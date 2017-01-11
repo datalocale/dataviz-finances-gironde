@@ -1,0 +1,38 @@
+{
+  "name": "dataviz-gironde",
+  "version": "1.0.0",
+  "description": "...",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify client/js/main.js  -t rollupify -o client/js/browserify-bundle.js -d",
+    "watch": "watchify client/js/main.js  -t rollupify -o client/js/browserify-bundle.js -d -v",
+    "lint": "eslint client/js",
+    "fix": "eslint client/js --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dtc-innovation/dataviz-finances-gironde"
+  },
+  "author": "dtc innovation",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dtc-innovation/dataviz-finances-gironde/issues"
+  },
+  "homepage": "",
+  "dependencies": {
+    "browserify": "^13.1.1",
+    "d3-color": "^1.0.2",
+    "d3-shape": "^1.0.0",
+    "event-emitter": "^0.3.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
+    "redux": "^3.6.0",
+    "rollupify": "^0.3.7"
+  },
+  "devDependencies": {
+    "eslint": "^3.13.1",
+    "watchify": "^3.8.0"
+  }
+}
