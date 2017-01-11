@@ -1,9 +1,11 @@
 # Dataviz finances Gironde
 
-
-
-# Contribuer
+## Contribuer
 
 Au vu du scope du projet et de sa spécificité franco-française, il est décidé que le *readme*, les *issues*, *pull requests* et messages de *commit* sont à écrire **en français**.
 
 Le code et les commentaires sont à écrire **en anglais**.
+
+## Compatibilité navigateur
+
+A priori, nous avons besoin que ça marche sur IE9 + Firefox 47.
