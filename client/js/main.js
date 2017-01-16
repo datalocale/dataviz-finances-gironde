@@ -11,8 +11,8 @@ function reducer(state, action){
     const {type} = action;
     
     switch(type){
-        case 'M52_DATA_RECEIVED':
-            return state.set('M52Data', action.M52)
+        case 'M52_INSTRUCTION_RECEIVED':
+            return state.set('M52Instruction', action.M52Instruction)
         default:
             return state; 
     }
@@ -44,8 +44,8 @@ const CA_P = fetch('./data/cedi_2015_CA.csv')
 .then(afterCSVCleanup)
 .then(caData => {
     store.dispatch({
-        type: 'M52_DATA_RECEIVED',
-        M52 : ImmutableSet(
+        type: 'M52_INSTRUCTION_RECEIVED',
+        M52Instruction : ImmutableSet(
             caData.map(M52RowRecord)
         )
     })
@@ -61,7 +61,7 @@ store.subscribe( () => {
         React.createElement(
             TopLevel,
             {
-                M52Data: state.get('M52Data')
+                M52Instruction: state.get('M52Instruction')
             }
         ),
         document.querySelector('.react-container')
