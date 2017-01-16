@@ -7,6 +7,6 @@ export default function(props){
 
 
     return React.createElement(Sunburst, {
-        hierarchicalData: hierarchicalM52(props.M52Data)
+        hierarchicalData: hierarchicalM52(props.M52Instruction)
     })
 }
