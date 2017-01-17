@@ -34,6 +34,7 @@ const rules = {
     },
     'RF1_2' :{
         label: 'Cotisation sur la valeur ajoutée des entreprises (CVAE)',
+        status: 'TEMPORARY',
         filter(m52Row){
             return isRF(m52Row) && m52Row['Article'] === 'A73112';
         }
@@ -57,13 +58,59 @@ const rules = {
         }
     },
     'RF2_3': {
-        label: 'Compensations fiscales',
+        label: "Compensations fiscales",
         filter(m52Row){
-            return isRF(m52Row) && m52Row['Article'] === 'A7461';
+            return isRF(m52Row) && ['A74833', 'A74834', 'A74835'].includes(m52Row['Article']);
         }
     },
-
+    'RF2_4': {
+        label: "Dotation de compensation de la réforme de la taxe professionnelle (DCRTP)",
+        filter(m52Row){
+            return isRF(m52Row) && ['A74832'].includes(m52Row['Article']);
+        }
+    },
+    'RF2_5': {
+        label: "Fonds National de Garantie Individuelle de Ressources (FNGIR)",
+        filter(m52Row){
+            return isRF(m52Row) && ['A73121'].includes(m52Row['Article']);
+        }
+    },
+    'RF2_6': {
+        label: "Fonds exceptionnel pour les départements en difficulté",
+        status: 'TEMPORARY',
+        filter(m52Row){
+            return isRF(m52Row) && false;
+        }
+    },
+    'RF3_1': {
+        label: "Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE)",
+        filter(m52Row){
+            return isRF(m52Row) && ['A7352'].includes(m52Row['Article']);
+        }
+    },
+    'RF3_2': {
+        label: "Taxe Sur les Contrats d’Assurance (TSCA)",
+        filter(m52Row){
+            return isRF(m52Row) && m52Row['Article'] === 'A7342';
+        }
+    },
+    'RF4': {
+        label: "Droits de mutation à titre onéreux (DMTO)",
+        filter(m52Row){
+            return isRF(m52Row) && ['A7321', 'A7322', 'A7482'].includes(m52Row['Article']);
+        }
+    },
     // ...
+    /*
+    'XX_ID_XX': {
+        label: "",
+        filter(m52Row){
+            return false;
+        }
+    },
+    
+    
+     */
 
     'RF5_1': {
         label: "Contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA)",
@@ -71,7 +118,6 @@ const rules = {
             return isRF(m52Row) && ['A747811', 'A747812'].includes(m52Row['Article']);
         }
     },
-
     'RF5_2': {
         label: "Fonds de Mobilisation Départementale pour l'Insertion (FMDI)",
         filter(m52Row){
