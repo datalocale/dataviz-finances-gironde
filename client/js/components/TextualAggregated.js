@@ -30,7 +30,7 @@ export default function(props){
         React.createElement('div', {}, 
             React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
             React.createElement('ul', {}, unusedM52Set.map(m52 => {
-                const m52Id = m52["Rubrique fonctionnelle"] + ' ' + m52["Article"];
+                const m52Id = m52["Rubrique fonctionnelle"] + ' ' + m52["Article"] + ' ' + m52["Chapitre"];
 
                 return React.createElement('li', {key: m52Id}, m52Id)
             }))

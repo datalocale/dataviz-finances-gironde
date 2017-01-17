@@ -27,7 +27,6 @@ export default function(props){
                 {transform: 'translate('+width/2+','+height/2+')'},
                 children.map((child, i) => {
                     const arcDesc = childrenArcDescs[i];
-                    console.log('arcDesc',arcDesc,  child, i);
 
                     return React.createElement(
                         HierarchicSlice,
