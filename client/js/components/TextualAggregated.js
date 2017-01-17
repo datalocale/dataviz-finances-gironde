@@ -13,14 +13,26 @@ function makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction){
     })
 }
 
+
+
 export default function(props){
     const {aggregatedInstruction, M52Instruction} = props;
 
     const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction);
 
+    console.log('agg', aggregatedInstruction.toJS());
+
     return React.createElement('div', {}, 
-        React.createElement('table', {}, aggregatedInstruction.map(aggRow => (
-            React.createElement('tr', {key: aggRow['id']}, 
+        React.createElement('table', {className: 'aggregated'}, aggregatedInstruction.map(aggRow => (
+            React.createElement(
+                'tr', 
+                {
+                    key: aggRow['id'],
+                    className: [
+                        aggRow['M52Rows'].size === 0 ? 'zero-m52' : '', 
+                        aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : ''
+                    ].filter(c => c).join(' ')
+                }, 
                 React.createElement('td', {}, aggRow['id']),
                 React.createElement('td', {}, aggRow['M52Rows'].size),
                 React.createElement('td', {}, aggRow['Libellé']),

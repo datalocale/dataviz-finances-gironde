@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {csvParse} from 'd3-dsv' 
-import {Record, Set as ImmutableSet, Map as ImmutableMap} from 'immutable'
+import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable'
 
 import afterCSVCleanup from './finance/afterCSVCleanup.js'
 import TopLevel from './components/TopLevel.js'
