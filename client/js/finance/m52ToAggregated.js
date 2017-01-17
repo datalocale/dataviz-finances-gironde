@@ -1,4 +1,4 @@
-import {Record, Set as ImmutableSet, Map as ImmutableMap} from 'immutable'
+import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable'
 
 /*
     This file's very French and even Gironde-specific.
@@ -750,6 +750,7 @@ const rules = {
 const AggregatedInstructionRowRecord = Record({
     "id": undefined,
     "Libellé": undefined,
+    "Statut": undefined,
     "M52Rows": undefined,
     "Montant": undefined
 })
@@ -762,6 +763,7 @@ function makeAggregatedInstructionRowRecord(id, m52Instruction){
     return AggregatedInstructionRowRecord({
         id,
         "Libellé": rule.label,
+        "Statut": rule.status,
         "M52Rows": m52Rows,
         "Montant": m52Rows.reduce(((acc, curr) => {
             return acc + curr["Montant"]
