@@ -13,7 +13,6 @@ import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable
 */
 
 
-
 export function isOR(m52Row){
     return m52Row["Réel/Ordre id/Ordre diff"] === 'OR';
 }
