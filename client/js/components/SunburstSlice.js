@@ -1,7 +1,7 @@
 import React from 'react'
 import d3Shape from 'd3-shape'
 
-export default function HierarchicSlice(props){
+export default function SunburstSlice(props){
     const {node, radius, donutWidth, startAngle, endAngle} = props;
     const {name} = node;
 
@@ -35,8 +35,8 @@ export default function HierarchicSlice(props){
         children.map((child, i) => {
             const arcDesc = childrenArcDescs[i];
     
-            return React.createElement(
-                HierarchicSlice,
+            return React.createElement( 
+                SunburstSlice, // yep recursive call
                 {
                     key: child.name,
                     node: child, 
