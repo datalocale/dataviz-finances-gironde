@@ -22,8 +22,10 @@ export default function({
                 aggregatedHierarchical, aggregatedSelectedNodes,
                 onSliceSelected: onAggregatedNodeSelected
             })
-        )/*,
-        React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
-        */
+        ),
+        React.createElement(TextualAggregated, {
+            M52Instruction,
+            aggregatedInstruction
+        })
     );
 }

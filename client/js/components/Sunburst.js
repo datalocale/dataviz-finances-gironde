@@ -57,7 +57,7 @@ export default function(props){
                     onSliceSelected();
                 }
             }
-        }, 
+        },
         React.createElement('svg', {width: width, height: height},
             React.createElement(
                 'g', 

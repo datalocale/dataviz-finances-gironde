@@ -1,7 +1,6 @@
 import React from 'react'
 import Sunburst from './Sunburst';
 
-
 /*
 
 interface M52VizProps{
