@@ -6,22 +6,12 @@ import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable
     an "M52 budget" to a "budget agrégé"
 */
 
-// TODO :
-// export not only the rows but how to assemble them, the categories and their labels
-
 /*
     Needs : 
-    * agrégée rows money amounts
-    * which M52 rows are unused (amount of money and % over M52 total)
-    * which M52 rows are used several times
-    * which agg rules gathered no M52 rows
-    * Some agg rules depend on some other rules
-
-    * viz
-        * Next to the M52 sunburst, show the above stats about M52 usage in aggregation 
+    * which M52 rows are unused 
+        * amount of money and % over M52 total)
 */
 
-// temporary helper: .split('+').map(s => "'"+'A'+s+"'").join(', ')
 
 export function isRF(m52Row){
     return m52Row['Dépense/Recette'] === 'R' && m52Row['Investissement/Fonctionnement'] === 'F';
