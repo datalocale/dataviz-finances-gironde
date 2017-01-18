@@ -30,8 +30,11 @@ export function isDI(m52Row){
     return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'I';
 }
 
+<<<<<<< 80197888866a3009836cb04df0bad190ccc54b94
 
 
+=======
+>>>>>>> Préparation pour l'agrégé hierarchique
 export const rules = Object.freeze({
 
     /**
