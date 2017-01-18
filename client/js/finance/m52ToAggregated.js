@@ -26,7 +26,7 @@ export function isDI(m52Row){
     return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'I';
 }
 
-const rules = {
+export const rules = Object.freeze({
 
     /**
      * Recettes de fonctionnement
@@ -723,18 +723,7 @@ const rules = {
             return m52Row['Dépense/Recette'] === 'D' && article.startsWith('A16') && article !== 'A1675';
         }
     }
-
-    /*
-    
-    'XX_ID_XX': {
-        label: "",
-        filter(m52Row){
-            return false;
-        }
-    },
-    
-     */
-}
+});
 
 
 const AggregatedInstructionRowRecord = Record({
