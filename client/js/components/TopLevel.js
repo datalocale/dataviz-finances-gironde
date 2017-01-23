@@ -7,7 +7,7 @@ import m52ToAggregated from '../finance/m52ToAggregated.js'
 
 
 export default function(props){
-    const {M52Instruction} = props;
+    const {M52Instruction, M52Hierarchical} = props;
     const aggregatedInstruction = m52ToAggregated(M52Instruction);
 
     console.log('agg', aggregatedInstruction.toJS())

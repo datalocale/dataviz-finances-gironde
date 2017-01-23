@@ -1,20 +1,19 @@
 import React from 'react'
 import Sunburst from './Sunburst';
 
-import hierarchicalM52 from '../finance/hierarchicalM52.js';
 
 /*
 
 interface M52VizProps{
-    M52Instruction: M52Instruction
+    M52Hierarchical: M52Hierarchical
 }
 
  */
 export default function(props){
-    const hierarchicalData = hierarchicalM52(props.M52Instruction);
+    const { M52Hierarchical } = props;
 
     return React.createElement('div', {},
-        React.createElement('h1', {}, hierarchicalData.name),
-        React.createElement(Sunburst, { hierarchicalData })
+        React.createElement('h1', {}, M52Hierarchical.name),
+        React.createElement(Sunburst, { hierarchicalData: M52Hierarchical })
     );
 }
