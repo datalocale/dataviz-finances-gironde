@@ -30,11 +30,6 @@ export function isDI(m52Row){
     return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'I';
 }
 
-<<<<<<< 80197888866a3009836cb04df0bad190ccc54b94
-
-
-=======
->>>>>>> Préparation pour l'agrégé hierarchique
 export const rules = Object.freeze({
 
     /**
@@ -196,7 +191,6 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A752';
         }
     },
-
     'RF-9-2': {
         label: "Autres impôts et Taxes",
         status: 'TEMPORARY', // Manquant dans tableau
@@ -523,7 +517,7 @@ export const rules = Object.freeze({
     'DF-6-5': { 
         label: "Participation diverses",
         status: 'TEMPORARY',
-        filter(m52Row){ // 6561+6556+65568+6568+6512+6581+65821
+        filter(m52Row){
             return isOR(m52Row) && isDF(m52Row) &&
             [
                 "A6561", "A6556", "A65568", "A6568", "A6512", 
@@ -653,9 +647,8 @@ export const rules = Object.freeze({
     },
     'RI-6': {
         label: "RI - Divers",
-        status: 'TEMPORARY', // Need confirmation that 20xx is "chapitre" and whether the "-" applies to the first or all
+        status: 'TEMPORARY',
         filter(m52Row){
-            // art (20xx+21xx+22xx+23xx+26xx+27xx)-204+165+1676+454121+454421+454428+45821
             const article = m52Row['Article'];
 
             return isOR(m52Row) && isRI(m52Row) && 
