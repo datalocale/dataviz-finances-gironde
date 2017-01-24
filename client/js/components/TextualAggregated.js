@@ -1,8 +1,10 @@
 import React from 'react'
 
+import {isOR} from '../finance/m52ToAggregated';
+
 function makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction){
     return M52Instruction.filter(m52row => {
-        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row))
+        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row)) && isOR(m52row);
     })
 }
 
