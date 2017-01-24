@@ -6,6 +6,7 @@ import TextualAggregated from './TextualAggregated';
 import m52ToAggregated from '../finance/m52ToAggregated.js'
 
 export default function({
+        M52Instruction, aggregatedInstruction,
         M52Hierarchical, M52SelectedNodes,
         aggregatedHierarchical, aggregatedSelectedNodes,
         onM52NodeSelected, onAggregatedNodeSelected

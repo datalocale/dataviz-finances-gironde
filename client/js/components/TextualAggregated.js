@@ -43,9 +43,7 @@ interface TextualAggregated{
 }
 
 */
-export default function(props){
-    const {aggregatedInstruction, M52Instruction} = props;
-
+export default function({aggregatedInstruction, M52Instruction}){
     const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction);
     const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction);
 
@@ -61,18 +59,20 @@ export default function(props){
                     ].filter(c => c).join(' ')
                 }, 
                 React.createElement('td', {}, aggRow['id']),
-                React.createElement('td', {}, aggRow['M52Rows'].size),
                 React.createElement('td', {}, aggRow['Libellé']),
-                React.createElement('td', {}, aggRow['Montant'].toFixed(2)+'€')
+                React.createElement('td', {}, aggRow['Montant'].toFixed(2)+'€'),
+                React.createElement('td', {}, aggRow['M52Rows'].size)
             )
         ))),
         React.createElement('div', {}, 
             React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
-            React.createElement('ul', {}, unusedM52Set.map(m52 => {
-                // TODO rajouter montants
+            React.createElement('table', {}, unusedM52Set.map(m52 => {
                 const m52Id = makeM52RowId(m52);
 
-                return React.createElement('li', {key: m52Id}, m52Id)
+                return React.createElement('tr', {key: m52Id}, 
+                    React.createElement('td', {}, m52Id),
+                    React.createElement('td', {}, m52["Montant"].toFixed(2)+'€')
+                )
             }))
         ),
         React.createElement('div', {}, 

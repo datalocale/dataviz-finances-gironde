@@ -170,6 +170,8 @@ function mapStateToProps(state){
     }
 
     return {
+        M52Instruction,
+        aggregatedInstruction,
         M52Hierarchical,
         M52SelectedNodes,
         aggregatedHierarchical,
