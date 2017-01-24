@@ -29,7 +29,13 @@ interface HierarchicalData<Element>{
 
 */
 export default function(props){
-    const {hierarchicalData, width=700, height=600} = props;
+    const {
+        hierarchicalData, width=700, height=600,
+        selectedNodes,
+        onSliceSelected
+    } = props;
+
+    console.log('selectedNodes', selectedNodes);
 
     const children = Array.from(hierarchicalData.children.values());
     
@@ -40,7 +46,14 @@ export default function(props){
     
     const childrenArcDescs = pie(children.map(c => c.total));
 
-    return React.createElement('div', {}, 
+    return React.createElement(
+        'div',
+        {
+            className: [
+                'sunburst',
+                selectedNodes ? 'active-selection' : undefined
+            ].filter(s => s).join(' ')
+        }, 
         React.createElement('svg', {width: width, height: height},
             React.createElement(
                 'g', 
@@ -56,7 +69,9 @@ export default function(props){
                             radius: RADIUS, 
                             donutWidth: DONUT_WIDTH, 
                             startAngle: arcDesc.startAngle,
-                            endAngle: arcDesc.endAngle
+                            endAngle: arcDesc.endAngle,
+                            selectedNodes,
+                            onSliceSelected
                         }
                     )
                 })              

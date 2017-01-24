@@ -9,11 +9,11 @@ interface M52VizProps{
 }
 
  */
-export default function(props){
-    const { M52Hierarchical } = props;
+
+export default function({ M52Hierarchical, M52SelectedNodes, onSliceSelected }){
 
     return React.createElement('div', {},
         React.createElement('h1', {}, M52Hierarchical.name),
-        React.createElement(Sunburst, { hierarchicalData: M52Hierarchical })
+        React.createElement(Sunburst, { hierarchicalData: M52Hierarchical, selectedNodes: M52SelectedNodes, onSliceSelected })
     );
 }

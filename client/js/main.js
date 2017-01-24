@@ -15,8 +15,8 @@ function reducer(state, action){
     switch(type){
     case 'M52_INSTRUCTION_RECEIVED':
         return state.set('M52Instruction', action.M52Instruction);
-    case 'M52_INSTRUCTION_USER_HOVERED':
-        return state.set('M52Hover', action.M52Rows);
+    case 'M52_INSTRUCTION_USER_NODE_HOVERED':
+        return state.set('M52NodeHover', action.M52Node);
     default:
         return state;
     }
@@ -56,28 +56,85 @@ fetch('./data/cedi_2015_CA.csv')
             M52Instruction,
         });
 
-        store.dispatch({
-            type: 'M52_INSTRUCTION_USER_HOVERED',
-            M52Rows: [
-                M52Instruction.first()
-            ]
-        });
     });
 
 
 const store = createStore(reducer, new ImmutableMap());
 
-const mapStateToProps = (state) => {
+
+const m52InstructionToHierarchical = new WeakMap();
+function memoizedHierarchicalM52(instr){
+    let hier = m52InstructionToHierarchical.get(instr);
+    if(!hier){
+        hier = hierarchicalM52(instr);
+        m52InstructionToHierarchical.set(instr, hier);
+    }
+    return hier;
+}
+
+
+let childToParent;
+
+function findSelectedNodeAncestors(tree, selectedNode){
+    if(!selectedNode)
+        return undefined;
+
+    if(!childToParent)
+        childToParent = new WeakMap();
+
+    if(tree === selectedNode){
+        let result = [];
+        let current = selectedNode;
+        while(current !== undefined){
+            result.push(current);
+            current = childToParent.get(current);
+        }
+        return new ImmutableSet(result);
+    }
+    
+    let ret;
+
+    if(tree.children){
+        Array.from(tree.children.values()).forEach(child => {
+            childToParent.set(child, tree);
+            const ancestors = findSelectedNodeAncestors(child, selectedNode);
+            if(ancestors)
+                ret = ancestors;
+        })
+    }
+
+    return ret;
+}
+
+    
+
+function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
-    const M52Hierarchical = hierarchicalM52(M52Instruction);
+    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction);
     // const M52RowsUIState = computeRowUiState(M52Hierarchical, state.get('M52Hover'));
+
 
     return {
         M52Instruction,
         M52Hierarchical,
-        M52RowsUIState: {}
+        M52SelectedNodes: findSelectedNodeAncestors(M52Hierarchical, state.get('M52NodeHover'))
     };
 };
+
+function mapDispatchToProps(dispatch){
+    return {
+        onSliceSelected(node){
+            console.log('onSliceSelected', node);
+
+            store.dispatch({
+                type: 'M52_INSTRUCTION_USER_NODE_HOVERED',
+                M52Node: node
+            });
+        }
+    }
+}
+
+
 
 store.subscribe( () => {
     const state = store.getState();
@@ -85,7 +142,7 @@ store.subscribe( () => {
     ReactDOM.render(
         React.createElement(
             TopLevel,
-            mapStateToProps(state)
+            Object.assign({}, mapStateToProps(state), mapDispatchToProps(store.dispatch))
         ),
         document.querySelector('.react-container')
     );
