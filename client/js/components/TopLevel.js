@@ -14,7 +14,7 @@ export default function({
         onM52NodeSelected, onAggregatedNodeSelected
     }){
 
-    return React.createElement('div', {className: 'top-level'},
+    return M52Instruction ? React.createElement('div', {className: 'top-level'},
         React.createElement('div', {},
             React.createElement(M52Viz, {
                 M52Hierarchical, M52SelectedNodes,
@@ -29,5 +29,5 @@ export default function({
             React.createElement(TextualSelected, {M52SelectedNode, aggregatedSelectedNode}) :
             undefined,
         React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
-    );
+    ) : React.createElement('div', {});
 }
