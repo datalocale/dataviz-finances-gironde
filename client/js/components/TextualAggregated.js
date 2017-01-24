@@ -69,6 +69,7 @@ export default function(props){
         React.createElement('div', {}, 
             React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
             React.createElement('ul', {}, unusedM52Set.map(m52 => {
+                // TODO rajouter montants
                 const m52Id = makeM52RowId(m52);
 
                 return React.createElement('li', {key: m52Id}, m52Id)

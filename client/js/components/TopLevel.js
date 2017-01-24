@@ -11,10 +11,10 @@ export default function(props){
     console.log('agg', aggregatedInstruction.toJS())
 
     return React.createElement('div', {className: 'top-level'},
-        React.createElement(M52Viz, props)/*,
+        React.createElement(M52Viz, props),
         React.createElement(AggregatedViz, {
             M52Instruction,
             aggregatedInstruction
-        })*/
+        })
     );
 }

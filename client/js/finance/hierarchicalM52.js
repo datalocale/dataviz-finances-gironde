@@ -20,6 +20,8 @@ const levelCategories = [
 ]
 
 /**
+ * Transforms an M52 instruction to its hierarchical form so it can be represented visually with hierarchy
+ * 
  * rows : ImmutableSet<Record<M52Entry>>
  * M52Entry keys are column names of 
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
