@@ -95,7 +95,7 @@
                 fill: #add2c2
             }
 
-            .slice{
+            .slice > .piece path{
                 stroke: #AAA;
             }
 
@@ -115,6 +115,10 @@
             .sunburst.active-selection .slice.selected > .piece path,
             .sunburst.active-selection .slice.selected > .piece text{
                 opacity: 1;
+            }
+
+            .sunburst.active-selection .slice.selected.last > .piece path{
+                stroke: black;
             }
 
 

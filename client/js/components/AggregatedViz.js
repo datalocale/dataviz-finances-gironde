@@ -20,5 +20,5 @@ export default function({aggregatedHierarchical, aggregatedSelectedNodes, onSlic
             selectedNodes: aggregatedSelectedNodes,
             onSliceSelected
         })
-    )
+    );
 }
