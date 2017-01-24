@@ -10,35 +10,39 @@ const levelCategories = {
             children: [
                 {
                     name: "Fiscalité directe",
-                    children: ruleIds.filter(id => id.startsWith('RF1'))
-                },
-                {
-                    name: "Dotations de l’État et compensations",
-                    children: ruleIds.filter(id => id.startsWith('RF2'))
+                    children: ruleIds.filter(id => id.startsWith('RF-1'))
                 },
                 {
                     name: "Fiscalité transférée",
-                    children: ruleIds.filter(id => id.startsWith('RF3'))
+                    children: ruleIds.filter(id => id.startsWith('RF-2'))
                 },
                 {
                     name: "Droits de mutation à titre onéreux (DMTO)",
-                    children: ruleIds.filter(id => id.startsWith('RF4'))
-                },
-                {
-                    name: "Recettes sociales",
-                    children: ruleIds.filter(id => id.startsWith('RF5'))
+                    children: ruleIds.filter(id => id.startsWith('RF-3'))
                 },
                 {
                     name: "Autres fiscalités",
-                    children: ruleIds.filter(id => id.startsWith('RF6'))
+                    children: ruleIds.filter(id => id.startsWith('RF-4'))
+                },
+                {
+                    name: "Dotations de l’État et compensations",
+                    children: ruleIds.filter(id => id.startsWith('RF-5'))
+                },
+                {
+                    name: "Recettes sociales",
+                    children: ruleIds.filter(id => id.startsWith('RF-6'))
+                },
+                {
+                    name: "Péréquation sociale",
+                    children: ruleIds.filter(id => id.startsWith('RF-7'))
+                },
+                {
+                    name: "Péréquation horizontale",
+                    children: ruleIds.filter(id => id.startsWith('RF-8'))
                 },
                 {
                     name: "Recettes diverses",
-                    children: ruleIds.filter(id => id.startsWith('RF7'))
-                },
-                {
-                    name: "Fonds de peréquations",
-                    children: ruleIds.filter(id => id.startsWith('RF8'))
+                    children: ruleIds.filter(id => id.startsWith('RF-9'))
                 }
             ]
         },
@@ -50,66 +54,77 @@ const levelCategories = {
                     children: [
                         {
                             name: "Frais d'hébergement",
-                            children: ruleIds.filter(id => id.startsWith('DF1_1'))
+                            children: ruleIds.filter(id => id.startsWith('DF-1-1'))
                         },
-                        'DF1_2',
-                        'DF1_3',
-                        'DF1_4',
+                        'DF-1-2',
+                        'DF-1-3',
+                        'DF-1-4',
                         {
                             name: "Divers enfants",
-                            children: ruleIds.filter(id => id.startsWith('DF1_5'))
+                            children: ruleIds.filter(id => id.startsWith('DF-1-5'))
                         },
-                        'DF1_6',
+                        'DF-1-6',
                         {
                             name: "Divers social",
-                            children: ruleIds.filter(id => id.startsWith('DF1_7'))
+                            children: ruleIds.filter(id => id.startsWith('DF-1-7'))
                         }
                     ]
                 },
                 {
                     name: "Actions sociales par publics",
-                    children: ruleIds.filter(id => id.startsWith('DF2'))
+                    children: ruleIds.filter(id => id.startsWith('DF-2'))
                 },
                 {
                     name: "Actions d’intervention",
-                    children: ruleIds.filter(id => id.startsWith('DF3'))
+                    children: ruleIds.filter(id => id.startsWith('DF-3'))
                 },
                 {
                     name: "Frais de personnel",
-                    children: ruleIds.filter(id => id.startsWith('DF4'))
+                    children: ruleIds.filter(id => id.startsWith('DF-4'))
                 },
                 {
-                    name: "Versement au fonds de peréquations",
-                    children: ruleIds.filter(id => id.startsWith('DF5'))
+                    name: "Péréquation verticale",
+                    children: ruleIds.filter(id => id.startsWith('DF-5'))
                 },
                 {
                     name: "Autres charges",
-                    children: ruleIds.filter(id => id.startsWith('DF6'))
+                    children: ruleIds.filter(id => id.startsWith('DF-6'))
                 },
                 {
                     name: "Frais généraux",
-                    children: ruleIds.filter(id => id.startsWith('DF7'))
+                    children: ruleIds.filter(id => id.startsWith('DF-7'))
                 },
                 {
                     name: "Frais financiers",
-                    children: ruleIds.filter(id => id.startsWith('DF8'))
+                    children: ruleIds.filter(id => id.startsWith('DF-8'))
                 }
             ]
         },
         {
             name: 'Recettes d’investissement',
-            children: ruleIds.filter(id => id.startsWith('RI'))
+            children: ruleIds
+                .filter(id => id.match(/RI-\d/))
+                .concat([
+                    {
+                        name: 'Emprunt contracté',
+                        children: ruleIds.filter(id => id.startsWith('RI-EM'))
+                    }
+                ])
         },
         {
             name: 'Dépenses d’investissement',
             children: [
                 {
                     name: "Equipements Propres",
-                    children: ruleIds.filter(id => id.startsWith('DI1'))
+                    children: ruleIds.filter(id => id.startsWith('DI-1'))
                 },
                 {
                     name: "Subventions",
-                    children: ruleIds.filter(id => id.startsWith('DI2'))
+                    children: ruleIds.filter(id => id.startsWith('DI-2'))
+                },
+                {
+                    name: 'Emprunt remboursé',
+                    children: ruleIds.filter(id => id.startsWith('DI-EM'))
                 }
             ]
         }
