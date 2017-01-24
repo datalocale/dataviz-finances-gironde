@@ -11,6 +11,18 @@ function makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction){
 function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
     const m52RowToAggRows = new Map();
 
+    const actionsSocialesParPrestationsRows = aggregatedInstruction
+        .filter( r => r.id.startsWith('DF-1'))
+        .map( r => r["M52Rows"] )
+        .flatten(1);
+
+    const actionsSocialesParPubliqueRows = aggregatedInstruction
+        .filter( r => r.id.startsWith('DF-2'))
+        .map( r => r["M52Rows"] )
+        .flatten(1);
+    
+    console.log('act soc', actionsSocialesParPrestationsRows.toJS(), actionsSocialesParPubliqueRows.toJS());
+
     M52Instruction.forEach(m52row => {
         const usingAggRows = new Set();
         
@@ -21,7 +33,15 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
         });
 
         if(usingAggRows.size >= 2){
-            m52RowToAggRows.set(m52row, usingAggRows)
+            if(usingAggRows.size === 2 && 
+                actionsSocialesParPrestationsRows.has(m52row) &&
+                actionsSocialesParPubliqueRows.has(m52row)
+            ){
+                // skip, because it's expected
+            }
+            else{
+                m52RowToAggRows.set(m52row, usingAggRows)
+            }
         }
     });
 
