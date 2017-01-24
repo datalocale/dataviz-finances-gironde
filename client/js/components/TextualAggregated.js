@@ -35,15 +35,19 @@ function makeM52RowId(m52Row){
     ].join(' ');
 }
 
+/*
 
+interface TextualAggregated{
+    M52Instruction: M52Instruction
+    aggregatedInstruction : AggregatedInstruction
+}
 
+*/
 export default function(props){
     const {aggregatedInstruction, M52Instruction} = props;
 
     const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction);
     const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction);
-
-    console.log('usedMoreThanOnceM52RowsSet', usedMoreThanOnceM52RowsSet);
 
     return React.createElement('div', {}, 
         React.createElement('table', {className: 'aggregated'}, aggregatedInstruction.map(aggRow => (

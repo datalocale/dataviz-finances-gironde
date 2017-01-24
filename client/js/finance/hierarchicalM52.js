@@ -26,18 +26,18 @@ const levelCategories = [
  */
 export default function(rows) {
     const root = {
-        name: "M52",
-        rows,
+        name: "Instruction M52",
+        elements: rows,
     };
 
-    /* TreeNode : 
+    /* TreeNode : HierarchicalData<M52Entry> 
     {
         name: '',
         ownValue: Number, // for nodes with children, this is the own value
         total?: Number,
         children?: Map<category, Set<TreeNode>>
 
-        rows?: Set<M52Entry>
+        elements?: Set<M52Entry>
     }
     */
 
@@ -50,7 +50,7 @@ export default function(rows) {
         let total = 0;
         let ownValue = 0;
 
-        node.rows.forEach(r => {
+        node.elements.forEach(r => {
             const category = categorizer(r);
             total += r["Montant"];
 
@@ -64,11 +64,11 @@ export default function(rows) {
                     if(!categoryChild){
                         categoryChild = {
                             name: category,
-                            rows: new Set()
+                            elements: new Set()
                         }
                         children.set(category, categoryChild);
                     }
-                    categoryChild.rows.add(r);
+                    categoryChild.elements.add(r);
                 }   
             }
         });
