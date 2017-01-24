@@ -18,6 +18,7 @@ export default function({aggregatedHierarchical, aggregatedSelectedNodes, onSlic
         React.createElement(Sunburst, {
             hierarchicalData: aggregatedHierarchical, 
             selectedNodes: aggregatedSelectedNodes,
+            donutWidth: 55, outerRadius: 120,
             onSliceSelected
         })
     );
