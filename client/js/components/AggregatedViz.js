@@ -1,7 +1,6 @@
 import React from 'react'
-import Sunburst from './Sunburst';
-import TextualAggregated from './TextualAggregated';
 
+import Sunburst from './Sunburst';
 import hierarchicalAggregated from '../finance/hierarchicalAggregated.js';
 
 /*
@@ -19,8 +18,8 @@ export default function(props){
     console.log('hierarchicalData', hierarchicalData);
 
     return React.createElement('div', {},
+        React.createElement('h1', {}, hierarchicalData.name),
         // TODO : this shouldn't be just a sunburst but rather the choice of "par prestation" or "par public" should be offered
-        React.createElement(Sunburst, { hierarchicalData }),
-        React.createElement(TextualAggregated, props)
+        React.createElement(Sunburst, { hierarchicalData })
     );
 }

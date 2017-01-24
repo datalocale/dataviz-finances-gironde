@@ -29,7 +29,7 @@ interface HierarchicalData<Element>{
 
 */
 export default function(props){
-    const {hierarchicalData, width=800, height=600} = props;
+    const {hierarchicalData, width=700, height=600} = props;
 
     const children = Array.from(hierarchicalData.children.values());
     
