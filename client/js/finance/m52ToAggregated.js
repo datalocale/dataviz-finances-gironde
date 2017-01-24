@@ -12,7 +12,6 @@ import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable
         * amount of money and % over M52 total)
 */
 
-
 export function isOR(m52Row){
     return m52Row["Réel/Ordre id/Ordre diff"] === 'OR';
 }
@@ -29,6 +28,8 @@ export function isRI(m52Row){
 export function isDI(m52Row){
     return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'I';
 }
+
+
 
 export const rules = Object.freeze({
 
