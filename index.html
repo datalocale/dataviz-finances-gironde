@@ -69,6 +69,55 @@
                 text-align: center;
             }
 
+            /*
+                Sunburst
+            */
+
+            .sunburst{}
+
+            .sunburst .slice path {
+                fill: #d4c685
+            }
+
+            .sunburst .slice > .slice path {
+                fill: #f7ef81
+            }
+
+            .sunburst .slice > .slice > .slice path {
+                fill: #cfe795
+            }
+
+            .sunburst .slice > .slice > .slice > .slice path {
+                fill: #a7d3a6
+            }
+
+            .sunburst .slice > .slice > .slice > .slice > .slice path {
+                fill: #add2c2
+            }
+
+            .slice{
+                stroke: #AAA;
+            }
+
+            text{
+                color: black;
+                stroke-width: 0;
+            }
+
+
+            .sunburst.active-selection{}
+
+            .sunburst.active-selection .slice > .piece path,
+            .sunburst.active-selection .slice > .piece text{
+                opacity: 0.3;
+            }
+
+            .sunburst.active-selection .slice.selected > .piece path,
+            .sunburst.active-selection .slice.selected > .piece text{
+                opacity: 1;
+            }
+
+
 
             /*
                 Sunburst
