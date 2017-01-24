@@ -35,8 +35,6 @@ export default function(props){
         onSliceSelected
     } = props;
 
-    console.log('selectedNodes', selectedNodes);
-
     const children = Array.from(hierarchicalData.children.values());
     
     const pie = d3Shape.pie();
@@ -52,7 +50,13 @@ export default function(props){
             className: [
                 'sunburst',
                 selectedNodes ? 'active-selection' : undefined
-            ].filter(s => s).join(' ')
+            ].filter(s => s).join(' '),
+            onMouseOver(e){
+                if(!e.target.matches('.slice *')){
+                    // remove selection
+                    onSliceSelected();
+                }
+            }
         }, 
         React.createElement('svg', {width: width, height: height},
             React.createElement(

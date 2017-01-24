@@ -7,25 +7,21 @@ import m52ToAggregated from '../finance/m52ToAggregated.js'
 
 
 export default function({
-        M52Instruction, M52Hierarchical, 
-        M52SelectedNodes, 
-        onSliceSelected
+        M52Hierarchical, M52SelectedNodes,
+        aggregatedHierarchical, aggregatedSelectedNodes,
+        onM52NodeSelected, onAggregatedNodeSelected
     }){
-    const aggregatedInstruction = m52ToAggregated(M52Instruction);
 
     return React.createElement('div', {className: 'top-level'},
         React.createElement('div', {},
             React.createElement(M52Viz, {
-                M52Instruction, 
-                M52Hierarchical, 
-                M52SelectedNodes,
-                onSliceSelected
-            })/*,
+                M52Hierarchical, M52SelectedNodes,
+                onSliceSelected: onM52NodeSelected
+            }),
             React.createElement(AggregatedViz, {
-                M52Instruction,
-                aggregatedInstruction,
-                onSliceSelected
-            })*/
+                aggregatedHierarchical, aggregatedSelectedNodes,
+                onSliceSelected: onAggregatedNodeSelected
+            })
         )/*,
         React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
         */

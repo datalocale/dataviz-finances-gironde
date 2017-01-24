@@ -26,7 +26,8 @@ export default function SunburstSlice(props){
         { 
             className: [
                 'slice',
-                selectedNodes && selectedNodes.has(node) ? 'selected' : undefined
+                selectedNodes && selectedNodes.has(node) ? 'selected' : undefined,
+                selectedNodes && selectedNodes.last() === node ? 'last' : undefined
             ].filter(s => s).join(' ')
         },
         React.createElement(
