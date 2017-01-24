@@ -6,12 +6,6 @@ import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable
     an "M52 budget" to a "budget agrégé"
 */
 
-/*
-    Needs : 
-    * which M52 rows are unused 
-        * amount of money and % over M52 total)
-*/
-
 
 export function isRF(m52Row){
     return m52Row['Dépense/Recette'] === 'R' && m52Row['Investissement/Fonctionnement'] === 'F';
@@ -27,7 +21,6 @@ export function isDI(m52Row){
 }
 
 export const rules = Object.freeze({
-
     /**
      * Recettes de fonctionnement
      */
