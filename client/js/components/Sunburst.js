@@ -1,11 +1,33 @@
 import React from 'react'
 import d3Shape from 'd3-shape'
 
-import HierarchicSlice from './HierarchicSlice'
+import SunburstSlice from './SunburstSlice'
 
 const DONUT_WIDTH = 45;
 const RADIUS = 80;
 
+/*
+
+interface SunburstProps<Element>{
+    hierarchicalData: HierarchicalData<Element>
+    width: number
+    height: number
+}
+
+// This data structure contains computed fields, but it's ~fine because it's 
+// only meant to be read once for viz  
+interface HierarchicalData<Element>{
+    children: Map<category, Set<HierarchicalData<Element>>>
+    id: string // unique id across the data structure
+    name: string
+    ownValue: number
+    total: number // computed value
+
+    // elements composing the slice
+    elements: Set<Element>
+}
+
+*/
 export default function(props){
     const {hierarchicalData, width=800, height=600} = props;
 
@@ -19,8 +41,6 @@ export default function(props){
     const childrenArcDescs = pie(children.map(c => c.total));
 
     return React.createElement('div', {}, 
-        React.createElement('h1', {}, hierarchicalData.name),
-        React.createElement('h2', {}, hierarchicalData.total),
         React.createElement('svg', {width: width, height: height},
             React.createElement(
                 'g', 
@@ -29,7 +49,7 @@ export default function(props){
                     const arcDesc = childrenArcDescs[i];
 
                     return React.createElement(
-                        HierarchicSlice,
+                        SunburstSlice,
                         {
                             key: child.name,
                             node: child, 
