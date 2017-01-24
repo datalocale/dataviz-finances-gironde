@@ -7,7 +7,7 @@
   "scripts": {
     "build": "browserify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d",
     "watch": "watchify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d -v",
-    "lint": "eslint client/js",
+    "lint": "eslint --ignore-path .gitignore client/js",
     "fix": "npm run lint -- --fix",
     "start": "serve --cors -p 3000",
     "test": "exit 0",
