@@ -124,6 +124,23 @@ function findSelectedAggregatedNodesByM52Rows(aggregatedNode, m52Rows){
     return result;
 }
 
+function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
+    let result = new ImmutableSet();
+
+    if(m52Rows.some(row => M52Node.elements.has(row))){
+        result = result.add(M52Node);
+    }
+    
+    if(M52Node.children){
+        Array.from(M52Node.children.values()).forEach(child => {
+            const selectedNodes = findSelectedM52NodesByM52Rows(child, m52Rows);
+            result = result.union(selectedNodes);
+        })
+    }
+
+    return result;
+}
+
 
 const memoizedHierarchicalM52 = memoize(hierarchicalM52);
 const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated);
@@ -146,7 +163,11 @@ function mapStateToProps(state){
         aggregatedSelectedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(M52SelectedNode.elements))
     }
     if(aggregatedSelectedNode){
-        console.error('TODO', 'aggregatedSelectedNode');
+        aggregatedSelectedNodes = findSelectedNodeAncestors(aggregatedHierarchical, aggregatedSelectedNode);
+        let m52Rows = new ImmutableSet();
+        aggregatedSelectedNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
+
+        M52SelectedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
     }
 
     return {

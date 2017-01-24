@@ -34,7 +34,6 @@ export default function SunburstSlice(props){
             {
                 className: 'piece',
                 onMouseOver(e){
-                    console.log('onMouseOver', node);
                     onSliceSelected(node);
                 }
             },
