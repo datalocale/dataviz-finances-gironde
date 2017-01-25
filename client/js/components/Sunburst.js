@@ -28,19 +28,22 @@ interface HierarchicalData<Element>{
 }
 
 */
-export default function(props){
-    const {
+export default function({
         hierarchicalData, width=700, height=600,
         selectedNodes,
+        donutWidth, outerRadius,
         onSliceSelected
-    } = props;
+    }){
+
+    donutWidth = donutWidth || DONUT_WIDTH;
+    outerRadius = outerRadius || RADIUS;
 
     const children = Array.from(hierarchicalData.children.values());
     
     const pie = d3Shape.pie();
     const arc = d3Shape.arc()
-        .innerRadius(RADIUS - DONUT_WIDTH)
-        .outerRadius(RADIUS);
+        .innerRadius(outerRadius - donutWidth)
+        .outerRadius(outerRadius);
     
     const childrenArcDescs = pie(children.map(c => c.total));
 
@@ -57,7 +60,7 @@ export default function(props){
                     onSliceSelected();
                 }
             }
-        }, 
+        },
         React.createElement('svg', {width: width, height: height},
             React.createElement(
                 'g', 
@@ -70,8 +73,8 @@ export default function(props){
                         {
                             key: child.name,
                             node: child, 
-                            radius: RADIUS, 
-                            donutWidth: DONUT_WIDTH, 
+                            radius: outerRadius, 
+                            donutWidth: donutWidth, 
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
                             selectedNodes,

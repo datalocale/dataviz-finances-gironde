@@ -21,12 +21,14 @@ export default function SunburstSlice(props){
     const childrenArcDescs = pie(children.map(c => c.total));
     const parentArcDesc = { startAngle, endAngle };
 
+    const selected = selectedNodes && selectedNodes.has(node);
+
     return React.createElement(
         'g', 
         { 
             className: [
                 'slice',
-                selectedNodes && selectedNodes.has(node) ? 'selected' : undefined
+                selected ? 'selected' : undefined
             ].filter(s => s).join(' ')
         },
         React.createElement(
@@ -40,14 +42,14 @@ export default function SunburstSlice(props){
             React.createElement('path', {
                 d: arc(parentArcDesc)
             }),
-            React.createElement('text', {
+            selected ? React.createElement('text', {
                 transform: 'translate('+arc.centroid(parentArcDesc)+')',
                 style: {
                     textAnchor: 'middle',
                     fill: '#111'
                 },
                 dy: '.35em'
-            }, name)
+            }, name) : undefined
         ),
         children.map((child, i) => {
             const arcDesc = childrenArcDescs[i];

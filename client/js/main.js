@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {csvParse} from 'd3-dsv';
 import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
 import memoize from 'lodash.memoize';
+import { connect, Provider } from 'react-redux'
 
 import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
@@ -69,7 +70,6 @@ fetch('./data/cedi_2015_CA.csv')
     });
 
 
-const store = createStore(reducer, new ImmutableMap());
 
 
 let childToParent;
@@ -148,6 +148,9 @@ const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
 function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
+    if(!M52Instruction)
+        return {};
+
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
     
     const M52Hierarchical = memoizedHierarchicalM52(M52Instruction);
@@ -171,8 +174,11 @@ function mapStateToProps(state){
     }
 
     return {
+        M52Instruction,
+        aggregatedInstruction,
         M52Hierarchical,
         M52SelectedNodes,
+        M52SelectedNode, aggregatedSelectedNode,
         aggregatedHierarchical,
         aggregatedSelectedNodes
     };
@@ -197,18 +203,19 @@ function mapDispatchToProps(dispatch){
     }
 }
 
+const BoundTopLevel = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopLevel)
 
+const store = createStore(reducer, new ImmutableMap());
 
-store.subscribe( () => {
-    const state = store.getState();
+ReactDOM.render(
+    React.createElement(
+        Provider,
+        {store},
+        React.createElement(BoundTopLevel)
+    ),
+    document.querySelector('.react-container')
+);
 
-    ReactDOM.render(
-        React.createElement(
-            TopLevel,
-            Object.assign({}, mapStateToProps(state), mapDispatchToProps(store.dispatch))
-        ),
-        document.querySelector('.react-container')
-    );
-
-
-});

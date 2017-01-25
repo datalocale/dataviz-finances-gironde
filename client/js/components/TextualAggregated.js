@@ -1,13 +1,25 @@
 import React from 'react'
 
+import {isOR} from '../finance/m52ToAggregated';
+
 function makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction){
     return M52Instruction.filter(m52row => {
-        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row))
+        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row)) && isOR(m52row);
     })
 }
 
 function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
     const m52RowToAggRows = new Map();
+
+    const actionsSocialesParPrestationsRows = aggregatedInstruction
+        .filter( r => r.id.startsWith('DF-1'))
+        .map( r => r["M52Rows"] )
+        .flatten(1);
+
+    const actionsSocialesParPubliqueRows = aggregatedInstruction
+        .filter( r => r.id.startsWith('DF-2'))
+        .map( r => r["M52Rows"] )
+        .flatten(1);
 
     M52Instruction.forEach(m52row => {
         const usingAggRows = new Set();
@@ -19,7 +31,15 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
         });
 
         if(usingAggRows.size >= 2){
-            m52RowToAggRows.set(m52row, usingAggRows)
+            if(usingAggRows.size === 2 && 
+                actionsSocialesParPrestationsRows.has(m52row) &&
+                actionsSocialesParPubliqueRows.has(m52row)
+            ){
+                // skip, because it's expected
+            }
+            else{
+                m52RowToAggRows.set(m52row, usingAggRows)
+            }
         }
     });
 
@@ -43,36 +63,39 @@ interface TextualAggregated{
 }
 
 */
-export default function(props){
-    const {aggregatedInstruction, M52Instruction} = props;
-
+export default function({aggregatedInstruction, M52Instruction}){
     const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction);
     const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction);
 
     return React.createElement('div', {}, 
-        React.createElement('table', {className: 'aggregated'}, aggregatedInstruction.map(aggRow => (
-            React.createElement(
-                'tr', 
-                {
-                    key: aggRow['id'],
-                    className: [
-                        aggRow['M52Rows'].size === 0 ? 'zero-m52' : '', 
-                        aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : ''
-                    ].filter(c => c).join(' ')
-                }, 
-                React.createElement('td', {}, aggRow['id']),
-                React.createElement('td', {}, aggRow['M52Rows'].size),
-                React.createElement('td', {}, aggRow['Libellé']),
-                React.createElement('td', {}, aggRow['Montant'].toFixed(2)+'€')
-            )
-        ))),
+        React.createElement('div', {}, 
+            React.createElement('h1', {}, "Tableau aggrégé"),
+            React.createElement('table', {className: 'aggregated'}, aggregatedInstruction.map(aggRow => (
+                React.createElement(
+                    'tr', 
+                    {
+                        key: aggRow['id'],
+                        className: [
+                            aggRow['M52Rows'].size === 0 ? 'zero-m52' : '', 
+                            aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : ''
+                        ].filter(c => c).join(' ')
+                    }, 
+                    React.createElement('td', {}, aggRow['id']),
+                    React.createElement('td', {}, aggRow['Libellé']),
+                    React.createElement('td', {}, aggRow['Montant'].toFixed(2)+'€'),
+                    React.createElement('td', {}, aggRow['M52Rows'].size)
+                )
+            )))
+        ),
         React.createElement('div', {}, 
             React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
-            React.createElement('ul', {}, unusedM52Set.map(m52 => {
-                // TODO rajouter montants
+            React.createElement('table', {}, unusedM52Set.map(m52 => {
                 const m52Id = makeM52RowId(m52);
 
-                return React.createElement('li', {key: m52Id}, m52Id)
+                return React.createElement('tr', {key: m52Id}, 
+                    React.createElement('td', {}, m52Id),
+                    React.createElement('td', {}, m52["Montant"].toFixed(2)+'€')
+                )
             }))
         ),
         React.createElement('div', {}, 
