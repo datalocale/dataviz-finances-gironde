@@ -1,14 +1,17 @@
 {
   "name": "dataviz-gironde",
+  "private": true,
   "version": "1.0.0",
   "description": "...",
   "main": "index.js",
   "scripts": {
-    "build": "browserify client/js/main.js  -t rollupify -o client/js/browserify-bundle.js -d",
-    "watch": "watchify client/js/main.js  -t rollupify -o client/js/browserify-bundle.js -d -v",
-    "lint": "eslint client/js",
-    "fix": "eslint client/js --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "browserify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d",
+    "watch": "watchify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d -v",
+    "lint": "eslint --ignore-path .gitignore client/js",
+    "fix": "npm run lint -- --fix",
+    "start": "serve --cors -p 3000",
+    "test": "exit 0",
+    "posttest": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,6 @@
   },
   "homepage": "",
   "dependencies": {
-    "browserify": "^13.1.1",
     "d3-color": "^1.0.2",
     "d3-dsv": "^1.0.3",
     "d3-shape": "^1.0.0",
@@ -35,7 +37,9 @@
     "rollupify": "^0.3.7"
   },
   "devDependencies": {
-    "eslint": "^3.13.1",
+    "browserify": "^13.1.1",
+    "eslint": "^3.14.0",
+    "serve": "^2.4.3",
     "watchify": "^3.8.0"
   }
 }
