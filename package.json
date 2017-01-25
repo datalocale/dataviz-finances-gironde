@@ -27,6 +27,7 @@
     "d3-shape": "^1.0.0",
     "event-emitter": "^0.3.4",
     "immutable": "^3.8.1",
+    "lodash.memoize": "^4.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",

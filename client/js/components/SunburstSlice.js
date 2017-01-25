@@ -1,8 +1,12 @@
 import React from 'react'
 import d3Shape from 'd3-shape'
 
-export default function HierarchicSlice(props){
-    const {node, radius, donutWidth, startAngle, endAngle} = props;
+export default function SunburstSlice(props){
+    const {
+        node, radius, donutWidth, startAngle, endAngle,
+        selectedNodes,
+        onSliceSelected
+    } = props;
     const {name} = node;
 
     const children = node.children ? Array.from(node.children.values()) : [];
@@ -17,11 +21,24 @@ export default function HierarchicSlice(props){
     const childrenArcDescs = pie(children.map(c => c.total));
     const parentArcDesc = { startAngle, endAngle };
 
-    return React.createElement('g', {className: 'slice'},
-        React.createElement('g', {},
+    return React.createElement(
+        'g', 
+        { 
+            className: [
+                'slice',
+                selectedNodes && selectedNodes.has(node) ? 'selected' : undefined
+            ].filter(s => s).join(' ')
+        },
+        React.createElement(
+            'g', 
+            {
+                className: 'piece',
+                onMouseOver(e){
+                    onSliceSelected(node);
+                }
+            },
             React.createElement('path', {
-                d: arc(parentArcDesc), 
-                fill: 'hsl('+Math.random()*360+', 50%, 37%)'
+                d: arc(parentArcDesc)
             }),
             React.createElement('text', {
                 transform: 'translate('+arc.centroid(parentArcDesc)+')',
@@ -35,15 +52,17 @@ export default function HierarchicSlice(props){
         children.map((child, i) => {
             const arcDesc = childrenArcDescs[i];
     
-            return React.createElement(
-                HierarchicSlice,
+            return React.createElement( 
+                SunburstSlice, // yep recursive call
                 {
                     key: child.name,
                     node: child, 
                     radius: radius + donutWidth, 
                     donutWidth, 
                     startAngle: arcDesc.startAngle, 
-                    endAngle: arcDesc.endAngle
+                    endAngle: arcDesc.endAngle,
+                    selectedNodes,
+                    onSliceSelected
                 }
             )
         })  

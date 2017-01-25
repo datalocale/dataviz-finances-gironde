@@ -17,7 +17,8 @@ export default function(rows){
         
         row["Article"] = row["Article"].trim()
         row["Rubrique fonctionnelle"] = row["Rubrique fonctionnelle"].trim()
-        
+        row["Réel/Ordre id/Ordre diff"] = row["Réel/Ordre id/Ordre diff"].trim(); 
+
         Object.freeze(row);
     });
 
