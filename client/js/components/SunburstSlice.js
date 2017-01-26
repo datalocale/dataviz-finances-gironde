@@ -1,72 +1,102 @@
 import React from 'react'
 import d3Shape from 'd3-shape'
 
-export default function SunburstSlice(props){
-    const {
-        node, radius, donutWidth, startAngle, endAngle,
-        selectedNodes,
-        onSliceSelected
-    } = props;
-    const {name} = node;
+import {flattenTree} from '../finance/visitHierarchical.js';
 
-    const children = node.children ? Array.from(node.children.values()) : [];
+export default class SunburstSlice extends React.Component{
     
-    const pie = d3Shape.pie()
-        .startAngle(startAngle)
-        .endAngle(endAngle);
-    const arc = d3Shape.arc()
-        .innerRadius(radius - donutWidth)
-        .outerRadius(radius);
-    
-    const childrenArcDescs = pie(children.map(c => c.total));
-    const parentArcDesc = { startAngle, endAngle };
+    shouldComponentUpdate(nextProps){
+        if(['radius', 'donutWidth', 'startAngle', 'endAngle']
+            .some(k => this.props[k] !== nextProps[k]))
+            return true;
 
-    const selected = selectedNodes && selectedNodes.has(node);
+        if(this.props.node !== nextProps.node)
+            return true;
+        // from now on, this.props.node === nextProps.node
+        const node = nextProps.node;
 
-    return React.createElement(
-        'g', 
-        { 
-            className: [
-                'slice',
-                selected ? 'selected' : undefined
-            ].filter(s => s).join(' ')
-        },
-        React.createElement(
+        if(this.props.selectedNodes === nextProps.selectedNodes)
+            return false;
+        else{
+            if(!this.props.selectedNodes || !nextProps.selectedNodes)
+                return true;
+            
+            const nodes = flattenTree(node);
+            
+            // update the component if there is a difference in this.props.selectedNodes VS nextProps.selectedNodes
+            // in regard to the node being drawn
+            return nodes.some(n => this.props.selectedNodes.has(n) !== nextProps.selectedNodes.has(n))
+        }
+
+    }
+
+    render(){
+        const {
+            node, radius, donutWidth, startAngle, endAngle,
+            selectedNodes,
+            onSliceSelected
+        } = this.props;
+        const {name} = node;
+
+        const children = node.children ? Array.from(node.children.values()) : [];
+        
+        const pie = d3Shape.pie()
+            .startAngle(startAngle)
+            .endAngle(endAngle);
+        const arc = d3Shape.arc()
+            .innerRadius(radius - donutWidth)
+            .outerRadius(radius);
+        
+        const childrenArcDescs = pie(children.map(c => c.total));
+        const parentArcDesc = { startAngle, endAngle };
+
+        const selected = selectedNodes && selectedNodes.has(node);
+
+        return React.createElement(
             'g', 
-            {
-                className: 'piece',
-                onMouseOver(e){
-                    onSliceSelected(node);
-                }
+            { 
+                className: [
+                    'slice',
+                    selected ? 'selected' : undefined
+                ].filter(s => s).join(' ')
             },
-            React.createElement('path', {
-                d: arc(parentArcDesc)
-            }),
-            selected ? React.createElement('text', {
-                transform: 'translate('+arc.centroid(parentArcDesc)+')',
-                style: {
-                    textAnchor: 'middle',
-                    fill: '#111'
-                },
-                dy: '.35em'
-            }, name) : undefined
-        ),
-        children.map((child, i) => {
-            const arcDesc = childrenArcDescs[i];
-    
-            return React.createElement( 
-                SunburstSlice, // yep recursive call
+            React.createElement(
+                'g', 
                 {
-                    key: child.name,
-                    node: child, 
-                    radius: radius + donutWidth, 
-                    donutWidth, 
-                    startAngle: arcDesc.startAngle, 
-                    endAngle: arcDesc.endAngle,
-                    selectedNodes,
-                    onSliceSelected
-                }
-            )
-        })  
-    );
+                    className: 'piece',
+                    onMouseOver(e){
+                        onSliceSelected(node);
+                    }
+                },
+                React.createElement('path', {
+                    d: arc(parentArcDesc)
+                }),
+                selected ? React.createElement('text', {
+                    transform: 'translate('+arc.centroid(parentArcDesc)+')',
+                    style: {
+                        textAnchor: 'middle',
+                        fill: '#111'
+                    },
+                    dy: '.35em'
+                }, name) : undefined
+            ),
+            children.map((child, i) => {
+                const arcDesc = childrenArcDescs[i];
+        
+                return React.createElement( 
+                    SunburstSlice, // yep recursive call
+                    {
+                        key: child.name,
+                        node: child, 
+                        radius: radius + donutWidth, 
+                        donutWidth, 
+                        startAngle: arcDesc.startAngle, 
+                        endAngle: arcDesc.endAngle,
+                        selectedNodes,
+                        onSliceSelected
+                    }
+                )
+            })  
+        );
+    }
 }
