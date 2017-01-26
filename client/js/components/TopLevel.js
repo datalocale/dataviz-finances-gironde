@@ -24,10 +24,10 @@ export default function({
                 aggregatedHierarchical, aggregatedSelectedNodes,
                 onSliceSelected: onAggregatedNodeSelected
             })
-        )/*,
+        ),
         M52SelectedNode || aggregatedSelectedNode ? 
             React.createElement(TextualSelected, {M52SelectedNode, aggregatedSelectedNode}) :
             undefined,
-        React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})*/
+        React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
     ) : React.createElement('div', {});
 }
