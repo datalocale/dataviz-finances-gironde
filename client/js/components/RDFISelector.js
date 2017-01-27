@@ -2,8 +2,9 @@ import React from 'react'
 
 /*
 
-interface M52VizProps{
-    M52Hierarchical: M52Hierarchical
+interface RDFISelector{
+    rdfi, 
+    onRDFIChange
 }
 
  */

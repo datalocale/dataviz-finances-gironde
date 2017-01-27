@@ -1,21 +1,19 @@
 const levelCategories = [
-    r => r['Dépense/Recette'],
-    r => r['Investissement/Fonctionnement'],
     r => {
         const R = r['Rubrique fonctionnelle'];
-        return R[1];
+        return R.slice(0, 2);
     },
     r => {
         const R = r['Rubrique fonctionnelle'];
-        return R[2] ? R.slice(1, 3) : undefined;
+        return R[2] ? R.slice(0, 3) : undefined;
     },
     r => {
         const R = r['Rubrique fonctionnelle'];
-        return R[3] ? R.slice(1, 4) : undefined;
+        return R[3] ? R.slice(0, 4) : undefined;
     },
     r => {
         const R = r['Rubrique fonctionnelle'];
-        return R[4] ? R.slice(1, 5) : undefined;
+        return R[4] ? R.slice(0, 5) : undefined;
     }
 ]
 

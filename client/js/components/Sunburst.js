@@ -35,8 +35,8 @@ export default function({
         onSliceSelected
     }){
 
-    width = width || 550;
-    height = height || 550;
+    width = width || 500;
+    height = height || 500;
 
     donutWidth = donutWidth || DONUT_WIDTH;
     outerRadius = outerRadius || RADIUS;

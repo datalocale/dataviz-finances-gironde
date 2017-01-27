@@ -144,10 +144,11 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     return result;
 }
 
-
 const memoizedHierarchicalM52 = memoize(hierarchicalM52);
 const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
+
+const m52InstrRDFIToFiltered = new WeakMap();
 
 function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
@@ -160,7 +161,21 @@ function mapStateToProps(state){
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
     
-    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction);
+    let RDFIFiltered = m52InstrRDFIToFiltered.get(M52Instruction);
+    if(!RDFIFiltered){
+        RDFIFiltered = {};
+        m52InstrRDFIToFiltered.set(M52Instruction, RDFIFiltered);
+    }
+    
+    let filtered = RDFIFiltered[ rdfi.rd + rdfi.fi ];
+    if(!filtered){
+        filtered = M52Instruction.filter(row => {
+            return row['Dépense/Recette'] === rdfi.rd && row['Investissement/Fonctionnement'] === rdfi.fi;
+        })
+        RDFIFiltered[ rdfi.rd + rdfi.fi ] = filtered;
+    }
+
+    const M52Hierarchical = memoizedHierarchicalM52(filtered);
     const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction);
     
     let M52SelectedNodes;
