@@ -4,14 +4,17 @@ import M52Viz from './M52Viz';
 import AggregatedViz from './AggregatedViz';
 import TextualAggregated from './TextualAggregated';
 import TextualSelected from './TextualSelected';
-import m52ToAggregated from '../finance/m52ToAggregated.js'
+import RDFISelector from './RDFISelector';
+
+import m52ToAggregated from '../finance/m52ToAggregated.js';
 
 export default function({
+        rdfi,
         M52Instruction, aggregatedInstruction,
         M52Hierarchical, M52SelectedNodes,
         aggregatedHierarchical, aggregatedSelectedNodes,
         M52SelectedNode, aggregatedSelectedNode,
-        onM52NodeSelected, onAggregatedNodeSelected
+        onM52NodeSelected, onAggregatedNodeSelected, onRDFIChange
     }){
 
     return M52Instruction ? React.createElement('div', {className: 'top-level'},
@@ -20,6 +23,7 @@ export default function({
                 M52Hierarchical, M52SelectedNodes,
                 onSliceSelected: onM52NodeSelected
             }),
+            React.createElement(RDFISelector, { rdfi, onRDFIChange }),
             React.createElement(AggregatedViz, {
                 aggregatedHierarchical, aggregatedSelectedNodes,
                 onSliceSelected: onAggregatedNodeSelected

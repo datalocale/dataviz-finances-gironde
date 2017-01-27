@@ -28,6 +28,9 @@ function reducer(state, action){
         return state
             .set('M52NodeSelected', undefined)
             .set('aggregatedNodeSelected', action.aggregatedNode);
+    case 'RDFI_CHANGE':
+        return state
+            .set('RDFI', action.rdfi)
     default:
         return state;
     }
@@ -148,6 +151,10 @@ const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
 function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
+    const rdfi = state.get('RDFI');
+    const M52SelectedNode = state.get('M52NodeSelected');
+    const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
+    
     if(!M52Instruction)
         return {};
 
@@ -159,8 +166,6 @@ function mapStateToProps(state){
     let M52SelectedNodes;
     let aggregatedSelectedNodes;
 
-    const M52SelectedNode = state.get('M52NodeSelected');
-    const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
     if(M52SelectedNode){
         M52SelectedNodes = findSelectedNodeAncestors(M52Hierarchical, M52SelectedNode);
         aggregatedSelectedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(M52SelectedNode.elements))
@@ -174,6 +179,7 @@ function mapStateToProps(state){
     }
 
     return {
+        rdfi,
         M52Instruction,
         aggregatedInstruction,
         M52Hierarchical,
@@ -199,6 +205,12 @@ function mapDispatchToProps(dispatch){
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
                 aggregatedNode: node
             });
+        },
+        onRDFIChange(rdfi){
+            store.dispatch({
+                type: 'RDFI_CHANGE',
+                rdfi
+            });
         }
     }
 }
@@ -208,7 +220,12 @@ const BoundTopLevel = connect(
   mapDispatchToProps
 )(TopLevel)
 
-const store = createStore(reducer, new ImmutableMap());
+const store = createStore(reducer, new ImmutableMap({
+    RDFI: {
+        rd: 'D',
+        fi: 'F'
+    }
+}));
 
 ReactDOM.render(
     React.createElement(
