@@ -151,6 +151,13 @@ export default function(aggRows, rdfi) {
                 const childRow = aggRows.find(r => r.id === child); 
                 correspondingTargetNode.elements.add(childRow);
                 correspondingTargetNode.total += childRow["Montant"];
+
+                correspondingTargetNode.children.add({
+                    name: childRow['Libellé'],
+                    ownValue: childRow["Montant"],
+                    total: childRow["Montant"],
+                    elements: new Set([childRow])
+                });
             }
             else{
                 correspondingTargetNode.children.add(makeCorrespondingSubtree(child));
