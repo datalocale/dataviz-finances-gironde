@@ -24,11 +24,17 @@ const levelCategories = [
  * M52Entry keys are column names of 
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
  */
-export default function(rows) {
+export default function(rows, rdfi) {
+    rows = rows.filter(row => {
+        return row['Dépense/Recette'] === rdfi.rd && row['Investissement/Fonctionnement'] === rdfi.fi;
+    });
+    
     const root = {
         name: "Instruction M52",
         elements: rows,
     };
+
+
 
     /* TreeNode : HierarchicalData<M52Entry> 
     {

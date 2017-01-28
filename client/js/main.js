@@ -11,6 +11,8 @@ import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
 
+import objectId from './objectId';
+
 import TopLevel from './components/TopLevel.js';
 
 
@@ -31,6 +33,8 @@ function reducer(state, action){
     case 'RDFI_CHANGE':
         return state
             .set('RDFI', action.rdfi)
+            .set('M52NodeSelected', undefined)
+            .set('aggregatedNodeSelected', undefined);
     default:
         return state;
     }
@@ -144,8 +148,12 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     return result;
 }
 
-const memoizedHierarchicalM52 = memoize(hierarchicalM52);
-const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated);
+function hierarchMemoizeResolver(o, rdfi){
+    return objectId(o) + rdfi.rd + rdfi.fi;
+}
+
+const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
+const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
 const m52InstrRDFIToFiltered = new WeakMap();
@@ -160,23 +168,8 @@ function mapStateToProps(state){
         return {};
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
-    
-    let RDFIFiltered = m52InstrRDFIToFiltered.get(M52Instruction);
-    if(!RDFIFiltered){
-        RDFIFiltered = {};
-        m52InstrRDFIToFiltered.set(M52Instruction, RDFIFiltered);
-    }
-    
-    let filtered = RDFIFiltered[ rdfi.rd + rdfi.fi ];
-    if(!filtered){
-        filtered = M52Instruction.filter(row => {
-            return row['Dépense/Recette'] === rdfi.rd && row['Investissement/Fonctionnement'] === rdfi.fi;
-        })
-        RDFIFiltered[ rdfi.rd + rdfi.fi ] = filtered;
-    }
-
-    const M52Hierarchical = memoizedHierarchicalM52(filtered);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction);
+    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
+    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi);
     
     let M52SelectedNodes;
     let aggregatedSelectedNodes;
