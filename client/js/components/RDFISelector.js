@@ -16,14 +16,13 @@ export default class RDFISelector extends React.PureComponent{
             'div',
             {
                 className: 'rdfi',
-                ref: (el => this.root = el),
                 style: {
                     padding: "1em"
                 },
                 onChange: e => {
                     onRDFIChange({
-                        rd: this.root.querySelector('input[type="radio"][name="rd"]:checked').value,
-                        fi: this.root.querySelector('input[type="radio"][name="fi"]:checked').value
+                        rd: e.currentTarget.querySelector('input[type="radio"][name="rd"]:checked').value,
+                        fi: e.currentTarget.querySelector('input[type="radio"][name="fi"]:checked').value
                     })
                 }
             }, 

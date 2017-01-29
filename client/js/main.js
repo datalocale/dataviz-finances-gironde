@@ -10,6 +10,7 @@ import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
+import {PAR_PUBLIC_VIEW} from './finance/constants';
 
 import objectId from './objectId';
 
@@ -35,6 +36,9 @@ function reducer(state, action){
             .set('RDFI', action.rdfi)
             .set('M52NodeSelected', undefined)
             .set('aggregatedNodeSelected', undefined);
+    case 'DF_VIEW_CHANGE':
+        return state
+            .set('DF_VIEW', action.dfView);
     default:
         return state;
     }
@@ -148,8 +152,8 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     return result;
 }
 
-function hierarchMemoizeResolver(o, rdfi){
-    return objectId(o) + rdfi.rd + rdfi.fi;
+function hierarchMemoizeResolver(o, rdfi, view){
+    return objectId(o) + rdfi.rd + rdfi.fi + (view ? view : '');
 }
 
 const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
@@ -161,6 +165,7 @@ const m52InstrRDFIToFiltered = new WeakMap();
 function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
     const rdfi = state.get('RDFI');
+    const dfView = state.get('DF_VIEW');
     const M52SelectedNode = state.get('M52NodeSelected');
     const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
     
@@ -169,7 +174,7 @@ function mapStateToProps(state){
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
     const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi);
+    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
     
     let M52SelectedNodes;
     let aggregatedSelectedNodes;
@@ -187,7 +192,7 @@ function mapStateToProps(state){
     }
 
     return {
-        rdfi,
+        rdfi, dfView,
         M52Instruction,
         aggregatedInstruction,
         M52Hierarchical,
@@ -219,6 +224,13 @@ function mapDispatchToProps(dispatch){
                 type: 'RDFI_CHANGE',
                 rdfi
             });
+        },
+        onAggregatedDFViewChange(dfView){
+            console.log('onAggregatedDFViewChange', dfView)
+            store.dispatch({
+                type: 'DF_VIEW_CHANGE',
+                dfView
+            });
         }
     }
 }
@@ -232,7 +244,8 @@ const store = createStore(reducer, new ImmutableMap({
     RDFI: {
         rd: 'D',
         fi: 'F'
-    }
+    },
+    DF_VIEW: PAR_PUBLIC_VIEW
 }));
 
 ReactDOM.render(

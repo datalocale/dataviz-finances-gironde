@@ -11,7 +11,7 @@ interface M52VizProps{
 
 export default function({ M52Hierarchical, M52SelectedNodes, onSliceSelected }){
     return React.createElement('div', {},
-        React.createElement('h1', {}, M52Hierarchical.name),
+        React.createElement('h1', {}, "Instruction M52"),
         React.createElement(Sunburst, { hierarchicalData: M52Hierarchical, selectedNodes: M52SelectedNodes, onSliceSelected })
     );
 }

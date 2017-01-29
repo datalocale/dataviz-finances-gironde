@@ -1,6 +1,38 @@
+import {Set as ImmutableSet} from 'immutable';
+
 import {rules} from './m52ToAggregated';
+import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from './constants';
 
 const ruleIds = Object.freeze(Object.keys(rules));
+
+const DFparPublicChild = {
+    name: "Actions sociales par publics",
+    children: ruleIds.filter(id => id.startsWith('DF-2'))
+};
+
+const DFparPrestationChild = {
+    name: "Actions sociales par prestations",
+    children: [
+        {
+            name: "Frais d'hébergement",
+            children: ruleIds.filter(id => id.startsWith('DF-1-1'))
+        },
+        'DF-1-2',
+        'DF-1-3',
+        'DF-1-4',
+        {
+            name: "Divers enfants",
+            children: ruleIds.filter(id => id.startsWith('DF-1-5'))
+        },
+        'DF-1-6',
+        {
+            name: "Divers social",
+            children: ruleIds.filter(id => id.startsWith('DF-1-7'))
+        }
+    ]
+}
+
+
 
 const levelsByRDFI = {
     'RF': {
@@ -44,34 +76,9 @@ const levelsByRDFI = {
             }
         ]
     },
-    'DF': {
+    'DF': Object.freeze({
         name: 'Dépenses de fonctionnement',
-        children: [
-            {
-                name: "Actions sociales par prestations",
-                children: [
-                    {
-                        name: "Frais d'hébergement",
-                        children: ruleIds.filter(id => id.startsWith('DF-1-1'))
-                    },
-                    'DF-1-2',
-                    'DF-1-3',
-                    'DF-1-4',
-                    {
-                        name: "Divers enfants",
-                        children: ruleIds.filter(id => id.startsWith('DF-1-5'))
-                    },
-                    'DF-1-6',
-                    {
-                        name: "Divers social",
-                        children: ruleIds.filter(id => id.startsWith('DF-1-7'))
-                    }
-                ]
-            },
-            {
-                name: "Actions sociales par publics",
-                children: ruleIds.filter(id => id.startsWith('DF-2'))
-            },
+        children: new ImmutableSet([
             {
                 name: "Actions d’intervention",
                 children: ruleIds.filter(id => id.startsWith('DF-3'))
@@ -96,8 +103,8 @@ const levelsByRDFI = {
                 name: "Frais financiers",
                 children: ruleIds.filter(id => id.startsWith('DF-8'))
             }
-        ]
-    },
+        ])
+    }),
     'RI': {
         name: 'Recettes d’investissement',
         children: ruleIds
@@ -133,7 +140,24 @@ const levelsByRDFI = {
 /**
  * rows : ImmutableSet<Record<AggEntry>>
  */
-export default function(aggRows, rdfi) {
+export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
+    const rdfiId = rdfi.rd + rdfi.fi;
+    let levels = levelsByRDFI[rdfiId];
+
+    if(rdfiId === 'DF'){
+        switch(view){
+            case PAR_PUBLIC_VIEW:
+                levels = Object.assign({}, levels);
+                levels.children = levels.children.add(DFparPublicChild); 
+                break;   
+            case PAR_PRESTATION_VIEW: 
+                levels = Object.assign({}, levels);
+                levels.children = levels.children.add(DFparPrestationChild);
+                break;
+            default:
+                throw new Error('Misunderstood view ('+view+')')
+        }
+    }
 
     function makeCorrespondingSubtree(sourceNode){
         const correspondingTargetNode = {
@@ -173,5 +197,5 @@ export default function(aggRows, rdfi) {
         return correspondingTargetNode;
     }
 
-    return makeCorrespondingSubtree(levelsByRDFI[rdfi.rd + rdfi.fi]);
+    return makeCorrespondingSubtree(levels);
 };
