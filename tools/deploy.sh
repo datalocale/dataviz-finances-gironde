@@ -4,7 +4,7 @@ git config user.name "David Bruant (via Travis CI with personal access token)"
 git config user.email "bruant.d+travisci@gmail.com"
 
 git remote add upstream "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git"
-git fetch origin $TRAVIS_BRANCH && git reset upstream/$DEPLOY_TARGET_BRANCH
+git fetch upstream && git reset upstream/$DEPLOY_TARGET_BRANCH
 
 git add -A .
 git add -f client/js/browserify-bundle.js
