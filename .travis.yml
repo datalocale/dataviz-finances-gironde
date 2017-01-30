@@ -3,6 +3,11 @@ node_js: 6
 
 install: npm install
 script: npm run build
+
+cache:
+  directories:
+  - node_modules
+
 deploy:
   skip_cleanup: true
   provider: script
