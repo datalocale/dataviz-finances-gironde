@@ -1,4 +1,4 @@
-# Dataviz finances Gironde
+# Dataviz finances Gironde [![Build Status](https://travis-ci.org/dtc-innovation/dataviz-finances-gironde.svg?branch=master)](https://travis-ci.org/dtc-innovation/dataviz-finances-gironde)
 
 ## Contribuer
 
