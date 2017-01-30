@@ -10,6 +10,7 @@ import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
+import visitHierarchical from './finance/visitHierarchical.js';
 
 import TopLevel from './components/TopLevel.js';
 
@@ -106,39 +107,28 @@ function findSelectedNodeAncestors(tree, selectedNode){
 }
 
 function findSelectedAggregatedNodesByM52Rows(aggregatedNode, m52Rows){
-    let result = new ImmutableSet();
+    let result = [];
 
-    if(m52Rows.some(row => {
-        return Array.from(aggregatedNode.elements).some(el => el["M52Rows"].has(row))
-    })){
-        result = result.add(aggregatedNode);
-    }
-    
-    if(aggregatedNode.children){
-        Array.from(aggregatedNode.children.values()).forEach(child => {
-            const selectedNodes = findSelectedAggregatedNodesByM52Rows(child, m52Rows);
-            result = result.union(selectedNodes);
-        })
-    }
+    visitHierarchical(aggregatedNode, n => {
+        const elements = Array.from(n.elements);
+        if(m52Rows.some(row => elements.some(el => el["M52Rows"].has(row)))){
+            result.push(n);
+        }
+    });
 
-    return result;
+    return new ImmutableSet(result);
 }
 
 function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
-    let result = new ImmutableSet();
+    let result = [];
 
-    if(m52Rows.some(row => M52Node.elements.has(row))){
-        result = result.add(M52Node);
-    }
-    
-    if(M52Node.children){
-        Array.from(M52Node.children.values()).forEach(child => {
-            const selectedNodes = findSelectedM52NodesByM52Rows(child, m52Rows);
-            result = result.union(selectedNodes);
-        })
-    }
+    visitHierarchical(M52Node, n => {
+        if(m52Rows.some(row => n.elements.has(row))){
+            result.push(n);
+        }
+    });
 
-    return result;
+    return new ImmutableSet(result);;
 }
 
 
@@ -193,8 +183,6 @@ function mapDispatchToProps(dispatch){
             });
         },
         onAggregatedNodeSelected(node){
-            console.log('onAggregatedNodeSelected', node);
-
             store.dispatch({
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
                 aggregatedNode: node
