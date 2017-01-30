@@ -8,7 +8,7 @@
     "build": "browserify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d",
     "watch": "watchify client/js/main.js -t rollupify -o client/js/browserify-bundle.js -d -v",
     "lint": "eslint --ignore-path .gitignore client/js",
-    "fix": "npm run lint -- --fix",
+    "lint-fix": "npm run lint -- --fix",
     "start": "serve --cors -p 3000",
     "test": "exit 0",
     "posttest": "npm run lint"
@@ -34,7 +34,8 @@
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "rollupify": "^0.3.7"
+    "rollupify": "^0.3.7",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "browserify": "^13.1.1",

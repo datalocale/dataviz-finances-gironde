@@ -11,7 +11,9 @@ import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
 import visitHierarchical from './finance/visitHierarchical.js';
+import {PAR_PUBLIC_VIEW} from './finance/constants';
 
+import objectId from './objectId';
 import TopLevel from './components/TopLevel.js';
 
 
@@ -29,6 +31,14 @@ function reducer(state, action){
         return state
             .set('M52NodeSelected', undefined)
             .set('aggregatedNodeSelected', action.aggregatedNode);
+    case 'RDFI_CHANGE':
+        return state
+            .set('RDFI', action.rdfi)
+            .set('M52NodeSelected', undefined)
+            .set('aggregatedNodeSelected', undefined);
+    case 'DF_VIEW_CHANGE':
+        return state
+            .set('DF_VIEW', action.dfView);
     default:
         return state;
     }
@@ -131,26 +141,33 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     return new ImmutableSet(result);;
 }
 
+function hierarchMemoizeResolver(o, rdfi, view){
+    return objectId(o) + rdfi.rd + rdfi.fi + (view ? view : '');
+}
 
-const memoizedHierarchicalM52 = memoize(hierarchicalM52);
-const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated);
+const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
+const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
+
+const m52InstrRDFIToFiltered = new WeakMap();
 
 function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
+    const rdfi = state.get('RDFI');
+    const dfView = state.get('DF_VIEW');
+    const M52SelectedNode = state.get('M52NodeSelected');
+    const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
+    
     if(!M52Instruction)
         return {};
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
-    
-    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction);
+    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
+    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
     
     let M52SelectedNodes;
     let aggregatedSelectedNodes;
 
-    const M52SelectedNode = state.get('M52NodeSelected');
-    const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
     if(M52SelectedNode){
         M52SelectedNodes = findSelectedNodeAncestors(M52Hierarchical, M52SelectedNode);
         aggregatedSelectedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(M52SelectedNode.elements))
@@ -164,6 +181,7 @@ function mapStateToProps(state){
     }
 
     return {
+        rdfi, dfView,
         M52Instruction,
         aggregatedInstruction,
         M52Hierarchical,
@@ -187,6 +205,19 @@ function mapDispatchToProps(dispatch){
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
                 aggregatedNode: node
             });
+        },
+        onRDFIChange(rdfi){
+            store.dispatch({
+                type: 'RDFI_CHANGE',
+                rdfi
+            });
+        },
+        onAggregatedDFViewChange(dfView){
+            console.log('onAggregatedDFViewChange', dfView)
+            store.dispatch({
+                type: 'DF_VIEW_CHANGE',
+                dfView
+            });
         }
     }
 }
@@ -196,7 +227,13 @@ const BoundTopLevel = connect(
   mapDispatchToProps
 )(TopLevel)
 
-const store = createStore(reducer, new ImmutableMap());
+const store = createStore(reducer, new ImmutableMap({
+    RDFI: {
+        rd: 'D',
+        fi: 'F'
+    },
+    DF_VIEW: PAR_PUBLIC_VIEW
+}));
 
 ReactDOM.render(
     React.createElement(

@@ -49,7 +49,14 @@
             .top-level > *:first-child{
                 display: flex;
                 flex-direction: row;
-                max-width: 50vw;
+                width: 100%;
+            }
+
+            .top-level > *:first-child > *{
+                flex: 2;
+            }
+            .top-level > *:first-child > *:nth-child(2){
+                flex: 1;
             }
 
 
@@ -121,53 +128,25 @@
             }
 
 
-
             /*
-                Sunburst
+                RDFI Selector
             */
 
-            .sunburst{}
+            .rdfi{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
 
-            .sunburst .slice path {
-                fill: #d4c685
+                min-width: 28em;
             }
 
-            .sunburst .slice > .slice path {
-                fill: #f7ef81
-            }
-
-            .sunburst .slice > .slice > .slice path {
-                fill: #cfe795
-            }
-
-            .sunburst .slice > .slice > .slice > .slice path {
-                fill: #a7d3a6
-            }
-
-            .sunburst .slice > .slice > .slice > .slice > .slice path {
-                fill: #add2c2
-            }
-
-            .slice > .piece path{
-                stroke: #AAA;
-            }
-
-            text{
-                color: black;
-                stroke-width: 0;
-            }
-
-
-            .sunburst.active-selection{}
-
-            .sunburst.active-selection .slice > .piece path,
-            .sunburst.active-selection .slice > .piece text{
-                opacity: 0.3;
-            }
-
-            .sunburst.active-selection .slice.selected > .piece path,
-            .sunburst.active-selection .slice.selected > .piece text{
-                opacity: 1;
+            .rdfi .selector{
+                
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
 
         </style>

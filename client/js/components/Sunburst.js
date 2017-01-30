@@ -29,11 +29,14 @@ interface HierarchicalData<Element>{
 
 */
 export default function({
-        hierarchicalData, width=700, height=600,
+        hierarchicalData, width, height,
         selectedNodes,
         donutWidth, outerRadius,
         onSliceSelected
     }){
+
+    width = width || 500;
+    height = height || 500;
 
     donutWidth = donutWidth || DONUT_WIDTH;
     outerRadius = outerRadius || RADIUS;
