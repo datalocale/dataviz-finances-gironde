@@ -30,9 +30,9 @@ interface HierarchicalData<Element>{
 */
 export default function({
         hierarchicalData, width, height,
-        selectedNodes,
+        highlightedNodes,
         donutWidth, outerRadius,
-        onSliceSelected
+        onSliceOvered
     }){
 
     width = width || 500;
@@ -55,12 +55,11 @@ export default function({
         {
             className: [
                 'sunburst',
-                selectedNodes ? 'active-selection' : undefined
+                highlightedNodes ? 'active-selection' : undefined
             ].filter(s => s).join(' '),
             onMouseOver(e){
                 if(!e.target.matches('.slice *')){
-                    // remove selection
-                    onSliceSelected();
+                    onSliceOvered(undefined);
                 }
             }
         },
@@ -77,11 +76,11 @@ export default function({
                             key: child.name,
                             node: child, 
                             radius: outerRadius, 
-                            donutWidth: donutWidth, 
+                            donutWidth, 
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
-                            selectedNodes,
-                            onSliceSelected
+                            highlightedNodes,
+                            onSliceOvered
                         }
                     )
                 })              

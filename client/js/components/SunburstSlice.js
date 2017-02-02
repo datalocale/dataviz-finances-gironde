@@ -15,17 +15,17 @@ export default class SunburstSlice extends React.Component{
         // from now on, this.props.node === nextProps.node
         const node = nextProps.node;
 
-        if(this.props.selectedNodes === nextProps.selectedNodes)
+        if(this.props.highlightedNodes === nextProps.highlightedNodes)
             return false;
         else{
-            if(!this.props.selectedNodes || !nextProps.selectedNodes)
+            if(!this.props.highlightedNodes || !nextProps.highlightedNodes)
                 return true;
             
             const nodes = flattenTree(node);
             
-            // update the component if there is a difference in this.props.selectedNodes VS nextProps.selectedNodes
+            // update the component if there is a difference in this.props.highlightedNodes VS nextProps.highlightedNodes
             // in regard to the node being drawn
-            return nodes.some(n => this.props.selectedNodes.has(n) !== nextProps.selectedNodes.has(n))
+            return nodes.some(n => this.props.highlightedNodes.has(n) !== nextProps.highlightedNodes.has(n))
         }
 
     }
@@ -33,8 +33,8 @@ export default class SunburstSlice extends React.Component{
     render(){
         const {
             node, radius, donutWidth, startAngle, endAngle,
-            selectedNodes,
-            onSliceSelected
+            highlightedNodes,
+            onSliceOvered
         } = this.props;
         const {name} = node;
 
@@ -50,7 +50,7 @@ export default class SunburstSlice extends React.Component{
         const childrenArcDescs = pie(children.map(c => c.total));
         const parentArcDesc = { startAngle, endAngle };
 
-        const selected = selectedNodes && selectedNodes.has(node);
+        const selected = highlightedNodes && highlightedNodes.has(node);
 
         return React.createElement(
             'g', 
@@ -65,7 +65,7 @@ export default class SunburstSlice extends React.Component{
                 {
                     className: 'piece',
                     onMouseOver(e){
-                        onSliceSelected(node);
+                        onSliceOvered(node);
                     }
                 },
                 React.createElement('path', {
@@ -92,8 +92,8 @@ export default class SunburstSlice extends React.Component{
                         donutWidth, 
                         startAngle: arcDesc.startAngle, 
                         endAngle: arcDesc.endAngle,
-                        selectedNodes,
-                        onSliceSelected
+                        highlightedNodes,
+                        onSliceOvered
                     }
                 )
             })  

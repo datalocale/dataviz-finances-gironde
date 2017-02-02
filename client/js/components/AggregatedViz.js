@@ -14,7 +14,7 @@ interface AggregatedViZProps{
 
 */
 export default function(
-    {aggregatedHierarchical, aggregatedSelectedNodes, rdfi, dfView, onSliceSelected, onAggregatedDFViewChange}
+    {aggregatedHierarchical, aggregatedHighlightedNodes, rdfi, dfView, onSliceOvered, onAggregatedDFViewChange}
     ){
     const rdfiId = rdfi.rd + rdfi.fi;
 
@@ -43,9 +43,9 @@ export default function(
         ) : undefined),
         React.createElement(Sunburst, {
             hierarchicalData: aggregatedHierarchical, 
-            selectedNodes: aggregatedSelectedNodes,
+            highlightedNodes: aggregatedHighlightedNodes,
             donutWidth: 55, outerRadius: 120,
-            onSliceSelected
+            onSliceOvered
         })
     );
 }
