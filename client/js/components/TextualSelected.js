@@ -1,5 +1,6 @@
 import React from 'react'
 import {OrderedSet} from 'immutable'
+import {format} from 'currency-formatter'
 
 function makeM52RowId(m52Row){
     return [
@@ -23,13 +24,13 @@ export default class TextualSelected extends React.PureComponent{
         return React.createElement('div', {},
             React.createElement('h1', {}, M52SelectedNode ? 'Morceau de la M52 sélectionnée' : "Morceau de l'agrégée selectionné"),
             React.createElement('h2', {}, selected.name),
-            React.createElement('h3', {}, selected.total.toFixed(2) + '€'),
+            React.createElement('h3', {className: 'money-amount'}, format(selected.total, { code: 'EUR' })),
             React.createElement('table', {}, m52Rows.map(m52 => {
                 const m52Id = makeM52RowId(m52);
 
                 return React.createElement('tr', {key: m52Id}, 
                     React.createElement('td', {}, m52Id),
-                    React.createElement('td', {}, m52["Montant"].toFixed(2)+'€')
+                    React.createElement('td', {className: 'money-amount'}, format(m52["Montant"], { code: 'EUR' }))
                 )
             }))
         );

@@ -1,4 +1,5 @@
 import React from 'react'
+import {format} from 'currency-formatter'
 
 import {isOR} from '../finance/m52ToAggregated';
 
@@ -86,7 +87,7 @@ export default class TextualSelected extends React.PureComponent{
                         }, 
                         React.createElement('td', {}, aggRow['id']),
                         React.createElement('td', {}, aggRow['Libellé']),
-                        React.createElement('td', {}, aggRow['Montant'].toFixed(2)+'€'),
+                        React.createElement('td', {className: 'money-amount'}, format(aggRow['Montant'], { code: 'EUR' })),
                         React.createElement('td', {}, aggRow['M52Rows'].size)
                     )
                 )))
@@ -98,7 +99,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('tr', {key: m52Id}, 
                         React.createElement('td', {}, m52Id),
-                        React.createElement('td', {}, m52["Montant"].toFixed(2)+'€')
+                        React.createElement('td', {className: 'money-amount'}, format(m52["Montant"], { code: 'EUR' }))
                     )
                 }))
             ),
