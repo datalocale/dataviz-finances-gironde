@@ -7,6 +7,7 @@ import TextualSelected from './TextualSelected';
 import RDFISelector from './RDFISelector';
 
 import m52ToAggregated from '../finance/m52ToAggregated.js';
+import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../finance/constants';
 
 /*
         rdfi, dfView,
@@ -22,22 +23,29 @@ export default function({
         M52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
-        over,
+        over, selectedNode,
         onM52NodeOvered, onAggregatedNodeOvered, 
+        onM52NodeSelected, onAggregatedNodeSelected,
         onRDFIChange, onAggregatedDFViewChange
     }){
 
     return M52Instruction ? React.createElement('div', {className: 'top-level'},
         React.createElement('div', {},
             React.createElement(M52Viz, {
-                M52Hierarchical, M52HighlightedNodes,
-                onSliceOvered: onM52NodeOvered
+                M52Hierarchical, 
+                M52HighlightedNodes,
+                selectedNode: selectedNode && selectedNode.type === M52_INSTRUCTION ? selectedNode.node : undefined,
+                onSliceOvered: onM52NodeOvered,
+                onSliceSelected: onM52NodeSelected
             }),
             React.createElement(RDFISelector, { rdfi, onRDFIChange }),
             React.createElement(AggregatedViz, {
-                aggregatedHierarchical, aggregatedHighlightedNodes,
+                aggregatedHierarchical, 
+                aggregatedHighlightedNodes,
+                selectedNode: selectedNode && selectedNode.type === AGGREGATED_INSTRUCTION ? selectedNode.node : undefined,
                 rdfi, dfView,
                 onSliceOvered: onAggregatedNodeOvered,
+                onSliceSelected: onAggregatedNodeSelected,
                 onAggregatedDFViewChange
             })
         ),

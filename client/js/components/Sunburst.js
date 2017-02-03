@@ -30,10 +30,12 @@ interface HierarchicalData<Element>{
 */
 export default function({
         hierarchicalData, width, height,
-        highlightedNodes,
+        highlightedNodes, selectedNode,
         donutWidth, outerRadius,
-        onSliceOvered
+        onSliceOvered, onSliceSelected
     }){
+
+        console.log('selectedNode', selectedNode)
 
     width = width || 500;
     height = height || 500;
@@ -61,6 +63,11 @@ export default function({
                 if(!e.target.matches('.slice *')){
                     onSliceOvered(undefined);
                 }
+            },
+            onClick(e){
+                if(!e.target.matches('.slice *')){
+                    onSliceSelected(undefined);
+                }
             }
         },
         React.createElement('svg', {width: width, height: height},
@@ -80,7 +87,9 @@ export default function({
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
                             highlightedNodes,
-                            onSliceOvered
+                            selectedNode,
+                            onSliceOvered,
+                            onSliceSelected
                         }
                     )
                 })              

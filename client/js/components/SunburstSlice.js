@@ -6,7 +6,7 @@ import {flattenTree} from '../finance/visitHierarchical.js';
 export default class SunburstSlice extends React.Component{
     
     shouldComponentUpdate(nextProps){
-        if(['radius', 'donutWidth', 'startAngle', 'endAngle']
+        if(['radius', 'donutWidth', 'startAngle', 'endAngle', 'selectedNode']
             .some(k => this.props[k] !== nextProps[k]))
             return true;
 
@@ -33,8 +33,8 @@ export default class SunburstSlice extends React.Component{
     render(){
         const {
             node, radius, donutWidth, startAngle, endAngle,
-            highlightedNodes,
-            onSliceOvered
+            highlightedNodes, selectedNode,
+            onSliceOvered, onSliceSelected
         } = this.props;
         const {name} = node;
 
@@ -50,13 +50,15 @@ export default class SunburstSlice extends React.Component{
         const childrenArcDescs = pie(children.map(c => c.total));
         const parentArcDesc = { startAngle, endAngle };
 
-        const selected = highlightedNodes && highlightedNodes.has(node);
+        const highlighted = highlightedNodes && highlightedNodes.has(node);
+        const selected = selectedNode === node;
 
         return React.createElement(
             'g', 
             { 
                 className: [
                     'slice',
+                    highlighted ? 'highlighted' : undefined,
                     selected ? 'selected' : undefined
                 ].filter(s => s).join(' ')
             },
@@ -66,12 +68,15 @@ export default class SunburstSlice extends React.Component{
                     className: 'piece',
                     onMouseOver(e){
                         onSliceOvered(node);
+                    },
+                    onClick(e){
+                        onSliceSelected(node);
                     }
                 },
                 React.createElement('path', {
                     d: arc(parentArcDesc)
                 }),
-                selected ? React.createElement('text', {
+                highlighted ? React.createElement('text', {
                     transform: 'translate('+arc.centroid(parentArcDesc)+')',
                     style: {
                         textAnchor: 'middle',
@@ -92,8 +97,8 @@ export default class SunburstSlice extends React.Component{
                         donutWidth, 
                         startAngle: arcDesc.startAngle, 
                         endAngle: arcDesc.endAngle,
-                        highlightedNodes,
-                        onSliceOvered
+                        highlightedNodes, selectedNode, 
+                        onSliceOvered, onSliceSelected
                     }
                 )
             })  
