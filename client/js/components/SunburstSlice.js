@@ -36,7 +36,7 @@ export default class SunburstSlice extends React.Component{
             highlightedNodes, selectedNode,
             onSliceOvered, onSliceSelected
         } = this.props;
-        const {name} = node;
+        const {label} = node;
 
         const children = node.children ? Array.from(node.children.values()) : [];
         
@@ -83,7 +83,7 @@ export default class SunburstSlice extends React.Component{
                         fill: '#111'
                     },
                     dy: '.35em'
-                }, name) : undefined
+                }, label) : undefined
             ),
             children.map((child, i) => {
                 const arcDesc = childrenArcDescs[i];

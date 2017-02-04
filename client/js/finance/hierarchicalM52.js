@@ -1,3 +1,5 @@
+const rubriqueIdToLabel = require('./finance/m52FonctionLabels.json'); 
+
 const levelCategories = [
     r => {
         const R = r['Rubrique fonctionnelle'];
@@ -30,7 +32,8 @@ export default function(rows, rdfi) {
     });
     
     const root = {
-        name: "Instruction M52",
+        id: 'M52',
+        label: "Instruction M52",
         elements: rows,
     };
 
@@ -38,7 +41,8 @@ export default function(rows, rdfi) {
 
     /* TreeNode : HierarchicalData<M52Entry> 
     {
-        name: '',
+        id: '',
+        label: 'str'
         ownValue: Number, // for nodes with children, this is the own value
         total?: Number,
         children?: Map<category, Set<TreeNode>>
@@ -68,8 +72,15 @@ export default function(rows, rdfi) {
                 else{
                     let categoryChild = children.get(category);
                     if(!categoryChild){
+                        const label = rubriqueIdToLabel[category]
+
+                        if(!label){
+                            console.warn('No label for rubrique', category);
+                        }
+
                         categoryChild = {
-                            name: category,
+                            id: category,
+                            label,
                             elements: new Set()
                         }
                         children.set(category, categoryChild);
@@ -88,7 +99,7 @@ export default function(rows, rdfi) {
         });
     }
 
-    buildTree(root, root.name, 0);
+    buildTree(root, root.id, 0);
 
     return root;
 };

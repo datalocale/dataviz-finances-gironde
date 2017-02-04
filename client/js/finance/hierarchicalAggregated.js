@@ -6,27 +6,32 @@ import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from './constants';
 const ruleIds = Object.freeze(Object.keys(rules));
 
 const DFparPublicChild = {
-    name: "Actions sociales par publics",
+    id: 'DF-2',
+    label: "Actions sociales par publics",
     children: ruleIds.filter(id => id.startsWith('DF-2'))
 };
 
 const DFparPrestationChild = {
-    name: "Actions sociales par prestations",
+    id: 'DF-1',
+    label: "Actions sociales par prestations",
     children: [
         {
-            name: "Frais d'hébergement",
+            id: 'DF-1-1',
+            label: "Frais d'hébergement",
             children: ruleIds.filter(id => id.startsWith('DF-1-1'))
         },
         'DF-1-2',
         'DF-1-3',
         'DF-1-4',
         {
-            name: "Divers enfants",
+            id: 'DF-1-5',
+            label: "Divers enfants",
             children: ruleIds.filter(id => id.startsWith('DF-1-5'))
         },
         'DF-1-6',
         {
-            name: "Divers social",
+            id: 'DF-1-7',
+            label: "Divers social",
             children: ruleIds.filter(id => id.startsWith('DF-1-7'))
         }
     ]
@@ -36,99 +41,122 @@ const DFparPrestationChild = {
 
 const levelsByRDFI = {
     'RF': {
-        name: 'Recettes de fonctionnement',
+        id: 'RF',
+        label: 'Recettes de fonctionnement',
         children: [
             {
-                name: "Fiscalité directe",
+                id: 'RF-1',
+                label: "Fiscalité directe",
                 children: ruleIds.filter(id => id.startsWith('RF-1'))
             },
             {
-                name: "Fiscalité transférée",
+                id: 'RF-2',
+                label: "Fiscalité transférée",
                 children: ruleIds.filter(id => id.startsWith('RF-2'))
             },
             {
-                name: "Droits de mutation à titre onéreux (DMTO)",
+                id: 'RF-3',
+                label: "Droits de mutation à titre onéreux (DMTO)",
                 children: ruleIds.filter(id => id.startsWith('RF-3'))
             },
             {
-                name: "Autres fiscalités",
+                id: 'RF-4',
+                label: "Autres fiscalités",
                 children: ruleIds.filter(id => id.startsWith('RF-4'))
             },
             {
-                name: "Dotations de l’État et compensations",
+                id: 'RF-5',
+                label: "Dotations de l’État et compensations",
                 children: ruleIds.filter(id => id.startsWith('RF-5'))
             },
             {
-                name: "Recettes sociales",
+                id: 'RF-6',
+                label: "Recettes sociales",
                 children: ruleIds.filter(id => id.startsWith('RF-6'))
             },
             {
-                name: "Péréquation sociale",
+                id: 'RF-7',
+                label: "Péréquation sociale",
                 children: ruleIds.filter(id => id.startsWith('RF-7'))
             },
             {
-                name: "Péréquation horizontale",
+                id: 'RF-8',
+                label: "Péréquation horizontale",
                 children: ruleIds.filter(id => id.startsWith('RF-8'))
             },
             {
-                name: "Recettes diverses",
+                id: 'RF-9',
+                label: "Recettes diverses",
                 children: ruleIds.filter(id => id.startsWith('RF-9'))
             }
         ]
     },
     'DF': Object.freeze({
-        name: 'Dépenses de fonctionnement',
+        id: 'DF',
+        label: 'Dépenses de fonctionnement',
         children: new ImmutableSet([
             {
-                name: "Actions d’intervention",
+                id: 'DF-3',
+                label: "Actions d’intervention",
                 children: ruleIds.filter(id => id.startsWith('DF-3'))
             },
             {
-                name: "Frais de personnel",
+                id: 'DF-4',
+                label: "Frais de personnel",
                 children: ruleIds.filter(id => id.startsWith('DF-4'))
             },
             {
-                name: "Péréquation verticale",
+                id: 'DF-5',
+                label: "Péréquation verticale",
                 children: ruleIds.filter(id => id.startsWith('DF-5'))
             },
             {
-                name: "Autres charges",
+                id: 'DF-6',
+                label: "Autres charges",
                 children: ruleIds.filter(id => id.startsWith('DF-6'))
             },
             {
-                name: "Frais généraux",
+                id: 'DF-7',
+                label: "Frais généraux",
                 children: ruleIds.filter(id => id.startsWith('DF-7'))
             },
             {
-                name: "Frais financiers",
+                id: 'DF-8',
+                label: "Frais financiers",
                 children: ruleIds.filter(id => id.startsWith('DF-8'))
             }
         ])
     }),
     'RI': {
-        name: 'Recettes d’investissement',
+        id: 'RI',
+        label: 'Recettes d’investissement',
         children: ruleIds
-            .filter(id => id.match(/RI-\d/))
+            .filter(id => id.match(/RI-\d+/))
             .concat([
                 {
-                    name: 'Emprunt contracté',
+                    id: 'RI-EM',
+                    label: 'Emprunt contracté',
                     children: ruleIds.filter(id => id.startsWith('RI-EM'))
                 }
             ])
     },
     'DI': {
-        name: 'Dépenses d’investissement',
+        id: 'DI',
+        label: 'Dépenses d’investissement',
         children: [
             {
-                name: "Equipements Propres",
+                id: 'DI-1',
+                label: "Equipements Propres",
                 children: ruleIds.filter(id => id.startsWith('DI-1'))
             },
             {
-                name: "Subventions",
+                id: 'DI-2',
+                label: "Subventions",
                 children: ruleIds.filter(id => id.startsWith('DI-2'))
             },
             {
-                name: 'Emprunt remboursé',
+                id: 'DI-EM',
+                label: 'Emprunt remboursé',
                 children: ruleIds.filter(id => id.startsWith('DI-EM'))
             }
         ]
@@ -161,7 +189,8 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
 
     function makeCorrespondingSubtree(sourceNode){
         const correspondingTargetNode = {
-            name: sourceNode.name,
+            id: sourceNode.id,
+            label: sourceNode.label,
             ownValue: 0,
             total: 0,
             children: new Set(),
@@ -177,7 +206,8 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
                 correspondingTargetNode.total += childRow["Montant"];
 
                 correspondingTargetNode.children.add({
-                    name: childRow['Libellé'],
+                    id: child,
+                    label: childRow['Libellé'],
                     ownValue: childRow["Montant"],
                     total: childRow["Montant"],
                     elements: new Set([childRow])
