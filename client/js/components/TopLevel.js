@@ -23,7 +23,7 @@ export default function({
         M52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
-        over, selectedNode,
+        over, selection,
         onM52NodeOvered, onAggregatedNodeOvered, 
         onM52NodeSelected, onAggregatedNodeSelected,
         onRDFIChange, onAggregatedDFViewChange
@@ -34,7 +34,7 @@ export default function({
             React.createElement(M52Viz, {
                 M52Hierarchical, 
                 M52HighlightedNodes,
-                selectedNode: selectedNode && selectedNode.type === M52_INSTRUCTION ? selectedNode.node : undefined,
+                selectedNode: selection && selection.type === M52_INSTRUCTION ? selection.node : undefined,
                 onSliceOvered: onM52NodeOvered,
                 onSliceSelected: onM52NodeSelected
             }),
@@ -42,14 +42,14 @@ export default function({
             React.createElement(AggregatedViz, {
                 aggregatedHierarchical, 
                 aggregatedHighlightedNodes,
-                selectedNode: selectedNode && selectedNode.type === AGGREGATED_INSTRUCTION ? selectedNode.node : undefined,
+                selectedNode: selection && selection.type === AGGREGATED_INSTRUCTION ? selection.node : undefined,
                 rdfi, dfView,
                 onSliceOvered: onAggregatedNodeOvered,
                 onSliceSelected: onAggregatedNodeSelected,
                 onAggregatedDFViewChange
             })
         ),
-        over ? React.createElement(TextualSelected, {over}) : undefined,
+        selection ? React.createElement(TextualSelected, {selection}) : undefined,
         React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
     ) : React.createElement('div', {});
 }

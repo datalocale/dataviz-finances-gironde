@@ -17,10 +17,9 @@ function makeM52RowId(m52Row){
 export default class TextualSelected extends React.PureComponent{
 
     render(){
-        const {over} = this.props;
-        const {type, node} = over;
+        const {selection} = this.props;
+        const {type, node} = selection;
 
-        const overed = node;
         const m52Rows = type === M52_INSTRUCTION ?
             Array.from(node.elements) : 
             type === AGGREGATED_INSTRUCTION ? 

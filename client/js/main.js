@@ -41,24 +41,32 @@ function reducer(state, action){
                 }) : 
                 undefined
             );
-    case 'M52_INSTRUCTION_USER_NODE_SELECTED':
+    case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
+        const { node } = action;
+        const {node: alreadySelectedNode} = state.set('selection') || {};
+
         return state
-            .set('selection', action.node ? 
+            .set('selection', node && node !== alreadySelectedNode ? 
                 new InstructionNodeRecord({
                     type: M52_INSTRUCTION,
-                    node: action.node
+                    node
                 }) : 
                 undefined
             );
-    case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED':
+    }
+    case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
+        const { node } = action;
+        const {node: alreadySelectedNode} = state.set('selection') || {};
+
         return state
-            .set('selection', action.node ? 
+            .set('selection', node && node !== alreadySelectedNode ? 
                 new InstructionNodeRecord({
                     type: AGGREGATED_INSTRUCTION,
-                    node: action.node
+                    node
                 }) : 
                 undefined
             );
+    }
     case 'RDFI_CHANGE':
         return state
             .set('RDFI', action.rdfi)
@@ -187,11 +195,16 @@ function mapStateToProps(state){
     const rdfi = state.get('RDFI');
     const dfView = state.get('DF_VIEW');
     const over = state.get('over');
-    const selectedNode = state.get('selection');
+    const selection = state.get('selection');
     const {type: overType, node: overedNode} = over || {};
+    const {type: selectedType, node: selectedNode} = selection || {};
 
     if(!M52Instruction)
         return {};
+
+
+    const mainHighlightNode = overedNode || selectedNode;
+    const mainHighlightType = overType || selectedType;
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
     const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
@@ -201,15 +214,15 @@ function mapStateToProps(state){
     let aggregatedHighlightedNodes;
 
     
-    if(overType === M52_INSTRUCTION){
-        M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, overedNode);
-        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(overedNode.elements))
+    if(mainHighlightType === M52_INSTRUCTION){
+        M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
+        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(mainHighlightNode.elements))
     }
     else{
-        if(overType === AGGREGATED_INSTRUCTION){
-            aggregatedHighlightedNodes = findSelectedNodeAncestors(aggregatedHierarchical, overedNode);
+        if(mainHighlightType === AGGREGATED_INSTRUCTION){
+            aggregatedHighlightedNodes = findSelectedNodeAncestors(aggregatedHierarchical, mainHighlightNode);
             let m52Rows = new ImmutableSet();
-            overedNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
+            mainHighlightNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
 
             M52HighlightedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
         }
@@ -220,7 +233,7 @@ function mapStateToProps(state){
         M52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
-        over, selectedNode
+        over, selection
     };
 };
 
