@@ -11,7 +11,7 @@ import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
 import visitHierarchical from './finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW} from './finance/constants';
+import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from './finance/constants';
 
 import objectId from './objectId';
 import TopLevel from './components/TopLevel.js';
@@ -23,23 +23,62 @@ function reducer(state, action){
     switch(type){
     case 'M52_INSTRUCTION_RECEIVED':
         return state.set('M52Instruction', action.M52Instruction);
-    case 'M52_INSTRUCTION_USER_NODE_SELECTED':
+    case 'M52_INSTRUCTION_USER_NODE_OVERED':
         return state
-            .set('M52NodeSelected', action.M52Node)
-            .set('aggregatedNodeSelected', undefined);
-    case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED':
+            .set('over', action.node ? 
+                new InstructionNodeRecord({
+                    type: M52_INSTRUCTION,
+                    node: action.node
+                }) : 
+                undefined
+            );
+    case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
         return state
-            .set('M52NodeSelected', undefined)
-            .set('aggregatedNodeSelected', action.aggregatedNode);
+            .set('over', action.node ? 
+                new InstructionNodeRecord({
+                    type: AGGREGATED_INSTRUCTION,
+                    node: action.node
+                }) : 
+                undefined
+            );
+    case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
+        const { node } = action;
+        const {node: alreadySelectedNode} = state.set('selection') || {};
+
+        return state
+            .set('selection', node && node !== alreadySelectedNode ? 
+                new InstructionNodeRecord({
+                    type: M52_INSTRUCTION,
+                    node
+                }) : 
+                undefined
+            );
+    }
+    case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
+        const { node } = action;
+        const {node: alreadySelectedNode} = state.set('selection') || {};
+
+        return state
+            .set('selection', node && node !== alreadySelectedNode ? 
+                new InstructionNodeRecord({
+                    type: AGGREGATED_INSTRUCTION,
+                    node
+                }) : 
+                undefined
+            );
+    }
     case 'RDFI_CHANGE':
         return state
             .set('RDFI', action.rdfi)
-            .set('M52NodeSelected', undefined)
-            .set('aggregatedNodeSelected', undefined);
+            .set('over', undefined)
+            .set('selection', undefined);
     case 'DF_VIEW_CHANGE':
         return state
-            .set('DF_VIEW', action.dfView);
+            .set('DF_VIEW', action.dfView)
+            .set('over', undefined)
+            .set('selection', undefined);
     default:
+        console.warn('Unknown action type', type);
         return state;
     }
 }
@@ -155,55 +194,74 @@ function mapStateToProps(state){
     const M52Instruction = state.get('M52Instruction');
     const rdfi = state.get('RDFI');
     const dfView = state.get('DF_VIEW');
-    const M52SelectedNode = state.get('M52NodeSelected');
-    const aggregatedSelectedNode = state.get('aggregatedNodeSelected');
-    
+    const over = state.get('over');
+    const selection = state.get('selection');
+    const {type: overType, node: overedNode} = over || {};
+    const {type: selectedType, node: selectedNode} = selection || {};
+
     if(!M52Instruction)
         return {};
+
+
+    const mainHighlightNode = overedNode || selectedNode;
+    const mainHighlightType = overType || selectedType;
 
     const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
     const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
     const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
     
-    let M52SelectedNodes;
-    let aggregatedSelectedNodes;
+    let M52HighlightedNodes;
+    let aggregatedHighlightedNodes;
 
-    if(M52SelectedNode){
-        M52SelectedNodes = findSelectedNodeAncestors(M52Hierarchical, M52SelectedNode);
-        aggregatedSelectedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(M52SelectedNode.elements))
+    
+    if(mainHighlightType === M52_INSTRUCTION){
+        M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
+        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(mainHighlightNode.elements))
     }
-    if(aggregatedSelectedNode){
-        aggregatedSelectedNodes = findSelectedNodeAncestors(aggregatedHierarchical, aggregatedSelectedNode);
-        let m52Rows = new ImmutableSet();
-        aggregatedSelectedNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
+    else{
+        if(mainHighlightType === AGGREGATED_INSTRUCTION){
+            aggregatedHighlightedNodes = findSelectedNodeAncestors(aggregatedHierarchical, mainHighlightNode);
+            let m52Rows = new ImmutableSet();
+            mainHighlightNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
 
-        M52SelectedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
+            M52HighlightedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
+        }
     }
 
     return {
         rdfi, dfView,
-        M52Instruction,
-        aggregatedInstruction,
-        M52Hierarchical,
-        M52SelectedNodes,
-        M52SelectedNode, aggregatedSelectedNode,
-        aggregatedHierarchical,
-        aggregatedSelectedNodes
+        M52Instruction, aggregatedInstruction,
+        M52Hierarchical, M52HighlightedNodes,
+        aggregatedHierarchical, aggregatedHighlightedNodes,
+        over, selection
     };
 };
 
 function mapDispatchToProps(dispatch){
     return {
+        onM52NodeOvered(node){
+            store.dispatch({
+                type: 'M52_INSTRUCTION_USER_NODE_OVERED',
+                node
+            });
+        },
+        onAggregatedNodeOvered(node){
+            store.dispatch({
+                type: 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED',
+                node
+            });
+        },
         onM52NodeSelected(node){
+            console.log('onM52NodeSelected', node)
             store.dispatch({
                 type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
-                M52Node: node
+                node
             });
         },
         onAggregatedNodeSelected(node){
             store.dispatch({
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
-                aggregatedNode: node
+                node
             });
         },
         onRDFIChange(rdfi){
@@ -227,13 +285,31 @@ const BoundTopLevel = connect(
   mapDispatchToProps
 )(TopLevel)
 
-const store = createStore(reducer, new ImmutableMap({
-    RDFI: {
-        rd: 'D',
-        fi: 'F'
-    },
-    DF_VIEW: PAR_PUBLIC_VIEW
-}));
+
+const InstructionNodeRecord = Record({
+    type: undefined,
+    node: undefined
+})
+
+const StoreRecord = Record({
+    M52Instruction: undefined,
+    selection: undefined,
+    over: undefined,
+    RDFI: undefined,
+    DF_VIEW: undefined
+})
+
+const store = createStore(
+    reducer,
+    new StoreRecord({
+        RDFI: {
+            rd: 'D',
+            fi: 'F'
+        },
+        DF_VIEW: PAR_PUBLIC_VIEW
+    })
+)
+
 
 ReactDOM.render(
     React.createElement(

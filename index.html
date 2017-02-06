@@ -61,6 +61,13 @@
 
 
             /*
+                Money amounts
+            */
+            td.money-amount{
+                text-align: right
+            }
+
+            /*
                 Textual aggregated
             */
             .aggregated{
@@ -122,9 +129,14 @@
                 opacity: 0.3;
             }
 
-            .sunburst.active-selection .slice.selected > .piece path,
-            .sunburst.active-selection .slice.selected > .piece text{
+            .sunburst.active-selection .slice.highlighted > .piece path,
+            .sunburst.active-selection .slice.highlighted > .piece text{
                 opacity: 1;
+            }
+
+            .sunburst.active-selection .slice.selected > .piece path{
+                stroke: indianred;
+                stroke-width: 2px;
             }
 
 
