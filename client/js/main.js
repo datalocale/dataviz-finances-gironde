@@ -1,322 +1,336 @@
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {csvParse} from 'd3-dsv';
-import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
+import { csvParse } from 'd3-dsv';
+import {
+  Record,
+  OrderedSet as ImmutableSet,
+  Map as ImmutableMap
+} from 'immutable';
 import memoize from 'lodash.memoize';
-import { connect, Provider } from 'react-redux'
+import { connect, Provider } from 'react-redux';
 
 import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
 import afterCSVCleanup from './finance/afterCSVCleanup.js';
 import visitHierarchical from './finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from './finance/constants';
+import {
+  PAR_PUBLIC_VIEW,
+  M52_INSTRUCTION,
+  AGGREGATED_INSTRUCTION
+} from './finance/constants';
 
 import objectId from './objectId';
 import TopLevel from './components/TopLevel.js';
 
+function reducer(state, action) {
+  const { type } = action;
 
-function reducer(state, action){
-    const {type} = action;
-
-    switch(type){
+  switch (type) {
     case 'M52_INSTRUCTION_RECEIVED':
-        return state.set('M52Instruction', action.M52Instruction);
+      return state.set('M52Instruction', action.M52Instruction);
     case 'M52_INSTRUCTION_USER_NODE_OVERED':
-        return state
-            .set('over', action.node ? 
-                new InstructionNodeRecord({
-                    type: M52_INSTRUCTION,
-                    node: action.node
-                }) : 
-                undefined
-            );
+      return state.set(
+        'over',
+        action.node
+          ? new InstructionNodeRecord({
+              type: M52_INSTRUCTION,
+              node: action.node
+            })
+          : undefined
+      );
     case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
-        return state
-            .set('over', action.node ? 
-                new InstructionNodeRecord({
-                    type: AGGREGATED_INSTRUCTION,
-                    node: action.node
-                }) : 
-                undefined
-            );
+      return state.set(
+        'over',
+        action.node
+          ? new InstructionNodeRecord({
+              type: AGGREGATED_INSTRUCTION,
+              node: action.node
+            })
+          : undefined
+      );
     case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
-        const { node } = action;
-        const {node: alreadySelectedNode} = state.set('selection') || {};
+      const { node } = action;
+      const { node: alreadySelectedNode } = state.set('selection') || {};
 
-        return state
-            .set('selection', node && node !== alreadySelectedNode ? 
-                new InstructionNodeRecord({
-                    type: M52_INSTRUCTION,
-                    node
-                }) : 
-                undefined
-            );
+      return state.set(
+        'selection',
+        node && node !== alreadySelectedNode
+          ? new InstructionNodeRecord({
+              type: M52_INSTRUCTION,
+              node
+            })
+          : undefined
+      );
     }
     case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
-        const { node } = action;
-        const {node: alreadySelectedNode} = state.set('selection') || {};
+      const { node } = action;
+      const { node: alreadySelectedNode } = state.set('selection') || {};
 
-        return state
-            .set('selection', node && node !== alreadySelectedNode ? 
-                new InstructionNodeRecord({
-                    type: AGGREGATED_INSTRUCTION,
-                    node
-                }) : 
-                undefined
-            );
+      return state.set(
+        'selection',
+        node && node !== alreadySelectedNode
+          ? new InstructionNodeRecord({
+              type: AGGREGATED_INSTRUCTION,
+              node
+            })
+          : undefined
+      );
     }
     case 'RDFI_CHANGE':
-        return state
-            .set('RDFI', action.rdfi)
-            .set('over', undefined)
-            .set('selection', undefined);
+      return state
+        .set('RDFI', action.rdfi)
+        .set('over', undefined)
+        .set('selection', undefined);
     case 'DF_VIEW_CHANGE':
-        return state
-            .set('DF_VIEW', action.dfView)
-            .set('over', undefined)
-            .set('selection', undefined);
+      return state
+        .set('DF_VIEW', action.dfView)
+        .set('over', undefined)
+        .set('selection', undefined);
     default:
-        console.warn('Unknown action type', type);
-        return state;
-    }
+      console.warn('Unknown action type', type);
+      return state;
+  }
 }
 
 const M52RowRecord = Record({
-    'Département': undefined,
-    'Budget': undefined,
-    'Type nomenclature': undefined,
-    'Exercice': undefined,
-    'Type fichier': undefined,
-    'Date vote': undefined,
-    'Dépense/Recette': undefined,
-    'Investissement/Fonctionnement': undefined,
-    'Réel/Ordre id/Ordre diff': undefined,
-    'Chapitre': undefined,
-    'Sous-chapitre': undefined,
-    'Opération': undefined,
-    'Article': undefined,
-    'Rubrique fonctionnelle': undefined,
-    'Libellé': undefined,
-    'Code devise': undefined,
-    'Montant': undefined
+  Département: undefined,
+  Budget: undefined,
+  'Type nomenclature': undefined,
+  Exercice: undefined,
+  'Type fichier': undefined,
+  'Date vote': undefined,
+  'Dépense/Recette': undefined,
+  'Investissement/Fonctionnement': undefined,
+  'Réel/Ordre id/Ordre diff': undefined,
+  Chapitre: undefined,
+  'Sous-chapitre': undefined,
+  Opération: undefined,
+  Article: undefined,
+  'Rubrique fonctionnelle': undefined,
+  Libellé: undefined,
+  'Code devise': undefined,
+  Montant: undefined
 });
 
 fetch('./data/cedi_2015_CA.csv')
-    .then(resp => resp.text())
-    .then(csvParse)
-    .then(afterCSVCleanup)
-    .then(caData => {
-        const M52Instruction = ImmutableSet(
-            caData.map(M52RowRecord)
-        );
+  .then(resp => resp.text())
+  .then(csvParse)
+  .then(afterCSVCleanup)
+  .then(caData => {
+    const M52Instruction = ImmutableSet(caData.map(M52RowRecord));
 
-        store.dispatch({
-            type: 'M52_INSTRUCTION_RECEIVED',
-            M52Instruction,
-        });
-
+    store.dispatch({
+      type: 'M52_INSTRUCTION_RECEIVED',
+      M52Instruction
     });
-
-
-
+  });
 
 let childToParent;
 
-function findSelectedNodeAncestors(tree, selectedNode){
-    if(!selectedNode)
-        return undefined;
+function findSelectedNodeAncestors(tree, selectedNode) {
+  if (!selectedNode) return undefined;
 
-    if(!childToParent)
-        childToParent = new WeakMap();
+  if (!childToParent) childToParent = new WeakMap();
 
-    if(tree === selectedNode){
-        let result = [];
-        let current = selectedNode;
-        while(current !== undefined){
-            result.push(current);
-            current = childToParent.get(current);
-        }
-        return new ImmutableSet(result);
-    }
-    
-    let ret;
-
-    if(tree.children){
-        Array.from(tree.children.values()).forEach(child => {
-            childToParent.set(child, tree);
-            const ancestors = findSelectedNodeAncestors(child, selectedNode);
-            if(ancestors)
-                ret = ancestors;
-        })
-    }
-
-    return ret;
-}
-
-function findSelectedAggregatedNodesByM52Rows(aggregatedNode, m52Rows){
+  if (tree === selectedNode) {
     let result = [];
-
-    visitHierarchical(aggregatedNode, n => {
-        const elements = Array.from(n.elements);
-        if(m52Rows.some(row => elements.some(el => el["M52Rows"].has(row)))){
-            result.push(n);
-        }
-    });
-
+    let current = selectedNode;
+    while (current !== undefined) {
+      result.push(current);
+      current = childToParent.get(current);
+    }
     return new ImmutableSet(result);
-}
+  }
 
-function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
-    let result = [];
+  let ret;
 
-    visitHierarchical(M52Node, n => {
-        if(m52Rows.some(row => n.elements.has(row))){
-            result.push(n);
-        }
+  if (tree.children) {
+    Array.from(tree.children.values()).forEach(child => {
+      childToParent.set(child, tree);
+      const ancestors = findSelectedNodeAncestors(child, selectedNode);
+      if (ancestors) ret = ancestors;
     });
+  }
 
-    return new ImmutableSet(result);;
+  return ret;
 }
 
-function hierarchMemoizeResolver(o, rdfi, view){
-    return objectId(o) + rdfi.rd + rdfi.fi + (view ? view : '');
+function findSelectedAggregatedNodesByM52Rows(aggregatedNode, m52Rows) {
+  let result = [];
+
+  visitHierarchical(aggregatedNode, n => {
+    const elements = Array.from(n.elements);
+    if (m52Rows.some(row => elements.some(el => el['M52Rows'].has(row)))) {
+      result.push(n);
+    }
+  });
+
+  return new ImmutableSet(result);
 }
 
-const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
-const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
+function findSelectedM52NodesByM52Rows(M52Node, m52Rows) {
+  let result = [];
+
+  visitHierarchical(M52Node, n => {
+    if (m52Rows.some(row => n.elements.has(row))) {
+      result.push(n);
+    }
+  });
+
+  return new ImmutableSet(result);
+}
+
+function hierarchMemoizeResolver(o, rdfi, view) {
+  return objectId(o) + rdfi.rd + rdfi.fi + (view ? view : '');
+}
+
+const memoizedHierarchicalM52 = memoize(
+  hierarchicalM52,
+  hierarchMemoizeResolver
+);
+const memoizedHierarchicalAggregated = memoize(
+  hierarchicalAggregated,
+  hierarchMemoizeResolver
+);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
 const m52InstrRDFIToFiltered = new WeakMap();
 
-function mapStateToProps(state){
-    const M52Instruction = state.get('M52Instruction');
-    const rdfi = state.get('RDFI');
-    const dfView = state.get('DF_VIEW');
-    const over = state.get('over');
-    const selection = state.get('selection');
-    const {type: overType, node: overedNode} = over || {};
-    const {type: selectedType, node: selectedNode} = selection || {};
+function mapStateToProps(state) {
+  const M52Instruction = state.get('M52Instruction');
+  const rdfi = state.get('RDFI');
+  const dfView = state.get('DF_VIEW');
+  const over = state.get('over');
+  const selection = state.get('selection');
+  const { type: overType, node: overedNode } = over || {};
+  const { type: selectedType, node: selectedNode } = selection || {};
 
-    if(!M52Instruction)
-        return {};
+  if (!M52Instruction) return {};
 
+  const mainHighlightNode = overedNode || selectedNode;
+  const mainHighlightType = overType || selectedType;
 
-    const mainHighlightNode = overedNode || selectedNode;
-    const mainHighlightType = overType || selectedType;
+  const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
+  const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
+  const aggregatedHierarchical = memoizedHierarchicalAggregated(
+    aggregatedInstruction,
+    rdfi,
+    dfView
+  );
 
-    const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
-    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
-    
-    let M52HighlightedNodes;
-    let aggregatedHighlightedNodes;
+  let M52HighlightedNodes;
+  let aggregatedHighlightedNodes;
 
-    
-    if(mainHighlightType === M52_INSTRUCTION){
-        M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
-        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(mainHighlightNode.elements))
+  if (mainHighlightType === M52_INSTRUCTION) {
+    M52HighlightedNodes = findSelectedNodeAncestors(
+      M52Hierarchical,
+      mainHighlightNode
+    );
+    aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(
+      aggregatedHierarchical,
+      Array.from(mainHighlightNode.elements)
+    );
+  } else {
+    if (mainHighlightType === AGGREGATED_INSTRUCTION) {
+      aggregatedHighlightedNodes = findSelectedNodeAncestors(
+        aggregatedHierarchical,
+        mainHighlightNode
+      );
+      let m52Rows = new ImmutableSet();
+      mainHighlightNode.elements.forEach(
+        e => m52Rows = m52Rows.union(e['M52Rows'])
+      );
+
+      M52HighlightedNodes = findSelectedM52NodesByM52Rows(
+        M52Hierarchical,
+        m52Rows
+      );
     }
-    else{
-        if(mainHighlightType === AGGREGATED_INSTRUCTION){
-            aggregatedHighlightedNodes = findSelectedNodeAncestors(aggregatedHierarchical, mainHighlightNode);
-            let m52Rows = new ImmutableSet();
-            mainHighlightNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
+  }
 
-            M52HighlightedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
-        }
-    }
-
-    return {
-        rdfi, dfView,
-        M52Instruction, aggregatedInstruction,
-        M52Hierarchical, M52HighlightedNodes,
-        aggregatedHierarchical, aggregatedHighlightedNodes,
-        over, selection
-    };
-};
-
-function mapDispatchToProps(dispatch){
-    return {
-        onM52NodeOvered(node){
-            store.dispatch({
-                type: 'M52_INSTRUCTION_USER_NODE_OVERED',
-                node
-            });
-        },
-        onAggregatedNodeOvered(node){
-            store.dispatch({
-                type: 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED',
-                node
-            });
-        },
-        onM52NodeSelected(node){
-            console.log('onM52NodeSelected', node)
-            store.dispatch({
-                type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
-                node
-            });
-        },
-        onAggregatedNodeSelected(node){
-            store.dispatch({
-                type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
-                node
-            });
-        },
-        onRDFIChange(rdfi){
-            store.dispatch({
-                type: 'RDFI_CHANGE',
-                rdfi
-            });
-        },
-        onAggregatedDFViewChange(dfView){
-            console.log('onAggregatedDFViewChange', dfView)
-            store.dispatch({
-                type: 'DF_VIEW_CHANGE',
-                dfView
-            });
-        }
-    }
+  return {
+    rdfi,
+    dfView,
+    M52Instruction,
+    aggregatedInstruction,
+    M52Hierarchical,
+    M52HighlightedNodes,
+    aggregatedHierarchical,
+    aggregatedHighlightedNodes,
+    over,
+    selection
+  };
 }
 
-const BoundTopLevel = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TopLevel)
+function mapDispatchToProps(dispatch) {
+  return {
+    onM52NodeOvered(node) {
+      store.dispatch({
+        type: 'M52_INSTRUCTION_USER_NODE_OVERED',
+        node
+      });
+    },
+    onAggregatedNodeOvered(node) {
+      store.dispatch({
+        type: 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED',
+        node
+      });
+    },
+    onM52NodeSelected(node) {
+      console.log('onM52NodeSelected', node);
+      store.dispatch({
+        type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
+        node
+      });
+    },
+    onAggregatedNodeSelected(node) {
+      store.dispatch({
+        type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
+        node
+      });
+    },
+    onRDFIChange(rdfi) {
+      store.dispatch({
+        type: 'RDFI_CHANGE',
+        rdfi
+      });
+    },
+    onAggregatedDFViewChange(dfView) {
+      console.log('onAggregatedDFViewChange', dfView);
+      store.dispatch({
+        type: 'DF_VIEW_CHANGE',
+        dfView
+      });
+    }
+  };
+}
 
+const BoundTopLevel = connect(mapStateToProps, mapDispatchToProps)(TopLevel);
 
 const InstructionNodeRecord = Record({
-    type: undefined,
-    node: undefined
-})
+  type: undefined,
+  node: undefined
+});
 
 const StoreRecord = Record({
-    M52Instruction: undefined,
-    selection: undefined,
-    over: undefined,
-    RDFI: undefined,
-    DF_VIEW: undefined
-})
+  M52Instruction: undefined,
+  selection: undefined,
+  over: undefined,
+  RDFI: undefined,
+  DF_VIEW: undefined
+});
 
-const store = createStore(
-    reducer,
-    new StoreRecord({
-        RDFI: {
-            rd: 'D',
-            fi: 'F'
-        },
-        DF_VIEW: PAR_PUBLIC_VIEW
-    })
-)
-
+const store = createStore(reducer, new StoreRecord({
+  RDFI: {
+    rd: 'D',
+    fi: 'F'
+  },
+  DF_VIEW: PAR_PUBLIC_VIEW
+}));
 
 ReactDOM.render(
-    React.createElement(
-        Provider,
-        {store},
-        React.createElement(BoundTopLevel)
-    ),
-    document.querySelector('.react-container')
+  React.createElement(Provider, { store }, React.createElement(BoundTopLevel)),
+  document.querySelector('.react-container')
 );
-

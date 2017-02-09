@@ -1,7 +1,7 @@
-import React from 'react'
-import d3Shape from 'd3-shape'
+import React from 'react';
+import d3Shape from 'd3-shape';
 
-import SunburstSlice from './SunburstSlice'
+import SunburstSlice from './SunburstSlice';
 
 const DONUT_WIDTH = 45;
 const RADIUS = 80;
@@ -28,72 +28,79 @@ interface HierarchicalData<Element>{
 }
 
 */
-export default function({
-        hierarchicalData, width, height,
-        highlightedNodes, selectedNode,
-        donutWidth, outerRadius,
-        onSliceOvered, onSliceSelected
-    }){
+export default function(
+  {
+    hierarchicalData,
+    width,
+    height,
+    highlightedNodes,
+    selectedNode,
+    donutWidth,
+    outerRadius,
+    onSliceOvered,
+    onSliceSelected
+  }
+) {
+  console.log('selectedNode', selectedNode);
 
-        console.log('selectedNode', selectedNode)
+  width = width || 500;
+  height = height || 500;
 
-    width = width || 500;
-    height = height || 500;
+  donutWidth = donutWidth || DONUT_WIDTH;
+  outerRadius = outerRadius || RADIUS;
 
-    donutWidth = donutWidth || DONUT_WIDTH;
-    outerRadius = outerRadius || RADIUS;
+  const children = Array.from(hierarchicalData.children.values());
 
-    const children = Array.from(hierarchicalData.children.values());
-    
-    const pie = d3Shape.pie();
-    const arc = d3Shape.arc()
-        .innerRadius(outerRadius - donutWidth)
-        .outerRadius(outerRadius);
-    
-    const childrenArcDescs = pie(children.map(c => c.total));
+  const pie = d3Shape.pie();
+  const arc = d3Shape
+    .arc()
+    .innerRadius(outerRadius - donutWidth)
+    .outerRadius(outerRadius);
 
-    return React.createElement(
-        'div',
+  const childrenArcDescs = pie(children.map(c => c.total));
+
+  return React.createElement(
+    'div',
+    {
+      className: ['sunburst', highlightedNodes ? 'active-selection' : undefined]
+        .filter(s => s)
+        .join(' '),
+      onMouseOver(e) {
+        if (!e.target.matches('.slice *')) {
+          onSliceOvered(undefined);
+        }
+      },
+      onClick(e) {
+        if (!e.target.matches('.slice *')) {
+          onSliceSelected(undefined);
+        }
+      }
+    },
+    React.createElement(
+      'svg',
+      { width: width, height: height },
+      React.createElement(
+        'g',
         {
-            className: [
-                'sunburst',
-                highlightedNodes ? 'active-selection' : undefined
-            ].filter(s => s).join(' '),
-            onMouseOver(e){
-                if(!e.target.matches('.slice *')){
-                    onSliceOvered(undefined);
-                }
-            },
-            onClick(e){
-                if(!e.target.matches('.slice *')){
-                    onSliceSelected(undefined);
-                }
-            }
+          transform: 'translate(' + width / 2 + ',' + height / 2 + ')'
         },
-        React.createElement('svg', {width: width, height: height},
-            React.createElement(
-                'g', 
-                {transform: 'translate('+width/2+','+height/2+')'},
-                children.map((child, i) => {
-                    const arcDesc = childrenArcDescs[i];
+        children.map((child, i) => {
+          const arcDesc = childrenArcDescs[i];
 
-                    return React.createElement(
-                        SunburstSlice,
-                        {
-                            key: child.name,
-                            node: child, 
-                            radius: outerRadius, 
-                            donutWidth, 
-                            startAngle: arcDesc.startAngle,
-                            endAngle: arcDesc.endAngle,
-                            highlightedNodes,
-                            selectedNode,
-                            onSliceOvered,
-                            onSliceSelected
-                        }
-                    )
-                })              
-            )
-        )
-    );
+          return React.createElement(SunburstSlice, {
+            key: child.name,
+            node: child,
+            radius: outerRadius,
+            donutWidth,
+            startAngle: arcDesc.startAngle,
+            endAngle: arcDesc.endAngle,
+            highlightedNodes,
+            selectedNode,
+            onSliceOvered,
+            onSliceSelected
+          });
+        })
+      )
+    )
+  );
 }
