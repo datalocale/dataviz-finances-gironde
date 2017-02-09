@@ -5,22 +5,20 @@
  * 
  * This function should be the only one allowed to mutate the data acquired from the CSV file
  */
-export default function(rows){
-    rows.forEach(function(row){
-        row["Montant"] = Number(row["Montant"]);
-        
-        if(row["Exercice"])
-            row["Exercice"] = Number(row["Exercice"]);
-        
-        if(row["Année"])
-            row["Exercice"] = Number(row["Année"]);
-        
-        row["Article"] = row["Article"].trim()
-        row["Rubrique fonctionnelle"] = row["Rubrique fonctionnelle"].trim()
-        row["Réel/Ordre id/Ordre diff"] = row["Réel/Ordre id/Ordre diff"].trim(); 
+export default function(rows) {
+  rows.forEach(function(row) {
+    row['Montant'] = Number(row['Montant']);
 
-        Object.freeze(row);
-    });
+    if (row['Exercice']) row['Exercice'] = Number(row['Exercice']);
 
-    return rows;
+    if (row['Année']) row['Exercice'] = Number(row['Année']);
+
+    row['Article'] = row['Article'].trim();
+    row['Rubrique fonctionnelle'] = row['Rubrique fonctionnelle'].trim();
+    row['Réel/Ordre id/Ordre diff'] = row['Réel/Ordre id/Ordre diff'].trim();
+
+    Object.freeze(row);
+  });
+
+  return rows;
 }
