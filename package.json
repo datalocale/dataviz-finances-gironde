@@ -10,8 +10,7 @@
     "lint": "eslint --ignore-path .gitignore client/js",
     "lint-fix": "npm run lint -- --fix",
     "start": "serve --cors -p 3000",
-    "test": "exit 0",
-    "posttest": "npm run lint"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -39,8 +38,13 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
+    "babel-jest": "^18.0.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
     "browserify": "^13.1.1",
     "eslint": "^3.14.0",
+    "jest": "^18.1.0",
+    "jest-immutable-matchers": "^1.4.0",
     "serve": "^2.4.3",
     "watchify": "^3.8.0"
   }
