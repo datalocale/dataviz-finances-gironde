@@ -5,8 +5,8 @@ import AggregatedViz from './AggregatedViz';
 import TextualAggregated from './TextualAggregated';
 import TextualSelected from './TextualSelected';
 import RDFISelector from './RDFISelector';
+import DepartmentFinanceHeader from './DepartmentFinanceHeader';
 
-import m52ToAggregated from '../finance/m52ToAggregated.js';
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../finance/constants';
 
 /*
@@ -20,16 +20,37 @@ import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../finance/constants';
 
 export default function({
         rdfi, dfView,
-        M52Instruction, aggregatedInstruction,
+        m52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
-        over, selection,
+        selection,
         onM52NodeOvered, onAggregatedNodeOvered, 
         onM52NodeSelected, onAggregatedNodeSelected,
-        onRDFIChange, onAggregatedDFViewChange
+        onRDFIChange, onAggregatedDFViewChange,
+        onNewM52CSVFile
     }){
 
-    return M52Instruction ? React.createElement('div', {className: 'top-level'},
+    return m52Instruction ? React.createElement('div', {className: 'top-level'},
+        React.createElement(
+            DepartmentFinanceHeader, 
+            {
+                department: m52Instruction.département,
+                year: m52Instruction.year,
+                type: m52Instruction.type
+            },
+            React.createElement('label', {},
+                'Fichier CSV instruction M52 au format CEDI: ',
+                React.createElement('input', {type: 'file', onChange(e){
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.readAsText(file, "UTF-8");
+                        reader.onload = e => onNewM52CSVFile(e.target.result);
+                        // TODO error case
+                    }
+                }})
+            )
+        ),
         React.createElement('div', {},
             React.createElement(M52Viz, {
                 M52Hierarchical, 
@@ -50,6 +71,6 @@ export default function({
             })
         ),
         selection ? React.createElement(TextualSelected, {selection}) : undefined,
-        React.createElement(TextualAggregated, {M52Instruction, aggregatedInstruction})
+        React.createElement(TextualAggregated, {m52Instruction, aggregatedInstruction})
     ) : React.createElement('div', {});
 }

@@ -1,7 +1,6 @@
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {csvParse} from 'd3-dsv';
 import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
 import memoize from 'lodash.memoize';
 import { connect, Provider } from 'react-redux'
@@ -9,7 +8,7 @@ import { connect, Provider } from 'react-redux'
 import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
 import m52ToAggregated from './finance/m52ToAggregated.js';
-import afterCSVCleanup from './finance/afterCSVCleanup.js';
+import csvStringToM52Instructions from './finance/csvStringToM52Instructions.js';
 import visitHierarchical from './finance/visitHierarchical.js';
 import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from './finance/constants';
 
@@ -22,7 +21,7 @@ function reducer(state, action){
 
     switch(type){
     case 'M52_INSTRUCTION_RECEIVED':
-        return state.set('M52Instruction', action.M52Instruction);
+        return state.set('M52Instruction', action.m52Instruction);
     case 'M52_INSTRUCTION_USER_NODE_OVERED':
         return state
             .set('over', action.node ? 
@@ -83,43 +82,6 @@ function reducer(state, action){
     }
 }
 
-const M52RowRecord = Record({
-    'Département': undefined,
-    'Budget': undefined,
-    'Type nomenclature': undefined,
-    'Exercice': undefined,
-    'Type fichier': undefined,
-    'Date vote': undefined,
-    'Dépense/Recette': undefined,
-    'Investissement/Fonctionnement': undefined,
-    'Réel/Ordre id/Ordre diff': undefined,
-    'Chapitre': undefined,
-    'Sous-chapitre': undefined,
-    'Opération': undefined,
-    'Article': undefined,
-    'Rubrique fonctionnelle': undefined,
-    'Libellé': undefined,
-    'Code devise': undefined,
-    'Montant': undefined
-});
-
-fetch('./data/cedi_2015_CA.csv')
-    .then(resp => resp.text())
-    .then(csvParse)
-    .then(afterCSVCleanup)
-    .then(caData => {
-        const M52Instruction = ImmutableSet(
-            caData.map(M52RowRecord)
-        );
-
-        store.dispatch({
-            type: 'M52_INSTRUCTION_RECEIVED',
-            M52Instruction,
-        });
-
-    });
-
-
 
 
 let childToParent;
@@ -177,7 +139,7 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
         }
     });
 
-    return new ImmutableSet(result);;
+    return new ImmutableSet(result);
 }
 
 function hierarchMemoizeResolver(o, rdfi, view){
@@ -188,10 +150,9 @@ const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver
 const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
-const m52InstrRDFIToFiltered = new WeakMap();
 
 function mapStateToProps(state){
-    const M52Instruction = state.get('M52Instruction');
+    const m52Instruction = state.get('M52Instruction');
     const rdfi = state.get('RDFI');
     const dfView = state.get('DF_VIEW');
     const over = state.get('over');
@@ -199,15 +160,15 @@ function mapStateToProps(state){
     const {type: overType, node: overedNode} = over || {};
     const {type: selectedType, node: selectedNode} = selection || {};
 
-    if(!M52Instruction)
+    if(!m52Instruction)
         return {};
 
 
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    const aggregatedInstruction = memoizedM52ToAggregated(M52Instruction);
-    const M52Hierarchical = memoizedHierarchicalM52(M52Instruction, rdfi);
+    const aggregatedInstruction = memoizedM52ToAggregated(m52Instruction);
+    const M52Hierarchical = memoizedHierarchicalM52(m52Instruction, rdfi);
     const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
     
     let M52HighlightedNodes;
@@ -230,7 +191,7 @@ function mapStateToProps(state){
 
     return {
         rdfi, dfView,
-        M52Instruction, aggregatedInstruction,
+        m52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
         over, selection
@@ -271,25 +232,31 @@ function mapDispatchToProps(dispatch){
             });
         },
         onAggregatedDFViewChange(dfView){
-            console.log('onAggregatedDFViewChange', dfView)
+            console.log('onAggregatedDFViewChange', dfView);
             store.dispatch({
                 type: 'DF_VIEW_CHANGE',
                 dfView
             });
+        },
+        onNewM52CSVFile(content){
+            store.dispatch({
+                type: 'M52_INSTRUCTION_RECEIVED',
+                m52Instruction: csvStringToM52Instructions(content),
+            });
         }
-    }
+    };
 }
 
 const BoundTopLevel = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopLevel)
+)(TopLevel);
 
 
 const InstructionNodeRecord = Record({
     type: undefined,
     node: undefined
-})
+});
 
 const StoreRecord = Record({
     M52Instruction: undefined,
@@ -297,7 +264,7 @@ const StoreRecord = Record({
     over: undefined,
     RDFI: undefined,
     DF_VIEW: undefined
-})
+});
 
 const store = createStore(
     reducer,
@@ -308,8 +275,33 @@ const store = createStore(
         },
         DF_VIEW: PAR_PUBLIC_VIEW
     })
-)
+);
 
+/*
+
+Make a M52InstructionRecord:
+{
+    dept: 33,
+    type: CA,
+    year: 2015,
+    rows: ...
+}
+& simplify M52RowRecord along the way
+
+csvText => M52InstructionRecord[] (can be several)
+... or error if not csv
+... or error is wrong columns. So test columns and provide informative message
+
+*/
+
+fetch('./data/cedi_2015_CA.csv').then(resp => resp.text())
+    .then(csvStringToM52Instructions)
+    .then(m52Instruction => {
+        store.dispatch({
+            type: 'M52_INSTRUCTION_RECEIVED',
+            m52Instruction,
+        });
+    });
 
 ReactDOM.render(
     React.createElement(

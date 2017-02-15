@@ -887,12 +887,12 @@ const AggregatedInstructionRowRecord = Record({
     "Statut": undefined,
     "M52Rows": undefined,
     "Montant": undefined
-})
+});
 
-function makeAggregatedInstructionRowRecord(id, m52Instruction){
+function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
     const rule = rules[id];
 
-    const m52Rows = m52Instruction.filter(rule.filter);
+    const m52Rows = m52InstructionRows.filter(rule.filter);
 
     return AggregatedInstructionRowRecord({
         id,
@@ -900,13 +900,13 @@ function makeAggregatedInstructionRowRecord(id, m52Instruction){
         "Statut": rule.status,
         "M52Rows": m52Rows,
         "Montant": m52Rows.reduce(((acc, curr) => {
-            return acc + curr["Montant"]
+            return acc + curr["Montant"];
         }), 0)
     })
 }
 
 export default function convert(m52Instruction){
     return ImmutableSet(
-        Object.keys(rules).map(id => makeAggregatedInstructionRowRecord(id, m52Instruction))
+        Object.keys(rules).map(id => makeAggregatedInstructionRowRecord(id, m52Instruction.rows))
     )
 }

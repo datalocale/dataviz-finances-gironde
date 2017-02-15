@@ -32,6 +32,10 @@
                 padding: 0.1em 0.5em;
             }
 
+            h1, h2, h3{
+                margin: 0.2em 0;
+            }
+
             .react-container{
                 width: 100%;
             }
@@ -46,18 +50,30 @@
                 width: 100%;
             }
 
-            .top-level > *:first-child{
+            .top-level > *:nth-child(2){
                 display: flex;
                 flex-direction: row;
                 width: 100%;
             }
 
-            .top-level > *:first-child > *{
+            .top-level > *:nth-child(2) > *{
                 flex: 2;
             }
-            .top-level > *:first-child > *:nth-child(2){
+            .top-level > *:nth-child(2) > *:nth-child(2){
                 flex: 1;
             }
+
+            /*
+                Departement Finance Header
+            */
+            header.departement-finance{
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+
+
+
 
 
             /*

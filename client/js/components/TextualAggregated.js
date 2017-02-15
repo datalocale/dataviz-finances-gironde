@@ -3,13 +3,13 @@ import {format} from 'currency-formatter'
 
 import {isOR} from '../finance/m52ToAggregated';
 
-function makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction){
-    return M52Instruction.filter(m52row => {
+function makeUnusedM52RowsSet(aggregatedInstruction, rows){
+    return rows.filter(m52row => {
         return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row)) && isOR(m52row);
     })
 }
 
-function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
+function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, rows){
     const m52RowToAggRows = new Map();
 
     const actionsSocialesParPrestationsRows = aggregatedInstruction
@@ -22,7 +22,7 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction){
         .map( r => r["M52Rows"] )
         .flatten(1);
 
-    M52Instruction.forEach(m52row => {
+    rows.forEach(m52row => {
         const usingAggRows = new Set();
         
         aggregatedInstruction.forEach(aggRow => {
@@ -67,10 +67,11 @@ interface TextualAggregated{
 export default class TextualSelected extends React.PureComponent{
 
     render(){
-        const {aggregatedInstruction, M52Instruction} = this.props;
+        const {aggregatedInstruction, m52Instruction} = this.props;
+        const m52Rows = m52Instruction.rows;
 
-        const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, M52Instruction);
-        const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, M52Instruction);
+        const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, m52Rows);
+        const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, m52Rows);
 
         return React.createElement('div', {}, 
             React.createElement('div', {}, 
