@@ -29,11 +29,7 @@ const DFparPrestationChild = {
             children: ruleIds.filter(id => id.startsWith('DF-1-5'))
         },
         'DF-1-6',
-        {
-            id: 'DF-1-7',
-            label: "Divers social",
-            children: ruleIds.filter(id => id.startsWith('DF-1-7'))
-        }
+        'DF-1-7'
     ]
 }
 
@@ -54,11 +50,7 @@ const levelsByRDFI = {
                 label: "Fiscalité transférée",
                 children: ruleIds.filter(id => id.startsWith('RF-2'))
             },
-            {
-                id: 'RF-3',
-                label: "Droits de mutation à titre onéreux (DMTO)",
-                children: ruleIds.filter(id => id.startsWith('RF-3'))
-            },
+            'RF-3',
             {
                 id: 'RF-4',
                 label: "Autres fiscalités",
@@ -98,7 +90,21 @@ const levelsByRDFI = {
             {
                 id: 'DF-3',
                 label: "Actions d’intervention",
-                children: ruleIds.filter(id => id.startsWith('DF-3'))
+                children: [
+                    'DF-3-1',
+                    'DF-3-2',
+                    'DF-3-3',
+                    'DF-3-3',
+                    'DF-3-4',
+                    'DF-3-5',
+                    'DF-3-6',
+                    {
+                        id: 'DF-3-7',
+                        label: "Frais de personnel",
+                        children: ruleIds.filter(id => id.startsWith('DF-3-7-'))
+                    }
+
+                ]
             },
             {
                 id: 'DF-4',
@@ -112,18 +118,25 @@ const levelsByRDFI = {
             },
             {
                 id: 'DF-6',
-                label: "Autres charges",
-                children: ruleIds.filter(id => id.startsWith('DF-6'))
+                label: "Charges courantes",
+                children: [
+                    {
+                        id: 'DF-6-1',
+                        label: "Frais généraux",
+                        children: ruleIds.filter(id => id.startsWith('DF-6-1-'))
+                    },
+                    'DF-6-2',
+                    {
+                        id: 'DF-6-3',
+                        label: "Autres charges",
+                        children: ruleIds.filter(id => id.startsWith('DF-6-3-'))
+                    }
+                ]
             },
             {
                 id: 'DF-7',
                 label: "Frais généraux",
                 children: ruleIds.filter(id => id.startsWith('DF-7'))
-            },
-            {
-                id: 'DF-8',
-                label: "Frais financiers",
-                children: ruleIds.filter(id => id.startsWith('DF-8'))
             }
         ])
     }),

@@ -82,7 +82,8 @@ export default class TextualSelected extends React.PureComponent{
                             key: aggRow['id'],
                             className: [
                                 aggRow['M52Rows'].size === 0 ? 'zero-m52' : '', 
-                                aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : ''
+                                aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : '',
+                                aggRow['Statut'] === 'AMOUNT_ISSUE' ? 'amount-issue' : ''
                             ].filter(c => c).join(' ')
                         }, 
                         React.createElement('td', {}, aggRow['id']),
