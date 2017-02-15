@@ -55,6 +55,12 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A73114';
         }
     },
+    'RF-1-4': {
+        label: 'Reversement CVAE Région',
+        filter(m52Row){
+            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A731';
+        }
+    },
     'RF-2-1': {
         label: 'Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE)',
         filter(m52Row){
@@ -93,6 +99,7 @@ export const rules = Object.freeze({
     },
     'RF-4-4': {
         label: "autres fiscalités",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7353', 'A7388'].includes(m52Row['Article']);
         }
@@ -179,6 +186,7 @@ export const rules = Object.freeze({
     },    
     'RF-8-2': {
         label: "Fonds exceptionnel pour les départements en difficulté",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A74718';
         }
@@ -191,10 +199,11 @@ export const rules = Object.freeze({
     },
     'RF-9-2': {
         label: "Produits exceptionnels",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
                 'A7817', 'A7875', 'A7711', 'A7714', 'A7718', 
-                'A773', 'A775', 'A7788'
+                'A773', 'A7788'
             ].includes(m52Row['Article']);
         }
     },
@@ -228,6 +237,7 @@ export const rules = Object.freeze({
     },
     'RF-9-7': {
         label: "Autres produits de gestions courants",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'].startsWith('A75') && m52Row['Article'] !== 'A752'; 
         }
@@ -263,15 +273,17 @@ export const rules = Object.freeze({
             
             return isOR(m52Row) && isDF(m52Row) && 
                 fonction.slice(0, 3) === 'R51' &&
-                [
-                    "A6132", "A6135", "A6184",
-                    "A62268", "A6234", "A6245", "A62878",
-                    "A6475",
-                    "A65111", "A65221", "A652222", "A65223", "A65228", 
-                    "A6523", "A652411", "A652412", "A652415", "A652418", 
-                    "A6574", "A65821", 
-                    "A6718", "A673"
-                ].includes(m52Row['Article']);
+                (
+                    [
+                        "A6132", "A6135", "A6184",
+                        "A62268", "A6234", "A6245", "A62878",
+                        "A65111", "A65221", "A652222", "A65223", "A65228", 
+                        "A6523", "A652411", "A652412", "A652415", "A652418", 
+                        "A6574", "A65821", 
+                        "A6718", "A673"
+                    ].includes(m52Row['Article']) ||
+                    m52Row['Article'].startsWith('A64')
+                );
         }
     },
     'DF-1-2': {
@@ -294,6 +306,7 @@ export const rules = Object.freeze({
     },
     'DF-1-5-1': {
         label: "Préventions enfants",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
 
@@ -304,6 +317,7 @@ export const rules = Object.freeze({
     },
     'DF-1-5-2': {
         label: "Autres divers enfants",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
 
@@ -322,7 +336,7 @@ export const rules = Object.freeze({
         status: 'TEMPORARY', // en attente de validation formule
         filter(m52Row){ 
             const fonction = m52Row['Rubrique fonctionnelle'];
-            const art = m52Row['Article']
+            const art = m52Row['Article'];
             const f2 = fonction.slice(0, 2);
             return isOR(m52Row) && isDF(m52Row) && 
                 (f2 === 'R4' || f2 === 'R5') &&
@@ -330,26 +344,15 @@ export const rules = Object.freeze({
                 fonction !== 'R51';
         }
     },
-    'DF-1-7-1': {
-        label: "Transports des étudiants et des élèves handicapés",
-        status: 'TEMPORARY',
-        filter(m52Row){ 
-            const fonction = m52Row['Rubrique fonctionnelle'];
-            return isOR(m52Row) && isDF(m52Row) && 
-                fonction.slice(0, 3) === 'R52' &&
-                ["A6245", "A6513", "A6568", "A673"].includes(m52Row['Article']);
-        }
-    },
-    'DF-1-7-2': {
+    'DF-1-7': {
         label: "Divers social - Autres",
         status: 'TEMPORARY',
         filter(m52Row){ 
             const fonction = m52Row['Rubrique fonctionnelle'];
             const art = m52Row['Article'];
             const f2 = fonction.slice(0, 2);
-            const parPrestationRuleIds = Object.keys(rules).filter(id => id.startsWith('DF-1-') && id !== 'DF-1-7-2')
+            const parPrestationRuleIds = Object.keys(rules).filter(id => id.startsWith('DF-1-') && id !== 'DF-1-7');
 
-            // missing : A6358 R01 ?
             return isOR(m52Row) && isDF(m52Row) && 
                 (f2 === 'R4' || f2 === 'R5') &&
                 (
@@ -358,8 +361,7 @@ export const rules = Object.freeze({
                 ) &&
                 parPrestationRuleIds.every(
                     id => !rules[id].filter(m52Row)
-                ) && 
-                !(art === 'A6526' && (fonction === 'R58' || fonction === 'R51'));
+                );
         }
     },
     
@@ -402,8 +404,7 @@ export const rules = Object.freeze({
             const f3 = fonction.slice(0, 3);
 
             return isOR(m52Row) && isDF(m52Row) && 
-                ['R58', 'R50', 'R40', 'R41', 'R42', 'R48'].includes(f3) &&
-                !m52Row['Article'].startsWith('A64');
+                ['R58', 'R50', 'R40', 'R41', 'R42', 'R48'].includes(f3)
         }
     },
 
@@ -415,6 +416,7 @@ export const rules = Object.freeze({
     },
     'DF-3-2': {
         label: "Transports",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const f2 = m52Row['Rubrique fonctionnelle']
                 .slice(0, 2);
@@ -423,40 +425,82 @@ export const rules = Object.freeze({
         }
     },
     'DF-3-3': {
+        label: "Transports des étudiants et des élèves handicapés",
+        filter(m52Row){
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const f3 = fonction.slice(0, 3);
+
+            return isOR(m52Row) && isDF(m52Row) && 
+                f3 === 'R52' &&
+                ['A6245', 'A6513', 'A6568', 'A673'].includes(m52Row['Article']);
+        }
+    },
+
+
+
+    'DF-3-4': {
         label: "Prévention spécialisée",
         filter(m52Row){
             return isOR(m52Row) && isDF(m52Row) && ['A6526', 'A6563'].includes(m52Row['Article']);
         }
     },
-    'DF-3-4': {
+    'DF-3-5': {
         label: "Dotation de fonctionnement des collèges",
         filter(m52Row){
             return isOR(m52Row) && isDF(m52Row) && ['A65511', 'A65512'].includes(m52Row['Article']);
         }
     },
-    'DF-3-5': {
+    'DF-3-6': {
         label: "Fond social logement FSL",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
 
-            return isOR(m52Row) && isDF(m52Row) && f3 === 'R72' && ['A6556', 'A65561'].includes(m52Row['Article']);
+            return isOR(m52Row) && isDF(m52Row) && 
+                ( f3 === 'R72' || f3 === 'R58' ) && 
+                'A65561' === m52Row['Article'];
         }
     },
-    'DF-3-6': {
+    'DF-3-7': {
         label: "Subventions de fonctionnement",
         filter(m52Row){
             const art = m52Row['Article'];
             const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
             return isOR(m52Row) && isDF(m52Row) &&
-                f2 !== 'R4' && f2 !== 'R5' && f2 !== 'R8' && 
                 [
                     "A65731", "A65732", "A65733", "A65734", "A65735", 
                     "A65736", "A65737", "A65738", "A6574"
-                ].includes(m52Row['Article']);
+                ].includes(art) &&
+                !(art.startsWith('A657') && (f2 !== 'R4' && f2 !== 'R5' && f2 !== 'R8'));
+        }
+    },
+    'DF-3-8-1': {
+        label: "FAJ/CAP'J",
+        filter(m52Row){
+            const art = m52Row['Article'];
+            return isOR(m52Row) && isDF(m52Row) && (art === 'A65562' || art === 'A6556');
+        }
+    },
+    'DF-3-8-2': { 
+        label: "Bourses départementales",
+        filter(m52Row){
+            const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
+            return isOR(m52Row) && isDF(m52Row) && m52Row['Article'] === 'A6513' && f3 !== 'R52';
+        }
+    },
+    'DF-3-8-3': { 
+        label: "Participation diverses",
+        filter(m52Row){
+            return isOR(m52Row) && isDF(m52Row) &&
+            [
+                "A6512", "A654", "A6541", "A6542", "A65568", 
+                "A6561", "A6568", "A6581", "A65821", "A65888"
+            ].includes(m52Row['Article']);
         }
     },
     'DF-4': { 
         label: "Frais de personnel",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const chap = m52Row['Chapitre'];
             const art = m52Row['Article'];
@@ -469,7 +513,8 @@ export const rules = Object.freeze({
                         (art.startsWith('A64') || art === 'A6218' || art === 'A6336') &&
                         (chap === 'C15' || chap === 'C16' || chap === 'C17')
                     )
-                );
+                ) && 
+                !(art.startsWith('A64') && f3 === 'R51');
         }
     },
     'DF-5-1': { 
@@ -480,63 +525,7 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isDF(m52Row) && (art === 'A73914' || art === 'A73926');
         }
     },
-    'DF-6-1': { 
-        label: "FAJ/CAP'J",
-        filter(m52Row){
-            const art = m52Row['Article'];
-            return isOR(m52Row) && isDF(m52Row) && (art === 'A65562' || art === 'A6556');
-        }
-    },
-    'DF-6-2': { 
-        label: "Bourses départementales",
-        filter(m52Row){
-            const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && m52Row['Article'] === 'A6513' && f3 !== 'R52';
-        }
-    },
-    'DF-6-3': { 
-        label: "Participation diverses",
-        filter(m52Row){
-            return isOR(m52Row) && isDF(m52Row) &&
-            [
-                "A6512", "A654", "A6541", "A6542", "A65568", 
-                "A6561", "A6568", "A6581", "A65821", "A65888"
-            ].includes(m52Row['Article']);
-        }
-    },
-    'DF-6-4': { 
-        label: "Questure/indemnités des élus",
-        filter(m52Row){
-            return isOR(m52Row) && isDF(m52Row) && 
-            [
-                "A65861", "A65862", "A6531", "A6532", "A6533", 
-                "A6534", "A65372"
-            ].includes(m52Row['Article']);
-        }
-    },
-    'DF-6-5': { 
-        label: "Charges exceptionnelles et provisions",
-        filter(m52Row){
-            const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
-            const art = m52Row['Article'];
-
-            return isOR(m52Row) && isDF(m52Row) && 
-                (art.startsWith('A67') || art.startsWith('A68')) &&
-                !(['R4', 'R5', 'R8'].includes(f2));
-        }
-    },
-    'DF-6-6': { 
-        label: "Autres",
-        filter(m52Row){
-            const art = m52Row['Article'];
-
-            return isOR(m52Row) && isDF(m52Row) && 
-                art.startsWith('A73') && 
-                art !== 'A73914' && 
-                art !== 'A73926';
-        }
-    },
-    'DF-7-1': { 
+    'DF-6-1-1': { 
         label: "Achats et fournitures",
         filter(m52Row){
             const f4 = m52Row['Rubrique fonctionnelle'].slice(0, 4);
@@ -549,8 +538,8 @@ export const rules = Object.freeze({
                 !(f4 === 'R621');
         }
     },
-    'DF-7-2': { 
-        label: "Prestations de services",
+    'DF-6-1-2': { 
+        label: "Prestations de services (entretien et réparation, assurances, locations, frais divers formation colloques…)",
         filter(m52Row){
             const f4 = m52Row['Rubrique fonctionnelle'].slice(0, 4);
             const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
@@ -562,8 +551,8 @@ export const rules = Object.freeze({
                 !(f4 === 'R621');
         }
     },
-    'DF-7-3': { 
-        label: "Frais divers (frais de gestion liés à la dette …)",
+    'DF-6-1-3': { 
+        label: "Frais divers (honoraires, conseils, reception, frais télécom, affranchissement, services bancaires…)",
         filter(m52Row){
             const f4 = m52Row['Rubrique fonctionnelle'].slice(0, 4);
             const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
@@ -575,7 +564,7 @@ export const rules = Object.freeze({
                 !(f4 === 'R621');
         }
     },
-    'DF-7-4': { 
+    'DF-6-1-4': { 
         label: "Autres impôts et taxes",
         filter(m52Row){
             const f4 = m52Row['Rubrique fonctionnelle'].slice(0, 4);
@@ -588,7 +577,7 @@ export const rules = Object.freeze({
                 !(f4 === 'R621');
         }
     },
-    'DF-7-5': { 
+    'DF-6-2': { 
         label: "Dépenses de voirie",
         status: 'TEMPORARY',
         filter(m52Row){
@@ -600,7 +589,41 @@ export const rules = Object.freeze({
                 (art.startsWith('A60') || art.startsWith('A61') || art.startsWith('A62') || art.startsWith('A63'))
         }
     },
-    'DF-8-1': { 
+
+
+    'DF-6-3-1': { 
+        label: "Questure/indemnités des élus",
+        filter(m52Row){
+            return isOR(m52Row) && isDF(m52Row) && 
+            [
+                "A65861", "A65862", "A6531", "A6532", "A6533", 
+                "A6534", "A65372"
+            ].includes(m52Row['Article']);
+        }
+    },
+    'DF-6-3-2': { 
+        label: "Charges exceptionnelles et provisions",
+        filter(m52Row){
+            const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
+            const art = m52Row['Article'];
+
+            return isOR(m52Row) && isDF(m52Row) && 
+                (art.startsWith('A67') || art.startsWith('A68')) &&
+                !(['R4', 'R5', 'R8'].includes(f2));
+        }
+    },
+    'DF-6-3-3': { 
+        label: "Autres",
+        filter(m52Row){
+            const art = m52Row['Article'];
+
+            return isOR(m52Row) && isDF(m52Row) && 
+                art.startsWith('A73') && 
+                art !== 'A73914' && 
+                art !== 'A73926';
+        }
+    },
+    'DF-7-1': { 
         label: "Intérêts des emprunts",
         filter(m52Row){
             return isOR(m52Row) && isDF(m52Row) && m52Row['Article'].startsWith('A66');
@@ -638,24 +661,15 @@ export const rules = Object.freeze({
                 (art.startsWith('A13') || art.startsWith('A204'))
         }
     },
-    'RI-5': {
-        label: "Produit des amendes radars autos",
-        filter(m52Row){
-            const article = m52Row['Article'];
-
-            return isOR(m52Row) && isRI(m52Row) && (article === 'A1335' || article === 'A1345')
-        }
-    },
     'RI-6': {
-        label: "RI - Divers",
-        status: 'TEMPORARY',
+        label: "Divers",
         filter(m52Row){
             const article = m52Row['Article'];
 
             return isOR(m52Row) && isRI(m52Row) && 
                 article !== 'A204' && 
                 (
-                    ["A165", "A1676", "A454121", "A454421", "A454428", "A45821"].includes(article) ||
+                    ["A165", "A1676", "A454121", "A454421", "A454428", "A45821", 'A1335', 'A1345'].includes(article) ||
                     ['C20', 'C21', 'C22', 'C23', 'C26', 'C27'].includes(m52Row['Chapitre'])
                 )
         }
@@ -677,7 +691,7 @@ export const rules = Object.freeze({
         label: "OCLT",
         status: 'TEMPORARY',
         filter(m52Row){
-            return isOR(m52Row) && isRI(m52Row) && ["A16441", "A16449"].includes(m52Row['Article']);
+            return isOR(m52Row) && isRI(m52Row) && ["A16441"].includes(m52Row['Article']);
         }
     },
 
@@ -700,12 +714,12 @@ export const rules = Object.freeze({
                     article.startsWith('A23')
                 ) &&
                 !article.startsWith('A204') &&
-                f4 === 'R221'
+                f4 === 'R221';
         }
     },
     'DI-1-2': {
         label: "Routes",
-        status: 'TEMPORARY',
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
@@ -805,7 +819,7 @@ export const rules = Object.freeze({
     },
     'DI-2-4': {
         label: "subventions tiers (hors sdis)",
-        status: 'TEMPORARY', 
+        status: 'AMOUNT_ISSUE', 
         filter(m52Row){
             const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
@@ -861,7 +875,7 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Article'];
 
-            return isOR(m52Row) && isDI(m52Row) && ["A16441", "A16449"].includes(article);
+            return isOR(m52Row) && isDI(m52Row) && ["A16441"].includes(article);
         }
     }
 });
