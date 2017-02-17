@@ -1,9 +1,9 @@
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
+import {Record, OrderedSet as ImmutableSet} from 'immutable';
 import memoize from 'lodash.memoize';
-import { connect, Provider } from 'react-redux'
+import { connect, Provider } from 'react-redux';
 
 import hierarchicalM52 from './finance/hierarchicalM52.js';
 import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
@@ -81,7 +81,6 @@ function reducer(state, action){
         return state;
     }
 }
-
 
 
 let childToParent;

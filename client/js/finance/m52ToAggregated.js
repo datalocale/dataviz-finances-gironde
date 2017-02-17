@@ -886,7 +886,7 @@ const AggregatedInstructionRowRecord = Record({
     "Libellé": undefined,
     "Statut": undefined,
     "M52Rows": undefined,
-    "Montant": undefined
+    "Montant": 0
 });
 
 function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
