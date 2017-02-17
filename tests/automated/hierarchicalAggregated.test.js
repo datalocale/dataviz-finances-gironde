@@ -14,28 +14,6 @@ const DF = {
     fi: 'F'
 };
 
-/* --------------------------------------
-    const m52Instruction = state.get('M52Instruction');
-    const rdfi = state.get('RDFI');
-    const dfView = state.get('DF_VIEW');
-    const over = state.get('over');
-    const selection = state.get('selection');
-    const {type: overType, node: overedNode} = over || {};
-    const {type: selectedType, node: selectedNode} = selection || {};
-
-    if(!m52Instruction)
-        return {};
-
-
-    const mainHighlightNode = overedNode || selectedNode;
-    const mainHighlightType = overType || selectedType;
-
-    const aggregatedInstruction = memoizedM52ToAggregated(m52Instruction);
-    const M52Hierarchical = memoizedHierarchicalM52(m52Instruction, rdfi);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
-
-*/ 
-
 test('hierarchicalAggregated returns a node when passed dummy valid arguments', () => {
   const AMOUNT = 1037;
 
