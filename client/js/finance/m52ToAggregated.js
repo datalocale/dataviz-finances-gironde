@@ -244,7 +244,10 @@ export const rules = Object.freeze({
         label: "Autres produits de gestions courants",
         status: 'AMOUNT_ISSUE',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'].startsWith('A75') && m52Row['Article'] !== 'A752'; 
+            return isOR(m52Row) && isRF(m52Row) && 
+                m52Row['Article'].startsWith('A75') && 
+                m52Row['Article'] !== 'A752' &&
+                m52Row['Article'] !== 'A7513';
         }
     },
     'RF-9-8': {

@@ -113,6 +113,33 @@ test("RF-9-2 : ne contient pas RF C78 R0202 A7875", () => {
 });
 
 
+// RF-9-7
+test("RF-9-7 : ne contient pas l'article A7513", () => {
+    const AMOUNT = 42;
+    const AGGREGATED_ROW_ID = 'RF-9-7';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'RXXX',
+            'Article': 'A7513',
+            'Chapitre': 'CXX',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.size).toBe(0);
+});
+
+
 
 
 /**
