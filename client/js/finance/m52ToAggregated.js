@@ -155,12 +155,12 @@ export const rules = Object.freeze({
     'RF-6-4': {
         label: "Autres (dont dotation conférence des financeurs)",
         filter(m52Row){
-            const fonction = m52Row['Rubrique fonctionnelle'][1];
+            const fonction = m52Row['Rubrique fonctionnelle'];
             const otherRecetteSocialeIds = Object.keys(rules)
-                .filter(id => id !== 'RF-6-4' && id.startsWith('RF-6'))
+                .filter(id => id !== 'RF-6-4' && id.startsWith('RF-6'));
 
             return isOR(m52Row) && isRF(m52Row) && 
-                (fonction === '4' || fonction === '5') &&
+                (fonction === 'R4' || fonction === 'R5') &&
                 otherRecetteSocialeIds.every(
                     id => !rules[id].filter(m52Row)
                 )
