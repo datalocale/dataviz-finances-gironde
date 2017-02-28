@@ -471,7 +471,7 @@ export const rules = Object.freeze({
                     "A65731", "A65732", "A65733", "A65734", "A65735", 
                     "A65736", "A65737", "A65738", "A6574"
                 ].includes(art) &&
-                !(art.startsWith('A657') && (f2 !== 'R4' && f2 !== 'R5' && f2 !== 'R8'));
+                !( art.startsWith('A657') && (f2 === 'R4' || f2 === 'R5' || f2 === 'R8') );
         }
     },
     'DF-3-8-1': {

@@ -24,16 +24,72 @@ test("RF-1-1 : contient l'article A73111", () => {
 
     const aggVision = m52ToAggregated(instruction);
 
-    const aggRF11 = aggVision.filter(row => row.id === AGGREGATED_ROW_ID).first();
-    const otherAggRows = aggVision.delete(aggRF11);
+    const aggRF11 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF11.id).toEqual(AGGREGATED_ROW_ID);
-    expect(aggRF11.M52Rows).toBeImmutableSet();
     expect(aggRF11.M52Rows.first()).toBe(m52Row);
-    expect(aggRF11["Montant"]).toBe(AMOUNT);
+});
 
-    otherAggRows.every(r => {
-        expect(r["Montant"]).toBe(0);
-    });
+test("DF-3-7 : ne contient pas d'article commençant par A657 des fonctions 4, 5 et 8", () => {
+    const AMOUNT = 38;
+    const AGGREGATED_ROW_ID = 'DF-3-7';
 
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R4',
+            'Article': 'A65711',
+            'Montant': AMOUNT
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R5',
+            'Article': 'A65722',
+            'Montant': AMOUNT
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R8',
+            'Article': 'A65733',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.size).toBe(0);
+});
+
+test("DF-3-7 : contient DF C65 R311 A6574", () => {
+    const AMOUNT = 39;
+    const AGGREGATED_ROW_ID = 'DF-3-7';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R311',
+            'Article': 'A6574',
+            'Chapitre': 'C65',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.first()).toBe(m52Rows[0]);
 });
