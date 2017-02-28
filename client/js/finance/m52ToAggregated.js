@@ -39,8 +39,14 @@ export const rules = Object.freeze({
 
     'RF-1-1' : {
         label: 'Taxe Foncière sur les propriétés bâties+rôles supplémentaires',
+        status: 'TEMPORARY', // TODO confirmer montant
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A73111', 'A7318', 'A7875', 'A7788'].includes(m52Row['Article']);
+            const article = m52Row['Article'];
+            const chapitre = m52Row['Chapitre'];
+
+            return isOR(m52Row) && isRF(m52Row) && 
+                ['A73111', 'A7318', 'A7875', 'A7788'].includes(article) &&
+                !(article === 'A7788' && chapitre === 'C77'); // TODO confirmer cette ligne
         }
     },
     'RF-1-2' :{
@@ -199,10 +205,9 @@ export const rules = Object.freeze({
     },
     'RF-9-2': {
         label: "Produits exceptionnels",
-        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
-                'A7817', 'A7875', 'A7711', 'A7714', 'A7718', 
+                'A7817', 'A7711', 'A7714', 'A7718', 
                 'A773', 'A7788'
             ].includes(m52Row['Article']);
         }

@@ -7,7 +7,12 @@ const AGGREGATED_ROWS_COUNT = Object.keys(rules).length;
 
 jest.addMatchers(matchers);
 
+/**
+ * RF - Recettes de Fonctionnement 
+ * 
+ */
 
+// RF-1-1
 test("RF-1-1 : contient l'article A73111", () => {
     const AMOUNT = 37;
     const AGGREGATED_ROW_ID = 'RF-1-1';
@@ -28,6 +33,92 @@ test("RF-1-1 : contient l'article A73111", () => {
 
     expect(aggRF11.M52Rows.first()).toBe(m52Row);
 });
+
+test("RF-1-1 : contient RF C78 R0202 A7875", () => {
+    const AMOUNT = 40;
+    const AGGREGATED_ROW_ID = 'RF-1-1';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R0202',
+            'Article': 'A7875',
+            'Chapitre': 'C78',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.first()).toBe(m52Rows[0]);
+});
+
+test("RF-1-1 : ne contient pas RF C77 R221 A7788", () => {
+    const AMOUNT = 41;
+    const AGGREGATED_ROW_ID = 'RF-1-1';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R221',
+            'Article': 'A7788',
+            'Chapitre': 'C77',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.size).toBe(0);
+});
+
+
+
+// RF-9-2
+test("RF-9-2 : ne contient pas RF C78 R0202 A7875", () => {
+    const AMOUNT = 40;
+    const AGGREGATED_ROW_ID = 'RF-9-2';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R0202',
+            'Article': 'A7875',
+            'Chapitre': 'C78',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF37.M52Rows.size).toBe(0);
+});
+
+
+
+
+/**
+ * DF - Dépenses de Fonctionnement 
+ * 
+ */
 
 test("DF-3-7 : ne contient pas d'article commençant par A657 des fonctions 4, 5 et 8", () => {
     const AMOUNT = 38;
