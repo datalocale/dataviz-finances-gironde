@@ -247,7 +247,9 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isRF(m52Row) && 
                 m52Row['Article'].startsWith('A75') && 
                 m52Row['Article'] !== 'A752' &&
-                m52Row['Article'] !== 'A7513';
+                m52Row['Article'] !== 'A7513' &&
+                m52Row['Article'] !== 'A75342' &&
+                m52Row['Article'] !== 'A75343';
         }
     },
     'RF-9-8': {

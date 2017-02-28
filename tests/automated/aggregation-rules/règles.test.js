@@ -163,6 +163,44 @@ test("RF-4-4 : ne contient pas RF C73 R01 A7353", () => {
 });
 
 
+// RF-6-1
+test("RF-6-1 : contient RF C017 R567 A75342 et RF C017 R567 A75343", () => {
+    const AMOUNT = 45;
+    const AGGREGATED_ROW_ID = 'RF-6-1';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A75342',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A75343',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggRow = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggRow.M52Rows.size).toBe(2);
+    expect(aggRow.M52Rows.has(m52Rows[0])).toBe(true);
+    expect(aggRow.M52Rows.has(m52Rows[1])).toBe(true);
+});
+
+
 
 // RF-9-2
 test("RF-9-2 : ne contient pas RF C78 R0202 A7875", () => {
@@ -242,6 +280,39 @@ test("RF-9-7 : ne contient pas l'article A7513", () => {
     expect(aggDF37.M52Rows.size).toBe(0);
 });
 
+test("RF-9-7 : ne contient pas RF C017 R567 A75342 et RF C017 R567 A75343", () => {
+    const AMOUNT = 45;
+    const AGGREGATED_ROW_ID = 'RF-9-7';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A75342',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A75343',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggRow = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggRow.M52Rows.size).toBe(0);
+});
 
 
 
