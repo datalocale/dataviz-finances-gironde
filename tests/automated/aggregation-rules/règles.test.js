@@ -84,6 +84,31 @@ test("RF-1-1 : ne contient pas RF C77 R221 A7788", () => {
     expect(aggDF37.M52Rows.size).toBe(0);
 });
 
+test("RF-1-1 : ne contient pas RF C017 R567 A7788", () => {
+    const AMOUNT = 44;
+    const AGGREGATED_ROW_ID = 'RF-1-1';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A7788',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggRow = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggRow.M52Rows.size).toBe(0);
+});
+
 
 // RF-4-3
 test("RF-4-3 : contient RF C73 R01 A7353", () => {
@@ -163,6 +188,31 @@ test("RF-9-2 : ne contient pas RF C78 R0202 A7875", () => {
     const aggDF37 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
 
     expect(aggDF37.M52Rows.size).toBe(0);
+});
+
+test("RF-9-2 : contient RF C017 R567 A7788", () => {
+    const AMOUNT = 44;
+    const AGGREGATED_ROW_ID = 'RF-9-2';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'R',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R567',
+            'Article': 'A7788',
+            'Chapitre': 'C017',
+            'Montant': AMOUNT
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggRow = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggRow.M52Rows.first()).toBe(m52Rows[0]);
 });
 
 

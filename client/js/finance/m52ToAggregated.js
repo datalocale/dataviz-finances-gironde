@@ -45,7 +45,7 @@ export const rules = Object.freeze({
             const chapitre = m52Row['Chapitre'];
 
             return isOR(m52Row) && isRF(m52Row) && 
-                ['A73111', 'A7318', 'A7875', 'A7788'].includes(article) &&
+                ['A73111', 'A7318', 'A7875'].includes(article) &&
                 !(article === 'A7788' && chapitre === 'C77'); // TODO confirmer cette ligne
         }
     },
