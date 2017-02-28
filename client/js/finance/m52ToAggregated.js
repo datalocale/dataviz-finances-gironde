@@ -107,7 +107,7 @@ export const rules = Object.freeze({
         label: "autres fiscalités",
         status: 'AMOUNT_ISSUE',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7353', 'A7388'].includes(m52Row['Article']);
+            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7388'].includes(m52Row['Article']);
         }
     },
     'RF-5-1': {
