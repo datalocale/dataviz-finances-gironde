@@ -39,8 +39,14 @@ export const rules = Object.freeze({
 
     'RF-1-1' : {
         label: 'Taxe Foncière sur les propriétés bâties+rôles supplémentaires',
+        status: 'TEMPORARY', // TODO confirmer montant
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A73111', 'A7318', 'A7875', 'A7788'].includes(m52Row['Article']);
+            const article = m52Row['Article'];
+            const chapitre = m52Row['Chapitre'];
+
+            return isOR(m52Row) && isRF(m52Row) && 
+                ['A73111', 'A7318', 'A7875'].includes(article) &&
+                !(article === 'A7788' && chapitre === 'C77'); // TODO confirmer cette ligne
         }
     },
     'RF-1-2' :{
@@ -101,7 +107,7 @@ export const rules = Object.freeze({
         label: "autres fiscalités",
         status: 'AMOUNT_ISSUE',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7353', 'A7388'].includes(m52Row['Article']);
+            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7388'].includes(m52Row['Article']);
         }
     },
     'RF-5-1': {
@@ -155,12 +161,12 @@ export const rules = Object.freeze({
     'RF-6-4': {
         label: "Autres (dont dotation conférence des financeurs)",
         filter(m52Row){
-            const fonction = m52Row['Rubrique fonctionnelle'][1];
+            const fonction = m52Row['Rubrique fonctionnelle'];
             const otherRecetteSocialeIds = Object.keys(rules)
-                .filter(id => id !== 'RF-6-4' && id.startsWith('RF-6'))
+                .filter(id => id !== 'RF-6-4' && id.startsWith('RF-6'));
 
             return isOR(m52Row) && isRF(m52Row) && 
-                (fonction === '4' || fonction === '5') &&
+                (fonction === 'R4' || fonction === 'R5') &&
                 otherRecetteSocialeIds.every(
                     id => !rules[id].filter(m52Row)
                 )
@@ -199,10 +205,9 @@ export const rules = Object.freeze({
     },
     'RF-9-2': {
         label: "Produits exceptionnels",
-        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
-                'A7817', 'A7875', 'A7711', 'A7714', 'A7718', 
+                'A7817', 'A7711', 'A7714', 'A7718', 
                 'A773', 'A7788'
             ].includes(m52Row['Article']);
         }
@@ -239,7 +244,12 @@ export const rules = Object.freeze({
         label: "Autres produits de gestions courants",
         status: 'AMOUNT_ISSUE',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'].startsWith('A75') && m52Row['Article'] !== 'A752'; 
+            return isOR(m52Row) && isRF(m52Row) && 
+                m52Row['Article'].startsWith('A75') && 
+                m52Row['Article'] !== 'A752' &&
+                m52Row['Article'] !== 'A7513' &&
+                m52Row['Article'] !== 'A75342' &&
+                m52Row['Article'] !== 'A75343';
         }
     },
     'RF-9-8': {
@@ -471,7 +481,7 @@ export const rules = Object.freeze({
                     "A65731", "A65732", "A65733", "A65734", "A65735", 
                     "A65736", "A65737", "A65738", "A6574"
                 ].includes(art) &&
-                !(art.startsWith('A657') && (f2 !== 'R4' && f2 !== 'R5' && f2 !== 'R8'));
+                !( art.startsWith('A657') && (f2 === 'R4' || f2 === 'R5' || f2 === 'R8') );
         }
     },
     'DF-3-8-1': {

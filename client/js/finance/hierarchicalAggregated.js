@@ -98,8 +98,9 @@ const levelsByRDFI = {
                     'DF-3-4',
                     'DF-3-5',
                     'DF-3-6',
+                    'DF-3-7',
                     {
-                        id: 'DF-3-7',
+                        id: 'DF-3-8',
                         label: "Frais de personnel",
                         children: ruleIds.filter(id => id.startsWith('DF-3-7-'))
                     }
