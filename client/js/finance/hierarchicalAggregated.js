@@ -217,7 +217,6 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
                 // aggRows.find over all tree nodes is O(n²)
                 const childRow = aggRows.find(r => r.id === child); 
                 correspondingTargetNode.elements.add(childRow);
-                correspondingTargetNode.total += childRow["Montant"];
 
                 correspondingTargetNode.children.add({
                     id: child,

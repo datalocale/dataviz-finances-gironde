@@ -276,22 +276,6 @@ const store = createStore(
     })
 );
 
-/*
-
-Make a M52InstructionRecord:
-{
-    dept: 33,
-    type: CA,
-    year: 2015,
-    rows: ...
-}
-& simplify M52RowRecord along the way
-
-csvText => M52InstructionRecord[] (can be several)
-... or error if not csv
-... or error is wrong columns. So test columns and provide informative message
-
-*/
 
 fetch('./data/cedi_2015_CA.csv').then(resp => resp.text())
     .then(csvStringToM52Instructions)
