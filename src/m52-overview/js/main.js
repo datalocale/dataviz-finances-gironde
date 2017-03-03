@@ -5,12 +5,12 @@ import {Record, OrderedSet as ImmutableSet} from 'immutable';
 import memoize from 'lodash.memoize';
 import { connect, Provider } from 'react-redux';
 
-import hierarchicalM52 from './finance/hierarchicalM52.js';
-import hierarchicalAggregated from './finance/hierarchicalAggregated.js';
-import m52ToAggregated from './finance/m52ToAggregated.js';
-import csvStringToM52Instructions from './finance/csvStringToM52Instructions.js';
-import visitHierarchical from './finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from './finance/constants';
+import hierarchicalM52 from '../../shared/js/finance/hierarchicalM52.js';
+import hierarchicalAggregated from '../../shared/js/finance/hierarchicalAggregated.js';
+import m52ToAggregated from '../../shared/js/finance/m52ToAggregated.js';
+import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
+import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../shared/js/finance/constants';
 
 import objectId from './objectId';
 import TopLevel from './components/TopLevel.js';

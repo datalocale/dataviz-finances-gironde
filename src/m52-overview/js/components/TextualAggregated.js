@@ -1,7 +1,7 @@
-import React from 'react'
-import {format} from 'currency-formatter'
+import React from 'react';
+import {format} from 'currency-formatter';
 
-import {isOR} from '../finance/m52ToAggregated';
+import {isOR} from '../../../shared/js/finance/m52ToAggregated';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
     return rows.filter(m52row => {

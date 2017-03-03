@@ -2,7 +2,7 @@ import React from 'react';
 import {OrderedSet} from 'immutable';
 import {format} from 'currency-formatter';
 
-import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../finance/constants';
+import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
 
 
 function makeM52RowId(m52Row){

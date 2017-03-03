@@ -7,7 +7,7 @@ import TextualSelected from './TextualSelected';
 import RDFISelector from './RDFISelector';
 import DepartmentFinanceHeader from './DepartmentFinanceHeader';
 
-import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../finance/constants';
+import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
 
 /*
         rdfi, dfView,

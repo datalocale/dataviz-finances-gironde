@@ -1,5 +1,5 @@
-import React from 'react'
-import Sunburst from './Sunburst';
+import React from 'react';
+import Sunburst from '../../../shared/js/components/Sunburst';
 
 /*
 
