@@ -1,6 +1,7 @@
+import budgetBalance from '../../shared/js/finance/budgetBalance';
+
 export default function(state){
-    return {
-        expenditures: 1000,
-        revenue: 1002
-    };
+    const { m52Instruction } = state;
+
+    return m52Instruction ? budgetBalance(m52Instruction) : {};
 }
