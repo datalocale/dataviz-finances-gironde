@@ -1,13 +1,13 @@
 language: node_js
 node_js: 6
 
-install: npm install
-before_script: npm test
-script: npm run build
-
 cache:
   directories:
   - node_modules
+
+script:
+- npm run build
+- npm test
 
 deploy:
   skip_cleanup: true
