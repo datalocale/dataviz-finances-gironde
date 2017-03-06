@@ -1,7 +1,7 @@
 import * as matchers from 'jest-immutable-matchers';
 import { OrderedSet as ImmutableSet } from 'immutable';
-import { rules, default as m52ToAggregated } from '../../../client/js/finance/m52ToAggregated';
-import { M52RowRecord, M52Instruction } from '../../../client/js/finance/M52InstructionDataStructures';
+import { rules, default as m52ToAggregated } from '../../../src/shared/js/finance/m52ToAggregated';
+import { M52RowRecord, M52Instruction } from '../../../src/shared/js/finance/M52InstructionDataStructures';
 
 const AGGREGATED_ROWS_COUNT = Object.keys(rules).length;
 

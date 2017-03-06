@@ -1,10 +1,10 @@
 import * as matchers from 'jest-immutable-matchers';
 import {OrderedSet as ImmutableSet} from 'immutable';
-import hierarchicalAggregated from '../../client/js/finance/hierarchicalAggregated';
-import m52ToAggregated from '../../client/js/finance/m52ToAggregated';
-import {M52RowRecord, M52Instruction} from '../../client/js/finance/M52InstructionDataStructures';
-import {PAR_PUBLIC_VIEW} from '../../client/js/finance/constants';
-import {flattenTree} from '../../client/js/finance/visitHierarchical.js';
+import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
+import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
+import {M52RowRecord, M52Instruction} from '../../src/shared/js/finance/M52InstructionDataStructures';
+import {PAR_PUBLIC_VIEW} from '../../src/shared/js/finance/constants';
+import {flattenTree} from '../../src/shared/js/finance/visitHierarchical.js';
 
 
 jest.addMatchers(matchers);
