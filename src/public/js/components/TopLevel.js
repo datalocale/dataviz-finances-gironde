@@ -13,6 +13,7 @@ export default function ({
     expenditures, revenue,
     onContentChange
 }) {
+    console.log('textsById', textsById.toJS())
 
     const displayedElement = breadcrumb.last();
 

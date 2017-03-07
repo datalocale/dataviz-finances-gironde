@@ -14,13 +14,18 @@ import { format } from 'currency-formatter';
     For these reasons, the usages of dangerouslySetInnerHTML are fine.
 */
 
+const CONSIDERED_YEAR = 2015;
+
 export default function ({page, total, texts}) {
     const atemporalText = texts && texts.get('atemporal');
+    const yearText = texts && texts.get('byYear') && texts.get('byYear').get(CONSIDERED_YEAR);
 
     return React.createElement('article', {}, 
         React.createElement('h1', {}, page), 
         React.createElement('h2', {}, format(total, { code: 'EUR' })),
         
-        atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
+        atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
+        yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année "+CONSIDERED_YEAR) : undefined,
+        yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined
     );
 }

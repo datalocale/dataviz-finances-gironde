@@ -14,7 +14,7 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import TopLevel from './components/TopLevel';
 
 import { HOME } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED } from './constants/actions';
 
 
 const REACT_CONTAINER_SELECTOR = '.content';
@@ -51,15 +51,35 @@ fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
         });
     });
 
-
-fetch('./data/texts/aggregated-atemporal.csv').then(resp => resp.text())
-    .then(csvParse)
-    .then(textList => {
-        store.dispatch({
-            type: ATEMPORAL_TEXTS_RECEIVED,
-            textList
+[
+    './data/texts/aggregated-atemporal.csv',
+    './data/texts/m52-fonctions-atemporal.csv'
+].forEach(url => {
+    fetch(url).then(resp => resp.text())
+        .then(csvParse)
+        .then(textList => {
+            store.dispatch({
+                type: ATEMPORAL_TEXTS_RECEIVED,
+                textList
+            });
         });
-    });
+});
+
+[
+    './data/texts/aggregated-2015.csv',
+    './data/texts/m52-fonctions-2015.csv'
+].forEach(url => {
+    fetch(url).then(resp => resp.text())
+        .then(csvParse)
+        .then(textList => {
+            store.dispatch({
+                type: YEAR_TEXTS_RECEIVED,
+                year: 2015,
+                textList
+            });
+        });
+});
+
 
 
 
