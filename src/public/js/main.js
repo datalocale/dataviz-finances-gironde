@@ -35,7 +35,7 @@ const BoundTopLevel = connect(
 )(TopLevel);
 
 
-fetch('./data/cedi_2015_CA.csv').then(resp => resp.text())
+fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     .then(csvStringToM52Instructions)
     .then(m52Instruction => {
         store.dispatch({
