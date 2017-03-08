@@ -21,7 +21,7 @@ export default function ({page, total, texts}) {
     const yearText = texts && texts.get('byYear') && texts.get('byYear').get(CONSIDERED_YEAR);
 
     return React.createElement('article', {}, 
-        React.createElement('h1', {}, page), 
+        React.createElement('h1', {}, texts && texts.get('label') || page), 
         React.createElement('h2', {}, format(total, { code: 'EUR' })),
         
         atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,

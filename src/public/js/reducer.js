@@ -3,7 +3,7 @@ import _md from 'markdown-it';
 
 import { 
     BREADCRUMB_CHANGE, M52_INSTRUCTION_RECEIVED, 
-    ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED 
+    ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED
 } from './constants/actions';
 
 const FinanceElementTextsRecord = Record({
@@ -53,6 +53,18 @@ export default function reducer(state, action) {
                 let byYear = financeElementTexts.get(year, new ImmutableMap()).set(year, md.render(text));
 
                 textMap = textMap.set(id, financeElementTexts.set('byYear', byYear));
+            });
+
+            return state.set('textsById', textMap);
+        }
+        case LABELS_RECEIVED: {
+            let textMap = state.get('textsById');
+
+            action.labelList.forEach(({id, text}) => {
+                const financeElementTexts = textMap
+                    .get(id, new FinanceElementTextsRecord())
+                    .set('label', text);
+                textMap = textMap.set(id, financeElementTexts);
             });
 
             return state.set('textsById', textMap);

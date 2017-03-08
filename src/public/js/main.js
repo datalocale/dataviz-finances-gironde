@@ -14,11 +14,10 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import TopLevel from './components/TopLevel';
 
 import { HOME } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED } from './constants/actions';
 
 
 const REACT_CONTAINER_SELECTOR = '.content';
-
 
 
 const StoreRecord = Record({
@@ -32,7 +31,7 @@ const store = createStore(
     reducer,
     new StoreRecord({
         breadcrumb: new List([HOME]),
-        textsById: ImmutableMap()
+        textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
 );
 
@@ -76,6 +75,20 @@ fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
                 type: YEAR_TEXTS_RECEIVED,
                 year: 2015,
                 textList
+            });
+        });
+});
+
+[
+    './data/texts/aggregated-labels.csv',
+    './data/texts/m52-fonctions-labels.csv'
+].forEach(url => {
+    fetch(url).then(resp => resp.text())
+        .then(csvParse)
+        .then(labelList => {
+            store.dispatch({
+                type: LABELS_RECEIVED,
+                labelList
             });
         });
 });

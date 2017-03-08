@@ -19,7 +19,7 @@ export default function ({
 
     // should it be a <main>?
     return React.createElement('div', {},
-        (breadcrumb.size >= 2 ? Breadcrumb({ breadcrumb, onContentChange }) : undefined),
+        (breadcrumb.size >= 2 ? Breadcrumb({ breadcrumb, textsById, onContentChange }) : undefined),
         displayedElement === HOME ?
             React.createElement(Home, { breadcrumb, expenditures, revenue, onContentChange }) :
             breadcrumb.size === 2 && displayedElement === FINANCE_EXPERT ?
