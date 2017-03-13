@@ -15,7 +15,7 @@ import TopLevel from './components/TopLevel';
 const REACT_CONTAINER_SELECTOR = '.content';
 
 const StoreRecord = Record({
-    M52Instruction: undefined
+    m52Instruction: undefined
 });
 
 const store = createStore(
