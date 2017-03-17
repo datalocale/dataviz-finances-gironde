@@ -1,13 +1,34 @@
-import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
-
-import {isOR, isRF, isDF, isRI, isDI} from './rowFilters';
-
+import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable'
 
 /*
     This file's very French and even Gironde-specific.
     It describes, documents and encodes the rules that allows to get from
     an "M52 budget" to a "budget agrégé"
 */
+
+/*
+    Needs : 
+    * which M52 rows are unused 
+        * amount of money and % over M52 total)
+*/
+
+export function isOR(m52Row){
+    return m52Row["Réel/Ordre id/Ordre diff"] === 'OR';
+}
+
+export function isRF(m52Row){
+    return m52Row['Dépense/Recette'] === 'R' && m52Row['Investissement/Fonctionnement'] === 'F';
+}
+export function isDF(m52Row){
+    return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'F';
+}
+export function isRI(m52Row){
+    return m52Row['Dépense/Recette'] === 'R' && m52Row['Investissement/Fonctionnement'] === 'I';
+}
+export function isDI(m52Row){
+    return m52Row['Dépense/Recette'] === 'D' && m52Row['Investissement/Fonctionnement'] === 'I';
+}
+
 
 
 export const rules = Object.freeze({
