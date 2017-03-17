@@ -1,6 +1,11 @@
 import React from 'react';
 
-
+/*
+interface BreadcrumbProps{
+    breadcrumb: string[], // array of content identifiers
+    onContentChange: (string) => void // (side effect), displays another page
+}
+ */
 export default function ({breadcrumb, onContentChange}) {
     const children = [];
 
