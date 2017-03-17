@@ -3,7 +3,7 @@ export default function reducer(state, action){
 
     switch(type){
     case 'M52_INSTRUCTION_RECEIVED':
-        return state.set('M52Instruction', action.m52Instruction);
+        return state.set('m52Instruction', action.m52Instruction);
     default:
         console.warn('Unknown action type', type);
         return state;
