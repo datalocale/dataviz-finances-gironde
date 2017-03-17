@@ -2,30 +2,36 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
-import { Record } from 'immutable';
+import { Record, List } from 'immutable';
 
 import reducer from './reducer';
-import mapStateToProps from './mapStateToProps';
+import stateToProps from './stateToProps';
+import dispatchToProps from './dispatchToProps';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 
 import TopLevel from './components/TopLevel';
 
+import {HOME} from './constants/pages';
+
 
 const REACT_CONTAINER_SELECTOR = '.content';
 
 const StoreRecord = Record({
-    m52Instruction: undefined
+    m52Instruction: undefined,
+    breadcrumb: undefined
 });
 
 const store = createStore(
     reducer,
-    new StoreRecord({})
+    new StoreRecord({
+        breadcrumb: new List([HOME])
+    })
 );
 
 const BoundTopLevel = connect(
-    mapStateToProps,
-    () => ({})
+    stateToProps,
+    dispatchToProps
 )(TopLevel);
 
 

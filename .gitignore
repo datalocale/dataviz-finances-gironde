@@ -3,3 +3,5 @@ node_modules
 .npm
 
 *-bundle.js
+
+notes.md
