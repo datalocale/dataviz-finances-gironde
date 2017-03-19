@@ -177,8 +177,6 @@ const levelsByRDFI = {
     }
 };
 
-
-
 /**
  * rows : ImmutableSet<Record<AggEntry>>
  */
@@ -197,7 +195,7 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
                 levels.children = levels.children.add(DFparPrestationChild);
                 break;
             default:
-                throw new Error('Misunderstood view ('+view+')')
+                throw new Error('Misunderstood view ('+view+')');
         }
     }
 
@@ -235,10 +233,10 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
         correspondingTargetNode.children.forEach(child => {
             correspondingTargetNode.total += child.total;
             child.elements.forEach(e => correspondingTargetNode.elements.add(e));
-        })
+        });
 
         return correspondingTargetNode;
     }
 
     return makeCorrespondingSubtree(levels);
-};
+}
