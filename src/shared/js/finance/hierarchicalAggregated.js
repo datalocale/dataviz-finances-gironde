@@ -94,7 +94,6 @@ export const levelsByRDFI = {
                     'DF-3-1',
                     'DF-3-2',
                     'DF-3-3',
-                    'DF-3-3',
                     'DF-3-4',
                     'DF-3-5',
                     'DF-3-6',
