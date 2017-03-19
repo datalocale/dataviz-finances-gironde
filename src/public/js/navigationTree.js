@@ -23,4 +23,6 @@ exp[REVENUE] = [ RF, RI ];
     })
 });
 
+exp[DF] = ['DF-2', 'DF-3', 'DF-4', 'DF-5', 'DF-6', 'DF-7'];
+
 export default exp;
