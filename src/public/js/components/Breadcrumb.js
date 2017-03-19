@@ -3,10 +3,12 @@ import React from 'react';
 /*
 interface BreadcrumbProps{
     breadcrumb: string[], // array of content identifiers
+    textsById: Map<ContentId, FinanceElementTextsRecord>
     onContentChange: (string) => void // (side effect), displays another page
 }
  */
-export default function ({breadcrumb, onContentChange}) {
+
+export default function ({breadcrumb, textsById, onContentChange}) {
     const children = [];
 
     breadcrumb.forEach((e, i) => {
@@ -22,14 +24,14 @@ export default function ({breadcrumb, onContentChange}) {
                             onContentChange(breadcrumb.slice(0, i + 1));
                         }
                     },
-                    e
+                    textsById.get(e).label
                 ),
                 ' / '
             );
         }
         else {
             // last
-            children.push(e);
+            children.push(textsById.get(e).label);
         }
     });
 
