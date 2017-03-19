@@ -9,3 +9,6 @@ Le code et les commentaires sont à écrire **en anglais**.
 ## Compatibilité navigateur
 
 A priori, nous avons besoin que ça marche sur IE9 + Firefox 47.
+
+## Pour visualiser
+[Démonstration](https://dtc-innovation.github.io/dataviz-finances-gironde/)
