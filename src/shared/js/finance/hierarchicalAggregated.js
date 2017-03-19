@@ -31,11 +31,11 @@ const DFparPrestationChild = {
         'DF-1-6',
         'DF-1-7'
     ]
-}
+};
 
 
 
-const levelsByRDFI = {
+export const levelsByRDFI = {
     'RF': {
         id: 'RF',
         label: 'Recettes de fonctionnement',

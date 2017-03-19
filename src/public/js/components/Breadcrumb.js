@@ -12,6 +12,9 @@ export default function ({breadcrumb, textsById, onContentChange}) {
     const children = [];
 
     breadcrumb.forEach((e, i) => {
+        const texts = textsById.get(e);
+        const label = texts && texts.label || e;
+
         if (i < breadcrumb.size - 1) {
             // all but last
             children.push(
@@ -24,14 +27,14 @@ export default function ({breadcrumb, textsById, onContentChange}) {
                             onContentChange(breadcrumb.slice(0, i + 1));
                         }
                     },
-                    textsById.get(e).label
+                    label
                 ),
                 ' / '
             );
         }
         else {
             // last
-            children.push(textsById.get(e).label);
+            children.push(label);
         }
     });
 

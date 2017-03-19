@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HOME, FINANCE_EXPERT, EXPENDITURES } from '../constants/pages';
+import { HOME, FINANCE_EXPERT } from '../constants/pages';
 
 import Breadcrumb from './Breadcrumb';
 import Home from './Home';

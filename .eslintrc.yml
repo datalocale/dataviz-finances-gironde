@@ -13,7 +13,5 @@ rules:
     - error
     - unix
   quotes: off
-  semi:
-    - error
-    - always
+  semi: off
   no-console: off

@@ -40,8 +40,6 @@ export default function ({contentId, total, texts, partition, onGoDeeper}) {
 
     const label = texts && texts.get('label');
 
-    console.log('FinanceElementProps', contentId, partition);
-
     return React.createElement('article', {className: 'finance-element'}, 
         React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, label), 
         React.createElement('h2', {}, format(total, { code: 'EUR' })),
