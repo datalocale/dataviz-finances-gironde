@@ -35,7 +35,7 @@ export default function reducer(state, action) {
         case ATEMPORAL_TEXTS_RECEIVED: {
             let textMap = state.get('textsById');
 
-            action.textList.forEach(({id, text}) => {
+            action.textList.forEach(({id, text = ''}) => {
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('atemporal', md.render(text));
@@ -48,7 +48,7 @@ export default function reducer(state, action) {
             const year = action.year;
             let textMap = state.get('textsById');
 
-            action.textList.forEach(({id, text}) => {
+            action.textList.forEach(({id, text = ''}) => {
                 let financeElementTexts = textMap.get(id, new FinanceElementTextsRecord());
                 let byYear = financeElementTexts.get(year, new ImmutableMap()).set(year, md.render(text));
 
@@ -60,7 +60,7 @@ export default function reducer(state, action) {
         case LABELS_RECEIVED: {
             let textMap = state.get('textsById');
 
-            action.labelList.forEach(({id, text}) => {
+            action.labelList.forEach(({id, text = ''}) => {
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('label', text);
