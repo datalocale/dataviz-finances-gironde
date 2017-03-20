@@ -2,3 +2,12 @@
     display: flex;
     flex-direction: column;
 }
+
+.home > section{
+    display: flex;
+    flex-direction: column;
+}
+
+.home > section:hover{
+    background-color: palegoldenrod;
+}
