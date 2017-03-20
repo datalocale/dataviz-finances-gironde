@@ -41,7 +41,7 @@ const BoundTopLevel = connect(
 )(TopLevel);
 
 
-fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
+fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     .then(csvStringToM52Instructions)
     .then(m52Instruction => {
         store.dispatch({
@@ -51,8 +51,8 @@ fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     });
 
 [
-    './data/texts/aggregated-atemporal.csv',
-    './data/texts/m52-fonctions-atemporal.csv'
+    '../data/texts/aggregated-atemporal.csv',
+    '../data/texts/m52-fonctions-atemporal.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -65,8 +65,8 @@ fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 });
 
 [
-    './data/texts/aggregated-2015.csv',
-    './data/texts/m52-fonctions-2015.csv'
+    '../data/texts/aggregated-2015.csv',
+    '../data/texts/m52-fonctions-2015.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -80,8 +80,8 @@ fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 });
 
 [
-    './data/texts/aggregated-labels.csv',
-    './data/texts/m52-fonctions-labels.csv'
+    '../data/texts/aggregated-labels.csv',
+    '../data/texts/m52-fonctions-labels.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
