@@ -68,7 +68,6 @@ export default function (state) {
         balance.expenditures : (displayedContentId === REVENUE ?
             balance.revenue :
             totalById.get(displayedContentId)));
-
     
     return Object.assign(
         {

@@ -68,12 +68,12 @@ export default connect(
         return Object.assign(
             {
                 urls: {
-                    expenditures: '/finance-details/'+EXPENDITURES, 
-                    focus1: '/focus/focus1',
-                    focus2: '/focus/focus2',
-                    focus3: '/focus/focus3',
-                    focus4: '/focus/focus4',
-                    strategy: '/strategie'
+                    expenditures: '#!/finance-details/'+EXPENDITURES, 
+                    focus1: '#!/focus/focus1',
+                    focus2: '#!/focus/focus2',
+                    focus3: '#!/focus/focus3',
+                    focus4: '#!/focus/focus4',
+                    strategy: '#!/strategie'
                 }
             },
             balance

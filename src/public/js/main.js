@@ -13,9 +13,10 @@ import dispatchToProps from './dispatchToProps';
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 
 import Home from './components/screens/Home';
+import FinanceElement from './components/screens/FinanceElement';
 
 import { HOME } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
 
 /**
  * 
@@ -108,7 +109,7 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 
 const URL_PREFIX = '/public'
 
-page(URL_PREFIX+'/', () => {
+page('/', () => {
     console.log('in route', '/')
 
     ReactDOM.render(
@@ -121,6 +122,32 @@ page(URL_PREFIX+'/', () => {
     );
 });
 
-page({
-    hashbang: true
+
+page('/finance-details/:contentId', ({params: {contentId}}) => {
+    console.log('in route', '/finance-details', contentId)
+
+    const breadcrumb = store.getState().breadcrumb;
+
+    store.dispatch({
+        type: BREADCRUMB_CHANGE,
+        breadcrumb: breadcrumb.push(contentId)
+    })
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(FinanceElement)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+page.redirect(location.pathname, '#!/')
+page.redirect(location.pathname+'/', '#!/')
+
+
+page({ hashbang: true });
+window.addEventListener('hashchange', () => {
+    page(location.hash);
 });
