@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import { Record, List, Map as ImmutableMap } from 'immutable';
 import { csvParse } from 'd3-dsv';
+import page from 'page';
 
 import reducer from './reducer';
 import stateToProps from './stateToProps';
@@ -11,14 +12,18 @@ import dispatchToProps from './dispatchToProps';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 
-import TopLevel from './components/TopLevel';
+import Home from './components/screens/Home';
 
 import { HOME } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED } from './constants/actions';
 
-
+/**
+ * 
+ * Initialize Redux store + React binding
+ * 
+ */
 const REACT_CONTAINER_SELECTOR = '.content';
-
+const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
 const StoreRecord = Record({
     m52Instruction: undefined,
@@ -35,12 +40,13 @@ const store = createStore(
     })
 );
 
-const BoundTopLevel = connect(
-    stateToProps,
-    dispatchToProps
-)(TopLevel);
 
 
+/**
+ * 
+ * Fetching initial data
+ * 
+ */
 fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     .then(csvStringToM52Instructions)
     .then(m52Instruction => {
@@ -94,13 +100,27 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 });
 
 
+/**
+ * 
+ * Routing
+ * 
+ */
 
+const URL_PREFIX = '/public'
 
-ReactDOM.render(
-    React.createElement(
-        Provider,
-        { store },
-        React.createElement(BoundTopLevel)
-    ),
-    document.querySelector(REACT_CONTAINER_SELECTOR)
-);
+page(URL_PREFIX+'/', () => {
+    console.log('in route', '/')
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(Home)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+page({
+    hashbang: true
+});
