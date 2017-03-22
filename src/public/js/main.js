@@ -149,5 +149,5 @@ page.redirect(location.pathname+'/', '#!/')
 
 page({ hashbang: true });
 window.addEventListener('hashchange', () => {
-    page(location.hash);
+    page.redirect(location.hash);
 });

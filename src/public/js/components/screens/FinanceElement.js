@@ -59,13 +59,10 @@ export function FinanceElement({contentId, total, texts, partition, urls}) {
         yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
         partition ? React.createElement('section', { className: 'partition'}, 
-            partition.map(({contentId, amount, texts}) => {
+            partition.map(({contentId, amount, texts, url}) => {
                 return React.createElement('a',
                     {
-                        href: '#',
-                        onClick(e) {
-                            e.preventDefault();
-                        }
+                        href: url
                     }, 
                     React.createElement('h1', {}, texts && texts.get('label') || contentId),
                     React.createElement('h2', {},
@@ -81,13 +78,16 @@ export function FinanceElement({contentId, total, texts, partition, urls}) {
     );
 }
 
+
+
 function makePartition(contentId, totalById, textsById){
     const childrenIds = navigationTree[contentId];
 
     return childrenIds ? childrenIds.map(childId => ({
         contentId: childId,
         amount: totalById.get(childId),
-        texts: textsById.get(childId)
+        texts: textsById.get(childId),
+        url: '#!/finance-details/'+childId
     })) : undefined;
 }
 
