@@ -1,5 +1,5 @@
-import React from 'react'
-import d3Shape from 'd3-shape'
+import React from 'react';
+import {arc as d3arc, pie as d3pie} from 'd3-shape';
 
 import {flattenTree} from '../finance/visitHierarchical.js';
 
@@ -25,7 +25,7 @@ export default class SunburstSlice extends React.Component{
             
             // update the component if there is a difference in this.props.highlightedNodes VS nextProps.highlightedNodes
             // in regard to the node being drawn
-            return nodes.some(n => this.props.highlightedNodes.has(n) !== nextProps.highlightedNodes.has(n))
+            return nodes.some(n => this.props.highlightedNodes.has(n) !== nextProps.highlightedNodes.has(n));
         }
 
     }
@@ -40,10 +40,10 @@ export default class SunburstSlice extends React.Component{
 
         const children = node.children ? Array.from(node.children.values()) : [];
         
-        const pie = d3Shape.pie()
+        const pie = d3pie()
             .startAngle(startAngle)
             .endAngle(endAngle);
-        const arc = d3Shape.arc()
+        const arc = d3arc()
             .innerRadius(radius - donutWidth)
             .outerRadius(radius);
         
@@ -66,10 +66,10 @@ export default class SunburstSlice extends React.Component{
                 'g', 
                 {
                     className: 'piece',
-                    onMouseOver(e){
+                    onMouseOver(){
                         onSliceOvered(node);
                     },
-                    onClick(e){
+                    onClick(){
                         onSliceSelected(node);
                     }
                 },
@@ -100,7 +100,7 @@ export default class SunburstSlice extends React.Component{
                         highlightedNodes, selectedNode, 
                         onSliceOvered, onSliceSelected
                     }
-                )
+                );
             })  
         );
     }
