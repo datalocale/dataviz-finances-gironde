@@ -38,7 +38,8 @@ interface FinanceElementProps{
     partition: Array<{
         contentId: string,
         amount: number,
-        texts: FinanceElementTextsRecord
+        texts: FinanceElementTextsRecord,
+        url: string
     }>
 }
 

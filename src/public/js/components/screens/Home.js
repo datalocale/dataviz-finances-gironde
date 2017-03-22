@@ -16,6 +16,10 @@ export function Home({
 }) {
 
     return React.createElement('article', {className: 'home'},
+        React.createElement('h1', {}, 'Compte administration du Département de la Gironde'),
+        React.createElement('p', {},
+            "Bonjour ! Aujourd'hui, on apprend des choses sur le CA du CD33 !"
+        ),
         React.createElement('section', {},
             React.createElement('h1', {}, 'Grosses sommes'),
             React.createElement(
@@ -44,7 +48,7 @@ export function Home({
             React.createElement(
                 'a',
                 { href: focus4 },
-                'Page Focus 5'
+                'Page Focus 4'
             )
         ),
         React.createElement('section', {},
@@ -54,8 +58,13 @@ export function Home({
                 { href: strategy },
                 'Stratégie budgétaire'
             )
+        ),
+        React.createElement('p', {},
+            "Et si vous voulez creuser vous-même, vous pouvez toujours télécharger les ",
+            React.createElement('a', {href:'#'}, 
+                'données open data sous format CSV'
+            )
         )
-        
     );
 }
 

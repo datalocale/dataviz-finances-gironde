@@ -14,9 +14,11 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
+import Focus from './components/screens/Focus';
 
 import { HOME } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
+
 
 /**
  * 
@@ -107,8 +109,6 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
  * 
  */
 
-const URL_PREFIX = '/public'
-
 page('/', () => {
     console.log('in route', '/')
 
@@ -138,6 +138,26 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
             Provider,
             { store },
             React.createElement(FinanceElement)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+page('/focus/:focusId', ({params: {focusId}}) => {
+    console.log('in route', '/focus', focusId);
+
+    const breadcrumb = store.getState().breadcrumb;
+
+    store.dispatch({
+        type: BREADCRUMB_CHANGE,
+        breadcrumb: breadcrumb.push(focusId)
+    });
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(Focus)
         ),
         CONTAINER_ELEMENT
     );
