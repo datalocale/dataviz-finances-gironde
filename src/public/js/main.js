@@ -15,6 +15,7 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import Focus from './components/screens/Focus';
+import Strategy from './components/screens/Strategy';
 
 import { HOME } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
@@ -158,6 +159,20 @@ page('/focus/:focusId', ({params: {focusId}}) => {
             Provider,
             { store },
             React.createElement(Focus)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+
+page('/strategie', () => {
+    console.log('in route', '/strategie');
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(Strategy)
         ),
         CONTAINER_ELEMENT
     );
