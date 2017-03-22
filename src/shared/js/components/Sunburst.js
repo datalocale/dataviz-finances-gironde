@@ -1,7 +1,7 @@
-import React from 'react'
-import d3Shape from 'd3-shape'
+import React from 'react';
+import {arc as d3arc, pie as d3pie} from 'd3-shape';
 
-import SunburstSlice from './SunburstSlice'
+import SunburstSlice from './SunburstSlice';
 
 const DONUT_WIDTH = 45;
 const RADIUS = 80;
@@ -35,7 +35,7 @@ export default function({
         onSliceOvered, onSliceSelected
     }){
 
-        console.log('selectedNode', selectedNode)
+        console.log('selectedNode', selectedNode);
 
     width = width || 500;
     height = height || 500;
@@ -45,10 +45,7 @@ export default function({
 
     const children = Array.from(hierarchicalData.children.values());
     
-    const pie = d3Shape.pie();
-    const arc = d3Shape.arc()
-        .innerRadius(outerRadius - donutWidth)
-        .outerRadius(outerRadius);
+    const pie = d3pie();
     
     const childrenArcDescs = pie(children.map(c => c.total));
 
@@ -91,7 +88,7 @@ export default function({
                             onSliceOvered,
                             onSliceSelected
                         }
-                    )
+                    );
                 })              
             )
         )
