@@ -25,7 +25,7 @@ import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED
  * Initialize Redux store + React binding
  * 
  */
-const REACT_CONTAINER_SELECTOR = '.content';
+const REACT_CONTAINER_SELECTOR = '.cd33-finance-dataviz';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
 const StoreRecord = Record({
