@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const focusContent = require('../../../data/focusContent.json');
+const focusContent = require('../../../../../data/focusContent.json');
 
 export function Focus({focusId}) {
     return React.createElement('article', {className: 'focus'},
