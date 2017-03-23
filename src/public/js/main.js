@@ -21,6 +21,12 @@ import { HOME } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
 
 
+let DATA_URL_PREFIX = "..";
+if(process.env.NODE_ENV === "production"){
+    // The prod URL may be used by external consumers
+    DATA_URL_PREFIX = "https://dtc-innovation.github.io/dataviz-finances-gironde";
+}
+
 /**
  * 
  * Initialize Redux store + React binding
@@ -51,7 +57,7 @@ const store = createStore(
  * Fetching initial data
  * 
  */
-fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
+fetch(DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     .then(csvStringToM52Instructions)
     .then(m52Instruction => {
         store.dispatch({
@@ -61,8 +67,8 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
     });
 
 [
-    '../data/texts/aggregated-atemporal.csv',
-    '../data/texts/m52-fonctions-atemporal.csv'
+    DATA_URL_PREFIX+'/data/texts/aggregated-atemporal.csv',
+    DATA_URL_PREFIX+'/data/texts/m52-fonctions-atemporal.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -75,8 +81,8 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 });
 
 [
-    '../data/texts/aggregated-2015.csv',
-    '../data/texts/m52-fonctions-2015.csv'
+    DATA_URL_PREFIX+'/data/texts/aggregated-2015.csv',
+    DATA_URL_PREFIX+'/data/texts/m52-fonctions-2015.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -90,8 +96,8 @@ fetch('../data/finances/cedi_2015_CA.csv').then(resp => resp.text())
 });
 
 [
-    '../data/texts/aggregated-labels.csv',
-    '../data/texts/m52-fonctions-labels.csv'
+    DATA_URL_PREFIX+'/data/texts/aggregated-labels.csv',
+    DATA_URL_PREFIX+'/data/texts/m52-fonctions-labels.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
