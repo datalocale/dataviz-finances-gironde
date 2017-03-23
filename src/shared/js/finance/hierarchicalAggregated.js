@@ -31,11 +31,11 @@ const DFparPrestationChild = {
         'DF-1-6',
         'DF-1-7'
     ]
-}
+};
 
 
 
-const levelsByRDFI = {
+export const levelsByRDFI = {
     'RF': {
         id: 'RF',
         label: 'Recettes de fonctionnement',
@@ -93,7 +93,6 @@ const levelsByRDFI = {
                 children: [
                     'DF-3-1',
                     'DF-3-2',
-                    'DF-3-3',
                     'DF-3-3',
                     'DF-3-4',
                     'DF-3-5',
@@ -177,8 +176,6 @@ const levelsByRDFI = {
     }
 };
 
-
-
 /**
  * rows : ImmutableSet<Record<AggEntry>>
  */
@@ -197,7 +194,7 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
                 levels.children = levels.children.add(DFparPrestationChild);
                 break;
             default:
-                throw new Error('Misunderstood view ('+view+')')
+                throw new Error('Misunderstood view ('+view+')');
         }
     }
 
@@ -235,10 +232,10 @@ export default function(aggRows, rdfi, view = PAR_PUBLIC_VIEW) {
         correspondingTargetNode.children.forEach(child => {
             correspondingTargetNode.total += child.total;
             child.elements.forEach(e => correspondingTargetNode.elements.add(e));
-        })
+        });
 
         return correspondingTargetNode;
     }
 
     return makeCorrespondingSubtree(levels);
-};
+}

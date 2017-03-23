@@ -16,16 +16,58 @@ import { format } from 'currency-formatter';
 
 const CONSIDERED_YEAR = 2015;
 
-export default function ({page, total, texts}) {
+
+/*
+
+interface FinanceElementProps{
+    contentId: string,
+    total: number, // total amount of money for this element
+    texts: FinanceElementTextsRecord,
+
+    // the partition will be displayed in the order it's passed. Sort beforehand if necessary
+    partition: Array<{
+        contentId: string,
+        amount: number,
+        texts: FinanceElementTextsRecord
+    }>
+}
+
+*/
+
+export default function ({contentId, total, texts, partition, onGoDeeper}) {
     const atemporalText = texts && texts.get('atemporal');
     const yearText = texts && texts.get('byYear') && texts.get('byYear').get(CONSIDERED_YEAR);
 
-    return React.createElement('article', {}, 
-        React.createElement('h1', {}, texts && texts.get('label') || page), 
+    const label = texts && texts.get('label');
+
+    return React.createElement('article', {className: 'finance-element'}, 
+        React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, label), 
         React.createElement('h2', {}, format(total, { code: 'EUR' })),
         
         atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
         yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année "+CONSIDERED_YEAR) : undefined,
-        yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined
+        yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
+
+        partition ? React.createElement('section', { className: 'partition'}, 
+            partition.map(({contentId, amount, texts}) => {
+                return React.createElement('a',
+                    {
+                        href: '#',
+                        onClick(e) {
+                            e.preventDefault();
+                            onGoDeeper(contentId);
+                        }
+                    }, 
+                    React.createElement('h1', {}, texts && texts.get('label') || contentId),
+                    React.createElement('h2', {},
+                        format(amount, { code: 'EUR' }),
+                        ' ',
+                        (100*amount/total).toFixed(1)+'%'
+                    ),
+                    React.createElement('p', texts && texts.get('atemporal'))
+                );
+            })  
+        ) : undefined 
+
     );
 }

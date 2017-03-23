@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HOME, FINANCE_EXPERT, EXPENDITURES } from '../constants/pages';
+import { HOME, FINANCE_EXPERT } from '../constants/pages';
 
 import Breadcrumb from './Breadcrumb';
 import Home from './Home';
@@ -11,13 +11,11 @@ export default function ({
     breadcrumb,
     textsById,
     expenditures, revenue,
+    texts, total, partition,
     onContentChange
 }) {
-    console.log('textsById', textsById.toJS())
-
     const displayedElement = breadcrumb.last();
 
-    // should it be a <main>?
     return React.createElement('div', {},
         (breadcrumb.size >= 2 ? Breadcrumb({ breadcrumb, textsById, onContentChange }) : undefined),
         displayedElement === HOME ?
@@ -27,10 +25,11 @@ export default function ({
                 React.createElement(
                     FinanceElement,
                     {
-                        page: displayedElement,
-                        texts: textsById.get(displayedElement),
-                        total: displayedElement === EXPENDITURES ? expenditures : revenue
+                        contentId: displayedElement,
+                        texts, total, partition,
+                        onGoDeeper: next => onContentChange(breadcrumb.push(next))
                     }
                 )
     );
 }
+

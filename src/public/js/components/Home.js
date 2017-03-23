@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { format } from 'currency-formatter';
 
@@ -9,6 +8,7 @@ export default function ({
     expenditures, revenue,
     onContentChange
 }) {
+    
     return React.createElement('article', {className: 'home'},
         React.createElement(
             'a',
@@ -43,5 +43,5 @@ export default function ({
             },
             'Page expert finance'
         )
-    )
+    );
 }

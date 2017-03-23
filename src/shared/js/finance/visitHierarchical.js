@@ -4,7 +4,11 @@ export default function visit(node, f){
     f(node)
     
     if(node.children){
-        Array.from(node.children.values()).forEach(child => {
+        const children = Array.isArray(node.children) ?
+            node.children :
+            Array.from(node.children.values())
+
+        children.forEach(child => {
             visit(child, f);
         })
     }
