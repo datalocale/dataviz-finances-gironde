@@ -60,7 +60,7 @@ export function Home({
             React.createElement(
                 'a',
                 { href: strategy },
-                React.createElement(Placeholder, {hint: "Comprendre la stratégie budgétaire + illustration"}),
+                React.createElement(Placeholder, {hint: "Comprendre la stratégie budgétaire + illustration"})
             )
         ),
         React.createElement('p', {},

@@ -8,9 +8,6 @@
     flex-direction: column;
 }
 
-.home > section:hover{
-    background-color: palegoldenrod;
-}
 
 
 .home .total-budget{
