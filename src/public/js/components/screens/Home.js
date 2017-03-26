@@ -31,20 +31,28 @@ export function Home({
         ),
         React.createElement('section', {},
             React.createElement('h1', {}, 'Sujets à la loupe'),
-            React.createElement(
-                'a',
-                { href: solidarities },
-                'Solidarités'
-            ),
-            React.createElement(
-                'a',
-                { href: invest },
-                'Investir pour le territoire'
-            ),
-            React.createElement(
-                'a',
-                { href: presence },
-                'Être présent sur le territoire'
+            React.createElement('ul', {className: 'focuses'},
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: solidarities },
+                        'Solidarités'
+                    )
+                ),
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: invest },
+                        'Investir pour le territoire'
+                    )
+                ),
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: presence },
+                        'Être présent sur le territoire'
+                    )
+                )
             )
         ),
         React.createElement('section', {},
