@@ -1,54 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { format } from 'currency-formatter';
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
-import { EXPENDITURES } from '../../constants/pages';
+import { EXPENDITURES, SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
 
 
 export function Home({
     expenditures,
     urls: {
         expenditures: expURL, 
-        focus1, focus2, focus3, focus4,
+        solidarities, invest, presence,
         strategy
     }
 }) {
 
     return React.createElement('article', {className: 'home'},
-        React.createElement('h1', {}, 'Compte administration du Département de la Gironde'),
+        React.createElement('h1', {}, "La Gironde : un budget au service d'une solidarité humaine et territoriale"),
         React.createElement('p', {},
             "Bonjour ! Aujourd'hui, on apprend des choses sur le CA du CD33 !"
         ),
         React.createElement('section', {},
-            React.createElement('h1', {}, 'Grosses sommes'),
             React.createElement(
                 'a', 
                 { href: expURL },
-                'Dépenses : ', format(expenditures, { code: 'EUR' })
+                React.createElement('h1', {}, 
+                    (expenditures/Math.pow(10, 9)).toFixed(3).replace('.', ','),
+                    ' Milliards de dépenses en 2016'
+                )
             )
         ),
         React.createElement('section', {},
-            React.createElement('h1', {}, 'Pages focus'),
+            React.createElement('h1', {}, 'Sujets à la loupe'),
             React.createElement(
                 'a',
-                { href: focus1 },
-                'Page Focus 1'
+                { href: solidarities },
+                'Solidarités'
             ),
             React.createElement(
                 'a',
-                { href: focus2 },
-                'Page Focus 2'
+                { href: invest },
+                'Investir pour le territoire'
             ),
             React.createElement(
                 'a',
-                { href: focus3 },
-                'Page Focus 3'
-            ),
-            React.createElement(
-                'a',
-                { href: focus4 },
-                'Page Focus 4'
+                { href: presence },
+                'Être présent sur le territoire'
             )
         ),
         React.createElement('section', {},
@@ -78,10 +74,9 @@ export default connect(
             {
                 urls: {
                     expenditures: '#!/finance-details/'+EXPENDITURES, 
-                    focus1: '#!/focus/focus1',
-                    focus2: '#!/focus/focus2',
-                    focus3: '#!/focus/focus3',
-                    focus4: '#!/focus/focus4',
+                    solidarities: '#!/focus/'+SOLIDARITES, 
+                    invest: '#!/focus/'+INVEST, 
+                    presence: '#!/focus/'+PRESENCE,
                     strategy: '#!/strategie'
                 }
             },
