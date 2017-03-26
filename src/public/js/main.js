@@ -1,14 +1,12 @@
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { Record, List, Map as ImmutableMap } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
 import reducer from './reducer';
-import stateToProps from './stateToProps';
-import dispatchToProps from './dispatchToProps';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 
