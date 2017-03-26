@@ -5,11 +5,11 @@
         <title>dataviz 33</title>
         
         <meta name="description" content="....">
- 
+        <!--
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <link rel="stylesheet" href="https://rawgit.com/DavidBruant/better-defaults/master/defaults.css"> 
+        -->
 
-        <link rel="stylesheet" href="src/public/css/finance-element.css"> 
 
         <link rel="stylesheet" href="../src/public/css/home.css"> 
         <link rel="stylesheet" href="../src/public/css/finance-element.css"> 
@@ -30,67 +30,18 @@
                 align-items: center;
             }
 
-            td{
-                border: 1px solid #BBB;
-                padding: 0.1em 0.5em;
-            }
-
             h1, h2, h3{
                 margin: 0.2em 0;
+            }
+
+            .content{
+                min-width: 40em;
             }
 
         </style>
     </head>
 
     <body>
-        <style>
-            header{
-                height: 79px;
-                width: 100%;
-                border-bottom : 1px solid #CCC;
-            }
-            .middle{
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-
-                justify-content: flex-start;
-                align-items: flex-start;
-
-                min-height: 75vh;
-            }
-
-            .middle > *{
-                min-height: 100%;
-            }
-
-
-            .middle > nav{
-                width: 109px;
-                border-right : 2px solid #CCC;
-                text-align: center;
-                padding-top : 5em;
-                color: #888;
-                font-weight: bold;
-                letter-spacing: 0em;
-            }
-
-            .middle .content{
-                box-sizing: content-box;
-                width: 785px;
-                padding: 0 100px 0 15px;
-            }
-
-            .middle .right{
-                flex: 1;
-                background-color: #DADADA;
-            }
-        </style>
-        <header><img height="50" src="http://www.gironde.fr/upload/docs/image/jpeg/2017-02/departement_site.jpg"></header>
-        <div class="middle">
-            <nav> MENU </nav>
-            <div class="content"></div>
-            <div class="right"></div>
-        </div>
+        <div class="content"></div>
     </body>
 </html>

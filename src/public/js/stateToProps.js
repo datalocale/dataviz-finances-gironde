@@ -8,6 +8,22 @@ import {flattenTree} from '../../shared/js/finance/visitHierarchical.js';
 import navigationTree from './navigationTree';
 
 
+/*
+
+interface FinanceElementProps{
+    contentId: string,
+    total: number, // total amount of money for this element
+    texts: FinanceElementTextsRecord,
+
+    // the partition will be displayed in the order it's passed. Sort beforehand if necessary
+    partition: Array<{
+        contentId: string,
+        amount: number,
+        texts: FinanceElementTextsRecord
+    }>
+}
+
+ */
 function makePartition(contentId, totalById, textsById){
     const childrenIds = navigationTree[contentId];
 
@@ -17,7 +33,6 @@ function makePartition(contentId, totalById, textsById){
         texts: textsById.get(childId)
     })) : undefined;
 }
-
 
 
 function getTotalById(m52Instruction){
