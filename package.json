@@ -5,9 +5,9 @@
   "description": "...",
   "main": "index.js",
   "scripts": {
-    "build:m52overview": "browserify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d",
-    "build:public": "browserify src/public/js/main.js -o build/public-bundle.js -d",
-    "build": "npm-run-all --parallel build:*",
+    "build:m52overview": "browserify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -p [minifyify --no-map]",
+    "build:public": "browserify src/public/js/main.js -o build/public-bundle.js -p [minifyify --no-map]",
+    "build": "cross-env NODE_ENV=production npm-run-all --parallel build:*",
     "watch:m52overview": "watchify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
     "watch:public": "watchify src/public/js/main.js -o build/public-bundle.js -d -v",
     "watch": "npm-run-all --parallel watch:*",
@@ -28,7 +28,15 @@
   "homepage": "",
   "browserify": {
     "transform": [
-      ["babelify", { "presets": ["es2015"] }]
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ],
+          "plugins": ["transform-node-env-inline"]
+        }
+      ]
     ]
   },
   "dependencies": {
@@ -40,6 +48,8 @@
     "immutable": "^3.8.1",
     "lodash.memoize": "^4.1.2",
     "markdown-it": "^8.3.1",
+    "npm-run-all": "^4.0.2",
+    "page": "^1.7.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.1",
@@ -48,12 +58,15 @@
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
+    "babel-plugin-transform-node-env-inline": "0.0.2",
     "babel-preset-es2015": "^6.24.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
+    "cross-env": "^3.2.4",
     "eslint": "^3.14.0",
     "jest": "^18.1.0",
     "jest-immutable-matchers": "^1.4.0",
+    "minifyify": "^7.3.5",
     "npm-run-all": "^4.0.2",
     "serve": "^2.4.3",
     "watchify": "^3.8.0"
