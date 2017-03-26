@@ -1,19 +1,34 @@
-import {isR, isD, isOR} from './rowFilters';
+import {isRF, isRI, isDF, isDI, isOR} from './rowFilters';
+import {RF, RI, DF, DI} from './constants';
+
 
 export default function(m52Instruction){
-    let expenditures = 0;
-    let revenue = 0;
+    const budget = {};
+    [RF, RI, DF, DI].forEach(k => budget[k] = 0);
 
     m52Instruction.rows.forEach(row => {
         if(isOR(row)){
-            if(isR(row)){
-                revenue += row['Montant'];
+            if(isRF(row)){
+                budget[RF] += row['Montant'];
+                return;
             }
-            if(isD(row)){
-                expenditures += row['Montant'];
+            if(isRI(row)){
+                budget[RI] += row['Montant'];
+                return;
+            }
+            if(isDF(row)){
+                budget[DF] += row['Montant'];
+                return;
+            }
+            if(isDI(row)){
+                budget[DI] += row['Montant'];
+                return;
             }
         }
     });
 
-    return { expenditures, revenue };
+    budget.expenditures = budget[DI] + budget[DF];
+    budget.revenue = budget[RI] + budget[RF];
+
+    return Object.freeze(budget);
 }

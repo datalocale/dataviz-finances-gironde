@@ -10,7 +10,7 @@ import { EXPENDITURES, SOLIDARITES, INVEST, PRESENCE } from '../../constants/pag
 export function Home({
     expenditures,
     urls: {
-        expenditures: expURL, 
+        total,
         solidarities, invest, presence,
         strategy
     }
@@ -18,14 +18,14 @@ export function Home({
 
     return React.createElement('article', {className: 'home'},
         React.createElement('h1', {}, "La Gironde : un budget au service d'une solidarité humaine et territoriale"),
-        React.createElement(Placeholder, {hint: "Paragraphe d'acceuil"}),
-        React.createElement('section', {},
+        
+        React.createElement('section', {className: 'total-budget'},
             React.createElement(
                 'a', 
-                { href: expURL },
+                { href: total },
                 React.createElement('h1', {}, 
                     (expenditures/Math.pow(10, 9)).toFixed(3).replace('.', ','),
-                    ' Milliards de dépenses en 2016'
+                    ' milliards de dépenses en 2016'
                 )
             )
         ),
@@ -60,7 +60,7 @@ export function Home({
             React.createElement(
                 'a',
                 { href: strategy },
-                'Stratégie budgétaire'
+                React.createElement(Placeholder, {hint: "Comprendre la stratégie budgétaire + illustration"}),
             )
         ),
         React.createElement('p', {},
@@ -81,7 +81,7 @@ export default connect(
         return Object.assign(
             {
                 urls: {
-                    expenditures: '#!/finance-details/'+EXPENDITURES, 
+                    total: '#!/total',
                     solidarities: '#!/focus/'+SOLIDARITES, 
                     invest: '#!/focus/'+INVEST, 
                     presence: '#!/focus/'+PRESENCE,
