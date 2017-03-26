@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Placeholder from '../../../../shared/js/components/Placeholder';
+
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import { EXPENDITURES, SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
 
@@ -16,9 +18,7 @@ export function Home({
 
     return React.createElement('article', {className: 'home'},
         React.createElement('h1', {}, "La Gironde : un budget au service d'une solidarité humaine et territoriale"),
-        React.createElement('p', {},
-            "Bonjour ! Aujourd'hui, on apprend des choses sur le CA du CD33 !"
-        ),
+        React.createElement(Placeholder, {hint: "Paragraphe d'acceuil"}),
         React.createElement('section', {},
             React.createElement(
                 'a', 
