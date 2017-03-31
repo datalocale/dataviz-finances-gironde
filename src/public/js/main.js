@@ -195,10 +195,10 @@ page('/focus/:focusId', ({params: {focusId}}) => {
     );
 });
 
-
 page.redirect(location.pathname, '#!/')
 page.redirect(location.pathname+'/', '#!/')
 
+page.base(location.pathname);
 
 page({ hashbang: true });
 window.addEventListener('hashchange', () => {
