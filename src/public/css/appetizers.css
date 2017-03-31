@@ -1,0 +1,91 @@
+.appetizer{
+    max-width: 50%;
+    
+    padding: 1em;
+    margin: 3em 0;
+
+    background-color: white;
+    box-shadow: 0 0 2px black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.appetizer:nth-child(even){
+    align-self: flex-end;
+}
+.appetizer:nth-child(odd){
+    align-self: flex-start;
+}
+
+.appetizer .info{
+    display: flex;
+    flex-direction: row;
+}
+
+.appetizer .info .number{
+    padding-right: 1em;
+    border-right: 0.5em solid #D7D7D7;
+}
+
+.appetizer .info .number .main,
+.appetizer .info .number .secundary{
+    white-space: nowrap;
+}
+
+.appetizer .info .number .main{
+    font-size: 2em;
+}
+.appetizer .info .number .secundary{
+    font-size: 1.5em;
+}
+.appetizer .info p{
+    padding-left: 1em;
+}
+
+.appetizer a{
+    align-self: flex-end;
+}
+
+
+/*
+React.createElement('section', { className: 'appetizer' },
+    React.createElement('h1', {}, h1),
+    React.createElement('div', { className: 'info' },
+        React.createElement('div', { className: 'number' },
+            React.createElement('span', { className: 'main' }, numberMain),
+            React.createElement('span', { className: 'secundary' }, numberSecundary)
+        ),
+        React.createElement('p', {}, description)
+    ),
+    React.createElement(
+        'a', 
+        { href: moreUrl },
+        'En savoir plus'
+    )
+);*/
+
+
+
+
+
+.appetizer.total-appetizer{
+    border: 1em solid white;
+    margin: 0;
+    width: 30em;
+    height: 30em;
+    border-radius: 50%;
+
+    position: relative;
+    left: 10%; /* % relative to parent width */    
+    transform: translateY(-25%); /* % relative to element height */
+
+    background-color: #EDEDED;
+    box-shadow: 0 0 0;
+
+    text-align: center;
+
+}
+
