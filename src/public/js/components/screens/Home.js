@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Placeholder from '../../../../shared/js/components/Placeholder';
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
+import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import { SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
@@ -13,8 +13,7 @@ export function Home({
     expenditures,
     urls: {
         total,
-        solidarities, invest, presence,
-        strategy
+        solidarities, invest, presence
     }
 }) {
 
@@ -55,10 +54,30 @@ export function Home({
         React.createElement('section', {},
             React.createElement('h1', {}, "Comprendre la construction d'un budget"),
             React.createElement(
-                'a',
-                { href: strategy },
-                React.createElement(Placeholder, {hint: "Comprendre la stratégie budgétaire + illustration"})
+                'p',
+                {},
+                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Cela signifie que les Départements ne peuvent pas présenter de déficit.`
+            ),
+            React.createElement(
+                'p',
+                {},
+                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
+            ),
+            React.createElement(
+                BudgetConstructionAnimation,
+                {
+                    Dotation: 100000,
+                    Machins: 200000,
+                    Impots: 300000,
+                    RecettesInvestissement: 400000,
+                    RecettesEmprunts: 500000,
+                    EpargneBrute: 600000,
+                    DepensesFonctionnement: 700000,
+                    FraisFinanciers: 800000,
+                    Investissements: 900000
+                }
             )
+            
         )
     );
 }
@@ -75,8 +94,7 @@ export default connect(
                     total: '#!/total',
                     solidarities: '#!/focus/'+SOLIDARITES, 
                     invest: '#!/focus/'+INVEST, 
-                    presence: '#!/focus/'+PRESENCE,
-                    strategy: '#!/strategie'
+                    presence: '#!/focus/'+PRESENCE
                 }
             },
             balance

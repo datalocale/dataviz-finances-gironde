@@ -1,0 +1,59 @@
+$texts-height: 10em;
+
+.budget-construction{
+
+    .bricks{
+        height: 2*$texts-height;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .column{
+
+            display: flex;
+            flex-direction: column;
+            
+            justify-content: flex-end;
+            width: 18%;
+
+            .brick{
+                min-height: 5em;
+                background-color: indianred;
+
+                padding: 0.5em;
+                margin: 0.5em 0; 
+                width: 100%;
+
+                border-radius: 5px;
+            }
+
+        }
+
+
+    }
+
+    hr{
+        height: 1em;
+        border: 0;
+        border-radius: 5px;	
+        background-color: #D8D8D8;
+    }
+
+    .texts{
+        height: $texts-height;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .column{
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+    }
+
+}
