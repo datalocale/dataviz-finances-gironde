@@ -1,22 +1,19 @@
+@import 'appetizers';
+
 .home{
     display: flex;
     flex-direction: column;
+
+    & > section{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .appetizers{
+        background-color: #A5D326;
+        margin-top: 5em;
+    }
 }
-
-.home > section{
-    display: flex;
-    flex-direction: column;
-}
-
-
-.appetizers{
-    background-color: #A5D326;
-    margin-top: 5em;
-}
-
-
-
-
 
 
 

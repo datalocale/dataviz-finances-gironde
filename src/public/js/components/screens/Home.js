@@ -53,7 +53,7 @@ export function Home({
         ),
         
         React.createElement('section', {},
-            React.createElement('h1', {}, 'Stratégie budgétaire'),
+            React.createElement('h1', {}, "Comprendre la construction d'un budget"),
             React.createElement(
                 'a',
                 { href: strategy },

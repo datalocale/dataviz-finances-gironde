@@ -1,0 +1,24 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: start;
+    align-items: center;
+}
+
+h1, h2, h3{
+    margin: 0.2em 0;
+}
+
+.cd33-finance-dataviz{
+    width: 80vw;
+
+    *{
+        width: 100%;
+    }
+}
