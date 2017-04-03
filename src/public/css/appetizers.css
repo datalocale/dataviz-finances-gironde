@@ -50,32 +50,11 @@
 }
 
 
-/*
-React.createElement('section', { className: 'appetizer' },
-    React.createElement('h1', {}, h1),
-    React.createElement('div', { className: 'info' },
-        React.createElement('div', { className: 'number' },
-            React.createElement('span', { className: 'main' }, numberMain),
-            React.createElement('span', { className: 'secundary' }, numberSecundary)
-        ),
-        React.createElement('p', {}, description)
-    ),
-    React.createElement(
-        'a', 
-        { href: moreUrl },
-        'En savoir plus'
-    )
-);*/
-
-
-
-
-
 .appetizer.total-appetizer{
-    border: 1em solid white;
+    border: 1.5em solid white;
     margin: 0;
-    width: 30em;
-    height: 30em;
+    width: 38em;
+    height: 38em;
     border-radius: 50%;
 
     position: relative;
@@ -87,5 +66,33 @@ React.createElement('section', { className: 'appetizer' },
 
     text-align: center;
 
+    color: #4A4A4A;
+    font-size: 14px;
 }
 
+
+.appetizer.total-appetizer h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+
+.appetizer.total-appetizer .total{
+    font-size: 6.5em;
+    letter-spacing: -10px;
+
+}
+
+.appetizer.total-appetizer hr{
+    width: 80%;
+    border-width: 1px 0 0 0;
+}
+
+.appetizer.total-appetizer p{
+    line-height: 1.8em;
+    max-width: 80%;
+}
+
+.appetizer.total-appetizer a{
+    align-self: center;
+}
