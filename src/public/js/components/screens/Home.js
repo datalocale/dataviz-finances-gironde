@@ -11,12 +11,13 @@ import { SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
 
 export function Home({
     expenditures,
+    currentYear,
     urls: {
         total,
         solidarity, invest, presence
     }
 }) {
-
+    
     return React.createElement('article', {className: 'home'},
         React.createElement('h1', {}, "Un budget au service d'une solidarité humaine et territoriale"),
         React.createElement('p', {}, "Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire."),
@@ -24,7 +25,7 @@ export function Home({
         React.createElement('section', {className: 'appetizers'},
             React.createElement(TotalAppetizer, {
                 total: expenditures,
-                year: 2016,
+                year: currentYear,
                 totalUrl: total
             }),
             React.createElement(Appetizer, {
@@ -85,11 +86,13 @@ export function Home({
 
 export default connect(
     state => {
-        const { m52Instruction } = state;
+        const { m52InstructionByYear, currentYear } = state;
+        const m52Instruction = m52InstructionByYear.get(currentYear);
         const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
 
         return Object.assign(
             {
+                currentYear,
                 urls: {
                     total: '#!/total',
                     solidarity: '#!/focus/'+SOLIDARITES, 

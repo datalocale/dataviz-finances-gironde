@@ -35,7 +35,8 @@ const REACT_CONTAINER_SELECTOR = '.cd33-finance-dataviz';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
 const StoreRecord = Record({
-    m52Instruction: undefined,
+    m52InstructionByYear: undefined,
+    currentYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
     breadcrumb: undefined
@@ -44,6 +45,8 @@ const StoreRecord = Record({
 const store = createStore(
     reducer,
     new StoreRecord({
+        m52InstructionByYear: new ImmutableMap(),
+        currentYear: 2016,
         breadcrumb: new List([HOME]),
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
@@ -56,14 +59,25 @@ const store = createStore(
  * Fetching initial data
  * 
  */
-fetch(DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv').then(resp => resp.text())
-    .then(csvStringToM52Instructions)
-    .then(m52Instruction => {
-        store.dispatch({
-            type: M52_INSTRUCTION_RECEIVED,
-            m52Instruction,
+[
+    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2016_CA.csv'
+].forEach(url => {
+    fetch(url).then(resp => resp.text())
+        .then(csvStringToM52Instructions)
+        .then(m52Instruction => {
+            store.dispatch({
+                type: M52_INSTRUCTION_RECEIVED,
+                m52Instruction,
+            });
         });
-    });
+});
 
 [
     DATA_URL_PREFIX+'/data/texts/aggregated-atemporal.csv',
