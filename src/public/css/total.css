@@ -1,0 +1,44 @@
+.total-budget{}
+
+.total-budget .viz{
+    display: flex;
+    flex-direction: row;
+}
+
+.total-budget .viz > *{
+    flex: 1;
+}
+
+
+.total-budget .expenditures,
+.total-budget .revenue{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 60vh;
+}
+
+
+.total-budget .expenditures a,
+.total-budget .revenue a{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+.total-budget .rf{
+    background-color: #C9DAF8;
+}
+
+.total-budget .ri{
+    background-color: #3D85C6;
+}
+
+.total-budget .df{
+    background-color: #EA9999;
+}
+
+.total-budget .di{
+    background-color: #E06666;
+}

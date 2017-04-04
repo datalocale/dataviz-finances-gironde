@@ -1,54 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { format } from 'currency-formatter';
+
+import Placeholder from '../../../../shared/js/components/Placeholder';
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
-import { EXPENDITURES } from '../../constants/pages';
+import { EXPENDITURES, SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
 
 
 export function Home({
     expenditures,
     urls: {
-        expenditures: expURL, 
-        focus1, focus2, focus3, focus4,
+        total,
+        solidarities, invest, presence,
         strategy
     }
 }) {
 
     return React.createElement('article', {className: 'home'},
-        React.createElement('h1', {}, 'Compte administration du Département de la Gironde'),
-        React.createElement('p', {},
-            "Bonjour ! Aujourd'hui, on apprend des choses sur le CA du CD33 !"
-        ),
-        React.createElement('section', {},
-            React.createElement('h1', {}, 'Grosses sommes'),
+        React.createElement('h1', {}, "La Gironde : un budget au service d'une solidarité humaine et territoriale"),
+        
+        React.createElement('section', {className: 'total-budget'},
             React.createElement(
                 'a', 
-                { href: expURL },
-                'Dépenses : ', format(expenditures, { code: 'EUR' })
+                { href: total },
+                React.createElement('h1', {}, 
+                    (expenditures/Math.pow(10, 9)).toFixed(3).replace('.', ','),
+                    ' milliards de dépenses en 2016'
+                )
             )
         ),
         React.createElement('section', {},
-            React.createElement('h1', {}, 'Pages focus'),
-            React.createElement(
-                'a',
-                { href: focus1 },
-                'Page Focus 1'
-            ),
-            React.createElement(
-                'a',
-                { href: focus2 },
-                'Page Focus 2'
-            ),
-            React.createElement(
-                'a',
-                { href: focus3 },
-                'Page Focus 3'
-            ),
-            React.createElement(
-                'a',
-                { href: focus4 },
-                'Page Focus 4'
+            React.createElement('h1', {}, 'Sujets à la loupe'),
+            React.createElement('ul', {className: 'focuses'},
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: solidarities },
+                        'Solidarités'
+                    )
+                ),
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: invest },
+                        'Investir pour le territoire'
+                    )
+                ),
+                React.createElement('li', {},
+                    React.createElement(
+                        'a',
+                        { href: presence },
+                        'Être présent sur le territoire'
+                    )
+                )
             )
         ),
         React.createElement('section', {},
@@ -56,7 +60,7 @@ export function Home({
             React.createElement(
                 'a',
                 { href: strategy },
-                'Stratégie budgétaire'
+                React.createElement(Placeholder, {hint: "Comprendre la stratégie budgétaire + illustration"})
             )
         ),
         React.createElement('p', {},
@@ -77,11 +81,10 @@ export default connect(
         return Object.assign(
             {
                 urls: {
-                    expenditures: '#!/finance-details/'+EXPENDITURES, 
-                    focus1: '#!/focus/focus1',
-                    focus2: '#!/focus/focus2',
-                    focus3: '#!/focus/focus3',
-                    focus4: '#!/focus/focus4',
+                    total: '#!/total',
+                    solidarities: '#!/focus/'+SOLIDARITES, 
+                    invest: '#!/focus/'+INVEST, 
+                    presence: '#!/focus/'+PRESENCE,
                     strategy: '#!/strategie'
                 }
             },
