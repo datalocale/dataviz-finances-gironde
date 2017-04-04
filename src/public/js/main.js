@@ -12,11 +12,11 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
-import Focus from './components/screens/Focus';
+import FocusSolidarity from './components/screens/FocusSolidarity';
 import Strategy from './components/screens/Strategy';
 import TotalBudget from './components/screens/TotalBudget';
 
-import { HOME } from './constants/pages';
+import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
 
 
@@ -175,21 +175,14 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
     );
 });
 
-page('/focus/:focusId', ({params: {focusId}}) => {
-    console.log('in route', '/focus', focusId);
-
-    const breadcrumb = store.getState().breadcrumb;
-
-    store.dispatch({
-        type: BREADCRUMB_CHANGE,
-        breadcrumb: breadcrumb.push(focusId)
-    });
+page('/focus/'+SOLIDARITES, () => {
+    console.log('in route', '/focus/'+SOLIDARITES);
 
     ReactDOM.render(
         React.createElement(
             Provider,
             { store },
-            React.createElement(Focus)
+            React.createElement(FocusSolidarity)
         ),
         CONTAINER_ELEMENT
     );

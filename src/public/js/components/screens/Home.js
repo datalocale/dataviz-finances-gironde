@@ -13,7 +13,7 @@ export function Home({
     expenditures,
     urls: {
         total,
-        solidarities, invest, presence
+        solidarity, invest, presence
     }
 }) {
 
@@ -33,7 +33,7 @@ export function Home({
                 numberSecundary: "bénéficiaires",
                 description: `Le Département affirme sa vocation sociale et déploie près de 900 millions d’euros pour aider et accompagner les personnes fragilisées.
                 Il emploie 1751 agents au service de l’action sociale soit près de 77 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendus aux publics les plus fragiles. A cela s’ajoute 937 assistants familiaux qui accueillent des enfants faisant l’objet de mesures de placement.`, 
-                moreUrl: solidarities
+                moreUrl: solidarity
             }),
             React.createElement(Appetizer, {
                 h1: "Des investissements ambitieux",
@@ -92,7 +92,7 @@ export default connect(
             {
                 urls: {
                     total: '#!/total',
-                    solidarities: '#!/focus/'+SOLIDARITES, 
+                    solidarity: '#!/focus/'+SOLIDARITES, 
                     invest: '#!/focus/'+INVEST, 
                     presence: '#!/focus/'+PRESENCE
                 }
