@@ -28,8 +28,10 @@ export default function reducer(state, action) {
     const {type} = action;
 
     switch (type) {
-        case M52_INSTRUCTION_RECEIVED:
-            return state.set('m52Instruction', action.m52Instruction);
+        case M52_INSTRUCTION_RECEIVED:{
+            const {m52Instruction} = action
+            return state.setIn(['m52InstructionByYear', m52Instruction.year], m52Instruction);
+        }
         case BREADCRUMB_CHANGE:
             return state.set('breadcrumb', action.breadcrumb);
         case ATEMPORAL_TEXTS_RECEIVED: {
