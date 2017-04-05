@@ -1,0 +1,55 @@
+@import '../../shared/style/d3-axis';
+
+.solidarity-by-year{
+
+    svg{
+        .d3-axis.x{
+
+            .tick{
+
+                line{
+                    stroke: grey;
+                    stroke-width: 1px;
+                }
+                text{
+                    fill: grey;
+                }
+
+            }
+
+        }
+
+        .d3-axis.y{
+
+            .tick{
+
+                line{
+                    stroke: #AAA;
+                    stroke-width: 1px;
+                }
+                text{
+                    fill: #AAA;
+                }
+
+            }
+
+        }
+
+
+        .content{
+
+            .column{
+
+                rect{
+                    fill: transparent;
+                    stroke: grey;
+                    stroke-width: 1px;
+                }
+            }
+
+        }
+
+    }
+
+}
+
