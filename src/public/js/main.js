@@ -60,14 +60,14 @@ const store = createStore(
  * 
  */
 [
-    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2016_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2016_CA.csv'
+    DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
+    /*DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv',*/
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
@@ -81,7 +81,7 @@ const store = createStore(
 
 [
     DATA_URL_PREFIX+'/data/texts/aggregated-atemporal.csv',
-    DATA_URL_PREFIX+'/data/texts/m52-fonctions-atemporal.csv'
+    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-atemporal.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -95,7 +95,7 @@ const store = createStore(
 
 [
     DATA_URL_PREFIX+'/data/texts/aggregated-2015.csv',
-    DATA_URL_PREFIX+'/data/texts/m52-fonctions-2015.csv'
+    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-2015.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -110,7 +110,7 @@ const store = createStore(
 
 [
     DATA_URL_PREFIX+'/data/texts/aggregated-labels.csv',
-    DATA_URL_PREFIX+'/data/texts/m52-fonctions-labels.csv'
+    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-labels.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
