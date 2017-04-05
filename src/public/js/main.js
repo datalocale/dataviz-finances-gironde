@@ -63,11 +63,11 @@ const store = createStore(
     DATA_URL_PREFIX+'/data/finances/cedi_2016_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
-    /*DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
+    DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv',*/
+    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
