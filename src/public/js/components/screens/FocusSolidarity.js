@@ -58,11 +58,12 @@ export function FocusSol({
     const years = solidarityByYear.keySeq().toJS();
 
     const columnAndMarginWidth = WIDTH/(years.length+1)
-    const columnMargin = columnAndMarginWidth/3;
-
+    const columnMargin = columnAndMarginWidth/4;
+    const columnWidth = columnAndMarginWidth - columnMargin;
+    
     const yearScale = scaleLinear()
         .domain([min(years), max(years)])
-        .range([columnMargin, WIDTH-columnMargin]);
+        .range([columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
     const solidarityTotals = solidarityByYear.valueSeq().toJS()
         .map(ys => ys.solidarityExpenditures);
@@ -115,7 +116,7 @@ export function FocusSol({
                                 line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
                                 text: {
                                     x: 0, y: -10, 
-                                    dx: "-1.6em", dy: 0, 
+                                    dx: "-1.6em", dy: "2em", 
                                     t: y
                                 }
                                 
@@ -140,7 +141,7 @@ export function FocusSol({
                     })}),
                     // content
                     React.createElement('g', {className: 'content'},
-                        solidarityByYear.entrySeq().toJS().map(([year, yearSolidarity], i) => {
+                        solidarityByYear.entrySeq().toJS().map(([year, yearSolidarity]) => {
                             const stackElements = ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-1-other'];
                             const stackYs = stackElements
                                 .map(id => yearSolidarity[id])
@@ -153,6 +154,7 @@ export function FocusSol({
                                     const height = rectAmountScale(amount);
 
                                     return {
+                                        id,
                                         amount,
                                         height,
                                         y: HEIGHT - HEIGHT_PADDING - height - stackYs[i]
@@ -162,10 +164,10 @@ export function FocusSol({
 
                             return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
                                 React.createElement('text', {}, yearSolidarity.solidarityExpenditures),
-                                stack.map( ({amount, height, y}) => {
-                                    return React.createElement('g', {}, 
-                                        React.createElement('rect', {x: 0, y, width: 100, height}),
-                                        React.createElement('text', {x: 0, y, width: 100, height}, (amount/1000000).toFixed(1))
+                                stack.map( ({id, amount, height, y}) => {
+                                    return React.createElement('g', {className: id}, 
+                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
+                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (amount/1000000).toFixed(1))
                                     )
                                 })
                             )
