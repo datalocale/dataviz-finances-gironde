@@ -24,9 +24,6 @@ import { EXPENDITURES, REVENUE } from '../../constants/pages';
     For these reasons, the usages of dangerouslySetInnerHTML are fine.
 */
 
-const CONSIDERED_YEAR = 2015;
-
-
 /*
 
 interface FinanceElementProps{
@@ -45,9 +42,9 @@ interface FinanceElementProps{
 
 */
 
-export function FinanceElement({contentId, total, texts, partition, urls}) {
+export function FinanceElement({contentId, total, texts, partition, year, urls}) {
     const atemporalText = texts && texts.get('atemporal');
-    const yearText = texts && texts.get('byYear') && texts.get('byYear').get(CONSIDERED_YEAR);
+    const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
 
     const label = texts && texts.get('label');
 
@@ -56,7 +53,7 @@ export function FinanceElement({contentId, total, texts, partition, urls}) {
         React.createElement('h2', {}, format(total, { code: 'EUR' })),
         
         atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
-        yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année "+CONSIDERED_YEAR) : undefined,
+        yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
         yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
         partition ? React.createElement('section', { className: 'partition'}, 
@@ -117,8 +114,10 @@ function getTotalById(m52Instruction){
 
 
 export default connect(
-    state => {
-        const { m52Instruction, textsById, breadcrumb } = state;
+    state => {        
+        const { m52InstructionByYear, textsById, breadcrumb, currentYear } = state;
+        
+        const m52Instruction = m52InstructionByYear.get(currentYear);
         const displayedContentId = breadcrumb.last();
         
         const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
@@ -134,7 +133,8 @@ export default connect(
                 contentId: displayedContentId, 
                 total, 
                 texts: textsById.get(displayedContentId),
-                partition: makePartition(displayedContentId, totalById, textsById) 
+                partition: makePartition(displayedContentId, totalById, textsById),
+                year: currentYear
             }
         )
 
