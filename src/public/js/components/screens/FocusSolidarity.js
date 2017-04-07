@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Record } from 'immutable';
 import { scaleLinear } from 'd3-scale';
-import { min, max } from 'd3-array';
+import { min, max, sum } from 'd3-array';
 
 import FocusDetail from '../FocusDetail';
 
