@@ -1,8 +1,6 @@
 import React from 'react'
 
 import Sunburst from '../../../shared/js/components/Sunburst';
-import TextualAggregated from './TextualAggregated';
-import hierarchicalAggregated from '../../../shared/js/finance/hierarchicalAggregated.js';
 import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from '../../../shared/js/finance/constants';
 
 /*

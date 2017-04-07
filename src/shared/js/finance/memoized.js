@@ -11,5 +11,5 @@ function hierarchMemoizeResolver(o, rdfi, view){
 }
 
 export const hierarchicalM52 = memoize(_hierarchicalM52, hierarchMemoizeResolver);
-export const hierarchicalAggregated = memoize(_hierarchicalAggregated, hierarchMemoizeResolver);
+export const hierarchicalAggregated = memoize(_hierarchicalAggregated);
 export const m52ToAggregated = memoize(_m52ToAggregated);

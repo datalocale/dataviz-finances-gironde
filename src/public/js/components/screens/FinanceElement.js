@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import { format } from 'currency-formatter';
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
-import m52ToAggregated from '../../../../shared/js/finance/m52ToAggregated';
-import hierarchicalAggregated from '../../../../shared/js/finance/hierarchicalAggregated';
+import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import navigationTree from '../../navigationTree';
 import { EXPENDITURES, REVENUE } from '../../constants/pages';
@@ -55,14 +54,14 @@ export function FinanceElement({contentId, amount, aboveTotal, topTotal, texts, 
         
         React.createElement('div', {className: 'ratios'}, 
             React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/aboveTotal+'%'}})
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/aboveTotal+'%'}}, 'Catégorie dessus')
             ),
             React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/topTotal+'%'}})
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/topTotal+'%'}}, 'Dépenses ou recettes totales')
             )
         ),
 
-        atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
+        atemporalText ? React.createElement('section', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
 
         React.createElement('h2', {}, 'Évolution sur ces dernières années'),
         React.createElement('scatter-plot', {}, ''),
@@ -105,25 +104,25 @@ function makePartition(contentId, totalById, textsById){
 
 
 
-function getTotalById(m52Instruction){
-    const aggregated = m52ToAggregated(m52Instruction);
+function getElementById(m52Instruction, aggregated){
 
-    let totalById = new ImmutableMap();
+    let elementById = new ImmutableMap();
 
     aggregated.forEach(aggRow => {
-        totalById = totalById.set(aggRow.id, aggRow.total);
+        elementById = elementById.set(aggRow.id, aggRow);
     });
 
     ['D', 'R'].forEach(rd => {
         ['F', 'I'].forEach(fi => {
+            throw 'TODO fix hierarchicalAggregated usage';
             const hierAgg = hierarchicalAggregated(aggregated, {rd, fi});
             flattenTree(hierAgg).forEach(aggHierNode => {
-                totalById = totalById.set(aggHierNode.id, aggHierNode.total);
+                elementById = elementById.set(aggHierNode.id, aggHierNode);
             });
         });
     });
 
-    return totalById;
+    return elementById;
 }
 
 
@@ -132,22 +131,42 @@ export default connect(
         const { m52InstructionByYear, textsById, breadcrumb, currentYear } = state;
         
         const m52Instruction = m52InstructionByYear.get(currentYear);
+        const aggregated = m52ToAggregated(m52Instruction);
+        
         const displayedContentId = breadcrumb.last();
         
         const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
-        const totalById = (m52Instruction && getTotalById(m52Instruction)) || new ImmutableMap();
+        let elementById = (m52Instruction && getElementById(m52Instruction, aggregated)) || new ImmutableMap();
+        elementById = elementById
+            .set(EXPENDITURES, {
+                id: EXPENDITURES,
+                total: balance.expenditures
+            })
+            .set(REVENUE, {
+                id: REVENUE,
+                total: balance.revenue
+            })
 
-        const amount = m52Instruction && (displayedContentId === EXPENDITURES ?
-            balance.expenditures : (displayedContentId === REVENUE ?
-                balance.revenue :
-                totalById.get(displayedContentId)));
+
+        const element = elementById.get(displayedContentId);
+
+        // weak. TODO : make a stronger test
+        const expenseOrRevenue = element && element.id ? 
+            (element.id.startsWith('D') ? EXPENDITURES : REVENUE) : 
+            undefined;
+
+        const amount = m52Instruction && element.total;
+
+        throw 'TODO topElement id'
 
         return Object.assign(
             {
                 contentId: displayedContentId, 
                 amount, 
-                aboveTotal: undefined, 
-                topTotal: undefined, 
+                parentElement: element.parent, 
+                topElement: {
+                    id: 12
+                }, 
                 texts: textsById.get(displayedContentId),
                 partition: makePartition(displayedContentId, totalById, textsById),
                 year: currentYear

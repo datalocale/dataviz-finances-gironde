@@ -147,6 +147,7 @@ function hierarchMemoizeResolver(o, rdfi, view){
 }
 
 const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
+throw 'TODO fix hierarchicalAggregated usage (use shared memzed)';
 const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
 const memoizedM52ToAggregated = memoize(m52ToAggregated);
 
@@ -162,6 +163,24 @@ function mapStateToProps(state){
 
     if(!m52Instruction)
         return {};
+
+
+
+    throw 'TODO: fix hierarchicalAggregated usages'
+    /*if(rdfiId === 'DF'){
+        switch(view){
+            case PAR_PUBLIC_VIEW:
+                levels = Object.assign({}, levels);
+                levels.children = levels.children.add(DFparPublicChild); 
+                break;   
+            case PAR_PRESTATION_VIEW: 
+                levels = Object.assign({}, levels);
+                levels.children = levels.children.add(DFparPrestationChild);
+                break;
+            default:
+                throw new Error('Misunderstood view ('+view+')');
+        }
+    }*/
 
 
     const mainHighlightNode = overedNode || selectedNode;

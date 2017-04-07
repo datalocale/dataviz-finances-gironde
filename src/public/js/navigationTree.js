@@ -1,6 +1,6 @@
 import { EXPENDITURES, REVENUE, DF, RF, DI, RI } from './constants/pages';
 
-import {levelsByRDFI} from '../../shared/js/finance/hierarchicalAggregated';
+import {levels} from '../../shared/js/finance/hierarchicalAggregated';
 import {flattenTree} from '../../shared/js/finance/visitHierarchical';
 
 /*
@@ -13,7 +13,7 @@ exp[EXPENDITURES] = [ DF, DI ];
 exp[REVENUE] = [ RF, RI ];
 
 [DF, RF, DI, RI].forEach(rdfi => {
-    flattenTree(levelsByRDFI[rdfi]).forEach(e => {
+    flattenTree(levels[rdfi]).forEach(e => {
         if(typeof e === 'string'){
             // leaf case
             return;

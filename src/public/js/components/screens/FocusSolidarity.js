@@ -303,6 +303,9 @@ export default connect(
         const solidarityByYear = m52InstructionByYear.map( (instruction => {
             const {expenditures} = budgetBalance(instruction);
             const agg = m52ToAggregated(instruction);
+
+            throw 'TODO fix hierarchicalAggregated usage';
+
             //const hierAggByPublic = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PUBLIC_VIEW);
             const hierAggByPrestation = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PRESTATION_VIEW);
 
