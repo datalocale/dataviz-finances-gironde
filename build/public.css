@@ -248,6 +248,44 @@ h1, h2, h3 {
 .d3-axis .tick text {
   fill: black; }
 
+.focus-detail {
+  display: flex;
+  flex-direction: row; }
+  .focus-detail .illustration {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1em; }
+    .focus-detail .illustration img {
+      border-radius: 50%;
+      object-fit: cover; }
+  .focus-detail .explanation {
+    flex: 4; }
+    .focus-detail .explanation h3 {
+      text-transform: uppercase; }
+    .focus-detail .explanation .proportion-container {
+      width: 100%;
+      height: 2em;
+      background-color: #F0F0F0; }
+      .focus-detail .explanation .proportion-container .proportion {
+        height: 100%; }
+    .focus-detail .explanation .highlights {
+      display: flex;
+      flex-direction: row; }
+      .focus-detail .explanation .highlights > * {
+        flex: 1;
+        background-color: #F0F0F0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1em; }
+        .focus-detail .explanation .highlights > *:not(:first-child):not(:last-child) {
+          margin: 0 2em; }
+        .focus-detail .explanation .highlights > * strong, .focus-detail .explanation .highlights > * span {
+          display: block; }
+
 .solidarity-by-year svg .d3-axis.x .tick line {
   stroke: grey;
   stroke-width: 1px; }
@@ -284,3 +322,15 @@ h1, h2, h3 {
 
 .solidarity-by-year svg .content .column text {
   fill: white; }
+
+.focus-detail.insertion .explanation .proportion {
+  background-color: #F35D32; }
+
+.focus-detail.handicap .explanation .proportion {
+  background-color: #F8C738; }
+
+.focus-detail.elderly .explanation .proportion {
+  background-color: #B8C30F; }
+
+.focus-detail.childhood .explanation .proportion {
+  background-color: #68B0CD; }
