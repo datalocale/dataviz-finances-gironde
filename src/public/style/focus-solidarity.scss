@@ -1,5 +1,7 @@
 @import '../../shared/style/d3-axis';
 
+@import './focus-detail';
+
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
 $rsa-color : #B8C30F;
@@ -85,3 +87,20 @@ $solidarity-other-color : purple;
 
 }
 
+
+
+.focus-detail.insertion .explanation .proportion{
+    background-color: #F35D32;
+}
+
+.focus-detail.handicap .explanation .proportion{
+    background-color: #F8C738;
+}
+
+.focus-detail.elderly .explanation .proportion{
+    background-color: #B8C30F;
+}
+
+.focus-detail.childhood .explanation .proportion{
+    background-color: #68B0CD;
+}
