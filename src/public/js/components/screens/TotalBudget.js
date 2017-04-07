@@ -29,14 +29,14 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
                 React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recette'),
-                React.createElement('a', {href: expenditures, style: {height: expHeight}}, 
+                React.createElement('a', {href: revenue, style: {height: expHeight}}, 
                     React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 'Recettes de fonctionnement'),
                     React.createElement('div', {className: 'ri', style: {height: riHeight}}, "Recettes d'investissement")
                 )
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, (budget.expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
-                React.createElement('a', {href: revenue, style: {height: revHeight}}, 
+                React.createElement('a', {href: expenditures, style: {height: revHeight}}, 
                     React.createElement('div', {className: 'df', style: {height: dfHeight}}, 'Dépenses de fonctionnement'),
                     React.createElement('div', {className: 'di', style: {height: diHeight}}, "Dépenses d'investissement")
                 )
@@ -47,7 +47,8 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
 
 export default connect(
     state => {
-        const { m52Instruction } = state;
+        const { m52InstructionByYear, currentYear } = state;
+        const m52Instruction = m52InstructionByYear.get(currentYear);
         const budget = m52Instruction ? budgetBalance(m52Instruction) : {};
 
         return {
