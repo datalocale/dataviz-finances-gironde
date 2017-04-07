@@ -28,13 +28,15 @@ import { EXPENDITURES, REVENUE } from '../../constants/pages';
 
 interface FinanceElementProps{
     contentId: string,
-    total: number, // total amount of money for this element
+    amount, // amount of this element
+    aboveTotal, // amount of the element in the above category
+    topTotal // amount of total expenditures or revenue
     texts: FinanceElementTextsRecord,
 
     // the partition will be displayed in the order it's passed. Sort beforehand if necessary
     partition: Array<{
         contentId: string,
-        amount: number,
+        partAmount: number,
         texts: FinanceElementTextsRecord,
         url: string
     }>
@@ -42,31 +44,43 @@ interface FinanceElementProps{
 
 */
 
-export function FinanceElement({contentId, total, texts, partition, year, urls}) {
+export function FinanceElement({contentId, amount, aboveTotal, topTotal, texts, partition, year, urls}) {
+    const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
     const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
 
-    const label = texts && texts.get('label');
-
     return React.createElement('article', {className: 'finance-element'}, 
         React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, label), 
-        React.createElement('h2', {}, format(total, { code: 'EUR' })),
+        React.createElement('h3', {}, format(amount, { code: 'EUR' })),
         
+        React.createElement('div', {className: 'ratios'}, 
+            React.createElement('div', {className: 'proportion-container'},
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/aboveTotal+'%'}})
+            ),
+            React.createElement('div', {className: 'proportion-container'},
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/topTotal+'%'}})
+            )
+        ),
+
         atemporalText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
-        yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
-        yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
+
+        React.createElement('h2', {}, 'Évolution sur ces dernières années'),
+        React.createElement('scatter-plot', {}, ''),
+        //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
+        //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
+
 
         partition ? React.createElement('section', { className: 'partition'}, 
-            partition.map(({contentId, amount, texts, url}) => {
+            partition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
                         href: url
                     }, 
                     React.createElement('h1', {}, texts && texts.get('label') || contentId),
                     React.createElement('h2', {},
-                        format(amount, { code: 'EUR' }),
+                        format(partAmount, { code: 'EUR' }),
                         ' ',
-                        (100*amount/total).toFixed(1)+'%'
+                        (100*partAmount/amount).toFixed(1)+'%'
                     ),
                     React.createElement('p', texts && texts.get('atemporal'))
                 );
@@ -83,7 +97,7 @@ function makePartition(contentId, totalById, textsById){
 
     return childrenIds ? childrenIds.map(childId => ({
         contentId: childId,
-        amount: totalById.get(childId),
+        partAmount: totalById.get(childId),
         texts: textsById.get(childId),
         url: '#!/finance-details/'+childId
     })) : undefined;
@@ -123,7 +137,7 @@ export default connect(
         const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
         const totalById = (m52Instruction && getTotalById(m52Instruction)) || new ImmutableMap();
 
-        const total = m52Instruction && (displayedContentId === EXPENDITURES ?
+        const amount = m52Instruction && (displayedContentId === EXPENDITURES ?
             balance.expenditures : (displayedContentId === REVENUE ?
                 balance.revenue :
                 totalById.get(displayedContentId)));
@@ -131,7 +145,9 @@ export default connect(
         return Object.assign(
             {
                 contentId: displayedContentId, 
-                total, 
+                amount, 
+                aboveTotal: undefined, 
+                topTotal: undefined, 
                 texts: textsById.get(displayedContentId),
                 partition: makePartition(displayedContentId, totalById, textsById),
                 year: currentYear
