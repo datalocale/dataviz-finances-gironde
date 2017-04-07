@@ -105,7 +105,7 @@ export function FocusSol({
             React.createElement('p', {}, `bla bla bla`),
             React.createElement('p', {}, `bla bla bla`)
         ),
-        /*React.createElement('section', {}, 
+        React.createElement('section', {}, 
             React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de XXX à YYY`),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
@@ -177,7 +177,7 @@ export function FocusSol({
                     )
                 )
             )
-        ),*/
+        ),
         React.createElement('section', {}, 
             React.createElement('h2', {}, `Les publics`),
             React.createElement('p', {}, `bla bla bla`),
