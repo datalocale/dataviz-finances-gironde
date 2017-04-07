@@ -7,12 +7,10 @@ import { connect, Provider } from 'react-redux';
 
 import objectId from '../../shared/js/objectId';
 
-import hierarchicalM52 from '../../shared/js/finance/hierarchicalM52.js';
-import hierarchicalAggregated from '../../shared/js/finance/hierarchicalAggregated.js';
-import m52ToAggregated from '../../shared/js/finance/m52ToAggregated.js';
+import {hierarchicalM52, hierarchicalAggregated, m52ToAggregated} from '../../shared/js/finance/memoized';
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../shared/js/finance/constants';
+import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
 
 import TopLevel from './components/TopLevel.js';
 
@@ -142,15 +140,6 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     return new ImmutableSet(result);
 }
 
-function hierarchMemoizeResolver(o, rdfi, view){
-    return objectId(o) + rdfi.rd + rdfi.fi + (view ? view : '');
-}
-
-const memoizedHierarchicalM52 = memoize(hierarchicalM52, hierarchMemoizeResolver);
-throw 'TODO fix hierarchicalAggregated usage (use shared memzed)';
-const memoizedHierarchicalAggregated = memoize(hierarchicalAggregated, hierarchMemoizeResolver);
-const memoizedM52ToAggregated = memoize(m52ToAggregated);
-
 
 function mapStateToProps(state){
     const m52Instruction = state.get('M52Instruction');
@@ -161,13 +150,30 @@ function mapStateToProps(state){
     const {type: overType, node: overedNode} = over || {};
     const {type: selectedType, node: selectedNode} = selection || {};
 
+    const expOrRev = rdfi[0] === 'D' ? EXPENDITURES : REVENUE;
+
     if(!m52Instruction)
         return {};
 
+    const mainHighlightNode = overedNode || selectedNode;
+    const mainHighlightType = overType || selectedType;
+
+    const aggregatedInstruction = m52ToAggregated(m52Instruction);
+    const M52Hierarchical = hierarchicalM52(m52Instruction, rdfi);
+    
+    const aggregatedHierarchical = hierarchicalAggregated(aggregatedInstruction);
+
+    const rdNode = [...aggregatedHierarchical.children].find(c => c.id === expOrRev);
+    const rdfiNode = [...rdNode.children].find(c => c.id === rdfi);
 
 
-    throw 'TODO: fix hierarchicalAggregated usages'
-    /*if(rdfiId === 'DF'){
+
+    throw `TODO: fix hierarchicalAggregated usages
+        that is, based on view, pick remove the part of the tree that shouldn't be here`
+
+
+
+    /*if(rdfi === 'DF'){
         switch(view){
             case PAR_PUBLIC_VIEW:
                 levels = Object.assign({}, levels);
@@ -182,25 +188,17 @@ function mapStateToProps(state){
         }
     }*/
 
-
-    const mainHighlightNode = overedNode || selectedNode;
-    const mainHighlightType = overType || selectedType;
-
-    const aggregatedInstruction = memoizedM52ToAggregated(m52Instruction);
-    const M52Hierarchical = memoizedHierarchicalM52(m52Instruction, rdfi);
-    const aggregatedHierarchical = memoizedHierarchicalAggregated(aggregatedInstruction, rdfi, dfView);
-    
     let M52HighlightedNodes;
     let aggregatedHighlightedNodes;
 
     
     if(mainHighlightType === M52_INSTRUCTION){
         M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
-        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(aggregatedHierarchical, Array.from(mainHighlightNode.elements))
+        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(rdfiNode, Array.from(mainHighlightNode.elements))
     }
     else{
         if(mainHighlightType === AGGREGATED_INSTRUCTION){
-            aggregatedHighlightedNodes = findSelectedNodeAncestors(aggregatedHierarchical, mainHighlightNode);
+            aggregatedHighlightedNodes = findSelectedNodeAncestors(rdfiNode, mainHighlightNode);
             let m52Rows = new ImmutableSet();
             mainHighlightNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
 
@@ -212,53 +210,53 @@ function mapStateToProps(state){
         rdfi, dfView,
         m52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
-        aggregatedHierarchical, aggregatedHighlightedNodes,
+        aggregatedHierarchical: rdfiNode, aggregatedHighlightedNodes,
         over, selection
     };
-};
+}
 
 function mapDispatchToProps(dispatch){
     return {
         onM52NodeOvered(node){
-            store.dispatch({
+            dispatch({
                 type: 'M52_INSTRUCTION_USER_NODE_OVERED',
                 node
             });
         },
         onAggregatedNodeOvered(node){
-            store.dispatch({
+            dispatch({
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED',
                 node
             });
         },
         onM52NodeSelected(node){
             console.log('onM52NodeSelected', node)
-            store.dispatch({
+            dispatch({
                 type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
                 node
             });
         },
         onAggregatedNodeSelected(node){
-            store.dispatch({
+            dispatch({
                 type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
                 node
             });
         },
         onRDFIChange(rdfi){
-            store.dispatch({
+            dispatch({
                 type: 'RDFI_CHANGE',
                 rdfi
             });
         },
         onAggregatedDFViewChange(dfView){
             console.log('onAggregatedDFViewChange', dfView);
-            store.dispatch({
+            dispatch({
                 type: 'DF_VIEW_CHANGE',
                 dfView
             });
         },
         onNewM52CSVFile(content){
-            store.dispatch({
+            dispatch({
                 type: 'M52_INSTRUCTION_RECEIVED',
                 m52Instruction: csvStringToM52Instructions(content),
             });
@@ -288,10 +286,7 @@ const StoreRecord = Record({
 const store = createStore(
     reducer,
     new StoreRecord({
-        RDFI: {
-            rd: 'D',
-            fi: 'F'
-        },
+        RDFI: 'DF',
         DF_VIEW: PAR_PUBLIC_VIEW
     })
 );

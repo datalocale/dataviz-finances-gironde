@@ -1,4 +1,4 @@
-import { Set as ImmutableSet } from 'immutable';
+import { Record } from 'immutable';
 
 import { rules } from './m52ToAggregated';
 import { PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, EXPENDITURES, REVENUE } from './constants';
@@ -83,7 +83,7 @@ export const levels = {
                 {
                     id: 'DF',
                     label: 'Dépenses de fonctionnement',
-                    children: new ImmutableSet([
+                    children: [
                         {
                             id: 'DF-1',
                             label: "Actions sociales par prestations",
@@ -161,7 +161,7 @@ export const levels = {
                             label: "Frais généraux",
                             children: ruleIds.filter(id => id.startsWith('DF-7-'))
                         }
-                    ])
+                    ]
                 },
                 {
                     id: 'DI',
@@ -190,6 +190,15 @@ export const levels = {
 };
 
 
+const AggregatedNodeRecord = new Record({
+    id: undefined,
+    label: undefined,
+    ownValue: undefined,
+    total: undefined,
+    parent: undefined,
+    children: undefined,
+    elements: undefined
+})
 
 
 /**
@@ -210,19 +219,20 @@ export default function (aggRows) {
 
         // build the tree first
         sourceNode.children.forEach(child => {
+            
             if (typeof child === 'string') {
                 // aggRows.find over all tree nodes is O(n²)
                 const childRow = aggRows.find(r => r.id === child);
                 correspondingTargetNode.elements.add(childRow);
 
-                correspondingTargetNode.children.add({
+                correspondingTargetNode.children.add(AggregatedNodeRecord({
                     id: child,
                     label: childRow['Libellé'],
                     ownValue: childRow["Montant"],
                     total: childRow["Montant"],
                     parent: correspondingTargetNode,
                     elements: new Set([childRow])
-                });
+                }));
             }
             else {
                 correspondingTargetNode.children.add(makeCorrespondingSubtree(child, correspondingTargetNode));
@@ -240,7 +250,7 @@ export default function (aggRows) {
             child.elements.forEach(e => correspondingTargetNode.elements.add(e));
         });
 
-        return correspondingTargetNode;
+        return AggregatedNodeRecord(correspondingTargetNode);
     }
 
     return makeCorrespondingSubtree(levels);

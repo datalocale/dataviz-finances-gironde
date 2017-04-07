@@ -16,11 +16,10 @@ export default function({
     rdfi, dfView, 
     onSliceOvered, onSliceSelected, onAggregatedDFViewChange
     }){
-    const rdfiId = rdfi.rd + rdfi.fi;
 
     return React.createElement('div', {},
         React.createElement('h1', {}, 'Instruction agrégée'),
-        (rdfiId === 'DF' ? React.createElement(
+        (rdfi === 'DF' ? React.createElement(
             'div', 
             {
                 className: 'view-selector',
