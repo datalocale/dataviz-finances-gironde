@@ -29,7 +29,7 @@ test('hierarchicalAggregated returns a node when passed dummy valid arguments', 
     expect(hierAgg.id).toBe('Total');
     expect(hierAgg.ownValue).toBe(0);
     expect(hierAgg.total).toBe(AMOUNT);
-    expect(hierAgg.children).toBeInstanceOf(Set);
+    expect(hierAgg.children).toBeImmutableList();
 });
 
 

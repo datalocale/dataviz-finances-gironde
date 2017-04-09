@@ -1,4 +1,4 @@
-import { Record } from 'immutable';
+import { Record, List, Set as ImmutableSet } from 'immutable';
 
 import { rules } from './m52ToAggregated';
 import { PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, EXPENDITURES, REVENUE } from './constants';
@@ -239,6 +239,8 @@ export default function (aggRows) {
             }
         });
 
+        correspondingTargetNode.children = List(correspondingTargetNode.children);
+
         // then compute total and elements
         correspondingTargetNode.children.forEach(child => {
             // it is expected that DF-1 === DF-2 but the total expenditures (and total DF) shouldn't count them twice
@@ -249,6 +251,8 @@ export default function (aggRows) {
             
             child.elements.forEach(e => correspondingTargetNode.elements.add(e));
         });
+
+        correspondingTargetNode.elements = ImmutableSet(correspondingTargetNode.elements);
 
         return AggregatedNodeRecord(correspondingTargetNode);
     }

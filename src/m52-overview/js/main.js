@@ -2,15 +2,12 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Record, OrderedSet as ImmutableSet} from 'immutable';
-import memoize from 'lodash.memoize';
 import { connect, Provider } from 'react-redux';
-
-import objectId from '../../shared/js/objectId';
 
 import {hierarchicalM52, hierarchicalAggregated, m52ToAggregated} from '../../shared/js/finance/memoized';
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
+import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
 
 import TopLevel from './components/TopLevel.js';
 
@@ -144,7 +141,7 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
 function mapStateToProps(state){
     const m52Instruction = state.get('M52Instruction');
     const rdfi = state.get('RDFI');
-    const dfView = state.get('DF_VIEW');
+    const view = state.get('DF_VIEW');
     const over = state.get('over');
     const selection = state.get('selection');
     const {type: overType, node: overedNode} = over || {};
@@ -164,29 +161,22 @@ function mapStateToProps(state){
     const aggregatedHierarchical = hierarchicalAggregated(aggregatedInstruction);
 
     const rdNode = [...aggregatedHierarchical.children].find(c => c.id === expOrRev);
-    const rdfiNode = [...rdNode.children].find(c => c.id === rdfi);
+    let rdfiNode = [...rdNode.children].find(c => c.id === rdfi);
 
-
-
-    throw `TODO: fix hierarchicalAggregated usages
-        that is, based on view, pick remove the part of the tree that shouldn't be here`
-
-
-
-    /*if(rdfi === 'DF'){
+    if(rdfi === 'DF'){
         switch(view){
-            case PAR_PUBLIC_VIEW:
-                levels = Object.assign({}, levels);
-                levels.children = levels.children.add(DFparPublicChild); 
+            case PAR_PUBLIC_VIEW: 
+                // per public is DF-2, so remove DF-1
+                rdfiNode = rdfiNode.removeIn(['children', 0]);
                 break;   
             case PAR_PRESTATION_VIEW: 
-                levels = Object.assign({}, levels);
-                levels.children = levels.children.add(DFparPrestationChild);
+                // per prestation is DF-1, so remove DF-2
+                rdfiNode = rdfiNode.removeIn(['children', 1]);
                 break;
             default:
                 throw new Error('Misunderstood view ('+view+')');
         }
-    }*/
+    }
 
     let M52HighlightedNodes;
     let aggregatedHighlightedNodes;
@@ -207,7 +197,7 @@ function mapStateToProps(state){
     }
 
     return {
-        rdfi, dfView,
+        rdfi, dfView: view,
         m52Instruction, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical: rdfiNode, aggregatedHighlightedNodes,
