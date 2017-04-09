@@ -10,7 +10,6 @@ import FocusDetail from '../FocusDetail';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
-import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from '../../../../shared/js/finance/constants';
 
 
 

@@ -4,11 +4,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { format } from 'currency-formatter';
 
-import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
-import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
+import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import navigationTree from '../../navigationTree';
-import { EXPENDITURES, REVENUE } from '../../constants/pages';
+import { EXPENDITURES, REVENUE } from '../../../../shared/js/finance/constants';
 
 /*
     In this component, there are several usages of dangerouslySetInnerHTML.
@@ -43,28 +42,44 @@ interface FinanceElementProps{
 
 */
 
-export function FinanceElement({contentId, amount, aboveTotal, topTotal, texts, partition, year, urls}) {
+export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
     const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
     const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
 
+    console.log('amountsByYear', amountsByYear);
+
     return React.createElement('article', {className: 'finance-element'}, 
-        React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, label), 
+        React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, 
+            label,
+            ' en ',
+            year
+        ), 
         React.createElement('h3', {}, format(amount, { code: 'EUR' })),
         
         React.createElement('div', {className: 'ratios'}, 
-            React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/aboveTotal+'%'}}, 'Catégorie dessus')
-            ),
-            React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/topTotal+'%'}}, 'Dépenses ou recettes totales')
-            )
+            parent ? React.createElement('div', {className: 'proportion-container'},
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/parent.amount+'%'}}, 'Proportion relative à ', parent.label)
+            ) : undefined,
+            top ? React.createElement('div', {className: 'proportion-container'},
+                React.createElement('div', {className: 'proportion', style: {width: 100*amount/top.amount+'%'}}, 'Proportion relative aux ', top.label, ' totales')
+            ) : undefined
         ),
 
         atemporalText ? React.createElement('section', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
 
         React.createElement('h2', {}, 'Évolution sur ces dernières années'),
-        React.createElement('scatter-plot', {}, ''),
+        React.createElement('ul', {},
+            amountsByYear.entrySeq().toJS().map(([year, amount]) => {
+                return React.createElement('li', {}, 
+                    React.createElement('strong', {}, year),
+                    ' ',
+                    React.createElement('span', {}, amount.toFixed(2)+'€')
+                )
+            })
+        ),
+
+        //React.createElement('scatter-plot', {}, ''),
         //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
         //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
@@ -81,7 +96,7 @@ export function FinanceElement({contentId, amount, aboveTotal, topTotal, texts, 
                         ' ',
                         (100*partAmount/amount).toFixed(1)+'%'
                     ),
-                    React.createElement('p', texts && texts.get('atemporal'))
+                    React.createElement('p', {dangerouslySetInnerHTML: {__html: atemporalText}})
                 );
             })  
         ) : undefined 
@@ -104,25 +119,28 @@ function makePartition(contentId, totalById, textsById){
 
 
 
-function getElementById(m52Instruction, aggregated){
-
+function makeElementById(hierAgg){
     let elementById = new ImmutableMap();
 
-    aggregated.forEach(aggRow => {
-        elementById = elementById.set(aggRow.id, aggRow);
-    });
-
-    ['D', 'R'].forEach(rd => {
-        ['F', 'I'].forEach(fi => {
-            throw 'TODO fix hierarchicalAggregated usage';
-            const hierAgg = hierarchicalAggregated(aggregated, {rd, fi});
-            flattenTree(hierAgg).forEach(aggHierNode => {
-                elementById = elementById.set(aggHierNode.id, aggHierNode);
-            });
-        });
+    flattenTree(hierAgg).forEach(aggHierNode => {
+        elementById = elementById.set(aggHierNode.id, aggHierNode);
     });
 
     return elementById;
+}
+
+function makeChildToParent(hierAgg){
+    const childToParent = new WeakMap();
+
+    visit(hierAgg, e => {
+        if(e.children){
+            e.children.forEach(c => {
+                childToParent.set(c, e);
+            })
+        }
+    });
+
+    return childToParent;
 }
 
 
@@ -131,47 +149,48 @@ export default connect(
         const { m52InstructionByYear, textsById, breadcrumb, currentYear } = state;
         
         const m52Instruction = m52InstructionByYear.get(currentYear);
-        const aggregated = m52ToAggregated(m52Instruction);
+        const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
+        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+        const childToParent = m52Instruction && makeChildToParent(hierAgg);
         
         const displayedContentId = breadcrumb.last();
         
-        const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
-        let elementById = (m52Instruction && getElementById(m52Instruction, aggregated)) || new ImmutableMap();
-        elementById = elementById
-            .set(EXPENDITURES, {
-                id: EXPENDITURES,
-                total: balance.expenditures
-            })
-            .set(REVENUE, {
-                id: REVENUE,
-                total: balance.revenue
-            })
-
-
+        const elementById = (m52Instruction && makeElementById(hierAgg)) || new ImmutableMap();
         const element = elementById.get(displayedContentId);
 
-        // weak. TODO : make a stronger test
         const expenseOrRevenue = element && element.id ? 
+            // weak test. TODO : pick a stronger test
             (element.id.startsWith('D') ? EXPENDITURES : REVENUE) : 
             undefined;
 
         const amount = m52Instruction && element.total;
 
-        throw 'TODO topElement id'
+        const isDeepElement = element && element.id !== EXPENDITURES && element.id !== REVENUE;
 
-        return Object.assign(
-            {
-                contentId: displayedContentId, 
-                amount, 
-                parentElement: element.parent, 
-                topElement: {
-                    id: 12
-                }, 
-                texts: textsById.get(displayedContentId),
-                partition: makePartition(displayedContentId, totalById, textsById),
-                year: currentYear
-            }
-        )
+        const parentElement = isDeepElement && childToParent.get(element);
+        const topElement = isDeepElement && elementById.get(expenseOrRevenue);
+
+        const amountsByYear = m52InstructionByYear.map(m52i => {
+            return makeElementById(hierarchicalAggregated(m52ToAggregated(m52i))).get(displayedContentId).total;
+        })
+
+        return {
+            contentId: displayedContentId, 
+            amount,
+            parent: parentElement && parentElement !== topElement && {
+                amount: parentElement.total,
+                label: textsById.get(parentElement.id).label
+            },
+            top: topElement && {
+                amount: topElement.total,
+                label: textsById.get(topElement.id).label
+            },
+            expenseOrRevenue,
+            amountsByYear,
+            texts: textsById.get(displayedContentId),
+            partition: makePartition(displayedContentId, elementById.map(e => e.total), textsById),
+            year: currentYear
+        }
 
     },
     () => ({})

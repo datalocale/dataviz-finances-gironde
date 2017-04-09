@@ -206,16 +206,15 @@ const AggregatedNodeRecord = new Record({
  */
 export default function (aggRows) {
 
-    function makeCorrespondingSubtree(sourceNode, parent) {
+    function makeCorrespondingSubtree(sourceNode) {
         const correspondingTargetNode = {
             id: sourceNode.id,
             label: sourceNode.label,
             ownValue: 0,
             total: 0,
-            parent,
-            children: new Set(),
-            elements: new Set()
         };
+        const children = new Set();
+        const elements = new Set();
 
         // build the tree first
         sourceNode.children.forEach(child => {
@@ -223,36 +222,35 @@ export default function (aggRows) {
             if (typeof child === 'string') {
                 // aggRows.find over all tree nodes is O(n²)
                 const childRow = aggRows.find(r => r.id === child);
-                correspondingTargetNode.elements.add(childRow);
+                elements.add(childRow);
 
-                correspondingTargetNode.children.add(AggregatedNodeRecord({
+                children.add(AggregatedNodeRecord({
                     id: child,
                     label: childRow['Libellé'],
                     ownValue: childRow["Montant"],
                     total: childRow["Montant"],
-                    parent: correspondingTargetNode,
-                    elements: new Set([childRow])
+                    elements: new ImmutableSet([childRow])
                 }));
             }
             else {
-                correspondingTargetNode.children.add(makeCorrespondingSubtree(child, correspondingTargetNode));
+                children.add(makeCorrespondingSubtree(child));
             }
         });
 
-        correspondingTargetNode.children = List(correspondingTargetNode.children);
+        correspondingTargetNode.children = List(children);
 
         // then compute total and elements
-        correspondingTargetNode.children.forEach(child => {
+        children.forEach(child => {
             // it is expected that DF-1 === DF-2 but the total expenditures (and total DF) shouldn't count them twice
             // skipping DF-1 accordingly
             if( !(correspondingTargetNode.id === 'DF' && child.id === 'DF-1') ){
                 correspondingTargetNode.total += child.total;
             }
             
-            child.elements.forEach(e => correspondingTargetNode.elements.add(e));
+            child.elements.forEach(e => elements.add(e));
         });
 
-        correspondingTargetNode.elements = ImmutableSet(correspondingTargetNode.elements);
+        correspondingTargetNode.elements = ImmutableSet(elements);
 
         return AggregatedNodeRecord(correspondingTargetNode);
     }
