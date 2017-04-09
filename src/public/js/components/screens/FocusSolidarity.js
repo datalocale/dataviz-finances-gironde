@@ -304,13 +304,9 @@ export default connect(
             const {expenditures} = budgetBalance(instruction);
             const agg = m52ToAggregated(instruction);
 
-            throw 'TODO fix hierarchicalAggregated usage';
+            const hierAgg = hierarchicalAggregated(agg);
 
-            //const hierAggByPublic = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PUBLIC_VIEW);
-            const hierAggByPrestation = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PRESTATION_VIEW);
-
-            const hierAggByPrestationList = flattenTree(hierAggByPrestation);
-            console.log('hierAggByPrestationList', hierAggByPrestationList);
+            const hierAggByPrestationList = flattenTree(hierAgg);
 
             const solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
             const df11 = hierAggByPrestationList.find(e => e.id === 'DF-1-1').total;
