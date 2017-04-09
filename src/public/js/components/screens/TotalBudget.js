@@ -5,7 +5,7 @@ import Placeholder from '../../../../shared/js/components/Placeholder';
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 
-import {EXPENDITURES, REVENUE} from '../../constants/pages';
+import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
 const MAX_HEIGHT = 50;
 
