@@ -6,11 +6,12 @@ import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 
 import FocusDetail from '../FocusDetail';
+import FocusDonut from '../FocusDonut';
 import D3Axis from '../D3Axis';
 
-import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
+import {EXPENDITURES} from '../../../../shared/js/finance/constants';
 
 
 
@@ -41,7 +42,7 @@ const HEIGHT = 570;
 const HEIGHT_PADDING = 30;
 
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear 
+    currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
@@ -83,7 +84,14 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement('Donut'),
+            React.createElement(FocusDonut, {
+                proportion: currentYearSolidarity && currentYearSolidarity.solidarityExpenditures/currentYearSolidarity.totalExpenditures, 
+                outerRadius: 188, 
+                innerText: [
+                    `de la dépense solidarité`,
+                    `dans le total dépenses`
+                ]
+            }),
             React.createElement('paragraphs'),
             React.createElement('fraction')
         ),
@@ -289,13 +297,13 @@ export default connect(
         const { m52InstructionByYear, currentYear } = state;
 
         const solidarityByYear = m52InstructionByYear.map( (instruction => {
-            const {expenditures} = budgetBalance(instruction);
             const agg = m52ToAggregated(instruction);
 
             const hierAgg = hierarchicalAggregated(agg);
 
             const hierAggByPrestationList = flattenTree(hierAgg);
 
+            const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
             const solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
             const df11 = hierAggByPrestationList.find(e => e.id === 'DF-1-1').total;
             const df12 = hierAggByPrestationList.find(e => e.id === 'DF-1-2').total;
