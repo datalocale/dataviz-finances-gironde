@@ -31,14 +31,14 @@ export function Home({
         
         React.createElement('section', {className: 'appetizers'},
             React.createElement(TotalAppetizer, {
-                total: expenditures,
+                total: 1.615*Math.pow(10, 9), //expenditures, // number hardcoded for demo TODO : fix the math
                 year: currentYear,
                 totalUrl: total
             }),
             React.createElement(Appetizer, {
                 h1: "Un territoire de solidarités",
-                numberMain: "400 000", 
-                numberSecundary: "bénéficiaires",
+                numberMain: "120 000", 
+                numberSecundary: "prestations allouées",
                 description: `Le Département affirme sa vocation sociale et déploie près de 900 millions d’euros pour aider et accompagner les personnes fragilisées.
                 Il emploie 1751 agents au service de l’action sociale soit près de 77 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendus aux publics les plus fragiles. A cela s’ajoute 937 assistants familiaux qui accueillent des enfants faisant l’objet de mesures de placement.`, 
                 moreUrl: solidarity
@@ -74,7 +74,11 @@ export function Home({
             React.createElement(
                 BudgetConstructionAnimation,
                 {
-                    ri, rf, di, df
+                    // hardcoded for demo. TODO : fix the math
+                    rf: 1.527*Math.pow(10, 9), 
+                    ri: 250*Math.pow(10, 6), 
+                    df: 1.327*Math.pow(10, 9), 
+                    di: 250*Math.pow(10, 6)
                 }
             )
             
