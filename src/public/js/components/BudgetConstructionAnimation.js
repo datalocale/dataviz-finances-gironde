@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { max } from 'd3-array';
+
 /*
 interface BudgetConstructionAnimationProps{
     Dotation: 100000,
@@ -14,30 +16,41 @@ interface BudgetConstructionAnimationProps{
 }
  */
 
-export default function ({Dotation, Machins, Impots, RecettesInvestissement, RecettesEmprunts, EpargneBrute, DepensesFonctionnement, FraisFinanciers, Investissements}) {
+export default function ({rf, ri, df, di}) {
+
+    const maximum = max([rf, ri, df, di]);
+    const maxBrickPercentHeight = 85;
+
 
     return React.createElement('article', { className: 'budget-construction' },
         React.createElement('div', {className: 'bricks'}, 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, '21'),
-                React.createElement('div', {className: 'brick'}, 'YO'),
-                React.createElement('div', {className: 'brick'}, 'YO'),
-                React.createElement('div', {className: 'brick'}, 'YO')
+                React.createElement('div', {className: 'total'}, (rf/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'brick', style: {
+                    height: (maxBrickPercentHeight*rf/maximum)+'%',
+                    backgroundColor: '#EC3500'
+                }}, 'RECETTES DE FONCTIONNEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, '21'),
-                React.createElement('div', {className: 'brick'}, 'YO'),
-                React.createElement('div', {className: 'brick'}, 'YO'),
-                React.createElement('div', {className: 'brick'}, 'YO')
+                React.createElement('div', {className: 'total'}, (ri/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'brick', style: {
+                    height: (maxBrickPercentHeight*ri/maximum)+'%',
+                    backgroundColor: '#0E7FAB'
+                }}, 'RECETTES D’INVESTISSEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, '21'),
-                React.createElement('div', {className: 'brick'}, 'YO'), 
-                React.createElement('div', {className: 'brick'}, 'YO')
+                React.createElement('div', {className: 'total'}, (df/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'brick', style: {
+                    height: (maxBrickPercentHeight*df/maximum)+'%',
+                    backgroundColor: '#F8C738'
+                }}, 'DÉPENSES DE FONCTIONNEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, '21'),
-                React.createElement('div', {className: 'brick'}, 'YO')
+                React.createElement('div', {className: 'total'}, (di/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'brick', style: {
+                    height: (maxBrickPercentHeight*di/maximum)+'%',
+                    backgroundColor: '#B8C30F'
+                }}, 'DÉPENSES D’INVESTISSEMENT')
             )
         ),
         React.createElement('hr'),

@@ -41,7 +41,7 @@ const HEIGHT = 570;
 const HEIGHT_PADDING = 30;
 
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear
+    currentYear, currentYearSolidarity, solidarityByYear 
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
