@@ -131,7 +131,7 @@ export function FocusSol({
                     // content
                     React.createElement('g', {className: 'content'},
                         solidarityByYear.entrySeq().toJS().map(([year, yearSolidarity]) => {
-                            const stackElements = ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-1-other'];
+                            const stackElements = ['DF-1-1', 'DF-1-2', 'DF-1-4', 'DF-1-3', 'DF-1-other'];
                             const stackYs = stackElements
                                 .map(id => yearSolidarity[id])
                                 .map( (amount, i, arr) => sum(arr.slice(0, i)) )
