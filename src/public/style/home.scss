@@ -12,7 +12,12 @@
     }
 
     .appetizers{
-        background-color: #A5D326;
-        margin-top: 5em;
+        background: url(/images/map-optimised.jpg), transparent;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-top: 9em;
+
+        min-height: 2470px;
     }
 }

@@ -24,7 +24,7 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
     
 
     return React.createElement('article', {className: 'total-budget'},
-        React.createElement('h1', {}, 'Totaux'),
+        React.createElement('h1', {}, 'Dépenses et Recettes du Comptes Administratif 2016'),
         React.createElement(Placeholder, {hint: 'description + définitions ?'}),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},

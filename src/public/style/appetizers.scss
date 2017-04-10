@@ -2,7 +2,7 @@
     max-width: 50%;
     
     padding: 1em;
-    margin: 3em 0;
+    margin: 10em 0;
 
     background-color: white;
     box-shadow: 0 0 2px black;
@@ -11,14 +11,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    &:first-of-type{
+        margin: 4em 0;
+    }
+
+    &:nth-child(even){
+        align-self: flex-end;
+    }
+    &:nth-child(odd){
+        align-self: flex-start;
+    }
+
 }
 
-.appetizer:nth-child(even){
-    align-self: flex-end;
-}
-.appetizer:nth-child(odd){
-    align-self: flex-start;
-}
 
 .appetizer .info{
     display: flex;
