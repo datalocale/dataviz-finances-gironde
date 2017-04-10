@@ -20,10 +20,12 @@ export default class RDFISelector extends React.PureComponent{
                     padding: "1em"
                 },
                 onChange: e => {
-                    onRDFIChange({
-                        rd: e.currentTarget.querySelector('input[type="radio"][name="rd"]:checked').value,
-                        fi: e.currentTarget.querySelector('input[type="radio"][name="fi"]:checked').value
-                    })
+                    const t = e.currentTarget;
+
+                    onRDFIChange(
+                        t.querySelector('input[type="radio"][name="rd"]:checked').value +
+                        t.querySelector('input[type="radio"][name="fi"]:checked').value
+                    )
                 }
             }, 
             React.createElement('span', {}, 'Répartition des'),
@@ -31,13 +33,13 @@ export default class RDFISelector extends React.PureComponent{
                 React.createElement('label', {}, 
                     'dépenses',
                     React.createElement('input',
-                        {name: 'rd', value: "D", type: "radio", defaultChecked: rdfi['rd'] === 'D'}
+                        {name: 'rd', value: "D", type: "radio", defaultChecked: rdfi[0] === 'D'}
                     )
                 ),
                 React.createElement('label', {}, 
                     'recettes',
                     React.createElement('input',
-                        {name: 'rd', value: "R", type: "radio", defaultChecked: rdfi['rd'] === 'R'}
+                        {name: 'rd', value: "R", type: "radio", defaultChecked: rdfi[0] === 'R'}
                     )
                 )
             ), 
@@ -45,13 +47,13 @@ export default class RDFISelector extends React.PureComponent{
                 React.createElement('label', {}, 
                     'de fonctionnement',
                     React.createElement('input',
-                        {name: 'fi', value: "F", type:"radio", defaultChecked: rdfi['fi'] === 'F'}
+                        {name: 'fi', value: "F", type:"radio", defaultChecked: rdfi[1] === 'F'}
                     )
                 ),
                 React.createElement('label', {}, 
                     "d'investissement",
                     React.createElement('input',
-                        {name: 'fi', value: "I", type:"radio", defaultChecked: rdfi['fi'] === 'I'}
+                        {name: 'fi', value: "I", type:"radio", defaultChecked: rdfi[1] === 'I'}
                     )
                 )
             )

@@ -6,26 +6,14 @@ import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 
 import FocusDetail from '../FocusDetail';
+import D3Axis from '../D3Axis';
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
-import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from '../../../../shared/js/finance/constants';
 
 
 
-function D3Axis({
-    tickData, className
-}){
-    return React.createElement('g', {className: ['d3-axis', className].filter(x => x).join(' ')}, 
-        tickData.map(({transform, line: {x1, y1, x2, y2}, text: {x, y, dx, dy, t} }) => {
-            return React.createElement('g', {className: 'tick', transform}, 
-                React.createElement('line', {x1, y1, x2, y2}),
-                React.createElement('text', {x, y, dx, dy}, t)
-            )
-        })
-    )
-}
 
 
 
@@ -303,11 +291,10 @@ export default connect(
         const solidarityByYear = m52InstructionByYear.map( (instruction => {
             const {expenditures} = budgetBalance(instruction);
             const agg = m52ToAggregated(instruction);
-            //const hierAggByPublic = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PUBLIC_VIEW);
-            const hierAggByPrestation = hierarchicalAggregated(agg, {rd: 'D', fi: 'F'}, PAR_PRESTATION_VIEW);
 
-            const hierAggByPrestationList = flattenTree(hierAggByPrestation);
-            console.log('hierAggByPrestationList', hierAggByPrestationList);
+            const hierAgg = hierarchicalAggregated(agg);
+
+            const hierAggByPrestationList = flattenTree(hierAgg);
 
             const solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
             const df11 = hierAggByPrestationList.find(e => e.id === 'DF-1-1').total;

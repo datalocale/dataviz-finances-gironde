@@ -1,8 +1,6 @@
 import React from 'react'
 
 import Sunburst from '../../../shared/js/components/Sunburst';
-import TextualAggregated from './TextualAggregated';
-import hierarchicalAggregated from '../../../shared/js/finance/hierarchicalAggregated.js';
 import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW} from '../../../shared/js/finance/constants';
 
 /*
@@ -18,11 +16,10 @@ export default function({
     rdfi, dfView, 
     onSliceOvered, onSliceSelected, onAggregatedDFViewChange
     }){
-    const rdfiId = rdfi.rd + rdfi.fi;
 
     return React.createElement('div', {},
         React.createElement('h1', {}, 'Instruction agrégée'),
-        (rdfiId === 'DF' ? React.createElement(
+        (rdfi === 'DF' ? React.createElement(
             'div', 
             {
                 className: 'view-selector',

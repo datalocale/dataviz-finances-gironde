@@ -37,10 +37,11 @@ export default function reducer(state, action) {
         case ATEMPORAL_TEXTS_RECEIVED: {
             let textMap = state.get('textsById');
 
-            action.textList.forEach(({id, text = ''}) => {
+            action.textList.forEach(({id, label, description = ''}) => {
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
-                    .set('atemporal', md.render(text));
+                    .set('atemporal', md.render(description))
+                    .set('label', label);
                 textMap = textMap.set(id, financeElementTexts);
             });
 

@@ -108,20 +108,6 @@ const store = createStore(
         });
 });
 
-[
-    DATA_URL_PREFIX+'/data/texts/aggregated-labels.csv',
-    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-labels.csv'
-].forEach(url => {
-    fetch(url).then(resp => resp.text())
-        .then(csvParse)
-        .then(labelList => {
-            store.dispatch({
-                type: LABELS_RECEIVED,
-                labelList
-            });
-        });
-});
-
 
 /**
  * 

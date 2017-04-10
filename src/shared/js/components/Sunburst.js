@@ -35,8 +35,6 @@ export default function({
         onSliceOvered, onSliceSelected
     }){
 
-        console.log('selectedNode', selectedNode);
-
     width = width || 500;
     height = height || 500;
 
