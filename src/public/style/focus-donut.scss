@@ -1,4 +1,3 @@
-$focus-donut-highlight-color : #F62727;
 $focus-donut-neutral-color : #D1D1D1;
 
 .focus-donut{
@@ -8,7 +7,7 @@ $focus-donut-neutral-color : #D1D1D1;
         }
 
         &.highlighted path{
-            fill: $focus-donut-highlight-color;
+            fill: $focus-highlight-color;
         }
     }
 
@@ -21,7 +20,7 @@ $focus-donut-neutral-color : #D1D1D1;
         fill: $focus-donut-neutral-color;
 
         .percent{
-            fill: $focus-donut-highlight-color;
+            fill: $focus-highlight-color;
         }
     }
 }
