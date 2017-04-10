@@ -1,3 +1,5 @@
+import { Map as ImmutableMap } from 'immutable';
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -6,7 +8,11 @@ import Appetizer from '../Appetizer';
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
+import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
+import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
+
 import { SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
+import { RF, RI, DF, DI } from '../../../../shared/js/finance/constants';
 
 
 export function Home({
@@ -15,7 +21,8 @@ export function Home({
     urls: {
         total,
         solidarity, invest, presence
-    }
+    },
+    amounts:{rf, ri, df, di}
 }) {
     
     return React.createElement('article', {className: 'home'},
@@ -67,15 +74,7 @@ export function Home({
             React.createElement(
                 BudgetConstructionAnimation,
                 {
-                    Dotation: 100000,
-                    Machins: 200000,
-                    Impots: 300000,
-                    RecettesInvestissement: 400000,
-                    RecettesEmprunts: 500000,
-                    EpargneBrute: 600000,
-                    DepensesFonctionnement: 700000,
-                    FraisFinanciers: 800000,
-                    Investissements: 900000
+                    ri, rf, di, df
                 }
             )
             
@@ -90,8 +89,25 @@ export default connect(
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
 
+        const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
+        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+
+        let elementById = new ImmutableMap();
+
+        if(m52Instruction){
+            flattenTree(hierAgg).forEach(aggHierNode => {
+                elementById = elementById.set(aggHierNode.id, aggHierNode);
+            });
+        }
+
         return Object.assign(
             {
+                amounts: m52Instruction ? {
+                    ri: elementById.get(RI).total,
+                    rf: elementById.get(RF).total,
+                    di: elementById.get(DI).total,
+                    df: elementById.get(DF).total,
+                } : {},
                 currentYear,
                 urls: {
                     total: '#!/total',

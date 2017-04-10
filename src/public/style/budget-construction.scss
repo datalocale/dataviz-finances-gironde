@@ -18,7 +18,7 @@ $texts-height: 10em;
             width: 18%;
 
             .brick{
-                min-height: 5em;
+                //min-height: 5em;
                 background-color: indianred;
 
                 padding: 0.5em;
@@ -49,6 +49,8 @@ $texts-height: 10em;
 
         .column{
             width: 30%;
+            height: 100%;
+
             display: flex;
             flex-direction: column;
             
