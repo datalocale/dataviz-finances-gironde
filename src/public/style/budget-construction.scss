@@ -40,7 +40,7 @@ $texts-height: 10em;
         background-color: #D8D8D8;
     }
 
-    .texts{
+    dl{
         height: $texts-height;
 
         display: flex;
@@ -52,6 +52,10 @@ $texts-height: 10em;
             display: flex;
             flex-direction: column;
             
+        }
+
+        dt{
+            font-weight: bold;
         }
 
     }

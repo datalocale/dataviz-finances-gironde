@@ -41,7 +41,7 @@ export default function ({Dotation, Machins, Impots, RecettesInvestissement, Rec
             )
         ),
         React.createElement('hr'),
-        React.createElement('dl', {className: 'texts'},
+        React.createElement('dl', {},
             React.createElement('div', {className: 'column'},
                 React.createElement('dt', {}, 'Recettes de fonctionnement'),
                 React.createElement('dd', {}, `Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations versées par l'État`),
