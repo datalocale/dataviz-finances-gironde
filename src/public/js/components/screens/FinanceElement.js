@@ -141,7 +141,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
 
                     return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
                         React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
-                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (amount/1000000).toFixed(1))
+                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (yearAmount/1000000).toFixed(1))
                     )
                 })
             )
