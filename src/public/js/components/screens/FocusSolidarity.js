@@ -79,7 +79,7 @@ export function FocusSol({
 
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
-            React.createElement('h1', {}, 'Solidarité'),
+            React.createElement('h1', {}, 'Un territoire de Solidarités'),
             React.createElement('p', {}, 
                 `Face à l’augmentation croissante des situations d’exclusion et de précarité, le Département affirme sa vocation sociale et poursuit avec détermination des politiques concertées et innovantes en particulier dans le domaine de l’insertion et l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
             )
@@ -120,16 +120,12 @@ export function FocusSol({
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "229",
+                        span: "millions d'euros pour le RSA"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
-                    },
-                    {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "+5.5%",
+                        span: "d'allocations RSA par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -144,16 +140,16 @@ export function FocusSol({
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "218",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "15217",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "-1,5%",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -169,16 +165,16 @@ export function FocusSol({
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "194",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "32 455",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "-2,6 %",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -194,16 +190,16 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "168",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "9303",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "+ 0,7%",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -295,7 +291,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
 
                     React.createElement('li', {className: 'DF-1-other'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "Autre"
+                        "Prévention santé, sexualité"
                     ),
                     React.createElement('li', {className: 'DF-1-3'},
                         React.createElement('span', {className: 'color'}), ' ',
