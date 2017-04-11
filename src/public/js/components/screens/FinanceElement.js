@@ -193,7 +193,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.get('label') || contentId),
-                        React.createElement('p', {dangerouslySetInnerHTML: {__html: texts && texts.get('atemporal').slice(0, 200)+'...'}}),
+                        React.createElement('p', {dangerouslySetInnerHTML: {__html: texts && texts.get('atemporal').slice(0, 400)+'...'}}),
                         React.createElement('a', {}, 'En savoir plus')
                     )
                 );
