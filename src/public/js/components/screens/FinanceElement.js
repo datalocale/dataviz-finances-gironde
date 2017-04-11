@@ -6,6 +6,7 @@ import { format } from 'currency-formatter';
 
 import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
+import { format as d3Format } from 'd3-format';
 
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
@@ -51,6 +52,9 @@ const WIDTH = 1000;
 const HEIGHT = 570;
 
 const HEIGHT_PADDING = 30;
+
+const PARTITION_TOTAL_HEIGHT = 800;
+const MIN_STRING_HEIGHT = 30;
 
 export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
     const label = texts && texts.get('label');
@@ -153,18 +157,30 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
 
 
         partition ? React.createElement('section', { className: 'partition'}, 
+            top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
             partition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
-                        href: url
-                    }, 
-                    React.createElement('h1', {}, texts && texts.get('label') || contentId),
-                    React.createElement('h2', {},
-                        format(partAmount, { code: 'EUR' }),
-                        ' ',
-                        (100*partAmount/amount).toFixed(1)+'%'
+                        href: url,
+                        style:{
+                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'px'
+                        }
+                    },
+                    React.createElement(
+                        'div', 
+                        {
+                            className: 'part', 
+                            style:{
+                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'px'
+                            }
+                        }, 
+                        React.createElement('span', {}, d3Format(".2s")(partAmount))
                     ),
-                    React.createElement('p', {dangerouslySetInnerHTML: {__html: atemporalText}})
+                    React.createElement('div', {className: 'text'},
+                        React.createElement('h1', {}, texts && texts.get('label') || contentId),
+                        React.createElement('p', {dangerouslySetInnerHTML: {__html: texts && texts.get('atemporal').slice(0, 200)+'...'}}),
+                        React.createElement('a', {}, 'En savoir plus')
+                    )
                 );
             })  
         ) : undefined 
