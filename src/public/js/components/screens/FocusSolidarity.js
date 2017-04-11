@@ -39,7 +39,8 @@ interface FocusSolidarityProps{
 const WIDTH = 1000;
 const HEIGHT = 570;
 
-const HEIGHT_PADDING = 50;
+const HEIGHT_PADDING = 70;
+const BRICK_SPACING = 6;
 
 export function FocusSol({
     currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
@@ -259,26 +260,56 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                                         id,
                                         amount,
                                         height,
-                                        y: HEIGHT - HEIGHT_PADDING - height - stackYs[i]
+                                        y: HEIGHT - HEIGHT_PADDING - height - BRICK_SPACING*i - stackYs[i] 
                                     }
                                 });
 
                             return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
                                 stack.map( ({id, amount, height, y}) => {
                                     return React.createElement('g', {className: id}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
+                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5}),
                                         React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))
                                     )
                                 }),
                                 React.createElement('text', {
                                     className: 'total',
-                                    y: HEIGHT - HEIGHT_PADDING - rectAmountScale(yearSolidarity.solidarityExpenditures), 
+                                    y: HEIGHT - HEIGHT_PADDING - BRICK_SPACING*stackElements.length - rectAmountScale(yearSolidarity.solidarityExpenditures), 
                                     dy: "-0.5em", 
                                     textAnchor: 'middle'
                                 }, (yearSolidarity.solidarityExpenditures/1000000).toFixed(0)+'M€')
                             )
 
                         })
+                    )
+                ),
+                React.createElement('ul', {className: 'legend'}, 
+                /*
+                apa-color : #F35D32;
+                $pch-actp-color : #F8C738;
+                $rsa-color : #B8C30F;
+                $hebergement-color : #68B0CD;
+                $solidarity-other-color
+                 */
+
+                    React.createElement('li', {className: 'DF-1-other'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "Autre"
+                    ),
+                    React.createElement('li', {className: 'DF-1-3'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "PCH-ACTP"
+                    ),
+                    React.createElement('li', {className: 'DF-1-4'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "APA"
+                    ),
+                    React.createElement('li', {className: 'DF-1-2'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "RSA"
+                    ),
+                    React.createElement('li', {className: 'DF-1-1'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "Hébergement"
                     )
                 )
             )
