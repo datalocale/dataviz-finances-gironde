@@ -39,7 +39,8 @@ interface FocusSolidarityProps{
 const WIDTH = 1000;
 const HEIGHT = 570;
 
-const HEIGHT_PADDING = 30;
+const HEIGHT_PADDING = 70;
+const BRICK_SPACING = 6;
 
 export function FocusSol({
     currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
@@ -104,11 +105,12 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement('h2', {}, `Les publics`),
-            React.createElement('p', {}, `bla bla bla`),
+            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations : les personnes en insertion ou en situation de précarité, les personnes handicapées, les personnes âgées et les enfants. L’Etat définit pour les départements un cadre légal d’intervention pour chaque public. Le Département à l’intérieur de ce cadre définit sa propre politique et les dispositifs pertinents à mettre en œuvre. Ces dispositifs peuvent se traduire selon chaque personne par : des hébergements, des allocations, des prestations ou subventions (insertion, aide à l’action des associations, …)
+            L’allocation permet de reverser directement à la personne un complément financier. Le revenu de solidarité active (RSA), l'allocation personnalisée d'autonomie (APA) La prestation de compensation du handicap (PCH),sont autant d’allocations spécifiques destinés à des publics différents. L’hébergement permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. La prestation permet de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en difficulté', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron1.png', 
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
@@ -133,7 +135,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'handicap', 
                 title: 'Personnes handicapées', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron2.png',
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
@@ -157,7 +159,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'elderly', 
                 title: 'Personness âgées', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron3.png', 
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
@@ -182,7 +184,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
             React.createElement(FocusDetail, {
                 className: 'childhood', 
                 title: 'Enfance', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron4.png',
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
@@ -206,7 +208,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
             })
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de XXX à YYY`),
+            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de ${min(years)} à ${max(years)}`),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
@@ -258,22 +260,56 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                                         id,
                                         amount,
                                         height,
-                                        y: HEIGHT - HEIGHT_PADDING - height - stackYs[i]
+                                        y: HEIGHT - HEIGHT_PADDING - height - BRICK_SPACING*i - stackYs[i] 
                                     }
-                                }) 
-
+                                });
 
                             return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
-                                React.createElement('text', {}, yearSolidarity.solidarityExpenditures),
                                 stack.map( ({id, amount, height, y}) => {
                                     return React.createElement('g', {className: id}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
-                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (amount/1000000).toFixed(1))
+                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5}),
+                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))
                                     )
-                                })
+                                }),
+                                React.createElement('text', {
+                                    className: 'total',
+                                    y: HEIGHT - HEIGHT_PADDING - BRICK_SPACING*stackElements.length - rectAmountScale(yearSolidarity.solidarityExpenditures), 
+                                    dy: "-0.5em", 
+                                    textAnchor: 'middle'
+                                }, (yearSolidarity.solidarityExpenditures/1000000).toFixed(0)+'M€')
                             )
 
                         })
+                    )
+                ),
+                React.createElement('ul', {className: 'legend'}, 
+                /*
+                apa-color : #F35D32;
+                $pch-actp-color : #F8C738;
+                $rsa-color : #B8C30F;
+                $hebergement-color : #68B0CD;
+                $solidarity-other-color
+                 */
+
+                    React.createElement('li', {className: 'DF-1-other'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "Autre"
+                    ),
+                    React.createElement('li', {className: 'DF-1-3'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "PCH-ACTP"
+                    ),
+                    React.createElement('li', {className: 'DF-1-4'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "APA"
+                    ),
+                    React.createElement('li', {className: 'DF-1-2'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "RSA"
+                    ),
+                    React.createElement('li', {className: 'DF-1-1'},
+                        React.createElement('span', {className: 'color'}), ' ',
+                        "Hébergement"
                     )
                 )
             )
