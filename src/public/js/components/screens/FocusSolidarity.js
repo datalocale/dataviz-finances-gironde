@@ -104,11 +104,12 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement('h2', {}, `Les publics`),
-            React.createElement('p', {}, `bla bla bla`),
+            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations : les personnes en insertion ou en situation de précarité, les personnes handicapées, les personnes âgées et les enfants. L’Etat définit pour les départements un cadre légal d’intervention pour chaque public. Le Département à l’intérieur de ce cadre définit sa propre politique et les dispositifs pertinents à mettre en œuvre. Ces dispositifs peuvent se traduire selon chaque personne par : des hébergements, des allocations, des prestations ou subventions (insertion, aide à l’action des associations, …)
+            L’allocation permet de reverser directement à la personne un complément financier. Le revenu de solidarité active (RSA), l'allocation personnalisée d'autonomie (APA) La prestation de compensation du handicap (PCH),sont autant d’allocations spécifiques destinés à des publics différents. L’hébergement permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. La prestation permet de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en difficulté', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron1.png', 
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
@@ -133,7 +134,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'handicap', 
                 title: 'Personnes handicapées', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron2.png',
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
@@ -157,7 +158,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'elderly', 
                 title: 'Personness âgées', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron3.png', 
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
@@ -182,7 +183,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
             React.createElement(FocusDetail, {
                 className: 'childhood', 
                 title: 'Enfance', 
-                illustrationUrl: 'http://res.freestockphotos.biz/pictures/5/5695-an-autumn-landscape-with-green-grass-pv.jpg', 
+                illustrationUrl: '../images/Macaron4.png',
                 amount: 123456789, 
                 proportion: 0.25, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
