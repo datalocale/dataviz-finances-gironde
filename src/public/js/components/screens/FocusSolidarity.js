@@ -207,7 +207,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
             })
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de XXX à YYY`),
+            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de ${min(years)} à ${max(years)}`),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
