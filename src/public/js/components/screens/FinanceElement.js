@@ -49,13 +49,15 @@ interface FinanceElementProps{
 
 */
 
-const WIDTH = 1000;
+const WIDTH = 1100;
 const HEIGHT = 570;
 
-const HEIGHT_PADDING = 30;
+const HEIGHT_PADDING = 70;
 
 const PARTITION_TOTAL_HEIGHT = 800;
 const MIN_STRING_HEIGHT = 30;
+
+const Y_AXIS_MARGIN = 60;
 
 export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
     const label = texts && texts.get('label');
@@ -65,13 +67,13 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
     const years = amountsByYear.keySeq().toJS();
     const amounts = amountsByYear.valueSeq().toJS();
 
-    const columnAndMarginWidth = WIDTH/(years.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
 
     const yearScale = scaleLinear()
         .domain([min(years), max(years)])
-        .range([columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
+        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
     const maxAmounts = max(amounts);
 
@@ -122,7 +124,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
                         line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
                         text: {
                             x: 0, y: -10, 
-                            dx: "-1.6em", dy: "2em", 
+                            dy: "2em", 
                             t: y
                         }
                         
@@ -139,7 +141,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
                     }, 
                     text: {
                         x: 0, y: -10, 
-                        dx: 0, dy: 0, 
+                        anchor: 'right',
                         t: (tick/1000000)+'M'
                     }
                     
@@ -153,7 +155,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
 
                     return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
                         React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
-                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (yearAmount/1000000).toFixed(1))
+                        React.createElement('text', {x: -columnWidth/2, y, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
                     )
                 })
             )
