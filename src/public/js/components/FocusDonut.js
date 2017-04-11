@@ -46,7 +46,7 @@ export default function({
                     React.createElement('path', {d})
                 )
             }),
-            React.createElement('g', {},
+            proportion ? React.createElement('g', {},
                 React.createElement('text', {className: 'percentage', textAnchor: 'middle', dy: "0.1em"}, 
                     React.createElement('tspan', {className: 'percent', textAnchor: 'middle'}, Math.round(100*proportion)),
                     React.createElement('tspan', {textAnchor: 'middle'}, '%')
@@ -54,7 +54,7 @@ export default function({
                 innerText.map((t, i) => {
                     return React.createElement('text', {textAnchor: 'middle', dy: (i*1+2.5)+"em"}, t)
                 })
-            )
+            ) : undefined
 
         )
     );
