@@ -1,0 +1,26 @@
+$focus-donut-neutral-color : #D1D1D1;
+
+.focus-donut{
+    .arc{
+        path{
+            fill: $focus-donut-neutral-color;
+        }
+
+        &.highlighted path{
+            fill: $focus-highlight-color;
+        }
+    }
+
+    text{
+        font-weight: bold;
+    }
+
+    text.percentage{
+        font-size: 6em;
+        fill: $focus-donut-neutral-color;
+
+        .percent{
+            fill: $focus-highlight-color;
+        }
+    }
+}

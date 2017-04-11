@@ -1,12 +1,51 @@
 @import '../../shared/style/d3-axis';
 
-@import './focus-detail';
-
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
 $rsa-color : #B8C30F;
 $hebergement-color : #68B0CD;
-$solidarity-other-color : purple;
+$solidarity-other-color : #c564a9;
+
+$focus-highlight-color : #F62727;
+
+@import './focus-detail';
+@import './focus-donut';
+
+
+.top-infos{
+    display: flex;
+    flex-direction: row;
+
+    & > *{
+        flex:1;
+    }
+
+    .people-fraction{
+        background-image: url(../images/bonhomme.svg);
+        background-size: contain;
+
+        position: relative;
+
+        text-transform: uppercase;
+        font-size: 1.3em;
+        font-weight: bold;
+
+        & > *{
+            position: absolute;
+            left: 50%;
+            width: 50%;
+            transform: translateY(50%);
+        }
+
+        .number{
+            font-size: 4em;
+            color: $focus-highlight-color;
+        }
+
+    }
+
+}
+
 
 
 .solidarity-by-year{

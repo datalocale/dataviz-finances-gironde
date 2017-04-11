@@ -15,7 +15,17 @@ $texts-height: 10em;
             flex-direction: column;
             
             justify-content: flex-end;
+            align-items: center;
             width: 18%;
+
+            .total{
+                font-weight: bold;
+                font-size: 0.7em;
+
+                .number{
+                    font-size: 3em;
+                }
+            }
 
             .brick{
                 //min-height: 5em;

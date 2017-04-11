@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="175px" height="374px" viewBox="0 0 175 374" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>bonhomme</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Solidarité" transform="translate(-1105.000000, -359.000000)">
+            <g id="58%" transform="translate(180.000000, 358.000000)">
+                <g id="Habitant" transform="translate(925.000000, 1.000000)">
+                    <g id="Group">
+                        <g id="bonhomme">
+                            <path d="M130.218177,43.1914681 C130.218177,100.820526 43.0483286,100.820526 43.0483286,43.1914681 C43.0483286,-14.397156 130.218177,-14.397156 130.218177,43.1914681 Z M108.942704,92.6362457 L108.942704,92.6362457 C145.951642,92.6362457 174.29996,120.701201 174.29996,157.433427 L174.29996,222.230607 L130.714513,222.230607 L130.714513,373.410206 L43.5854472,373.410206 L43.5854472,222.230607 L0,222.230607 L0,157.433427 C0,120.701201 28.3075349,92.6362457 65.3572565,92.6362457 L108.942704,92.6362457 Z" id="Combined-Shape" fill="#D2D2D2" fill-rule="nonzero"></path>
+                            <rect id="mask" fill="#FFFFFF" opacity="0.75" x="85" y="0" width="89" height="373.410206"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -24,29 +24,41 @@ export default function ({rf, ri, df, di}) {
 
     return React.createElement('article', { className: 'budget-construction' },
         React.createElement('div', {className: 'bricks'}, 
-            React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, (rf/1000000000).toFixed(1)),
+            React.createElement('div', {className: 'column'},  // weird hardcoding for demo. TODO fix the math
+                React.createElement('div', {className: 'total'}, 
+                    React.createElement('span', {className: 'number'}, (rf/1000000000).toFixed(3) ), 
+                    ' milliards'
+                ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*rf/maximum)+'%',
                     backgroundColor: '#EC3500'
                 }}, 'RECETTES DE FONCTIONNEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, (ri/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'total'}, 
+                    React.createElement('span', {className: 'number'}, (ri/1000000).toFixed(0)),
+                    ' millions'
+                ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*ri/maximum)+'%',
                     backgroundColor: '#0E7FAB'
                 }}, 'RECETTES D’INVESTISSEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, (df/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'total'}, 
+                    React.createElement('span', {className: 'number'}, (df/1000000000).toFixed(3)),
+                    ' milliards'
+                ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*df/maximum)+'%',
                     backgroundColor: '#F8C738'
                 }}, 'DÉPENSES DE FONCTIONNEMENT')
             ), 
             React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, (di/1000000000).toFixed(1)),
+                React.createElement('div', {className: 'total'}, 
+                    React.createElement('span', {className: 'number'}, (di/1000000).toFixed(0)),
+                    ' millions'
+                ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*di/maximum)+'%',
                     backgroundColor: '#B8C30F'

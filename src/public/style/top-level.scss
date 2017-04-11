@@ -11,18 +11,19 @@ body{
     align-items: center;
 }
 
-h1, h2, h3{
-    margin: 0.2em 0;
-}
-
 .cd33-finance-dataviz{
     width: 80vw;
+    font-family: 'Roboto', sans-serif;
 
     & > *{
         width: 100%;
     }
 
-    *{
-         font-family: 'Roboto', sans-serif;
+    h1, h2, h3{
+        margin: 0.2em 0;
+    }
+
+    h1{
+        font-size: 4em;
     }
 }
