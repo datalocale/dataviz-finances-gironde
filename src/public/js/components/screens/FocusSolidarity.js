@@ -115,7 +115,7 @@ export function FocusSol({
                 title: 'Personnes en difficulté', 
                 illustrationUrl: '../images/Macaron1.png', 
                 amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.totalExpenditures : 1, 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
                 
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
@@ -136,7 +136,7 @@ export function FocusSol({
                 title: 'Personnes handicapées', 
                 illustrationUrl: '../images/Macaron2.png',
                 amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.totalExpenditures : 1, 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
@@ -157,10 +157,10 @@ export function FocusSol({
             }),
             React.createElement(FocusDetail, {
                 className: 'elderly', 
-                title: 'Personness âgées', 
+                title: 'Personnes âgées', 
                 illustrationUrl: '../images/Macaron3.png', 
                 amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.totalExpenditures : 1, 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
 
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
@@ -185,7 +185,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                 title: 'Enfance', 
                 illustrationUrl: '../images/Macaron4.png',
                 amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-4')) : '', 
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.totalExpenditures : 1, 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
 
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
