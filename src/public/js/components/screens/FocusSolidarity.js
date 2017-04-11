@@ -39,7 +39,7 @@ interface FocusSolidarityProps{
 const WIDTH = 1000;
 const HEIGHT = 570;
 
-const HEIGHT_PADDING = 30;
+const HEIGHT_PADDING = 50;
 
 export function FocusSol({
     currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
@@ -261,17 +261,21 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                                         height,
                                         y: HEIGHT - HEIGHT_PADDING - height - stackYs[i]
                                     }
-                                }) 
-
+                                });
 
                             return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
-                                React.createElement('text', {}, yearSolidarity.solidarityExpenditures),
                                 stack.map( ({id, amount, height, y}) => {
                                     return React.createElement('g', {className: id}, 
                                         React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
-                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (amount/1000000).toFixed(1))
+                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))
                                     )
-                                })
+                                }),
+                                React.createElement('text', {
+                                    className: 'total',
+                                    y: HEIGHT - HEIGHT_PADDING - rectAmountScale(yearSolidarity.solidarityExpenditures), 
+                                    dy: "-0.5em", 
+                                    textAnchor: 'middle'
+                                }, (yearSolidarity.solidarityExpenditures/1000000).toFixed(0)+'M€')
                             )
 
                         })

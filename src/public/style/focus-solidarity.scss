@@ -116,6 +116,13 @@ $focus-highlight-color : #F62727;
 
                 text{
                     fill: white;
+                    font-weight: bold;
+                }
+
+                text.total{
+                    fill: black;
+                    font-size: 1.6em;
+                    font-weight: bold;
                 }
 
             }
