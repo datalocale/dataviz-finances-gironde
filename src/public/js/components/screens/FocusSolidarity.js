@@ -42,19 +42,21 @@ const HEIGHT = 570;
 const HEIGHT_PADDING = 70;
 const BRICK_SPACING = 6;
 
+const Y_AXIS_MARGIN = 50;
+
 export function FocusSol({
     currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
 
-    const columnAndMarginWidth = WIDTH/(years.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
     
     const yearScale = scaleLinear()
         .domain([min(years), max(years)])
-        .range([columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
+        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
     const solidarityTotals = solidarityByYear.valueSeq().toJS()
         .map(ys => ys.solidarityExpenditures);
@@ -219,7 +221,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                                 line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
                                 text: {
                                     x: 0, y: -10, 
-                                    dx: "-1.6em", dy: "2em", 
+                                    dy: "2em", 
                                     t: y
                                 }
                                 
@@ -236,7 +238,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                             }, 
                             text: {
                                 x: 0, y: -10, 
-                                dx: 0, dy: 0, 
+                                anchor: 'left',
                                 t: (tick/1000000)+'M'
                             }
                             

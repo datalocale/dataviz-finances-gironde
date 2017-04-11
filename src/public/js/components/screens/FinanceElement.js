@@ -97,7 +97,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         React.createElement('div', {className: 'ratios'}, 
             React.createElement(FinanceElementPie, {
                 elementProportion: top ? amount/top.amount : undefined,
-                parentProportion: parent ? amount/parent.amount : undefined
+                parentProportion: parent ? parent.amount/top.amount : undefined
             }),
             parent && top ? React.createElement('div', {}, 
                 `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
@@ -113,7 +113,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         atemporalText ? React.createElement('section', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
 
         React.createElement('h2', {}, 'Évolution sur ces dernières années'),
-        React.createElement('svg', {width: WIDTH, height: HEIGHT},
+        React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
             // x axis / years
             React.createElement(D3Axis, {className: 'x', tickData: 
                 years.map(y => {
