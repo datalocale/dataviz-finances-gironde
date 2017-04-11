@@ -19,7 +19,6 @@ export default function({
     const arc = _arc();
     
     const arcDescs = pie(data);
-    console.log('arcDescs', parentProportion, elementProportion, arcDescs);
 
     return React.createElement('svg', {width, height, className: 'finance-element-pie'},
         React.createElement(

@@ -49,13 +49,15 @@ interface FinanceElementProps{
 
 */
 
-const WIDTH = 1000;
+const WIDTH = 1100;
 const HEIGHT = 570;
 
-const HEIGHT_PADDING = 30;
+const HEIGHT_PADDING = 70;
 
 const PARTITION_TOTAL_HEIGHT = 800;
 const MIN_STRING_HEIGHT = 30;
+
+const Y_AXIS_MARGIN = 60;
 
 export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
     const label = texts && texts.get('label');
@@ -65,13 +67,13 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
     const years = amountsByYear.keySeq().toJS();
     const amounts = amountsByYear.valueSeq().toJS();
 
-    const columnAndMarginWidth = WIDTH/(years.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
 
     const yearScale = scaleLinear()
         .domain([min(years), max(years)])
-        .range([columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
+        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
     const maxAmounts = max(amounts);
 
@@ -92,70 +94,75 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
             ' en ',
             year
         ), 
-        React.createElement('h3', {}, format(amount, { code: 'EUR' })),
-        
-        React.createElement('div', {className: 'ratios'}, 
-            React.createElement(FinanceElementPie, {
-                elementProportion: top ? amount/top.amount : undefined,
-                parentProportion: parent ? amount/parent.amount : undefined
-            }),
-            parent && top ? React.createElement('div', {}, 
-                `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
-                React.createElement('a', {href: parent.url}, parent.label)
-            ) : undefined,
-            top ? React.createElement('div', {}, 
-                `${d3Format('.1%')(amount/top.amount)} des `,
-                React.createElement('a', {href: top.url}, top.label), 
-                ' totales'
-            ) : undefined
+        React.createElement('h2', {}, format(amount, { code: 'EUR' })),
+        React.createElement('section', {}, 
+            React.createElement('div', {className: 'ratios'}, 
+                React.createElement(FinanceElementPie, {
+                    elementProportion: top ? amount/top.amount : undefined,
+                    parentProportion: parent ? parent.amount/top.amount : undefined
+                }),
+                parent && top ? React.createElement('div', {}, 
+                    `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
+                    React.createElement('a', {href: parent.url}, parent.label)
+                ) : undefined,
+                top ? React.createElement('div', {}, 
+                    `${d3Format('.1%')(amount/top.amount)} des `,
+                    React.createElement('a', {href: top.url}, top.label), 
+                    ' totales'
+                ) : undefined
+            ),
+            atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
         ),
-
-        atemporalText ? React.createElement('section', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
-
-        React.createElement('h2', {}, 'Évolution sur ces dernières années'),
-        React.createElement('svg', {width: WIDTH, height: HEIGHT},
-            // x axis / years
-            React.createElement(D3Axis, {className: 'x', tickData: 
-                years.map(y => {
+        
+        React.createElement('section', {},
+            React.createElement('h2', {}, 'Évolution sur ces dernières années'),
+            React.createElement('p', {}, 
+                `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountsByYear.get(year-1)) - 1  )}`
+            ),
+            React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
+                // x axis / years
+                React.createElement(D3Axis, {className: 'x', tickData: 
+                    years.map(y => {
+                        return {
+                            transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
+                            line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
+                            text: {
+                                x: 0, y: -10, 
+                                dy: "2em", 
+                                t: y
+                            }
+                            
+                        }
+                    })
+                }),
+                // y axis / money amounts
+                React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
                     return {
-                        transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
-                        line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
+                        transform: `translate(0, ${yAxisAmountScale(tick)})`,
+                        line: {
+                            x1 : 0, y1 : 0, 
+                            x2 : WIDTH, y2 : 0
+                        }, 
                         text: {
                             x: 0, y: -10, 
-                            dx: "-1.6em", dy: "2em", 
-                            t: y
+                            anchor: 'right',
+                            t: (tick/1000000)+'M'
                         }
                         
                     }
-                })
-            }),
-            // y axis / money amounts
-            React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
-                return {
-                    transform: `translate(0, ${yAxisAmountScale(tick)})`,
-                    line: {
-                        x1 : 0, y1 : 0, 
-                        x2 : WIDTH, y2 : 0
-                    }, 
-                    text: {
-                        x: 0, y: -10, 
-                        dx: 0, dy: 0, 
-                        t: (tick/1000000)+'M'
-                    }
-                    
-                }
-            })}),
-            // content
-            React.createElement('g', {className: 'content'},
-                amountsByYear.entrySeq().toJS().map(([year, yearAmount]) => {
-                    const height = rectAmountScale(yearAmount);
-                    const y = HEIGHT - HEIGHT_PADDING - height;
+                })}),
+                // content
+                React.createElement('g', {className: 'content'},
+                    amountsByYear.entrySeq().toJS().map(([year, yearAmount]) => {
+                        const height = rectAmountScale(yearAmount);
+                        const y = HEIGHT - HEIGHT_PADDING - height;
 
-                    return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
-                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
-                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.5em", dx:"0.5em"}, (yearAmount/1000000).toFixed(1))
-                    )
-                })
+                        return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
+                            React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
+                            React.createElement('text', {x: -columnWidth/2, y, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
+                        )
+                    })
+                )
             )
         ),
         

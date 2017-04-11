@@ -53,8 +53,8 @@ $focus-neutral-color: #F0F0F0;
 
                 padding: 1em;
 
-                &:not(:first-child):not(:last-child){
-                    margin: 0 2em;
+                &:not(:first-child){
+                    margin-left: 2em;
                 }
 
 

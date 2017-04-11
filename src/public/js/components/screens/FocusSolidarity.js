@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Record } from 'immutable';
 import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
+import { format } from 'd3-format';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -42,19 +43,21 @@ const HEIGHT = 570;
 const HEIGHT_PADDING = 70;
 const BRICK_SPACING = 6;
 
+const Y_AXIS_MARGIN = 50;
+
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear, totalExpenditures
+    currentYear, currentYearSolidarity, solidarityByYear
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
 
-    const columnAndMarginWidth = WIDTH/(years.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
     
     const yearScale = scaleLinear()
         .domain([min(years), max(years)])
-        .range([columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
+        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
     const solidarityTotals = solidarityByYear.valueSeq().toJS()
         .map(ys => ys.solidarityExpenditures);
@@ -77,7 +80,7 @@ export function FocusSol({
 
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
-            React.createElement('h1', {}, 'Solidarité'),
+            React.createElement('h1', {}, 'Un territoire de Solidarités'),
             React.createElement('p', {}, 
                 `Face à l’augmentation croissante des situations d’exclusion et de précarité, le Département affirme sa vocation sociale et poursuit avec détermination des politiques concertées et innovantes en particulier dans le domaine de l’insertion et l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
             )
@@ -111,23 +114,19 @@ export function FocusSol({
                 className: 'insertion', 
                 title: 'Personnes en difficulté', 
                 illustrationUrl: '../images/Macaron1.png', 
-                amount: 123456789, 
-                proportion: 0.25, 
+                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.totalExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
                 
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "229",
+                        span: "millions d'euros pour le RSA"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
-                    },
-                    {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "+5.5%",
+                        span: "d'allocations RSA par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -136,22 +135,22 @@ export function FocusSol({
                 className: 'handicap', 
                 title: 'Personnes handicapées', 
                 illustrationUrl: '../images/Macaron2.png',
-                amount: 123456789, 
-                proportion: 0.25, 
+                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.totalExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "218",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "15217",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "-1,5%",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -160,23 +159,23 @@ export function FocusSol({
                 className: 'elderly', 
                 title: 'Personness âgées', 
                 illustrationUrl: '../images/Macaron3.png', 
-                amount: 123456789, 
-                proportion: 0.25, 
+                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.totalExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
 
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "194",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "32 455",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "-2,6 %",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -185,23 +184,23 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                 className: 'childhood', 
                 title: 'Enfance', 
                 illustrationUrl: '../images/Macaron4.png',
-                amount: 123456789, 
-                proportion: 0.25, 
+                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-4')) : '', 
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.totalExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
 
 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "265",
+                        strong: "168",
                         span: "millions d'euros"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "9303",
+                        span: "bénéficiaires"
                     },
                     {
-                        strong: "265",
-                        span: "millions d'euros"
+                        strong: "+ 0,7%",
+                        span: "personnes concernées par rapport à 2015"
                     }
                 ], 
                 //moreUrl:
@@ -219,7 +218,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                                 line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
                                 text: {
                                     x: 0, y: -10, 
-                                    dx: "-1.6em", dy: "2em", 
+                                    dy: "2em", 
                                     t: y
                                 }
                                 
@@ -236,7 +235,7 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                             }, 
                             text: {
                                 x: 0, y: -10, 
-                                dx: 0, dy: 0, 
+                                anchor: 'left',
                                 t: (tick/1000000)+'M'
                             }
                             
@@ -282,18 +281,10 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                         })
                     )
                 ),
-                React.createElement('ul', {className: 'legend'}, 
-                /*
-                apa-color : #F35D32;
-                $pch-actp-color : #F8C738;
-                $rsa-color : #B8C30F;
-                $hebergement-color : #68B0CD;
-                $solidarity-other-color
-                 */
-
+                React.createElement('ul', {className: 'legend'},
                     React.createElement('li', {className: 'DF-1-other'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "Autre"
+                        "Prévention santé, sexualité"
                     ),
                     React.createElement('li', {className: 'DF-1-3'},
                         React.createElement('span', {className: 'color'}), ' ',
@@ -325,7 +316,11 @@ const YearSolidarityRecord = Record({
     'DF-1-2': 0,
     'DF-1-3': 0,
     'DF-1-4': 0,
-    'DF-1-other': 0
+    'DF-1-other': 0,
+    'DF-2-1': 0,
+    'DF-2-2': 0,
+    'DF-2-3': 0,
+    'DF-2-4': 0
 })
 
 export default connect(
@@ -341,23 +336,22 @@ export default connect(
 
             const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
             const solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
-            const df11 = hierAggByPrestationList.find(e => e.id === 'DF-1-1').total;
-            const df12 = hierAggByPrestationList.find(e => e.id === 'DF-1-2').total;
-            const df13 = hierAggByPrestationList.find(e => e.id === 'DF-1-3').total;
-            const df14 = hierAggByPrestationList.find(e => e.id === 'DF-1-4').total;
-            const df1other = solidarityExpenditures - (df11 + df12 + df13 + df14);
+            const ysrData = {};
+            ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4'].forEach(id => {
+                ysrData[id] = hierAggByPrestationList.find(e => e.id === id).total;
+            });
 
-            return new YearSolidarityRecord({
-                totalExpenditures: expenditures,
-                solidarityExpenditures,
-                'DF-1-1': df11,
-                'DF-1-2': df12,
-                'DF-1-3': df13,
-                'DF-1-4': df14,
-                'DF-1-other': df1other
-            })
-        }) )
+            const df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
 
+            return new YearSolidarityRecord(Object.assign(
+                {
+                    totalExpenditures: expenditures,
+                    solidarityExpenditures,
+                    'DF-1-other': df1other
+                },
+                ysrData
+            ))
+        }))
 
         return {
             currentYear,

@@ -4,6 +4,11 @@ $partition-part-width: 6em;
 $part-font-size : 1.2em;
 
 .finance-element{
+    
+    &>section{
+        margin-bottom: 5em;
+    }
+
 
     .ratios{
         width: 30%;
@@ -38,6 +43,19 @@ $part-font-size : 1.2em;
         }
     }
 
+    .over-time {
+        .content{
+            rect{
+                fill: cornflowerblue;
+            }
+
+            text{
+                font-size: 1.2em;
+                font-weight: bold;
+            }
+        }
+
+    }
 
 
     .partition{

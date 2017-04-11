@@ -11,6 +11,12 @@ $focus-highlight-color : #F62727;
 @import './focus-detail';
 @import './focus-donut';
 
+.focus{
+    &>section{
+        margin-bottom: 5em;
+    }
+}
+
 
 .top-infos{
     display: flex;
