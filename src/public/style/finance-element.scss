@@ -1,3 +1,8 @@
+@import './finance-element-pie';
+
+$partition-part-width: 6em;
+$part-font-size : 1.2em;
+
 .finance-element{
 
     .ratios{
@@ -38,16 +43,56 @@
     .partition{
 
         a{
-            display: block;
+            display: flex;
+            flex-direction: row;
+
             color: black;
-            background-color: moccasin;
             text-decoration: none;
 
-            padding: 0.5em;
-            margin: 0.5em 0;
+            min-height: 10em;
 
             &:hover{
                 background-color: lightgrey;
+            }
+
+            .part{
+                background-color: cadetblue;
+                color: white;
+                font-size: $part-font-size;
+                font-weight: bold;
+                
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-start;
+                
+                padding: 0.2em;
+
+                width: $partition-part-width;
+                z-index: 1; // atop the a::before
+            }
+
+            .text{
+                margin-left: 2em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                padding-bottom: 1em;
+
+                flex: 1;                                                                                                                                                                                                            
+
+                h1{
+                    font-size: 1.1em;
+                }                
+            }
+
+            &:not(:last-child)::before{
+                content: '';
+                font-size: $part-font-size;
+                transform: translateX($partition-part-width/2);
+                border-left: 1px solid black;
+                height: 100%;
+                width: 0;
             }
 
         } 

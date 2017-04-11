@@ -6,6 +6,7 @@ import { format } from 'currency-formatter';
 
 import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
+import { format as d3Format } from 'd3-format';
 
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
@@ -13,6 +14,7 @@ import navigationTree from '../../navigationTree';
 import { EXPENDITURES, REVENUE } from '../../../../shared/js/finance/constants';
 
 import D3Axis from '../D3Axis';
+import FinanceElementPie from '../FinanceElementPie';
 
 /*
     In this component, there are several usages of dangerouslySetInnerHTML.
@@ -52,6 +54,9 @@ const HEIGHT = 570;
 
 const HEIGHT_PADDING = 30;
 
+const PARTITION_TOTAL_HEIGHT = 800;
+const MIN_STRING_HEIGHT = 30;
+
 export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
     const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
@@ -90,11 +95,18 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         React.createElement('h3', {}, format(amount, { code: 'EUR' })),
         
         React.createElement('div', {className: 'ratios'}, 
-            parent ? React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/parent.amount+'%'}}, 'Proportion relative à ', parent.label)
+            React.createElement(FinanceElementPie, {
+                elementProportion: top ? amount/top.amount : undefined,
+                parentProportion: parent ? amount/parent.amount : undefined
+            }),
+            parent && top ? React.createElement('div', {}, 
+                `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
+                React.createElement('a', {href: parent.url}, parent.label)
             ) : undefined,
-            top ? React.createElement('div', {className: 'proportion-container'},
-                React.createElement('div', {className: 'proportion', style: {width: 100*amount/top.amount+'%'}}, 'Proportion relative aux ', top.label, ' totales')
+            top ? React.createElement('div', {}, 
+                `${d3Format('.1%')(amount/top.amount)} des `,
+                React.createElement('a', {href: top.url}, top.label), 
+                ' totales'
             ) : undefined
         ),
 
@@ -153,18 +165,30 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
 
 
         partition ? React.createElement('section', { className: 'partition'}, 
+            top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
             partition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
-                        href: url
-                    }, 
-                    React.createElement('h1', {}, texts && texts.get('label') || contentId),
-                    React.createElement('h2', {},
-                        format(partAmount, { code: 'EUR' }),
-                        ' ',
-                        (100*partAmount/amount).toFixed(1)+'%'
+                        href: url,
+                        style:{
+                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'px'
+                        }
+                    },
+                    React.createElement(
+                        'div', 
+                        {
+                            className: 'part', 
+                            style:{
+                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'px'
+                            }
+                        }, 
+                        React.createElement('span', {}, d3Format(".2s")(partAmount))
                     ),
-                    React.createElement('p', {dangerouslySetInnerHTML: {__html: atemporalText}})
+                    React.createElement('div', {className: 'text'},
+                        React.createElement('h1', {}, texts && texts.get('label') || contentId),
+                        React.createElement('p', {dangerouslySetInnerHTML: {__html: texts && texts.get('atemporal').slice(0, 200)+'...'}}),
+                        React.createElement('a', {}, 'En savoir plus')
+                    )
                 );
             })  
         ) : undefined 
@@ -247,11 +271,13 @@ export default connect(
             amount,
             parent: parentElement && parentElement !== topElement && {
                 amount: parentElement.total,
-                label: textsById.get(parentElement.id).label
+                label: textsById.get(parentElement.id).label,
+                url: '#!/finance-details/'+parentElement.id
             },
             top: topElement && {
                 amount: topElement.total,
-                label: textsById.get(topElement.id).label
+                label: textsById.get(topElement.id).label,
+                url: '#!/finance-details/'+topElement.id
             },
             expenseOrRevenue,
             amountsByYear,
