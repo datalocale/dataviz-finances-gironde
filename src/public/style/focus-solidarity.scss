@@ -6,6 +6,13 @@ $rsa-color : #B8C30F;
 $hebergement-color : #68B0CD;
 $solidarity-other-color : #c564a9;
 
+$insertion-color: #F35D32;
+$handicap-color: #F8C738;
+$elderly-color: #B8C30F;
+$childhood-color: #68B0CD;
+
+$solidarity-other-color : #c564a9;
+
 $focus-highlight-color : #F62727;
 
 @import './focus-detail';
@@ -32,6 +39,10 @@ $focus-highlight-color : #F62727;
         justify-content: center;
 
         text-align: justify;
+        
+        line-height: 1.4em;
+        font-size: 1.1em;
+
     }
 
     .people-fraction{
@@ -99,6 +110,21 @@ $focus-highlight-color : #F62727;
                     stroke-width: 0;
                 } 
 
+                .DF-2-1 rect{
+                    fill: $insertion-color;
+                }
+                .DF-2-2 rect{
+                    fill: $handicap-color;
+                }
+                .DF-2-3 rect{
+                    fill: $elderly-color;
+                }
+                .DF-2-4 rect{
+                    fill: $childhood-color;
+                }
+                .DF-2-other rect{
+                    fill: $solidarity-other-color;
+                }
                 .DF-1-1 rect{
                     fill: $hebergement-color;
                 }
@@ -129,10 +155,12 @@ $focus-highlight-color : #F62727;
     }
 
     .legend{
+        font-size: 1.3em;
+
         .color{
             display: inline-block;
-            width: 1em;
-            height: 1em;
+            width: 1.5em;
+            height: 1.5em;
         }
 
         .DF-1-1 .color{
@@ -148,6 +176,22 @@ $focus-highlight-color : #F62727;
             background-color: $apa-color;
         }
         .DF-1-other .color{
+            background-color: $solidarity-other-color;
+        }
+
+        .DF-2-1 .color{
+            background-color: $insertion-color;
+        }
+        .DF-2-2 .color{
+            background-color: $handicap-color;
+        }
+        .DF-2-3 .color{
+            background-color: $elderly-color;
+        }
+        .DF-2-4 .color{
+            background-color: $childhood-color;
+        }
+        .DF-2-other .color{
             background-color: $solidarity-other-color;
         }
     }
