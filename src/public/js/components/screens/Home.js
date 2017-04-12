@@ -53,7 +53,7 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
             React.createElement(Appetizer, {
                 h1: "Une action de proximité",
                 numberMain: "125 métiers", 
-                numberSecundary: "277 sites",
+                numberSecundary: "425 sites",
                 description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents occupant 125 métiers différents mènent leur mission dans tout le territoire de la Gironde. Il compte 425 lieux de travail et d’accueil du public. Malgré une croissance démographique constante (+ 15 000 nouveaux Girondins en moyenne chaque année) qui entraîne une augmentent des besoins, le Département accorde une vigilance particulière au maintien de ses frais de personnel et de fonctionnement.`, 
                 moreUrl: presence
             })        

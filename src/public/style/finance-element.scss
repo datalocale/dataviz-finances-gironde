@@ -100,7 +100,11 @@ $part-font-size : 1.2em;
                 flex: 1;                                                                                                                                                                                                            
                 h1{
                     font-size: 2em; 
-                }                
+                }              
+
+                a{
+                    text-decoration: underline;
+                }  
             }
 
             &:not(:last-child)::before{

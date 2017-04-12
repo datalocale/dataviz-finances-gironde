@@ -29,33 +29,36 @@ export default function({
     const data = [proportion, 1-proportion];
     const arcDescs = pie(data);
 
-    return React.createElement('svg', {width, height, className: 'focus-donut'},
-        React.createElement(
-            'g', 
-            {transform: `translate(${width/2}, ${height/2})`},
-            arcDescs.map(ad => {
-                const d = arc(Object.assign(
-                    {
-                        outerRadius,
-                        innerRadius: outerRadius - donutWidth
-                    },
-                    ad
-                ))
+    return React.createElement('div', {className: 'focus-donut'},
+        React.createElement('svg', {width, height},
+            React.createElement(
+                'g', 
+                {transform: `translate(${width/2}, ${height/2})`},
+                arcDescs.map(ad => {
+                    const d = arc(Object.assign(
+                        {
+                            outerRadius,
+                            innerRadius: outerRadius - donutWidth
+                        },
+                        ad
+                    ))
 
-                return React.createElement('g', {className: ['arc', ad.data === proportion ? 'highlighted' : ''].join(' ')},
-                    React.createElement('path', {d})
-                )
-            }),
-            proportion ? React.createElement('g', {},
-                React.createElement('text', {className: 'percentage', textAnchor: 'middle', dy: "0.1em"}, 
-                    React.createElement('tspan', {className: 'percent', textAnchor: 'middle'}, Math.round(100*proportion)),
-                    React.createElement('tspan', {textAnchor: 'middle'}, '%')
-                ),
-                innerText.map((t, i) => {
-                    return React.createElement('text', {textAnchor: 'middle', dy: (i*1+2.5)+"em"}, t)
-                })
-            ) : undefined
+                    return React.createElement('g', {className: ['arc', ad.data === proportion ? 'highlighted' : ''].join(' ')},
+                        React.createElement('path', {d})
+                    )
+                }),
+                proportion ? React.createElement('g', {},
+                    React.createElement('text', {className: 'percentage', textAnchor: 'middle', dy: "0.1em"}, 
+                        React.createElement('tspan', {className: 'percent', textAnchor: 'middle'}, Math.round(100*proportion)),
+                        React.createElement('tspan', {textAnchor: 'middle'}, '%')
+                    ),
+                    innerText.map((t, i) => {
+                        return React.createElement('text', {textAnchor: 'middle', dy: (i*1+2.5)+"em"}, t)
+                    })
+                ) : undefined
 
+            )
         )
     );
+    
 }

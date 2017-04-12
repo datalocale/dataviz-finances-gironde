@@ -14,11 +14,6 @@ import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/fin
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
 import {EXPENDITURES} from '../../../../shared/js/finance/constants';
 
-
-
-
-
-
 /*
 
 interface FocusSolidarityProps{
@@ -98,7 +93,7 @@ export function FocusSol({
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "En 2016, le Département de la Gironde a financé 842 539 675€"
+                        "En 2016, le Département de la Gironde a financé 842.539.675€"
                     ),
                     ` au titre de la solidarité soit 52% de la totalité des dépenses. `,
                     React.createElement('strong', {}, 
@@ -111,7 +106,7 @@ export function FocusSol({
                 React.createElement('div', {}, 
                     React.createElement('div', {}, 'Près de'),
                     React.createElement('div', {className: 'number'}, '1/10'),
-                    React.createElement('div', {}, `personnes accompagnées par le département`)
+                    React.createElement('div', {}, `personne accompagnée par le département`)
                 )
             )
         ),
@@ -124,7 +119,7 @@ export function FocusSol({
                 title: 'Personnes en insertion', 
                 illustrationUrl: '../images/Macaron1.png', 
                 // hardcoded TODO fix the math
-                amount: format(".3s")(229*Math.pow(10, 6)),//currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
+                amount: "244 Millions €",//currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
                 
@@ -139,14 +134,14 @@ export function FocusSol({
                         span: "d'allocations RSA par rapport à 2015"
                     }
                 ], 
-                //moreUrl:
+                moreUrl: '#!/finance-details/DF-2-1'
             }),
             React.createElement(FocusDetail, {
                 className: 'handicap', 
                 title: 'Personnes handicapées', 
                 illustrationUrl: '../images/Macaron2.png',
                 // hardcoded TODO fix the math
-                amount: format(".3s")(218*Math.pow(10, 6)), // currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
+                amount: "218 Millions €", // currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `L’aide aux personnes handicapées recouvre trois types d’aides : la Prestation de compensation du Handicap (PCH), l’allocation pour tierce personne (ACTP) et des prestations d’hébergement.
                 La prestation de compensation du handicap (PCH) est une aide financière versée par le département. Elle est destinée à rembourser les dépenses liées à votre la perte d'autonomie. Son attribution dépend du degré d'autonomie, de l’âge, des ressources et de la résidence.
@@ -167,14 +162,14 @@ export function FocusSol({
                         span: "personnes concernées par rapport à 2015"
                     }
                 ], 
-                //moreUrl:
+                moreUrl: '#!/finance-details/DF-2-2'
             }),
             React.createElement(FocusDetail, {
                 className: 'elderly', 
                 title: 'Personnes âgées', 
                 illustrationUrl: '../images/Macaron3.png',
                 // hardcoded TODO fix the math
-                amount: format(".3s")(194*Math.pow(10, 6)), //currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
+                amount: "194 Millions €", //currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `L’aide en faveur des personnes âgées recouvre essentiellement deux types d’aide : l’allocation personnalisée d’autonomie (APA) qui peut soit être versée directement à la personne ou à un établissement et les prestations d’hébergement
 Les personnes âgées peuvent bénéficier de l'allocation personnalisée d'autonomie (Apa) en cas de perte d'autonomie, de l'allocation de solidarité aux personnes âgées (Aspa), si elles disposent de faibles revenus, de l'allocation supplémentaire d'invalidité (Asi) si elles sont invalides et n’ont pas atteint l’âge légal de départ à la retraite.
@@ -193,14 +188,14 @@ L’année 2016 est marquée par l’augmentation des versements de l’APA lié
                         span: "personnes concernées par rapport à 2015"
                     }
                 ], 
-                //moreUrl:
+                moreUrl: '#!/finance-details/DF-2-3'
             }),
             React.createElement(FocusDetail, {
                 className: 'childhood', 
                 title: 'Enfance', 
                 illustrationUrl: '../images/Macaron4.png',
                 // hardcoded TODO fix the math
-                amount: format(".3s")(168*Math.pow(10, 6)), //currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '', 
+                amount: "168 Millions €", //currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `L'Aide Sociale à l'Enfance aussi appelée ASE est un service du Département. Il est responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007) en collaboration avec le service de protection des maladies infantiles (PMI) et le service départemental d'Action Sociale (UTAS).
 Dans le cadre de sa mission, le service de l'ASE peut ainsi :
@@ -222,11 +217,11 @@ L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépe
                         span: "personnes concernées par rapport à 2015"
                     }
                 ], 
-                //moreUrl:
+                moreUrl: '#!/finance-details/DF-2-4'
             })
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par prestation de ${min(years)} à ${max(years)}`),
+            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par public de ${min(years)} à ${max(years)}`),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
@@ -263,7 +258,7 @@ L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépe
                     // content
                     React.createElement('g', {className: 'content'},
                         solidarityByYear.entrySeq().toJS().map(([year, yearSolidarity]) => {
-                            const stackElements = ['DF-1-1', 'DF-1-2', 'DF-1-4', 'DF-1-3', 'DF-1-other'];
+                            const stackElements = ['DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4', 'DF-2-other'];
                             const stackYs = stackElements
                                 .map(id => yearSolidarity[id])
                                 .map( (amount, i, arr) => sum(arr.slice(0, i)) )
@@ -285,8 +280,8 @@ L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépe
                             return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
                                 stack.map( ({id, amount, height, y}) => {
                                     return React.createElement('g', {className: id}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5}),
-                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))
+                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})/*,
+                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))*/
                                     )
                                 }),
                                 React.createElement('text', {
@@ -301,25 +296,25 @@ L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépe
                     )
                 ),
                 React.createElement('ul', {className: 'legend'},
-                    React.createElement('li', {className: 'DF-1-other'},
+                    React.createElement('li', {className: 'DF-2-other'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "Prévention santé, sexualité"
+                        "Prévention transversale"
                     ),
-                    React.createElement('li', {className: 'DF-1-3'},
+                    React.createElement('li', {className: 'DF-2-4'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "PCH-ACTP"
+                        "Enfance"
                     ),
-                    React.createElement('li', {className: 'DF-1-4'},
+                    React.createElement('li', {className: 'DF-2-3'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "APA"
+                        "Personnes âgées"
                     ),
-                    React.createElement('li', {className: 'DF-1-2'},
+                    React.createElement('li', {className: 'DF-2-2'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "RSA"
+                        "Personnes handicapées"
                     ),
-                    React.createElement('li', {className: 'DF-1-1'},
+                    React.createElement('li', {className: 'DF-2-1'},
                         React.createElement('span', {className: 'color'}), ' ',
-                        "Hébergement"
+                        "Personnes en insertion"
                     )
                 )
             )
@@ -339,7 +334,8 @@ const YearSolidarityRecord = Record({
     'DF-2-1': 0,
     'DF-2-2': 0,
     'DF-2-3': 0,
-    'DF-2-4': 0
+    'DF-2-4': 0,
+    'DF-2-other': 0
 })
 
 export default connect(
@@ -361,10 +357,11 @@ export default connect(
             });
 
             let df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
+            let df2other = solidarityExpenditures - (ysrData['DF-2-1'] + ysrData['DF-2-2'] + ysrData['DF-2-3'] + ysrData['DF-2-4']);
 
             // hardcoded TODO fix the math
             if(year === 2015 || year === 2016){
-                df1other -= 3000000;
+                df2other -= 3000000;
                 solidarityExpenditures -= 3000000;
             }
             // hardcoded TODO fix the math
@@ -373,7 +370,8 @@ export default connect(
                 {
                     totalExpenditures: expenditures,
                     solidarityExpenditures,
-                    'DF-1-other': df1other
+                    'DF-1-other': df1other,
+                    'DF-2-other': df2other
                 },
                 ysrData
             ))

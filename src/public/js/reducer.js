@@ -38,6 +38,14 @@ export default function reducer(state, action) {
             let textMap = state.get('textsById');
 
             action.textList.forEach(({id, label, description = ''}) => {
+
+                // hardcoded TODO fix in content
+                if(id === 'DF-2-1'){
+                    label = 'Personnes en insertion';
+                }
+
+                label = label.replace('•', '').trim()
+
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('atemporal', md.render(description))

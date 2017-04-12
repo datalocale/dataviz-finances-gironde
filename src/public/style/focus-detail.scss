@@ -38,12 +38,20 @@ $focus-neutral-color: #F0F0F0;
 
             .proportion{
                 height: 100%;
+
+                color: white;
+                font-size: 1.2em;
+                font-weight: bold;
+                padding: 0.2em 1em ;
             }
         }
 
         .highlights{
             display: flex;
             flex-direction: row;
+
+            font-size: 1.2em;
+            text-align: center;
 
             &> *{
                 flex: 1;
