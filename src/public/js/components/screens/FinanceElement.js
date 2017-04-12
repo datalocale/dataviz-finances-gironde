@@ -89,7 +89,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         .range([0, yRange]);
 
     return React.createElement('article', {className: 'finance-element'}, 
-        React.createElement('a', {href:'#', style: {padding: '1em'}}, `Page d'accueil`),
+        React.createElement('a', {href:'#', style: {padding: '1em', display: 'block', color: 'black', textDecoration: 'none'}}, `⇐ Page d'accueil`),
         React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, 
             label,
             ' en ',

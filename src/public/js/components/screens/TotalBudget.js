@@ -25,7 +25,7 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
 
     return React.createElement('article', {className: 'total-budget'},
         React.createElement('h1', {}, 'Dépenses et Recettes du Comptes Administratif 2016'),
-        React.createElement('div', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
+        React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
 
 Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
@@ -55,7 +55,13 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                     )
                 )
             )
+        ),
+        React.createElement('a', { href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}}, 
+            React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
+            ' ',
+            `Télécharger les données brutes Open Data à la norme M52 au format CSV`
         )
+
     );
 }
 
