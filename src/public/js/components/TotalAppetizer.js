@@ -21,7 +21,7 @@ export default function ({total, year, totalUrl}) {
             )
         ),
         React.createElement('hr', {}),
-        React.createElement('p', {}, "Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire."),
+        React.createElement('p', {}, `Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`),
         React.createElement(
             'a', 
             { href: totalUrl },

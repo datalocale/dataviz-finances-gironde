@@ -75,7 +75,8 @@ export function FocusSol({
         .domain([0, maxSolidarityTotal])
         .range([0, yRange]);
 
-    const solidarityProportion = currentYearSolidarity &&currentYearSolidarity.solidarityExpenditures/currentYearSolidarity.totalExpenditures
+    // hardcoded TODO fix the math
+    const solidarityProportion = 0.52; //currentYearSolidarity &&currentYearSolidarity.solidarityExpenditures/currentYearSolidarity.totalExpenditures
 
 
     return React.createElement('article', {className: 'focus'},
@@ -87,7 +88,7 @@ export function FocusSol({
         ),
         React.createElement('section', {className: 'top-infos'}, 
             React.createElement(FocusDonut, {
-                proportion: 0.52, //solidarityProportion, // hardcoded TODO fix the math
+                proportion: solidarityProportion, 
                 outerRadius: 188, 
                 innerText: [
                     `de la dépense solidarité`,
@@ -95,7 +96,15 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, `En 2016, le Département de la Gironde a financé 842 539 675€ au titre de la solidarité soit 52% de la totalité des dépenses. Ce qui représente une évolution de +4,31% par rapport à 2015 Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs d’une ou plusieurs aides du Département. Chef de file sur les actions de solidarité, il accompagne les plus fragiles dans leurs parcours de vie au quotidien.`),
+                React.createElement('p', {}, 
+                    React.createElement('strong', {},
+                        "En 2016, le Département de la Gironde a financé 842 539 675€"
+                    ),
+                    ` au titre de la solidarité soit 52% de la totalité des dépenses. `,
+                    React.createElement('strong', {}, 
+                        "Ce qui représente une évolution de +4,31% par rapport à 2015."
+                    ),
+                    ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs d’une ou plusieurs aides du Département. Chef de file sur les actions de solidarité, il accompagne les plus fragiles dans leurs parcours de vie au quotidien.`),
                 React.createElement('a', {href: '#!/finance-details/DF'}, `en savoir plus`)
             ),
             React.createElement('div', {className: 'people-fraction'}, 
