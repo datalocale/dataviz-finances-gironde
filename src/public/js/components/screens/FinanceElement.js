@@ -268,6 +268,8 @@ export default connect(
 
         const parentElement = isDeepElement && childToParent.get(element);
         const topElement = isDeepElement && elementById.get(expenseOrRevenue);
+        const topTexts = topElement && textsById.get(topElement.id);
+        const topLabel = topTexts && topTexts.label || '';
 
         const amountsByYear = m52InstructionByYear.map(m52i => {
             return makeElementById(hierarchicalAggregated(m52ToAggregated(m52i))).get(displayedContentId).total;
@@ -283,7 +285,7 @@ export default connect(
             },
             top: topElement && {
                 amount: topElement.total,
-                label: textsById.get(topElement.id).label,
+                label: topLabel,
                 url: '#!/finance-details/'+topElement.id
             },
             expenseOrRevenue,
