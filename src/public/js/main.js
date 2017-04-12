@@ -157,6 +157,7 @@ page('/strategie', () => {
 
 page('/finance-details/:contentId', ({params: {contentId}}) => {
     console.log('in route', '/finance-details', contentId)
+    scrollTo(0, 0);
 
     const breadcrumb = store.getState().breadcrumb;
 
@@ -177,6 +178,7 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
 
 page('/focus/'+SOLIDARITES, () => {
     console.log('in route', '/focus/'+SOLIDARITES);
+    scrollTo(0, 0);
 
     ReactDOM.render(
         React.createElement(
@@ -195,5 +197,10 @@ page.base(location.pathname);
 
 page({ hashbang: true });
 window.addEventListener('hashchange', () => {
-    page.redirect(location.hash);
+    scrollTo(0, 0);
+    page.redirect(location.hash); 
+});
+window.addEventListener('popstate', () => {
+    scrollTo(0, 0);
+    page.redirect(location.hash); 
 });

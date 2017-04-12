@@ -1,12 +1,35 @@
-.total-budget{}
+.total-budget{
+    .viz{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+        > *{
+            width: 30%;
+        }
 
-.total-budget .viz{
-    display: flex;
-    flex-direction: row;
-}
+        h1{
+            font-size: 2em;
+            text-align: center;
+        }
 
-.total-budget .viz > *{
-    flex: 1;
+        a{
+            color: black;
+            text-decoration: none;
+
+            .rf, .ri, .df, .di{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+    }
+
+    section{
+        margin-bottom: 3em;
+    }
 }
 
 
@@ -26,19 +49,21 @@
     justify-content: flex-end;
 }
 
+$expenditures-color : #F35D32;
+$revenue-color : #68B0CD;
 
 .total-budget .rf{
-    background-color: #C9DAF8;
+    background-color: $revenue-color;
 }
 
 .total-budget .ri{
-    background-color: #3D85C6;
+    background-color: lighten($revenue-color, 20%);
 }
 
 .total-budget .df{
-    background-color: #EA9999;
+    background-color: $expenditures-color;
 }
 
 .total-budget .di{
-    background-color: #E06666;
+    background-color: lighten($expenditures-color, 20%);
 }

@@ -31,7 +31,7 @@ export function Home({
         
         React.createElement('section', {className: 'appetizers'},
             React.createElement(TotalAppetizer, {
-                total: 1.615*Math.pow(10, 9), //expenditures, // number hardcoded for demo TODO : fix the math
+                total: 1.616*Math.pow(10, 9), //expenditures, // hardcoded TODO fix the math
                 year: currentYear,
                 totalUrl: total
             }),
@@ -76,9 +76,9 @@ export function Home({
                 {
                     // hardcoded for demo. TODO : fix the math
                     rf: 1.527*Math.pow(10, 9), 
-                    ri: 250*Math.pow(10, 6), 
-                    df: 1.327*Math.pow(10, 9), 
-                    di: 250*Math.pow(10, 6)
+                    ri: 240*Math.pow(10, 6), 
+                    df: 1.376*Math.pow(10, 9), 
+                    di: 240*Math.pow(10, 6)
                 }
             )
             

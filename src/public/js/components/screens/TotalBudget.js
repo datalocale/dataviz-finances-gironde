@@ -25,7 +25,7 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
 
     return React.createElement('article', {className: 'total-budget'},
         React.createElement('h1', {}, 'Dépenses et Recettes du Comptes Administratif 2016'),
-        React.createElement('div', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
+        React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
 
 Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
@@ -34,20 +34,34 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
 `),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
-                React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recette'),
+                React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
                 React.createElement('a', {href: revenue, style: {height: expHeight}}, 
-                    React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 'Recettes de fonctionnement'),
-                    React.createElement('div', {className: 'ri', style: {height: riHeight}}, "Recettes d'investissement")
+                    React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 
+                        React.createElement('span', {}, 'Recettes de fonctionnement')
+                    ),
+                    React.createElement('div', {className: 'ri', style: {height: riHeight}},
+                        React.createElement('span', {}, "Recettes d'investissement")
+                    )
                 )
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, (budget.expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
                 React.createElement('a', {href: expenditures, style: {height: revHeight}}, 
-                    React.createElement('div', {className: 'df', style: {height: dfHeight}}, 'Dépenses de fonctionnement'),
-                    React.createElement('div', {className: 'di', style: {height: diHeight}}, "Dépenses d'investissement")
+                    React.createElement('div', {className: 'df', style: {height: dfHeight}}, 
+                        React.createElement('span', {}, 'Dépenses de fonctionnement')
+                    ),
+                    React.createElement('div', {className: 'di', style: {height: diHeight}}, 
+                        React.createElement('span', {}, "Dépenses d'investissement")
+                    )
                 )
             )
+        ),
+        React.createElement('a', { href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}}, 
+            React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
+            ' ',
+            `Télécharger les données brutes Open Data à la norme M52 au format CSV`
         )
+
     );
 }
 
