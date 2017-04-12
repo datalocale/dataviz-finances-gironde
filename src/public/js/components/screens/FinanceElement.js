@@ -89,6 +89,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         .range([0, yRange]);
 
     return React.createElement('article', {className: 'finance-element'}, 
+        React.createElement('a', {href:'#', style: {padding: '1em'}}, `Page d'accueil`),
         React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, 
             label,
             ' en ',
@@ -96,7 +97,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         ), 
         React.createElement('h2', {}, format(amount, { code: 'EUR' })),
         React.createElement('section', {}, 
-            React.createElement('div', {className: 'ratios'}, 
+            parent || top ? React.createElement('div', {className: 'ratios'}, 
                 React.createElement(FinanceElementPie, {
                     elementProportion: top ? amount/top.amount : undefined,
                     parentProportion: parent ? parent.amount/top.amount : undefined
@@ -110,7 +111,7 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
                     React.createElement('a', {href: top.url}, top.label), 
                     ' totales'
                 ) : undefined
-            ),
+            ) : undefined,
             atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
         ),
         

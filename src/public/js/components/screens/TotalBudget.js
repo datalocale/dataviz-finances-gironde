@@ -34,17 +34,25 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
 `),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
-                React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recette'),
+                React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
                 React.createElement('a', {href: revenue, style: {height: expHeight}}, 
-                    React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 'Recettes de fonctionnement'),
-                    React.createElement('div', {className: 'ri', style: {height: riHeight}}, "Recettes d'investissement")
+                    React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 
+                        React.createElement('span', {}, 'Recettes de fonctionnement')
+                    ),
+                    React.createElement('div', {className: 'ri', style: {height: riHeight}},
+                        React.createElement('span', {}, "Recettes d'investissement")
+                    )
                 )
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, (budget.expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
                 React.createElement('a', {href: expenditures, style: {height: revHeight}}, 
-                    React.createElement('div', {className: 'df', style: {height: dfHeight}}, 'Dépenses de fonctionnement'),
-                    React.createElement('div', {className: 'di', style: {height: diHeight}}, "Dépenses d'investissement")
+                    React.createElement('div', {className: 'df', style: {height: dfHeight}}, 
+                        React.createElement('span', {}, 'Dépenses de fonctionnement')
+                    ),
+                    React.createElement('div', {className: 'di', style: {height: diHeight}}, 
+                        React.createElement('span', {}, "Dépenses d'investissement")
+                    )
                 )
             )
         )

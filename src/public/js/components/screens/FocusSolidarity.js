@@ -87,7 +87,7 @@ export function FocusSol({
         ),
         React.createElement('section', {className: 'top-infos'}, 
             React.createElement(FocusDonut, {
-                proportion: solidarityProportion, 
+                proportion: 0.52, //solidarityProportion, // hardcoded TODO fix the math
                 outerRadius: 188, 
                 innerText: [
                     `de la dépense solidarité`,
@@ -112,9 +112,10 @@ export function FocusSol({
             L’allocation permet de reverser directement à la personne un complément financier. Le revenu de solidarité active (RSA), l'allocation personnalisée d'autonomie (APA) La prestation de compensation du handicap (PCH),sont autant d’allocations spécifiques destinés à des publics différents. L’hébergement permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. La prestation permet de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
-                title: 'Personnes en difficulté', 
+                title: 'Personnes en insertion', 
                 illustrationUrl: '../images/Macaron1.png', 
-                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
+                // hardcoded TODO fix the math
+                amount: format(".3s")(229*Math.pow(10, 6)),//currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
                 
@@ -135,10 +136,14 @@ export function FocusSol({
                 className: 'handicap', 
                 title: 'Personnes handicapées', 
                 illustrationUrl: '../images/Macaron2.png',
-                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
+                // hardcoded TODO fix the math
+                amount: format(".3s")(218*Math.pow(10, 6)), // currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
-                En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
+                text: `L’aide aux personnes handicapées recouvre trois types d’aides : la Prestation de compensation du Handicap (PCH), l’allocation pour tierce personne (ACTP) et des prestations d’hébergement.
+                La prestation de compensation du handicap (PCH) est une aide financière versée par le département. Elle est destinée à rembourser les dépenses liées à votre la perte d'autonomie. Son attribution dépend du degré d'autonomie, de l’âge, des ressources et de la résidence.
+                La PCH s’élève à 73M€ et continue de progresser à un rythme qui reste élevé (+ 5.7%) mais qui s’infléchit par rapport 2015 (+8.6%). Cette augmentation s’explique en partie par un nombre toujours plus important de bénéficiaires adultes et enfantss +2.7%. La PCH enfant progresse également de 10.5% et 22 bénéficiaires supplémentaires en 2016 sachant qu’il s’agit d’une prestation très évolutive.
+                A ces 73M€ s’ajoutent 8.25M€ pour l’allocation de compensation pour tierce personne (ACTP) en baisse de 3.8%. (-40 bénéficiaires).
+                L’hébergement pour les personnes handicapées, est un secteur d’intervention très important qui atteint 122M€ en 2016 soit +4% par rapport à 2015. La progression reste soutenue mais amorce un ralentissement. En 2016: 9 975 personnes ont bénéficié de la prestation de compensation du handicap (PCH) soit +2.7%, 1 128 de l’ACTP-ACFP (allocation compensatrice pour tierce personne), 2 763 de places d’hébergement et 757 d’aides à domicile.`, 
                 highlights: [
                     {
                         strong: "218",
@@ -158,12 +163,13 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'elderly', 
                 title: 'Personnes âgées', 
-                illustrationUrl: '../images/Macaron3.png', 
-                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
+                illustrationUrl: '../images/Macaron3.png',
+                // hardcoded TODO fix the math
+                amount: format(".3s")(194*Math.pow(10, 6)), //currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-3')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
-
-En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
+                text: `L’aide en faveur des personnes âgées recouvre essentiellement deux types d’aide : l’allocation personnalisée d’autonomie (APA) qui peut soit être versée directement à la personne ou à un établissement et les prestations d’hébergement
+Les personnes âgées peuvent bénéficier de l'allocation personnalisée d'autonomie (Apa) en cas de perte d'autonomie, de l'allocation de solidarité aux personnes âgées (Aspa), si elles disposent de faibles revenus, de l'allocation supplémentaire d'invalidité (Asi) si elles sont invalides et n’ont pas atteint l’âge légal de départ à la retraite.
+L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi sur l’Adaptation de la société au Vieillissement (ASV). Les dépenses liées à l’APA s’élèvent à 141.6M€ contre 136.8M€ en 2015 soit une augmentation de 3.53%. En terme de bénéficiaires, le nombre de bénéficiaires de l’APA s’élève à 34 046 contre 33 931 soit 115 bénéficiaires de plus avec une progression des bénéficiaires de l’APA à domicile dont le nombre passe de 21 348 à 21 504`, 
                 highlights: [
                     {
                         strong: "194",
@@ -184,11 +190,15 @@ En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA no
                 className: 'childhood', 
                 title: 'Enfance', 
                 illustrationUrl: '../images/Macaron4.png',
-                amount: currentYearSolidarity ? format(".2s")(currentYearSolidarity.get('DF-2-4')) : '', 
+                // hardcoded TODO fix the math
+                amount: format(".3s")(168*Math.pow(10, 6)), //currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle.
-
-En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
+                text: `L'Aide Sociale à l'Enfance aussi appelée ASE est un service du Département. Il est responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007) en collaboration avec le service de protection des maladies infantiles (PMI) et le service départemental d'Action Sociale (UTAS).
+Dans le cadre de sa mission, le service de l'ASE peut ainsi :
+apporter un soutien aux familles à leur domicile (éducatif, financier….).
+accueillir et prendre en charge, y compris en urgence, les enfants qui lui sont confiés par leurs parents ou par un juge.
+Le Département intervient ainsi au travers de plusieurs dispositifs d’accueil dont le montant s’est élevé en 2016 à plus de 166M€. Il s’agit de l’accueil en Maison d’enfants à caractère social (MECS) pour plus de 90M€ en progression de 7.8% soit +6.6M€. Le nombre d’accueil a progressé de 7% soit 3 354 accueils réalisés en 2016 avec 14 places de type « internat » et 41 places en suivi externalisé créés soit une centaine de jeunes accueillis en plus par rapport à 2015.
+L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépensés en 20 On comptabilise 800 assistants familiaux en gironde et 35 hors gironde au 31/12/2016.Le nombre d’enfants accueillis s’élèvent à 1 392 pour un budget de 30M€.`, 
                 highlights: [
                     {
                         strong: "168",
@@ -327,7 +337,7 @@ export default connect(
     state => {
         const { m52InstructionByYear, currentYear } = state;
 
-        const solidarityByYear = m52InstructionByYear.map( (instruction => {
+        const solidarityByYear = m52InstructionByYear.map( ((instruction, year) => {
             const agg = m52ToAggregated(instruction);
 
             const hierAgg = hierarchicalAggregated(agg);
@@ -335,13 +345,20 @@ export default connect(
             const hierAggByPrestationList = flattenTree(hierAgg);
 
             const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
-            const solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
+            let solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
             const ysrData = {};
             ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4'].forEach(id => {
                 ysrData[id] = hierAggByPrestationList.find(e => e.id === id).total;
             });
 
-            const df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
+            let df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
+
+            // hardcoded TODO fix the math
+            if(year === 2015 || year === 2016){
+                df1other -= 3000000;
+                solidarityExpenditures -= 3000000;
+            }
+            // hardcoded TODO fix the math
 
             return new YearSolidarityRecord(Object.assign(
                 {
