@@ -30,9 +30,10 @@ $texts-height: 10em;
             .brick{
                 //min-height: 5em;
                 background-color: indianred;
+                color: black;
 
                 padding: 0.5em;
-                margin: 0.5em 0; 
+                margin: 0;
                 width: 100%;
 
                 border-radius: 5px;
@@ -40,7 +41,14 @@ $texts-height: 10em;
                 font-weight: bold;
                 text-align: center;
 
-                opacity : 0;
+                opacity: 0;
+            }
+
+            .parent{
+                opacity: 1;
+                background-color: transparent;
+                color: transparent;
+                position: relative;
             }
         }
 
@@ -101,32 +109,34 @@ $texts-height: 10em;
     }
 }
 
+@keyframes englobed-by-parent{
+    from{
+        opacity: 1;
+    }
+
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes parent-englobes{
+    from{
+        background-color: transparent;
+        color: transparent;
+    }
+    to{
+        background-color: lightskyblue;
+        color: black;
+    }
+}
+
 $appearance-time : 2s;
+$disappearance-time : $appearance-time;
+$parent-englobes-time : $appearance-time;
 $appearance-shift : 0.5s;
 
-.budget-construction .bricks{
-
-    .dotation-etat{
-        animation: brick-appear $appearance-time;
-    }
-    .fiscalite-directe{
-        animation: brick-appear $appearance-time;
-        animation-delay: 1*($appearance-time + $appearance-shift);
-    }
-    .fiscalite-indirecte{
-        animation: brick-appear $appearance-time;
-        animation-delay: 2*($appearance-time + $appearance-shift);
-    }
-    .recettes-diverses{
-        animation: brick-appear $appearance-time;
-        animation-delay: 3*($appearance-time + $appearance-shift);
-    }
-
-
-
-    .brick{
-        animation-fill-mode: forwards;
-    }
+.budget-construction .bricks .brick{
+    animation-fill-mode: forwards;
 }
 
 
