@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { max } from 'd3-array';
+import { max, sum } from 'd3-array';
 
 /*
 interface BudgetConstructionAnimationProps{
@@ -16,55 +16,68 @@ interface BudgetConstructionAnimationProps{
 }
  */
 
-export default function ({rf, ri, df, di}) {
+export default function (amounts) {
+
+    const {DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses} = amounts;
+
+    const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
+    const ri = 0, di = 0, df = 0;
 
     const maximum = max([rf, ri, df, di]);
     const maxBrickPercentHeight = 85;
 
 
     return React.createElement('article', { className: 'budget-construction' },
-        React.createElement('div', {className: 'bricks'}, 
-            React.createElement('div', {className: 'column'},  // weird hardcoding for demo. TODO fix the math
-                React.createElement('div', {className: 'total'}, 
+        DotationEtat ? React.createElement('div', {className: 'bricks'}, 
+            React.createElement('div', {className: 'column'},
+                /*React.createElement('div', {className: 'total'}, 
                     React.createElement('span', {className: 'number'}, (rf/1000000000).toFixed(3) ), 
                     ' milliards'
-                ),
-                React.createElement('div', {className: 'brick', style: {
-                    height: (maxBrickPercentHeight*rf/maximum)+'%',
-                    backgroundColor: '#EC3500'
-                }}, 'RECETTES DE FONCTIONNEMENT')
+                ),*/
+                React.createElement('div', {className: 'brick dotation-etat', style: {
+                    height: (maxBrickPercentHeight*DotationEtat/maximum)+'%'
+                }}, `Dotation de l'Etat`),
+                React.createElement('div', {className: 'brick fiscalite-directe', style: {
+                    height: (maxBrickPercentHeight*FiscalitéDirecte/maximum)+'%'
+                }}, 'Fiscalité directe'),
+                React.createElement('div', {className: 'brick fiscalite-indirecte', style: {
+                    height: (maxBrickPercentHeight*FiscalitéIndirecte/maximum)+'%'
+                }}, 'Fiscalité indirecte'),
+                React.createElement('div', {className: 'brick recettes-diverses', style: {
+                    height: (maxBrickPercentHeight*RecettesDiverses/maximum)+'%'
+                }}, 'Recettes diverse')
             ), 
-            React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, 
+            React.createElement('div', {className: 'column'}, ''
+                /*React.createElement('div', {className: 'total'}, 
                     React.createElement('span', {className: 'number'}, (ri/1000000).toFixed(0)),
                     ' millions'
                 ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*ri/maximum)+'%',
                     backgroundColor: '#0E7FAB'
-                }}, 'RECETTES D’INVESTISSEMENT')
+                }}, 'RECETTES D’INVESTISSEMENT')*/
             ), 
-            React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, 
+            React.createElement('div', {className: 'column'}, ''
+                /*React.createElement('div', {className: 'total'}, 
                     React.createElement('span', {className: 'number'}, (df/1000000000).toFixed(3)),
                     ' milliards'
                 ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*df/maximum)+'%',
                     backgroundColor: '#F8C738'
-                }}, 'DÉPENSES DE FONCTIONNEMENT')
+                }}, 'DÉPENSES DE FONCTIONNEMENT')*/
             ), 
-            React.createElement('div', {className: 'column'}, 
-                React.createElement('div', {className: 'total'}, 
+            React.createElement('div', {className: 'column'}, ''
+                /*React.createElement('div', {className: 'total'}, 
                     React.createElement('span', {className: 'number'}, (di/1000000).toFixed(0)),
                     ' millions'
                 ),
                 React.createElement('div', {className: 'brick', style: {
                     height: (maxBrickPercentHeight*di/maximum)+'%',
                     backgroundColor: '#B8C30F'
-                }}, 'DÉPENSES D’INVESTISSEMENT')
+                }}, 'DÉPENSES D’INVESTISSEMENT')*/
             )
-        ),
+        ) : undefined,
         React.createElement('hr'),
         React.createElement('dl', {},
             React.createElement('div', {className: 'column'},

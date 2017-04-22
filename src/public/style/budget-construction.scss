@@ -3,7 +3,7 @@ $texts-height: 10em;
 .budget-construction{
 
     .bricks{
-        height: 2*$texts-height;
+        height: 3*$texts-height;
 
         display: flex;
         flex-direction: row;
@@ -39,9 +39,13 @@ $texts-height: 10em;
 
                 font-weight: bold;
                 text-align: center;
-            }
 
+                opacity : 0;
+            }
         }
+
+
+
 
 
     }
@@ -81,3 +85,55 @@ $texts-height: 10em;
     }
 
 }
+
+
+/*
+    ANIMATION
+*/
+
+@keyframes brick-appear{
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+$appearance-time : 2s;
+$appearance-shift : 0.5s;
+
+.budget-construction .bricks{
+
+    .dotation-etat{
+        animation: brick-appear $appearance-time;
+    }
+    .fiscalite-directe{
+        animation: brick-appear $appearance-time;
+        animation-delay: 1*($appearance-time + $appearance-shift);
+    }
+    .fiscalite-indirecte{
+        animation: brick-appear $appearance-time;
+        animation-delay: 2*($appearance-time + $appearance-shift);
+    }
+    .recettes-diverses{
+        animation: brick-appear $appearance-time;
+        animation-delay: 3*($appearance-time + $appearance-shift);
+    }
+
+
+
+    .brick{
+        animation-fill-mode: forwards;
+    }
+}
+
+
+/*
+    Questions animations : 
+    * à quels identifiants de l'agrégé correspondent les briques ?
+    * l'espacement entre les briques ne correspond à rien. Si on respecte les proportions le total est 
+    visuellement plus petit que la somme des parties
+
+*/
