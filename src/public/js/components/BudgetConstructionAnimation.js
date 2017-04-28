@@ -77,10 +77,10 @@ function animate(container, {dfBrickHeights}){
         })
     });
 
-    // step 3
+    // steps 3-5
     const step3Start = step2Done;
 
-    const step3Done = step3Start.then(() => {
+    const step5Done = step3Start.then(() => {
         const rfParentFilling = container.querySelector('.brick.rf .filling');
         const dfParent = container.querySelector('.brick.df');
 
@@ -110,7 +110,28 @@ function animate(container, {dfBrickHeights}){
 
     });
 
-    step3Done.catch(e => console.error('animation error', e))
+    // step 6
+    const step6Start = step5Done;
+
+    const step6Done = step6Start.then(() => {
+        const dfParent = container.querySelector('.brick.df')
+
+        Array.from(dfParent.querySelectorAll('.brick')).forEach(el => {
+            el.style.animationName = `englobed-by-parent`;
+            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
+            el.style.animationDelay = '0s';
+        });
+
+        dfParent.style.animationName = `parent-englobes`;
+        dfParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
+        dfParent.style.animationDelay = '0s';
+
+        return new Promise(resolve => {
+            dfParent.addEventListener('animationend', resolve, {once: true})
+        })
+    });
+
+    step6Done.catch(e => console.error('animation error', e))
 
 }
 
@@ -296,7 +317,7 @@ export default class BudgetConstructionAnimation extends React.Component{
                             React.createElement('div', {className: 'brick appear-by-height solidarite'}, Legend(`Solidarité`)),
                             React.createElement('div', {className: 'brick appear-by-height interventions'}, Legend('Interventions')),
                             React.createElement('div', {className: 'brick appear-by-height depenses-structure'}, Legend('DépensesStructure')),
-                            React.createElement('div', {className: 'filling'}, Legend(`Dépenses de fonctionnement`))
+                            Legend(`Dépenses de fonctionnement`)
                         )
                     ), 
                     React.createElement('div', {className: 'column'}, ''
