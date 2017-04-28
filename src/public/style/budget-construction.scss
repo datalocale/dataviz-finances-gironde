@@ -27,34 +27,82 @@ $texts-height: 10em;
                 }
             }
 
-            .brick{
-                //min-height: 5em;
-                background-color: indianred;
-                color: black;
-
-                padding: 0.5em;
-                margin: 0;
-                width: 100%;
-
-                border-radius: 5px;
-
-                font-weight: bold;
-                text-align: center;
-
-                opacity: 0;
-            }
-
             .parent{
                 opacity: 1;
+                
                 background-color: transparent;
                 color: transparent;
+
                 position: relative;
+
+                padding: 0;
+
+                text-align: center;
+                font-weight: bold;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
+                width: 100%;
+
+                .brick{
+                    //min-height: 5em;
+                    background-color: indianred;
+                    color: black;
+
+                    padding: 0.5em;
+                    margin: 0;
+                    width: 100%;
+
+                    border-radius: 5px;
+
+                    position: relative;
+
+                    &.appear-by-opacity{
+                        opacity: 0;
+                    }
+
+                    &.appear-by-height{
+                        height: 0;
+                        padding: 0;
+                        overflow: hidden;
+                    }
+
+                }
+
+                .legend, .brick .legend{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                }
+
+                .filling-container{
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    height: 0;
+
+                    color: transparent;
+
+                    .filling{
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        left: 0;
+                        height: 0;
+
+                        transition-property: height;
+
+                        opacity: 0.2;
+                        background-color: black;
+                    }
+                }
+
             }
         }
-
-
-
-
 
     }
 
@@ -138,6 +186,8 @@ $appearance-shift : 0.5s;
 .budget-construction .bricks .brick{
     animation-fill-mode: forwards;
 }
+
+
 
 
 /*

@@ -115,7 +115,11 @@ export default connect(
                     DotationEtat: totalById.get('RF-5'),
                     FiscalitéDirecte: totalById.get('RF-1'),
                     FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
-                    RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i)))
+                    RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
+                    Solidarité: totalById.get('DF-1'),
+                    Interventions: totalById.get('DF-3'),
+                    // hardcoded and arbitrarily adjusted (/2) TODO correct formula
+                    DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2
                 } : undefined,
                 currentYear,
                 urls: {
