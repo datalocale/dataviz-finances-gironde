@@ -178,7 +178,28 @@ function animate(container, {dfBrickHeights, riBrickHeights, rfHeight}){
         }, Promise.resolve());
     })
 
-    step9Done.catch(e => console.error('animation error', e))
+    // step 10
+    const step10Start = step9Done;
+
+    const step10Done = step10Start.then(() => {
+        const riParent = container.querySelector('.brick.ri')
+
+        Array.from(riParent.querySelectorAll('.brick')).forEach(el => {
+            el.style.animationName = `englobed-by-parent`;
+            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
+            el.style.animationDelay = '0s';
+        });
+
+        riParent.style.animationName = `parent-englobes`;
+        riParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
+        riParent.style.animationDelay = '0s';
+
+        return new Promise(resolve => {
+            riParent.addEventListener('animationend', resolve, {once: true})
+        })
+    });
+
+    step10Done.catch(e => console.error('animation error', e))
 
 }
 
