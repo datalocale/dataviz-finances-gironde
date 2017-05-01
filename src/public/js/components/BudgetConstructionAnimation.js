@@ -6,14 +6,21 @@ function delayPromise(t){
     return new Promise(resolve => setTimeout(resolve, t));
 }
 
-const SOLIDARITE = 'solidarité';
-const INTERVENTIONS = 'interventions';
-const STRUCTURE = 'structure';
+const SOLIDARITE = 'SOLIDARITE';
+const INTERVENTIONS = 'INTERVENTIONS';
+const STRUCTURE = 'STRUCTURE';
+const EPARGNE = 'EPARGNE';
+const RI_PROPRES = 'RI_PROPRES';
+const EMPRUNT = 'EMPRUNT';
 
 const DF_BRICK_SELECTOR = {
     [SOLIDARITE]: '.solidarite', 
     [INTERVENTIONS]: '.interventions', 
     [STRUCTURE]: '.depenses-structure'
+};
+const RI_BRICK_SELECTOR = {
+    [RI_PROPRES]: '.ri-propres', 
+    [EMPRUNT]: '.emprunt'
 };
 
 const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.85;
@@ -29,7 +36,7 @@ function Legend(text){
 }
 
 
-function animate(container, {dfBrickHeights, rfHeight, epargneHeight}){
+function animate(container, {dfBrickHeights, riBrickHeights, rfHeight}){
 
     console.log('animate container', container)
 
@@ -138,6 +145,7 @@ function animate(container, {dfBrickHeights, rfHeight, epargneHeight}){
     const step8Done = step8Start.then(() => {
         const rfParent = container.querySelector('.brick.rf');
         const epargneElement = container.querySelector('.brick.ri .epargne');
+        const epargneHeight = riBrickHeights[EPARGNE];
 
         rfParent.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         rfParent.style.height = `${rfHeight - epargneHeight}em`;
@@ -150,9 +158,27 @@ function animate(container, {dfBrickHeights, rfHeight, epargneHeight}){
         })
     })
 
+    // step 9
+    const step9Start = step8Done;
 
+    const step9Done = step9Start.then(() => {
+        const riParent = container.querySelector('.brick.ri')
 
-    step8Done.catch(e => console.error('animation error', e))
+        return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
+            return previousDone.then(() => {
+                const el = riParent.querySelector(RI_BRICK_SELECTOR[id]);
+
+                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                el.style.height = `${riBrickHeights[id]}em`;
+
+                return new Promise(resolve => {
+                    el.addEventListener('transitionend', resolve, {once: true})
+                })
+            })
+        }, Promise.resolve());
+    })
+
+    step9Done.catch(e => console.error('animation error', e))
 
 }
 
@@ -180,21 +206,24 @@ interface BudgetConstructionAnimationProps{
 
 function doTheMaths({
         DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses, 
-        Solidarité, Interventions, DépensesStructure
+        Solidarité, Interventions, DépensesStructure,
+        RIPropre, Emprunt
     }, bricksContainerSize){
 
     const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
     const df = sum([Solidarité, Interventions, DépensesStructure]);
-    const ri = 0, di = 0;
 
     const epargne = rf - df;
+
+    const ri = epargne + RIPropre + Emprunt;
+    const di = 0;
 
     const maxAmount = max([rf, ri, df, di]);
 
     const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION*bricksContainerSize;
     const rfHeight = maxHeight*rf/maxAmount;
     const dfHeight = maxHeight*df/maxAmount;
-    const epargneHeight = maxHeight*epargne/maxAmount;
+    const riHeight = maxHeight*ri/maxAmount;
 
     return {
         rf, ri, df, di, 
@@ -204,7 +233,11 @@ function doTheMaths({
             [INTERVENTIONS]: dfHeight*Interventions/df,
             [STRUCTURE]: dfHeight*DépensesStructure/df,
         },
-        epargneHeight,
+        riBrickHeights: {
+            [EPARGNE]: riHeight*epargne/ri,
+            [RI_PROPRES]: riHeight*RIPropre/ri, 
+            [EMPRUNT]: riHeight*Emprunt/ri
+        },
         rfHeight
     }
 }
@@ -227,9 +260,9 @@ export default class BudgetConstructionAnimation extends React.Component{
 
     animateAndLockComponent(props){
         if(this.financeDataReady(props) && !this.state.animationStarted && this.state.computationCache){
-            const {dfBrickHeights, rfHeight, epargneHeight} = this.state.computationCache;
+            const {dfBrickHeights, riBrickHeights, rfHeight, epargneHeight} = this.state.computationCache;
 
-            animate(this.refs.container, {dfBrickHeights, epargneHeight, rfHeight});
+            animate(this.refs.container, {dfBrickHeights, riBrickHeights, epargneHeight, rfHeight});
             this.setState(Object.assign({}, this.state, {animationStarted: true}))
         }
     }
