@@ -121,7 +121,13 @@ export default connect(
                     // hardcoded and arbitrarily adjusted (/2) TODO correct formula
                     DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
                     RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
-                    Emprunt: totalById.get('RI-EM')
+                    Emprunt: totalById.get('RI-EM'),
+
+                    RemboursementEmprunt: totalById.get('DI-EM'), 
+                    Routes:totalById.get('DI-1-2'), 
+                    Colleges: totalById.get('DI-1-1'), 
+                    Amenagement: totalById.get('DI-1-4'), 
+                    Subventions: totalById.get('DI-2')
                 } : undefined,
                 currentYear,
                 urls: {
