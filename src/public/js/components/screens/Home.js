@@ -2,6 +2,7 @@ import { Map as ImmutableMap } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { sum } from 'd3-array';
 
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
@@ -22,7 +23,7 @@ export function Home({
         total,
         solidarity, invest, presence
     },
-    amounts:{rf, ri, df, di}
+    amounts
 }) {
     
     return React.createElement('article', {className: 'home'},
@@ -60,7 +61,7 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
         ),
         
         React.createElement('section', {},
-            React.createElement('h1', {}, "Comprendre la construction d'un budget"),
+            React.createElement('h2', {}, "Comprendre la construction d'un budget"),
             React.createElement(
                 'p',
                 {},
@@ -73,13 +74,15 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
             ),
             React.createElement(
                 BudgetConstructionAnimation,
-                {
+                amounts
+                
+                /*{
                     // hardcoded for demo. TODO : fix the math
                     rf: 1.527*Math.pow(10, 9), 
                     ri: 240*Math.pow(10, 6), 
                     df: 1.376*Math.pow(10, 9), 
                     di: 240*Math.pow(10, 6)
-                }
+                }*/
             )
             
         )
@@ -104,14 +107,28 @@ export default connect(
             });
         }
 
+        const totalById = elementById.map(e => e.total);
+
         return Object.assign(
             {
                 amounts: m52Instruction ? {
-                    ri: elementById.get(RI).total,
-                    rf: elementById.get(RF).total,
-                    di: elementById.get(DI).total,
-                    df: elementById.get(DF).total,
-                } : {},
+                    DotationEtat: totalById.get('RF-5'),
+                    FiscalitéDirecte: totalById.get('RF-1'),
+                    FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
+                    RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
+                    Solidarité: totalById.get('DF-1'),
+                    Interventions: totalById.get('DF-3'),
+                    // hardcoded and arbitrarily adjusted (/2) TODO correct formula
+                    DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
+                    RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
+                    Emprunt: totalById.get('RI-EM'),
+
+                    RemboursementEmprunt: totalById.get('DI-EM'), 
+                    Routes:totalById.get('DI-1-2'), 
+                    Colleges: totalById.get('DI-1-1'), 
+                    Amenagement: totalById.get('DI-1-4'), 
+                    Subventions: totalById.get('DI-2')
+                } : undefined,
                 currentYear,
                 urls: {
                     total: '#!/total',

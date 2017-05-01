@@ -3,7 +3,7 @@ $texts-height: 10em;
 .budget-construction{
 
     .bricks{
-        height: 2*$texts-height;
+        height: 3*$texts-height;
 
         display: flex;
         flex-direction: row;
@@ -27,22 +27,82 @@ $texts-height: 10em;
                 }
             }
 
-            .brick{
-                //min-height: 5em;
-                background-color: indianred;
+            .parent{
+                opacity: 1;
+                
+                background-color: transparent;
+                color: transparent;
 
-                padding: 0.5em;
-                margin: 0.5em 0; 
+                position: relative;
+
+                padding: 0;
+
+                text-align: center;
+                font-weight: bold;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+
                 width: 100%;
 
-                border-radius: 5px;
+                .brick{
+                    //min-height: 5em;
+                    background-color: indianred;
+                    color: black;
 
-                font-weight: bold;
-                text-align: center;
+                    padding: 0.5em;
+                    margin: 0;
+                    width: 100%;
+
+                    border-radius: 5px;
+
+                    position: relative;
+
+                    &.appear-by-opacity{
+                        opacity: 0;
+                    }
+
+                    &.appear-by-height{
+                        height: 0;
+                        padding: 0;
+                        overflow: hidden;
+                    }
+
+                }
+
+                .legend, .brick .legend{
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+                }
+
+                .filling-container{
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    height: 0;
+
+                    color: transparent;
+
+                    .filling{
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        left: 0;
+                        height: 0;
+
+                        transition-property: height;
+
+                        opacity: 0.2;
+                        background-color: black;
+                    }
+                }
+
             }
-
         }
-
 
     }
 
@@ -81,3 +141,59 @@ $texts-height: 10em;
     }
 
 }
+
+
+/*
+    ANIMATION
+*/
+
+@keyframes brick-appear{
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes englobed-by-parent{
+    from{
+        opacity: 1;
+    }
+
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes parent-englobes{
+    from{
+        background-color: transparent;
+        color: transparent;
+    }
+    to{
+        background-color: lightskyblue;
+        color: black;
+    }
+}
+
+$appearance-time : 2s;
+$disappearance-time : $appearance-time;
+$parent-englobes-time : $appearance-time;
+$appearance-shift : 0.5s;
+
+.budget-construction .bricks .brick{
+    animation-fill-mode: forwards;
+}
+
+
+
+
+/*
+    Questions animations : 
+    * à quels identifiants de l'agrégé correspondent les briques ?
+    * l'espacement entre les briques ne correspond à rien. Si on respecte les proportions le total est 
+    visuellement plus petit que la somme des parties
+
+*/

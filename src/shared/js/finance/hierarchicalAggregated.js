@@ -124,16 +124,12 @@ export const levels = {
                                 {
                                     id: 'DF-3-8',
                                     label: "Frais de personnel",
-                                    children: ruleIds.filter(id => id.startsWith('DF-3-7-'))
+                                    children: ruleIds.filter(id => id.startsWith('DF-3-8-'))
                                 }
 
                             ]
                         },
-                        {
-                            id: 'DF-4',
-                            label: "Frais de personnel",
-                            children: ruleIds.filter(id => id.startsWith('DF-4-'))
-                        },
+                        'DF-4',
                         {
                             id: 'DF-5',
                             label: "Péréquation verticale",
