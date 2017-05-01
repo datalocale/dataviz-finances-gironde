@@ -119,7 +119,9 @@ export default connect(
                     Solidarité: totalById.get('DF-1'),
                     Interventions: totalById.get('DF-3'),
                     // hardcoded and arbitrarily adjusted (/2) TODO correct formula
-                    DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2
+                    DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
+                    RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
+                    Emprunt: totalById.get('RI-EM')
                 } : undefined,
                 currentYear,
                 urls: {

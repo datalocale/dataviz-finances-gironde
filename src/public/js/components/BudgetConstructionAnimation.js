@@ -29,7 +29,7 @@ function Legend(text){
 }
 
 
-function animate(container, {dfBrickHeights}){
+function animate(container, {dfBrickHeights, rfHeight, epargneHeight}){
 
     console.log('animate container', container)
 
@@ -131,7 +131,28 @@ function animate(container, {dfBrickHeights}){
         })
     });
 
-    step6Done.catch(e => console.error('animation error', e))
+    // step 7
+    // step 8
+    const step8Start = step6Done;
+
+    const step8Done = step8Start.then(() => {
+        const rfParent = container.querySelector('.brick.rf');
+        const epargneElement = container.querySelector('.brick.ri .epargne');
+
+        rfParent.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+        rfParent.style.height = `${rfHeight - epargneHeight}em`;
+
+        epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+        epargneElement.style.height = `${epargneHeight}em`;
+        
+        return new Promise(resolve => {
+            epargneElement.addEventListener('transitionend', resolve, {once: true})
+        })
+    })
+
+
+
+    step8Done.catch(e => console.error('animation error', e))
 
 }
 
@@ -166,11 +187,14 @@ function doTheMaths({
     const df = sum([Solidarité, Interventions, DépensesStructure]);
     const ri = 0, di = 0;
 
+    const epargne = rf - df;
+
     const maxAmount = max([rf, ri, df, di]);
 
     const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION*bricksContainerSize;
     const rfHeight = maxHeight*rf/maxAmount;
     const dfHeight = maxHeight*df/maxAmount;
+    const epargneHeight = maxHeight*epargne/maxAmount;
 
     return {
         rf, ri, df, di, 
@@ -179,7 +203,9 @@ function doTheMaths({
             [SOLIDARITE]: dfHeight*Solidarité/df,
             [INTERVENTIONS]: dfHeight*Interventions/df,
             [STRUCTURE]: dfHeight*DépensesStructure/df,
-        }
+        },
+        epargneHeight,
+        rfHeight
     }
 }
 
@@ -201,9 +227,9 @@ export default class BudgetConstructionAnimation extends React.Component{
 
     animateAndLockComponent(props){
         if(this.financeDataReady(props) && !this.state.animationStarted && this.state.computationCache){
-            const {dfBrickHeights} = this.state.computationCache;
+            const {dfBrickHeights, rfHeight, epargneHeight} = this.state.computationCache;
 
-            animate(this.refs.container, {dfBrickHeights});
+            animate(this.refs.container, {dfBrickHeights, epargneHeight, rfHeight});
             this.setState(Object.assign({}, this.state, {animationStarted: true}))
         }
     }
@@ -240,18 +266,23 @@ export default class BudgetConstructionAnimation extends React.Component{
 
         const {
             DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses, 
-            Solidarité, Interventions, DépensesStructure
+            Solidarité, Interventions, DépensesStructure,
+            RIPropre, Emprunt
         } = amounts;
 
-        const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
-        const df = sum([Solidarité, Interventions, DépensesStructure]);
-        const ri = 0, di = 0;
+        const rf = DotationEtat + FiscalitéDirecte + FiscalitéIndirecte + RecettesDiverses
+        const df = Solidarité + Interventions + DépensesStructure
+        const epargne = rf - df;
+        const ri = epargne + RIPropre + Emprunt;
+        const di = 0;
 
         const maxAmount = max([rf, ri, df, di]);
 
         const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION*bricksContainerSize;
         const rfHeight = maxHeight*rf/maxAmount;
         const dfHeight = maxHeight*df/maxAmount;
+
+        const riHeight = maxHeight*ri/maxAmount;
 
         console.log('bricksContainerSize', bricksContainerSize, maxHeight);
         
@@ -291,15 +322,24 @@ export default class BudgetConstructionAnimation extends React.Component{
                             Legend(`Recettes de fonctionnement`)
                         )
                     ), 
-                    React.createElement('div', {className: 'column'}, ''
+                    React.createElement('div', {className: 'column'}, 
                         /*React.createElement('div', {className: 'total'}, 
                             React.createElement('span', {className: 'number'}, (ri/1000000).toFixed(0)),
                             ' millions'
-                        ),
-                        React.createElement('div', {className: 'brick', style: {
-                            height: (maxBrickPercentHeight*ri/maximum)+'%',
-                            backgroundColor: '#0E7FAB'
-                        }}, 'RECETTES D’INVESTISSEMENT')*/
+                        ),*/
+                        React.createElement(
+                            'div', 
+                            {
+                                className: 'brick parent ri', 
+                                style: {
+                                    height: `${riHeight}em`
+                                }
+                            },
+                            React.createElement('div', {className: 'brick appear-by-height epargne'}, Legend(`Epargne`)),
+                            React.createElement('div', {className: 'brick appear-by-height ri-propres'}, Legend('RI propres')),
+                            React.createElement('div', {className: 'brick appear-by-height emprunt'}, Legend('Emprunt')),
+                            Legend(`Recettes d'investissement`)
+                        )
                     ), 
                     React.createElement('div', {className: 'column'},
                         /*React.createElement('div', {className: 'total'}, 
