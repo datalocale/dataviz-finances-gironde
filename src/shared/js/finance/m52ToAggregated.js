@@ -18,14 +18,11 @@ export const rules = Object.freeze({
 
     'RF-1-1' : {
         label: 'Taxe Foncière sur les propriétés bâties+rôles supplémentaires',
-        status: 'TEMPORARY', // TODO confirmer montant
         filter(m52Row){
             const article = m52Row['Article'];
-            const chapitre = m52Row['Chapitre'];
 
             return isOR(m52Row) && isRF(m52Row) && 
-                ['A73111', 'A7318', 'A7875'].includes(article) &&
-                !(article === 'A7788' && chapitre === 'C77'); // TODO confirmer cette ligne
+                ['A73111', 'A7318'].includes(article);
         }
     },
     'RF-1-2' :{
@@ -40,10 +37,10 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A73114';
         }
     },
-    'RF-1-4': {
+    'RF-1-4': { // should be 0 before 2016 and >0 in 2017
         label: 'Reversement CVAE Région',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A731';
+            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A73123';
         }
     },
     'RF-2-1': {
@@ -84,7 +81,6 @@ export const rules = Object.freeze({
     },
     'RF-4-4': {
         label: "autres fiscalités",
-        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7388'].includes(m52Row['Article']);
         }
@@ -138,11 +134,25 @@ export const rules = Object.freeze({
         }
     },
     'RF-6-4': {
-        label: "Autres (dont dotation conférence des financeurs)",
+        // This didn't exist in 2015
+        // It was new in 2016 and put in R53*A74788
+        // Since 2017, it'll be as A7478141+A7478142
+        label: "Conférence des financeurs",
+        filter(m52Row){
+            const fonction = m52Row['Rubrique fonctionnelle'];
+
+            return isOR(m52Row) && isRF(m52Row) && (
+                ['A7478141', 'A7478142'].includes(m52Row['Article']) ||
+                (m52Row['Exercice'] === 2016 && m52Row['Article'] === 'A74788' && fonction === 'R53')
+            )
+        }
+    },
+    'RF-6-5': {
+        label: "Autres",
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
             const otherRecetteSocialeIds = Object.keys(rules)
-                .filter(id => id !== 'RF-6-4' && id.startsWith('RF-6'));
+                .filter(id => id !== 'RF-6-5' && id.startsWith('RF-6-'));
 
             return isOR(m52Row) && isRF(m52Row) && 
                 (fonction === 'R4' || fonction === 'R5') &&
@@ -163,6 +173,20 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A73125';
         }
     },
+    'RF-7-3': {
+        label: "Fonds d'appui d'aide à domicile (CNSA AAD)",
+        status: 'TEMPORARY',
+        filter(m52Row){
+            //return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A74788';
+        }
+    },
+    'RF-7-4': {
+        label: "Fonds d'appui aux politiques d'insertion",
+        status: 'TEMPORARY',
+        filter(m52Row){
+            //return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A74718';
+        }
+    },
     'RF-8-1': {
         label: "Fonds de Péréquation DMTO et Fonds de solidarité",
         filter(m52Row){
@@ -171,9 +195,9 @@ export const rules = Object.freeze({
     },    
     'RF-8-2': {
         label: "Fonds exceptionnel pour les départements en difficulté",
-        status: 'AMOUNT_ISSUE',
+        status: 'TEMPORARY',
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A74718';
+            //return isOR(m52Row) && isRF(m52Row) && m52Row['Article'] === 'A74718';
         }
     },
     'RF-9-1': {
@@ -184,15 +208,17 @@ export const rules = Object.freeze({
     },
     'RF-9-2': {
         label: "Produits exceptionnels",
+        status: 'TEMPORARY',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
                 'A7817', 'A7711', 'A7714', 'A7718', 
-                'A773', 'A7788'
+                'A773', 'A7788', 'A7875'
             ].includes(m52Row['Article']);
         }
     },
     'RF-9-3': {
         label: "Dotations et participations (dont fonds européens)",
+        status: 'TEMPORARY',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
                 'A7475', 'A7476', 'A74771', 'A74772', 'A74778', 
@@ -221,7 +247,6 @@ export const rules = Object.freeze({
     },
     'RF-9-7': {
         label: "Autres produits de gestions courants",
-        status: 'AMOUNT_ISSUE',
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && 
                 m52Row['Article'].startsWith('A75') && 
@@ -265,11 +290,10 @@ export const rules = Object.freeze({
                 (
                     [
                         "A6132", "A6135", "A6184",
-                        "A62268", "A6234", "A6245", "A62878",
+                        "A6234", "A6245",
                         "A65111", "A65221", "A652222", "A65223", "A65228", 
                         "A6523", "A652411", "A652412", "A652415", "A652418", 
-                        "A6574", "A65821", 
-                        "A6718", "A673"
+                        "A65821", "A6718"
                     ].includes(m52Row['Article']) ||
                     m52Row['Article'].startsWith('A64')
                 );
@@ -293,7 +317,7 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isDF(m52Row) && ['A651141', 'A651142', 'A651143', 'A651144', 'A651148'].includes(m52Row['Article']);
         }
     },
-    'DF-1-5-1': {
+    'DF-1-5': {
         label: "Préventions enfants",
         status: 'AMOUNT_ISSUE',
         filter(m52Row){
@@ -302,22 +326,6 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isDF(m52Row) && 
                 fonction.slice(0, 3) === 'R51' &&
                 ['A652416', 'A6514', 'A65111', 'A6718'].includes(m52Row['Article']);    
-        }
-    },
-    'DF-1-5-2': {
-        label: "Autres divers enfants",
-        status: 'AMOUNT_ISSUE',
-        filter(m52Row){
-            const fonction = m52Row['Rubrique fonctionnelle'];
-
-            return isOR(m52Row) && isDF(m52Row) && 
-                fonction.slice(0, 3) === 'R51' &&
-                [
-                    "A6068", "A6188", "A616", "A62268", "A6227", 
-                    "A62878", "A654", "A6541", "A6542", "A6568", 
-                    "A65734", "A65737", "A6574", "A6718", "A673", 
-                    "A6745"
-                ].includes(m52Row['Article']);
         }
     },
     'DF-1-6': {
@@ -333,14 +341,30 @@ export const rules = Object.freeze({
                 fonction !== 'R51';
         }
     },
-    'DF-1-7': {
+    'DF-1-7-1': {
+        label: "Autres divers enfants",
+        status: 'AMOUNT_ISSUE',
+        filter(m52Row){
+            const fonction = m52Row['Rubrique fonctionnelle'];
+
+            return isOR(m52Row) && isDF(m52Row) && 
+                fonction.slice(0, 3) === 'R51' &&
+                [
+                    "A6068", "A6188", "A616", "A62268", "A6227", 
+                    "A62878", "A654", "A6541", "A6542", "A6568", 
+                    "A65734", "A65737", "A6574", "A6718", "A673", 
+                    "A6745"
+                ].includes(m52Row['Article']);
+        }
+    },
+    'DF-1-7-2': {
         label: "Divers social - Autres",
         status: 'TEMPORARY',
         filter(m52Row){ 
             const fonction = m52Row['Rubrique fonctionnelle'];
             const art = m52Row['Article'];
             const f2 = fonction.slice(0, 2);
-            const parPrestationRuleIds = Object.keys(rules).filter(id => id.startsWith('DF-1-') && id !== 'DF-1-7');
+            const parPrestationRuleIds = Object.keys(rules).filter(id => id.startsWith('DF-1-') && id !== 'DF-1-7-2');
 
             return isOR(m52Row) && isDF(m52Row) && 
                 (f2 === 'R4' || f2 === 'R5') &&
@@ -424,9 +448,6 @@ export const rules = Object.freeze({
                 ['A6245', 'A6513', 'A6568', 'A673'].includes(m52Row['Article']);
         }
     },
-
-
-
     'DF-3-4': {
         label: "Prévention spécialisée",
         filter(m52Row){
@@ -440,17 +461,6 @@ export const rules = Object.freeze({
         }
     },
     'DF-3-6': {
-        label: "Fond social logement FSL",
-        status: 'AMOUNT_ISSUE',
-        filter(m52Row){
-            const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
-
-            return isOR(m52Row) && isDF(m52Row) && 
-                ( f3 === 'R72' || f3 === 'R58' ) && 
-                'A65561' === m52Row['Article'];
-        }
-    },
-    'DF-3-7': {
         label: "Subventions de fonctionnement",
         filter(m52Row){
             const art = m52Row['Article'];
@@ -463,27 +473,35 @@ export const rules = Object.freeze({
                 !( art.startsWith('A657') && (f2 === 'R4' || f2 === 'R5' || f2 === 'R8') );
         }
     },
-    'DF-3-8-1': {
-        label: "FAJ/CAP'J",
+    'DF-3-7-1': {
+        label: "Fond social logement FSL",
+        status: 'AMOUNT_ISSUE',
         filter(m52Row){
-            const art = m52Row['Article'];
-            return isOR(m52Row) && isDF(m52Row) && (art === 'A65562' || art === 'A6556');
+            const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
+
+            return isOR(m52Row) && isDF(m52Row) && 
+                ( f3 === 'R72' || f3 === 'R58' ) && 
+                'A65561' === m52Row['Article'];
         }
     },
-    'DF-3-8-2': { 
+    'DF-3-7-2': { 
         label: "Bourses départementales",
         filter(m52Row){
             const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
             return isOR(m52Row) && isDF(m52Row) && m52Row['Article'] === 'A6513' && f3 !== 'R52';
         }
     },
-    'DF-3-8-3': { 
+    'DF-3-7-3': { 
         label: "Participation diverses",
         filter(m52Row){
+            const f = m52Row['Rubrique fonctionnelle'];
+
             return isOR(m52Row) && isDF(m52Row) &&
+            f !== 'R51' &&
             [
                 "A6512", "A654", "A6541", "A6542", "A65568", 
-                "A6561", "A6568", "A6581", "A65821", "A65888"
+                "A6561", "A6568", "A6581", "A65821", "A65888",
+                'A65562', 'A6556'
             ].includes(m52Row['Article']);
         }
     },

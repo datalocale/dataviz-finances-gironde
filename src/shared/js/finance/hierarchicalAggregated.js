@@ -96,13 +96,13 @@ export const levels = {
                                 'DF-1-2',
                                 'DF-1-3',
                                 'DF-1-4',
-                                {
-                                    id: 'DF-1-5',
-                                    label: "Divers enfants",
-                                    children: ruleIds.filter(id => id.startsWith('DF-1-5-'))
-                                },
+                                'DF-1-5',
                                 'DF-1-6',
-                                'DF-1-7'
+                                {
+                                    id: 'DF-1-7',
+                                    label: "Autre social",
+                                    children: ruleIds.filter(id => id.startsWith('DF-1-7-'))
+                                }
                             ]
                         },
                         {
@@ -120,11 +120,10 @@ export const levels = {
                                 'DF-3-4',
                                 'DF-3-5',
                                 'DF-3-6',
-                                'DF-3-7',
                                 {
-                                    id: 'DF-3-8',
+                                    id: 'DF-3-7',
                                     label: "Frais de personnel",
-                                    children: ruleIds.filter(id => id.startsWith('DF-3-8-'))
+                                    children: ruleIds.filter(id => id.startsWith('DF-3-7-'))
                                 }
 
                             ]
