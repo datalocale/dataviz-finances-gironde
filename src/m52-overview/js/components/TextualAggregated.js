@@ -112,6 +112,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
+                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `,
                         ' utilisé dans ',
                         [...aggSet].map(aggRow => aggRow.id).join(', ')
                     )
