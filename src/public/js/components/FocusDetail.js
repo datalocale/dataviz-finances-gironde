@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+
 /*
 interface FocusDetailProps{
     className:  string
@@ -34,7 +36,7 @@ export default function ({className, title, illustrationUrl, amount, proportion,
                     )
                 })
             ),
-            React.createElement('a', {href: moreUrl}, 'En savoir plus')
+            React.createElement(PrimaryCallToAction, {href: moreUrl, text: 'En savoir plus'})
         )
     );
 }

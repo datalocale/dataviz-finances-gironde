@@ -7,6 +7,7 @@ import { min, max, sum } from 'd3-array';
 import { format } from 'd3-format';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -102,7 +103,7 @@ export function FocusSol({
                         "Ce qui représente une évolution de +4,31% par rapport à 2015."
                     ),
                     ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs d’une ou plusieurs aides du Département. Chef de file sur les actions de solidarité, il accompagne les plus fragiles dans leurs parcours de vie au quotidien.`),
-                React.createElement('a', {href: '#!/finance-details/DF'}, `en savoir plus`)
+                React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
                 React.createElement('div', {}, 
