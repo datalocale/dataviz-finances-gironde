@@ -19,14 +19,16 @@ $circle-radius : 38em;
 
     font-size: 14px;
 
+    z-index: 2;
+
     &:first-of-type{
         margin: 4em 0;
     }
 
-    &:nth-child(even){
+    &:nth-child(odd){
         align-self: flex-end;
     }
-    &:nth-child(odd){
+    &:nth-child(even){
         align-self: flex-start;
     }
 

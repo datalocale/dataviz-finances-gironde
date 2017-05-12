@@ -12,12 +12,14 @@
     }
 
     .appetizers{
-        background: url(../images/map-optimised.jpg), transparent;
+        background: url(../images/map-optimised.jpg), #BEBC05;
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
         margin-top: 9em;
 
         min-height: 2470px;
+
+        position: relative;
     }
 }
