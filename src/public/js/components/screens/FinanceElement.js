@@ -13,6 +13,8 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 import navigationTree from '../../navigationTree';
 import { EXPENDITURES, REVENUE } from '../../../../shared/js/finance/constants';
 
+import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+
 import D3Axis from '../D3Axis';
 import FinanceElementPie from '../FinanceElementPie';
 
@@ -88,13 +90,8 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         .domain([0, maxAmounts])
         .range([0, yRange]);
 
-    return React.createElement('article', {className: 'finance-element'}, 
-        React.createElement('a', {href:'#', style: {padding: '1em', display: 'block', color: 'black', textDecoration: 'none'}}, `⇐ Page d'accueil`),
-        React.createElement('h1', {className: label ? '' : 'missing', 'data-id': contentId}, 
-            label,
-            ' en ',
-            year
-        ), 
+    return React.createElement('article', {className: 'finance-element'},
+        React.createElement(PageTitle, {text: `${label} en ${year}`}), 
         React.createElement('h2', {}, format(amount, { code: 'EUR' })),
         React.createElement('section', {}, 
             parent || top ? React.createElement('div', {className: 'ratios'}, 

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Placeholder from '../../../../shared/js/components/Placeholder';
+import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 
@@ -24,7 +25,7 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
     
 
     return React.createElement('article', {className: 'total-budget'},
-        React.createElement('h1', {}, 'Dépenses et Recettes du Comptes Administratif 2016'),
+        React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
         React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
 
