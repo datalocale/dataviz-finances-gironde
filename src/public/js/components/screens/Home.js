@@ -22,7 +22,7 @@ export function Home({
     expenditures,
     currentYear,
     urls: {
-        total,
+        explore,
         solidarity, invest, presence
     },
     amounts
@@ -50,7 +50,7 @@ export function Home({
             React.createElement(TotalAppetizer, {
                 total: 1.616*Math.pow(10, 9), //expenditures, // hardcoded TODO fix the math
                 year: currentYear,
-                totalUrl: total
+                exploreUrl: explore
             }),
             React.createElement(Appetizer, {
                 h1: "Un territoire de solidarités",
@@ -147,7 +147,7 @@ export default connect(
                 } : undefined,
                 currentYear,
                 urls: {
-                    total: '#!/total',
+                    explore: '#!/explorer',
                     solidarity: '#!/focus/'+SOLIDARITES, 
                     invest: '#!/focus/'+INVEST, 
                     presence: '#!/focus/'+PRESENCE

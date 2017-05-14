@@ -13,8 +13,7 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
-import Strategy from './components/screens/Strategy';
-import TotalBudget from './components/screens/TotalBudget';
+import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
@@ -129,27 +128,14 @@ page('/', () => {
 });
 
 
-page('/total', () => {
-    console.log('in route', '/total');
+page('/explorer', () => {
+    console.log('in route', '/explorer');
 
     ReactDOM.render(
         React.createElement(
             Provider,
             { store },
-            React.createElement(TotalBudget)
-        ),
-        CONTAINER_ELEMENT
-    );
-});
-
-page('/strategie', () => {
-    console.log('in route', '/strategie');
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(Strategy)
+            React.createElement(ExploreBudget)
         ),
         CONTAINER_ELEMENT
     );
