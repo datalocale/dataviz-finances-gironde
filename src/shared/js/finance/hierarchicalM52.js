@@ -53,9 +53,6 @@ export default function({rows}, RDFI) {
     }
     */
 
-    // create first level.
-    // for all categories in first level, create next level. 
-
     function buildTree(node, parentCategory, level){
         const categorizer = levelCategories[level];
         const children = new Map();
@@ -104,4 +101,4 @@ export default function({rows}, RDFI) {
     buildTree(root, root.id, 0);
 
     return root;
-};
+}

@@ -2,16 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import M52Viz from '../../../../shared/js/components/M52Viz';
 
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
+import {hierarchicalM52} from '../../../../shared/js/finance/memoized';
 
 import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
 const MAX_HEIGHT = 50;
 
 
-export function TotalBudget({budget, urls: {expenditures, revenue}}) {
+export function TotalBudget({budget, m52Hierarchical, urls: {expenditures, revenue}}) {
     
     const max = Math.max(budget.expenditures, budget.revenue);
 
@@ -24,7 +26,7 @@ export function TotalBudget({budget, urls: {expenditures, revenue}}) {
     const dfHeight = 100*(budget[DF]/budget.revenue)+'%';
     
 
-    return React.createElement('article', {className: 'total-budget'},
+    return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
         React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
@@ -57,13 +59,56 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                 )
             )
         ),
-        React.createElement('a', { target: '_blank', href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1/resource/1e565576-bf4c-4abc-99f4-a6966f0fa8ee?inner_span=True', style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}}, 
-            React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
-            ' ',
-            `Télécharger les données brutes Open Data à la norme M52 au format CSV`
+        React.createElement('section', {className: 'm52'}, 
+            React.createElement('h2', {}, 'Les comptes sous la norme M52'),
+            React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
+            m52Hierarchical ? React.createElement('div', {}, 
+                React.createElement(M52Viz, {
+                    M52Hierarchical: m52Hierarchical,
+                    donutWidth: 130, 
+                    outerRadius: 240,
+                    /*M52HighlightedNodes,
+                    selectedNode: selection && selection.type === M52_INSTRUCTION ? selection.node : undefined,
+                    onSliceOvered: onM52NodeOvered,
+                    onSliceSelected: onM52NodeSelected*/
+                }),
+                React.createElement('div', {}, `FI selector + legend`)
+            ) : undefined,
+            React.createElement(
+                'a', 
+                {
+                    target: '_blank', 
+                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1/resource/1e565576-bf4c-4abc-99f4-a6966f0fa8ee?inner_span=True', 
+                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
+                }, 
+                React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
+                ' ',
+                `Télécharger les données brutes Open Data à la norme M52 au format CSV`
+            )
         )
 
+
+
     );
+}
+
+function stripAllButFirstLevel(root){
+    const children = []
+    root.children.forEach(c => children.push(c));
+
+    return Object.assign(
+        {},
+        root,
+        {
+            children: new Set(children.map(c => {
+                const copy = Object.assign({}, c);
+                delete copy.children;
+
+                return copy;
+            }))
+        }
+
+    )
 }
 
 export default connect(
@@ -72,8 +117,12 @@ export default connect(
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const budget = m52Instruction ? budgetBalance(m52Instruction) : {};
 
+        const rdfi = 'DF';
+        const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
+
         return {
             budget,
+            m52Hierarchical,
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 

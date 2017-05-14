@@ -36,7 +36,7 @@ export default class SunburstSlice extends React.Component{
             highlightedNodes, selectedNode,
             onSliceOvered, onSliceSelected
         } = this.props;
-        const {label} = node;
+        const {label, id} = node;
 
         const children = node.children ? Array.from(node.children.values()) : [];
         
@@ -65,13 +65,13 @@ export default class SunburstSlice extends React.Component{
             React.createElement(
                 'g', 
                 {
-                    className: 'piece',
-                    onMouseOver(){
+                    className: ['piece', id].filter(s => s).join(' '),
+                    onMouseOver: onSliceOvered ? () => {
                         onSliceOvered(node);
-                    },
-                    onClick(){
+                    }: undefined,
+                    onClick: onSliceSelected ? () => {
                         onSliceSelected(node);
-                    }
+                    } : undefined
                 },
                 React.createElement('path', {
                     d: arc(parentArcDesc)

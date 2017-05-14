@@ -1,0 +1,112 @@
+@import '../../shared/style/sunburst';
+
+$expenditures-color : #F35D32;
+$revenue-color : #68B0CD;
+
+$RX-S: 40%;
+$RX-L: 60%;
+
+$R0-color: hsl(360*0/10, $RX-S, $RX-L);
+$R1-color: hsl(360*1/10, $RX-S, $RX-L);
+$R2-color: hsl(360*2/10, $RX-S, $RX-L);
+$R3-color: hsl(360*3/10, $RX-S, $RX-L);
+$R4-color: hsl(360*4/10, $RX-S, $RX-L);
+$R5-color: hsl(360*5/10, $RX-S, $RX-L);
+$R6-color: hsl(360*6/10, $RX-S, $RX-L);
+$R7-color: hsl(360*7/10, $RX-S, $RX-L);
+$R8-color: hsl(360*8/10, $RX-S, $RX-L);
+$R9-color: hsl(360*9/10, $RX-S, $RX-L);
+
+.explore-budget{
+    section{
+        margin-bottom: 3em;
+    }
+
+    .viz{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        
+        > *{
+            width: 30%;
+        }
+
+        h1{
+            font-size: 2em;
+            text-align: center;
+        }
+
+        a{
+            color: black;
+            text-decoration: none;
+
+            .rf, .ri, .df, .di{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+    }
+
+    .expenditures, .revenue{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 60vh;
+
+        a{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+    }
+
+    .rf{
+        background-color: $revenue-color;
+    }
+
+    .ri{
+        background-color: lighten($revenue-color, 20%);
+    }
+
+    .df{
+        background-color: $expenditures-color;
+    }
+
+    .di{
+        background-color: lighten($expenditures-color, 20%);
+    }
+
+    .R0 path{
+        fill: $R0-color;
+    }
+    .R1 path{
+        fill: $R1-color;
+    }
+    .R2 path{
+        fill: $R2-color;
+    }
+    .R3 path{
+        fill: $R3-color;
+    }
+    .R4 path{
+        fill: $R4-color;
+    }
+    .R5 path{
+        fill: $R5-color;
+    }
+    .R6 path{
+        fill: $R6-color;
+    }
+    .R7 path{
+        fill: $R7-color;
+    }
+    .R8 path{
+        fill: $R8-color;
+    }
+    .R9 path{
+        fill: $R9-color;
+    }
+}
