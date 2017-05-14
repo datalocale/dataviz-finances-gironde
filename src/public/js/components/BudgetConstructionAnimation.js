@@ -53,8 +53,6 @@ function Legend(text){
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight}){
 
-    console.log('animate container', container)
-
     const animationStart = Promise.resolve(performance.now());
 
     // step 1
@@ -398,9 +396,6 @@ export default class BudgetConstructionAnimation extends React.Component{
 
         const riHeight = maxHeight*ri/maxAmount;
         const diHeight = maxHeight*di/maxAmount;
-
-        console.log('bricksContainerSize', bricksContainerSize, maxHeight);
-        
 
         return React.createElement('article', { className: 'budget-construction', ref: 'container' },
             React.createElement('div', {className: 'bricks'}, 
