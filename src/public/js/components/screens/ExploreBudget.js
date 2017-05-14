@@ -62,7 +62,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
         React.createElement('section', {className: 'm52'}, 
             React.createElement('h2', {}, 'Les comptes sous la norme M52'),
             React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
-            m52Hierarchical ? React.createElement('div', {}, 
+            m52Hierarchical ? React.createElement('div', {className: 'm52-par-fonction'}, 
                 React.createElement(M52Viz, {
                     M52Hierarchical: m52Hierarchical,
                     donutWidth: 130, 
@@ -72,7 +72,17 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                     onSliceOvered: onM52NodeOvered,
                     onSliceSelected: onM52NodeSelected*/
                 }),
-                React.createElement('div', {}, `FI selector + legend`)
+                React.createElement('div', {}, 
+                    React.createElement('ul', {className: 'legend'},
+                        Array(10).fill().map((e, i) => {
+                            return React.createElement('li', {},
+                                React.createElement('span', {className: `color R${i}`}),
+                                `R${i} blabla`
+                            )
+                        })
+                    )
+
+                )
             ) : undefined,
             React.createElement(
                 'a', 

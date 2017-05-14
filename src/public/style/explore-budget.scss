@@ -79,34 +79,98 @@ $R9-color: hsl(360*9/10, $RX-S, $RX-L);
         background-color: lighten($expenditures-color, 20%);
     }
 
-    .R0 path{
-        fill: $R0-color;
+    .m52-par-fonction{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        & > :first-child{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            flex: 2;
+        }
+
+        & > *{
+            flex: 1;
+        }
+
+        .R0 path{
+            fill: $R0-color;
+        }
+        .R1 path{
+            fill: $R1-color;
+        }
+        .R2 path{
+            fill: $R2-color;
+        }
+        .R3 path{
+            fill: $R3-color;
+        }
+        .R4 path{
+            fill: $R4-color;
+        }
+        .R5 path{
+            fill: $R5-color;
+        }
+        .R6 path{
+            fill: $R6-color;
+        }
+        .R7 path{
+            fill: $R7-color;
+        }
+        .R8 path{
+            fill: $R8-color;
+        }
+        .R9 path{
+            fill: $R9-color;
+        }
+
+        .legend{
+            .color{
+                display: inline-block;
+                height: 2em;
+                width: 2em;
+
+                &.R0{
+                    background-color: $R0-color;
+                }
+                &.R1{
+                    background-color: $R1-color;
+                }
+                &.R2{
+                    background-color: $R2-color;
+                }
+                &.R3{
+                    background-color: $R3-color;
+                }
+                &.R4{
+                    background-color: $R4-color;
+                }
+                &.R5{
+                    background-color: $R5-color;
+                }
+                &.R6{
+                    background-color: $R6-color;
+                }
+                &.R7{
+                    background-color: $R7-color;
+                }
+                &.R8{
+                    background-color: $R8-color;
+                }
+                &.R9{
+                    background-color: $R9-color;
+                }
+            }
+        }
+
+
+
     }
-    .R1 path{
-        fill: $R1-color;
-    }
-    .R2 path{
-        fill: $R2-color;
-    }
-    .R3 path{
-        fill: $R3-color;
-    }
-    .R4 path{
-        fill: $R4-color;
-    }
-    .R5 path{
-        fill: $R5-color;
-    }
-    .R6 path{
-        fill: $R6-color;
-    }
-    .R7 path{
-        fill: $R7-color;
-    }
-    .R8 path{
-        fill: $R8-color;
-    }
-    .R9 path{
-        fill: $R9-color;
-    }
+
+
 }
