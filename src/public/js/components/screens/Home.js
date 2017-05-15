@@ -4,6 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { sum } from 'd3-array';
 
+import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
@@ -27,10 +29,24 @@ export function Home({
 }) {
     
     return React.createElement('article', {className: 'home'},
-        React.createElement('h1', {}, "Un budget au service d'une solidarité humaine et territoriale"),
+        React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
         React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement Les domaines d’intervention du Département sont vastes mais respectent tous un même objectif : assurer la mission d’aide sociale et de solidarité pour accompagner au mieux les Girondins et les territoires. A ces compétences obligatoires s’ajoutent des actions volontaristes dans de nombreux domaines. Le Département intervient au quotidien pour répondre à une demande de solidarité et de services publics grandissante.`),
         
         React.createElement('section', {className: 'appetizers'},
+            React.createElement('div', {
+                className: 'fader',
+                style: {
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                    zIndex: 1
+                }
+            }) ,
             React.createElement(TotalAppetizer, {
                 total: 1.616*Math.pow(10, 9), //expenditures, // hardcoded TODO fix the math
                 year: currentYear,
@@ -57,7 +73,7 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
                 numberSecundary: "425 sites",
                 description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents occupant 125 métiers différents mènent leur mission dans tout le territoire de la Gironde. Il compte 425 lieux de travail et d’accueil du public. Malgré une croissance démographique constante (+ 15 000 nouveaux Girondins en moyenne chaque année) qui entraîne une augmentent des besoins, le Département accorde une vigilance particulière au maintien de ses frais de personnel et de fonctionnement.`, 
                 moreUrl: presence
-            })        
+            }) 
         ),
         
         React.createElement('section', {},

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+
 /*
 interface TotalAppetizerProps{
     total: number,
@@ -22,10 +24,6 @@ export default function ({total, year, totalUrl}) {
         ),
         React.createElement('hr', {}),
         React.createElement('p', {}, `Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`),
-        React.createElement(
-            'a', 
-            { href: totalUrl },
-            'En savoir plus'
-        )
+        React.createElement(PrimaryCallToAction, { href: totalUrl, text: 'Explorer le budget'})
     );
 }

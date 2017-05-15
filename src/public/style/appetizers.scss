@@ -1,3 +1,5 @@
+@import 'gironde-vars';
+
 $circle-radius : 38em;
 
 
@@ -17,20 +19,22 @@ $circle-radius : 38em;
 
     font-size: 14px;
 
+    z-index: 2;
+
     &:first-of-type{
         margin: 4em 0;
     }
 
-    &:nth-child(even){
+    &:nth-child(odd){
         align-self: flex-end;
     }
-    &:nth-child(odd){
+    &:nth-child(even){
         align-self: flex-start;
     }
 
     h1{
-        font-size: 2.5em;
-        text-transform: uppercase;
+        align-self: flex-start;
+        width: 100%;
     }
 
     p{
@@ -61,18 +65,24 @@ $circle-radius : 38em;
             font-size: 1.5em;
         }
 
-
         .total{
             font-size: 5.5em;
             letter-spacing: -10px;
+
+            color: $gironde-green;
         }
 
         hr{
             width: 80%;
-            border-width: 1px 0 0 0;
+            border-color: rgb(45, 45, 45);
+
+            margin: 0.7em;
         }
 
-
+        p{
+            line-height: 1.8em;
+            max-width: 80%;
+        }
 
         a{
             align-self: center;
@@ -130,30 +140,4 @@ $circle-radius : 38em;
 
     color: #4A4A4A;
     font-size: 14px;
-}
-
-
-.appetizer.total-appetizer h1{
-    font-size: 1.5em;
-}
-
-
-.appetizer.total-appetizer .total{
-    font-size: 5.5em;
-    letter-spacing: -10px;
-
-}
-
-.appetizer.total-appetizer hr{
-    width: 80%;
-    border-width: 1px 0 0 0;
-}
-
-.appetizer.total-appetizer p{
-    line-height: 1.8em;
-    max-width: 80%;
-}
-
-.appetizer.total-appetizer a{
-    align-self: center;
 }
