@@ -2,7 +2,7 @@ import { Record, Map as ImmutableMap } from 'immutable';
 import _md from 'markdown-it';
 
 import { 
-    BREADCRUMB_CHANGE, M52_INSTRUCTION_RECEIVED, 
+    FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED, 
     ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED
 } from './constants/actions';
 
@@ -32,8 +32,8 @@ export default function reducer(state, action) {
             const {m52Instruction} = action
             return state.setIn(['m52InstructionByYear', m52Instruction.year], m52Instruction);
         }
-        case BREADCRUMB_CHANGE:
-            return state.set('breadcrumb', action.breadcrumb);
+        case FINANCE_DETAIL_ID_CHANGE:
+            return state.set('financeDetailId', action.financeDetailId);
         case ATEMPORAL_TEXTS_RECEIVED: {
             let textMap = state.get('textsById');
 

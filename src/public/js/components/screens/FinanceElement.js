@@ -243,14 +243,14 @@ function makeChildToParent(hierAgg){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, textsById, breadcrumb, currentYear } = state;
+        const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
         
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
         const childToParent = m52Instruction && makeChildToParent(hierAgg);
         
-        const displayedContentId = breadcrumb.last();
+        const displayedContentId = financeDetailId;
         
         const elementById = (m52Instruction && makeElementById(hierAgg)) || new ImmutableMap();
         const element = elementById.get(displayedContentId);
@@ -260,7 +260,7 @@ export default connect(
             (element.id.startsWith('D') ? EXPENDITURES : REVENUE) : 
             undefined;
 
-        const amount = m52Instruction && element.total;
+        const amount = m52Instruction && element && element.total;
 
         const isDeepElement = element && element.id !== EXPENDITURES && element.id !== REVENUE;
 

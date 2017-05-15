@@ -12,6 +12,14 @@ import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
 const MAX_HEIGHT = 50;
 
+/*throw `TODO :
+* make m52 legend clickable
+    * Create m52 pages 'par fonction'
+    * Display m52 row table in leaf pages (finance detail)
+* display correct label in the legend
+* 
+`*/
+
 
 export function TotalBudget({budget, m52Hierarchical, urls: {expenditures, revenue}}) {
     
