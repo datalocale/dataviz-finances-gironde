@@ -21,7 +21,7 @@ const MAX_HEIGHT = 50;
 `*/
 
 
-export function TotalBudget({budget, m52Hierarchical, urls: {expenditures, revenue}}) {
+export function TotalBudget({budget, m52Hierarchical, urls: {expenditures, revenue, byFonction}}) {
     
     const max = Math.max(budget.expenditures, budget.revenue);
 
@@ -83,9 +83,13 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                 React.createElement('div', {}, 
                     React.createElement('ul', {className: 'legend'},
                         Array(10).fill().map((e, i) => {
+                            const fonction = `R${i}`;
+
                             return React.createElement('li', {},
-                                React.createElement('span', {className: `color R${i}`}),
-                                `R${i} blabla`
+                                React.createElement('a', {href: byFonction[fonction]},
+                                    React.createElement('span', {className: `color ${fonction}`}),
+                                    `${fonction} blabla`
+                                )
                             )
                         })
                     )
@@ -144,6 +148,18 @@ export default connect(
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 
+                byFonction: {
+                    'R0': `#!/finance-details/M52-${rdfi}-R0`,
+                    'R1': `#!/finance-details/M52-${rdfi}-R1`,
+                    'R2': `#!/finance-details/M52-${rdfi}-R2`,
+                    'R3': `#!/finance-details/M52-${rdfi}-R3`,
+                    'R4': `#!/finance-details/M52-${rdfi}-R4`,
+                    'R5': `#!/finance-details/M52-${rdfi}-R5`,
+                    'R6': `#!/finance-details/M52-${rdfi}-R6`,
+                    'R7': `#!/finance-details/M52-${rdfi}-R7`,
+                    'R8': `#!/finance-details/M52-${rdfi}-R8`,
+                    'R9': `#!/finance-details/M52-${rdfi}-R9`
+                }
             }
         };
 

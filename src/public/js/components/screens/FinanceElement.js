@@ -8,7 +8,7 @@ import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 import { format as d3Format } from 'd3-format';
 
-import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
+import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import navigationTree from '../../navigationTree';
 import { EXPENDITURES, REVENUE } from '../../../../shared/js/finance/constants';
@@ -216,28 +216,28 @@ function makePartition(contentId, totalById, textsById){
 
 
 
-function makeElementById(hierAgg){
+function makeElementById(hierAgg, hierM52){
     let elementById = new ImmutableMap();
 
     flattenTree(hierAgg).forEach(aggHierNode => {
         elementById = elementById.set(aggHierNode.id, aggHierNode);
     });
 
+    flattenTree(hierM52).forEach(m52HierNode => {
+        elementById = elementById.set(m52HierNode.id, m52HierNode);
+    });
+
     return elementById;
 }
 
-function makeChildToParent(hierAgg){
-    const childToParent = new WeakMap();
-
-    visit(hierAgg, e => {
+function fillChildToParent(tree, wm){
+    visit(tree, e => {
         if(e.children){
             e.children.forEach(c => {
-                childToParent.set(c, e);
+                wm.set(c, e);
             })
         }
     });
-
-    return childToParent;
 }
 
 
@@ -245,32 +245,45 @@ export default connect(
     state => {        
         const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
         
+        const RDFI = 'DF';
+
         const m52Instruction = m52InstructionByYear.get(currentYear);
+        const hierM52 = m52Instruction && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
-        const childToParent = m52Instruction && makeChildToParent(hierAgg);
+
+        const childToParent = new WeakMap();
+        if(m52Instruction){
+            fillChildToParent(hierM52, childToParent);
+            fillChildToParent(hierAgg, childToParent);
+        }
         
         const displayedContentId = financeDetailId;
         
-        const elementById = (m52Instruction && makeElementById(hierAgg)) || new ImmutableMap();
+        const elementById = (m52Instruction && makeElementById(hierAgg, hierM52)) || new ImmutableMap();
         const element = elementById.get(displayedContentId);
 
         const expenseOrRevenue = element && element.id ? 
-            // weak test. TODO : pick a stronger test
-            (element.id.startsWith('D') ? EXPENDITURES : REVENUE) : 
+            // weak test. TODO : create a stronger test
+            (element.id.startsWith('D') || element.id.startsWith('M52-D') ? EXPENDITURES : REVENUE) : 
             undefined;
 
         const amount = m52Instruction && element && element.total;
 
-        const isDeepElement = element && element.id !== EXPENDITURES && element.id !== REVENUE;
+        const isDeepElement = element && element.id !== EXPENDITURES && element.id !== REVENUE && childToParent.get(element) !== hierM52;
 
         const parentElement = isDeepElement && childToParent.get(element);
         const topElement = isDeepElement && elementById.get(expenseOrRevenue);
         const topTexts = topElement && textsById.get(topElement.id);
         const topLabel = topTexts && topTexts.label || '';
 
+        console.log('el, par', element, parentElement);
+
         const amountsByYear = m52InstructionByYear.map(m52i => {
-            return makeElementById(hierarchicalAggregated(m52ToAggregated(m52i))).get(displayedContentId).total;
+            return makeElementById(
+                hierarchicalAggregated(m52ToAggregated(m52i)), 
+                hierarchicalM52(m52i, RDFI)
+            ).get(displayedContentId).total;
         })
 
         return {

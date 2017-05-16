@@ -78,7 +78,7 @@ export default function({rows}, RDFI) {
                         }
 
                         categoryChild = {
-                            id: category,
+                            id: `M52-${RDFI}-${category}`,
                             label,
                             elements: new Set()
                         }
