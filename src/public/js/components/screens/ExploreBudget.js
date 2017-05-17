@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -32,7 +34,6 @@ export function TotalBudget({budget, m52Hierarchical, labelsById, urls: {expendi
     const riHeight = 100*(budget[RI]/budget.revenue)+'%';
     const diHeight = 100*(budget[DI]/budget.revenue)+'%';
     const dfHeight = 100*(budget[DF]/budget.revenue)+'%';
-    
 
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
@@ -82,13 +83,13 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                 }),
                 React.createElement('div', {}, 
                     React.createElement('ul', {className: 'legend'},
-                        Array(10).fill().map((e, i) => {
-                            const fonction = `R${i}`;
-
+                        new List(m52Hierarchical.children)
+                        .sort((c1, c2) => c2.total - c1.total)
+                        .map((e, i) => {
                             return React.createElement('li', {},
-                                React.createElement('a', {href: byFonction[fonction]},
-                                    React.createElement('span', {className: `color ${fonction}`}),
-                                    labelsById.get(`M52-DF-${fonction}`)
+                                React.createElement('a', {href: byFonction[e.id]},
+                                    React.createElement('span', {className: `color ${e.id}`}),
+                                    labelsById.get(e.id)
                                 )
                             )
                         })
@@ -150,16 +151,16 @@ export default connect(
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 
                 byFonction: {
-                    'R0': `#!/finance-details/M52-${rdfi}-R0`,
-                    'R1': `#!/finance-details/M52-${rdfi}-R1`,
-                    'R2': `#!/finance-details/M52-${rdfi}-R2`,
-                    'R3': `#!/finance-details/M52-${rdfi}-R3`,
-                    'R4': `#!/finance-details/M52-${rdfi}-R4`,
-                    'R5': `#!/finance-details/M52-${rdfi}-R5`,
-                    'R6': `#!/finance-details/M52-${rdfi}-R6`,
-                    'R7': `#!/finance-details/M52-${rdfi}-R7`,
-                    'R8': `#!/finance-details/M52-${rdfi}-R8`,
-                    'R9': `#!/finance-details/M52-${rdfi}-R9`
+                    'M52-DF-R0': `#!/finance-details/M52-${rdfi}-R0`,
+                    'M52-DF-R1': `#!/finance-details/M52-${rdfi}-R1`,
+                    'M52-DF-R2': `#!/finance-details/M52-${rdfi}-R2`,
+                    'M52-DF-R3': `#!/finance-details/M52-${rdfi}-R3`,
+                    'M52-DF-R4': `#!/finance-details/M52-${rdfi}-R4`,
+                    'M52-DF-R5': `#!/finance-details/M52-${rdfi}-R5`,
+                    'M52-DF-R6': `#!/finance-details/M52-${rdfi}-R6`,
+                    'M52-DF-R7': `#!/finance-details/M52-${rdfi}-R7`,
+                    'M52-DF-R8': `#!/finance-details/M52-${rdfi}-R8`,
+                    'M52-DF-R9': `#!/finance-details/M52-${rdfi}-R9`
                 }
             }
         };
