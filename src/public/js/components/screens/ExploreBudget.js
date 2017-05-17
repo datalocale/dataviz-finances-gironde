@@ -32,8 +32,8 @@ export function TotalBudget({budget, m52Hierarchical, labelsById, urls: {expendi
 
     const rfHeight = 100*(budget[RF]/budget.revenue)+'%';
     const riHeight = 100*(budget[RI]/budget.revenue)+'%';
-    const diHeight = 100*(budget[DI]/budget.revenue)+'%';
-    const dfHeight = 100*(budget[DF]/budget.revenue)+'%';
+    const diHeight = 100*(budget[DI]/budget.expenditures)+'%';
+    const dfHeight = 100*(budget[DF]/budget.expenditures)+'%';
 
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
@@ -47,7 +47,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
                 React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
-                React.createElement('a', {href: revenue, style: {height: expHeight}}, 
+                React.createElement('a', {href: revenue, style: {height: revHeight}}, 
                     React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 
                         React.createElement('span', {}, 'Recettes de fonctionnement')
                     ),
@@ -58,7 +58,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, (budget.expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
-                React.createElement('a', {href: expenditures, style: {height: revHeight}}, 
+                React.createElement('a', {href: expenditures, style: {height: expHeight}}, 
                     React.createElement('div', {className: 'df', style: {height: dfHeight}}, 
                         React.createElement('span', {}, 'Dépenses de fonctionnement')
                     ),
