@@ -7,6 +7,7 @@ import { format } from 'currency-formatter';
 import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 import { format as d3Format } from 'd3-format';
+import { format as formatEuro } from 'currency-formatter';
 
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
@@ -61,7 +62,7 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls}) {
+export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls, m52Rows}) {
     const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
     //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
@@ -196,7 +197,33 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
                     )
                 );
             })  
-        ) : undefined 
+        ) : undefined,
+
+        !partition && m52Rows ? React.createElement('section', { className: 'partition'}, 
+            React.createElement('h2', {}, `Lignes M52 correspondantes`),
+            React.createElement('table', {}, 
+                m52Rows.map(row => {
+                    return React.createElement('tr', {}, 
+                        React.createElement('td', {}, row['Rubrique fonctionnelle']),
+                        React.createElement('td', {}, row['Chapitre']),
+                        React.createElement('td', {}, row['Article']),
+                        React.createElement('td', {}, row['Libellé']),
+                        React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                    )
+                })
+            ),
+            React.createElement(
+                'a', 
+                {
+                    target: '_blank', 
+                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', 
+                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
+                }, 
+                React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
+                ' ',
+                `Télécharger toutes les données Open Data à la norme M52 au format CSV`
+            )
+        ): undefined
 
     );
 }
@@ -300,7 +327,8 @@ export default connect(
             expenseOrRevenue,
             amountsByYear,
             texts: textsById.get(displayedContentId),
-            partition: makePartition(element, elementById.map(e => e.total), textsById),
+            partition: element && element.children ? makePartition(element, elementById.map(e => e.total), textsById) : undefined,
+            m52Rows: element && !element.children ? element.elements.first()['M52Rows'] : undefined,
             year: currentYear
         }
 

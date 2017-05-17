@@ -101,7 +101,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                 'a', 
                 {
                     target: '_blank', 
-                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1/resource/1e565576-bf4c-4abc-99f4-a6966f0fa8ee?inner_span=True', 
+                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', 
                     style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
                 }, 
                 React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
