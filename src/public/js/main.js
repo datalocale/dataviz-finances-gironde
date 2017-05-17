@@ -18,6 +18,8 @@ import ExploreBudget from './components/screens/ExploreBudget';
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
 
+const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json'); 
+
 
 let DATA_URL_PREFIX = "..";
 if(process.env.NODE_ENV === "production"){
@@ -50,6 +52,17 @@ const store = createStore(
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
 );
+
+
+
+store.dispatch({
+    type: ATEMPORAL_TEXTS_RECEIVED,
+    textList: Object.keys(rubriqueIdToLabel)
+        .map(fonction => ({
+            id: `M52-DF-${fonction}`, 
+            label: rubriqueIdToLabel[fonction]
+        }))
+});
 
 
 

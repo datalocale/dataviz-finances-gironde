@@ -21,7 +21,7 @@ const MAX_HEIGHT = 50;
 `*/
 
 
-export function TotalBudget({budget, m52Hierarchical, urls: {expenditures, revenue, byFonction}}) {
+export function TotalBudget({budget, m52Hierarchical, labelsById, urls: {expenditures, revenue, byFonction}}) {
     
     const max = Math.max(budget.expenditures, budget.revenue);
 
@@ -88,7 +88,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                             return React.createElement('li', {},
                                 React.createElement('a', {href: byFonction[fonction]},
                                     React.createElement('span', {className: `color ${fonction}`}),
-                                    `${fonction} blabla`
+                                    labelsById.get(`M52-DF-${fonction}`)
                                 )
                             )
                         })
@@ -135,7 +135,7 @@ function stripAllButFirstLevel(root){
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear } = state;
+        const { m52InstructionByYear, currentYear, textsById } = state;
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const budget = m52Instruction ? budgetBalance(m52Instruction) : {};
 
@@ -145,6 +145,7 @@ export default connect(
         return {
             budget,
             m52Hierarchical,
+            labelsById: textsById.map(texts => texts.label),
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 
