@@ -1,3 +1,5 @@
+import { Map as ImmutableMap } from 'immutable';
+
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
 const rubriqueIdToLabel = require('./m52FonctionLabels.json'); 
@@ -91,7 +93,7 @@ export default function({rows}, RDFI) {
 
         node.total = total;
         node.ownValue = ownValue;
-        node.children = children;
+        node.children = new ImmutableMap(children);
         children.forEach((child, category) => {
             if(levelCategories[level+1])
                 buildTree(child, category, level+1)

@@ -203,14 +203,14 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
 
 
 
-function makePartition(contentId, totalById, textsById){
-    const childrenIds = navigationTree[contentId];
+function makePartition(element, totalById, textsById){
+    const children = element.children;
 
-    return childrenIds ? childrenIds.map(childId => ({
-        contentId: childId,
-        partAmount: totalById.get(childId),
-        texts: textsById.get(childId),
-        url: '#!/finance-details/'+childId
+    return children ? children.map(child => ({
+        contentId: child.id,
+        partAmount: totalById.get(child.id),
+        texts: textsById.get(child.id),
+        url: '#!/finance-details/'+child.id
     })) : undefined;
 }
 
@@ -277,8 +277,6 @@ export default connect(
         const topTexts = topElement && textsById.get(topElement.id);
         const topLabel = topTexts && topTexts.label || '';
 
-        console.log('el, par', element, parentElement);
-
         const amountsByYear = m52InstructionByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i)), 
@@ -302,7 +300,7 @@ export default connect(
             expenseOrRevenue,
             amountsByYear,
             texts: textsById.get(displayedContentId),
-            partition: makePartition(displayedContentId, elementById.map(e => e.total), textsById),
+            partition: makePartition(element, elementById.map(e => e.total), textsById),
             year: currentYear
         }
 
