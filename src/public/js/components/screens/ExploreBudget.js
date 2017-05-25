@@ -7,7 +7,6 @@ import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
-import {hierarchicalM52} from '../../../../shared/js/finance/memoized';
 
 import M52ByFonction from '../M52ByFonction';
 
@@ -24,7 +23,7 @@ const MAX_HEIGHT = 50;
 `*/
 
 
-export function TotalBudget({budget, m52Hierarchical, labelsById, urls: {expenditures, revenue, byFonction}}) {
+export function TotalBudget({budget, m52Instruction, labelsById, urls: {expenditures, revenue, byFonction}}) {
     
     const max = Math.max(budget.expenditures, budget.revenue);
 
@@ -72,7 +71,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
         React.createElement('section', {className: 'm52'}, 
             React.createElement('h2', {}, 'Les comptes sous la norme M52'),
             React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
-            m52Hierarchical ? React.createElement(M52ByFonction, {m52Hierarchical, urlByFonction: byFonction, labelsById}) : undefined,
+            m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
                 'a', 
                 {
@@ -91,52 +90,40 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
     );
 }
 
-function stripAllButFirstLevel(root){
-    const children = []
-    root.children.forEach(c => children.push(c));
-
-    return Object.assign(
-        {},
-        root,
-        {
-            children: new Set(children.map(c => {
-                const copy = Object.assign({}, c);
-                delete copy.children;
-
-                return copy;
-            }))
-        }
-
-    )
-}
-
 export default connect(
     state => {
         const { m52InstructionByYear, currentYear, textsById } = state;
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const budget = m52Instruction ? budgetBalance(m52Instruction) : {};
 
-        const rdfi = 'DF';
-        const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
-
         return {
             budget,
-            m52Hierarchical,
+            m52Instruction,
             labelsById: textsById.map(texts => texts.label),
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 
                 byFonction: {
-                    'M52-DF-R0': `#!/finance-details/M52-${rdfi}-R0`,
-                    'M52-DF-R1': `#!/finance-details/M52-${rdfi}-R1`,
-                    'M52-DF-R2': `#!/finance-details/M52-${rdfi}-R2`,
-                    'M52-DF-R3': `#!/finance-details/M52-${rdfi}-R3`,
-                    'M52-DF-R4': `#!/finance-details/M52-${rdfi}-R4`,
-                    'M52-DF-R5': `#!/finance-details/M52-${rdfi}-R5`,
-                    'M52-DF-R6': `#!/finance-details/M52-${rdfi}-R6`,
-                    'M52-DF-R7': `#!/finance-details/M52-${rdfi}-R7`,
-                    'M52-DF-R8': `#!/finance-details/M52-${rdfi}-R8`,
-                    'M52-DF-R9': `#!/finance-details/M52-${rdfi}-R9`
+                    'M52-DF-R0': `#!/finance-details/M52-DF-R0`,
+                    'M52-DF-R1': `#!/finance-details/M52-DF-R1`,
+                    'M52-DF-R2': `#!/finance-details/M52-DF-R2`,
+                    'M52-DF-R3': `#!/finance-details/M52-DF-R3`,
+                    'M52-DF-R4': `#!/finance-details/M52-DF-R4`,
+                    'M52-DF-R5': `#!/finance-details/M52-DF-R5`,
+                    'M52-DF-R6': `#!/finance-details/M52-DF-R6`,
+                    'M52-DF-R7': `#!/finance-details/M52-DF-R7`,
+                    'M52-DF-R8': `#!/finance-details/M52-DF-R8`,
+                    'M52-DF-R9': `#!/finance-details/M52-DF-R9`,
+                    'M52-DI-R0': `#!/finance-details/M52-DI-R0`,
+                    'M52-DI-R1': `#!/finance-details/M52-DI-R1`,
+                    'M52-DI-R2': `#!/finance-details/M52-DI-R2`,
+                    'M52-DI-R3': `#!/finance-details/M52-DI-R3`,
+                    'M52-DI-R4': `#!/finance-details/M52-DI-R4`,
+                    'M52-DI-R5': `#!/finance-details/M52-DI-R5`,
+                    'M52-DI-R6': `#!/finance-details/M52-DI-R6`,
+                    'M52-DI-R7': `#!/finance-details/M52-DI-R7`,
+                    'M52-DI-R8': `#!/finance-details/M52-DI-R8`,
+                    'M52-DI-R9': `#!/finance-details/M52-DI-R9`
                 }
             }
         };

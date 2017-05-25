@@ -12,7 +12,7 @@ import { format as formatEuro } from 'currency-formatter';
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import navigationTree from '../../navigationTree';
-import { EXPENDITURES, REVENUE } from '../../../../shared/js/finance/constants';
+import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
@@ -62,7 +62,7 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, amount, parent, top, texts, partition, year, amountsByYear, urls, m52Rows}) {
+export function FinanceElement({contentId, RDFI, amount, parent, top, texts, partition, year, amountsByYear, urls, m52Rows}) {
     const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
     //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
@@ -91,8 +91,16 @@ export function FinanceElement({contentId, amount, parent, top, texts, partition
         .domain([0, maxAmounts])
         .range([0, yRange]);
 
+    const RDFIText = RDFI === DF ?
+        'Dépense de fonctionnement' : 
+        RDFI === DI ?
+            `Dépense d'investissement`:
+            '';
+
     return React.createElement('article', {className: 'finance-element'},
-        React.createElement(PageTitle, {text: `${label} en ${year}`}), 
+        React.createElement(PageTitle, {text: RDFI ? 
+            `${RDFIText} - ${label} en ${year}` :
+            `${label} en ${year}`}), 
         React.createElement('h2', {}, format(amount, { code: 'EUR' })),
         React.createElement('section', {}, 
             parent || top ? React.createElement('div', {className: 'ratios'}, 
@@ -243,7 +251,7 @@ function makePartition(element, totalById, textsById){
 
 
 
-function makeElementById(hierAgg, hierM52){
+function makeElementById(hierAgg, hierM52 = {}){
     let elementById = new ImmutableMap();
 
     flattenTree(hierAgg).forEach(aggHierNode => {
@@ -272,16 +280,21 @@ export default connect(
     state => {        
         const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
         
-        const RDFI = 'DF';
+        let RDFI;
+        if(financeDetailId.startsWith('M52-')){
+            RDFI = financeDetailId.slice(4, 4+2);
+        }
 
         const m52Instruction = m52InstructionByYear.get(currentYear);
-        const hierM52 = m52Instruction && hierarchicalM52(m52Instruction, RDFI);
+        const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
         const childToParent = new WeakMap();
         if(m52Instruction){
-            fillChildToParent(hierM52, childToParent);
+            if(hierM52)
+                fillChildToParent(hierM52, childToParent);
+            
             fillChildToParent(hierAgg, childToParent);
         }
         
@@ -307,12 +320,13 @@ export default connect(
         const amountsByYear = m52InstructionByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i)), 
-                hierarchicalM52(m52i, RDFI)
+                RDFI ? hierarchicalM52(m52i, RDFI): undefined
             ).get(displayedContentId).total;
         })
 
         return {
             contentId: displayedContentId, 
+            RDFI,
             amount,
             parent: parentElement && parentElement !== topElement && {
                 amount: parentElement.total,

@@ -63,6 +63,14 @@ store.dispatch({
             label: rubriqueIdToLabel[fonction]
         }))
 });
+store.dispatch({
+    type: ATEMPORAL_TEXTS_RECEIVED,
+    textList: Object.keys(rubriqueIdToLabel)
+        .map(fonction => ({
+            id: `M52-DI-${fonction}`, 
+            label: rubriqueIdToLabel[fonction]
+        }))
+});
 
 
 
