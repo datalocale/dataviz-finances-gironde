@@ -4,11 +4,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
-import M52Viz from '../../../../shared/js/components/M52Viz';
 
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
 import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {hierarchicalM52} from '../../../../shared/js/finance/memoized';
+
+import M52ByFonction from '../M52ByFonction';
 
 import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
@@ -71,32 +72,7 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
         React.createElement('section', {className: 'm52'}, 
             React.createElement('h2', {}, 'Les comptes sous la norme M52'),
             React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
-            m52Hierarchical ? React.createElement('div', {className: 'm52-par-fonction'}, 
-                React.createElement(M52Viz, {
-                    M52Hierarchical: m52Hierarchical,
-                    donutWidth: 130, 
-                    outerRadius: 240,
-                    /*M52HighlightedNodes,
-                    selectedNode: selection && selection.type === M52_INSTRUCTION ? selection.node : undefined,
-                    onSliceOvered: onM52NodeOvered,
-                    onSliceSelected: onM52NodeSelected*/
-                }),
-                React.createElement('div', {}, 
-                    React.createElement('ul', {className: 'legend'},
-                        new List(m52Hierarchical.children)
-                        .sort((c1, c2) => c2.total - c1.total)
-                        .map((e, i) => {
-                            return React.createElement('li', {},
-                                React.createElement('a', {href: byFonction[e.id]},
-                                    React.createElement('span', {className: `color ${e.id}`}),
-                                    labelsById.get(e.id)
-                                )
-                            )
-                        })
-                    )
-
-                )
-            ) : undefined,
+            m52Hierarchical ? React.createElement(M52ByFonction, {m52Hierarchical, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
                 'a', 
                 {
