@@ -52,8 +52,9 @@ interface FinanceElementProps{
 
 */
 
-const WIDTH = 1100;
-const HEIGHT = 570;
+
+const WIDTH = 825;
+const HEIGHT = 430;
 
 const HEIGHT_PADDING = 70;
 
@@ -62,13 +63,14 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, RDFI, amount, parent, top, texts, partition, year, amountsByYear, urls, m52Rows}) {
+export function FinanceElement({contentId, RDFI, amount, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
     const label = texts && texts.get('label');
     const atemporalText = texts && texts.get('atemporal');
     //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
 
-    const years = amountsByYear.keySeq().toJS();
-    const amounts = amountsByYear.valueSeq().toJS();
+    const years = partitionByYear.keySeq().toJS();
+    const partitions = partitionByYear.valueSeq().toJS();
+    const amountByYear = partitionByYear.map(p => sum( p.map(part => part.partAmount).toJS() ));
 
     const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
@@ -78,17 +80,26 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         .domain([min(years), max(years)])
         .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
-    const maxAmounts = max(amounts);
+    const maxAmount = max(amountByYear.valueSeq().toJS());
+
+    // sort all partitions part according to the order in this year's partition
+    let thisYearPartition = partitionByYear.get(year)
+    thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
+    const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
+    partitionByYear = partitionByYear.map(partition => {
+        // indexOf inside a .map leads to O(n^2), but lists are 10 elements long, so it's ok
+        return partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p2.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
+    })
 
     const yAxisAmountScale = scaleLinear()
-        .domain([0, maxAmounts])
+        .domain([0, maxAmount])
         .range([HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]);
     const yRange = yAxisAmountScale.range()[0] - yAxisAmountScale.range()[1];
 
     const ticks = yAxisAmountScale.ticks(5);
 
     const rectAmountScale = scaleLinear()
-        .domain([0, maxAmounts])
+        .domain([0, maxAmount])
         .range([0, yRange]);
 
     const RDFIText = RDFI === DF ?
@@ -96,6 +107,7 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         RDFI === DI ?
             `Dépense d'investissement`:
             '';
+
 
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
@@ -124,7 +136,7 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         React.createElement('section', {},
             React.createElement('h2', {}, 'Évolution sur ces dernières années'),
             React.createElement('p', {}, 
-                `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountsByYear.get(year-1)) - 1  )}`
+                `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
             ),
             React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
                 // x axis / years
@@ -160,17 +172,27 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
                 })}),
                 // content
                 React.createElement('g', {className: 'content'},
-                    amountsByYear.entrySeq().toJS().map(([year, yearAmount]) => {
+                    partitionByYear.entrySeq().toJS().map(([year, partition]) => {
+                        const yearAmount = sum(partition.map(p => p.partAmount).toJS());
+
                         const height = rectAmountScale(yearAmount);
                         const y = HEIGHT - HEIGHT_PADDING - height;
 
+                        throw `TODO compute a y per part (accumulate. See SolidarityFocus code)`
+
                         return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
-                            React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height}),
+                            React.createElement('g', {},
+                                partition.map(part => {
+                                    const partHeight = 20;
+                                    return React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height: partHeight})
+                                })
+                            ),
                             React.createElement('text', {x: -columnWidth/2, y, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
                         )
                     })
                 )
-            )
+            ),
+            React.createElement('div', {className: 'legend'}, `Legend TODO`)
         ),
         
         //React.createElement('scatter-plot', {}, ''),
@@ -178,9 +200,9 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
 
-        partition ? React.createElement('section', { className: 'partition'}, 
+        thisYearPartition ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
-            partition.map(({contentId, partAmount, texts, url}) => {
+            thisYearPartition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
                         href: url,
@@ -206,7 +228,7 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
             })  
         ) : undefined,
 
-        !partition && m52Rows ? React.createElement('section', { className: 'partition'}, 
+        !thisYearPartition && m52Rows ? React.createElement('section', { className: 'partition'}, 
             React.createElement('h2', {}, `Lignes M52 correspondantes en ${year}`),
             React.createElement('table', {}, 
                 m52Rows
@@ -248,8 +270,7 @@ function makePartition(element, totalById, textsById){
             partAmount: totalById.get(child.id),
             texts: textsById.get(child.id),
             url: '#!/finance-details/'+child.id
-        }))
-        .sort(({partAmount: a1}, {partAmount: a2}) => a2 - a1) : undefined;
+        })) : undefined;
 }
 
 
@@ -320,12 +341,16 @@ export default connect(
         const topTexts = topElement && textsById.get(topElement.id);
         const topLabel = topTexts && topTexts.label || '';
 
-        const amountsByYear = m52InstructionByYear.map(m52i => {
-            return makeElementById(
+        const partitionByYear = m52InstructionByYear.map(m52i => {
+            const elementById = makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
-            ).get(displayedContentId).total;
-        })
+            );
+
+            const yearElement = elementById.get(displayedContentId)
+
+            return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
+        });
 
         return {
             contentId: displayedContentId, 
@@ -342,9 +367,8 @@ export default connect(
                 url: '#!/finance-details/'+topElement.id
             },
             expenseOrRevenue,
-            amountsByYear,
             texts: textsById.get(displayedContentId),
-            partition: element && element.children ? makePartition(element, elementById.map(e => e.total), textsById) : undefined,
+            partitionByYear,
             m52Rows: element && !element.children ? element.elements.first()['M52Rows'] : undefined,
             year: currentYear
         }
