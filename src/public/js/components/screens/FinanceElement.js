@@ -57,7 +57,7 @@ const HEIGHT = 570;
 
 const HEIGHT_PADDING = 70;
 
-const PARTITION_TOTAL_HEIGHT = 800;
+const PARTITION_TOTAL_HEIGHT = 600;
 const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
@@ -200,7 +200,6 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.get('label') || contentId),
-                        React.createElement('p', {dangerouslySetInnerHTML: {__html: texts && texts.get('atemporal').slice(0, 400)+'...'}}),
                         React.createElement('a', {}, 'En savoir plus')
                     )
                 );
@@ -208,7 +207,7 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         ) : undefined,
 
         !partition && m52Rows ? React.createElement('section', { className: 'partition'}, 
-            React.createElement('h2', {}, `Lignes M52 correspondantes`),
+            React.createElement('h2', {}, `Lignes M52 correspondantes en ${year}`),
             React.createElement('table', {}, 
                 m52Rows
                 .sort((r1, r2) => r2['Montant'] - r1['Montant'])
