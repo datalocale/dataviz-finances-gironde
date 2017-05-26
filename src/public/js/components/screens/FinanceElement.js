@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as ImmutableMap, List } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -210,7 +210,9 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
         !partition && m52Rows ? React.createElement('section', { className: 'partition'}, 
             React.createElement('h2', {}, `Lignes M52 correspondantes`),
             React.createElement('table', {}, 
-                m52Rows.map(row => {
+                m52Rows
+                .sort((r1, r2) => r2['Montant'] - r1['Montant'])
+                .map(row => {
                     return React.createElement('tr', {}, 
                         React.createElement('td', {}, row['Rubrique fonctionnelle']),
                         React.createElement('td', {}, row['Chapitre']),
@@ -241,12 +243,14 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
 function makePartition(element, totalById, textsById){
     const children = element.children;
 
-    return children ? children.map(child => ({
-        contentId: child.id,
-        partAmount: totalById.get(child.id),
-        texts: textsById.get(child.id),
-        url: '#!/finance-details/'+child.id
-    })) : undefined;
+    return children ? List(children)
+        .map(child => ({
+            contentId: child.id,
+            partAmount: totalById.get(child.id),
+            texts: textsById.get(child.id),
+            url: '#!/finance-details/'+child.id
+        }))
+        .sort(({partAmount: a1}, {partAmount: a2}) => a2 - a1) : undefined;
 }
 
 
