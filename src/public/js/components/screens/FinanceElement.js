@@ -63,14 +63,13 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, RDFI, amount, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
-    const label = texts && texts.get('label');
-    const atemporalText = texts && texts.get('atemporal');
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
+    const label = texts && texts.label || '';
+    const atemporalText = texts && texts.atemporal;
     //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
+    const amount = amountByYear.get(year);
 
     const years = partitionByYear.keySeq().toJS();
-    const partitions = partitionByYear.valueSeq().toJS();
-    const amountByYear = partitionByYear.map(p => sum( p.map(part => part.partAmount).toJS() ));
 
     const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
     const columnMargin = columnAndMarginWidth/4;
@@ -173,12 +172,16 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
                 // content
                 React.createElement('g', {className: 'content'},
                     partitionByYear.entrySeq().toJS().map(([year, partition]) => {
-                        const yearAmount = sum(partition.map(p => p.partAmount).toJS());
+                        const yearAmount = sum(
+                            // DF-1 === DF-2. Don't count it twice
+                            (contentId === 'DF' ? partition.filter(p => p.contentId !== 'DF-1') : partition)
+                            .map(p => p.partAmount).toJS()
+                        )
 
                         const height = rectAmountScale(yearAmount);
                         const y = HEIGHT - HEIGHT_PADDING - height;
 
-                        throw `TODO compute a y per part (accumulate. See SolidarityFocus code)`
+                        //throw `TODO compute a y per part (accumulate. See SolidarityFocus code)`
 
                         return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
                             React.createElement('g', {},
@@ -195,7 +198,6 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
             React.createElement('div', {className: 'legend'}, `Legend TODO`)
         ),
         
-        //React.createElement('scatter-plot', {}, ''),
         //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
         //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
@@ -218,10 +220,10 @@ export function FinanceElement({contentId, RDFI, amount, parent, top, texts, par
                                 height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'px'
                             }
                         }, 
-                        React.createElement('span', {}, d3Format(".2s")(partAmount))
+                        React.createElement('span', {}, d3Format(".3s")(partAmount))
                     ),
                     React.createElement('div', {className: 'text'},
-                        React.createElement('h1', {}, texts && texts.get('label') || contentId),
+                        React.createElement('h1', {}, texts.label || contentId),
                         React.createElement('a', {}, 'En savoir plus')
                     )
                 );
@@ -332,8 +334,6 @@ export default connect(
             (element.id.startsWith('D') || element.id.startsWith('M52-D') ? EXPENDITURES : REVENUE) : 
             undefined;
 
-        const amount = m52Instruction && element && element.total;
-
         const isDeepElement = element && element.id !== EXPENDITURES && element.id !== REVENUE && childToParent.get(element) !== hierM52;
 
         const parentElement = isDeepElement && childToParent.get(element);
@@ -347,15 +347,28 @@ export default connect(
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
             );
 
-            const yearElement = elementById.get(displayedContentId)
+            const yearElement = elementById.get(displayedContentId);
 
             return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
+        const amountByYear = m52InstructionByYear.map((m52i, year) => {
+            const elementById = makeElementById(
+                hierarchicalAggregated(m52ToAggregated(m52i)), 
+                RDFI ? hierarchicalM52(m52i, RDFI): undefined
+            );
+
+            const yearElement = elementById.get(displayedContentId);
+
+            return yearElement && yearElement.total;
+        });
+
+        
+
         return {
             contentId: displayedContentId, 
             RDFI,
-            amount,
+            amountByYear,
             parent: parentElement && parentElement !== topElement && {
                 amount: parentElement.total,
                 label: textsById.get(parentElement.id).label,

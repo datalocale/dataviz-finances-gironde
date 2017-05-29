@@ -190,7 +190,6 @@ const AggregatedNodeRecord = new Record({
     label: undefined,
     ownValue: undefined,
     total: undefined,
-    parent: undefined,
     children: undefined,
     elements: undefined
 })
@@ -234,18 +233,17 @@ export default function (aggRows) {
 
         correspondingTargetNode.children = List(children);
 
-        // then compute total and elements
+        // then compute elements
         children.forEach(child => {
-            // it is expected that DF-1 === DF-2 but the total expenditures (and total DF) shouldn't count them twice
-            // skipping DF-1 accordingly
-            if( !(correspondingTargetNode.id === 'DF' && child.id === 'DF-1') ){
-                correspondingTargetNode.total += child.total;
-            }
-            
             child.elements.forEach(e => elements.add(e));
         });
-
         correspondingTargetNode.elements = ImmutableSet(elements);
+
+        // total amount is computed off of the set of m52 row considered (this helps prevent mistakes due to duplicates)
+        const targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
+            .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet());
+
+        correspondingTargetNode.total = targetNodeM52Rows.reduce(((acc, e) => acc + e["Montant"]), 0);
 
         return AggregatedNodeRecord(correspondingTargetNode);
     }
