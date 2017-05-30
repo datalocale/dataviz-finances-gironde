@@ -22,7 +22,7 @@ export function Home({
     expenditures,
     currentYear,
     urls: {
-        total,
+        explore,
         solidarity, invest, presence
     },
     amounts
@@ -48,9 +48,9 @@ export function Home({
                 }
             }) ,
             React.createElement(TotalAppetizer, {
-                total: 1.616*Math.pow(10, 9), //expenditures, // hardcoded TODO fix the math
+                total: expenditures, // (May 29th) different than what was hardcoded (1.616*Math.pow(10, 9))
                 year: currentYear,
-                totalUrl: total
+                exploreUrl: explore
             }),
             React.createElement(Appetizer, {
                 h1: "Un territoire de solidarités",
@@ -91,16 +91,7 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
             React.createElement(
                 BudgetConstructionAnimation,
                 amounts
-                
-                /*{
-                    // hardcoded for demo. TODO : fix the math
-                    rf: 1.527*Math.pow(10, 9), 
-                    ri: 240*Math.pow(10, 6), 
-                    df: 1.376*Math.pow(10, 9), 
-                    di: 240*Math.pow(10, 6)
-                }*/
             )
-            
         )
     );
 }
@@ -127,6 +118,7 @@ export default connect(
 
         return Object.assign(
             {
+                // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
                 amounts: m52Instruction ? {
                     DotationEtat: totalById.get('RF-5'),
                     FiscalitéDirecte: totalById.get('RF-1'),
@@ -134,7 +126,6 @@ export default connect(
                     RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
                     Solidarité: totalById.get('DF-1'),
                     Interventions: totalById.get('DF-3'),
-                    // hardcoded and arbitrarily adjusted (/2) TODO correct formula
                     DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
                     RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
                     Emprunt: totalById.get('RI-EM'),
@@ -147,7 +138,7 @@ export default connect(
                 } : undefined,
                 currentYear,
                 urls: {
-                    total: '#!/total',
+                    explore: '#!/explorer',
                     solidarity: '#!/focus/'+SOLIDARITES, 
                     invest: '#!/focus/'+INVEST, 
                     presence: '#!/focus/'+PRESENCE

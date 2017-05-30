@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Record, List, Map as ImmutableMap } from 'immutable';
+import { Record, Map as ImmutableMap } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
@@ -13,11 +13,12 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
-import Strategy from './components/screens/Strategy';
-import TotalBudget from './components/screens/TotalBudget';
+import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, BREADCRUMB_CHANGE } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
+
+const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json'); 
 
 
 let DATA_URL_PREFIX = "..";
@@ -39,7 +40,7 @@ const StoreRecord = Record({
     currentYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
-    breadcrumb: undefined
+    financeDetailId: undefined
 });
 
 const store = createStore(
@@ -47,10 +48,29 @@ const store = createStore(
     new StoreRecord({
         m52InstructionByYear: new ImmutableMap(),
         currentYear: 2016,
-        breadcrumb: new List([HOME]),
+        financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
 );
+
+
+
+store.dispatch({
+    type: ATEMPORAL_TEXTS_RECEIVED,
+    textList: Object.keys(rubriqueIdToLabel)
+        .map(fonction => ({
+            id: `M52-DF-${fonction}`, 
+            label: rubriqueIdToLabel[fonction]
+        }))
+});
+store.dispatch({
+    type: ATEMPORAL_TEXTS_RECEIVED,
+    textList: Object.keys(rubriqueIdToLabel)
+        .map(fonction => ({
+            id: `M52-DI-${fonction}`, 
+            label: rubriqueIdToLabel[fonction]
+        }))
+});
 
 
 
@@ -129,41 +149,27 @@ page('/', () => {
 });
 
 
-page('/total', () => {
-    console.log('in route', '/total');
+page('/explorer', () => {
+    console.log('in route', '/explorer');
 
     ReactDOM.render(
         React.createElement(
             Provider,
             { store },
-            React.createElement(TotalBudget)
+            React.createElement(ExploreBudget)
         ),
         CONTAINER_ELEMENT
     );
 });
 
-page('/strategie', () => {
-    console.log('in route', '/strategie');
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(Strategy)
-        ),
-        CONTAINER_ELEMENT
-    );
-});
 
 page('/finance-details/:contentId', ({params: {contentId}}) => {
     console.log('in route', '/finance-details', contentId)
     scrollTo(0, 0);
 
-    const breadcrumb = store.getState().breadcrumb;
-
     store.dispatch({
-        type: BREADCRUMB_CHANGE,
-        breadcrumb: breadcrumb.push(contentId)
+        type: FINANCE_DETAIL_ID_CHANGE,
+        financeDetailId: contentId
     })
 
     ReactDOM.render(

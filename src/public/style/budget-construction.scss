@@ -2,6 +2,8 @@ $texts-height: 10em;
 
 .budget-construction{
 
+    position: relative;
+
     .bricks{
         height: 3*$texts-height;
 
@@ -137,6 +139,16 @@ $texts-height: 10em;
             margin: 0;
             margin-bottom: 1em;
         }
+
+    }
+
+    .replay{
+        position: absolute;
+        top: 0;
+        right: 0;
+        opacity: 0;
+
+        transition-property: opacity;
 
     }
 

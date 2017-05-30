@@ -41,10 +41,10 @@ const DI_BRICK_SELECTOR = {
 const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.85;
 
 // unit is seconds
-const BRICK_APPEAR_DURATION = 1;
-const BETWEEN_BRICK_APPEAR_DURATION = 0.5;
+const BRICK_APPEAR_DURATION = 0.2;
+const BETWEEN_BRICK_APPEAR_DURATION = 0.1;
 
-const ENGLOBE_DURATION = 2;
+const ENGLOBE_DURATION = 0.3;
 
 function Legend(text){
     return React.createElement('span', {className: 'legend'}, text);
@@ -52,8 +52,28 @@ function Legend(text){
 
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight}){
+    // RF
+    const rfParent = container.querySelector('.brick.rf');
+    const rfBricks = [
+        '.dotation-etat', '.fiscalite-directe', '.fiscalite-indirecte', '.recettes-diverses'
+    ].map(s => rfParent.querySelector(s));
+    const rfParentFilling = rfParent.querySelector('.brick.rf .filling');
 
-    console.log('animate container', container)
+    // DF
+    const dfParent = container.querySelector('.brick.df');
+    const dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+
+    // RI
+    const riParent = container.querySelector('.brick.ri');
+    const epargneElement = riParent.querySelector('.epargne');
+    const riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+
+    // DI
+    const diParent = container.querySelector('.brick.di');
+    const diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
+        .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+
+
 
     const animationStart = Promise.resolve(performance.now());
 
@@ -61,11 +81,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step1Start = animationStart;
 
     const step1Done = step1Start.then(() => {
-        const elementAnimationDones = [
-            '.dotation-etat', '.fiscalite-directe', '.fiscalite-indirecte', '.recettes-diverses'
-        ].map((s, i) => {
-            const el = container.querySelector(s);
-            
+        const elementAnimationDones = rfBricks.map((el, i) => {
             el.style.animationName = `brick-appear`;
             el.style.animationDuration = `${BRICK_APPEAR_DURATION}s`;
             el.style.animationDelay = `${i*(BRICK_APPEAR_DURATION+BETWEEN_BRICK_APPEAR_DURATION)}s`;
@@ -82,8 +98,6 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step2Start = step1Done;
 
     const step2Done = step2Start.then(() => {
-        const rfParent = container.querySelector('.brick.rf')
-
         Array.from(rfParent.querySelectorAll('.brick')).forEach(el => {
             el.style.animationName = `englobed-by-parent`;
             el.style.animationDuration = `${ENGLOBE_DURATION}s`;
@@ -103,9 +117,6 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step3Start = step2Done;
 
     const step5Done = step3Start.then(() => {
-        const rfParentFilling = container.querySelector('.brick.rf .filling');
-        const dfParent = container.querySelector('.brick.df');
-
         rfParentFilling.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         rfParentFilling.style.transitionDelay = `0s`;
 
@@ -136,9 +147,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step6Start = step5Done;
 
     const step6Done = step6Start.then(() => {
-        const dfParent = container.querySelector('.brick.df')
-
-        Array.from(dfParent.querySelectorAll('.brick')).forEach(el => {
+        Array.from(dfBricks).forEach(el => {
             el.style.animationName = `englobed-by-parent`;
             el.style.animationDuration = `${ENGLOBE_DURATION}s`;
             el.style.animationDelay = '0s';
@@ -158,13 +167,10 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step8Start = step6Done;
 
     const step8Done = step8Start.then(() => {
-        const rfParent = container.querySelector('.brick.rf');
-        const epargneElement = container.querySelector('.brick.ri .epargne');
         const epargneHeight = riBrickHeights[EPARGNE];
 
         rfParent.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        rfParent.style.height = `${rfHeight - epargneHeight}em`;
-
+        
         epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         epargneElement.style.height = `${epargneHeight}em`;
         
@@ -177,8 +183,6 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step9Start = step8Done;
 
     const step9Done = step9Start.then(() => {
-        const riParent = container.querySelector('.brick.ri')
-
         return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
             return previousDone.then(() => {
                 const el = riParent.querySelector(RI_BRICK_SELECTOR[id]);
@@ -238,9 +242,8 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
     const step13Start = step12Done;
 
     const step13Done = step13Start.then(() => {
-        const diParent = container.querySelector('.brick.di')
 
-        Array.from(diParent.querySelectorAll('.brick')).forEach(el => {
+        Array.from(diBricks).forEach(el => {
             el.style.animationName = `englobed-by-parent`;
             el.style.animationDuration = `${ENGLOBE_DURATION}s`;
             el.style.animationDelay = '0s';
@@ -255,11 +258,57 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
         })
     });
 
-    const endOfAnimation = step13Done;
+    // add replay button
+    const addReplayButton = step13Done.then(() => {
+        const replayButton = document.querySelector('.replay');
+
+        replayButton.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+        replayButton.style.opacity = `1`;
+
+        // reset styles
+        replayButton.addEventListener('click', () => {
+            // RF
+            rfParent.style.animationName = '';
+            rfBricks.forEach(el => {
+                el.style.animationName = '';
+            })
+            rfParentFilling.style.height = 0;
+
+            // DF
+            dfParent.style.animationName = '';
+            dfBricks.forEach(el => {
+                el.style.height = 0;
+                el.style.animationName = '';
+            })
+
+            // RI
+            riParent.style.animationName = '';
+            riBricks.forEach(el => {
+                el.style.height = 0;
+                el.style.animationName = '';
+            })
+
+            // DI
+            diParent.style.animationName = '';
+            diBricks.forEach(el => {
+                el.style.height = 0;
+                el.style.animationName = '';
+            })
+
+            // replay
+            animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight})
+        })
+
+
+
+    });
+
+    const endOfAnimation = addReplayButton;
 
     return endOfAnimation.catch(e => console.error('animation error', e))
 
 }
+
 
 /*
 interface BudgetConstructionAnimationProps{
@@ -399,9 +448,6 @@ export default class BudgetConstructionAnimation extends React.Component{
         const riHeight = maxHeight*ri/maxAmount;
         const diHeight = maxHeight*di/maxAmount;
 
-        console.log('bricksContainerSize', bricksContainerSize, maxHeight);
-        
-
         return React.createElement('article', { className: 'budget-construction', ref: 'container' },
             React.createElement('div', {className: 'bricks'}, 
                 DotationEtat ? [ 
@@ -516,7 +562,8 @@ export default class BudgetConstructionAnimation extends React.Component{
                     React.createElement('dt', {}, `Dépenses d'investissement`), 
                     React.createElement('dd', {}, `Elles concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`)
                 )
-            )
+            ),
+            React.createElement('button', {className: 'replay'}, 'rejouer')
         );
     }
 }

@@ -1,0 +1,65 @@
+.sunburst{
+    .slice {
+        path {
+            fill: #d4c685;
+        }
+
+        & > .piece path{
+            stroke: #AAA;
+        }
+
+        & > .slice {
+            path {
+                fill: #f7ef81;
+            }
+
+            & > .slice {
+                path {
+                    fill: #cfe795;
+                }
+            
+                & > .slice {
+                    path {
+                        fill: #a7d3a6;
+                    }
+
+                    & > .slice {
+                        path {
+                            fill: #add2c2;
+                        }   
+                    }
+                }
+            }
+        }
+    }
+
+
+    text{
+        color: black;
+        stroke-width: 0;
+    }
+
+    .active-selection{
+        .slice {
+            & > .piece path,
+            & > .piece text{
+                opacity: 0.3;
+            }
+
+            &.highlighted {
+                & > .piece path,
+                & > .piece text{
+                    opacity: 1;
+                }
+            }
+
+            &.selected > .piece path{
+                stroke: indianred;
+                stroke-width: 2px;
+            }
+        }
+    } 
+}
+
+
+

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import M52Viz from './M52Viz';
+import M52Viz from '../../../shared/js/components/M52Viz';
 import AggregatedViz from './AggregatedViz';
 import TextualAggregated from './TextualAggregated';
 import TextualSelected from './TextualSelected';
