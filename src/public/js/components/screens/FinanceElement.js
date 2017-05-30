@@ -86,8 +86,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
     thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
     const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
     partitionByYear = partitionByYear.map(partition => {
-        // indexOf inside a .map leads to O(n^2), but lists are 10 elements long, so it's ok
-        return partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p2.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
+        // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
+        return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p2.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     })
 
     const yAxisAmountScale = scaleLinear()
@@ -172,25 +172,44 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 // content
                 React.createElement('g', {className: 'content'},
                     partitionByYear.entrySeq().toJS().map(([year, partition]) => {
-                        const yearAmount = sum(
-                            // DF-1 === DF-2. Don't count it twice
-                            (contentId === 'DF' ? partition.filter(p => p.contentId !== 'DF-1') : partition)
-                            .map(p => p.partAmount).toJS()
-                        )
+                        const yearAmount = amountByYear.get(year);
 
-                        const height = rectAmountScale(yearAmount);
-                        const y = HEIGHT - HEIGHT_PADDING - height;
+                        partition = partition || List([{
+                            contentId: contentId,
+                            partAmount: yearAmount
+                        }]);
 
-                        //throw `TODO compute a y per part (accumulate. See SolidarityFocus code)`
+                        const stackYs = partition
+                            .map(p => p.partAmount)
+                            .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
+                            .map(rectAmountScale);
+
+                        const stack = partition
+                            .map((part, i) => {
+                                const amount = part.partAmount;
+                                const height = rectAmountScale(amount);
+
+                                return {
+                                    id: part.contentId,
+                                    amount,
+                                    height,
+                                    y: HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
+                                }
+                            });
+
+                        const totalHeight = rectAmountScale(yearAmount);
+                        const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
+
 
                         return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
                             React.createElement('g', {},
-                                partition.map(part => {
-                                    const partHeight = 20;
-                                    return React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height: partHeight})
+                                stack.map( ({id, amount, height, y}) => {
+                                    return React.createElement('g', {className: id}, 
+                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
+                                    )
                                 })
                             ),
-                            React.createElement('text', {x: -columnWidth/2, y, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
+                            React.createElement('text', {x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
                         )
                     })
                 )
@@ -223,7 +242,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         React.createElement('span', {}, d3Format(".3s")(partAmount))
                     ),
                     React.createElement('div', {className: 'text'},
-                        React.createElement('h1', {}, texts.label || contentId),
+                        React.createElement('h1', {}, texts && texts.label || contentId),
                         React.createElement('a', {}, 'En savoir plus')
                     )
                 );
