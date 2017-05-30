@@ -3,7 +3,8 @@ import { OrderedSet as ImmutableSet } from 'immutable';
 import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
 import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
 import { M52RowRecord, M52Instruction } from '../../src/shared/js/finance/M52InstructionDataStructures';
-import {EXPENDITURES, REVENUE } from '../../src/shared/js/finance/constants';
+import { EXPENDITURES } from '../../src/shared/js/finance/constants';
+import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
 
 jest.addMatchers(matchers);
 
@@ -33,35 +34,33 @@ test('hierarchicalAggregated returns a node when passed dummy valid arguments', 
 });
 
 
-test('with one expenditure in DF-1 and one in DF-2, hierarchicalAggregated returns the correct expenditure total', () => {
+test('a row that appears in both DF-1 and DF-2 should be counted only once in total expenditures', () => {
     const AMOUNT = 1037;
 
-    const df1M52Row = new M52RowRecord({
+    const solidarityM52Row = new M52RowRecord({
         'Dépense/Recette': 'D',
         'Investissement/Fonctionnement': 'F',
         'Réel/Ordre id/Ordre diff': 'OR',
-        'Chapitre': 'C0',
-        'Article': 'A652221',
-        'Rubrique fonctionnelle': 'R5',
-        'Montant': AMOUNT
-    });
-    const df2M52Row = new M52RowRecord({
-        'Dépense/Recette': 'D',
-        'Investissement/Fonctionnement': 'F',
-        'Réel/Ordre id/Ordre diff': 'OR',
-        'Chapitre': 'C0',
-        'Article': 'A000',
-        'Rubrique fonctionnelle': 'R54',
+        'Chapitre': 'C65',
+        'Article': 'A652412',
+        'Rubrique fonctionnelle': 'R51',
         'Montant': AMOUNT
     });
 
-    const m52instruction = new M52Instruction({ rows: new ImmutableSet([df1M52Row, df2M52Row]) });
+    const m52instruction = new M52Instruction({ rows: new ImmutableSet([solidarityM52Row]) });
     const aggregatedVision = m52ToAggregated(m52instruction);
 
     const hierAgg = hierarchicalAggregated(aggregatedVision);
     
+    const hierAggList = flattenTree(hierAgg)
+
+    const df1 = hierAggList.find(c => c.id === 'DF-1');
+    const df2 = hierAggList.find(c => c.id === 'DF-2');
+
     const expenditures = [...hierAgg.children].find(c => c.id === EXPENDITURES);
 
+    expect(df1.total).toBe(AMOUNT);
+    expect(df2.total).toBe(AMOUNT);
     expect(expenditures.total).toBe(AMOUNT);
 });
 
