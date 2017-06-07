@@ -11,7 +11,7 @@ import { format as formatEuro } from 'currency-formatter';
 
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
-import navigationTree from '../../navigationTree';
+
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';

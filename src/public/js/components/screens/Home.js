@@ -10,12 +10,11 @@ import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
-import budgetBalance from '../../../../shared/js/finance/budgetBalance';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 
 import { SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
-import { RF, RI, DF, DI } from '../../../../shared/js/finance/constants';
+import { EXPENDITURES } from '../../../../shared/js/finance/constants';
 
 
 export function Home({
@@ -101,7 +100,6 @@ export default connect(
     state => {
         const { m52InstructionByYear, currentYear } = state;
         const m52Instruction = m52InstructionByYear.get(currentYear);
-        const balance = m52Instruction ? budgetBalance(m52Instruction) : {};
 
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -116,36 +114,34 @@ export default connect(
 
         const totalById = elementById.map(e => e.total);
 
-        return Object.assign(
-            {
-                // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
-                amounts: m52Instruction ? {
-                    DotationEtat: totalById.get('RF-5'),
-                    FiscalitéDirecte: totalById.get('RF-1'),
-                    FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
-                    RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
-                    Solidarité: totalById.get('DF-1'),
-                    Interventions: totalById.get('DF-3'),
-                    DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
-                    RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
-                    Emprunt: totalById.get('RI-EM'),
+        return {
+            // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
+            amounts: m52Instruction ? {
+                DotationEtat: totalById.get('RF-5'),
+                FiscalitéDirecte: totalById.get('RF-1'),
+                FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
+                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
+                Solidarité: totalById.get('DF-1'),
+                Interventions: totalById.get('DF-3'),
+                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
+                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
+                Emprunt: totalById.get('RI-EM'),
 
-                    RemboursementEmprunt: totalById.get('DI-EM'), 
-                    Routes:totalById.get('DI-1-2'), 
-                    Colleges: totalById.get('DI-1-1'), 
-                    Amenagement: totalById.get('DI-1-4'), 
-                    Subventions: totalById.get('DI-2')
-                } : undefined,
-                currentYear,
-                urls: {
-                    explore: '#!/explorer',
-                    solidarity: '#!/focus/'+SOLIDARITES, 
-                    invest: '#!/focus/'+INVEST, 
-                    presence: '#!/focus/'+PRESENCE
-                }
+                RemboursementEmprunt: totalById.get('DI-EM'), 
+                Routes:totalById.get('DI-1-2'), 
+                Colleges: totalById.get('DI-1-1'), 
+                Amenagement: totalById.get('DI-1-4'), 
+                Subventions: totalById.get('DI-2')
+            } : undefined,
+            currentYear,
+            urls: {
+                explore: '#!/explorer',
+                solidarity: '#!/focus/'+SOLIDARITES, 
+                invest: '#!/focus/'+INVEST, 
+                presence: '#!/focus/'+PRESENCE
             },
-            balance
-        )
+            expenditures: totalById.get(EXPENDITURES)
+        }
 
 
     },

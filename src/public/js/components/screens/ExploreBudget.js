@@ -1,4 +1,4 @@
-import { List } from 'immutable';
+import { Map as ImmutableMap } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
 import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
-import budgetBalance from '../../../../shared/js/finance/budgetBalance';
+
+import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
+import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import M52ByFonction from '../M52ByFonction';
 
@@ -14,26 +16,20 @@ import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
 const MAX_HEIGHT = 50;
 
-/*throw `TODO :
-* make m52 legend clickable
-    * Create m52 pages 'par fonction'
-    * Display m52 row table in leaf pages (finance detail)
-* display correct label in the legend
-* 
-`*/
 
+export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}}) {
+    const expenditures = totalById.get(EXPENDITURES)
+    const revenue = totalById.get(REVENUE)
 
-export function TotalBudget({budget, m52Instruction, labelsById, urls: {expenditures, revenue, byFonction}}) {
-    
-    const max = Math.max(budget.expenditures, budget.revenue);
+    const max = Math.max(expenditures, revenue);
 
-    const expHeight = MAX_HEIGHT*(budget.expenditures/max)+'vh'; 
-    const revHeight = MAX_HEIGHT*(budget.revenue/max)+'vh'; 
+    const expHeight = MAX_HEIGHT*(expenditures/max)+'vh'; 
+    const revHeight = MAX_HEIGHT*(revenue/max)+'vh'; 
 
-    const rfHeight = 100*(budget[RF]/budget.revenue)+'%';
-    const riHeight = 100*(budget[RI]/budget.revenue)+'%';
-    const diHeight = 100*(budget[DI]/budget.expenditures)+'%';
-    const dfHeight = 100*(budget[DF]/budget.expenditures)+'%';
+    const rfHeight = 100*(totalById.get(RF)/revenue)+'%';
+    const riHeight = 100*(totalById.get(RI)/revenue)+'%';
+    const diHeight = 100*(totalById.get(DI)/expenditures)+'%';
+    const dfHeight = 100*(totalById.get(DF)/expenditures)+'%';
 
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
@@ -46,8 +42,8 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
 `),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
-                React.createElement('h1', {}, (budget.revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
-                React.createElement('a', {href: revenue, style: {height: revHeight}}, 
+                React.createElement('h1', {}, (revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
+                React.createElement('a', {href: revURL, style: {height: revHeight}}, 
                     React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 
                         React.createElement('span', {}, 'Recettes de fonctionnement')
                     ),
@@ -57,8 +53,8 @@ une  réduction du besoin de financement par emprunt qui entraîne une baisse du
                 )
             ),
             React.createElement('div', {className: 'expenditures'},
-                React.createElement('h1', {}, (budget.expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
-                React.createElement('a', {href: expenditures, style: {height: expHeight}}, 
+                React.createElement('h1', {}, (expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
+                React.createElement('a', {href: expURL, style: {height: expHeight}}, 
                     React.createElement('div', {className: 'df', style: {height: dfHeight}}, 
                         React.createElement('span', {}, 'Dépenses de fonctionnement')
                     ),
@@ -94,10 +90,18 @@ export default connect(
     state => {
         const { m52InstructionByYear, currentYear, textsById } = state;
         const m52Instruction = m52InstructionByYear.get(currentYear);
-        const budget = m52Instruction ? budgetBalance(m52Instruction) : {};
+        const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
+        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+
+        let totalById = new ImmutableMap();
+        if(hierAgg){
+            flattenTree(hierAgg).forEach(aggHierNode => {
+                totalById = totalById.set(aggHierNode.id, aggHierNode.total);
+            });
+        }
 
         return {
-            budget,
+            totalById,
             m52Instruction,
             labelsById: textsById.map(texts => texts.label),
             urls: {
