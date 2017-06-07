@@ -283,7 +283,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
 
 function makePartition(element, totalById, textsById){
-    const children = element.children;
+    let children = element.children;
+    children = typeof children.toList === 'function' ? children.toList() : children;
 
     return children ? List(children)
         .map(child => ({
