@@ -312,20 +312,6 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
 }
 
 
-/*
-interface BudgetConstructionAnimationProps{
-    Dotation: 100000,
-    Machins: 200000,
-    Impots: 300000,
-    RecettesInvestissement: 400000,
-    RecettesEmprunts: 500000,
-    EpargneBrute: 600000,
-    DepensesFonctionnement: 700000,
-    FraisFinanciers: 800000,
-    Investissements: 900000
-}
- */
-
 function doTheMaths({
         DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
         Solidarité, Interventions, DépensesStructure,

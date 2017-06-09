@@ -125,18 +125,20 @@ export default connect(
             constructionAmounts: m52Instruction ? {
                 DotationEtat: totalById.get('RF-5'),
                 FiscalitéDirecte: totalById.get('RF-1'),
-                FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
-                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
+                FiscalitéIndirecte: totalById.get('RF-2'),
+                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-5'].map(i => totalById.get(i))),
+
                 Solidarité: totalById.get('DF-1'),
-                Interventions: totalById.get('DF-3'),
-                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
-                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
+                Interventions: totalById.get('DF-3') + totalById.get('DF-4'),
+                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3', 'DF-4'].map(i => totalById.get(i)))),
+                
                 Emprunt: totalById.get('RI-EM'),
+                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
 
                 RemboursementEmprunt: totalById.get('DI-EM'), 
-                Routes:totalById.get('DI-1-2'), 
+                Routes: totalById.get('DI-1-2'), 
                 Colleges: totalById.get('DI-1-1'), 
-                Amenagement: totalById.get('DI-1-4'), 
+                Amenagement: totalById.get('DI-1-3') + totalById.get('DI-1-4') + totalById.get('DI-1-5'), 
                 Subventions: totalById.get('DI-2')
             } : undefined,
             urls: {
