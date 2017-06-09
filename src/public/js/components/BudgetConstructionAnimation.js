@@ -52,30 +52,32 @@ function Legend(text){
 
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight}){
-    // RF
-    const rfParent = container.querySelector('.brick.rf');
-    const rfBricks = [
-        '.dotation-etat', '.fiscalite-directe', '.fiscalite-indirecte', '.recettes-diverses'
-    ].map(s => rfParent.querySelector(s));
-    const rfParentFilling = rfParent.querySelector('.brick.rf .filling');
 
-    // DF
-    const dfParent = container.querySelector('.brick.df');
-    const dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+    let rfParent, rfBricks, rfParentFilling, dfParent, dfBricks, riParent, epargneElement, riBricks, diParent, diBricks;
 
-    // RI
-    const riParent = container.querySelector('.brick.ri');
-    const epargneElement = riParent.querySelector('.epargne');
-    const riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+    const animationStart = Promise.resolve()
+    .then( () => {
+        // RF
+        rfParent = container.querySelector('.brick.rf');
+        rfBricks = [
+            '.dotation-etat', '.fiscalite-directe', '.fiscalite-indirecte', '.recettes-diverses'
+        ].map(s => rfParent.querySelector(s));
+        rfParentFilling = rfParent.querySelector('.brick.rf .filling');
 
-    // DI
-    const diParent = container.querySelector('.brick.di');
-    const diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
-        .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+        // DF
+        dfParent = container.querySelector('.brick.df');
+        dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
 
+        // RI
+        riParent = container.querySelector('.brick.ri');
+        epargneElement = riParent.querySelector('.epargne');
+        riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
 
-
-    const animationStart = Promise.resolve(performance.now());
+        // DI
+        diParent = container.querySelector('.brick.di');
+        diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
+            .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+    })
 
     // step 1
     const step1Start = animationStart;
@@ -129,14 +131,14 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
         return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i) => {
             return previousDone.then(() => {
                 const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
-            
+
                 el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                 el.style.height = `${dfBrickHeights[id]}em`;
 
                 rfParentFilling.style.height = `${rfParentFillingHeights[i]}em`;
 
                 return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, {once: true})
+                    el.addEventListener('transitionend', resolve, {once: true});
                 })
             })
         }, Promise.resolve());
@@ -331,8 +333,6 @@ function doTheMaths({
         RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
     }, bricksContainerSize){
 
-    console.log('doTheMaths');
-
     const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
     const df = sum([Solidarité, Interventions, DépensesStructure]);
 
@@ -379,8 +379,6 @@ export default class BudgetConstructionAnimation extends React.Component{
     constructor(){
         super();
         this.state = { 
-            animationStarted : false,
-            computationCache: undefined,
             bricksContainerSize: undefined // em
         };
     }
@@ -389,23 +387,16 @@ export default class BudgetConstructionAnimation extends React.Component{
         return !!props.DotationEtat;
     }
 
-    animateAndLockComponent(props){
-        console.log('animateAndLockComponent', props, this.state, this.financeDataReady(props), !this.state.animationStarted, this.state.computationCache)
-        if(this.financeDataReady(props) && !this.state.animationStarted && this.state.computationCache){
-            const {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight} = this.state.computationCache;
+    animateAndLockComponent(props, bricksContainerSize){
+        if(this.financeDataReady(props) && bricksContainerSize){
+            const {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight} = doTheMaths(props, bricksContainerSize);
 
             animate(this.refs.container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight});
-            this.setState(Object.assign({}, this.state, {animationStarted: true}))
+            setTimeout( () => this.setState(Object.assign({}, this.state)))
         }
     }
 
-    shouldComponentUpdate(nextProps){
-        return !this.state.animationStarted && this.props.DotationEtat !== nextProps.DotationEtat
-    }
-
     componentDidMount(){
-        console.log('componentDidMount', this.state, this.financeDataReady(this.props), !this.state.animationStarted)
-
         const bricksContainer = this.refs.container.querySelector('.bricks');
         // these sizes are in px
         const {fontSize, height} = getComputedStyle(bricksContainer);
@@ -414,34 +405,24 @@ export default class BudgetConstructionAnimation extends React.Component{
             {}, 
             this.state,
             {
-                bricksContainerSize: parseFloat(height)/parseFloat(fontSize),
-                computationCache: this.financeDataReady(this.props) && !this.state.animationStarted ?
-                    doTheMaths(this.props, this.state.bricksContainerSize) :
-                    undefined
+                bricksContainerSize: parseFloat(height)/parseFloat(fontSize)
             }
         ));
 
         // so the state is actually up to date when calling animateAndLockComponent
         setTimeout( () => {
-            this.animateAndLockComponent(this.props) 
+            this.animateAndLockComponent(this.props, this.state.bricksContainerSize) 
         });
     }
 
     componentWillUnmount(){
         this.setState({ 
-            animationStarted : false,
-            computationCache: undefined,
             bricksContainerSize: undefined // em
         })
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('componentWillReceiveProps', nextProps, this.financeDataReady(nextProps) && !this.state.animationStarted)
-        if(this.financeDataReady(nextProps) && !this.state.animationStarted){
-            this.setState(Object.assign({}, this.state, {computationCache: doTheMaths(nextProps, this.state.bricksContainerSize)}))
-        }
-        
-        this.animateAndLockComponent(nextProps);
+        this.animateAndLockComponent(nextProps, this.state.bricksContainerSize);
     }
 
     render(){
