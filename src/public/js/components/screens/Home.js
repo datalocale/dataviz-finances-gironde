@@ -2,13 +2,11 @@ import { Map as ImmutableMap } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { sum } from 'd3-array';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
-import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
@@ -23,8 +21,7 @@ export function Home({
     urls: {
         explore,
         solidarity, invest, presence
-    },
-    amounts
+    }
 }) {
     
     return React.createElement('article', {className: 'home'},
@@ -73,24 +70,6 @@ Il emploie 1 751 agents au service de l’action sociale soit près de 75 millio
                 description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents occupant 125 métiers différents mènent leur mission dans tout le territoire de la Gironde. Il compte 425 lieux de travail et d’accueil du public. Malgré une croissance démographique constante (+ 15 000 nouveaux Girondins en moyenne chaque année) qui entraîne une augmentent des besoins, le Département accorde une vigilance particulière au maintien de ses frais de personnel et de fonctionnement.`, 
                 moreUrl: presence
             }) 
-        ),
-        
-        React.createElement('section', {},
-            React.createElement('h2', {}, "Comprendre la construction d'un budget"),
-            React.createElement(
-                'p',
-                {},
-                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Cela signifie que les Départements ne peuvent pas présenter de déficit.`
-            ),
-            React.createElement(
-                'p',
-                {},
-                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
-            ),
-            React.createElement(
-                BudgetConstructionAnimation,
-                amounts
-            )
         )
     );
 }
@@ -115,24 +94,6 @@ export default connect(
         const totalById = elementById.map(e => e.total);
 
         return {
-            // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
-            amounts: m52Instruction ? {
-                DotationEtat: totalById.get('RF-5'),
-                FiscalitéDirecte: totalById.get('RF-1'),
-                FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
-                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
-                Solidarité: totalById.get('DF-1'),
-                Interventions: totalById.get('DF-3'),
-                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
-                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
-                Emprunt: totalById.get('RI-EM'),
-
-                RemboursementEmprunt: totalById.get('DI-EM'), 
-                Routes:totalById.get('DI-1-2'), 
-                Colleges: totalById.get('DI-1-1'), 
-                Amenagement: totalById.get('DI-1-4'), 
-                Subventions: totalById.get('DI-2')
-            } : undefined,
             currentYear,
             urls: {
                 explore: '#!/explorer',

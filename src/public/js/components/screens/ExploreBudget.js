@@ -3,21 +3,22 @@ import { Map as ImmutableMap } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import { sum } from 'd3-array';
 
-import {RF, RI, DF, DI} from '../../../../shared/js/finance/constants';
+import {RF, RI, DF, DI, EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
 
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import M52ByFonction from '../M52ByFonction';
 
-import {EXPENDITURES, REVENUE} from '../../../../shared/js/finance/constants';
+import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 const MAX_HEIGHT = 50;
 
 
-export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}}) {
+export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}, constructionAmounts}) {
     const expenditures = totalById.get(EXPENDITURES)
     const revenue = totalById.get(REVENUE)
 
@@ -36,10 +37,26 @@ export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expen
         React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
 
-Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
-une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière
-`),
+        Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
+        une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
+        une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`),
+        React.createElement('section', {},
+            React.createElement('h2', {}, "Comprendre la construction d'un budget"),
+            React.createElement(
+                'p',
+                {},
+                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Cela signifie que les Départements ne peuvent pas présenter de déficit.`
+            ),
+            React.createElement(
+                'p',
+                {},
+                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
+            ),
+            React.createElement(
+                BudgetConstructionAnimation,
+                constructionAmounts
+            )
+        ),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
                 React.createElement('h1', {}, (revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
@@ -104,6 +121,24 @@ export default connect(
             totalById,
             m52Instruction,
             labelsById: textsById.map(texts => texts.label),
+            // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
+            constructionAmounts: m52Instruction ? {
+                DotationEtat: totalById.get('RF-5'),
+                FiscalitéDirecte: totalById.get('RF-1'),
+                FiscalitéIndirecte: totalById.get('RF-2') + totalById.get('RF-3'),
+                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-5'].map(i => totalById.get(i))),
+                Solidarité: totalById.get('DF-1'),
+                Interventions: totalById.get('DF-3'),
+                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i))))/2,
+                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
+                Emprunt: totalById.get('RI-EM'),
+
+                RemboursementEmprunt: totalById.get('DI-EM'), 
+                Routes:totalById.get('DI-1-2'), 
+                Colleges: totalById.get('DI-1-1'), 
+                Amenagement: totalById.get('DI-1-4'), 
+                Subventions: totalById.get('DI-2')
+            } : undefined,
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 

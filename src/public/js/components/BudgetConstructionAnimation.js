@@ -331,6 +331,8 @@ function doTheMaths({
         RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
     }, bricksContainerSize){
 
+    console.log('doTheMaths');
+
     const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
     const df = sum([Solidarité, Interventions, DépensesStructure]);
 
@@ -388,6 +390,7 @@ export default class BudgetConstructionAnimation extends React.Component{
     }
 
     animateAndLockComponent(props){
+        console.log('animateAndLockComponent', props, this.state, this.financeDataReady(props), !this.state.animationStarted, this.state.computationCache)
         if(this.financeDataReady(props) && !this.state.animationStarted && this.state.computationCache){
             const {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight} = this.state.computationCache;
 
@@ -401,7 +404,7 @@ export default class BudgetConstructionAnimation extends React.Component{
     }
 
     componentDidMount(){
-        this.animateAndLockComponent(this.props);
+        console.log('componentDidMount', this.state, this.financeDataReady(this.props), !this.state.animationStarted)
 
         const bricksContainer = this.refs.container.querySelector('.bricks');
         // these sizes are in px
@@ -410,11 +413,30 @@ export default class BudgetConstructionAnimation extends React.Component{
         this.setState(Object.assign(
             {}, 
             this.state,
-            {bricksContainerSize: parseFloat(height)/parseFloat(fontSize)}
-        ))
+            {
+                bricksContainerSize: parseFloat(height)/parseFloat(fontSize),
+                computationCache: this.financeDataReady(this.props) && !this.state.animationStarted ?
+                    doTheMaths(this.props, this.state.bricksContainerSize) :
+                    undefined
+            }
+        ));
+
+        // so the state is actually up to date when calling animateAndLockComponent
+        setTimeout( () => {
+            this.animateAndLockComponent(this.props) 
+        });
+    }
+
+    componentWillUnmount(){
+        this.setState({ 
+            animationStarted : false,
+            computationCache: undefined,
+            bricksContainerSize: undefined // em
+        })
     }
 
     componentWillReceiveProps(nextProps){
+        console.log('componentWillReceiveProps', nextProps, this.financeDataReady(nextProps) && !this.state.animationStarted)
         if(this.financeDataReady(nextProps) && !this.state.animationStarted){
             this.setState(Object.assign({}, this.state, {computationCache: doTheMaths(nextProps, this.state.bricksContainerSize)}))
         }
