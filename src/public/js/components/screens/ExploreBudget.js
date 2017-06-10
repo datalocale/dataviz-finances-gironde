@@ -41,7 +41,7 @@ export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expen
         une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
         une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`),
         React.createElement('section', {},
-            React.createElement('h2', {}, "Comprendre la construction d'un budget"),
+            React.createElement(PageTitle, {text: "Comprendre la construction d'un budget"}),
             React.createElement(
                 'p',
                 {},
