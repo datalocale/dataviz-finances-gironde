@@ -96,7 +96,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                 // using rAF otherwise the transition doesn't occur for the first element 
                 // (and transitionend event doesn't happen and other elementd don't appear)
-                setTimeout( () => {el.style.height = `${rfBrickHeights[id]}em`}, 20)
+                requestAnimationFrame( () => {el.style.height = `${rfBrickHeights[id]}em`})
 
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
@@ -194,7 +194,12 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             diBricks.forEach(el => { el.style.height = 0; })
 
             // replay
-            animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights })
+            // let some time pass so transition actually occurs
+            setTimeout( () => {
+                animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights })
+            }, 100);
+            
+            
         })
 
     });

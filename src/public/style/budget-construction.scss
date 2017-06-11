@@ -121,6 +121,8 @@ $texts-height: 10em;
                     }
 
                     &.appear-by-height{
+                        transition-property: height;
+                        
                         padding: 0 0.5em; 
                         height: 0;
                         overflow: hidden;
