@@ -380,30 +380,6 @@ export default class BudgetConstructionAnimation extends React.Component {
                     ),
                     React.createElement('div', { className: 'column' },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
-                            React.createElement('div', {className: 'text'}, 
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
-                                React.createElement('span', {}, `Recettes d'investissement`)
-                            )
-                        ),
-                        React.createElement(
-                            'div',
-                            {
-                                className: 'brick parent ri'
-                            },
-                            React.createElement('div', { className: 'brick appear-by-height epargne' }, 
-                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
-                                Legend('RI propres', `${(RIPropre/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
-                                Legend('Emprunt', `${(Emprunt/1000000).toFixed(0)} millions`)
-                            )
-                        )
-                    ),
-                    React.createElement('div', { className: 'column' },
-                        React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'number'}, (df/1000000).toFixed(0) ),
                             React.createElement('div', {className: 'text'}, 
                                 React.createElement('span', {className: 'unit'}, ` millions d'euros`),
@@ -423,6 +399,30 @@ export default class BudgetConstructionAnimation extends React.Component {
                             ),
                             React.createElement('div', { className: 'brick appear-by-height depenses-structure' }, 
                                 Legend('Dépenses de structure', `${(DépensesStructure/1000000).toFixed(0)} millions`)
+                            )
+                        )
+                    ),
+                    React.createElement('div', { className: 'column' },
+                        React.createElement('div', {className: 'legend'},
+                            React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
+                            React.createElement('div', {className: 'text'}, 
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
+                                React.createElement('span', {}, `Recettes d'investissement`)
+                            )
+                        ),
+                        React.createElement(
+                            'div',
+                            {
+                                className: 'brick parent ri'
+                            },
+                            React.createElement('div', { className: 'brick appear-by-height epargne' }, 
+                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
+                                Legend('RI propres', `${(RIPropre/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
+                                Legend('Emprunt', `${(Emprunt/1000000).toFixed(0)} millions`)
                             )
                         )
                     ),
