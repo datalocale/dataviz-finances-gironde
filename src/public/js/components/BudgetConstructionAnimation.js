@@ -351,7 +351,11 @@ export default class BudgetConstructionAnimation extends React.Component {
         return React.createElement('article', { className: 'budget-construction', ref: 'container' },
             React.createElement('div', { className: 'bricks' },
                 DotationEtat ? [
-                    React.createElement('div', { className: 'column' },
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/RF'
+                        },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'number'}, (rf/1000000).toFixed(0) ),
                             React.createElement('div', {className: 'text'}, 
@@ -378,7 +382,11 @@ export default class BudgetConstructionAnimation extends React.Component {
                             )
                         )
                     ),
-                    React.createElement('div', { className: 'column' },
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/DF'
+                        },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'number'}, (df/1000000).toFixed(0) ),
                             React.createElement('div', {className: 'text'}, 
@@ -402,7 +410,11 @@ export default class BudgetConstructionAnimation extends React.Component {
                             )
                         )
                     ),
-                    React.createElement('div', { className: 'column' },
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/RI'
+                        },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
                             React.createElement('div', {className: 'text'}, 
@@ -426,7 +438,11 @@ export default class BudgetConstructionAnimation extends React.Component {
                             )
                         )
                     ),
-                    React.createElement('div', { className: 'column' },
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/DI'
+                        },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'number'}, (di/1000000).toFixed(0) ),
                             React.createElement('div', {className: 'text'}, 

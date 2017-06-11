@@ -26,6 +26,7 @@ $texts-height: 10em;
                 display: flex;
                 flex-direction: row;
 
+                color: black;
                 font-weight: bold;
 
                 .number{
@@ -66,6 +67,10 @@ $texts-height: 10em;
                 background-color:#B8C30F;
             }
 
+            .brick.epargne{
+                background-color: gold;
+            }
+
             .parent{
                 opacity: 1;
                 
@@ -103,6 +108,8 @@ $texts-height: 10em;
                         display: flex;
                         flex-direction: column;
 
+                        color: white;
+
                         .text, .amount{
                             padding: 0;
                             margin: 0;
@@ -122,7 +129,7 @@ $texts-height: 10em;
 
                     &.appear-by-height{
                         transition-property: height;
-                        
+
                         padding: 0 0.5em; 
                         height: 0;
                         overflow: hidden;
