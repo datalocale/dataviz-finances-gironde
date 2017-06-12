@@ -13,6 +13,8 @@ import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import M52ByFonction from '../M52ByFonction';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 const MAX_HEIGHT = 50;
@@ -59,24 +61,40 @@ export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expen
         ),
         React.createElement('section', {className: 'viz'},
             React.createElement('div', {className: 'revenue'},
-                React.createElement('h1', {}, (revenue/Math.pow(10, 9)).toFixed(2), ' milliards de recettes'),
-                React.createElement('a', {href: revURL, style: {height: revHeight}}, 
-                    React.createElement('div', {className: 'rf', style: {height: rfHeight}}, 
-                        React.createElement('span', {}, 'Recettes de fonctionnement')
+                React.createElement('h1', {}, 'Recettes'),
+                React.createElement('a', {href: revURL}, 
+                    React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
+                        React.createElement('div', {className: 'rf', style: {height: rfHeight}},
+                            React.createElement('span', {}, "Recettes de fonctionnement")
+                        ),
+                        React.createElement('div', {className: 'ri', style: {height: riHeight}},
+                            React.createElement('span', {}, "Recettes d'investissement")
+                        )
                     ),
-                    React.createElement('div', {className: 'ri', style: {height: riHeight}},
-                        React.createElement('span', {}, "Recettes d'investissement")
+                    React.createElement('div', {className: 'texts'}, 
+                        React.createElement('span', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2)),
+                        React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                        React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
+                        React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                     )
                 )
             ),
             React.createElement('div', {className: 'expenditures'},
-                React.createElement('h1', {}, (expenditures/Math.pow(10, 9)).toFixed(2), ' milliards de dépenses'),
-                React.createElement('a', {href: expURL, style: {height: expHeight}}, 
-                    React.createElement('div', {className: 'df', style: {height: dfHeight}}, 
-                        React.createElement('span', {}, 'Dépenses de fonctionnement')
+                React.createElement('h1', {}, 'Dépenses'),
+                React.createElement('a', {href: revURL}, 
+                    React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
+                        React.createElement('div', {className: 'df', style: {height: rfHeight}},
+                            React.createElement('span', {}, "Dépenses de fonctionnement")
+                        ),
+                        React.createElement('div', {className: 'di', style: {height: riHeight}},
+                            React.createElement('span', {}, "Dépenses d'investissement")
+                        )
                     ),
-                    React.createElement('div', {className: 'di', style: {height: diHeight}}, 
-                        React.createElement('span', {}, "Dépenses d'investissement")
+                    React.createElement('div', {className: 'texts'}, 
+                        React.createElement('span', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2)),
+                        React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                        React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
+                        React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                     )
                 )
             )

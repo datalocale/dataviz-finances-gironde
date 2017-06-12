@@ -1,3 +1,5 @@
+@import './color-palette';
+
 $texts-height: 10em;
 
 .budget-construction{
@@ -52,22 +54,22 @@ $texts-height: 10em;
             
 
             .rf .brick {
-                background-color:#EC3500;
+                background-color: $area-color-1;
             }
 
             .df .brick {
-                background-color:#F8C738;
+                background-color: $area-color-2;
             }
 
             .ri .brick {
-                background-color: #0E7FAB;
+                background-color: $area-color-3;
             }
 
             .di .brick {
-                background-color:#B8C30F;
+                background-color: $area-color-4;
             }
 
-            .brick.epargne{
+            .brick.epargne{ 
                 background-color: gold;
             }
 
