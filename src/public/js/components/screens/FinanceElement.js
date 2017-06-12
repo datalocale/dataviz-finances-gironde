@@ -11,7 +11,7 @@ import { format as formatEuro } from 'currency-formatter';
 
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
-import navigationTree from '../../navigationTree';
+
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
@@ -53,10 +53,11 @@ interface FinanceElementProps{
 */
 
 
-const WIDTH = 825;
+const WIDTH = 1000;
 const HEIGHT = 430;
 
 const HEIGHT_PADDING = 70;
+const BRICK_PADDING = 6;
 
 const PARTITION_TOTAL_HEIGHT = 600;
 const MIN_STRING_HEIGHT = 30;
@@ -85,9 +86,11 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
     let thisYearPartition = partitionByYear.get(year)
     thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
     const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
+
+    // reorder all partitions so they adhere to partitionIdsInOrder
     partitionByYear = partitionByYear.map(partition => {
         // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
-        return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p2.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
+        return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     })
 
     const yAxisAmountScale = scaleLinear()
@@ -186,14 +189,18 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
                         const stack = partition
                             .map((part, i) => {
-                                const amount = part.partAmount;
-                                const height = rectAmountScale(amount);
+                                const { partAmount } = part;
+                                const height = Math.max(rectAmountScale(partAmount) - BRICK_PADDING, 4);
+
+                                console.log('part', year, part.texts && part.texts.label, (amount/1000000).toFixed(0), (partAmount/1000000).toFixed(0), rectAmountScale(partAmount).toFixed(0), height)
 
                                 return {
                                     id: part.contentId,
-                                    amount,
+                                    amount: partAmount,
                                     height,
-                                    y: HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
+                                    y: i === 0 ? 
+                                        HEIGHT - HEIGHT_PADDING - height :
+                                        HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
                                 }
                             });
 
@@ -203,8 +210,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
                         return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
                             React.createElement('g', {},
-                                stack.map( ({id, amount, height, y}) => {
-                                    return React.createElement('g', {className: id}, 
+                                stack.map( ({id, amount, height, y}, i) => {
+                                    return React.createElement('g', {className: [id, `area-color-${i+1}`].join(' ')}, 
                                         React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
                                     )
                                 })
@@ -214,12 +221,22 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })
                 )
             ),
-            React.createElement('div', {className: 'legend'}, `Legend TODO`)
+            thisYearPartition ? React.createElement('div', {className: 'legend'}, 
+                React.createElement('ol', {},
+                    thisYearPartition.map((p, i) => {
+                        return React.createElement('li', {className: p.contentId},
+                            React.createElement('a', {href: p.url},
+                                React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
+                                p.texts.label
+                            )
+                        )
+                    })
+                )
+            ) : undefined
         ),
         
         //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
         //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
-
 
         thisYearPartition ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
@@ -283,7 +300,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
 
 function makePartition(element, totalById, textsById){
-    const children = element.children;
+    let children = element.children;
+    children = typeof children.toList === 'function' ? children.toList() : children;
 
     return children ? List(children)
         .map(child => ({

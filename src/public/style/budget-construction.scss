@@ -5,7 +5,7 @@ $texts-height: 10em;
     position: relative;
 
     .bricks{
-        height: 3*$texts-height;
+        height: 4*$texts-height;
 
         display: flex;
         flex-direction: row;
@@ -20,13 +20,55 @@ $texts-height: 10em;
             align-items: center;
             width: 18%;
 
-            .total{
+            .legend{
+                align-self: flex-start;
+
+                display: flex;
+                flex-direction: row;
+
+                color: black;
                 font-weight: bold;
-                font-size: 0.7em;
 
                 .number{
-                    font-size: 3em;
+                    font-size: 5em;
                 }
+
+                .text{
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    padding-left: 0.3em;
+
+                    text-transform: uppercase;
+
+                    .unit{
+                        text-transform: lowercase;
+                    }
+                }
+            }
+
+            
+
+            .rf .brick {
+                background-color: $area-color-1;
+            }
+
+            .df .brick {
+                background-color: $area-color-2;
+            }
+
+            .ri .brick {
+                background-color: $area-color-3;
+            }
+
+            .di .brick {
+                background-color: $area-color-4;
+            }
+
+            .brick.epargne{ 
+                background-color: gold;
             }
 
             .parent{
@@ -39,7 +81,7 @@ $texts-height: 10em;
 
                 padding: 0;
 
-                text-align: center;
+                text-align: left;
                 font-weight: bold;
 
                 display: flex;
@@ -49,35 +91,50 @@ $texts-height: 10em;
                 width: 100%;
 
                 .brick{
-                    //min-height: 5em;
-                    background-color: indianred;
-                    color: black;
+                    color: white;
 
                     padding: 0.5em;
                     margin: 0;
+                    margin-top: 0.5em;
                     width: 100%;
 
                     border-radius: 5px;
 
                     position: relative;
 
-                    &.appear-by-opacity{
-                        opacity: 0;
+                    .legend{
+                        margin-top: 0.5em;
+
+                        display: flex;
+                        flex-direction: column;
+
+                        color: white;
+
+                        .text, .amount{
+                            padding: 0;
+                            margin: 0;
+                        }
+
+                        .text{
+                            text-transform: uppercase;
+                        }
+
+                        .amount{
+                            font-weight: normal;
+                        }
+
+
+
                     }
 
                     &.appear-by-height{
+                        transition-property: height;
+
+                        padding: 0 0.5em; 
                         height: 0;
-                        padding: 0;
                         overflow: hidden;
                     }
 
-                }
-
-                .legend, .brick .legend{
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    left: 0;
                 }
 
                 .filling-container{
@@ -148,64 +205,21 @@ $texts-height: 10em;
         right: 0;
         opacity: 0;
 
+        font-size: 1.2em;
+
+        padding: 1em;
+
+        color: white;
+        background-color: #D2D2D2;
+
+        text-transform: uppercase;
+
         transition-property: opacity;
 
     }
 
 }
 
-
-/*
-    ANIMATION
-*/
-
-@keyframes brick-appear{
-    from{
-        opacity: 0;
-    }
-
-    to{
-        opacity: 1;
-    }
-}
-
-@keyframes englobed-by-parent{
-    from{
-        opacity: 1;
-    }
-
-    to{
-        opacity: 0;
-    }
-}
-
-@keyframes parent-englobes{
-    from{
-        background-color: transparent;
-        color: transparent;
-    }
-    to{
-        background-color: lightskyblue;
-        color: black;
-    }
-}
-
-$appearance-time : 2s;
-$disappearance-time : $appearance-time;
-$parent-englobes-time : $appearance-time;
-$appearance-shift : 0.5s;
-
 .budget-construction .bricks .brick{
     animation-fill-mode: forwards;
 }
-
-
-
-
-/*
-    Questions animations : 
-    * à quels identifiants de l'agrégé correspondent les briques ?
-    * l'espacement entre les briques ne correspond à rien. Si on respecte les proportions le total est 
-    visuellement plus petit que la somme des parties
-
-*/

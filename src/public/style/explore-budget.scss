@@ -1,7 +1,8 @@
 @import '../../shared/style/sunburst';
+@import './color-palette.scss'; 
 
-$expenditures-color : #F35D32;
-$revenue-color : #68B0CD;
+$expenditures-color : $area-color-1;
+$revenue-color : $area-color-3;
 
 $RX-S: 40%;
 $RX-L: 60%;
@@ -28,16 +29,16 @@ $R9-color: hsl(360*9/10, $RX-S, $RX-L);
         justify-content: space-around;
         
         > *{
-            width: 30%;
+            width: 45%;
         }
 
         h1{
             font-size: 2em;
-            text-align: center;
+            text-align: left;
+            text-transform: uppercase;
         }
 
-        a{
-            color: black;
+        & > a{
             text-decoration: none;
 
             .rf, .ri, .df, .di{
@@ -50,16 +51,38 @@ $R9-color: hsl(360*9/10, $RX-S, $RX-L);
         }
     }
 
-    .expenditures, .revenue{
+    .expenditures > a, .revenue > a{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
-        min-height: 60vh;
+        align-items: flex-end;
 
-        a{
+        color: black;
+
+        .areas{
+            width: 50%;
+            height: 100%;
+
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+
+            &> *{
+                margin-top: 0.5em;
+            }
+        }
+
+        .texts {
+            display: flex;
+            flex-direction: column;
+            padding: 0 1em;
+
+            .amount, .unit{
+                font-weight: bold;
+            }
+
+            .amount{
+                font-size: 5em;
+            }
         }
     }
 

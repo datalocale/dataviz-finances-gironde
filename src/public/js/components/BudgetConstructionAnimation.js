@@ -1,10 +1,12 @@
 import React from 'react';
 
 import { max, sum } from 'd3-array';
+import { scaleLinear } from 'd3-scale';
 
-function delayPromise(t){
-    return new Promise(resolve => setTimeout(resolve, t));
-}
+const DOTATION = 'DOTATION';
+const FISCALITE_DIRECTE = 'FISCALITE_DIRECTE';
+const FISCALITE_INDIRECTE = 'FISCALITE_INDIRECTE';
+const RECETTES_DIVERSES = 'RECETTES_DIVERSES';
 
 const SOLIDARITE = 'SOLIDARITE';
 const INTERVENTIONS = 'INTERVENTIONS';
@@ -20,169 +22,129 @@ const COLLEGES = 'COLLEGES';
 const AMENAGEMENT = 'AMENAGEMENT';
 const SUBVENTIONS = 'SUBVENTIONS';
 
+const RF_BRICK_SELECTOR = {
+    [DOTATION]: '.dotation-etat',
+    [FISCALITE_DIRECTE]: '.fiscalite-directe',
+    [FISCALITE_INDIRECTE]: '.fiscalite-indirecte',
+    [RECETTES_DIVERSES]: '.recettes-diverses'
+};
 const DF_BRICK_SELECTOR = {
-    [SOLIDARITE]: '.solidarite', 
-    [INTERVENTIONS]: '.interventions', 
+    [SOLIDARITE]: '.solidarite',
+    [INTERVENTIONS]: '.interventions',
     [STRUCTURE]: '.depenses-structure'
 };
 const RI_BRICK_SELECTOR = {
-    [RI_PROPRES]: '.ri-propres', 
+    [RI_PROPRES]: '.ri-propres',
     [EMPRUNT]: '.emprunt'
 };
-
 const DI_BRICK_SELECTOR = {
     [REMBOURSEMENT_EMPRUNT]: '.remboursement-emprunt',
     [ROUTES]: '.routes',
-    [COLLEGES]: '.colleges', 
-    [AMENAGEMENT]: '.amenagement', 
+    [COLLEGES]: '.colleges',
+    [AMENAGEMENT]: '.amenagement',
     [SUBVENTIONS]: '.subventions'
-}
+};
 
 const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.85;
+const MIN_BRICK_HEIGHT = 4; // em
 
 // unit is seconds
-const BRICK_APPEAR_DURATION = 0.2;
-const BETWEEN_BRICK_APPEAR_DURATION = 0.1;
+const BRICK_APPEAR_DURATION = 0.2; 
 
-const ENGLOBE_DURATION = 0.3;
-
-function Legend(text){
-    return React.createElement('span', {className: 'legend'}, text);
+function Legend(text, amount) {
+    return React.createElement('div', { className: 'legend' },
+        React.createElement('span', { className: 'text' }, text),
+        React.createElement('span', { className: 'amount' }, amount)
+    )
 }
 
 
-function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight}){
-    // RF
-    const rfParent = container.querySelector('.brick.rf');
-    const rfBricks = [
-        '.dotation-etat', '.fiscalite-directe', '.fiscalite-indirecte', '.recettes-diverses'
-    ].map(s => rfParent.querySelector(s));
-    const rfParentFilling = rfParent.querySelector('.brick.rf .filling');
+function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights}) {
 
-    // DF
-    const dfParent = container.querySelector('.brick.df');
-    const dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+    let rfParent, rfBricks, dfParent, dfBricks, riParent, epargneElement, riBricks, diParent, diBricks;
 
-    // RI
-    const riParent = container.querySelector('.brick.ri');
-    const epargneElement = riParent.querySelector('.epargne');
-    const riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+    const animationStart = Promise.resolve()
+        .then(() => {
+            // RF
+            rfParent = container.querySelector('.brick.rf');
+            rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
+                .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
 
-    // DI
-    const diParent = container.querySelector('.brick.di');
-    const diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
-        .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+            // DF
+            dfParent = container.querySelector('.brick.df');
+            dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
 
+            // RI
+            riParent = container.querySelector('.brick.ri');
+            epargneElement = riParent.querySelector('.epargne');
+            riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
 
-
-    const animationStart = Promise.resolve(performance.now());
-
-    // step 1
-    const step1Start = animationStart;
-
-    const step1Done = step1Start.then(() => {
-        const elementAnimationDones = rfBricks.map((el, i) => {
-            el.style.animationName = `brick-appear`;
-            el.style.animationDuration = `${BRICK_APPEAR_DURATION}s`;
-            el.style.animationDelay = `${i*(BRICK_APPEAR_DURATION+BETWEEN_BRICK_APPEAR_DURATION)}s`;
-
-            return new Promise(resolve => {
-                el.addEventListener('animationend', resolve, {once: true})
-            })
-        });
-
-        return Promise.all(elementAnimationDones)
-    });
-
-    // step 2
-    const step2Start = step1Done;
-
-    const step2Done = step2Start.then(() => {
-        Array.from(rfParent.querySelectorAll('.brick')).forEach(el => {
-            el.style.animationName = `englobed-by-parent`;
-            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
-            el.style.animationDelay = '0s';
-        });
-
-        rfParent.style.animationName = `parent-englobes`;
-        rfParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
-        rfParent.style.animationDelay = '0s';
-
-        return new Promise(resolve => {
-            rfParent.addEventListener('animationend', resolve, {once: true})
+            // DI
+            diParent = container.querySelector('.brick.di');
+            diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
+                .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
         })
+
+    // Bring in RF bricks
+    const rfBricksStart = animationStart;
+
+    const rfBricksDone = rfBricksStart.then(() => {
+        return [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES].reduce((previousDone, id) => {
+            return previousDone.then(() => {
+                const el = rfParent.querySelector(RF_BRICK_SELECTOR[id]);
+
+                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                // using setTimeout otherwise the transition doesn't occur for the first element 
+                // (and transitionend event doesn't happen and other elementd don't appear)
+                setTimeout( () => {el.style.height = `${rfBrickHeights[id]}em`}, 100)
+
+                return new Promise(resolve => {
+                    el.addEventListener('transitionend', resolve, { once: true });
+                }).catch(err => console.error('rf err', err))
+            })
+        }, Promise.resolve());
     });
 
-    // steps 3-5
-    const step3Start = step2Done;
+    // DF bricks
+    const dfBricksStart = rfBricksDone;
 
-    const step5Done = step3Start.then(() => {
-        rfParentFilling.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        rfParentFilling.style.transitionDelay = `0s`;
-
-        const rfParentFillingHeights = [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((acc, id) => {
-            const cumulative = dfBrickHeights[id] + (acc[acc.length - 1] || 0);
-            acc.push(cumulative);
-            return acc;
-        }, []);
-
-        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i) => {
+    const dfBricksDone = dfBricksStart.then(() => {
+        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id) => {
             return previousDone.then(() => {
                 const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
-            
+
                 el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                 el.style.height = `${dfBrickHeights[id]}em`;
 
-                rfParentFilling.style.height = `${rfParentFillingHeights[i]}em`;
-
                 return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, {once: true})
+                    el.addEventListener('transitionend', resolve, { once: true });
                 })
             })
         }, Promise.resolve());
 
     });
 
-    // step 6
-    const step6Start = step5Done;
 
-    const step6Done = step6Start.then(() => {
-        Array.from(dfBricks).forEach(el => {
-            el.style.animationName = `englobed-by-parent`;
-            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
-            el.style.animationDelay = '0s';
-        });
+    // Epargne brick
+    const epargneBrickStart = dfBricksDone;
 
-        dfParent.style.animationName = `parent-englobes`;
-        dfParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
-        dfParent.style.animationDelay = '0s';
-
-        return new Promise(resolve => {
-            dfParent.addEventListener('animationend', resolve, {once: true})
-        })
-    });
-
-    // step 7
-    // step 8
-    const step8Start = step6Done;
-
-    const step8Done = step8Start.then(() => {
+    const epargneBrickDone = epargneBrickStart.then(() => {
         const epargneHeight = riBrickHeights[EPARGNE];
 
         rfParent.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        
+
         epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         epargneElement.style.height = `${epargneHeight}em`;
-        
+
         return new Promise(resolve => {
-            epargneElement.addEventListener('transitionend', resolve, {once: true})
+            epargneElement.addEventListener('transitionend', resolve, { once: true })
         })
     })
 
-    // step 9
-    const step9Start = step8Done;
+    // other RU bricks
+    const otherRiBricksStart = epargneBrickDone;
 
-    const step9Done = step9Start.then(() => {
+    const otherRiBricksDone = otherRiBricksStart.then(() => {
         return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
             return previousDone.then(() => {
                 const el = riParent.querySelector(RI_BRICK_SELECTOR[id]);
@@ -191,37 +153,16 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
                 el.style.height = `${riBrickHeights[id]}em`;
 
                 return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, {once: true})
+                    el.addEventListener('transitionend', resolve, { once: true })
                 })
             })
         }, Promise.resolve());
-    })
-
-    // step 10
-    const step10Start = step9Done;
-
-    const step10Done = step10Start.then(() => {
-        const riParent = container.querySelector('.brick.ri')
-
-        Array.from(riParent.querySelectorAll('.brick')).forEach(el => {
-            el.style.animationName = `englobed-by-parent`;
-            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
-            el.style.animationDelay = '0s';
-        });
-
-        riParent.style.animationName = `parent-englobes`;
-        riParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
-        riParent.style.animationDelay = '0s';
-
-        return new Promise(resolve => {
-            riParent.addEventListener('animationend', resolve, {once: true})
-        })
     });
 
-    // steps 11-12
-    const step11Start = step10Done;
+    // DI bricks
+    const diBricksStart = otherRiBricksDone;
 
-    const step12Done = step11Start.then(() => {
+    const diBricksDone = diBricksStart.then(() => {
         const diParent = container.querySelector('.brick.di')
 
         return [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS].reduce((previousDone, id) => {
@@ -232,34 +173,14 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
                 el.style.height = `${diBrickHeights[id]}em`;
 
                 return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, {once: true})
+                    el.addEventListener('transitionend', resolve, { once: true })
                 })
             })
         }, Promise.resolve());
     });
 
-    // step 13
-    const step13Start = step12Done;
-
-    const step13Done = step13Start.then(() => {
-
-        Array.from(diBricks).forEach(el => {
-            el.style.animationName = `englobed-by-parent`;
-            el.style.animationDuration = `${ENGLOBE_DURATION}s`;
-            el.style.animationDelay = '0s';
-        });
-
-        diParent.style.animationName = `parent-englobes`;
-        diParent.style.animationDuration = `${ENGLOBE_DURATION}s`;
-        diParent.style.animationDelay = '0s';
-
-        return new Promise(resolve => {
-            diParent.addEventListener('animationend', resolve, {once: true})
-        })
-    });
-
-    // add replay button
-    const addReplayButton = step13Done.then(() => {
+    // Replay button
+    const addReplayButton = diBricksDone.then(() => {
         const replayButton = document.querySelector('.replay');
 
         replayButton.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
@@ -267,39 +188,19 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
 
         // reset styles
         replayButton.addEventListener('click', () => {
-            // RF
-            rfParent.style.animationName = '';
-            rfBricks.forEach(el => {
-                el.style.animationName = '';
-            })
-            rfParentFilling.style.height = 0;
-
-            // DF
-            dfParent.style.animationName = '';
-            dfBricks.forEach(el => {
-                el.style.height = 0;
-                el.style.animationName = '';
-            })
-
-            // RI
-            riParent.style.animationName = '';
-            riBricks.forEach(el => {
-                el.style.height = 0;
-                el.style.animationName = '';
-            })
-
-            // DI
-            diParent.style.animationName = '';
-            diBricks.forEach(el => {
-                el.style.height = 0;
-                el.style.animationName = '';
-            })
+            rfBricks.forEach(el => { el.style.height = 0; })
+            dfBricks.forEach(el => { el.style.height = 0; })
+            riBricks.forEach(el => { el.style.height = 0; })
+            diBricks.forEach(el => { el.style.height = 0; })
 
             // replay
-            animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight})
+            // let some time pass so transition actually occurs
+            setTimeout( () => {
+                animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights })
+            }, 100);
+            
+            
         })
-
-
 
     });
 
@@ -310,26 +211,12 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfH
 }
 
 
-/*
-interface BudgetConstructionAnimationProps{
-    Dotation: 100000,
-    Machins: 200000,
-    Impots: 300000,
-    RecettesInvestissement: 400000,
-    RecettesEmprunts: 500000,
-    EpargneBrute: 600000,
-    DepensesFonctionnement: 700000,
-    FraisFinanciers: 800000,
-    Investissements: 900000
-}
- */
-
 function doTheMaths({
-        DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
-        Solidarité, Interventions, DépensesStructure,
-        RIPropre, Emprunt,
-        RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
-    }, bricksContainerSize){
+    DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
+    Solidarité, Interventions, DépensesStructure,
+    RIPropre, Emprunt,
+    RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
+}, bricksContainerSize) {
 
     const rf = sum([DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses]);
     const df = sum([Solidarité, Interventions, DépensesStructure]);
@@ -340,94 +227,107 @@ function doTheMaths({
     const di = RemboursementEmprunt + Routes + Colleges + Amenagement + Subventions;
 
     const maxAmount = max([rf, ri, df, di]);
+    const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * bricksContainerSize;
 
-    const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION*bricksContainerSize;
-    const rfHeight = maxHeight*rf/maxAmount;
-    const dfHeight = maxHeight*df/maxAmount;
-    const riHeight = maxHeight*ri/maxAmount;
-    const diHeight = maxHeight*di/maxAmount;
+    const amountScale = scaleLinear()
+        .domain([0, maxAmount])
+        .range([0, maxHeight]);
+
+    const rfBrickHeights = {
+        [DOTATION]: Math.max(amountScale(DotationEtat), MIN_BRICK_HEIGHT),
+        [FISCALITE_DIRECTE]: Math.max(amountScale(FiscalitéDirecte), MIN_BRICK_HEIGHT),
+        [FISCALITE_INDIRECTE]: Math.max(amountScale(FiscalitéIndirecte), MIN_BRICK_HEIGHT),
+        [RECETTES_DIVERSES]: Math.max(amountScale(RecettesDiverses), MIN_BRICK_HEIGHT)
+    };
+
+    const dfBrickHeights = {
+        [SOLIDARITE]: Math.max(amountScale(Solidarité), MIN_BRICK_HEIGHT),
+        [INTERVENTIONS]: Math.max(amountScale(Interventions), MIN_BRICK_HEIGHT),
+        [STRUCTURE]: Math.max(amountScale(DépensesStructure), MIN_BRICK_HEIGHT)
+    };
+
+    const riBrickHeights = {
+        [EPARGNE]: Math.max(amountScale(epargne), MIN_BRICK_HEIGHT),
+        [RI_PROPRES]: Math.max(amountScale(RIPropre), MIN_BRICK_HEIGHT),
+        [EMPRUNT]: Math.max(amountScale(Emprunt), MIN_BRICK_HEIGHT)
+    };
+
+    const diBrickHeights = {
+        [REMBOURSEMENT_EMPRUNT]: Math.max(amountScale(RemboursementEmprunt), MIN_BRICK_HEIGHT),
+        [ROUTES]: Math.max(amountScale(Routes), MIN_BRICK_HEIGHT),
+        [COLLEGES]: Math.max(amountScale(Colleges), MIN_BRICK_HEIGHT),
+        [AMENAGEMENT]: Math.max(amountScale(Amenagement), MIN_BRICK_HEIGHT),
+        [SUBVENTIONS]: Math.max(amountScale(Subventions), MIN_BRICK_HEIGHT)
+    }
 
     return {
-        rf, ri, df, di, 
+        rf, ri, df, di,
         maxAmount,
-        dfBrickHeights: {
-            [SOLIDARITE]: dfHeight*Solidarité/df,
-            [INTERVENTIONS]: dfHeight*Interventions/df,
-            [STRUCTURE]: dfHeight*DépensesStructure/df,
-        },
-        riBrickHeights: {
-            [EPARGNE]: riHeight*epargne/ri,
-            [RI_PROPRES]: riHeight*RIPropre/ri, 
-            [EMPRUNT]: riHeight*Emprunt/ri
-        },
-        diBrickHeights: {
-            [REMBOURSEMENT_EMPRUNT]: diHeight*RemboursementEmprunt/di,
-            [ROUTES]: diHeight*Routes/di,
-            [COLLEGES]: diHeight*Colleges/di,
-            [AMENAGEMENT]: diHeight*Amenagement/di,
-            [SUBVENTIONS]: diHeight*Subventions/di
-        },
-        rfHeight
+        rfBrickHeights,
+        dfBrickHeights,
+        riBrickHeights,
+        diBrickHeights
     }
 }
 
 
-export default class BudgetConstructionAnimation extends React.Component{
+export default class BudgetConstructionAnimation extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
-        this.state = { 
-            animationStarted : false,
-            computationCache: undefined,
+        this.state = {
             bricksContainerSize: undefined // em
         };
     }
 
-    financeDataReady(props){
+    financeDataReady(props) {
         return !!props.DotationEtat;
     }
 
-    animateAndLockComponent(props){
-        if(this.financeDataReady(props) && !this.state.animationStarted && this.state.computationCache){
-            const {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight} = this.state.computationCache;
+    animateAndLockComponent(props, bricksContainerSize) {
+        if (this.financeDataReady(props) && bricksContainerSize) {
+            const {dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights} = doTheMaths(props, bricksContainerSize);
 
-            animate(this.refs.container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfHeight});
-            this.setState(Object.assign({}, this.state, {animationStarted: true}))
+            animate(this.refs.container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights });
+            setTimeout(() => this.setState(Object.assign({}, this.state)))
         }
     }
 
-    shouldComponentUpdate(nextProps){
-        return !this.state.animationStarted && this.props.DotationEtat !== nextProps.DotationEtat
-    }
-
-    componentDidMount(){
-        this.animateAndLockComponent(this.props);
-
+    componentDidMount() {
         const bricksContainer = this.refs.container.querySelector('.bricks');
         // these sizes are in px
         const {fontSize, height} = getComputedStyle(bricksContainer);
 
         this.setState(Object.assign(
-            {}, 
+            {},
             this.state,
-            {bricksContainerSize: parseFloat(height)/parseFloat(fontSize)}
-        ))
+            {
+                bricksContainerSize: parseFloat(height) / parseFloat(fontSize)
+            }
+        ));
+
+        // so the state is actually up to date when calling animateAndLockComponent
+        setTimeout(() => {
+            this.animateAndLockComponent(this.props, this.state.bricksContainerSize)
+        });
     }
 
-    componentWillReceiveProps(nextProps){
-        if(this.financeDataReady(nextProps) && !this.state.animationStarted){
-            this.setState(Object.assign({}, this.state, {computationCache: doTheMaths(nextProps, this.state.bricksContainerSize)}))
-        }
-        
-        this.animateAndLockComponent(nextProps);
+    componentWillUnmount() {
+        this.setState({
+            bricksContainerSize: undefined // em
+        })
     }
 
-    render(){
+    componentWillReceiveProps(nextProps) {
+        this.animateAndLockComponent(nextProps, this.state.bricksContainerSize);
+    }
+
+    render() {
         const amounts = this.props;
         const {bricksContainerSize} = this.state;
 
         const {
-            DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses, 
+            DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
             Solidarité, Interventions, DépensesStructure,
             RIPropre, Emprunt,
             RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
@@ -441,129 +341,162 @@ export default class BudgetConstructionAnimation extends React.Component{
 
         const maxAmount = max([rf, ri, df, di]);
 
-        const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION*bricksContainerSize;
-        const rfHeight = maxHeight*rf/maxAmount;
-        const dfHeight = maxHeight*df/maxAmount;
+        const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * bricksContainerSize;
+        const rfHeight = maxHeight * rf / maxAmount;
+        const dfHeight = maxHeight * df / maxAmount;
 
-        const riHeight = maxHeight*ri/maxAmount;
-        const diHeight = maxHeight*di/maxAmount;
+        const riHeight = maxHeight * ri / maxAmount;
+        const diHeight = maxHeight * di / maxAmount;
 
         return React.createElement('article', { className: 'budget-construction', ref: 'container' },
-            React.createElement('div', {className: 'bricks'}, 
-                DotationEtat ? [ 
-                    React.createElement('div', {className: 'column'},
-                        /*React.createElement('div', {className: 'total'}, 
-                            React.createElement('span', {className: 'number'}, (rf/1000000000).toFixed(3) ), 
-                            ' milliards'
-                        ),*/
+            React.createElement('div', { className: 'bricks' },
+                DotationEtat ? [
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/RF'
+                        },
+                        React.createElement('div', {className: 'legend'},
+                            React.createElement('div', {className: 'number'}, (rf/1000000).toFixed(0) ),
+                            React.createElement('div', {className: 'text'}, 
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
+                                React.createElement('span', {}, `Recettes de fonctionnement`)
+                            )
+                        ),
                         React.createElement(
-                            'div', 
+                            'div',
                             {
-                                className: 'brick parent rf', 
-                                style: {
-                                    height: `${rfHeight}em`
-                                }
+                                className: 'brick parent rf'
                             },
-                            React.createElement('div', {className: 'brick appear-by-opacity dotation-etat', style: {
-                                height: (rfHeight*DotationEtat/rf)+'em'
-                            }}, Legend(`Dotation de l'Etat`)),
-                            React.createElement('div', {className: 'brick appear-by-opacity fiscalite-directe', style: {
-                                height: (rfHeight*FiscalitéDirecte/rf)+'em'
-                            }}, Legend('Fiscalité directe')),
-                            React.createElement('div', {className: 'brick appear-by-opacity fiscalite-indirecte', style: {
-                                height: (rfHeight*FiscalitéIndirecte/rf)+'em'
-                            }}, Legend('Fiscalité indirecte')),
-                            React.createElement('div', {className: 'brick appear-by-opacity recettes-diverses', style: {
-                                height: (rfHeight*RecettesDiverses/rf)+'em'
-                            }}, Legend('Recettes diverses')),
-                            // RF filling matches DF growth
-                            React.createElement('div', {className: 'filling-container', style: {
-                                height: `${dfHeight}em`
-                            }}, React.createElement('div', {className: 'filling'})),
-                            Legend(`Recettes de fonctionnement`)
+                            React.createElement('div', { className: 'brick appear-by-height dotation-etat'}, 
+                                Legend(`Dotation de l'Etat`, `${(DotationEtat/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height fiscalite-directe' }, 
+                                Legend('Fiscalité directe', `${(FiscalitéDirecte/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height fiscalite-indirecte'}, 
+                                Legend('Fiscalité indirecte', `${(FiscalitéIndirecte/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height recettes-diverses' }, 
+                                Legend('Recettes diverses', `${(RecettesDiverses/1000000).toFixed(0)} millions`)
+                            )
                         )
-                    ), 
-                    React.createElement('div', {className: 'column'}, 
-                        /*React.createElement('div', {className: 'total'}, 
-                            React.createElement('span', {className: 'number'}, (ri/1000000).toFixed(0)),
-                            ' millions'
-                        ),*/
+                    ),
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/DF'
+                        },
+                        React.createElement('div', {className: 'legend'},
+                            React.createElement('div', {className: 'number'}, (df/1000000).toFixed(0) ),
+                            React.createElement('div', {className: 'text'}, 
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
+                                React.createElement('span', {}, `Dépenses de fonctionnement`)
+                            )
+                        ),
                         React.createElement(
-                            'div', 
+                            'div',
                             {
-                                className: 'brick parent ri', 
-                                style: {
-                                    height: `${riHeight}em`
-                                }
+                                className: 'brick parent df'
                             },
-                            React.createElement('div', {className: 'brick appear-by-height epargne'}, Legend(`Epargne`)),
-                            React.createElement('div', {className: 'brick appear-by-height ri-propres'}, Legend('RI propres')),
-                            React.createElement('div', {className: 'brick appear-by-height emprunt'}, Legend('Emprunt')),
-                            Legend(`Recettes d'investissement`)
+                            React.createElement('div', { className: 'brick appear-by-height solidarite' }, 
+                                Legend(`Solidarité`, `${(Solidarité/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height interventions' }, 
+                                Legend('Interventions', `${(Interventions/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height depenses-structure' }, 
+                                Legend('Dépenses de structure', `${(DépensesStructure/1000000).toFixed(0)} millions`)
+                            )
                         )
-                    ), 
-                    React.createElement('div', {className: 'column'},
-                        /*React.createElement('div', {className: 'total'}, 
-                            React.createElement('span', {className: 'number'}, (rf/1000000000).toFixed(3) ), 
-                            ' milliards'
-                        ),*/
+                    ),
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/RI'
+                        },
+                        React.createElement('div', {className: 'legend'},
+                            React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
+                            React.createElement('div', {className: 'text'}, 
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
+                                React.createElement('span', {}, `Recettes d'investissement`)
+                            )
+                        ),
                         React.createElement(
-                            'div', 
+                            'div',
                             {
-                                className: 'brick parent df', 
-                                style: {
-                                    height: `${dfHeight}em`
-                                }
+                                className: 'brick parent ri'
                             },
-                            React.createElement('div', {className: 'brick appear-by-height solidarite'}, Legend(`Solidarité`)),
-                            React.createElement('div', {className: 'brick appear-by-height interventions'}, Legend('Interventions')),
-                            React.createElement('div', {className: 'brick appear-by-height depenses-structure'}, Legend('Dépenses de structure')),
-                            Legend(`Dépenses de fonctionnement`)
+                            React.createElement('div', { className: 'brick appear-by-height epargne' }, 
+                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
+                                Legend('RI propres', `${(RIPropre/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
+                                Legend('Emprunt', `${(Emprunt/1000000).toFixed(0)} millions`)
+                            )
                         )
-                    ), 
-                    React.createElement('div', {className: 'column'}, 
-                        /*React.createElement('div', {className: 'total'}, 
-                            React.createElement('span', {className: 'number'}, (di/1000000).toFixed(0)),
-                            ' millions'
-                        ),*/
+                    ),
+                    React.createElement('a', 
+                        { 
+                            className: 'column',
+                            href: '#!/finance-details/DI'
+                        },
+                        React.createElement('div', {className: 'legend'},
+                            React.createElement('div', {className: 'number'}, (di/1000000).toFixed(0) ),
+                            React.createElement('div', {className: 'text'}, 
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
+                                React.createElement('span', {}, `Dépenses d'investissement`)
+                            )
+                        ),
                         React.createElement(
-                            'div', 
+                            'div',
                             {
-                                className: 'brick parent di', 
-                                style: {
-                                    height: `${diHeight}em`
-                                }
+                                className: 'brick parent di'
                             },
-                            React.createElement('div', {className: 'brick appear-by-height remboursement-emprunt'}, Legend(`Remboursement emprunt`)),
-                            React.createElement('div', {className: 'brick appear-by-height routes'}, Legend('Routes')),
-                            React.createElement('div', {className: 'brick appear-by-height colleges'}, Legend('Collèges')),
-                            React.createElement('div', {className: 'brick appear-by-height amenagement'}, Legend('Aménagement')),
-                            React.createElement('div', {className: 'brick appear-by-height subventions'}, Legend('Subventions')),
-                            Legend(`Dépenses d'investissement`)
+                            React.createElement('div', { className: 'brick appear-by-height remboursement-emprunt' }, 
+                                Legend(`Remboursement emprunt`, `${(RemboursementEmprunt/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height routes' }, 
+                                Legend('Routes', `${(Routes/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height colleges' }, 
+                                Legend('Collèges', `${(Colleges/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height amenagement' }, 
+                                Legend('Aménagement', `${(Amenagement/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height subventions' }, 
+                                Legend('Subventions', `${(Subventions/1000000).toFixed(0)} millions`)
+                            )
                         )
                     )
                 ] : undefined
             ),
             React.createElement('hr'),
             React.createElement('dl', {},
-                React.createElement('div', {className: 'column'},
+                React.createElement('div', { className: 'column' },
                     React.createElement('dt', {}, 'Recettes de fonctionnement'),
                     React.createElement('dd', {}, `Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations versées par l'État`),
-                    React.createElement('dt', {}, 'Emprunt'), 
+                    React.createElement('dt', {}, 'Emprunt'),
                     React.createElement('dd', {}, `Il permet au Département d'atteindre l’équilibre budgétaire et d’investir dans des projets d’ampleur ou durables.`)
-                ), 
-                React.createElement('div', {className: 'column'}, 
-                    React.createElement('dt', {}, 'Dépenses de fonctionnement'), 
+                ),
+                React.createElement('div', { className: 'column' },
+                    React.createElement('dt', {}, 'Dépenses de fonctionnement'),
                     React.createElement('dd', {}, `Ces dépenses financent principalement les allocations et prestations sociales ou de solidarité, les services de secours (pompiers), les transports, les collèges, les routes, ainsi que le fonctionnement propre du Département (salaires et moyens) et les intérêts d’emprunts. `)
-                ), 
-                React.createElement('div', {className: 'column'}, 
-                    React.createElement('dt', {}, 'Recettes d’investissement'), 
+                ),
+                React.createElement('div', { className: 'column' },
+                    React.createElement('dt', {}, 'Recettes d’investissement'),
                     React.createElement('dd', {}, `Elles sont principalement constituées de dotations de l’Etat et de subventions`),
-                    React.createElement('dt', {}, `Dépenses d'investissement`), 
+                    React.createElement('dt', {}, `Dépenses d'investissement`),
                     React.createElement('dd', {}, `Elles concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`)
                 )
             ),
-            React.createElement('button', {className: 'replay'}, 'rejouer')
+            React.createElement('button', { className: 'replay' }, 
+                React.createElement('i',  { className: 'fa fa-play-circle-o' }),
+                ' rejouer',
+            )
         );
     }
 }
