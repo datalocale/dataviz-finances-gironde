@@ -29,20 +29,6 @@ export function Home({
         React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement Les domaines d’intervention du Département sont vastes mais respectent tous un même objectif : assurer la mission d’aide sociale et de solidarité pour accompagner au mieux les Girondins et les territoires. A ces compétences obligatoires s’ajoutent des actions volontaristes dans de nombreux domaines. Le Département intervient au quotidien pour répondre à une demande de solidarité et de services publics grandissante.`),
         
         React.createElement('section', {className: 'appetizers'},
-            React.createElement('div', {
-                className: 'fader',
-                style: {
-                    width: '100%',
-                    height: '100%',
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-                    zIndex: 1
-                }
-            }) ,
             React.createElement(TotalAppetizer, {
                 total: expenditures, // (May 29th) different than what was hardcoded (1.616*Math.pow(10, 9))
                 year: currentYear,
