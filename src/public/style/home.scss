@@ -2,24 +2,48 @@
 
 @import 'budget-construction';
 
+$column-padding: 40px;
+$column-max-width: 1200px + 2*$column-padding;
+$background-height: 2470px;
+
 .home{
     display: flex;
     flex-direction: column;
-
+    align-items: center;
+    width: 100%;
+    
+    & > *{
+        max-width: $column-max-width;
+        padding: 0 $column-padding;
+        width: 100%;
+    }
+    
     & > section{
         display: flex;
         flex-direction: column;
     }
 
-    .appetizers{
+    .appetizers-container{
         background: url(../images/map-optimised.jpg), #BEBC05;
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
         margin-top: 9em;
 
-        min-height: 2470px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
-        position: relative;
+        min-height: $background-height;
+
+        width: 100%;
+        max-width: 100%;
+
+        .appetizers{
+            max-width: $column-max-width;
+
+            display: flex;
+            flex-direction: column;
+        }
     }
 }
