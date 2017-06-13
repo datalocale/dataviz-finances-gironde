@@ -685,7 +685,7 @@ export const rules = Object.freeze({
                 (art.startsWith('A13') || art.startsWith('A204'))
         }
     },
-    'RI-6': {
+    'RI-5': {
         label: "Divers",
         filter(m52Row){
             const article = m52Row['Article'];
@@ -698,7 +698,7 @@ export const rules = Object.freeze({
                 )
         }
     },
-    'RI-7': {
+    'RI-6': {
         label: "Cessions",
         filter(m52Row){
             // The choice of picking from "Recette de Fonctionnement" (RF) and not RI is deliberate
