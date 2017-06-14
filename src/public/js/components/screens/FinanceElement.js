@@ -192,8 +192,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 const { partAmount } = part;
                                 const height = Math.max(rectAmountScale(partAmount) - BRICK_PADDING, 4);
 
-                                console.log('part', year, part.texts && part.texts.label, (amount/1000000).toFixed(0), (partAmount/1000000).toFixed(0), rectAmountScale(partAmount).toFixed(0), height)
-
                                 return {
                                     id: part.contentId,
                                     amount: partAmount,
@@ -299,7 +297,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
 
 
-function makePartition(element, totalById, textsById){
+export function makePartition(element, totalById, textsById){
     let children = element.children;
     children = typeof children.toList === 'function' ? children.toList() : children;
 
@@ -314,7 +312,7 @@ function makePartition(element, totalById, textsById){
 
 
 
-function makeElementById(hierAgg, hierM52 = {}){
+export function makeElementById(hierAgg, hierM52 = {}){
     let elementById = new ImmutableMap();
 
     flattenTree(hierAgg).forEach(aggHierNode => {

@@ -1,0 +1,24 @@
+@import 'color-palette';
+
+.focus-detail.colleges .explanation .proportion{
+    background-color: $area-color-3;
+}
+
+.focus-detail.roads .explanation .proportion{
+    background-color: $area-color-2;
+}
+
+.focus-detail.buildings .explanation .proportion{
+    background-color: $area-color-4;
+}
+
+.focus-detail.environment .explanation .proportion{
+    background-color: $area-color-1;
+} 
+
+.focus-detail.city-subsidy .explanation .proportion{
+    background-color: $area-color-5;
+} 
+
+
+
