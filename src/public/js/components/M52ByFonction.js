@@ -51,11 +51,7 @@ export default class M52ByFonction extends React.Component {
             React.createElement(M52Viz, {
                 M52Hierarchical: m52Hierarchical,
                 donutWidth: 130,
-                outerRadius: 240,
-                /*M52HighlightedNodes,
-                selectedNode: selection && selection.type === M52_INSTRUCTION ? selection.node : undefined,
-                onSliceOvered: onM52NodeOvered,
-                onSliceSelected: onM52NodeSelected*/
+                outerRadius: 240
             }),
             React.createElement('div', {},
                 React.createElement('div', {}, 

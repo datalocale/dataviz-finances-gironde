@@ -1,5 +1,5 @@
 import React from 'react';
-import {arc as d3arc, pie as d3pie} from 'd3-shape';
+import {pie as d3pie} from 'd3-shape';
 
 import SunburstSlice from './SunburstSlice';
 
@@ -46,6 +46,8 @@ export default function({
     const pie = d3pie();
     
     const childrenArcDescs = pie(children.map(c => c.total));
+
+    console.log('childrenArcDescs', childrenArcDescs)
 
     return React.createElement(
         'div',
