@@ -1,5 +1,6 @@
 @import '../../shared/style/sunburst';
 @import './color-palette.scss'; 
+@import 'top-level-vars';
 
 $expenditures-color : $area-color-1;
 $revenue-color : $area-color-3;
@@ -18,7 +19,12 @@ $R7-color: hsl(360*7/10, $RX-S, $RX-L);
 $R8-color: hsl(360*8/10, $RX-S, $RX-L);
 $R9-color: hsl(360*9/10, $RX-S, $RX-L);
 
+
 .explore-budget{
+    width: 100%;
+    max-width: $column-max-width; 
+    padding: 0 $column-padding;
+
     section{
         margin-bottom: 3em;
     }

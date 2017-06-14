@@ -1,3 +1,5 @@
+@import 'top-level-vars';
+
 html, body{
     height: 100%;
     width: 100%;
@@ -11,6 +13,7 @@ body{
     align-items: center;
 }
 
+
 .cd33-finance-dataviz{
     width: 100%; 
     font-family: 'Roboto', sans-serif;
@@ -21,7 +24,6 @@ body{
     flex-direction: column;
     align-items: center;
 
-
     h2, h3{
         margin: 0.2em 0;
     }
@@ -29,4 +31,5 @@ body{
     p{
         max-width: 60em;
     }
+
 }

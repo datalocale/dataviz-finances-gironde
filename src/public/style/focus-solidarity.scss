@@ -1,4 +1,5 @@
 @import '../../shared/style/d3-axis';
+@import 'top-level-vars';
 
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
@@ -19,7 +20,11 @@ $focus-highlight-color : #F62727;
 @import './focus-donut';
 
 .focus{
-    &>section{
+    width: 100%;
+    max-width: $column-max-width; 
+    padding: 0 $column-padding;
+
+    & > section{
         margin-bottom: 5em;
     }
 }
