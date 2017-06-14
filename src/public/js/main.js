@@ -13,6 +13,7 @@ import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52In
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
+import FocusInvestments from './components/screens/FocusInvestments';
 import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
@@ -182,8 +183,8 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
     );
 });
 
-page('/focus/'+SOLIDARITES, () => {
-    console.log('in route', '/focus/'+SOLIDARITES);
+page(`/focus/${SOLIDARITES}`, () => {
+    console.log('in route', `/focus/${SOLIDARITES}`);
     scrollTo(0, 0);
 
     ReactDOM.render(
@@ -191,6 +192,20 @@ page('/focus/'+SOLIDARITES, () => {
             Provider,
             { store },
             React.createElement(FocusSolidarity)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+page(`/focus/${INVEST}`, () => {
+    console.log('in route', `/focus/${INVEST}`);
+    scrollTo(0, 0);
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(FocusInvestments)
         ),
         CONTAINER_ELEMENT
     );

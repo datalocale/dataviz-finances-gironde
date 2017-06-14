@@ -1,3 +1,5 @@
+@import 'color-palette';
+
 $texts-height: 10em;
 
 .budget-construction{
@@ -12,7 +14,6 @@ $texts-height: 10em;
         justify-content: space-between;
 
         .column{
-
             display: flex;
             flex-direction: column;
             

@@ -1,5 +1,6 @@
 @import '../../shared/style/sunburst';
-@import './color-palette.scss'; 
+@import 'color-palette'; 
+@import 'top-level-vars';
 
 $expenditures-color : $area-color-1;
 $revenue-color : $area-color-3;
@@ -7,18 +8,23 @@ $revenue-color : $area-color-3;
 $RX-S: 40%;
 $RX-L: 60%;
 
-$R0-color: hsl(360*0/10, $RX-S, $RX-L);
-$R1-color: hsl(360*1/10, $RX-S, $RX-L);
-$R2-color: hsl(360*2/10, $RX-S, $RX-L);
-$R3-color: hsl(360*3/10, $RX-S, $RX-L);
-$R4-color: hsl(360*4/10, $RX-S, $RX-L);
-$R5-color: hsl(360*5/10, $RX-S, $RX-L);
-$R6-color: hsl(360*6/10, $RX-S, $RX-L);
-$R7-color: hsl(360*7/10, $RX-S, $RX-L);
-$R8-color: hsl(360*8/10, $RX-S, $RX-L);
-$R9-color: hsl(360*9/10, $RX-S, $RX-L);
+$R0-color: $area-color-1;
+$R1-color: $area-color-2;
+$R2-color: $area-color-3;
+$R3-color: $area-color-4;
+$R4-color: $area-color-5;
+$R5-color: $area-color-6;
+$R6-color: $area-color-7;
+$R7-color: $area-color-8;
+$R8-color: $area-color-9;
+$R9-color: $area-color-10;
+
 
 .explore-budget{
+    width: 100%;
+    max-width: $column-max-width; 
+    padding: 0 $column-padding;
+
     section{
         margin-bottom: 3em;
     }

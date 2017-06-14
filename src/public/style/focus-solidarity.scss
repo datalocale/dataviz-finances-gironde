@@ -1,4 +1,6 @@
 @import '../../shared/style/d3-axis';
+@import 'top-level-vars';
+@import 'color-palette';
 
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
@@ -19,7 +21,11 @@ $focus-highlight-color : #F62727;
 @import './focus-donut';
 
 .focus{
-    &>section{
+    width: 100%;
+    max-width: $column-max-width; 
+    padding: 0 $column-padding;
+
+    & > section{
         margin-bottom: 5em;
     }
 }
@@ -204,17 +210,17 @@ $focus-highlight-color : #F62727;
 
 
 .focus-detail.insertion .explanation .proportion{
-    background-color: #F35D32;
+    background-color: $area-color-3;
 }
 
 .focus-detail.handicap .explanation .proportion{
-    background-color: #F8C738;
+    background-color: $area-color-2;
 }
 
 .focus-detail.elderly .explanation .proportion{
-    background-color: #B8C30F;
+    background-color: $area-color-4;
 }
 
 .focus-detail.childhood .explanation .proportion{
-    background-color: #68B0CD;
+    background-color: $area-color-1;
 }

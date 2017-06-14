@@ -16,7 +16,7 @@ interface FocusDetailProps{
 }
  */
 
-export default function ({className, title, illustrationUrl, amount, proportion, text, highlights, moreUrl}) {
+export default function ({className, title, illustrationUrl, amount, proportion, text, highlights = [], moreUrl}) {
 
     return React.createElement('div', { className: ['focus-detail', className].filter(e => e).join(' ') },
         React.createElement('div', {className: 'illustration'},

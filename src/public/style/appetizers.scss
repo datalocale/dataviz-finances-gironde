@@ -26,11 +26,11 @@ $circle-radius : 38em;
     }
 
     &:nth-child(odd){
-        align-self: flex-end;
-    }
-    &:nth-child(even){
         align-self: flex-start;
     }
+    &:nth-child(even){
+        align-self: flex-end;
+}
 
     h1{
         align-self: flex-start;

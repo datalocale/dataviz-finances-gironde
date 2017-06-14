@@ -1,10 +1,15 @@
 @import './finance-element-pie'; 
+@import 'top-level-vars';
 
 $partition-part-width: 6em;
 $part-font-size : 1.2em;
 
 .finance-element{
-    
+
+    width: 100%;
+    max-width: $column-max-width; 
+    padding: 0 $column-padding;
+
     &>section{
         margin-bottom: 5em;
     }

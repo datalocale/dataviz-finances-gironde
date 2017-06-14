@@ -20,7 +20,7 @@ import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 const MAX_HEIGHT = 50;
 
 
-export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}, constructionAmounts}) {
+export function TotalBudget({currentYear, totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}, constructionAmounts}) {
     const expenditures = totalById.get(EXPENDITURES)
     const revenue = totalById.get(REVENUE)
 
@@ -35,7 +35,7 @@ export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expen
     const dfHeight = 100*(totalById.get(DF)/expenditures)+'%';
 
     return React.createElement('article', {className: 'explore-budget'},
-        React.createElement(PageTitle, {text: 'Dépenses et Recettes du Comptes Administratif 2016'}),
+        React.createElement(PageTitle, {text: `Exploration des comptes ${currentYear}`}),
         React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
 
 
@@ -81,12 +81,12 @@ export function TotalBudget({totalById, m52Instruction, labelsById, urls: {expen
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, 'Dépenses'),
-                React.createElement('a', {href: revURL}, 
+                React.createElement('a', {href: expURL}, 
                     React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
-                        React.createElement('div', {className: 'df', style: {height: rfHeight}},
+                        React.createElement('div', {className: 'df', style: {height: dfHeight}},
                             React.createElement('span', {}, "Dépenses de fonctionnement")
                         ),
-                        React.createElement('div', {className: 'di', style: {height: riHeight}},
+                        React.createElement('div', {className: 'di', style: {height: diHeight}},
                             React.createElement('span', {}, "Dépenses d'investissement")
                         )
                     ),
@@ -136,6 +136,7 @@ export default connect(
         }
 
         return {
+            currentYear,
             totalById,
             m52Instruction,
             labelsById: textsById.map(texts => texts.label),
