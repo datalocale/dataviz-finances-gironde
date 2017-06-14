@@ -81,12 +81,12 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
             ),
             React.createElement('div', {className: 'expenditures'},
                 React.createElement('h1', {}, 'Dépenses'),
-                React.createElement('a', {href: revURL}, 
+                React.createElement('a', {href: expURL}, 
                     React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
-                        React.createElement('div', {className: 'df', style: {height: rfHeight}},
+                        React.createElement('div', {className: 'df', style: {height: dfHeight}},
                             React.createElement('span', {}, "Dépenses de fonctionnement")
                         ),
-                        React.createElement('div', {className: 'di', style: {height: riHeight}},
+                        React.createElement('div', {className: 'di', style: {height: diHeight}},
                             React.createElement('span', {}, "Dépenses d'investissement")
                         )
                     ),
