@@ -17,7 +17,7 @@ import FocusInvestments from './components/screens/FocusInvestments';
 import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
 
 const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json'); 
 
@@ -102,7 +102,6 @@ store.dispatch({
 
 [
     DATA_URL_PREFIX+'/data/texts/aggregated-atemporal.csv',
-    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-atemporal.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -115,15 +114,13 @@ store.dispatch({
 });
 
 [
-    DATA_URL_PREFIX+'/data/texts/aggregated-2015.csv',
-    //DATA_URL_PREFIX+'/data/texts/m52-fonctions-2015.csv'
+    DATA_URL_PREFIX+'/data/texts/aggregated-temporal.csv',
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
         .then(textList => {
             store.dispatch({
-                type: YEAR_TEXTS_RECEIVED,
-                year: 2015,
+                type: TEMPORAL_TEXTS_RECEIVED,
                 textList
             });
         });
