@@ -1,16 +1,15 @@
-import { Record, Map as ImmutableMap } from 'immutable';
+import { Record } from 'immutable';
 import _md from 'markdown-it';
 
 import { 
     FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED, 
-    ATEMPORAL_TEXTS_RECEIVED, YEAR_TEXTS_RECEIVED, LABELS_RECEIVED
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED
 } from './constants/actions';
 
 const FinanceElementTextsRecord = Record({
     label: undefined,
     atemporal: undefined,
-    // ImmutableMap<year, string>
-    byYear: undefined
+    temporal: undefined
 });
 
 const md = _md({
@@ -47,15 +46,14 @@ export default function reducer(state, action) {
 
             return state.set('textsById', textMap);
         }
-        case YEAR_TEXTS_RECEIVED: {
-            const year = action.year;
+        case TEMPORAL_TEXTS_RECEIVED: {
             let textMap = state.get('textsById');
 
             action.textList.forEach(({id, text = ''}) => {
-                let financeElementTexts = textMap.get(id, new FinanceElementTextsRecord());
-                let byYear = financeElementTexts.get(year, new ImmutableMap()).set(year, md.render(text));
-
-                textMap = textMap.set(id, financeElementTexts.set('byYear', byYear));
+                const financeElementTexts = textMap
+                    .get(id, new FinanceElementTextsRecord())
+                    .set('temporal', md.render(text));
+                textMap = textMap.set(id, financeElementTexts);
             });
 
             return state.set('textsById', textMap);

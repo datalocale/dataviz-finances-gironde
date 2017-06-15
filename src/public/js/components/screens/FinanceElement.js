@@ -67,7 +67,10 @@ const Y_AXIS_MARGIN = 60;
 export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
-    //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
+    const temporalText = texts && texts.temporal;
+
+    console.log('temp', temporalText, texts);
+
     const amount = amountByYear.get(year);
 
     const years = partitionByYear.keySeq().toJS();
@@ -230,7 +233,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         )
                     })
                 )
-            ) : undefined
+            ) : undefined,
+            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
+
         ),
         
         //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
@@ -340,7 +345,7 @@ function fillChildToParent(tree, wm){
 export default connect(
     state => {        
         const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
-        
+
         let RDFI;
         if(financeDetailId.startsWith('M52-')){
             RDFI = financeDetailId.slice(4, 4+2);
@@ -387,7 +392,7 @@ export default connect(
             return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
-        const amountByYear = m52InstructionByYear.map((m52i, year) => {
+        const amountByYear = m52InstructionByYear.map((m52i) => {
             const elementById = makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
@@ -397,8 +402,6 @@ export default connect(
 
             return yearElement && yearElement.total;
         });
-
-        
 
         return {
             contentId: displayedContentId, 
