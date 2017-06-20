@@ -12,6 +12,7 @@
     "build:m52overview": "browserify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -p [minifyify --no-map]",
     "build:public": "npm-run-all --parallel build:public:*",
     "build:public:style": "node-sass src/public/style/main.scss build/public.css",
+    "build:public:style-for-drupal": "node-sass src/public/style/main-for-drupal.scss build/public-for-drupal.css",
     "build:public:script": "browserify src/public/js/main.js -o build/public-bundle.js -p [minifyify --no-map]",
     "watch:m52overview": "watchify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
     "watch:public": "npm-run-all --parallel watch:public:*",
