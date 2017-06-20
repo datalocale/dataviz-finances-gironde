@@ -1,19 +1,5 @@
 @import 'top-level-vars';
 
-html, body{
-    height: 100%;
-    width: 100%;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-
-    justify-content: start;
-    align-items: center;
-}
-
-
 .cd33-finance-dataviz{
     width: 100%; 
     font-family: 'Roboto', sans-serif;
