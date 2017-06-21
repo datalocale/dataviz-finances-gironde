@@ -16,11 +16,7 @@ const EPARGNE = 'EPARGNE';
 const RI_PROPRES = 'RI_PROPRES';
 const EMPRUNT = 'EMPRUNT';
 
-const REMBOURSEMENT_EMPRUNT = 'REMBOURSEMENT_EMPRUNT';
-const ROUTES = 'ROUTES';
-const COLLEGES = 'COLLEGES';
-const AMENAGEMENT = 'AMENAGEMENT';
-const SUBVENTIONS = 'SUBVENTIONS';
+const DI = 'DI';
 
 const RF_BRICK_SELECTOR = {
     [DOTATION]: '.dotation-etat',
@@ -38,11 +34,7 @@ const RI_BRICK_SELECTOR = {
     [EMPRUNT]: '.emprunt'
 };
 const DI_BRICK_SELECTOR = {
-    [REMBOURSEMENT_EMPRUNT]: '.remboursement-emprunt',
-    [ROUTES]: '.routes',
-    [COLLEGES]: '.colleges',
-    [AMENAGEMENT]: '.amenagement',
-    [SUBVENTIONS]: '.subventions'
+    [DI]: '.di'
 };
 
 const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.85;
@@ -81,7 +73,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
             // DI
             diParent = container.querySelector('.brick.di');
-            diBricks = [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS]
+            diBricks = [DI]
                 .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
         })
 
@@ -165,7 +157,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const diBricksDone = diBricksStart.then(() => {
         const diParent = container.querySelector('.brick.di')
 
-        return [REMBOURSEMENT_EMPRUNT, ROUTES, COLLEGES, AMENAGEMENT, SUBVENTIONS].reduce((previousDone, id) => {
+        return [DI].reduce((previousDone, id) => {
             return previousDone.then(() => {
                 const el = diParent.querySelector(DI_BRICK_SELECTOR[id]);
 
@@ -253,12 +245,8 @@ function doTheMaths({
     };
 
     const diBrickHeights = {
-        [REMBOURSEMENT_EMPRUNT]: Math.max(amountScale(RemboursementEmprunt), MIN_BRICK_HEIGHT),
-        [ROUTES]: Math.max(amountScale(Routes), MIN_BRICK_HEIGHT),
-        [COLLEGES]: Math.max(amountScale(Colleges), MIN_BRICK_HEIGHT),
-        [AMENAGEMENT]: Math.max(amountScale(Amenagement), MIN_BRICK_HEIGHT),
-        [SUBVENTIONS]: Math.max(amountScale(Subventions), MIN_BRICK_HEIGHT)
-    }
+        [DI]: 8
+    };
 
     return {
         rf, ri, df, di,
@@ -455,20 +443,8 @@ export default class BudgetConstructionAnimation extends React.Component {
                             {
                                 className: 'brick parent di'
                             },
-                            React.createElement('div', { className: 'brick appear-by-height remboursement-emprunt' }, 
-                                Legend(`Remboursement emprunt`, `${(RemboursementEmprunt/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height routes' }, 
-                                Legend('Routes', `${(Routes/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height colleges' }, 
-                                Legend('Collèges', `${(Colleges/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height amenagement' }, 
-                                Legend('Aménagement', `${(Amenagement/1000000).toFixed(0)} millions`)
-                            ),
-                            React.createElement('div', { className: 'brick appear-by-height subventions' }, 
-                                Legend('Subventions', `${(Subventions/1000000).toFixed(0)} millions`)
+                            React.createElement('div', { className: 'brick appear-by-height di' }, 
+                                Legend(`RemboursementEmprunt + Routes + Colleges + Amenagement + Subventions`, `${(di/1000000).toFixed(0)} millions`)
                             )
                         )
                     )
@@ -495,7 +471,7 @@ export default class BudgetConstructionAnimation extends React.Component {
             ),
             React.createElement('button', { className: 'replay' }, 
                 React.createElement('i',  { className: 'fa fa-play-circle-o' }),
-                ' rejouer',
+                ' rejouer'
             )
         );
     }
