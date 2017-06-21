@@ -58,6 +58,9 @@ $part-font-size : 1.2em;
             text{
                 font-size: 1.2em;
                 font-weight: bold;
+                paint-order: stroke;
+                stroke: #fff;
+                stroke-width: 2px;
             }
         }
 
