@@ -42,59 +42,46 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
         Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
         une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
         une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`),
+ 
         React.createElement('section', {},
-            React.createElement(PageTitle, {text: "Comprendre la construction d'un budget"}),
-            React.createElement(
-                'p',
-                {},
-                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Cela signifie que les Départements ne peuvent pas présenter de déficit.`
-            ),
-            React.createElement(
-                'p',
-                {},
-                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
-            ),
-            React.createElement(
-                BudgetConstructionAnimation,
-                constructionAmounts
-            )
-        ),
-        React.createElement('section', {className: 'viz'},
-            React.createElement('div', {className: 'revenue'},
-                React.createElement('h1', {}, 'Recettes'),
-                React.createElement('a', {href: revURL}, 
-                    React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
-                        React.createElement('div', {className: 'rf', style: {height: rfHeight}},
-                            React.createElement('span', {}, "Recettes de fonctionnement")
+            React.createElement('h2', {}, 'Les grandes masses budgétaires'),
+            React.createElement('div', {className: 'viz'},
+                React.createElement('div', {className: 'revenue'},
+                    React.createElement('h1', {}, 'Recettes'),
+                    React.createElement('a', {href: revURL}, 
+                        React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
+                            React.createElement('div', {className: 'rf', style: {height: rfHeight}},
+                                React.createElement('span', {}, "Recettes de fonctionnement")
+                            ),
+                            React.createElement('div', {className: 'ri', style: {height: riHeight}},
+                                React.createElement('span', {}, "Recettes d'investissement")
+                            )
                         ),
-                        React.createElement('div', {className: 'ri', style: {height: riHeight}},
-                            React.createElement('span', {}, "Recettes d'investissement")
+                        React.createElement('div', {className: 'texts'}, 
+                            React.createElement('span', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2)),
+                            React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                            React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
+                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
-                    ),
-                    React.createElement('div', {className: 'texts'}, 
-                        React.createElement('span', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2)),
-                        React.createElement('span', {className: 'unit'}, `milliards d'euros`),
-                        React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
-                        React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                     )
-                )
-            ),
-            React.createElement('div', {className: 'expenditures'},
-                React.createElement('h1', {}, 'Dépenses'),
-                React.createElement('a', {href: expURL}, 
-                    React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
-                        React.createElement('div', {className: 'df', style: {height: dfHeight}},
-                            React.createElement('span', {}, "Dépenses de fonctionnement")
+                ),
+                React.createElement('div', {className: 'expenditures'},
+                    React.createElement('h1', {}, 'Dépenses'),
+                    React.createElement('a', {href: expURL}, 
+                        React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
+                            React.createElement('div', {className: 'df', style: {height: dfHeight}},
+                                React.createElement('span', {}, "Dépenses de fonctionnement")
+                            ),
+                            React.createElement('div', {className: 'di', style: {height: diHeight}},
+                                React.createElement('span', {}, "Dépenses d'investissement")
+                            )
                         ),
-                        React.createElement('div', {className: 'di', style: {height: diHeight}},
-                            React.createElement('span', {}, "Dépenses d'investissement")
+                        React.createElement('div', {className: 'texts'}, 
+                            React.createElement('span', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2)),
+                            React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                            React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
+                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
-                    ),
-                    React.createElement('div', {className: 'texts'}, 
-                        React.createElement('span', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2)),
-                        React.createElement('span', {className: 'unit'}, `milliards d'euros`),
-                        React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
-                        React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                     )
                 )
             )
@@ -114,8 +101,24 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                 ' ',
                 `Télécharger les données brutes Open Data à la norme M52 au format CSV`
             )
-        )
-
+        ),
+        React.createElement('section', {},
+            React.createElement(PageTitle, {text: "Comprendre la construction d'un budget"}),
+            React.createElement(
+                'p',
+                {},
+                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Cela signifie que les Départements ne peuvent pas présenter de déficit.`
+            ),
+            React.createElement(
+                'p',
+                {},
+                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
+            ),
+            React.createElement(
+                BudgetConstructionAnimation,
+                constructionAmounts
+            )
+        ),
 
 
     );
