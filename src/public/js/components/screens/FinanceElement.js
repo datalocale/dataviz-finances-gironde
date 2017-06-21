@@ -69,8 +69,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
 
-    console.log('temp', temporalText, texts);
-
     const amount = amountByYear.get(year);
 
     const years = partitionByYear.keySeq().toJS();
@@ -222,7 +220,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })
                 )
             ),
-            thisYearPartition ? React.createElement('div', {className: 'legend'}, 
+            thisYearPartition && thisYearPartition.size >= 2 ? React.createElement('div', {className: 'legend'}, 
                 React.createElement('ol', {},
                     thisYearPartition.map((p, i) => {
                         return React.createElement('li', {className: p.contentId},
@@ -306,13 +304,20 @@ export function makePartition(element, totalById, textsById){
     let children = element.children;
     children = typeof children.toList === 'function' ? children.toList() : children;
 
-    return children ? List(children)
+    return children.size >= 1 ? 
+        List(children)
         .map(child => ({
             contentId: child.id,
             partAmount: totalById.get(child.id),
             texts: textsById.get(child.id),
             url: '#!/finance-details/'+child.id
-        })) : undefined;
+        })) : 
+        List().push({
+            contentId: element.id,
+            partAmount: totalById.get(element.id),
+            texts: textsById.get(element.id),
+            url: '#!/finance-details/'+element.id
+        });
 }
 
 
@@ -389,7 +394,7 @@ export default connect(
 
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
+            return yearElement && makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
         const amountByYear = m52InstructionByYear.map((m52i) => {
