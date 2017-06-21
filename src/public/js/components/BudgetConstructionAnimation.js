@@ -3,6 +3,10 @@ import React from 'react';
 import { max, sum } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 
+function delay(time){
+    return () => new Promise(resolve => setTimeout(resolve, time))
+}
+
 const DOTATION = 'DOTATION';
 const FISCALITE_DIRECTE = 'FISCALITE_DIRECTE';
 const FISCALITE_INDIRECTE = 'FISCALITE_INDIRECTE';
@@ -42,6 +46,10 @@ const MIN_BRICK_HEIGHT = 4; // em
 
 // unit is seconds
 const BRICK_APPEAR_DURATION = 0.2; 
+const BETWEEN_BRICK_PAUSE_DURATION = 0.2; 
+const BETWEEN_COLUMN_PAUSE_DURATION = 1; 
+
+const MILLISECONDS = 1000;
 
 function Legend(text, amount) {
     return React.createElement('div', { className: 'legend' },
@@ -92,13 +100,14 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
-                }).catch(err => console.error('rf err', err))
+                })
+                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
             })
         }, Promise.resolve());
     });
 
     // DF bricks
-    const dfBricksStart = rfBricksDone;
+    const dfBricksStart = rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
 
     const dfBricksDone = dfBricksStart.then(() => {
         return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id) => {
@@ -111,6 +120,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
                 })
+                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
             })
         }, Promise.resolve());
 
@@ -118,7 +128,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
 
     // Epargne brick
-    const epargneBrickStart = dfBricksDone;
+    const epargneBrickStart = dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const epargneBrickDone = epargneBrickStart.then(() => {
         const epargneHeight = riBrickHeights[EPARGNE];
@@ -134,7 +144,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     })
 
     // other RU bricks
-    const otherRiBricksStart = epargneBrickDone;
+    const otherRiBricksStart = epargneBrickDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const otherRiBricksDone = otherRiBricksStart.then(() => {
         return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
@@ -147,12 +157,13 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true })
                 })
+                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
             })
         }, Promise.resolve());
     });
 
     // DI bricks
-    const diBricksStart = otherRiBricksDone;
+    const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const diBricksDone = diBricksStart.then(() => {
         const diParent = container.querySelector('.brick.di')
@@ -167,12 +178,15 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true })
                 })
+                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
             })
         }, Promise.resolve());
     });
 
     // Replay button
-    const addReplayButton = diBricksDone.then(() => {
+    const addReplayButton = diBricksDone
+    .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
+    .then(() => {
         const replayButton = document.querySelector('.replay');
 
         replayButton.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
