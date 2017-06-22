@@ -41,8 +41,9 @@ const DI_BRICK_SELECTOR = {
     [DI]: '.di'
 };
 
-const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.85;
+const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.80;
 const MIN_BRICK_HEIGHT = 4; // em
+const IN_BETWEEN_BRICK_SPACE = 0.5; // em // to be sync with variable of same name in budget-construction.scss
 
 // unit is seconds
 const BRICK_APPEAR_DURATION = 0.2; 
@@ -61,7 +62,10 @@ function Legend(text, amount) {
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights}) {
 
-    let rfParent, rfBricks, dfParent, dfBricks, riParent, epargneElement, riBricks, diParent, diBricks;
+    let rfParent, rfBricks, rfEmptier,
+        dfParent, dfBricks, 
+        riParent, epargneElement, riBricks, 
+        diParent, diBricks;
 
     const animationStart = Promise.resolve()
         .then(() => {
@@ -69,6 +73,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             rfParent = container.querySelector('.brick.rf');
             rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
                 .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
+            rfEmptier = rfParent.querySelector('.emptier');
 
             // DF
             dfParent = container.querySelector('.brick.df');
@@ -110,12 +115,21 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const dfBricksStart = rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
 
     const dfBricksDone = dfBricksStart.then(() => {
-        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id) => {
+        rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+        let rfEmptierHeight = 0;
+
+        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i) => {
             return previousDone.then(() => {
                 const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
 
                 el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                 el.style.height = `${dfBrickHeights[id]}em`;
+
+                rfEmptierHeight += dfBrickHeights[id];
+                if(i >= 1)
+                    rfEmptierHeight += IN_BETWEEN_BRICK_SPACE;
+
+                rfEmptier.style.height = `${rfEmptierHeight}em`
 
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
@@ -133,10 +147,10 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const epargneBrickDone = epargneBrickStart.then(() => {
         const epargneHeight = riBrickHeights[EPARGNE];
 
-        rfParent.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-
         epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         epargneElement.style.height = `${epargneHeight}em`;
+
+        rfEmptier.style.height = `100%`;
 
         return new Promise(resolve => {
             epargneElement.addEventListener('transitionend', resolve, { once: true })
@@ -233,7 +247,7 @@ function doTheMaths({
     const di = RemboursementEmprunt + Routes + Colleges + Amenagement + Subventions;
 
     const maxAmount = max([rf, ri, df, di]);
-    const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * bricksContainerSize;
+    const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * (bricksContainerSize - 4*IN_BETWEEN_BRICK_SPACE);
 
     const amountScale = scaleLinear()
         .domain([0, maxAmount])
@@ -381,7 +395,8 @@ export default class BudgetConstructionAnimation extends React.Component {
                             ),
                             React.createElement('div', { className: 'brick appear-by-height recettes-diverses' }, 
                                 Legend('Recettes diverses', `${(RecettesDiverses/1000000).toFixed(0)} millions`)
-                            )
+                            ),
+                            React.createElement('div', { className: 'emptier appear-by-height' })
                         )
                     ),
                     React.createElement('a', 
