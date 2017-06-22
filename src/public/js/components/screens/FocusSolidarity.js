@@ -79,7 +79,7 @@ export function FocusSol({
 
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
-            React.createElement(PageTitle, {text: 'Un territoire de Solidarités'}),
+            React.createElement(PageTitle, {text: 'Solidarités'}),
             React.createElement('p', {}, 
                 `Face à l’augmentation croissante des situations d’exclusion et de précarité, le Département affirme sa vocation sociale et poursuit avec détermination des politiques concertées et innovantes en particulier dans le domaine de l’insertion et l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
             )
