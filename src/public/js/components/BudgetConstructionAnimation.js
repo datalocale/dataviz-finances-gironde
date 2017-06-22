@@ -3,6 +3,8 @@ import React from 'react';
 import { max, sum } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 
+import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+
 function delay(time){
     return () => new Promise(resolve => setTimeout(resolve, time))
 }
@@ -62,10 +64,10 @@ function Legend(text, amount) {
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights}) {
 
-    let rfParent, rfBricks, rfEmptier,
-        dfParent, dfBricks, 
-        riParent, epargneElement, riBricks, 
-        diParent, diBricks;
+    let rfParent, rfBricks, rfEmptier, rfDefs,
+        dfParent, dfBricks, dfDefs,
+        riParent, epargneElement, riBricks, riDefs,
+        diParent, diBricks, diDefs;
 
     const animationStart = Promise.resolve()
         .then(() => {
@@ -74,26 +76,32 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
                 .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
             rfEmptier = rfParent.querySelector('.emptier');
+            rfDefs = container.querySelector('dl .rf');
 
             // DF
             dfParent = container.querySelector('.brick.df');
             dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+            dfDefs = container.querySelector('dl .df');
 
             // RI
             riParent = container.querySelector('.brick.ri');
             epargneElement = riParent.querySelector('.epargne');
             riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+            riDefs = container.querySelector('dl .ri');
 
             // DI
             diParent = container.querySelector('.brick.di');
             diBricks = [DI]
                 .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+            diDefs = container.querySelector('dl .di');
         })
 
     // Bring in RF bricks
     const rfBricksStart = animationStart;
 
     const rfBricksDone = rfBricksStart.then(() => {
+        rfDefs.style.opacity = 1;
+
         return [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES].reduce((previousDone, id) => {
             return previousDone.then(() => {
                 const el = rfParent.querySelector(RF_BRICK_SELECTOR[id]);
@@ -118,7 +126,9 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         let rfEmptierHeight = 0;
 
-        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i) => {
+        dfDefs.style.opacity = 1;
+
+        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i, arr) => {
             return previousDone.then(() => {
                 const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
 
@@ -126,10 +136,17 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 el.style.height = `${dfBrickHeights[id]}em`;
 
                 rfEmptierHeight += dfBrickHeights[id];
-                if(i >= 1)
+                if(i >= 1){
                     rfEmptierHeight += IN_BETWEEN_BRICK_SPACE;
+                }
+                if(i === arr.length - 1){ // last
+                    rfEmptier.style.height = `calc(100% - ${riBrickHeights[EPARGNE]}em)`;
+                }
+                else{
+                    rfEmptier.style.height = `${rfEmptierHeight}em`
+                }
 
-                rfEmptier.style.height = `${rfEmptierHeight}em`
+                
 
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
@@ -145,6 +162,8 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const epargneBrickStart = dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const epargneBrickDone = epargneBrickStart.then(() => {
+        riDefs.style.opacity = 1;
+
         const epargneHeight = riBrickHeights[EPARGNE];
 
         epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
@@ -180,6 +199,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const diBricksDone = diBricksStart.then(() => {
+        diDefs.style.opacity = 1;
         const diParent = container.querySelector('.brick.di')
 
         return [DI].reduce((previousDone, id) => {
@@ -369,7 +389,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                 DotationEtat ? [
                     React.createElement('a', 
                         { 
-                            className: 'column',
+                            className: 'brick-column',
                             href: '#!/finance-details/RF'
                         },
                         React.createElement('div', {className: 'legend'},
@@ -401,7 +421,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                     ),
                     React.createElement('a', 
                         { 
-                            className: 'column',
+                            className: 'brick-column',
                             href: '#!/finance-details/DF'
                         },
                         React.createElement('div', {className: 'legend'},
@@ -429,7 +449,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                     ),
                     React.createElement('a', 
                         { 
-                            className: 'column',
+                            className: 'brick-column',
                             href: '#!/finance-details/RI'
                         },
                         React.createElement('div', {className: 'legend'},
@@ -444,20 +464,20 @@ export default class BudgetConstructionAnimation extends React.Component {
                             {
                                 className: 'brick parent ri'
                             },
-                            React.createElement('div', { className: 'brick appear-by-height epargne' }, 
-                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
-                            ),
                             React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
                                 Legend('RI propres', `${(RIPropre/1000000).toFixed(0)} millions`)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
                                 Legend('Emprunt', `${(Emprunt/1000000).toFixed(0)} millions`)
+                            ),
+                            React.createElement('div', { className: 'brick appear-by-height epargne' }, 
+                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
                             )
                         )
                     ),
                     React.createElement('a', 
                         { 
-                            className: 'column',
+                            className: 'brick-column',
                             href: '#!/finance-details/DI'
                         },
                         React.createElement('div', {className: 'legend'},
@@ -473,7 +493,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent di'
                             },
                             React.createElement('div', { className: 'brick appear-by-height di' }, 
-                                Legend(`RemboursementEmprunt + Routes + Colleges + Amenagement + Subventions`, `${(di/1000000).toFixed(0)} millions`)
+                                Legend(`Remboursement Emprunt + Routes + Colleges + Amenagement + Subventions`, `${(di/1000000).toFixed(0)} millions`)
                             )
                         )
                     )
@@ -481,21 +501,27 @@ export default class BudgetConstructionAnimation extends React.Component {
             ),
             React.createElement('hr'),
             React.createElement('dl', {},
-                React.createElement('div', { className: 'column' },
+                React.createElement('a', { className: 'column rf', href: '#!/finance-details/RF' },
                     React.createElement('dt', {}, 'Recettes de fonctionnement'),
                     React.createElement('dd', {}, `Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations versées par l'État`),
-                    React.createElement('dt', {}, 'Emprunt'),
-                    React.createElement('dd', {}, `Il permet au Département d'atteindre l’équilibre budgétaire et d’investir dans des projets d’ampleur ou durables.`)
+                    React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 ),
-                React.createElement('div', { className: 'column' },
+                React.createElement('a', { className: 'column df', href: '#!/finance-details/DF' },
                     React.createElement('dt', {}, 'Dépenses de fonctionnement'),
-                    React.createElement('dd', {}, `Ces dépenses financent principalement les allocations et prestations sociales ou de solidarité, les services de secours (pompiers), les transports, les collèges, les routes, ainsi que le fonctionnement propre du Département (salaires et moyens) et les intérêts d’emprunts. `)
+                    React.createElement('dd', {}, `Ces dépenses financent principalement les allocations et prestations sociales ou de solidarité, les services de secours (pompiers), les transports, les collèges, les routes, ainsi que le fonctionnement propre du Département (salaires et moyens) et les intérêts d’emprunts.`),
+                    React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 ),
-                React.createElement('div', { className: 'column' },
+                React.createElement('a', { className: 'column ri', href: '#!/finance-details/RI' },
                     React.createElement('dt', {}, 'Recettes d’investissement'),
                     React.createElement('dd', {}, `Elles sont principalement constituées de dotations de l’Etat et de subventions`),
+                    React.createElement('dt', {}, 'Emprunt'),
+                    React.createElement('dd', {}, `Il permet au Département d'atteindre l’équilibre budgétaire et d’investir dans des projets d’ampleur ou durables.`),
+                    React.createElement(PrimaryCallToAction, {text: 'explorer'})
+                ),
+                React.createElement('a', { className: 'column di', href: '#!/finance-details/DI' },
                     React.createElement('dt', {}, `Dépenses d'investissement`),
-                    React.createElement('dd', {}, `Elles concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`)
+                    React.createElement('dd', {}, `Elles concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`),
+                    React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 )
             ),
             React.createElement('button', { className: 'replay' }, 
