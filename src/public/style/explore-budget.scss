@@ -55,6 +55,22 @@ $R9-color: $area-color-10;
             }
 
         }
+
+        .rf{
+            background-color: $revenue-color;
+        }
+
+        .ri{
+            background-color: lighten($revenue-color, 20%);
+        }
+
+        .df{
+            background-color: $expenditures-color;
+        }
+
+        .di{
+            background-color: lighten($expenditures-color, 20%);
+        }
     }
 
     .expenditures > a, .revenue > a{
@@ -92,21 +108,6 @@ $R9-color: $area-color-10;
         }
     }
 
-    .rf{
-        background-color: $revenue-color;
-    }
-
-    .ri{
-        background-color: lighten($revenue-color, 20%);
-    }
-
-    .df{
-        background-color: $expenditures-color;
-    }
-
-    .di{
-        background-color: lighten($expenditures-color, 20%);
-    }
 
     .m52-by-fonction{
         display: flex;

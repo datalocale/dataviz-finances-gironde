@@ -47,8 +47,6 @@ export default function({
     
     const childrenArcDescs = pie(children.map(c => c.total));
 
-    console.log('childrenArcDescs', childrenArcDescs)
-
     return React.createElement(
         'div',
         {

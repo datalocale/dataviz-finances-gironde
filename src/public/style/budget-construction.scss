@@ -1,19 +1,19 @@
 @import 'color-palette';
 
-$texts-height: 10em;
+$in-between-brick-space: 0.5em; // to be sync with variable of same name in BudgetConstructionAnimation.js
 
 .budget-construction{
 
     position: relative;
 
     .bricks{
-        height: 4*$texts-height;
+        height: 40em;
 
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
 
-        .column{
+        .brick-column{
             display: flex;
             flex-direction: column;
             
@@ -53,7 +53,7 @@ $texts-height: 10em;
             
 
             .rf .brick {
-                background-color: $area-color-1;
+                background-color: $area-color-3;
             }
 
             .df .brick {
@@ -61,7 +61,7 @@ $texts-height: 10em;
             }
 
             .ri .brick {
-                background-color: $area-color-3;
+                background-color: $area-color-1;
             }
 
             .di .brick {
@@ -69,7 +69,7 @@ $texts-height: 10em;
             }
 
             .brick.epargne{ 
-                background-color: gold;
+                background-color: $area-color-5;
             }
 
             .parent{
@@ -96,12 +96,15 @@ $texts-height: 10em;
 
                     padding: 0.5em;
                     margin: 0;
-                    margin-top: 0.5em;
                     width: 100%;
 
                     border-radius: 5px;
 
                     position: relative;
+
+                    &:not(:first-child){
+                        margin-top: $in-between-brick-space; 
+                    }
 
                     .legend{
                         margin-top: 0.5em;
@@ -123,10 +126,8 @@ $texts-height: 10em;
                         .amount{
                             font-weight: normal;
                         }
-
-
-
                     }
+
 
                     &.appear-by-height{
                         transition-property: height;
@@ -138,27 +139,16 @@ $texts-height: 10em;
 
                 }
 
-                .filling-container{
+                .emptier{
                     position: absolute;
-                    bottom: 0;
+                    top: 0;
                     right: 0;
                     left: 0;
                     height: 0;
 
-                    color: transparent;
-
-                    .filling{
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        left: 0;
-                        height: 0;
-
-                        transition-property: height;
-
-                        opacity: 0.2;
-                        background-color: black;
-                    }
+                    z-index: 1;
+                    background-color: white;
+                    opacity: 0.6;
                 }
 
             }
@@ -174,8 +164,6 @@ $texts-height: 10em;
     }
 
     dl{
-        height: $texts-height;
-
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -184,9 +172,16 @@ $texts-height: 10em;
             width: 30%;
             height: 100%;
 
+            color: black;
+            text-decoration: none;
+
             display: flex;
             flex-direction: column;
             
+            opacity: 0;
+
+            transition-property: opacity;
+            transition-duration: 0.2s;
         }
 
         dt{
