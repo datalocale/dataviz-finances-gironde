@@ -23,7 +23,7 @@ export default function ({total, year, exploreUrl}) {
         ),
         React.createElement('hr', {}),
         React.createElement('p', {}, 
-            `Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`
+            `Le département a dépensé 1,6 milliards d’euros pour les girondins en 2016. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})
     );
