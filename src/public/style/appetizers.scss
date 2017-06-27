@@ -30,7 +30,7 @@ $circle-radius : 38em;
     }
     &:nth-child(even){
         align-self: flex-end;
-}
+    }
 
     h1{
         align-self: flex-start;
@@ -59,17 +59,38 @@ $circle-radius : 38em;
 
         text-align: center;
 
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+
         color: #4A4A4A;
 
         h1{
             font-size: 1.5em;
-        }
 
-        .total{
-            font-size: 5.5em;
-            letter-spacing: -10px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
 
-            color: $gironde-green;
+            align-self: auto;
+
+            width: 80%;
+
+            margin: 0;
+
+            .number{
+                font-size: 5.5em;
+                color: $gironde-green;
+                letter-spacing: -10px;
+            }
+
+            .text{
+                width: 50%;
+                text-align: center;
+                text-transform: uppercase;
+            }
+
         }
 
         hr{
