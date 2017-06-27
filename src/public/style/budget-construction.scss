@@ -19,28 +19,27 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             
             justify-content: flex-end;
             align-items: center;
-            width: 18%;
+            width: 19%;
 
-            .legend{
+            & > .legend{
                 align-self: flex-start;
 
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
 
                 color: black;
                 font-weight: bold;
 
                 .number{
-                    font-size: 5em;
+                    color: #BBB;
                 }
 
                 .text{
-
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
 
-                    padding-left: 0.3em;
+                    font-size: 1.5em;
 
                     text-transform: uppercase;
 
@@ -50,10 +49,10 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
                 }
             }
 
-            
+            $rf-color: $area-color-3;
 
             .rf .brick {
-                background-color: $area-color-3;
+                background-color: $rf-color;
             }
 
             .df .brick {
@@ -69,7 +68,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             }
 
             .brick.epargne{ 
-                background-color: $area-color-5;
+                background-color: $rf-color;
             }
 
             .parent{
@@ -211,7 +210,10 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
         text-transform: uppercase;
 
         transition-property: opacity;
-
+        
+        &::disabled{
+            cursor: default;
+        }
     }
 
 }
