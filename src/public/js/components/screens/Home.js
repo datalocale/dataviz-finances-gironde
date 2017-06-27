@@ -42,7 +42,7 @@ export function Home({
                     h1: "Solidarités",
                     numberMain: "120 000", 
                     numberSecundary: "prestations allouées",
-                    description: `Avec 845 Millions d’€ en 2016 et 1751 agents mobilisés c’est plus de la moitié des ressources du département qui sont consacrées aux politiques de Solidarités.`, 
+                    description: `Avec 845 Millions d’euros en 2016 et 1751 agents mobilisés c’est plus de la moitié des ressources du département qui sont consacrées aux politiques de Solidarités.`, 
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
