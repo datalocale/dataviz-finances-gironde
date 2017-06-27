@@ -111,6 +111,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             `Dépense d'investissement`:
             '';
 
+    const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
+
 
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
@@ -220,7 +222,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })
                 )
             ),
-            thisYearPartition && thisYearPartition.size >= 2 ? React.createElement('div', {className: 'legend'}, 
+            !isLeaf ? React.createElement('div', {className: 'legend'}, 
                 React.createElement('ol', {},
                     thisYearPartition.map((p, i) => {
                         return React.createElement('li', {className: p.contentId},
@@ -239,7 +241,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
         //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
-        thisYearPartition ? React.createElement('section', { className: 'partition'}, 
+        !isLeaf ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
             thisYearPartition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
@@ -267,7 +269,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             })  
         ) : undefined,
 
-        !thisYearPartition && m52Rows ? React.createElement('section', { className: 'partition'}, 
+        isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
             React.createElement('h2', {}, `Lignes M52 correspondantes en ${year}`),
             React.createElement('table', {}, 
                 m52Rows
@@ -302,9 +304,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
 export function makePartition(element, totalById, textsById){
     let children = element.children;
-    children = typeof children.toList === 'function' ? children.toList() : children;
+    children = children && typeof children.toList === 'function' ? children.toList() : children;
 
-    return children.size >= 1 ? 
+    return children && children.size >= 1 ? 
         List(children)
         .map(child => ({
             contentId: child.id,
@@ -351,8 +353,10 @@ export default connect(
     state => {        
         const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
 
+        const isM52Element = financeDetailId.startsWith('M52-');
+
         let RDFI;
-        if(financeDetailId.startsWith('M52-')){
+        if(isM52Element){
             RDFI = financeDetailId.slice(4, 4+2);
         }
 
@@ -408,6 +412,15 @@ export default connect(
             return yearElement && yearElement.total;
         });
 
+        console.log('element', element, element && element.children);
+
+        const m52Rows = element && (!element.children || element.children.size === 0) ? 
+            (isM52Element ?
+                 element.elements :
+                 element.elements.first()['M52Rows'] 
+            ) :
+            undefined
+
         return {
             contentId: displayedContentId, 
             RDFI,
@@ -425,7 +438,7 @@ export default connect(
             expenseOrRevenue,
             texts: textsById.get(displayedContentId),
             partitionByYear,
-            m52Rows: element && !element.children ? element.elements.first()['M52Rows'] : undefined,
+            m52Rows,
             year: currentYear
         }
 
