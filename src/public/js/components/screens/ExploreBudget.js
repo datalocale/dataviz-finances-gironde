@@ -95,7 +95,7 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                 {
                     target: '_blank', 
                     href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', 
-                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
+                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em'}
                 }, 
                 React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
                 ' ',

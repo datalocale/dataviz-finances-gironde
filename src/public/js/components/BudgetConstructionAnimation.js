@@ -70,7 +70,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
     let rfParent, rfBricks, rfEmptier, rfDefs,
         dfParent, dfBricks, dfDefs,
-        riParent, epargneElement, riBricks, riDefs,
+        riParent, epargneElement, riBricks, riEmptier, riDefs,
         diParent, diBricks, diDefs;
 
     const animationStart = Promise.resolve()
@@ -91,6 +91,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             riParent = container.querySelector('.brick.ri');
             epargneElement = riParent.querySelector('.epargne');
             riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+            riEmptier = riParent.querySelector('.emptier');
             riDefs = container.querySelector('dl .ri');
 
             // DI
@@ -151,7 +152,6 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 }
 
                 
-
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true });
                 })
@@ -203,15 +203,30 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
 
     const diBricksDone = diBricksStart.then(() => {
+
+        riEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+        let riEmptierHeight = 0;
+
         diDefs.style.opacity = 1;
         const diParent = container.querySelector('.brick.di')
 
-        return [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS].reduce((previousDone, id) => {
+        return [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS].reduce((previousDone, id, i, arr) => {
             return previousDone.then(() => {
                 const el = diParent.querySelector(DI_BRICK_SELECTOR[id]);
 
                 el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                 el.style.height = `${diBrickHeights[id]}em`;
+
+                riEmptierHeight += diBrickHeights[id];
+                if(i >= 1){
+                    riEmptierHeight += IN_BETWEEN_BRICK_SPACE;
+                }
+                if(i === arr.length - 1){ // last
+                    riEmptier.style.height = `100%`;
+                }
+                else{
+                    riEmptier.style.height = `${riEmptierHeight}em`
+                }
 
                 return new Promise(resolve => {
                     el.addEventListener('transitionend', resolve, { once: true })
@@ -229,6 +244,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
         replayButton.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
         replayButton.style.opacity = `1`;
+        replayButton.removeAttribute('disabled');
 
         // reset styles
         replayButton.addEventListener('click', () => {
@@ -237,10 +253,15 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             riBricks.forEach(el => { el.style.height = 0; })
             diBricks.forEach(el => { el.style.height = 0; })
 
+            rfEmptier.style.height = 0;
+            riEmptier.style.height = 0;
+            replayButton.setAttribute('disabled', '');
+
             // replay
             // let some time pass so transition actually occurs
             setTimeout( () => {
-                animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights })
+                animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights });
+                replayButton.style.opacity = `0`;
             }, 100);
             
             
@@ -486,7 +507,8 @@ export default class BudgetConstructionAnimation extends React.Component {
                             ),
                             React.createElement('div', { className: 'brick appear-by-height epargne' }, 
                                 Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
-                            )
+                            ),
+                            React.createElement('div', { className: 'emptier appear-by-height' })
                         )
                     ),
                     React.createElement('a', 
