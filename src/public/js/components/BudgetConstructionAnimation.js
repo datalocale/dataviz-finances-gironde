@@ -428,10 +428,10 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/RF'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'number'}, (rf/1000000).toFixed(0) ),
-                            React.createElement('div', {className: 'text'}, 
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
-                                React.createElement('span', {}, `Recettes de fonctionnement`)
+                            React.createElement('div', {className: 'text'}, `Recettes de fonctionnement`),
+                            React.createElement('div', {className: 'number'}, 
+                                (rf/1000000).toFixed(0),
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
                             )
                         ),
                         React.createElement(
@@ -460,10 +460,10 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/DF'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'number'}, (df/1000000).toFixed(0) ),
-                            React.createElement('div', {className: 'text'}, 
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
-                                React.createElement('span', {}, `Dépenses de fonctionnement`)
+                            React.createElement('div', {className: 'text'}, `Dépenses de fonctionnement`),
+                            React.createElement('div', {className: 'number'}, 
+                                (df/1000000).toFixed(0),
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
                             )
                         ),
                         React.createElement(
@@ -488,10 +488,10 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/RI'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
-                            React.createElement('div', {className: 'text'}, 
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
-                                React.createElement('span', {}, `Recettes d'investissement`)
+                            React.createElement('div', {className: 'text'}, `Recettes d'investissement`),
+                            React.createElement('div', {className: 'number'}, 
+                                (ri/1000000).toFixed(0),
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
                             )
                         ),
                         React.createElement(
@@ -517,11 +517,11 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/DI'
                         },
                         React.createElement('div', {className: 'legend'},
-                            // "ri" purposefully so that di === ri
-                            React.createElement('div', {className: 'number'}, (ri/1000000).toFixed(0) ),
-                            React.createElement('div', {className: 'text'}, 
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`),
-                                React.createElement('span', {}, `Dépenses d'investissement`)
+                            React.createElement('div', {className: 'text'}, `Dépenses d'investissement`),
+                            React.createElement('div', {className: 'number'}, 
+                                // "ri" purposefully so that di === ri
+                                (ri/1000000).toFixed(0),
+                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
                             )
                         ),
                         React.createElement(
