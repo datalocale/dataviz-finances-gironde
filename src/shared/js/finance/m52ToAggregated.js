@@ -211,7 +211,7 @@ export const rules = Object.freeze({
         filter(m52Row){
             return isOR(m52Row) && isRF(m52Row) && [
                 'A7817', 'A7711', 'A7714', 'A7718', 
-                'A773', 'A7788', 'A7875'
+                'A773', 'A7788', 'A7875','A7816'
             ].includes(m52Row['Article']);
         }
     },
