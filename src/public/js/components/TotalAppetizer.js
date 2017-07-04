@@ -12,11 +12,21 @@ interface TotalAppetizerProps{
 
 export default function ({total, year, exploreUrl}) {
 
+    let beforeAndComma;
+    let afterComma;
+
+    if(total){
+        const toDisplay = (total/Math.pow(10, 9)).toFixed(1);
+        beforeAndComma = toDisplay.match(/^(\d+)\./)[1];
+        afterComma = toDisplay.match(/\.(\d+)$/)[1];
+    }
+
     return React.createElement('div', { className: 'appetizer total-appetizer' }, 
         React.createElement('h1', {}, 
-            React.createElement('div', {className: 'number'}, 
-                total ? (total/Math.pow(10, 9)).toFixed(1).replace('.', ',') : ''
-            ),
+            total ? React.createElement('div', {className: 'number'}, 
+                React.createElement('span', {className: 'before-comma'}, beforeAndComma),
+                React.createElement('span', {className: 'after-comma'}, ', '+afterComma)
+            ) : '',
             React.createElement('div', {className: 'text'}, 
                 `Milliards de dépenses en ${year}`
             )

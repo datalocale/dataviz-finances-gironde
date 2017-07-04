@@ -48,8 +48,8 @@ export function Home({
                 }),
                 React.createElement(Appetizer, {
                     h1: "Investissements",
-                    numberMain: "1 MILLIARD", 
-                    numberSecundary: "A l’HORIZON 2020",
+                    numberMain: "1 milliard", 
+                    numberSecundary: "à l’horizon 2020",
                     description: `Avec une moyenne de 200 millions d’euros investis chaque année durant la mandature, le Département adopte une stratégie volontariste dans une période de réduction budgétaire majeure.`, 
                     moreUrl: invest
                 }),
