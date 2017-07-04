@@ -216,7 +216,7 @@ export const rules = Object.freeze({
             const f2 = fonction.slice(0, 2);
             return isOR(m52Row) && isRF(m52Row) && f2!=='R4' && f2!=='R5' && [
                 'A7817', 'A7711', 'A7714', 'A7718', 
-                'A773', 'A7788', 'A7875','A7816'
+                'A773', 'A7788', 'A7875', 'A7816'
             ].includes(m52Row['Article']);
         }
     },
