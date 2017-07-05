@@ -60,7 +60,6 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                         React.createElement('div', {className: 'texts'}, 
                             React.createElement('span', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2)),
                             React.createElement('span', {className: 'unit'}, `milliards d'euros`),
-                            React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
                     )
@@ -79,7 +78,6 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                         React.createElement('div', {className: 'texts'}, 
                             React.createElement('span', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2)),
                             React.createElement('span', {className: 'unit'}, `milliards d'euros`),
-                            React.createElement('p', {}, `blalbba blablabablalbb bllabalba bblalaaaaba`),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
                     )
