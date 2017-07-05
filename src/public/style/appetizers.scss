@@ -4,9 +4,9 @@ $circle-radius : 38em;
 
 
 .appetizer{
-    max-width: 50%;
+    width: 58.3%;
     
-    padding: 1em;
+    padding: 2em;
     margin: 10em 0;
 
     background-color: white;
@@ -83,6 +83,10 @@ $circle-radius : 38em;
                 font-size: 5.5em;
                 color: $gironde-green;
                 letter-spacing: -10px;
+
+                .after-comma{
+                    font-size: 0.6em;
+                }
             }
 
             .text{
@@ -113,52 +117,39 @@ $circle-radius : 38em;
 }
 
 
-.appetizer .info{
-    display: flex;
-    flex-direction: row;
-}
+.appetizer{
+    .info{
+        display: flex;
+        flex-direction: row;
 
-.appetizer .info .number{
-    padding-right: 1em;
-    border-right: 0.5em solid #D7D7D7;
-}
+        .number{
+            padding-right: 1em;
+            border-right: 0.5em solid #D7D7D7;
+            text-align: right;
+            
 
-.appetizer .info .number .main,
-.appetizer .info .number .secundary{
-    white-space: nowrap;
-}
+            .main, .secundary{
+                white-space: nowrap;
+                font-weight: bold;
+            }
 
-.appetizer .info .number .main{
-    font-size: 2em;
-}
-.appetizer .info .number .secundary{
-    font-size: 1.5em;
-}
-.appetizer .info p{
-    padding-left: 1em;
-}
+            .main{
+                font-size: 3em;
+                color: $gironde-green;
+            }
+            .secundary{
+                font-size: 1.5em;
+                text-transform: uppercase; 
+            }
+        }
 
-.appetizer a{
-    align-self: flex-end;
-}
+        p{
+            padding-left: 1em;
+        }
+    }
 
+    a{
+        align-self: flex-end;
+    }
 
-.appetizer.total-appetizer{
-    border: 1.5em solid white;
-    margin: 0;
-    width: $circle-radius;
-    height: $circle-radius;
-    border-radius: 50%;
-
-    position: relative;
-    left: 10%; /* % relative to parent width */    
-    transform: translateY(-25%); /* % relative to element height */
-
-    background-color: #EDEDED;
-    box-shadow: 0 0 0;
-
-    text-align: center;
-
-    color: #4A4A4A;
-    font-size: 14px;
-}
+} 
