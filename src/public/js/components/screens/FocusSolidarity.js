@@ -114,7 +114,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Evolution des dépenses de “Solidarités” par public de ${min(years)} à ${max(years)}`),
+            React.createElement(PageTitle, {text: `Evolution des dépenses de “Solidarités” par public de ${min(years)} à ${max(years)}`}),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
