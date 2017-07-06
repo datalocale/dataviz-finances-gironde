@@ -15,6 +15,7 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import LegendList from '../../../../shared/js/components/LegendList';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
@@ -247,18 +248,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })
                 )
             ),
-            !isLeaf ? React.createElement('div', {className: 'legend'}, 
-                React.createElement('ol', {},
-                    barchartPartitionByYear.get(year).map((p, i) => {
-                        return React.createElement('li', {className: p.contentId},
-                            React.createElement('a', {href: p.url},
-                                React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
-                                p.texts.label
-                            )
-                        )
-                    })
-                )
-            ) : undefined,
+            !isLeaf ? React.createElement(LegendList, {
+                items: barchartPartitionByYear.get(year).map((p, i) => ({
+                    className: p.contentId, 
+                    url: p.url, 
+                    text: p.texts.label, 
+                    colorClassName: `area-color-${i+1}`
+                })).reverse()
+            }) : undefined,
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
 
         ),

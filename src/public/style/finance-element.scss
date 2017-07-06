@@ -1,4 +1,6 @@
-@import './finance-element-pie'; 
+@import '../../shared/style/legend-list'; 
+
+@import 'finance-element-pie'; 
 @import 'top-level-vars';
 
 $partition-part-width: 6em;
@@ -82,20 +84,6 @@ $part-font-size : 1.2em;
             }
         }
 
-    }
-
-    .legend{
-        ol{
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .color{
-            display: inline-block;
-            height: 2em;
-            width: 2em;
-        }
     }
 
     .partition{
