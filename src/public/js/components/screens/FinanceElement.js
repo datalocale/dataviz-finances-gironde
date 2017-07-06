@@ -140,9 +140,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         
         React.createElement('section', {},
             React.createElement('h2', {}, 'Évolution sur ces dernières années'),
-            React.createElement('p', {}, 
+            years.includes(year-1) ? React.createElement('p', {}, 
                 `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
-            ),
+            ) : undefined,
             React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
                 // x axis / years
                 React.createElement(D3Axis, {className: 'x', tickData: 
@@ -154,8 +154,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 x: 0, y: -10, 
                                 dy: "2em", 
                                 t: y
-                            }
-                            
+                            },
+                            className: year === y ? 'selected' : undefined
                         }
                     })
                 }),
@@ -351,7 +351,7 @@ function fillChildToParent(tree, wm){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
+        const { m52InstructionByYear, textsById, financeDetailId, explorationYear } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -360,7 +360,7 @@ export default connect(
             RDFI = financeDetailId.slice(4, 4+2);
         }
 
-        const m52Instruction = m52InstructionByYear.get(currentYear);
+        const m52Instruction = m52InstructionByYear.get(explorationYear);
         const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -439,7 +439,7 @@ export default connect(
             texts: textsById.get(displayedContentId),
             partitionByYear,
             m52Rows,
-            year: currentYear
+            year: explorationYear
         }
 
     },

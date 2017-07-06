@@ -64,6 +64,16 @@ $part-font-size : 1.2em;
             }
         }
 
+        .d3-axis{
+            .selected{
+                font-weight: bold;
+
+                text{
+                    fill: black;
+                }
+            }
+        }
+
     }
 
     .legend{

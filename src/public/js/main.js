@@ -39,6 +39,7 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
     currentYear: undefined,
+    explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
     financeDetailId: undefined
@@ -49,6 +50,7 @@ const store = createStore(
     new StoreRecord({
         m52InstructionByYear: new ImmutableMap(),
         currentYear: 2016,
+        explorationYear: 2016,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
