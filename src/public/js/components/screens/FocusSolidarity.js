@@ -6,6 +6,8 @@ import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 import { format } from 'd3-format';
 
+import LegendList from '../../../../shared/js/components/LegendList';
+
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
@@ -188,28 +190,28 @@ export function FocusSol({
                         })
                     )
                 ),
-                React.createElement('ul', {className: 'legend'},
-                    React.createElement('li', {className: 'DF-2-other'},
-                        React.createElement('span', {className: 'color'}), ' ',
-                        "Prévention transversale"
-                    ),
-                    React.createElement('li', {className: 'DF-2-4'},
-                        React.createElement('span', {className: 'color'}), ' ',
-                        "Enfance"
-                    ),
-                    React.createElement('li', {className: 'DF-2-3'},
-                        React.createElement('span', {className: 'color'}), ' ',
-                        "Personnes âgées"
-                    ),
-                    React.createElement('li', {className: 'DF-2-2'},
-                        React.createElement('span', {className: 'color'}), ' ',
-                        "Personnes handicapées"
-                    ),
-                    React.createElement('li', {className: 'DF-2-1'},
-                        React.createElement('span', {className: 'color'}), ' ',
-                        "Personnes en insertion"
-                    )
-                )
+                React.createElement(LegendList, {items: [
+                    {
+                        className: 'DF-2-other', 
+                        text: "Prévention transversale"
+                    },
+                    {
+                        className: 'DF-2-4', 
+                        text: "Enfance"
+                    },
+                    {
+                        className: 'DF-2-3', 
+                        text: "Personnes âgées"
+                    },
+                    {
+                        className: 'DF-2-2', 
+                        text: "Personnes handicapées"
+                    },
+                    {
+                        className: 'DF-2-1', 
+                        text: "Personnes en insertion"
+                    }
+                ]})
             )
         ),
         React.createElement('section', {}, 
