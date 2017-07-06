@@ -15,6 +15,9 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import LegendList from '../../../../shared/js/components/LegendList';
+
+import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import D3Axis from '../D3Axis';
 import FinanceElementPie from '../FinanceElementPie';
@@ -64,7 +67,7 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -83,16 +86,36 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const maxAmount = max(amountByYear.valueSeq().toJS());
 
-    // sort all partitions part according to the order in this year's partition
-    let thisYearPartition = partitionByYear.get(year)
-    thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
-    const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
+    // sort all partitions part according to the order of the last year partition
+    let lastYearPartition = partitionByYear.get(max(years))
+    lastYearPartition = lastYearPartition && lastYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
+    const partitionIdsInOrder = lastYearPartition && lastYearPartition.map(p => p.contentId) || [];
 
     // reorder all partitions so they adhere to partitionIdsInOrder
     partitionByYear = partitionByYear.map(partition => {
         // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     })
+
+    let thisYearPartition = partitionByYear.get(year);
+
+    let barchartPartitionByYear = partitionByYear;
+    if(contentId === 'DF'){
+        // For DF, for the split thing at the end, the whole partition is needed. 
+        // However, DF-1 === DF-2, so for the barchart, we only want one of them with the label "solidarité"
+        barchartPartitionByYear = barchartPartitionByYear.map(partition => {
+            partition = partition.remove(partition.findIndex(p => p.contentId === 'DF-1'))
+
+            const df2 = partition.find(p => p.contentId === 'DF-2');
+
+            return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
+                contentId: df2.contentId,
+                partAmount: df2.partAmount,
+                texts: df2.texts && df2.texts.set('label', 'Actions sociales'),
+                url: df2.url
+            });
+        })
+    }
 
     const yAxisAmountScale = scaleLinear()
         .domain([0, maxAmount])
@@ -140,13 +163,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         
         React.createElement('section', {},
             React.createElement('h2', {}, 'Évolution sur ces dernières années'),
-            React.createElement('p', {}, 
+            years.includes(year-1) ? React.createElement('p', {}, 
                 `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
-            ),
+            ) : undefined,
             React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
                 // x axis / years
-                React.createElement(D3Axis, {className: 'x', tickData: 
-                    years.map(y => {
+                React.createElement(D3Axis, {
+                    className: 'x', 
+                    tickData: years.map(y => {
                         return {
                             transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
                             line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
@@ -154,10 +178,12 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 x: 0, y: -10, 
                                 dy: "2em", 
                                 t: y
-                            }
-                            
+                            },
+                            id: y,
+                            className: year === y ? 'selected' : undefined
                         }
-                    })
+                    }),
+                    onSelectedAxisItem: changeExplorationYear
                 }),
                 // y axis / money amounts
                 React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
@@ -177,7 +203,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 })}),
                 // content
                 React.createElement('g', {className: 'content'},
-                    partitionByYear.entrySeq().toJS().map(([year, partition]) => {
+                    barchartPartitionByYear.entrySeq().toJS().map(([year, partition]) => {
                         const yearAmount = amountByYear.get(year);
 
                         partition = partition || List([{
@@ -222,18 +248,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })
                 )
             ),
-            !isLeaf ? React.createElement('div', {className: 'legend'}, 
-                React.createElement('ol', {},
-                    thisYearPartition.map((p, i) => {
-                        return React.createElement('li', {className: p.contentId},
-                            React.createElement('a', {href: p.url},
-                                React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
-                                p.texts.label
-                            )
-                        )
-                    })
-                )
-            ) : undefined,
+            !isLeaf ? React.createElement(LegendList, {
+                items: barchartPartitionByYear.get(year).map((p, i) => ({
+                    className: p.contentId, 
+                    url: p.url, 
+                    text: p.texts.label, 
+                    colorClassName: `area-color-${i+1}`
+                })).reverse()
+            }) : undefined,
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
 
         ),
@@ -351,7 +373,7 @@ function fillChildToParent(tree, wm){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, textsById, financeDetailId, currentYear } = state;
+        const { m52InstructionByYear, textsById, financeDetailId, explorationYear } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -360,7 +382,7 @@ export default connect(
             RDFI = financeDetailId.slice(4, 4+2);
         }
 
-        const m52Instruction = m52InstructionByYear.get(currentYear);
+        const m52Instruction = m52InstructionByYear.get(explorationYear);
         const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -412,8 +434,6 @@ export default connect(
             return yearElement && yearElement.total;
         });
 
-        console.log('element', element, element && element.children);
-
         const m52Rows = element && (!element.children || element.children.size === 0) ? 
             (isM52Element ?
                  element.elements :
@@ -439,9 +459,16 @@ export default connect(
             texts: textsById.get(displayedContentId),
             partitionByYear,
             m52Rows,
-            year: currentYear
+            year: explorationYear
         }
 
     },
-    () => ({})
+    dispatch => ({
+        changeExplorationYear(year){
+            dispatch({
+                type: CHANGE_EXPLORATION_YEAR,
+                year
+            })
+        }
+    })
 )(FinanceElement);

@@ -39,6 +39,7 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
     currentYear: undefined,
+    explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
     financeDetailId: undefined
@@ -49,6 +50,7 @@ const store = createStore(
     new StoreRecord({
         m52InstructionByYear: new ImmutableMap(),
         currentYear: 2016,
+        explorationYear: 2016,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
@@ -85,10 +87,7 @@ store.dispatch({
     DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv'
+    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)

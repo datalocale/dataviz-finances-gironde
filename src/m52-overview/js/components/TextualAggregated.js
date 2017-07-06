@@ -2,6 +2,8 @@ import React from 'react';
 import {format} from 'currency-formatter';
 
 import {isOR} from '../../../shared/js/finance/rowFilters';
+import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
+import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
     return rows.filter(m52row => {
@@ -47,6 +49,25 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, rows){
     return m52RowToAggRows;
 }
 
+function makeDF12Diffs(aggregatedInstruction){
+    const hierAgg = hierarchicalAggregated(aggregatedInstruction)
+    const aggRows = flattenTree(hierAgg);
+
+    const df1 = aggRows.find(r => r.id === 'DF-1');
+    const df2 = aggRows.find(r => r.id === 'DF-2');
+
+    const df1M52Rows = df1.elements.map(e => e['M52Rows']).flatten(1);
+    const df2M52Rows = df2.elements.map(e => e['M52Rows']).flatten(1);
+
+    console.log('df1M52Rows df2M52Rows', df1M52Rows, df2M52Rows)
+
+    return {
+        onlyDF1: df1M52Rows.subtract(df2M52Rows),
+        onlyDF2: df2M52Rows.subtract(df1M52Rows)
+    }
+
+}
+
 function makeM52RowId(m52Row){
     return [
         m52Row['Dépense/Recette'] + m52Row['Investissement/Fonctionnement'],
@@ -72,6 +93,7 @@ export default class TextualSelected extends React.PureComponent{
 
         const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, m52Rows);
         const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, m52Rows);
+        const {onlyDF1, onlyDF2} = makeDF12Diffs(aggregatedInstruction);
 
         return React.createElement('div', {}, 
             React.createElement('div', {}, 
@@ -115,6 +137,28 @@ export default class TextualSelected extends React.PureComponent{
                         ` (${format(m52Row["Montant"], { code: 'EUR' })}) `,
                         ' utilisé dans ',
                         [...aggSet].map(aggRow => aggRow.id).join(', ')
+                    )
+                }))
+            ),
+            React.createElement('div', {}, 
+                React.createElement('h1', {}, "Lignes M52 utilisées dans DF-1, mais pas dans DF-2 ("+onlyDF1.size+")"),
+                React.createElement('ul', {}, Array.from(onlyDF1).map(m52Row => {
+                    const m52Id = makeM52RowId(m52Row);
+
+                    return React.createElement('li', {key: m52Id}, 
+                        m52Id,
+                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `
+                    )
+                }))
+            ) ,
+            React.createElement('div', {}, 
+                React.createElement('h1', {}, "Lignes M52 utilisées dans DF-2, mais pas dans DF-1 ("+onlyDF2.size+")"),
+                React.createElement('ul', {}, Array.from(onlyDF2).map(m52Row => {
+                    const m52Id = makeM52RowId(m52Row);
+
+                    return React.createElement('li', {key: m52Id}, 
+                        m52Id,
+                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `
                     )
                 }))
             )        
