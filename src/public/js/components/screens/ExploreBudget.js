@@ -36,12 +36,16 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
 
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: `Exploration des comptes ${currentYear}`}),
-        React.createElement('section', {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
-
-
-        Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-        une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
-        une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`),
+        React.createElement('section', {}, 
+            React.createElement('p', {},
+                `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.`
+            ),
+            React.createElement('p', {},
+                `Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
+                une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
+                une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`
+            )
+        ),
  
         React.createElement('section', {},
             React.createElement('h2', {}, 'Les grandes masses budgétaires'),
