@@ -16,6 +16,8 @@ import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/con
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
+import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
+
 import D3Axis from '../D3Axis';
 import FinanceElementPie from '../FinanceElementPie';
 
@@ -64,7 +66,7 @@ const MIN_STRING_HEIGHT = 30;
 
 const Y_AXIS_MARGIN = 60;
 
-export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows}) {
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -83,8 +85,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const maxAmount = max(amountByYear.valueSeq().toJS());
 
-    // sort all partitions part according to the order in this year's partition
-    let thisYearPartition = partitionByYear.get(year)
+    // sort all partitions part according to the order of the last year partition
+    let thisYearPartition = partitionByYear.get(max(years))
     thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
     const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
 
@@ -145,8 +147,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             ) : undefined,
             React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
                 // x axis / years
-                React.createElement(D3Axis, {className: 'x', tickData: 
-                    years.map(y => {
+                React.createElement(D3Axis, {
+                    className: 'x', 
+                    tickData: years.map(y => {
                         return {
                             transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
                             line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
@@ -155,9 +158,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 dy: "2em", 
                                 t: y
                             },
+                            id: y,
                             className: year === y ? 'selected' : undefined
                         }
-                    })
+                    }),
+                    onSelectedAxisItem(y){
+                        console.log('changing exploration year to', y);
+                        changeExplorationYear(y);
+                    }
                 }),
                 // y axis / money amounts
                 React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
@@ -412,8 +420,6 @@ export default connect(
             return yearElement && yearElement.total;
         });
 
-        console.log('element', element, element && element.children);
-
         const m52Rows = element && (!element.children || element.children.size === 0) ? 
             (isM52Element ?
                  element.elements :
@@ -443,5 +449,12 @@ export default connect(
         }
 
     },
-    () => ({})
+    dispatch => ({
+        changeExplorationYear(year){
+            dispatch({
+                type: CHANGE_EXPLORATION_YEAR,
+                year
+            })
+        }
+    })
 )(FinanceElement);

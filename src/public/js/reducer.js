@@ -3,7 +3,8 @@ import _md from 'markdown-it';
 
 import { 
     FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED, 
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED,
+    CHANGE_EXPLORATION_YEAR
 } from './constants/actions';
 
 const FinanceElementTextsRecord = Record({
@@ -70,8 +71,12 @@ export default function reducer(state, action) {
 
             return state.set('textsById', textMap);
         }
+        case CHANGE_EXPLORATION_YEAR: {
+            const {year} = action;
+            return state.set('explorationYear', year);
+        }
         default:
-            console.warn('Unknown action type', type);
+            console.warn('Unhandled action type', type);
             return state;
     }
 }
