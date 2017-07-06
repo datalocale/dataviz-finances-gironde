@@ -228,7 +228,7 @@ test("RF-9-2 : contient RF C78 R0202 A7875", () => {
     expect(aggDF37.M52Rows.size).toBe(1);
 });
 
-test("RF-9-2 : contient RF C017 R567 A7788", () => {
+test("RF-9-2 : ne contient pas RF C017 R567 A7788", () => {
     const AMOUNT = 44;
     const AGGREGATED_ROW_ID = 'RF-9-2';
 
@@ -250,7 +250,7 @@ test("RF-9-2 : contient RF C017 R567 A7788", () => {
 
     const aggRow = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
 
-    expect(aggRow.M52Rows.first()).toBe(m52Rows[0]);
+    expect(aggRow.M52Rows.first()).toBe(undefined);
 });
 
 
