@@ -106,8 +106,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             partition = partition.remove(partition.findIndex(p => p.contentId === 'DF-1'))
 
             const df2 = partition.find(p => p.contentId === 'DF-2');
-            
-            console.log('size after', partition.size);
 
             return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
                 contentId: df2.contentId,
