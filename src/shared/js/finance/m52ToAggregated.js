@@ -82,7 +82,7 @@ export const rules = Object.freeze({
     'RF-4-4': {
         label: "autres fiscalités",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7388'].includes(m52Row['Article']);
+            return isOR(m52Row) && isRF(m52Row) && ['A7362', 'A7388','A738'].includes(m52Row['Article']);
         }
     },
     'RF-5-1': {
@@ -151,11 +151,14 @@ export const rules = Object.freeze({
         label: "Autres",
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
+            const f2 = fonction.slice(0, 2);
             const otherRecetteSocialeIds = Object.keys(rules)
                 .filter(id => id !== 'RF-6-5' && id.startsWith('RF-6-'));
 
-            return isOR(m52Row) && isRF(m52Row) && 
-                (fonction === 'R4' || fonction === 'R5') &&
+            return isOR(m52Row) && isRF(m52Row) &&
+                m52Row['Article'] !== 'A74783' &&
+                m52Row['Article'] !== 'A775' &&
+                (f2 === 'R4' || f2 === 'R5') &&
                 otherRecetteSocialeIds.every(
                     id => !rules[id].filter(m52Row)
                 )
@@ -209,16 +212,21 @@ export const rules = Object.freeze({
     'RF-9-2': {
         label: "Produits exceptionnels",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && [
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const f2 = fonction.slice(0, 2);
+            return isOR(m52Row) && isRF(m52Row) && f2!=='R4' && f2!=='R5' && [
                 'A7817', 'A7711', 'A7714', 'A7718', 
-                'A773', 'A7788', 'A7875'
+                'A773', 'A7788', 'A7875', 'A7816'
             ].includes(m52Row['Article']);
         }
     },
     'RF-9-3': {
         label: "Dotations et participations (dont fonds européens)",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && [
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const f2 = fonction.slice(0, 2);
+
+            return isOR(m52Row) && isRF(m52Row) && f2!=='R4' && f2!=='R5' && [
                 'A7475', 'A7476', 'A74771', 'A74772', 'A74778', 
                 'A74788', 'A74888', 'A74718', 'A7474', 'A7472', 
                 'A7473', 'A7478228'
@@ -234,19 +242,27 @@ export const rules = Object.freeze({
     'RF-9-5': {
         label: "Produits des services",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && m52Row['Article'].startsWith('A70');
+           const fonction = m52Row['Rubrique fonctionnelle'];
+           const f2 = fonction.slice(0, 2); 
+
+            return isOR(m52Row) && isRF(m52Row) && f2!=='R4' && f2!=='R5' && m52Row['Article'].startsWith('A70');
         }
     },
     'RF-9-6': {
         label: "Remboursement charges de personnels",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && ['A6419', 'A6459', 'A6479'].includes(m52Row['Article']);
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const f2 = fonction.slice(0, 2);
+            return isOR(m52Row) && isRF(m52Row) && f2!=='R4' && f2!=='R5' && ['A6419', 'A6459', 'A6479'].includes(m52Row['Article']);
         }
     },
     'RF-9-7': {
         label: "Autres produits de gestions courants",
         filter(m52Row){
-            return isOR(m52Row) && isRF(m52Row) && 
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const f2 = fonction.slice(0, 2);
+            return isOR(m52Row) && isRF(m52Row) &&
+                f2!=='R4' && f2!=='R5' && 
                 m52Row['Article'].startsWith('A75') && 
                 m52Row['Article'] !== 'A752' &&
                 m52Row['Article'] !== 'A7513' &&
@@ -322,7 +338,7 @@ export const rules = Object.freeze({
 
             return isOR(m52Row) && isDF(m52Row) && 
                 fonction.slice(0, 3) === 'R51' &&
-                ['A652416', 'A6514', 'A65111', 'A6718'].includes(m52Row['Article']);    
+                ['A652416', 'A6514', 'A65111'].includes(m52Row['Article']);    
         }
     },
     'DF-1-6': {
@@ -347,7 +363,7 @@ export const rules = Object.freeze({
                 [
                     "A6068", "A6188", "A616", "A62268", "A6227", 
                     "A62878", "A654", "A6541", "A6542", "A6568", 
-                    "A65734", "A65737", "A6574", "A6718", "A673", 
+                    "A65734", "A65737", "A6574", "A673", 
                     "A6745"
                 ].includes(m52Row['Article']);
         }
@@ -495,7 +511,8 @@ export const rules = Object.freeze({
 
             return isOR(m52Row) && isDF(m52Row) && 
                 ( f3 === 'R72') && 
-                'A6556' === m52Row['Article'];
+                ('A6556' === m52Row['Article'] ||
+                'A65561' === m52Row['Article']);
         }
     },
     'DF-3-7-2': { 
@@ -708,7 +725,7 @@ export const rules = Object.freeze({
     'RI-EM-1': {
         label: "Emprunt nouveau",
         filter(m52Row){
-            return isOR(m52Row) && isRI(m52Row) && ["A1641", "A16311", "A167", "A168"].includes(m52Row['Article']);
+            return isOR(m52Row) && isRI(m52Row) && ["A1641", "A16311", "A167", "A168","A1631","A16811"].includes(m52Row['Article']);
         }
     },
     'RI-EM-2': {
@@ -783,13 +800,15 @@ export const rules = Object.freeze({
             const f4 = fonction.slice(0, 4);
 
             return isOR(m52Row) && isDI(m52Row) &&
-                ([
-                    "A1311", "A1321", "A2031", "A2111", "A2157", 
-                    "A2182", "A21848", "A2312", "A231351", "A2314", 
-                    "A23152", "A23153"
-                ].includes(article) &&
-                f4 === 'R738' ) ||
-                article === 'A454418';
+                (
+                    ([
+                        "A1311", "A2031", "A2111", "A2157", 
+                        "A2182", "A21848", "A2312", "A231351", "A2314", 
+                        "A23152", "A23153"
+                    ].includes(article) &&
+                    f4 === 'R738' ) ||
+                    article === 'A454418' || article === 'A454411' 
+                );
         }
     },
     'DI-1-5': {
@@ -852,7 +871,7 @@ export const rules = Object.freeze({
                     "A204151", "A204152", "A204162", "A2041721", "A2041722", 
                     "A2041782", "A204181", "A204182", "A204182", "A20421", 
                     "A20422", "A20431", 'A2761', 'A261', 'A20421', 'A204183', 
-                    'A204113', 'A1321'
+                    'A204113', 'A1321','A2748','A1328','A13278'
                 ].includes(article) &&
                 fonction !== 'R72' && 
                 !(article === 'A204152' && fonction === 'R93') && 
