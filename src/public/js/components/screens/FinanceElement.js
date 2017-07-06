@@ -86,15 +86,37 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
     const maxAmount = max(amountByYear.valueSeq().toJS());
 
     // sort all partitions part according to the order of the last year partition
-    let thisYearPartition = partitionByYear.get(max(years))
-    thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
-    const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
+    let lastYearPartition = partitionByYear.get(max(years))
+    lastYearPartition = lastYearPartition && lastYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
+    const partitionIdsInOrder = lastYearPartition && lastYearPartition.map(p => p.contentId) || [];
 
     // reorder all partitions so they adhere to partitionIdsInOrder
     partitionByYear = partitionByYear.map(partition => {
         // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     })
+
+    let thisYearPartition = partitionByYear.get(year);
+
+    let barchartPartitionByYear = partitionByYear;
+    if(contentId === 'DF'){
+        // For DF, for the split thing at the end, the whole partition is needed. 
+        // However, DF-1 === DF-2, so for the barchart, we only want one of them with the label "solidarité"
+        barchartPartitionByYear = barchartPartitionByYear.map(partition => {
+            partition = partition.remove(partition.findIndex(p => p.contentId === 'DF-1'))
+
+            const df2 = partition.find(p => p.contentId === 'DF-2');
+            
+            console.log('size after', partition.size);
+
+            return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
+                contentId: df2.contentId,
+                partAmount: df2.partAmount,
+                texts: df2.texts && df2.texts.set('label', 'Actions sociales'),
+                url: df2.url
+            });
+        })
+    }
 
     const yAxisAmountScale = scaleLinear()
         .domain([0, maxAmount])
@@ -162,10 +184,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                             className: year === y ? 'selected' : undefined
                         }
                     }),
-                    onSelectedAxisItem(y){
-                        console.log('changing exploration year to', y);
-                        changeExplorationYear(y);
-                    }
+                    onSelectedAxisItem: changeExplorationYear
                 }),
                 // y axis / money amounts
                 React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
@@ -185,7 +204,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 })}),
                 // content
                 React.createElement('g', {className: 'content'},
-                    partitionByYear.entrySeq().toJS().map(([year, partition]) => {
+                    barchartPartitionByYear.entrySeq().toJS().map(([year, partition]) => {
                         const yearAmount = amountByYear.get(year);
 
                         partition = partition || List([{
@@ -232,7 +251,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             ),
             !isLeaf ? React.createElement('div', {className: 'legend'}, 
                 React.createElement('ol', {},
-                    thisYearPartition.map((p, i) => {
+                    barchartPartitionByYear.get(year).map((p, i) => {
                         return React.createElement('li', {className: p.contentId},
                             React.createElement('a', {href: p.url},
                                 React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
