@@ -71,11 +71,16 @@ $part-font-size : 1.2em;
             list-style: none;
             margin: 0;
             padding: 0;
+            
+            > li {
+              margin-bottom: $part-font-size / 2;
+            }
         }
 
         .color{
             display: inline-block;
             height: 2em;
+            vertical-align: middle;
             width: 2em;
         }
     }
