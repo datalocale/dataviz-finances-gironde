@@ -82,6 +82,7 @@ const DEFAULT_BREADCRUMB = List([
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
     currentYear: undefined,
+    explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
     financeDetailId: undefined
@@ -92,6 +93,7 @@ const store = createStore(
     new StoreRecord({
         m52InstructionByYear: new ImmutableMap(),
         currentYear: 2016,
+        explorationYear: 2016,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
@@ -125,7 +127,10 @@ store.dispatch({
  */
 [
     DATA_URL_PREFIX+'cedi_2016_CA.pdf',
-    DATA_URL_PREFIX+'cedi_2015_CA.pdf'
+    DATA_URL_PREFIX+'cedi_2015_CA.pdf',
+    DATA_URL_PREFIX+'cedi_2014_CA.pdf',
+    DATA_URL_PREFIX+'cedi_2013_CA.pdf',
+    DATA_URL_PREFIX+'cedi_2012_CA.pdf'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
