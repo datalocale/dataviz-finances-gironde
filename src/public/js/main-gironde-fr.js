@@ -2,13 +2,14 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Record, Map as ImmutableMap } from 'immutable';
+import { Record, Map as ImmutableMap, List } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
 import reducer from './reducer';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb.js';
 
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
@@ -56,8 +57,25 @@ Array.from(elementsToMove).forEach(e => {
     }
 });
 
-
 main.insertBefore(CONTAINER_ELEMENT, rowEl);
+
+// Breadcrumb
+const BREADCRUMB_CONTAINER = main.querySelector('.breadcrumb').parentNode;
+const DEFAULT_BREADCRUMB = List([
+    {
+        text: 'Accueil',
+        url: '/'
+    },
+    {
+        text: 'Le Département',
+        url: '/le-departement'
+    },
+    {
+        text: `Un budget au service d'une solidarité humaine et territoriale`,
+        url: '#'
+    }
+]);
+
 
 
 
@@ -163,6 +181,9 @@ page('/', () => {
         ),
         CONTAINER_ELEMENT
     );
+
+    const breadcrumb = DEFAULT_BREADCRUMB;
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 });
 
 
@@ -177,6 +198,9 @@ page('/explorer', () => {
         ),
         CONTAINER_ELEMENT
     );
+
+    const breadcrumb = DEFAULT_BREADCRUMB.push({text: 'Explorer'});
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 });
 
 
@@ -197,6 +221,12 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
         ),
         CONTAINER_ELEMENT
     );
+
+    const breadcrumb = DEFAULT_BREADCRUMB
+        .push({text: 'Explorer', url: '#!/explorer'})
+        .push({text: 'X1', url: '#!/explorer/x1'})
+        .push({text: 'X2 blou blou'});
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 });
 
 page(`/focus/${SOLIDARITES}`, () => {
