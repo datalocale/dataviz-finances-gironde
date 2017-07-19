@@ -292,7 +292,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         ) : undefined,
 
         isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
-            React.createElement('h2', {}, `Lignes M52 correspondantes en ${year}`),
+            React.createElement('h2', {}, `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`),
             React.createElement('table', {}, 
                 m52Rows
                 .sort((r1, r2) => r2['Montant'] - r1['Montant'])
