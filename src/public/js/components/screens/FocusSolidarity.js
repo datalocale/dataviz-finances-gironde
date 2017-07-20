@@ -83,7 +83,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
             React.createElement('p', {}, 
-                `Face à l’augmentation croissante des situations d’exclusion et de précarité, le Département affirme sa vocation sociale et poursuit avec détermination des politiques concertées et innovantes en particulier dans le domaine de l’insertion et l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
+                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes, et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
@@ -98,13 +98,13 @@ export function FocusSol({
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "En 2016, le Département de la Gironde a financé 842.539.675€"
+                        "En 2016, 50% du total des dépenses du Département sont dédiées aux allocations, aux prestations sociales et à la solidarité."
                     ),
-                    ` au titre de la solidarité soit 52% de la totalité des dépenses. `,
+                    ` soit 52% de la totalité des dépenses. `,
                     React.createElement('strong', {}, 
                         "Ce qui représente une évolution de +4,31% par rapport à 2015."
                     ),
-                    ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs d’une ou plusieurs aides du Département. Chef de file sur les actions de solidarité, il accompagne les plus fragiles dans leurs parcours de vie au quotidien.`),
+                    ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux girondins bénéficient d’une ou plusieurs aides du département. Il s’engage à accompagner les plus fragiles dans leurs parcours de vie au quotidien..`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -216,8 +216,7 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement('h2', {}, `Les publics`),
-            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations : les personnes en insertion ou en situation de précarité, les personnes handicapées, les personnes âgées et les enfants. L’Etat définit pour les départements un cadre légal d’intervention pour chaque public. Le Département à l’intérieur de ce cadre définit sa propre politique et les dispositifs pertinents à mettre en œuvre. Ces dispositifs peuvent se traduire selon chaque personne par : des hébergements, des allocations, des prestations ou subventions (insertion, aide à l’action des associations, …)
-            L’allocation permet de reverser directement à la personne un complément financier. Le revenu de solidarité active (RSA), l'allocation personnalisée d'autonomie (APA) La prestation de compensation du handicap (PCH),sont autant d’allocations spécifiques destinés à des publics différents. L’hébergement permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. La prestation permet de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale.`),
+            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations: les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. L’Etat impose au Département un cadre légal d’intervention pour chaque public.Au sein de ce cadre, le Département définit sa propre politique et les actions qu’il met en œuvre.  Les actions et les aides octroyées par le Département varient en fonction des publics. On retrouve : Des Hébergements qui permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. Des Prestations qui permettent de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale. Des Subventions pour l’insertion, l’aide à l’action des associations etc … Des Allocations qui permettent de reverser directement à la personne un complément financier : RSA  (Revenu de solidarité active) ; APA (Allocation personnalisée d’autonomie); PCH (Prestation de compensation du handicap).`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
@@ -225,21 +224,21 @@ export function FocusSol({
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Principale dépense à destination des personnes en difficulté, le revenu de solidarité active (RSA) assure aux personnes sans ressources un niveau minimum de revenu variable selon la composition du foyer. Le RSA est ouvert, sous certaines conditions, aux personnes d'au moins 25 ans et aux jeunes actifs de 18 à 24 ans s'ils sont parents isolés ou justifient d’une certaine durée d’activité professionnelle. 
+                text: `Le RSA (Revenu de Solidarité Active) assure aux personnes sans ressource un revenu minimum variable selon la composition du foyer. Il est délivré sous certaines conditions. Pour bénéficier du RSA il faut : soit avoir 25 ans ou plus si inactif professionnellement, soit Avoir entre 18 et 24 ans et justifier d’une certaine durée d’activité professionnelle ou être parents isolés. 
                 
                 En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
                 highlights: [
                     {
-                        strong: "229",
-                        span: "millions d'euros pour le RSA"
+                        strong: "229 M d'€",
+                        span: " pour le RSA en 2016"
                     },
                     {
-                        strong: "61 588",
-                        span: "bénéficiaires du RSA"
-                    },
-                    {
-                        strong: "+5.5%",
+                        strong: "12 M d'€ de plus (+5.5%)",
                         span: "d'allocations RSA par rapport à 2015"
+                    },
+                    {
+                        strong: "baisse",
+                        span: "du nombre de bénéficiaires du RSA"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-1'
@@ -251,23 +250,19 @@ export function FocusSol({
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’aide aux personnes handicapées recouvre trois types d’aides : la Prestation de compensation du Handicap (PCH), l’allocation pour tierce personne (ACTP) et des prestations d’hébergement.
-                La prestation de compensation du handicap (PCH) est une aide financière versée par le département. Elle est destinée à rembourser les dépenses liées à votre la perte d'autonomie. Son attribution dépend du degré d'autonomie, de l’âge, des ressources et de la résidence.
-                La PCH s’élève à 73M€ et continue de progresser à un rythme qui reste élevé (+ 5.7%) mais qui s’infléchit par rapport 2015 (+8.6%). Cette augmentation s’explique en partie par un nombre toujours plus important de bénéficiaires adultes et enfantss +2.7%. La PCH enfant progresse également de 10.5% et 22 bénéficiaires supplémentaires en 2016 sachant qu’il s’agit d’une prestation très évolutive.
-                A ces 73M€ s’ajoutent 8.25M€ pour l’allocation de compensation pour tierce personne (ACTP) en baisse de 3.8%. (-40 bénéficiaires).
-                L’hébergement pour les personnes handicapées, est un secteur d’intervention très important qui atteint 122M€ en 2016 soit +4% par rapport à 2015. La progression reste soutenue mais amorce un ralentissement. En 2016: 9 975 personnes ont bénéficié de la prestation de compensation du handicap (PCH) soit +2.7%, 1 128 de l’ACTP-ACFP (allocation compensatrice pour tierce personne), 2 763 de places d’hébergement et 757 d’aides à domicile.`, 
+                text: `L’aide aux personnes handicapées recouvre trois types d’aides versées par le Département. La PCH (Prestation de Compensation du Handicap) est une aide financière destinée à rembourser les dépenses liées à la perte d’autonomie de la personne. Elle est calculée selon : le degré d’autonomie ; l’âge ; les ressources de la résidence. En 2016, 73Millions d'euros ont été versés pour 9 975 personnes bénéficiaires. Seconde aide, la prestation d’hébergement pour les personnes handicapées est un secteur d’intervention très important pour le Département avec 122 Millions d'euros en 2016. Troisième aide : l'ACTP (Allocation de Compensation pour Tiers Personne) représente 8.25 Millions d'euros versés pour 1 128 personnes en 2016`, 
                 highlights: [
                     {
-                        strong: "218",
-                        span: "millions d'euros"
+                        strong: "3 aides possibles ",
+                        span: "allocation, hébergement, aides à domicile"
                     },
                     {
-                        strong: "15217",
-                        span: "bénéficiaires"
+                        strong: "2 763 places ",
+                        span: "d’hébergement en 2016"
                     },
                     {
-                        strong: "-1,5%",
-                        span: "personnes concernées par rapport à 2015"
+                        strong: " 757 ",
+                        span: "aides à domicile en 2016"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-2'
@@ -278,21 +273,19 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron3.png',
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-3')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’aide en faveur des personnes âgées recouvre essentiellement deux types d’aide : l’allocation personnalisée d’autonomie (APA) qui peut soit être versée directement à la personne ou à un établissement et les prestations d’hébergement
-Les personnes âgées peuvent bénéficier de l'allocation personnalisée d'autonomie (Apa) en cas de perte d'autonomie, de l'allocation de solidarité aux personnes âgées (Aspa), si elles disposent de faibles revenus, de l'allocation supplémentaire d'invalidité (Asi) si elles sont invalides et n’ont pas atteint l’âge légal de départ à la retraite.
-L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi sur l’Adaptation de la société au Vieillissement (ASV). Les dépenses liées à l’APA s’élèvent à 141.6M€ contre 136.8M€ en 2015 soit une augmentation de 3.53%. En terme de bénéficiaires, le nombre de bénéficiaires de l’APA s’élève à 34 046 contre 33 931 soit 115 bénéficiaires de plus avec une progression des bénéficiaires de l’APA à domicile dont le nombre passe de 21 348 à 21 504`, 
+                text: `La principale aide en faveur des personnes âgées est l’APA (Allocation Personnalisée d’autonomie). Elle peut être versée soit directement à la personne soit à l’établissement en charge de la personne. L’APA est versée : en cas de perte d’autonomie ; si la personne dispose de l’ASPA (Allocation de Solidarité aux Personnes Âgées) et/ou de l’ASI (Allocation Supplémentaire d’Invalidité) ; si la personne dispose de faibles revenus ; si la personne est invalide et n’a pas atteint l’âge légal de départ à la retraite.L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi ASV (Adaptation de la Société  au Vieillissement)`, 
                 highlights: [
                     {
-                        strong: "194",
-                        span: "millions d'euros"
+                        strong: "141.6 M d'€ ",
+                        span: "versés en 2016 pour l’APA"
                     },
                     {
-                        strong: "32 455",
-                        span: "bénéficiaires"
+                        strong: " + 3.53%  ",
+                        span: " en 2016 "
                     },
                     {
-                        strong: "-2,6 %",
-                        span: "personnes concernées par rapport à 2015"
+                        strong: "34 046 ",
+                        span: "bénéficiaires en 2016"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-3'
@@ -304,24 +297,19 @@ L’année 2016 est marquée par l’augmentation des versements de l’APA lié
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L'Aide Sociale à l'Enfance aussi appelée ASE est un service du Département. Il est responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007) en collaboration avec le service de protection des maladies infantiles (PMI) et le service départemental d'Action Sociale (UTAS).
-Dans le cadre de sa mission, le service de l'ASE peut ainsi :
-apporter un soutien aux familles à leur domicile (éducatif, financier….).
-accueillir et prendre en charge, y compris en urgence, les enfants qui lui sont confiés par leurs parents ou par un juge.
-Le Département intervient ainsi au travers de plusieurs dispositifs d’accueil dont le montant s’est élevé en 2016 à plus de 166M€. Il s’agit de l’accueil en Maison d’enfants à caractère social (MECS) pour plus de 90M€ en progression de 7.8% soit +6.6M€. Le nombre d’accueil a progressé de 7% soit 3 354 accueils réalisés en 2016 avec 14 places de type « internat » et 41 places en suivi externalisé créés soit une centaine de jeunes accueillis en plus par rapport à 2015.
-L’accueil familial représente de deuxième mode d’accueil avec 30M€ dépensés en 20 On comptabilise 800 assistants familiaux en gironde et 35 hors gironde au 31/12/2016.Le nombre d’enfants accueillis s’élèvent à 1 392 pour un budget de 30M€.`, 
+                text: `L’Aide Sociale à l'Enfance (ASE) est le service du Département responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007). L’ASE est en collaboration avec : , La PMI (Protection Maternelle et Infantile) , l’UTAS (Union Territoriale d’Action Sociale). Les Missions de l’ASE : apporter un soutien aux familles à leur domicile (éducatif, financier …), accueillir et prendre en charge (également dans l’urgence)les enfants qui lui confiés par leurs parents ou par un juge. Le département s'occupe également de l’accueil familial qui représente le deuxième mode d’accueil avec 800 assistants familiaux en gironde et 35 assistants familiaux hors gironde.`, 
                 highlights: [
                     {
-                        strong: "168",
-                        span: "millions d'euros"
+                        strong: "166 M d'€",
+                        span: "investits dans les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
-                        strong: "9303",
-                        span: "bénéficiaires"
+                        strong: "1392 ",
+                        span: "enfants accueuillis en 2016"
                     },
                     {
-                        strong: "+ 0,7%",
-                        span: "personnes concernées par rapport à 2015"
+                        strong: "800",
+                        span: " assistants familiaux en Gironde"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-4'
