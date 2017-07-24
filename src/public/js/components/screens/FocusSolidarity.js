@@ -276,7 +276,7 @@ export function FocusSol({
                 text: `La principale aide en faveur des personnes âgées est l’APA (Allocation Personnalisée d’autonomie). Elle peut être versée soit directement à la personne soit à l’établissement en charge de la personne. L’APA est versée : en cas de perte d’autonomie ; si la personne dispose de l’ASPA (Allocation de Solidarité aux Personnes Âgées) et/ou de l’ASI (Allocation Supplémentaire d’Invalidité) ; si la personne dispose de faibles revenus ; si la personne est invalide et n’a pas atteint l’âge légal de départ à la retraite.L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi ASV (Adaptation de la Société  au Vieillissement)`, 
                 highlights: [
                     {
-                        strong: "141.6 M d'€ ",
+                        strong: "141.6 Millions d'€ ",
                         span: "versés en 2016 pour l’APA"
                     },
                     {
