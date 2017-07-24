@@ -256,16 +256,16 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
 - L'ACTP (All`, 
                 highlights: [
                     {
-                        strong: "3 aides possibles ",
-                        span: "allocation, hébergement, aides à domicile"
+                        strong: "73 Millions d'euros",
+                        span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "2 763 places ",
-                        span: "d’hébergement en 2016"
+                        strong: "122 Millions d'euros",
+                        span: "pour des places d’hébergement"
                     },
                     {
-                        strong: " 757 ",
-                        span: "aides à domicile en 2016"
+                        strong: "8.25 Millions d'euros",
+                        span: "pour l'emploi de 757 aides à domicile"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-2'
