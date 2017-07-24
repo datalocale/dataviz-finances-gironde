@@ -251,9 +251,10 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Trois types d’aides ont été allouées aux personnes handicapées par le Département en 2016 :
-- La PCH (Prestation de Compensation du Handicap), a été versée à 9 975 personnes bénéficiaires. 
-- La prestation d’hébergement a financé 2763 places d'hébergement. 
-- L'ACTP (All`, 
+- La PCH (Prestation de Compensation du Handicap), a été versée à 9 975 personnes bénéficiaires 
+- La prestation d’hébergement a financé 2763 places d'hébergement
+- L'ACTP (Allocation de Compensation pour Tiers Personne) a financé l'emploi d'aides à domicile pour 1 128 personnes 
+(All`, 
                 highlights: [
                     {
                         strong: "73 Millions d'euros",
