@@ -225,21 +225,20 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Le RSA (Revenu de Solidarité Active) assure aux personnes sans ressource un revenu minimum variable selon la composition du foyer. Il est délivré sous certaines conditions. Pour bénéficier du RSA il faut : soit avoir 25 ans ou plus si inactif professionnellement, soit Avoir entre 18 et 24 ans et justifier d’une certaine durée d’activité professionnelle ou être parents isolés. 
-                
-                En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
+                text: `A lui seul, le RSA (Revenu de Solidarité Active) représente presque 94% des aides allouées aux personnes en insertion. Une personne française ou étrangère d'au moins 25 ans peut en bénéficier si elle remplit plusieurs conditions. https://www.service-public.fr/particuliers/vosdroits/F19778
+       `, 
                 highlights: [
                     {
+                        strong: "+32%",
+                        span: "de dépenses depuis 2012"
+                    },
+                    {
                         strong: "229 M d'€",
-                        span: " pour le RSA en 2016"
+                        span: "dédiés au RSA en 2016"
                     },
                     {
-                        strong: "12 M d'€ de plus (+5.5%)",
+                        strong: "+5.5%",
                         span: "d'allocations RSA par rapport à 2015"
-                    },
-                    {
-                        strong: "baisse",
-                        span: "du nombre de bénéficiaires du RSA"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-1'
