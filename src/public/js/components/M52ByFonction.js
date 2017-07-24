@@ -3,6 +3,8 @@ import { List } from 'immutable';
 import React from 'react';
 
 import M52Viz from '../../../shared/js/components/M52Viz';
+import LegendList from '../../../shared/js/components/LegendList';
+
 import {hierarchicalM52} from '../../../shared/js/finance/memoized';
 import {DF, DI} from '../../../shared/js/finance/constants';
 
@@ -79,18 +81,14 @@ export default class M52ByFonction extends React.Component {
                     )
                 ),
 
-                React.createElement('ul', { className: 'legend' },
-                    new List(m52Hierarchical.children)
-                        .sort((c1, c2) => c2.total - c1.total)
-                        .map((e, i) => {
-                            return React.createElement('li', {},
-                                React.createElement('a', { href: urlByFonction[e.id] },
-                                    React.createElement('span', { className: `color ${e.id}` }),
-                                    labelsById.get(e.id)
-                                )
-                            )
-                        })
-                )
+                React.createElement(LegendList, {items: new List(m52Hierarchical.children)
+                    .sort((c1, c2) => c2.total - c1.total)
+                    .map((e) => ({
+                        url: urlByFonction[e.id], 
+                        text: labelsById.get(e.id), 
+                        colorClassName: `${e.id}`
+                    }))
+                })
             )
         )
     }

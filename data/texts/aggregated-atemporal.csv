@@ -1,297 +1,215 @@
 id,label,description
-EXPENDITURES,Dépenses,"Les dépenses publiques locales sont l’ensemble des dépenses réalisées par les administrations publiques locales. Leur financement est assuré par les recettes publiques (impôts, taxes, et cotisations sociales)."
-REVENUE,Recettes,"Les recettes publiques locales sont l’ensemble des **recettes perçues** par les administrations publiques locales. Elles se constituent essentiellement des impôts, des taxes, et cotisations sociales. Les recettes publiques locales contribuent avec les emprunts publics au financement des dépenses publiques.
+EXPENDITURES,Dépenses,"Les dépenses de la collectivité permettent : 
+* la mise en oeuvre des **décisions politiques** de l'assemblée départementale pour l’aménagement du territoire et le soutien à des projets locaux
+* la mise en oeuvre des **dispositifs d'interventions réglementaires** pour le versement d'allocations sociales, service de restauration pour les collégiens, l’entretien des routes départementales 
+* le **pilotage administratif** de la collectivité pour la gestion de la masse salariale, l’instruction des demandes des usagers, l’accompagnement aux initiatives locales"
+REVENUE,Recettes,"Les **recettes perçues** par les administrations publiques locales sont constituées des taxes et impôts locaux, et de dotations de fonctionnement de l'Etat.  
+Dans le cadre des lois de décentralisation, les collectivités locales doivent disposer des moyens financiers d'exercer la libre administration de leurs compétences obligatoires. 
 [source](http://www.vie-publique.fr/decouverte_instit/animations/finances/pdf/Q_08.pdf)"
-RF,Recettes de fonctionnement,"Les recettes de fonctionnement (ou produits de fonctionnement) proviennent :
-* de la fiscalité directe locale (taxe sur le foncier, taxe professionnelle jusqu'en 2009);
-* la compensation-relais pour 2010 ;
-* des recettes fiscales indirectes (taxes additionnelles aux droits de mutation) ;
-* des dotations versées par l'État ;
-* des ressources d'exploitation des domaines ;
-* des produits financiers."
-RF-1,Fiscalité directe,"Un impôt direct est un impôt dû **nominativement** par une personne physique ou morale. 
-La fiscalité directe est généralement déclarative"
-RF-1-1,Taxe Foncière sur les propriétés bâties+rôles supplémentaires,La taxe foncière est un impôt local dû tous les ans par le propriétaire d'un bien immobilier.
-RF-1-2,Cotisation sur la valeur ajoutée des entreprises (CVAE),"La cotisation sur la valeur ajoutée des entreprises (CVAE) est un impôt local créé en France par la loi de finances pour 20101.
-Elle est un composant, avec la cotisation foncière des entreprises (CFE), de la contribution économique territoriale (CET) qui a remplacé la taxe professionnelle.
-Sont redevables de la CVAE les entreprises dont le chiffre d’affaires est supérieur à 500 000 €
+RF,Recettes de fonctionnement,"Les recettes de fonctionnement (ou produits de fonctionnement) proviennent de la **fiscalité directe locale** (taxe sur le foncier, taxe professionnelle jusqu'en 2009), de la **compensation-relais** pour 2010, des **recettes fiscales indirectes** (taxes additionnelles aux droits de mutation), des **dotations versées** par l'État, des **ressources d'exploitation** de son patrimoine, des **produits financiers**. Elles constituent les revenus de la collectivité et servent à financer ses dépenses de fonctionnement."
+RF-1,Fiscalité directe,"Les recettes de fonctionnement du Département issues de la fiscalité directe concernent : 
+* pour les particuliers : la part départementale de la **taxe sur la propriété foncière**
+* pour les entreprises : la part départementale de la **cotisation sur la valeur ajoutée**
+* pour les réseaux d'énergie : **l'imposition forfaitaire** correspondant au service déployé sur le territoire"
+RF-1-1,Taxe Foncière sur les propriétés bâties+rôles supplémentaires,"La taxe foncière sur les propriétés bâties est dû tous les ans par le propriétaire d'un bien immobilier. Le montant de cet impôt est fixé **au niveau national** et les sommes perçues par l'Etat sont **reversées aux collectivités territoriales**. Certains territoires étant plus bâtis que d'autres, le produit de cet impôt fait l'objet d'une redistribution équitable sur l'ensemble du territoire via un **mécanisme de péréquation**.
+[source](http://www.collectivites-locales.gouv.fr/taxe-fonciere-sur-proprietes-baties-0)"
+RF-1-2,Cotisation sur la valeur ajoutée des entreprises (CVAE),"Cet impôt local créé par la loi de finances 2011 est un composant, avec la cotisation foncière des entreprises (CFE), de la **contribution économique territoriale (CET)** qui a remplacé la taxe professionnelle.
+Sont redevables de la CVAE les entreprises dont le chiffre d’affaires est supérieur à 500 000 €.
 [source](https://fr.wikipedia.org/wiki/Cotisation_sur_la_valeur_ajout%C3%A9e_des_entreprises)"
-RF-1-3,Imposition forfaitaire pour les entreprises de réseaux (IFER),"L'Imposition Forfaitaire sur les Entreprises de Réseau (aussi désignée sous le sigle ""IFER"") est un des impôts perçus, en France, au profit des Collectivités territoriales. Elle apparaît en 2010, suite à la suppression de la Taxe Professionnelle. Cette imposition vise certaines entreprises dont l'activité est exercée dans les secteurs de de l'énergie, des transports ferroviaires et des télécommunications [source](https://fr.wikipedia.org/wiki/Imposition_forfaitaire_sur_les_entreprises_de_r%C3%A9seaux)"
-RF-1-4,reversement CVAE Région,"Le produit de la cotisation sur la valeur ajoutée des entreprises (CVAE) est réparti entre les différents niveaux de collectivités territoriales de la façon suivante (jusqu'en 2016) :
-
-* 26,5 % pour les communes et les intercommunalités ;
-* 48,5 % pour les départements ;
-* 25 % pour les régions.
+RF-1-3,Imposition forfaitaire pour les entreprises de réseaux (IFER),"Cet impôt apparu en 2010 suite à la suppression de la Taxe Professionnelle vise certaines entreprises dont l'activité est exercée dans les secteurs de **l'énergie, des transports ferroviaires et des télécommunications**. Elle est reversée aux collectivités territoriales et aux établissements publics de coopération intercommunale.[source](http://www.collectivites-locales.gouv.fr/imposition-forfaitaire-sur-entreprises-reseaux-ifer-2)"
+RF-1-4,reversement CVAE Région,"Le *produit de la cotisation sur la valeur ajoutée des entreprises (CVAE)* est réparti entre les différents niveaux de collectivités territoriales de la façon suivante (jusqu'en 2016) :
+* 26,5 % pour les communes et les intercommunalités
+* 48,5 % pour les départements
+* 25 % pour les régions
 "
-RF-2,Fiscalité transférée,"Les transferts de compétences relatifs à l’acte II de la décentralisation ont eux été principalement compensés à l’aide d’un transfert de fiscalité aux collectivités locales
+RF-2,Fiscalité transférée,"Les **transferts de compétences** de l'Etat aux collectivités territoriales, relatifs à l’acte II de la décentralisation, ont été principalement compensés à l’aide d’un transfert de fiscalité aux collectivités locales.
 [source](http://www.wikiterritorial.cnfpt.fr/xwiki/wiki/econnaissances/view/Notions-Cles/TransfertsdelEtatauxcollectivitesterritoriales#H4.FiscalitE9transfE9rE9e)"
-RF-2-1,Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE),"La taxe intérieure de consommation sur les produits énergétiques (TICPE, anciennement « taxe intérieure de consommation sur les produits pétroliers » ou TIPP) est la principale taxe perçue en France sur certains produits énergétiques, notamment ceux d'origine pétrolière.
+RF-2-1,Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE),"Anciennement « taxe intérieure de consommation sur les produits pétroliers » ou **TIPP**, cet taxe concerne certains produits énergétiques, notamment ceux **d'origine pétrolière**.
 [source](https://fr.wikipedia.org/wiki/Taxe_int%C3%A9rieure_de_consommation_sur_les_produits_%C3%A9nerg%C3%A9tiques)"
-RF-2-2,Taxe Sur les Contrats d’Assurance (TSCA),"La taxe spéciale sur les conventions d'assurances en France est un impôt proportionnel créé en 1944 qui doit être acquitté sur certaines conventions d'assurance, selon le cas, par l'assureur, le courtier ou l'assuré lui-même. Elle est régie par les dispositions des articles 991 à 1004 du Code général des impôts français.
-
-Le produit de cette taxe en 2010 était de 6,029 milliards d'euros. Il est affecté pour partie aux départements, à la Caisse nationale des allocations familiales et à la Caisse nationale de l’assurance maladie des travailleurs salariés (CNAM)2. Les départements reversent une partie de cette taxe aux services départementaux d'incendie et de secours
+RF-2-2,Taxe Sur les Contrats d’Assurance (TSCA),"Cet **impôt proportionnel** créé en 1944, acquitté sur certaines conventions d'assurance par l'assureur, le courtier ou l'assuré lui-même, est affecté pour partie aux départements, à la Caisse nationale des allocations familiales et à la Caisse nationale de l’assurance maladie des travailleurs salariés (CNAM). Les départements reversent une partie de cette taxe aux **services départementaux d'incendie et de secours (SDIS)**.
 [source](https://fr.wikipedia.org/wiki/Taxe_sp%C3%A9ciale_sur_les_conventions_d%27assurances)"
-RF-3,Droits de mutation à titre onéreux (DMTO),les taxes de publicité foncière recouvrent les impositions indirectes perçues à l'occasion de la publication d'une opération au fichier immobilier. Les plus connues sont perçues à l'occasion d'une vente immobilière (source wp)
+RF-3,Droits de mutation à titre onéreux (DMTO),"Ces droits, qui comprennent les **droits d'enregistrement** et la **taxe de publicité foncière**, sont perçus à l'occasion de la publication d'une opération au fichier immobilier. Les plus connues sont perçues à l'occasion d'une **vente immobilière** (les fameux ""frais de notaire""). La part perçue par le Département dépend d'un taux qui peut varier dans une fourchette fixée par la loi."
 RF-4,Autres fiscalités,"part départementale de la taxe d'habitation ?
 [source](http://www.collectivites-locales.gouv.fr/files/files/dgcl_v2/La_fiscalite_2010_des_departements.pdf"";""La fiscalité des départements)"
-RF-4-1,Taxe d'aménagement (incluant les anciennes Taxe Départementale Espaces Naturels Sensibles (TDENS) et financement CAUE),"La taxe d'aménagement (ou TA) est une taxe, instituée à compter du 1er mars 2012 par l'article 28 de la loi n° 2010-1658 du 29 décembre 2010 de finances rectificative pour 2010 [archive], au profit de la commune ou de l'établissement public de coopération intercommunale, du département et de la région d'Île-de-France, qui peut être due en France à l'occasion d'opérations de constructions immobilières, afin de leur permettre de financer les actions et opérations contribuant à la réalisation des objectifs des schémas de cohérence territoriales (SCOT), et, par exemple, la création ou l'extension d'équipements (routes, assainissement, écoles…) induits par l'urbanisation. [source](https://fr.wikipedia.org/wiki/Taxe_d%27am%C3%A9nagement)"
-RF-4-2,Taxe sur l’électricité,"Les taxes sur la consommation finale d'électricité (TCFE) ont remplacé les taxes locales sur l'électricité en 2011.
-la taxe départementale sur la consommation finale d'électricité (TDCFE) 
-Elles dépendent de la puissance souscrite et d’un coefficient multiplicateur fixé et voté par les Conseils municipaux et départementaux.
+RF-4-1,Taxe d'aménagement (incluant les anciennes Taxe Départementale Espaces Naturels Sensibles (TDENS) et financement CAUE),"Cette taxe est due à certaines collectivités à l'occasion **d'opérations de constructions immobilières**, afin de leur permettre de financer les actions et opérations contribuant à la réalisation des objectifs des schémas de cohérence territoriales **(SCOT)**, et, par exemple, la création ou l'extension **d'équipements** (routes, assainissement, écoles…) induits par l'urbanisation. [source](https://fr.wikipedia.org/wiki/Taxe_d%27am%C3%A9nagement)"
+RF-4-2,Taxe sur l’électricité,"La taxe départementale sur la consommation finale d'électricité (TDCFE) est due par les abonnés aux communes et départements en **proportion des kWh consommés**. Son montant dépend d’un coefficient multiplicateur fixé et voté par les Conseils municipaux et départementaux.
 [source](http://www.energie-info.fr/Fiches-pratiques/Ma-facture-mon-compteur/CSPE-TICGN-CTA-TVA-Toutes-les-taxes-sur-ma-facture)"
-RF-4-3,Redevance des mines,"Les redevances communales et départementales des mines en France sont des redevances proportionnelles ayant pour fondement originel la loi du 21 avril 1810 concernant les mines, les minières et les carrières et créées sous leur forme moderne en 1941.
+RF-4-3,Redevance des mines,"Les redevances communales et départementales des mines en France sont des redevances proportionnelles ayant pour fondement originel la loi du 21 avril 1810 concernant **les mines, les minières et les carrières** et créées sous leur forme moderne en 1941.
 [source](https://fr.wikipedia.org/wiki/Redevances_communales_et_d%C3%A9partementales_des_mines)"
 RF-4-4,Autres fiscalités,
-RF-5,Dotations de l’État et compensations,
-RF-5-1,Dotation Globale de Fonctionnement (DGF),"Depuis 2005, la Dotation Globale de Fonctionnement (DGF) des départements comprend quatre composantes : 
-
-* une dotation de compensation ; 
-* une dotation forfaitaire ; 
-* une dotation de péréquation urbaine (DPU) ; 
-* une dotation de fonctionnement minimale (DFM). 
+RF-5,Dotations de l’État et compensations,"Les dotations de l'Etat correspondent au financement des **compétences transférées** aux collectivités territoriales dans le cadre des lois de décentralisation. Elles visent à permettre l'exécution des **missions réglementaires** des collectivités à partir des recettes collectées par l'état (impôts sur le revenu, taxe sur la valeur ajoutée, etc...)."
+RF-5-1,Dotation Globale de Fonctionnement (DGF),"Depuis 2005, cette dotation vise à permettre l'exécution des missions qui ont été transférées aux départements dans le cadre des lois de décentralisation. Elle comprend quatre composantes : 
+* une **dotation de compensation** 
+* une **dotation forfaitaire**
+* une **dotation de péréquation urbaine (DPU)** 
+* une **dotation de fonctionnement minimale (DFM)** 
 [source](http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=11)"
-RF-5-2,Dotation Globale de Décentralisation (DGD),"Les Dotations Globales de Fonctionnement (DGF) peuvent servir à compenser des transferts de compétences de l’État aux collectivités. Il s’agit notamment de la dotation générale de décentralisation (DGD).
+RF-5-2,Dotation Globale de Décentralisation (DGD),"Ces dotations peuvent servir à compenser des transferts de compétences de l’État aux collectivités. Il s’agit notamment de la **dotation générale de décentralisation (DGD)**.
 [source](http://www.vie-publique.fr/decouverte-institutions/finances-publiques/collectivites-territoriales/ressources/quelles-sont-dotations-etat-aux-collectivites.html)"
-RF-5-3,Compensations fiscales,Les Dotations Globales de Fonctionnement (DGF) peuvent servir à compenser des transferts de compétences de l’État aux collectivités. Elles peuvent aussi servir à compenser les exonérations et dégrèvements consentis par l’État sur la fiscalité locale.
-RF-5-4,Dotation de compensation de la réforme de la taxe professionnelle (DCRTP),Les Dotations Globales de Fonctionnement (DGF) peuvent servir à compenser des transferts de compétences de l’État aux collectivités. Elles peuvent aussi servir à compenser les exonérations et dégrèvements consentis par l’État sur la fiscalité locale.
-RF-5-5,Fonds National de Garantie Individuelle de Ressources (FNGIR),"Les Fonds départementaux de péréquation de la taxe professionnelle (FDPTP) appartiennent à un mécanisme de péréquation horizontale de la taxe professionnelle.
-La loi de finances pour 2010 du 29 décembre 2009 a supprimé la Taxe professionnelle (TP). Celle-ci a été remplacée par la [Contribution économique territoriale] (CET)
-
-En conséquence, les FDPTP seront supprimés à partir de 2011. Dans chaque département, en remplacement des FDPTP, seront mis en place de nouveaux systèmes de péréquation des ressources des communes et des EPCI (établissement public de coopération intercommunale.) 
-Ces systèmes devraient permettre de corriger les inadéquations de la répartition ou de la croissance des ressources entre les collectivités territoriales et établissements publics au regard de l'importance de leurs charges ou de la croissance de ces charges. 
-Sera également instaurée une garantie individuelle de ressource pour chaque FDPTP."
+RF-5-3,Compensations fiscales,Les Dotations Globales de Fonctionnement (DGF) peuvent servir à compenser des **transferts de compétences** de l’État aux collectivités. Elles peuvent aussi servir à compenser les **exonérations et dégrèvements** consentis par l’État sur la fiscalité locale.
+RF-5-4,Dotation de compensation de la réforme de la taxe professionnelle (DCRTP),"Cette dotation est les fonds nationaux de garantie individuelle des ressources (FNGIR), mis en oeuvre à compter de 2011, concrétisent le principe de **compensation intégrale** du manque à gagner pour les collectivités territoriales et les établissements publics de coopération intercommunale (EPCI) à fiscalité propre résultant de la **suppression de la taxe professionnelle**. [source](http://www.collectivites-locales.gouv.fr/files/files/CIRCULAIRE_DCRTP-FNGIR_08_20119814.pdf)"
+RF-5-5,Fonds National de Garantie Individuelle de Ressources (FNGIR),"Cette dotation est les fonds nationaux de garantie individuelle des ressources (FNGIR), mis en oeuvre à compter de 2011, concrétisent le principe de **compensation intégrale** du manque à gagner pour les collectivités territoriales et les établissements publics de coopération intercommunale (EPCI) à fiscalité propre résultant de la **suppression de la taxe professionnelle**. [source](http://www.collectivites-locales.gouv.fr/files/files/CIRCULAIRE_DCRTP-FNGIR_08_20119814.pdf)"
 ,,
-RF-6,Recettes sociales,"Les recettes sociales sont de 3 types : 
-
+RF-6,Recettes sociales,"Les recettes sociales sont de 3 types :
 * Contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA)
 * Fonds de Mobilisation Départementale pour l'Insertion (FMDI)
 * Recouvrements sur bénéficiaires
 "
-RF-6-1,Indus RSA,remboursements des sommes versées aux bénéficiaires du RSA ayant exercé une activité salarié temporaire
-RF-6-2,Contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA),L'Etat et le Département sont associé dans un Groupement d'Intérêt Public (GIP) pour co-financer la prise en charge du handicap. Dans le cadre de ce groupement la Caisse Nationale de Solidarité pour l'Autonomie (CNSA) verse des recettes au Département.
-RF-6-3,Recouvrements sur bénéficiaires PA/PH,remboursements des sommes versées aux bénéficiaires de l'allocation APA ou PH en raison d'une évolution du niveau de leur prise en charge
-RF-6-4,Conférence des financeurs,"Les conférences départementales des financeurs de la prévention de la perte d’autonomie sont prévues par la loi ASV et réunissent, sous la présidence du conseil départemental, tous les acteurs du financement de la prévention. 
-Elles permettent d’améliorer la visibilité sur l’offre existante et l’identification des besoins non couverts ou non financés pour élaborer une stratégie coordonnée de prévention sur chaque territoire.
-[source](http://www.ehpa.fr/actualite/conference-des-financeurs-on-avance-on-avance/)"
+RF-6-1,Indus RSA,Il s'agit des **remboursements des sommes versées** aux bénéficiaires du RSA ayant exercé une activité salariée temporaire.
+RF-6-2,Contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA),L'Etat et le Département sont associé dans un Groupement d'Intérêt Public (GIP) pour co-financer la **prise en charge du handicap**. Dans le cadre de ce groupement la Caisse Nationale de Solidarité pour l'Autonomie (CNSA) verse des recettes au Département.
+RF-6-3,Recouvrements sur bénéficiaires PA/PH,Il s'agit des **remboursements des sommes versées** aux bénéficiaires de l'allocation APA ou PH en raison d'une évolution du niveau de leur prise en charge.
+RF-6-4,Conférence des financeurs,"Les conférences départementales des financeurs de la **prévention de la perte d’autonomie** permettent d’améliorer la visibilité sur l’offre existante et l’identification des besoins non couverts ou non financés pour élaborer une **stratégie coordonnée** de prévention sur chaque territoire. Elles sont prévues par la loi ASV et réunissent, sous la présidence du conseil départemental, tous les acteurs du financement de la prévention. [source](http://www.ehpa.fr/actualite/conference-des-financeurs-on-avance-on-avance/)"
 RF-6-5 ,Autres,
 RF-7,Péréquation sociale,
-RF-7-1,Fonds de Mobilisation Départementale pour l'Insertion (FMDI),"Le fonds de Mobilisation Départementale pour l'Insertion (FMDI) vise  à soutenir les départements qui se sont investi pour accompagner les bénéficiaires du RSA à reprendre une activité.
-[source](http://circulaire.legifrance.gouv.fr/pdf/2012/12/cir_36160.pdf)"
-RF-7-2,Dotation de compensation peréquée DCP,"L’article 42 de la loi de finances pour 2014 met en œuvre l’une des dispositions du Pacte de confiance et de responsabilité conclu entre l’Etat et les collectivités locales le 16 juillet 2013. Il crée un nouveau dispositif d’affectation des ressources désigné sous l’appellation de **dispositif de compensation péréquée** (DCP)
-L’objectif est d’assurer aux départements une nouvelle ressource pour financer les allocations individuelles de solidarité (AIS). Le DCP consiste à affecter aux départements les produits nets des frais de gestion de la taxe foncière sur les propriétés bâties jusque-là perçus par l’Etat.
+RF-7-1,Fonds de Mobilisation Départementale pour l'Insertion (FMDI),Ce fonds vise à soutenir les départements qui se sont investis pour accompagner les bénéficiaires du RSA à **reprendre une activité**.[source](http://circulaire.legifrance.gouv.fr/pdf/2012/12/cir_36160.pdf)
+RF-7-2,Dotation de compensation peréquée DCP,"Cette dotation assure aux départements une nouvelle ressource pour financer les **allocations individuelles de solidarité (AIS)**. Le DCP consiste à affecter aux départements les produits nets des frais de gestion de la taxe foncière sur les propriétés bâties jusque-là perçus par l’Etat.
 [source](http://www.lagazettedescommunes.com/220517/le-dispositif-de-compensation-perequee-une-nouvelle-ressource-departementale-pour-aider-au-financement-des-allocations-de-solidarite/)"
 RF-7-3,Fonds d'appui d'aide à domicile (CNSA AAD),
 RF-7-4,Fonds d'appui aux politiques d'insertion,
-RF-8,Péréquation horizontale,"Jusqu’en 2010, la péréquation était essentiellement mise en œuvre au travers de dotations de l’Etat. Depuis 2010, a été enclenché un mouvement de développement de la péréquation horizontale reposant sur la péréquation des ressources fiscales des collectivités, et ce pour l’ensemble des catégories de collectivités (groupements et leurs communes membres, départements, régions).
-
-Ce mouvement a pour but d’accompagner la réforme de la fiscalité locale en prélevant les collectivités disposant des ressources les plus dynamiques suite à la suppression de la taxe professionnelle pour les reverser aux collectivités moins favorisées.
-[source](http://www.collectivites-locales.gouv.fr/perequation-horizontale)"
-RF-8-1,Fonds de Péréquation DMTO et Fonds de solidarité,"le mécanisme de répartition du fonds national de péréquation des Droits de Mutation à Titre Onéreux (DMTO) des départements instaure un mécanisme visant à assurer la stabilité des ressources du dit fonds
-Le transfert des DMTO était initialement prévu pour compenser, au moins en partie, les dépenses en matière de collèges.
-[source](http://www.wikiterritorial.cnfpt.fr/xwiki/wiki/econnaissances/view/Pages-Associees/Lesfondsdeperequationhorizontaledepartementauxetregionaux-1#H1.1LefondsdE9partementaldepE9rE9quationpourlesdroitsdemutationsE0titreonE9reux28DMTO29)"
-RF-8-2,Fonds exceptionnel pour les départements en difficulté,"Dans le cadre du projet de budget rectificatif 2015, les députés se sont prononcés en faveur d'un amendement du gouvernement créant un fonds de soutien de 50 millions d'euros pour plusieurs départements où ""la situation financière peut être qualifiée de tendue ""."
+RF-8,Péréquation horizontale,Le mécanisme de la péréquation horizontale accompagne la réforme de la fiscalité locale (suppression de la taxe professionnelle) en prélevant les collectivités disposant des ressources fiscales **les plus dynamiques** pour les reverser aux **collectivités moins favorisées**. [source](http://www.collectivites-locales.gouv.fr/perequation-horizontale)
+RF-8-1,Fonds de Péréquation DMTO et Fonds de solidarité,Sont bénéficiaires des ressources du fonds  de péréquation DMTO tous les départements dont le potentiel financier par habitant est **inférieur à la moyenne** de l’ensemble des départements. Le fonds de solidarité est versé en faveur des collectivités territoriales et de leurs groupements touchés par des **catastrophes naturelles**. [source](http://www.wikiterritorial.cnfpt.fr/xwiki/wiki/econnaissances/view/Pages-Associees/Lesfondsdeperequationhorizontaledepartementauxetregionaux-1#H1.1LefondsdE9partementaldepE9rE9quationpourlesdroitsdemutationsE0titreonE9reux28DMTO29)
+RF-8-2,Fonds exceptionnel pour les départements en difficulté,"Dans le cadre du projet de budget rectificatif 2015, les députés se sont prononcés en faveur d'un amendement du gouvernement créant un fonds de soutien de 50 millions d'euros pour plusieurs départements où ""la **situation financière peut être qualifiée de tendue** ""."
 RF-9,Recettes diverses,
-RF-9-1,Produits des domaines (ventes),"loyers sur des biens du domaine privé, rémunération d’une convention d’occupation du domaine public"
-RF-9-2,Produits exceptionnels,revenus des services publics locaux
+RF-9-1,Produits des domaines (ventes),"Il s'agit des loyers perçus sur des biens du domaine privé, ou des rémunérations liées à une convention d’occupation du domaine public."
+RF-9-2,Produits exceptionnels,Il s'agit des revenus issus des services publics locaux (exemples ???)
 RF-9-3,Dotations et participations (dont fonds européens et FCTVA),"fonds structurels européens
 Les  fonds  structurels  européens constituent  l’apport  le  plus  remarquable  de  l’Union  européenne  aux  finances  locales."
 RF-9-4,Restauration collèges,
-RF-9-5,Produits des services,revenus des services publics locaux
+RF-9-5,Produits des services,Il s'agit des revenus issus des services publics locaux (exemples ???)
 RF-9-6,Remboursement charges de personnels,
 RF-9-7,Autres produits de gestions courants,
 RF-9-8,Produits financiers,
-DF,Dépenses de fonctionnement,"Dépenses liées au fonctionnement courant de la collectivité.
-Elles regroupent principalement :
-
-* les frais de rémunération des personnels ;
-* les dépenses d'entretien et de fourniture ;
-* les frais de fonctionnement divers correspondant aux compétences de la collectivité ;
-* les intérêts de la dette, c'est-à-dire les intérêts des emprunts."
-DF-1,Actions sociales par prestations,"L’action sociale du département, dont le coût financier représente en moyenne plus de la moitié de son budget de fonctionnement, peut être compatbilisé en fonction de la liste des dispositifs réglémentaires d'interventions. On parlera ici des dépenses par prestation. Les principales sont : 
-  
-* l'aide sociale à l’enfance (ASE)
-* l'aide sociale aux personnes handicapées (PCH)
-* l'aide sociale aux personnes âgées (APA) :
-* les prestations d’aide sociale (RSA)"
-DF-1-1,Frais d’hébergement,"Les prestations de type hébergement concernent principalement trois dispositifs d'accueil fiancés par le Département : 
-
-* Etablissements d'hébergement pour personnes adultes handicapées travaillant en ESAT
-* Etablissements d'hébergement pour personnes adultes handicapées inaptes au travail
-* Etablissements d'accueil de jour "
-DF-1-1-1,Personnes handicapées,"Les prestations versées pour l'autonomie des personnes en situation de handicap sont au nombre de 3 : 
-
-* AEEH : Allocation d’Education de l’Enfant Handicapé (source site internet CAF) : ce dispositif apporte une aide dans l’éducation et les soins à apporter à un enfant handicapé. Elle remplace l’AES (Allocation d’éducation spéciale).
-
-* Aide à domicile: c'est une prestation accordée aux personnes ayant besoin pour demeurer à leur domicile, d'une aide matérielle pour effectuer les tâches ménagères.
-
-* Hébergement personnes handicapées : toute personne handicapée adulte qui ne peut utilement être aidée à domicile peut, si elle-même ou son représentant y consent, dans le cadre de son projet de vie, être accueillie dans un établissement pour personne handicapée ou chez un particulier agréé et, si elle ne dispose pas de ressources suffisantes, solliciter l'aide sociale.
+DF,Dépenses de fonctionnement,"Ces dépenses regroupent principalement :
+* les frais de **rémunération des personnels**
+* les dépenses **d'entretien** et de **fourniture** nécessaires à son fonctionnement
+* les **frais de fonctionnement divers** correspondant aux compétences de la collectivité : entretien des routes, entretien de son patrimoine et notamment des lieux d'acceuil du public, entretien des collèges, etc...
+* les **intérêts de la dette*, c'est-à-dire les intérêts des emprunts"
+DF-1,Actions sociales par prestations,"L’action sociale du département, dont le coût financier représente en moyenne plus de la moitié de son budget de fonctionnement, peut être comptabilisée en fonction de la liste des dispositifs réglémentaires d'interventions : 
+* l'aide sociale à l’**enfance** (ASE)
+* l'aide sociale aux **personnes handicapées** (PCH)
+* l'aide sociale aux **personnes âgées** (APA)
+* les prestations d’**aide sociale** (RSA)"
+DF-1-1,Frais d’hébergement,"Ces prestations concernent principalement trois dispositifs d'accueil financés par le Département : 
+* Etablissements d'hébergement pour personnes **adultes handicapées travaillant en ESAT**
+* Etablissements d'hébergement pour personnes **adultes handicapées inaptes au travail**
+* Etablissements d'**accueil de jour**"
+DF-1-1-1,Personnes handicapées,"Les prestations versées pour l'autonomie des personnes en situation de handicap sont : 
+* L'**Allocation d’Education de l’Enfant Handicapé** (AEEH), qui apporte une aide dans l’éducation et les soins à apporter à un enfant handicapé
+* L'**Aide à domicile**, accordée aux personnes ayant besoin d'une aide matérielle pour effectuer les tâches ménagères
+* L'**Hébergement personnes handicapées**, accordée selon le niveau de ressources à toute personne handicapée adulte qui ne peut utilement être aidée à domicile mais peut être accueillie dans un établissement pour personne handicapée ou chez un particulier agréé"
+DF-1-1-2,Personnes âgées,"Les aides sociales aux personnes âgées sont : 
+* Les **aides sociales à l'hébergement** en établissement, qui s'adresse à toute personne qui ne peut utilement être aidée à son domicile et consent (ou son représentant légal) à être accueillie dans un établissement ou chez un accueillant familial agréé
+* Les **aides sociales à domicile** (aides ménagères), accordée aux personnes ayant besoin pour demeurer à leur domicile, d'une aide matérielle pour effectuer les tâches ménagères
 "
-DF-1-1-2,Personnes âgées,"Les aides sociales aux personnes âgées sont de 2 types : 
-
-* Aides sociales à l'hébergement en établissement: l''aide sociale à l'hébergement s'adresse à toute personne qui ne peut utilement être aidée à son domicile. Avec son consentement ou, en cas d'incapacité, celui de son représentant légal, elle peut être accueillie dans un établissement pour personne âgées ou chez un accueillant familial agréé
-* Aides sociales à domicile (Aides ménagères) : l'aide Ménagère est une prestation, accordée aux personnes ayant besoin pour demeurer à leur domicile, d'une aide matérielle pour effectuer les tâches ménagères
-
+DF-1-1-3,Enfants,"Les aides sociale à l'enfance (ASE) concernent l'accueil par des **assistants familiaux ou maternels** à leur domicile ou l'accueil en **établissement** (Maison d'Enfance à Caractère Social, par exemple) d'enfants en situation de précarité
 "
-DF-1-1-3,Enfants,"ASE : les aides sociale à l'enfance concerne l'accueil par des assistants familiaux ou maternels à leur domicile ou l'accueil en établissement (Maison d'Enfance à Caractère Social (MECS par exemple)
+DF-1-2,Revenu de Solidarité Active (RSA),"Ce dispositf vise à favoriser l'inclusion par l'activité. Le nombre de bénéficiaires est calculé sur la base des personnes adultes d’un foyer titulaire d’un droit RSA. L'allocation dispose de deux composantes pouvant être perçues simultanément :
+* le **RSA socle minimum social** qui remplace le RMI ( revenu minimum d’insertion ), l’API (allocation parent isolé) et les dispositifs d’intéressement à la reprise d’emploi
+* le **RSA activité** qui apporte un complément de ressources aux allocataires dont les revenus d’activité professionnelle sont inferieurs à 500 euros par mois (remplacé au 1er janvier 2016 par la prime d'activité)
 "
-DF-1-2,Revenu de Solidarité Active (RSA),"Le Revenu de Solidarité Active (RSA) est un dispositf visant à favoriser l'insertion par l'activité. Le nombre de bénéficiaires est calculé sur la base des personnes adultes d’un foyer titulaire d’un droit RSA. 
-L'allocation dispose de deux composantes :
-
-* le RSA socle minimum social qui remplace le RMI ( revenu minimum d’insertion ) , l’ API ( allocation parent isolées) et les dispositifs d’intéressement à la reprise d’emploi,
-* le RSA activité qui apporte un complément de ressources aux allocataires dont les revenus d’activité sont inferieurs à un certain seuil.
-
-Les deux composantes peuvent être perçues simultanément.
-A compter du 1er janvier 2016, le RSA activité est supprimé et remplacé par la prime d'activité. 
-
-personnes éligibles : il s’agit des bénéficiaires du RSA socle et disposant de revenus tirés d’une activité professionnelle inferieurs à 500 euros par mois
+DF-1-3,Prestation Compensatoire du Handicap (PCH) + Allocation Compensatrice aux Tierces Personnes (ACTP),"Ces prestations s'adressent aux personnes en situation de handicap.
+* La **Prestation de compensation** (PCH), finance les besoins liés à la perte d’autonomie sur la base d’un plan personnalisé. Cette prestation est amenée à remplacer l’Allocation compensatrice pour tierce personne (ACTP). 
+* L'**Allocation compensatrice pour tierce personne**, finance le recours à une tierce personne pour accomplir les actes essentiels de la vie courante. A compter du 1er janvier 2006, la loi du 11 février 2005 lui substitue pour toute nouvelle demande la Prestation de compensation du handicap (PCH)
 "
-DF-1-3,Prestation Compensatoire du Handicap (PCH) + Allocation Compensatrice aux Tierces Personnes (ACTP),"Les prestations en faveur des personnes en situation de handicap sont de 2 types : 
-
-* PCH : pour financer les besoins liés à la perte d’autonomie, les personnes handicapées peuvent bénéficier de la prestation de compensation (PCH). Cette prestation est attribuée par la Commission des droits et de l’autonomie, après instruction de la demande par la MDPH et sur la base d’un plan personnalisé de compensation. Cette prestation est amenée à remplacer l’Allocation compensatrice pour tierce personne (ACTP). 
-
-* ACTP : c'est une prestation d'aide sociale accordée aux personnes handicapées ayant besoin de l'aide d'une tierce personne pour accomplir les actes essentiels de la vie courante. A compter du 1er janvier 2006, aucun nouveaux droit n'est ouvert: la loi du 11 février 2005 lui substitue la Prestation de compensation du handicap (PCH)
+DF-1-4,Allocation Personnalisée d’Autonomie (APA),"Elle est destinée aux **personnes âgées de plus de 60 ans** présentant une **dépendance lourde ou moyenne**. Accordée à domicile (mais aussi en établissement), l'APA permet de contribuer au financement des aides nécessaires à la prise en charge de la perte d'autonomie de la personne âgée.
 "
-DF-1-4,Allocation Personnalisée d’Autonomie (APA),"L'Allocation Personnalisée d'Autonomie est destinée aux personnes âgées de plus de 60 ans présentant une dépendance lourde ou moyenne. 
-Accordée à domicile (mais aussi en établissement), l'APA permet de contribuer au financement des aides nécessaires à la prise en charge de la perte d'autonomie de la personne âgée .
-"
-DF-1-5,Préventions enfants,"Les prestations de prévention s'adressent à des mineurs ou à des jeunes majeurs âgés de moins de 21 ans confrontés à de graves diffucultés sociales ou présentant des risques d'inadaptation sociale. Le soutien apporté peut prendre la forme d'aide financière (allocation mensuelle), d'intervention à domicile de travailleur familial et/ou de service d'action.
-
+DF-1-5,Préventions enfants,"Ces prestations s'adressent à des **mineurs ou jeunes majeurs âgés de moins de 21 ans** confrontés à de **graves diffcultés sociales** ou présentant des **risques d'inadaptation sociale**. Le soutien apporté peut prendre la forme d'aide financière (allocation mensuelle), d'intervention à domicile d'un travailleur familial et/ou de service d'action.
  "
 DF-1-6,Subventions sociales,
-DF-1-7,Diverses dépenses de solidarité,"Différents dispositifs d'aides financières viennent compléter les prestations gérées par le Département  : 
-
-* APRE : aides financières permettant de participer à la prise en charge de frais liés à une reprise d’activité professionnelle pour les bénéficiaires du RSA « soumis aux droits et devoirs ».
-
-* RSA : aides financières permettant de participer à la prise en charge de frais liés à la réalisation de démarches d’insertion pour le bénéficiaires du RSA « soumis aux droits et devoir »
-
-* PRECARITE : l'Aide Financière Précarité (AFP) concerne les ménages avec ou sans enfant. La décision est fondée sur la situation financière du ménage dont la situation de précarité ne lui permet pas de faire face aux besoins de la vie quotidienne ou au paiement de certaines charges.
-
+DF-1-7,Diverses dépenses de solidarité,"Différents dispositifs d'aides financières viennent compléter les prestations de solidarité gérées par le Département : 
+* L'**APRE** : aides financières permettant de participer à la prise en charge de frais liés à une reprise d’activité professionnelle pour les bénéficiaires du RSA « soumis aux droits et devoirs ».
+* Le **RSA** : aides financières permettant de participer à la prise en charge de frais liés à la réalisation de démarches d’insertion pour le bénéficiaires du RSA « soumis aux droits et devoir »
+* L'**Aide Financière Précarité** (AFP) concerne les ménages avec ou sans enfant dont la situation de précarité ne lui permet pas de faire face aux besoins de la vie quotidienne ou au paiement de certaines charges.
 "
 DF-1-7-1,Divers enfants,"Les personnes qui mettent en œuvre la politique de protection de l’enfance, ainsi que celles qui leur apportent concours transmettent sans délais au Président du Conseil Départemental ou au responsable désigné par lui toute **information préoccupante** sur un mineur en danger ou risquant de l’être.
-
-Après évaluation 2 types de mesures peuvent être prises : 
-
-* AED : décision administrative prise par le président du conseil général à la demande ou en accord avec les parents. Mesures exercées en milieu familial, les AED ont pour objectif d'apporter un soutien éducatif et /ou psychologique aux mineurs, à leur famille, ainsi qu'aux jeunes majeurs âgés de moins de 21 ans. 
-
-*AEMO : mesures exercées en vertu d'un mandat judiciaire (décision de juge des enfants, dans le cadre de l'assistance éducative). Elle poursuit le même but que l'AED, mais à la différence de celle-ci, elle présente un caractère contraignant vis-à-vis de la famille."
+Après évaluation, deux types de mesures peuvent être prises : 
+* Les **AED** : mesures exercées en milieu familial, elle ont pour objectif d'apporter un soutien éducatif et /ou psychologique aux mineurs, à leur famille, ainsi qu'aux jeunes majeurs âgés de moins de 21 ans. 
+* Les **AEMO** : mesures exercées en vertu d'un mandat judiciaire (décision de juge des enfants, dans le cadre de l'assistance éducative). A la différence de l'AED, elle présente un caractère contraignant vis-à-vis de la famille."
 DF-1-7-2,Divers social,
-DF-2,Actions sociales par publics,"Le compte des dépenses d'actions sociales peut être réalisé en fonction de la liste des publics accompagnés par le département dans leur parcours de vie. Les principaux publics sont :
-
-* les personnes en situation de précarité ou d'insertion
-* les personnes en situation de handicap
-* les personnes âgées
-* les enfants"
-DF-2-1,Personnes en difficultés,"Le Département met en place des dispositifs de lutte contre l’exclusion et la pauvreté, devenue un champ de compétence départementale depuis le transfert en 2004"
-DF-2-2,Personnes handicapées,"Le Département contribue à garantir aux personnes handicapées le libre choix de leur projet de vie et leur permettre une participation effective à la vie sociale, en généralisant l’accessibilité."
-DF-2-3,Personnes âgées,"Le Département contribue à la prise en charge de la dépendance, principalement au travers de l’allocation personnalisée d’autonomie (APA)."
-DF-2-4,Enfance,Le Département met en place un soutien financier et conseil aux familles pour garantir l’accès aux droits pour tous et lutter contre les exclusions
-DF-2-5,Autres,"Le Département soutient les associations qui facilitent l’accès des femmes et des couples aux méthodes de régulation des naissances, à la lutte contre les infections sexuellement transmissibles."
-DF-3,Actions d’intervention,Sous ce chapitre sont regroupées les dépenses liées à l'intervention du département sur le territoire avec notamment la contribution financière de la collectivité au fonctionnement du service d'incendie et de secours.
-DF-3-1,Service Départemental d'Incendie et de Secours (SDIS),"En France, le service départemental d’incendie et de secours (ou SDIS), est l'établissement public à caractère administratif doté d'une assemblée délibérante gérant les sapeurs-pompiers au niveau d'un département. 
-Le SDIS est soumis à une double autorité. La première est une autorité opérationnelle gérée par le préfet et le maire en collaboration dans leur pouvoir de police respectif.
-
-La seconde est une autorité administrative gérée par un conseil d'administration, le Conseil d'Administration du SDIS (CASDIS) qui comprend des conseillers départementaux, des maires et des élus des établissements publics de coopération intercommunaux (EPCI). Le Président du Conseil Départemental est, de droit, Président du CASDIS.
+DF-2,Actions sociales par publics,"Le compte des dépenses d'actions sociales peut être réalisé en fonction de la liste des publics accompagnés par le département dans leur parcours de vie :
+* les personnes en situation de **précarité ou d'insertion**
+* les personnes en situation de **handicap**
+* les **personnes âgées**
+* les **enfants**"
+DF-2-1,Personnes en difficultés,Le Département met en place des dispositifs de lutte **contre l’exclusion et la pauvreté** comme par exemple (exemples ???)
+DF-2-2,Personnes handicapées,"Le Département contribue à garantir aux personnes handicapées le libre choix de leur projet de vie et leur permettre une participation effective à la vie sociale, en **généralisant l’accessibilité** (des lieux publics ?)"
+DF-2-3,Personnes âgées,"Le Département contribue à la **prise en charge de la dépendance**, principalement au travers de l’allocation personnalisée d’autonomie (APA)."
+DF-2-4,Enfance,Le Département met en place un soutien financier et conseil aux familles pour garantir **l’accès aux droits pour tous** et **lutter contre les exclusions**.
+DF-2-5,Autres,"Le Département soutient les associations qui facilitent l’accès des femmes et des couples aux **méthodes de régulation des naissances**, et à la lutte contre les **infections sexuellement transmissibles**."
+DF-3,Actions d’intervention,Ce chapitre regroupe les dépenses liées à l'intervention du Département sur le territoire avec notamment la contribution financière au fonctionnement du **service d'incendie et de secours** (SDIS) gérant les sapeurs-pompiers.
+DF-3-1,Service Départemental d'Incendie et de Secours (SDIS),"Le SDIS est l'établissement public à caractère administratif gérant les sapeurs-pompiers au niveau d'un département. Doté d'une assemblée délibérante, le SDIS est soumis à une double autorité :  opérationnelle (gérée par le préfet et le maire en collaboration dans leur pouvoir de police respectif) et  administrative (gérée par un conseil d'administration présidé par le Président du Conseil Départemental)
 [source](https://fr.wikipedia.org/wiki/Service_d%C3%A9partemental_d%27incendie_et_de_secours)"
-DF-3-2,Transports,"Juqu'à la loi NOTRe (art. L.3111-1 code des transports) les transports routiers non urbains des personnes, réguliers ou à la demande, les transports scolaires, la desserte des îles (art. L5431-1 code des transports), la construction, l’aménagement et l’exploitation des gares publiques routières de voyageurs relevant du département et les lignes ferroviaires d’intérêt local relevaient de la compétence des départements. Ces compétences sont en cours de tranfert aux régions.
+DF-3-2,Transports,"Juqu'à la loi NOTRe (art. L.3111-1 code des transports), relevaient de la compétence des départements :
+* les **transports routiers non urbains** des personnes, 
+* les **transports scolaires**
+* la **desserte des îles**
+* la construction, l’aménagement et l’exploitation de **gares publiques routières de voyageurs** 
+* les **lignes ferroviaires d’intérêt local**
+Ces compétences sont en cours de tranfert aux régions.
 [source](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)"
-DF-3-3,Transports des étudiants et des élèves handicapés,les services de transport spécial des élèves handicapés vers les établissements scolaires demeurent à la charge du département dans la loi NOTRe
-DF-3-4,Prévention spécialisée,"En France, la prévention spécialisée est une action d'éducation spécialisée visant à permettre à des jeunes en voie de marginalisation de rompre avec l’isolement et de restaurer le lien social. Cette action est placée sous l'autorité des départements (conseil départemental) dans le cadre des politiques que ceux-ci développent pour venir en aide à l'enfance. Cette aide à l'enfance faite par les départements se nomme l’Aide Sociale à l’Enfance (ASE)
+DF-3-3,Transports des étudiants et des élèves handicapés,Le Département prend en charge le transport spécial des élèves handicapés vers leurs établissements scolaires.
+DF-3-4,Prévention spécialisée,"Dans le cadre des politiques que ceux-ci développent pour venir en aide à l'enfance, les départements ont autorité sur l'**action d'éducation spécialisée** visant à permettre à des jeunes en voie de marginalisation de **rompre avec l’isolement** et de **restaurer le lien social**. 
 [source](https://fr.wikipedia.org/wiki/Pr%C3%A9vention_sp%C3%A9cialis%C3%A9e)"
-DF-3-5,Dotation de fonctionnement des collèges,"La dotation globale de fonctionnement des collèges est la principale ressource des établissements scolaires, assurée par le Département. Elle permet de financer leur fonctionnement en toute autonomie : dépenses liées à la pédagogie, à l'administration des collèges et à leur entretien courant. Ces charges communes sont ainsi couvertes par la dotation. Les dépenses dues à l'électricité, l'eau et le chauffage sont également comprises dans la dotation.
-[source](http://www.gironde.fr/jcms/cgw_63537/le-fonctionnement-des-colleges)"
-DF-3-6,Subventions de fonctionnement,aides financières à  des  organismes  extérieurs conformément aux réglements d'intervention adpotés par les élus
+DF-3-5,Dotation de fonctionnement des collèges,"C'est la principale ressource des établissements scolaires, assurée par le Département. Elle permet de financer leur **fonctionnement** : dépenses liées à la **pédagogie**, à l'**administration** et à leur **entretien**.[source](http://www.gironde.fr/jcms/cgw_63537/le-fonctionnement-des-colleges)"
+DF-3-6,Subventions de fonctionnement,"Ces aides financières sont versées à des organismes extérieurs conformément aux réglements d'intervention adoptés par les élus. il peut s'agir d'associations, etc...(exemples)"
 DF-3-7,Diverses participations,
-DF-3-7-1,Fond social logement FSL,"Le Fonds de Solidarité Logement de la Gironde (FSL) a pour but d’aider les familles ou les personnes les plus démunies, qui rencontrent des difficultés pour accéder à un logement décent et indépendant, ou à s’y maintenir en disposant de la fourniture d’eau, d’énergie et de service téléphonique et/ou internet
-[source](http://www.fsl33.org/)"
-DF-3-7-2,Bourses départementales,"
-
-Dans un esprit de solidarité et pour permettre l'accès de tous les jeunes girondins à la scolarité, le Département attribue des bourses départementales aux collégiens.
-
-Cette aide directe est accordée aux familles les plus modestes pour mieux accompagner la scolarité des enfants. 
-Ce dispositif du Département s’adresse aux familles domiciliées en Gironde, boursières de l’Education Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public ou un collège privé sous contrat.
-
-La bourse départementale est une aide forfaitaire destinée à couvrir les frais de scolarité. Elle varie selon le taux de la bourse nationale qui tient compte des revenus de la famille.
-
-Pour l’année 2015-2016, le montant de cette aide départementale est de :
+DF-3-7-1,Fond social logement,"Le Fonds de Solidarité Logement de la Gironde a pour but d’aider les **familles ou les personnes les plus démunies** rencontrant des difficultés pour accéder à un logement décent et indépendant, ou à s’y maintenir en disposant de la fourniture d’eau, d’énergie et de service téléphonique et/ou internet. [source](http://www.fsl33.org/)"
+DF-3-7-2,Bourses départementales,"Cette aide directe destinée à **couvrir les frais de scolarité** est accordée aux **familles les plus modestes**, domiciliées en Gironde, boursières de l’Education Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public ou un collège privé sous contrat. Selon les revenus de la famille, en 2015-2016, le montant de cette aide départementale était de :
 
 * 70 € pour les familles bénéficiant du taux 1
 * 80 € pour les familles bénéficiant du taux 2
 * 100 € pour les familles bénéficiant du taux 3
 "
 DF-3-7-3,Participation diverses,
-DF-4,Frais de personnel,les frais de rémunération des personnels
-DF-5,Péréquation verticale,"La péréquation est un mécanisme de redistribution qui vise à réduire les écarts de richesse, et donc les inégalités, entre les différentes collectivités territoriales.
-[source](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)"
-DF-5-1,Versement au fonds de peréquations,"L’article 113 de la loi de finances initiales pour 2013 prévoit la création d’un mécanisme de péréquation horizontale pour les départements, c'est-à-dire redistribuant une fraction des ressources fiscales entre ces collectivités. Ce mécanisme est appelé fonds national de péréquation de la cotisation sur la valeur ajoutée des entreprises perçue par les départements.
-[source](http://www.collectivites-locales.gouv.fr/fonds-national-perequation-cotisation-sur-valeur-ajoutee-des-entreprises-cvae-percue-par-departement)"
-DF-6,Charges courantes,les frais de fonctionnement divers correspondant aux compétences de la collectivité
-DF-6-1,Frais généraux,les dépenses d’entretien
-DF-6-1-1,Achats et fournitures,les dépenses de fourniture
-DF-6-1-2,"Prestations de services (entretien et réparation, assurances, locations, frais divers, formation, colloques, etc…)","Charges de publicité, de publication, missions et réceptions, transport de biens et de personnes…"
-DF-6-1-3,"Frais divers (honoraires, conseils, réception, frais télécom, affranchissement, services bancaires…)",
+DF-4,Frais de personnel,L'administration départementale dispose de **ressources humaines** pour lui permettre de mettre en oeuvre ses missions de service public. Ces agents territoriaux (contractuels ou fonctionnaires) sont rémunérés par la collectivité en fonction des règles définies par le code général des collectivités territoriales.
+DF-5,Péréquation verticale,"La péréquation est un mécanisme de redistribution qui vise à réduire les écarts de richesse, et donc les inégalités, entre les différentes collectivités territoriales. [source](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)
+L’article 113 de la loi de finances initiales pour 2013 prévoit la création d’un mécanisme de péréquation horizontale pour les départements, c'est-à-dire redistribuant une fraction des ressources fiscales entre ces collectivités. Ce mécanisme est appelé fonds national de péréquation de la cotisation sur la valeur ajoutée des entreprises perçue par les départements. [source](http://www.collectivites-locales.gouv.fr/fonds-national-perequation-cotisation-sur-valeur-ajoutee-des-entreprises-cvae-percue-par-departement)"
+DF-6,Charges courantes,"Ces charges comprennent notamment les **dépenses d'achats de fourniture, les dépenses liées aux consommations d'énergie et de communication, l'ensemble des prestations de services** auxquelles font appel la collectivité ainsi que les dépenses liées à l'**entretien de la voirie** et les **indémnités des élus** (questure)."
+DF-6-1,Frais généraux,"Ces frais comprennent les **dépenses d’entretien des bâtiments, les honoraires des prestataires de conseil, les frais affranchissement ou de télécommunication** de la collectivité."
+DF-6-1-1,Achats et fournitures,Ces frais comprennent les **dépenses de fourniture** de la collectivité : achat de mobilier et de petits consommables.
+DF-6-1-2,"Prestations de services (entretien et réparation, assurances, locations, frais divers, formation, colloques, etc…)","Ces frais comprennent les dépenses réalisées par la collectivité pour ses **publications et publicités, missions et réceptions, le transport de biens et de personnes**, …"
+DF-6-1-3,"Frais divers (honoraires, conseils, réception, frais télécom, affranchissement, services bancaires…)","Cette rubrique regroupe l'ensemble des prestations de services sous-traitées par la collectivité aussi bien en termes d'envoi postal, de souscription à une offre de service de télécommunication, de services bancaires ou pour l'organisation de réception."
 DF-6-1-4,Autres impôts et taxes,
-DF-6-2,Dépenses de voirie,entretien du réseau routier départemental
-DF-6-3,Autres charges,"Participations aux charges d’organismes extérieurs : Aide sociale, syndicats intercommunaux…"
-DF-6-3-1,Questure/indemnités des élus,Frais de fonctionnement des groupes d’élus
-DF-6-3-2,Charges exceptionnelles et provisions,"intérêts moratoires, amendes fiscales, subventions aux SPIC"
+DF-6-2,Dépenses de voirie,Ces dépenses concernent l'entretien du **réseau routier** départemental constitué de **6 476 kilomètres de routes dont 318 kilomètres de pistes cyclables.** [source](https://www.gironde.fr/deplacements/les-routes-et-ponts) 
+DF-6-3,Autres charges,"Ces charges concernent des **participations aux charges d’organismes extérieurs** : Aide sociale, syndicats intercommunaux…"
+DF-6-3-1,Questure/indemnités des élus,Ces dépenses concernent les **frais de fonctionnement des groupes d’élus**.
+DF-6-3-2,Charges exceptionnelles et provisions,"Ces charges concernent les **intérêts moratoires, amendes fiscales, subventions aux SPIC** (service public industriel et commercial)"
 DF-6-3-3,"Autres (dont budgets annexes hostens, LABO)",
 DF-7,Intérêts des emprunts,"Les emprunts correspondent au volume global des emprunts à plus d'un an contractés pendant l'exercice. Par convention, il s'agit de financements inscrits pour une durée supérieure à un an (emprunts à long et moyen terme)."
-RI,Recettes d’investissement,"Elles sont constituées des dotations et subventions, tels que les fonds de la compensation de la TVA (FCTVA), la dotation globale d'équipement (DGE), les autres subventions d'investissement et les emprunts.
+RI,Recettes d’investissement,"Elles sont constituées des **dotations et subventions**, tels que les fonds de la compensation de la TVA (FCTVA), la dotation globale d'équipement (DGE), les autres subventions d'investissement et les emprunts.
 [source](http://www.wikiterritorial.cnfpt.fr/xwiki/bin/view/vitrine/Les+recettes+d%27investissement)"
-RI-1,Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA),"Le fonds de compensation pour la TVA (FCTVA) est un prélèvement sur les recettes de l’Etat qui constitue la principale aide de l’Etat aux collectivités territoriales en matière d’investissement.
-
-Une collectivité territoriale ne récupère la TVA que sur ses dépenses d’investissement.
-C’est une dotation versée aux collectivités territoriales et à leurs groupements destinée à assurer une compensation, à un taux forfaitaire, de la charge de TVA qu’ils supportent sur leurs dépenses réelles d’investissement et qu’ils ne peuvent pas récupérer par la voie fiscale puisqu’ils ne sont pas considérés comme des assujettis pour les activités ou opérations qu’ils accomplissent en tant qu’autorités publiques.
-[source](http://www.collectivites-locales.gouv.fr/fonds-compensation-taxe-sur-valeur-ajoutee-fctva)"
-RI-2,Dotation Décentralisée pour l’Equipement des collèges (DDEC),"Depuis le 1er janvier 1986, la dotation départementale d’équipement des collèges (DDEC), instituée par les lois n° 83-8 du 7 janvier 1983 et n° 83-663 du 22 juillet 1983 modifiées, est attribuée aux départements pour compenser les dépenses d’investissement et d’équipement des collèges transférés aux départements.
-[source](http://www.collectivites-locales.gouv.fr/dotations-compensation-des-transferts#Les%20dotations%20aux%20d%C3%A9partements)"
-RI-3,Dotation Globale d’Equipement (DGE),"Mise en place en 1983, la DGE des départements est destinée à soutenir l’effort d'investissement des départements en matière d’équipement rural (infrastructures publiques en milieu rural, tourisme vert ou encore habitat rural).
+RI-1,Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA),"Ce fonds est une dotation de l'Etat destinée à assurer une compensation de la charge de TVA que les collectivités et leur groupement supportent sur leurs **dépenses réelles d’investissement**. Une collectivité territoriale ne récupère la TVA que sur ses dépenses d’investissement, et non sur celles qu’elle accomplit en tant qu’autorité publique.[source](http://www.collectivites-locales.gouv.fr/fonds-compensation-taxe-sur-valeur-ajoutee-fctva)
+"
+RI-2,Dotation Décentralisée pour l’Equipement des collèges (DDEC),Cette dotation est attribuée aux départements pour **compenser les dépenses d’investissement et d’équipement** des collèges transférés aux départements par l'Etat en 1986.[source](http://www.collectivites-locales.gouv.fr/dotations-compensation-des-transferts#Les%20dotations%20aux%20d%C3%A9partements)
+RI-3,Dotation Globale d’Equipement (DGE),"Cette dotation est destinée à soutenir l’effort d'investissement des départements en matière d’**équipement rural** (infrastructures publiques en milieu rural, tourisme vert ou encore habitat rural).
 [source](http://www.collectivites-locales.gouv.fr/dotation-globale-dequipement-dge-des-departements)"
 RI-4,Subventions,"L’Europe (FEDER, FEOGA), l’Etat, la Région, le Département, le Pays, 
-l’ADEME, l’Agence de l’Eau, la CAF… sont autant de financeurs possibles 
-pour les collectivités territoriales.
-Le conseil départemental et le conseil régional peuvent également bénéficier de subventions de l’Etat et de l’Europe ainsi que de subventions spécifiques versées par les ministères"
+l’ADEME, l’Agence de l’Eau, la CAF… sont autant de **financeurs possibles 
+pour les collectivités territoriales**."
 RI-5,Divers,
 RI-6,Cessions,"Il s’agit des ventes de biens meubles ou immeubles comme :
 
-* les bâtiments (ancienne mairie, atelier relais.....),
-* les terrains (lotissement, parcelle zone d’activités..........),
-* le matériel si le montant est supérieur à 500 € (véhicule, mobilier.....), à défaut l’inscription se fait en fonctionnement. 
-
-[source](http://www.wikiterritorial.cnfpt.fr/xwiki/bin/view/vitrine/Les+recettes+d%27investissement#H1.2Ventedebiens)"
-RI-EM,Emprunt contracté,refinancement afférents aux réaménagements de dette budgétés ?
-RI-EM-1,Emprunt nouveau,"L’assemblée délibérante peut emprunter librement :
-
-* auprès de n’importe quelle banque,
-* à taux fixe ou révisable,
-* en euros ou en devises,
-* à la durée souhaitée.
-
-La réalisation d’un emprunt se fait en trois étapes : 
-
-* vote de l’emprunt au budget,
-* délibération de l’assemblée délibérante, sauf délégation à l’exécutif, pour décider de l’emprunt. Cette délibération doit comporter obligatoirement :
-        l’objet de l’emprunt,
-        son montant,
-        le taux d’intérêt,
-        les frais financiers,
-        le taux effectif global (TEG).
-* signature du contrat par l’exécutif.
+* les **bâtiments** (ancienne mairie, atelier relais.....),
+* les **terrains** (lotissement, parcelle zone d’activités..........),
+* le **matériel** si le montant est supérieur à 500 € (véhicule, mobilier.....), à défaut l’inscription se fait en fonctionnement. [source](http://www.wikiterritorial.cnfpt.fr/xwiki/bin/view/vitrine/Les+recettes+d%27investissement#H1.2Ventedebiens)"
+RI-EM,Emprunt contracté,"Les emprunts sont exclusivement destinés à financer des investissements, qu'il s'agisse d'un équipement spécifique, d'un ensemble de travaux relatifs à cet équipement ou encore d'acquisitions de biens durables considérés comme des immobilisations. Les emprunts n'ont pas à être affectés explicitement à une ou plusieurs opérations d'investissement précisément désignées au contrat. Ils peuvent être globalisés et correspondre à l'ensemble du besoin de financement de la section d'investissement."
+RI-EM-1,Emprunt nouveau,"Un emprunt contracté par le Département ne peut **financer que des dépenses d’investissement**. La réalisation d’un emprunt se fait en trois étapes : 
+* vote de l’emprunt au budget départemental
+* délibération de l’assemblée délibérante, sauf délégation à l’exécutif, pour décider de l’emprunt 
+* signature du contrat par l’exécutif
 Dans un souci de transparence, les collectivités de plus de 3 500 habitants  doivent faire ressortir dans leur budget des ratios sur la dette.
-Rappel :
-Un emprunt ne peut financer que des dépenses d’investissement."
-RI-EM-2,OCLT,"Ouverture de Crédits Long   Terme   (OCLT)   ou   Crédits   Long   Terme Renouvelable (CLTR).
-Ils  associent  un  crédit  long  terme  classique  et l’ouverture  de  droits  de  tirages  comparables  à  une ligne de trésorerie. 
-Une ligne de crédit (appelée également Credit Facility ou Tranche) est une autorisation (droit de tirages) donnée par une banque à un emprunteur de tirer des fonds jusqu'à un plafond fixé et pendant une période donnée. Elle peut inclure également une ouverture de crédit permettant de rendre le compte courant débiteur dans certaines limites.
-[source](https://fr.wikipedia.org/wiki/Ligne_de_cr%C3%A9dit)"
+"
+RI-EM-2,OCLT,"Ces emprunts baptisés Ouverture de Crédits Long Terme (OCLT) ou Crédits Long Terme Renouvelable (CLTR) associent  un  crédit  long  terme  classique  et l’ouverture  de  ""droits de tirage"" assortis
+d’une ligne de trésorerie. Ces droits consistent à pouvoir tirer des fonds jusqu'à un plafond fixé et pendant une période donnée.[source](http://www.collectivites-locales.gouv.fr/files/files/emprunts_ligne_tresorerie_credits_revolving_2.pdf)"
 ,,
-DI,Dépenses d’investissement,"Les dépenses d'investissement concernent des opérations en capital.
-Elles comprennent :
+DI,Dépenses d’investissement,"Les dépenses d’investissement comprennent essentiellement des opérations qui se traduisent par une modification de la consistance ou de la valeur du patrimoine de la collectivité territoriale : achats de matériels durables, construction ou aménagement de bâtiments, travaux d’infrastructure, et acquisition de titres de participation ou autres titres immobilisés.
 
-* les remboursements d'emprunts ;
-* les prêts et avances accordés par la collectivité ;
-* les dépenses directes d'investissement (acquisitions mobilières et immobilières, travaux neufs, grosses réparations) ;
-* les subventions d'équipements versées."
+Elles comprennent également le montant du remboursement en capital des emprunts et diverses dépenses ayant pour effet de réduire les fonds propres (reprises ou reversements, moins value…).
+
+Sont des dépenses d’investissement, les acquisitions de biens meubles considérés comme des immobilisations par nature, dans la mesure où ils remplissent des conditions de durabilité et de consistance. À ce titre, une liste de ces biens a été publiée par une circulaire n° NOR/INT/B/02/00059/C du 26 février 2002.
+Les dépenses d’investissement peuvent être financées par l’emprunt, sauf le remboursement de l’annuité en capital de la dette qui ne peut être effectué que par des recettes propres.
+
+Enfin, les dépenses d’investissement des communes, des départements et des régions peuvent faire l’objet d’autorisations de programme qui permettent de gérer dans le temps les opérations pluriannuelles. Les autorisations de programme constituent la limite supérieure des dépenses qui peuvent être engagées pour l’exécution des investissements."
 ,,
 DI-1,Equipements Propres,"Les dépenses d'investissement en équipements propres sont considérées comme des immobilisations par nature, dans la mesure où elles remplissent des conditions de durabilité et de consistance. À ce titre, une liste de ces biens a été publiée par une circulaire n° NOR/INT/B/02/00059/C du 26 février 2002."
 DI-1-1,Collèges,construction de nouveaux collèges
@@ -312,9 +230,3 @@ DI-EM,Emprunt remboursé,
 DI-EM-1,Amortissement emprunt,remboursement du capital des emprunts contractés
 DI-EM-2,Amortissement OCLT,remboursement des facilités de crédit
 DI-EM-3,Divers Emprunts,
-,,
-REAM-OCLT,,
-"REAM-OCLT-1
-",Refinancement dette,
-REAM-OCLT-2,Opération tirage ligne de trésorerie,
-EXC,Excédent,

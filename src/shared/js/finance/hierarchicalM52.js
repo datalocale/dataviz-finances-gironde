@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from 'immutable';
+import { Map as ImmutableMap, Set as ImmutableSet } from 'immutable';
 
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
@@ -82,11 +82,11 @@ export default function({rows}, RDFI) {
                         categoryChild = {
                             id: `M52-${RDFI}-${category}`,
                             label,
-                            elements: new Set()
+                            elements: new ImmutableSet()
                         }
                         children.set(category, categoryChild);
                     }
-                    categoryChild.elements.add(r);
+                    categoryChild.elements = categoryChild.elements.add(r);
                 }   
             }
         });

@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Record } from 'immutable';
 import { scaleLinear } from 'd3-scale';
 import { min, max, sum } from 'd3-array';
 import { format } from 'd3-format';
+
+import LegendList from '../../../../shared/js/components/LegendList';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
@@ -185,18 +186,14 @@ export function FocusSol({
                     })
                 )
             ),
-            thisYearPartition ? React.createElement('div', {className: 'legend'}, 
-                React.createElement('ol', {},
-                    thisYearPartition.map((p, i) => {
-                        return React.createElement('li', {className: p.contentId},
-                            React.createElement('a', {href: p.url},
-                                React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
-                                p.texts.label
-                            )
-                        )
-                    })
-                )
-            ) : undefined,
+            thisYearPartition ? React.createElement(LegendList, {
+                items: thisYearPartition.map((p, i) => ({
+                    className: p.contentId, 
+                    url: p.url, 
+                    text: p.texts.label, 
+                    colorClassName: `area-color-${i+1}`
+                })).reverse()
+            }) : undefined,
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
         ),
         React.createElement('section', {}, 

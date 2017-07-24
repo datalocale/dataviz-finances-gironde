@@ -1,0 +1,15 @@
+ol.legend-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    font-size: 1.2em;
+
+    .color{
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+
+        vertical-align: middle;
+    }
+}

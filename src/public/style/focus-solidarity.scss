@@ -67,7 +67,7 @@ $focus-highlight-color : #F62727;
 
         & > *{
             position: absolute;
-            left: 50%;
+            left: calc(50% + 1em);
             width: 50%;
             transform: translateY(50%);
         }
@@ -164,14 +164,7 @@ $focus-highlight-color : #F62727;
         }
     }
 
-    .legend{
-        font-size: 1.3em;
-
-        .color{
-            display: inline-block;
-            width: 1.5em;
-            height: 1.5em;
-        }
+    .legend-list{
 
         .DF-1-1 .color{
             background-color: $hebergement-color;

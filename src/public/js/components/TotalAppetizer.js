@@ -11,19 +11,28 @@ interface TotalAppetizerProps{
  */
 
 export default function ({total, year, exploreUrl}) {
+    let toDisplay;
+    let beforeAndComma;
+    let afterComma;
 
-    const amount = total ? (total/Math.pow(10, 9)).toFixed(1).replace('.', ',') : '';
-
+    if(total){
+        toDisplay = (total/Math.pow(10, 9)).toFixed(1);
+        beforeAndComma = toDisplay.match(/^(\d+)\./)[1];
+        afterComma = toDisplay.match(/\.(\d+)$/)[1];
+    }
     return React.createElement('div', { className: 'appetizer total-appetizer' }, 
         React.createElement('h1', {}, 
-            React.createElement('div', {className: 'number'}, amount),
+            total ? React.createElement('div', {className: 'number'}, 
+                React.createElement('span', {className: 'before-comma'}, beforeAndComma),
+                React.createElement('span', {className: 'after-comma'}, ', '+afterComma)
+            ) : '',
             React.createElement('div', {className: 'text'}, 
                 `Milliards de dépenses en ${year}`
             )
         ),
         React.createElement('hr', {}),
         React.createElement('p', {}, 
-            `Le département a dépensé ${amount} milliards d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
+            `Le département a dépensé ${toDisplay.replace('.', ',')} milliards d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})
     );

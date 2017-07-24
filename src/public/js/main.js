@@ -19,8 +19,7 @@ import ExploreBudget from './components/screens/ExploreBudget';
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
 
-const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json'); 
-
+const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
 
 let DATA_URL_PREFIX = "..";
 if(process.env.NODE_ENV === "production"){
@@ -39,6 +38,7 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
     currentYear: undefined,
+    explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
     financeDetailId: undefined
@@ -49,6 +49,7 @@ const store = createStore(
     new StoreRecord({
         m52InstructionByYear: new ImmutableMap(),
         currentYear: 2016,
+        explorationYear: 2016,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
     })
@@ -85,10 +86,7 @@ store.dispatch({
     DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
     DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2011_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2010_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2009_CA.csv'
+    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv'
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
