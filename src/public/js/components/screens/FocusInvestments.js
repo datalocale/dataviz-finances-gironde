@@ -81,7 +81,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
             React.createElement('p', {}, 
-                `Le département de la Gironde investit en moyenne 200 millions d’euros chaque année.  Ces dépenses comprennent : des remboursements d'emprunts ; les prêts accordés par la collectivité ; des acquisitions mobilières et immobilières, des travaux et des subventions.`
+                `De nombreux Girondins sont les bénéficiaires directs des investissements du Département, qui s'élèvent en moyenne à 200 millions d’euros chaque année. Ils concernent le réaménagement des routes, la construction de collèges ou l'entretien d’espaces naturels, mais aussi des remboursements d'emprunts, prêts accordés par la collectivité ou des acquisitions mobilières et immobilières.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
