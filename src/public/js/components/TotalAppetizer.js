@@ -11,16 +11,15 @@ interface TotalAppetizerProps{
  */
 
 export default function ({total, year, exploreUrl}) {
-
+    let toDisplay;
     let beforeAndComma;
     let afterComma;
 
     if(total){
-        const toDisplay = (total/Math.pow(10, 9)).toFixed(1);
+        toDisplay = (total/Math.pow(10, 9)).toFixed(1);
         beforeAndComma = toDisplay.match(/^(\d+)\./)[1];
         afterComma = toDisplay.match(/\.(\d+)$/)[1];
     }
-
     return React.createElement('div', { className: 'appetizer total-appetizer' }, 
         React.createElement('h1', {}, 
             total ? React.createElement('div', {className: 'number'}, 
@@ -33,7 +32,7 @@ export default function ({total, year, exploreUrl}) {
         ),
         React.createElement('hr', {}),
         React.createElement('p', {}, 
-            `Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`
+            `Le département a dépensé ${toDisplay.replace('.', ',')} milliards d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})
     );
