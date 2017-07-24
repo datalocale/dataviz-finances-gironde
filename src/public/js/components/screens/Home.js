@@ -27,7 +27,7 @@ export function Home({
     return React.createElement('article', {className: 'home'},
         React.createElement('div', {}, 
             React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
-            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement Les domaines d’intervention du Département sont vastes mais respectent tous un même objectif : assurer la mission d’aide sociale et de solidarité pour accompagner au mieux les Girondins et les territoires. A ces compétences obligatoires s’ajoutent des actions volontaristes dans de nombreux domaines. Le Département intervient au quotidien pour répondre à une demande de solidarité et de services publics grandissante.`)
+            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement, les domaines d’intervention du Département sont vastes mais respectent tous un même objectif : assurer la mission d’aide sociale et de solidarité pour accompagner au mieux les Girondins et les territoires. À ces compétences obligatoires s’ajoutent des actions volontaristes dans de nombreux domaines. Le Département intervient au quotidien pour répondre à une demande de solidarité et de services publics grandissante.`)
         ),
         
         React.createElement('section', {className: 'appetizers-container'},
