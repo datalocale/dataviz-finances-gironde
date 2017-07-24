@@ -11,7 +11,7 @@ interface TotalAppetizerProps{
  */
 
 export default function ({total, year, exploreUrl}) {
-    let toDisplay;
+    let toDisplay = '';
     let beforeAndComma;
     let afterComma;
 
