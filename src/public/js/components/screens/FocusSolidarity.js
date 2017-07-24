@@ -250,7 +250,10 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’aide aux personnes handicapées recouvre trois types d’aides versées par le Département. La PCH (Prestation de Compensation du Handicap) est une aide financière destinée à rembourser les dépenses liées à la perte d’autonomie de la personne. Elle est calculée selon : le degré d’autonomie ; l’âge ; les ressources de la résidence. En 2016, 73Millions d'euros ont été versés pour 9 975 personnes bénéficiaires. Seconde aide, la prestation d’hébergement pour les personnes handicapées est un secteur d’intervention très important pour le Département avec 122 Millions d'euros en 2016. Troisième aide : l'ACTP (Allocation de Compensation pour Tiers Personne) représente 8.25 Millions d'euros versés pour 1 128 personnes en 2016`, 
+                text: `Trois types d’aides ont été allouées aux personnes handicapées par le Département en 2016 :
+- La PCH (Prestation de Compensation du Handicap), a été versée à 9 975 personnes bénéficiaires. 
+- La prestation d’hébergement a financé 2763 places d'hébergement. 
+- L'ACTP (All`, 
                 highlights: [
                     {
                         strong: "3 aides possibles ",
