@@ -385,3 +385,68 @@ test("DF-3-6 : contient DF C65 R311 A6574", () => {
 
     expect(aggDF37.M52Rows.first()).toBe(m52Rows[0]);
 });
+
+
+test("DF-5 : contient DF C014 R01 A73913/A73914/A73926/A739261/A739262", () => {
+    const AGGREGATED_ROW_ID = 'DF-5';
+
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R01',
+            'Article': 'A73913',
+            'Chapitre': 'C014',
+            'Montant': 1
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R01',
+            'Article': 'A73914',
+            'Chapitre': 'C014',
+            'Montant': 2
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R01',
+            'Article': 'A73926',
+            'Chapitre': 'C014',
+            'Montant': 3
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R01',
+            'Article': 'A739261',
+            'Chapitre': 'C014',
+            'Montant': 4
+        }),
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R01',
+            'Article': 'A739262',
+            'Chapitre': 'C014',
+            'Montant': 5
+        })
+    ];
+
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF5 = aggVision.find(row => row.id === AGGREGATED_ROW_ID);
+
+    expect(aggDF5.M52Rows.includes(m52Rows[0])).toBe(true);
+    expect(aggDF5.M52Rows.includes(m52Rows[1])).toBe(true);
+    expect(aggDF5.M52Rows.includes(m52Rows[2])).toBe(true);
+    expect(aggDF5.M52Rows.includes(m52Rows[3])).toBe(true);
+    expect(aggDF5.M52Rows.includes(m52Rows[4])).toBe(true);
+});

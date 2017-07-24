@@ -557,7 +557,8 @@ export const rules = Object.freeze({
         filter(m52Row){
             const art = m52Row['Article'];
 
-            return isOR(m52Row) && isDF(m52Row) && (art === 'A73914' || art === 'A73926');
+            return isOR(m52Row) && isDF(m52Row) &&
+            ['A73913', 'A73914', 'A73926', 'A739261', 'A739262'].includes(art);
         }
     },
     'DF-6-1-1': { 
@@ -657,9 +658,10 @@ export const rules = Object.freeze({
             const art = m52Row['Article'];
 
             return isOR(m52Row) && isDF(m52Row) && 
-                ((art.startsWith('A73') && 
-                art !== 'A73914' && 
-                art !== 'A73926') ||
+                (
+                    (art.startsWith('A73') && 
+                    !['A73913', 'A73914', 'A73926', 'A739261', 'A739262'].includes(art)
+                ) ||
                 ['A654', 'A6541', 'A6542', 'A6581', 'A65821', 'A65888', 'A65661'].includes(art)) &&
                 !(['R4', 'R5', 'R8'].includes(f2));
         }
