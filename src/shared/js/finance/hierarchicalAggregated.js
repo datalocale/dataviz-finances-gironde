@@ -129,11 +129,7 @@ export const levels = {
                             ]
                         },
                         'DF-4',
-                        {
-                            id: 'DF-5',
-                            label: "Péréquation verticale",
-                            children: ruleIds.filter(id => id.startsWith('DF-5-'))
-                        },
+                        'DF-5',
                         {
                             id: 'DF-6',
                             label: "Charges courantes",

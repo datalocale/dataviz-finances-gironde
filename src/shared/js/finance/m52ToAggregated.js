@@ -552,8 +552,8 @@ export const rules = Object.freeze({
                 !(art.startsWith('A64') && f3 === 'R51');
         }
     },
-    'DF-5-1': { 
-        label: "Versement au fonds de peréquations",
+    'DF-5': { 
+        label: "Péréquation verticale",
         filter(m52Row){
             const art = m52Row['Article'];
 
