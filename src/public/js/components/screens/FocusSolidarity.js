@@ -91,20 +91,20 @@ export function FocusSol({
                 proportion: solidarityProportion, 
                 outerRadius: 188, 
                 innerText: [
-                    `de la dépense solidarité`,
-                    `dans le total dépenses`
+                    `de dépenses Solidarités`,
+                    `dans le total des dépenses`
                 ]
             }),
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "En 2016, 50% du total des dépenses du Département sont dédiées aux allocations, aux prestations sociales et à la solidarité."
+                        "Avec 120 000 prestations allouées et xxx millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
                     ),
-                    ` soit 52% de la totalité des dépenses. `,
+                    ``,
                     React.createElement('strong', {}, 
-                        "Ce qui représente une évolution de +4,31% par rapport à 2015."
+ 
                     ),
-                    ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux girondins bénéficient d’une ou plusieurs aides du département. Il s’engage à accompagner les plus fragiles dans leurs parcours de vie au quotidien..`),
+                    ` `),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -116,7 +116,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement(PageTitle, {text: `Evolution des dépenses de “Solidarités” par public de ${min(years)} à ${max(years)}`}),
+            React.createElement(PageTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
