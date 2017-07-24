@@ -27,7 +27,7 @@ export function Home({
     return React.createElement('article', {className: 'home'},
         React.createElement('div', {}, 
             React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
-            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il remplit une mission d’aide sociale et de solidarité dans un contexte d'accroissement des besoins.`)
+            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il finance des politiques publiques d’aide sociale et de solidarité dans un contexte d'accroissement constant des besoins.`)
         ),
         
         React.createElement('section', {className: 'appetizers-container'},
