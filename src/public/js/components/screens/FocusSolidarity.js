@@ -83,7 +83,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
             React.createElement('p', {}, 
-                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes, et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
+                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. Allocations, prestations sociales et solidarité : de nombreux girondins bénéficient d’une ou plusieurs aides dans leurs parcours de vie au quotidien.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
