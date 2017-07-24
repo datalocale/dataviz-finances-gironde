@@ -83,7 +83,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
             React.createElement('p', {}, 
-                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes, et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. En ${currentYear}, ${(solidarityProportion*100).toFixed(0)}% du total des dépenses de fonctionnement du département sont dédiées aux allocations et prestations sociales ou de solidarité.`
+                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. Allocations, prestations sociales et solidarité : de nombreux girondins bénéficient d’une ou plusieurs aides dans leurs parcours de vie au quotidien.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
@@ -91,20 +91,20 @@ export function FocusSol({
                 proportion: solidarityProportion, 
                 outerRadius: 188, 
                 innerText: [
-                    `de la dépense solidarité`,
-                    `dans le total dépenses`
+                    `de dépenses Solidarités`,
+                    `dans le total des dépenses`
                 ]
             }),
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "En 2016, 50% du total des dépenses du Département sont dédiées aux allocations, aux prestations sociales et à la solidarité."
+                        "Avec 120 000 prestations allouées et xxx millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
                     ),
-                    ` soit 52% de la totalité des dépenses. `,
+                    ``,
                     React.createElement('strong', {}, 
-                        "Ce qui représente une évolution de +4,31% par rapport à 2015."
+ 
                     ),
-                    ` Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux girondins bénéficient d’une ou plusieurs aides du département. Il s’engage à accompagner les plus fragiles dans leurs parcours de vie au quotidien..`),
+                    ` `),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -116,7 +116,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement(PageTitle, {text: `Evolution des dépenses de “Solidarités” par public de ${min(years)} à ${max(years)}`}),
+            React.createElement(PageTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
             React.createElement('div', {className: 'solidarity-by-year'},
                 React.createElement('svg', {width: WIDTH, height: HEIGHT},
                     // x axis / years
@@ -215,8 +215,9 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Les publics`),
-            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations: les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. L’Etat impose au Département un cadre légal d’intervention pour chaque public.Au sein de ce cadre, le Département définit sa propre politique et les actions qu’il met en œuvre.  Les actions et les aides octroyées par le Département varient en fonction des publics. On retrouve : Des Hébergements qui permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. Des Prestations qui permettent de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale. Des Subventions pour l’insertion, l’aide à l’action des associations etc … Des Allocations qui permettent de reverser directement à la personne un complément financier : RSA  (Revenu de solidarité active) ; APA (Allocation personnalisée d’autonomie); PCH (Prestation de compensation du handicap).`),
+            React.createElement('h2', {}, `Les actions et les aides varient en fonction des publics`),
+            React.createElement('p', {}, `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
+Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
@@ -224,21 +225,20 @@ export function FocusSol({
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Le RSA (Revenu de Solidarité Active) assure aux personnes sans ressource un revenu minimum variable selon la composition du foyer. Il est délivré sous certaines conditions. Pour bénéficier du RSA il faut : soit avoir 25 ans ou plus si inactif professionnellement, soit Avoir entre 18 et 24 ans et justifier d’une certaine durée d’activité professionnelle ou être parents isolés. 
-                
-                En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% En 2016, on constate un ralentissement dans la progression des allocations versées corrélé à une baisse des bénéficiaires.`, 
+                text: `A lui seul, le RSA (Revenu de Solidarité Active) représente presque 94% des aides allouées aux personnes en insertion. Une personne française ou étrangère d'au moins 25 ans peut en bénéficier si elle remplit plusieurs conditions. https://www.service-public.fr/particuliers/vosdroits/F19778
+       `, 
                 highlights: [
                     {
+                        strong: "+32%",
+                        span: "de dépenses depuis 2012"
+                    },
+                    {
                         strong: "229 M d'€",
-                        span: " pour le RSA en 2016"
+                        span: "dédiés au RSA en 2016"
                     },
                     {
-                        strong: "12 M d'€ de plus (+5.5%)",
+                        strong: "+5.5%",
                         span: "d'allocations RSA par rapport à 2015"
-                    },
-                    {
-                        strong: "baisse",
-                        span: "du nombre de bénéficiaires du RSA"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-1'
@@ -250,19 +250,23 @@ export function FocusSol({
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’aide aux personnes handicapées recouvre trois types d’aides versées par le Département. La PCH (Prestation de Compensation du Handicap) est une aide financière destinée à rembourser les dépenses liées à la perte d’autonomie de la personne. Elle est calculée selon : le degré d’autonomie ; l’âge ; les ressources de la résidence. En 2016, 73Millions d'euros ont été versés pour 9 975 personnes bénéficiaires. Seconde aide, la prestation d’hébergement pour les personnes handicapées est un secteur d’intervention très important pour le Département avec 122 Millions d'euros en 2016. Troisième aide : l'ACTP (Allocation de Compensation pour Tiers Personne) représente 8.25 Millions d'euros versés pour 1 128 personnes en 2016`, 
+                text: `Trois types d’aides ont été allouées aux personnes handicapées par le Département en 2016 :
+- La PCH (Prestation de Compensation du Handicap), a été versée à 9 975 personnes bénéficiaires 
+- La prestation d’hébergement a financé 2763 places d'hébergement
+- L'ACTP (Allocation de Compensation pour Tiers Personne) a financé l'emploi d'aides à domicile pour 1 128 personnes 
+(All`, 
                 highlights: [
                     {
-                        strong: "3 aides possibles ",
-                        span: "allocation, hébergement, aides à domicile"
+                        strong: "73 Millions d'euros",
+                        span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "2 763 places ",
-                        span: "d’hébergement en 2016"
+                        strong: "122 Millions d'euros",
+                        span: "pour des places d’hébergement"
                     },
                     {
-                        strong: " 757 ",
-                        span: "aides à domicile en 2016"
+                        strong: "8.25 Millions d'euros",
+                        span: "pour l'emploi de 757 aides à domicile"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-2'
