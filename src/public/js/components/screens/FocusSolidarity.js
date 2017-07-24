@@ -301,19 +301,19 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’Aide Sociale à l'Enfance (ASE) est le service du Département responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007). L’ASE est en collaboration avec : , La PMI (Protection Maternelle et Infantile) , l’UTAS (Union Territoriale d’Action Sociale). Les Missions de l’ASE : apporter un soutien aux familles à leur domicile (éducatif, financier …), accueillir et prendre en charge (également dans l’urgence)les enfants qui lui confiés par leurs parents ou par un juge. Le département s'occupe également de l’accueil familial qui représente le deuxième mode d’accueil avec 800 assistants familiaux en gironde et 35 assistants familiaux hors gironde.`, 
+                text: `L’Aide Sociale à l'Enfance (ASE) est le service du Département responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007). Les missions de l’ASE : apporter un soutien aux familles à leur domicile et accueillir les enfants qui lui sont confiés par leurs parents ou par un juge. Le Département s'occupe également de l’accueil familial qui représente le deuxième mode d’accueil des mineurs.`, 
                 highlights: [
                     {
                         strong: "166 M d'€",
-                        span: "investits dans les Maisons d’Enfants à Caractère Sociale"
+                        span: "pour les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
                         strong: "1392 ",
-                        span: "enfants accueuillis en 2016"
+                        span: "enfants accueillis en 2016"
                     },
                     {
-                        strong: "800",
-                        span: " assistants familiaux en Gironde"
+                        strong: "835",
+                        span: " assistants familiaux pour l'accueil familial"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DF-2-4'
