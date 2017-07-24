@@ -215,8 +215,9 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Les publics`),
-            React.createElement('p', {}, `Les dépenses de solidarité se concentrent auprès de quatre populations: les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. L’Etat impose au Département un cadre légal d’intervention pour chaque public.Au sein de ce cadre, le Département définit sa propre politique et les actions qu’il met en œuvre.  Les actions et les aides octroyées par le Département varient en fonction des publics. On retrouve : Des Hébergements qui permet de proposer aux plus fragiles des nuitées et des lits dans des structures sécurisées et adaptées. Des Prestations qui permettent de venir en aide en urgence, de soutenir l’action des associations et des entreprises de l’insertion sociale. Des Subventions pour l’insertion, l’aide à l’action des associations etc … Des Allocations qui permettent de reverser directement à la personne un complément financier : RSA  (Revenu de solidarité active) ; APA (Allocation personnalisée d’autonomie); PCH (Prestation de compensation du handicap).`),
+            React.createElement('h2', {}, `Les actions et les aides varient en fonction des publics`),
+            React.createElement('p', {}, `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
+Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
