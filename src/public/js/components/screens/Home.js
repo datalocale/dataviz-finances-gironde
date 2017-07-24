@@ -42,8 +42,7 @@ export function Home({
                     h1: "Solidarités",
                     numberMain: "120 000", 
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près de 845 millions d’euros pour aider et accompagner les personnes fragilisées.
-    Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendus aux publics les plus fragiles. A cela s’ajoute 800 assistants familiaux (et 35 hors Gironde) qui accueillent des enfants faisant l’objet de mesures de placement.`, 
+                    description: `Avec 845 Millions d’euros en 2016 et 1751 agents mobilisés c’est plus de la moitié des ressources du département qui sont consacrées aux politiques de Solidarités.`, 
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
