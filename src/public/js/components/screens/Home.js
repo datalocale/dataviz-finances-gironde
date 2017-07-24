@@ -27,7 +27,7 @@ export function Home({
     return React.createElement('article', {className: 'home'},
         React.createElement('div', {}, 
             React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
-            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement, les domaines d’intervention du Département sont vastes mais respectent tous un même objectif : assurer la mission d’aide sociale et de solidarité pour accompagner au mieux les Girondins et les territoires. À ces compétences obligatoires s’ajoutent des actions volontaristes dans de nombreux domaines. Le Département intervient au quotidien pour répondre à une demande de solidarité et de services publics grandissante.`)
+            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il finance l’aide sociale et la solidarité dans un contexte de croissance démographique constante : + 15 000 nouveaux Girondins en moyenne chaque année.`)
         ),
         
         React.createElement('section', {className: 'appetizers-container'},
@@ -42,7 +42,7 @@ export function Home({
                     h1: "Solidarités",
                     numberMain: "120 000", 
                     numberSecundary: "prestations allouées",
-                    description: `Avec 845 Millions d’euros en 2016 et 1751 agents mobilisés c’est plus de la moitié des ressources du département qui sont consacrées aux politiques de Solidarités.`, 
+                    description: `Le Département affirme sa vocation sociale et déploie près de 845 millions d’euros pour aider et accompagner les personnes fragilisées.`, 
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
@@ -56,7 +56,7 @@ export function Home({
                     h1: "Présence sur le territoire",
                     numberMain: "125 métiers", 
                     numberSecundary: "425 sites",
-                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents occupant 125 métiers différents mènent leur mission dans tout le territoire de la Gironde. Il compte 425 lieux de travail et d’accueil du public. Malgré une croissance démographique constante (+ 15 000 nouveaux Girondins en moyenne chaque année) qui entraîne une augmentent des besoins, le Département accorde une vigilance particulière au maintien de ses frais de personnel et de fonctionnement.`, 
+                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents mènent leur mission dans des lieux de travail et d’accueil du public répartis dans toute la Gironde.`, 
                     moreUrl: presence
                 }) 
             )

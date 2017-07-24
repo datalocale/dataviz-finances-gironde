@@ -27,7 +27,7 @@ export default function ({total, year, exploreUrl}) {
                 React.createElement('span', {className: 'after-comma'}, ', '+afterComma)
             ) : '',
             React.createElement('div', {className: 'text'}, 
-                `Milliards de dépenses en ${year}`
+                `Milliards d'euros de dépenses en ${year}`
             )
         ),
         React.createElement('hr', {}),
