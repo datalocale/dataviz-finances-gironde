@@ -6,6 +6,9 @@ $column-padding: 40px;
 $column-max-width: 1200px + 2*$column-padding;
 $background-height: 2470px;
 
+$home-illustration-url: '/sites/default/files/2017-07/map-optimised.jpg';
+// $home-illustration-url: '../images/map-optimised.jpg';
+
 .home{
     display: flex;
     flex-direction: column;
@@ -24,7 +27,7 @@ $background-height: 2470px;
     }
 
     .appetizers-container{
-        background: url(../images/map-optimised.jpg), #BEBC05;
+        background: url($home-illustration-url), #BEBC05;
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;

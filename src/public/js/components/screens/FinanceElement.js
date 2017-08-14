@@ -310,14 +310,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 'a', 
                 {
                     target: '_blank', 
-                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', 
+                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde', 
                     style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
                 }, 
                 React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
                 ' ',
                 `Télécharger toutes les données Open Data à la norme M52 au format CSV`
             )
-        ): undefined
+        ) : undefined
 
     );
 }

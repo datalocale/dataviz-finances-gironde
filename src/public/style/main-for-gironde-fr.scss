@@ -9,3 +9,12 @@
 @import 'explore-budget';
 @import 'focus-solidarity';
 @import 'focus-investments';
+
+// Specific to gironde.fr
+
+.breadcrumb, #block-gironde-fr-local-tasks{
+    max-width: 1280px;
+    padding: 0 40px;
+    width: 100%;
+    margin: 0 auto;
+}

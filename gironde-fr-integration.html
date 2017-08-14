@@ -1,11 +1,10 @@
 <div class="cd33-finance-dataviz"></div>
-<script crossorigin="anonymous" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=WeakMap,Promise,fetch"></script>
-<script crossorigin="anonymous" src="https://dtc-innovation.github.io/dataviz-finances-gironde/build/public-bundle.js"></script>
+<script crossorigin="anonymous" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.includes,WeakMap,Promise,fetch"></script>
+<script crossorigin="anonymous" src="/sites/default/files/2017-07/dataviz-finance-gironde-fr-bundle_12.pdf"></script>
 <style>
 .cd33-finance-dataviz {
   width: 100%;
   font-family: 'Roboto', sans-serif;
-  padding-bottom: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center; }
@@ -76,8 +75,8 @@
     fill: #FF5521; }
 
 .appetizer {
-  max-width: 50%;
-  padding: 1em;
+  width: 58.3%;
+  padding: 2em;
   margin: 10em 0;
   background-color: white;
   box-shadow: 0 0 2px black;
@@ -113,13 +112,29 @@
     background-color: #EDEDED;
     box-shadow: 0 0 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #4A4A4A; }
     .appetizer.total-appetizer h1 {
-      font-size: 1.5em; }
-    .appetizer.total-appetizer .total {
-      font-size: 5.5em;
-      letter-spacing: -10px;
-      color: #00857E; }
+      font-size: 1.5em;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      align-self: auto;
+      width: 80%;
+      margin: 0; }
+      .appetizer.total-appetizer h1 .number {
+        font-size: 5.5em;
+        color: #00857E;
+        letter-spacing: -10px; }
+        .appetizer.total-appetizer h1 .number .after-comma {
+          font-size: 0.6em; }
+      .appetizer.total-appetizer h1 .text {
+        width: 50%;
+        text-align: center;
+        text-transform: uppercase; }
     .appetizer.total-appetizer hr {
       width: 80%;
       border-color: #2d2d2d;
@@ -133,43 +148,24 @@
 .appetizer .info {
   display: flex;
   flex-direction: row; }
-
-.appetizer .info .number {
-  padding-right: 1em;
-  border-right: 0.5em solid #D7D7D7; }
-
-.appetizer .info .number .main,
-.appetizer .info .number .secundary {
-  white-space: nowrap; }
-
-.appetizer .info .number .main {
-  font-size: 2em; }
-
-.appetizer .info .number .secundary {
-  font-size: 1.5em; }
-
-.appetizer .info p {
-  padding-left: 1em; }
+  .appetizer .info .number {
+    padding-right: 1em;
+    border-right: 0.5em solid #D7D7D7;
+    text-align: right; }
+    .appetizer .info .number .main, .appetizer .info .number .secundary {
+      white-space: nowrap;
+      font-weight: bold; }
+    .appetizer .info .number .main {
+      font-size: 3em;
+      color: #00857E; }
+    .appetizer .info .number .secundary {
+      font-size: 1.5em;
+      text-transform: uppercase; }
+  .appetizer .info p {
+    padding-left: 1em; }
 
 .appetizer a {
   align-self: flex-end; }
-
-.appetizer.total-appetizer {
-  border: 1.5em solid white;
-  margin: 0;
-  width: 38em;
-  height: 38em;
-  border-radius: 50%;
-  position: relative;
-  left: 10%;
-  /* % relative to parent width */
-  transform: translateY(-25%);
-  /* % relative to element height */
-  background-color: #EDEDED;
-  box-shadow: 0 0 0;
-  text-align: center;
-  color: #4A4A4A;
-  font-size: 14px; }
 
 .area-color-1 {
   background-color: #0E7FAB; }
@@ -227,40 +223,40 @@
     height: 40em;
     display: flex;
     flex-direction: row;
-    justify-content: space-between; }
-    .budget-construction .bricks .column {
+    justify-content: space-around; }
+    .budget-construction .bricks .brick-column {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      width: 18%; }
-      .budget-construction .bricks .column .legend {
+      width: 19%; }
+      .budget-construction .bricks .brick-column > .legend {
         align-self: flex-start;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         color: black;
         font-weight: bold; }
-        .budget-construction .bricks .column .legend .number {
-          font-size: 5em; }
-        .budget-construction .bricks .column .legend .text {
+        .budget-construction .bricks .brick-column > .legend .number {
+          color: #BBB; }
+        .budget-construction .bricks .brick-column > .legend .text {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding-left: 0.3em;
+          font-size: 1.5em;
           text-transform: uppercase; }
-          .budget-construction .bricks .column .legend .text .unit {
+          .budget-construction .bricks .brick-column > .legend .text .unit {
             text-transform: lowercase; }
-      .budget-construction .bricks .column .rf .brick {
-        background-color: #0E7FAB; }
-      .budget-construction .bricks .column .df .brick {
-        background-color: #F8C738; }
-      .budget-construction .bricks .column .ri .brick {
+      .budget-construction .bricks .brick-column .rf .brick {
         background-color: #EC3500; }
-      .budget-construction .bricks .column .di .brick {
+      .budget-construction .bricks .brick-column .df .brick {
+        background-color: #F8C738; }
+      .budget-construction .bricks .brick-column .ri .brick {
+        background-color: #0E7FAB; }
+      .budget-construction .bricks .brick-column .di .brick {
         background-color: #B8C30F; }
-      .budget-construction .bricks .column .brick.epargne {
-        background-color: gold; }
-      .budget-construction .bricks .column .parent {
+      .budget-construction .bricks .brick-column .brick.epargne {
+        background-color: #EC3500; }
+      .budget-construction .bricks .brick-column .parent {
         opacity: 1;
         background-color: transparent;
         color: transparent;
@@ -272,62 +268,60 @@
         flex-direction: column;
         justify-content: flex-end;
         width: 100%; }
-        .budget-construction .bricks .column .parent .brick {
+        .budget-construction .bricks .brick-column .parent .brick {
           color: white;
           padding: 0.5em;
           margin: 0;
-          margin-top: 0.5em;
           width: 100%;
           border-radius: 5px;
           position: relative; }
-          .budget-construction .bricks .column .parent .brick .legend {
+          .budget-construction .bricks .brick-column .parent .brick:not(:first-child) {
+            margin-top: 0.5em; }
+          .budget-construction .bricks .brick-column .parent .brick .legend {
             margin-top: 0.5em;
             display: flex;
             flex-direction: column;
             color: white; }
-            .budget-construction .bricks .column .parent .brick .legend .text, .budget-construction .bricks .column .parent .brick .legend .amount {
+            .budget-construction .bricks .brick-column .parent .brick .legend .text, .budget-construction .bricks .brick-column .parent .brick .legend .amount {
               padding: 0;
               margin: 0; }
-            .budget-construction .bricks .column .parent .brick .legend .text {
+            .budget-construction .bricks .brick-column .parent .brick .legend .text {
               text-transform: uppercase; }
-            .budget-construction .bricks .column .parent .brick .legend .amount {
+            .budget-construction .bricks .brick-column .parent .brick .legend .amount {
               font-weight: normal; }
-          .budget-construction .bricks .column .parent .brick.appear-by-height {
+          .budget-construction .bricks .brick-column .parent .brick.appear-by-height {
             transition-property: height;
             padding: 0 0.5em;
             height: 0;
             overflow: hidden; }
-        .budget-construction .bricks .column .parent .filling-container {
+        .budget-construction .bricks .brick-column .parent .emptier {
           position: absolute;
-          bottom: 0;
+          top: 0;
           right: 0;
           left: 0;
           height: 0;
-          color: transparent; }
-          .budget-construction .bricks .column .parent .filling-container .filling {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            left: 0;
-            height: 0;
-            transition-property: height;
-            opacity: 0.2;
-            background-color: black; }
+          z-index: 1;
+          background-color: white;
+          opacity: 0.6; }
   .budget-construction hr {
     height: 1em;
     border: 0;
     border-radius: 5px;
     background-color: #D8D8D8; }
   .budget-construction dl {
-    height: 10em;
     display: flex;
     flex-direction: row;
     justify-content: space-between; }
     .budget-construction dl .column {
       width: 30%;
       height: 100%;
+      color: black;
+      text-decoration: none;
       display: flex;
-      flex-direction: column; }
+      flex-direction: column;
+      opacity: 0;
+      transition-property: opacity;
+      transition-duration: 0.2s; }
     .budget-construction dl dt {
       font-weight: bold; }
     .budget-construction dl dd {
@@ -344,6 +338,8 @@
     background-color: #D2D2D2;
     text-transform: uppercase;
     transition-property: opacity; }
+    .budget-construction .replay::disabled {
+      cursor: default; }
 
 .budget-construction .bricks .brick {
   animation-fill-mode: forwards; }
@@ -361,7 +357,7 @@
     display: flex;
     flex-direction: column; }
   .home .appetizers-container {
-    background: url(../images/map-optimised.jpg), #BEBC05;
+    background: url("/sites/default/files/2017-07/map-optimised.jpg"), #BEBC05;
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -376,6 +372,17 @@
       max-width: 1280px;
       display: flex;
       flex-direction: column; }
+
+ol.legend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em; }
+  ol.legend-list .color {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    vertical-align: middle; }
 
 .finance-element-pie .arc:nth-child(1) path {
   fill: cornflowerblue; }
@@ -408,21 +415,24 @@
         white-space: nowrap; }
   .finance-element h2 {
     clear: both; }
+  .finance-element .atemporal ul, .finance-element .temporal ul {
+    list-style: disc; }
   .finance-element .atemporal p {
     margin-top: 0; }
   .finance-element .temporal {
     margin-top: 2em; }
   .finance-element .over-time .content text {
     font-size: 1.2em;
+    font-weight: bold;
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-width: 2px; }
+  .finance-element .over-time .d3-axis .selected {
     font-weight: bold; }
-  .finance-element .legend ol {
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-  .finance-element .legend .color {
-    display: inline-block;
-    height: 2em;
-    width: 2em; }
+    .finance-element .over-time .d3-axis .selected text {
+      fill: black; }
+  .finance-element .over-time .d3-axis .actionable {
+    cursor: pointer; }
   .finance-element .partition a {
     display: flex;
     flex-direction: row;
@@ -568,6 +578,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center; }
+    .explore-budget .viz .rf {
+      background-color: #EC3500; }
+    .explore-budget .viz .ri {
+      background-color: #ff7a53; }
+    .explore-budget .viz .df {
+      background-color: #0E7FAB; }
+    .explore-budget .viz .di {
+      background-color: #31b9ee; }
   .explore-budget .expenditures > a, .explore-budget .revenue > a {
     display: flex;
     flex-direction: row;
@@ -589,14 +607,6 @@
         font-weight: bold; }
       .explore-budget .expenditures > a .texts .amount, .explore-budget .revenue > a .texts .amount {
         font-size: 5em; }
-  .explore-budget .rf {
-    background-color: #EC3500; }
-  .explore-budget .ri {
-    background-color: #ff7a53; }
-  .explore-budget .df {
-    background-color: #0E7FAB; }
-  .explore-budget .di {
-    background-color: #31b9ee; }
   .explore-budget .m52-by-fonction {
     display: flex;
     flex-direction: row;
@@ -640,30 +650,26 @@
     .explore-budget .m52-by-fonction .M52-DF-R9 path,
     .explore-budget .m52-by-fonction .M52-DI-R9 path {
       fill: #FF5521; }
-    .explore-budget .m52-by-fonction .legend .color {
-      display: inline-block;
-      height: 2em;
-      width: 2em; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R0, .explore-budget .m52-by-fonction .legend .color.M52-DI-R0 {
-        background-color: #0E7FAB; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R1, .explore-budget .m52-by-fonction .legend .color.M52-DI-R1 {
-        background-color: #F8C738; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R2, .explore-budget .m52-by-fonction .legend .color.M52-DI-R2 {
-        background-color: #EC3500; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R3, .explore-budget .m52-by-fonction .legend .color.M52-DI-R3 {
-        background-color: #B8C30F; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R4, .explore-budget .m52-by-fonction .legend .color.M52-DI-R4 {
-        background-color: #9C26B0; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R5, .explore-budget .m52-by-fonction .legend .color.M52-DI-R5 {
-        background-color: #019587; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R6, .explore-budget .m52-by-fonction .legend .color.M52-DI-R6 {
-        background-color: #795549; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R7, .explore-budget .m52-by-fonction .legend .color.M52-DI-R7 {
-        background-color: #607C8A; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R8, .explore-budget .m52-by-fonction .legend .color.M52-DI-R8 {
-        background-color: #6739B6; }
-      .explore-budget .m52-by-fonction .legend .color.M52-DF-R9, .explore-budget .m52-by-fonction .legend .color.M52-DI-R9 {
-        background-color: #FF5521; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R0, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R0 {
+      background-color: #0E7FAB; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R1, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R1 {
+      background-color: #F8C738; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R2, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R2 {
+      background-color: #EC3500; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R3, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R3 {
+      background-color: #B8C30F; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R4, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R4 {
+      background-color: #9C26B0; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R5, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R5 {
+      background-color: #019587; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R6, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R6 {
+      background-color: #795549; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R7, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R7 {
+      background-color: #607C8A; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R8, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R8 {
+      background-color: #6739B6; }
+    .explore-budget .m52-by-fonction .legend-list .color.M52-DF-R9, .explore-budget .m52-by-fonction .legend-list .color.M52-DI-R9 {
+      background-color: #FF5521; }
 
 .d3-axis line {
   stroke: grey;
@@ -811,7 +817,7 @@
     font-weight: bold; }
     .top-infos .people-fraction > * {
       position: absolute;
-      left: 50%;
+      left: calc(50% + 1em);
       width: 50%;
       transform: translateY(50%); }
     .top-infos .people-fraction .number {
@@ -876,32 +882,35 @@
   font-size: 1.6em;
   font-weight: bold; }
 
-.solidarity-by-year .legend {
-  font-size: 1.3em; }
-  .solidarity-by-year .legend .color {
-    display: inline-block;
-    width: 1.5em;
-    height: 1.5em; }
-  .solidarity-by-year .legend .DF-1-1 .color {
-    background-color: #68B0CD; }
-  .solidarity-by-year .legend .DF-1-2 .color {
-    background-color: #B8C30F; }
-  .solidarity-by-year .legend .DF-1-3 .color {
-    background-color: #F8C738; }
-  .solidarity-by-year .legend .DF-1-4 .color {
-    background-color: #F35D32; }
-  .solidarity-by-year .legend .DF-1-other .color {
-    background-color: #c564a9; }
-  .solidarity-by-year .legend .DF-2-1 .color {
-    background-color: #F35D32; }
-  .solidarity-by-year .legend .DF-2-2 .color {
-    background-color: #F8C738; }
-  .solidarity-by-year .legend .DF-2-3 .color {
-    background-color: #B8C30F; }
-  .solidarity-by-year .legend .DF-2-4 .color {
-    background-color: #68B0CD; }
-  .solidarity-by-year .legend .DF-2-other .color {
-    background-color: #c564a9; }
+.solidarity-by-year .legend-list .DF-1-1 .color {
+  background-color: #68B0CD; }
+
+.solidarity-by-year .legend-list .DF-1-2 .color {
+  background-color: #B8C30F; }
+
+.solidarity-by-year .legend-list .DF-1-3 .color {
+  background-color: #F8C738; }
+
+.solidarity-by-year .legend-list .DF-1-4 .color {
+  background-color: #F35D32; }
+
+.solidarity-by-year .legend-list .DF-1-other .color {
+  background-color: #c564a9; }
+
+.solidarity-by-year .legend-list .DF-2-1 .color {
+  background-color: #F35D32; }
+
+.solidarity-by-year .legend-list .DF-2-2 .color {
+  background-color: #F8C738; }
+
+.solidarity-by-year .legend-list .DF-2-3 .color {
+  background-color: #B8C30F; }
+
+.solidarity-by-year .legend-list .DF-2-4 .color {
+  background-color: #68B0CD; }
+
+.solidarity-by-year .legend-list .DF-2-other .color {
+  background-color: #c564a9; }
 
 .focus-detail.insertion .explanation .proportion {
   background-color: #EC3500; }
@@ -979,5 +988,11 @@
 
 .focus-detail.city-subsidy .explanation .proportion {
   background-color: #9C26B0; }
+
+.breadcrumb, #block-gironde-fr-local-tasks {
+  max-width: 1280px;
+  padding: 0 40px;
+  width: 100%;
+  margin: 0 auto; }
 
 </style>
