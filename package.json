@@ -78,7 +78,7 @@
     "jest": "^18.1.0",
     "jest-immutable-matchers": "^1.4.0",
     "minifyify": "^7.3.5",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
     "serve": "^2.4.3",
     "watchify": "^3.8.0"
