@@ -136,7 +136,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
 
-
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
             `${RDFIText} - ${label} en ${year}` :
