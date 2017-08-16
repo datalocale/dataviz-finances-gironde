@@ -210,7 +210,10 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
 
     const breadcrumbData = [];
 
-    let currentContentId = contentId;
+    let currentContentId = contentId.startsWith('M52-') ?
+        contentId.slice(7) :
+        contentId;
+
     while(currentContentId){
         if(currentContentId !== 'Total'){
             breadcrumbData.push({
