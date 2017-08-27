@@ -11,7 +11,7 @@ export const levels = {
     children: [
         {
             id: REVENUE,
-            label: 'Revenues',
+            label: 'Recettes',
             children: [
                 {
                     id: 'RF',
@@ -50,7 +50,7 @@ export const levels = {
                         },
                         {
                             id: 'RF-8',
-                            label: "Pé[REVENUE]: réquation horizontale",
+                            label: "Péréquation horizontale",
                             children: ruleIds.filter(id => id.startsWith('RF-8-'))
                         },
                         {

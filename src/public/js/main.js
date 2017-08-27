@@ -2,14 +2,16 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Record, Map as ImmutableMap } from 'immutable';
+import { Record, Map as ImmutableMap, List } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
 import reducer from './reducer';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
+import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
@@ -34,6 +36,28 @@ if(process.env.NODE_ENV === "production"){
  */
 const REACT_CONTAINER_SELECTOR = '.cd33-finance-dataviz';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
+
+
+
+// Breadcrumb
+const BREADCRUMB_CONTAINER = process.env.NODE_ENV === "production" ?
+    main.querySelector('.breadcrumb').parentNode :
+    document.body.querySelector('nav');
+const DEFAULT_BREADCRUMB = List([
+    {
+        text: 'Accueil',
+        url: '/'
+    },
+    {
+        text: 'Le Département',
+        url: '/le-departement'
+    },
+    {
+        text: `Un budget au service d'une solidarité humaine et territoriale`,
+        url: '#'
+    }
+]);
+
 
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
@@ -142,6 +166,9 @@ page('/', () => {
         ),
         CONTAINER_ELEMENT
     );
+
+    const breadcrumb = DEFAULT_BREADCRUMB;
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 });
 
 
@@ -156,6 +183,10 @@ page('/explorer', () => {
         ),
         CONTAINER_ELEMENT
     );
+
+
+    const breadcrumb = DEFAULT_BREADCRUMB.push({text: 'Explorer'});
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 });
 
 
@@ -176,6 +207,32 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
         ),
         CONTAINER_ELEMENT
     );
+
+    const breadcrumbData = [];
+
+    let currentContentId = contentId.startsWith('M52-') ?
+        contentId.slice(7) :
+        contentId;
+
+    while(currentContentId){
+        if(currentContentId !== 'Total'){
+            breadcrumbData.push({
+                text: elementById.get(currentContentId).label,
+                url: `#!/finance-details/${currentContentId}`
+            })
+        }
+        currentContentId = childToParent.get(currentContentId);
+    }
+
+    breadcrumbData.push({
+        text: 'Explorer',
+        url: `#!/explorer`
+    })
+    
+    const breadcrumb = DEFAULT_BREADCRUMB.concat(breadcrumbData.reverse());
+
+    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
+
 });
 
 page(`/focus/${SOLIDARITES}`, () => {
