@@ -8,5 +8,8 @@ notes.md
 
 build/
 
+data/finances/*.xml
+
+# temporary
 data/*.pdf
 data/**/*.pdf
