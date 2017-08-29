@@ -1,0 +1,27 @@
+.stackchart {
+    .content{
+
+        text{
+            font-size: 1.2em;
+            font-weight: bold;
+            paint-order: stroke;
+            stroke: #fff;
+            stroke-width: 2px;
+        }
+    }
+
+    .d3-axis{
+        .selected{
+            font-weight: bold;
+
+            text{
+                fill: black;
+            }
+        }
+
+        .actionable{
+            cursor: pointer;
+        }
+    }
+
+}

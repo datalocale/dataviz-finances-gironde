@@ -6,13 +6,14 @@ import { min, max, sum } from 'd3-array';
 import { format } from 'd3-format';
 
 import LegendList from '../../../../shared/js/components/LegendList';
+import D3Axis from '../../../../shared/js/components/D3Axis';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
-import D3Axis from '../D3Axis';
+
 
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
