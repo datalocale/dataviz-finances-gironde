@@ -21,8 +21,6 @@ export default function ({ xs, ysByX,
     selectedX,
     onSelectedXAxisItem
 }) {
-    console.log('StackChart', xs, ysByX.toJS())
-
     const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length+1)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
@@ -31,7 +29,7 @@ export default function ({ xs, ysByX,
         .domain([min(xs), max(xs)])
         .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
 
-    const maxAmount = max(ysByX.valueSeq().toJS().map(ys =>  sum(ys.map(y => y.value))))
+    const maxAmount = max(ysByX.valueSeq().toJS().map(ys =>  sum(ys))); 
 
     const yScale = scaleLinear()
         .domain([0, maxAmount])
@@ -84,23 +82,19 @@ export default function ({ xs, ysByX,
             // content
             React.createElement('g', {className: 'content'},
                 ysByX.entrySeq().toJS().map(([x, ys]) => {
-                    const total = sum(ys.toJS().map(y => y.value));
+                    const total = sum(ys.toJS());
 
                     const stackYs = ys
-                        .map(y => y.value)
                         // .map + .slice is an 0(n²) algorithm. Fine here because n is never higher than 20
                         .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
                         .map(yValueScale);
 
                     const stack = ys
                         .map((y, i) => {
-                            const { value } = y;
-                            console.log('y', x, i, y, yValueScale(value));
-
-                            const height = Math.max(yValueScale(value) - BRICK_PADDING, MIN_BRICK_HEIGHT);
+                            const height = Math.max(yValueScale(y) - BRICK_PADDING, MIN_BRICK_HEIGHT);
 
                             return {
-                                value,
+                                value: y,
                                 height,
                                 y: i === 0 ? 
                                     HEIGHT - HEIGHT_PADDING - height :
@@ -111,11 +105,10 @@ export default function ({ xs, ysByX,
                     const totalHeight = yValueScale(total);
                     const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
 
-
                     return React.createElement('g', {transform: `translate(${xScale(x)})`}, 
                         React.createElement('g', {},
                             stack.map( ({value, height, y}, i) => {
-                                return React.createElement('g', {className: [`area-color-${i+1}`].join(' ')}, 
+                                return React.createElement('g', {className: `area-color-${i+1}`}, 
                                     React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
                                 )
                             })

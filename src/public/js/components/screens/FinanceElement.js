@@ -4,8 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { format } from 'currency-formatter';
 
-import { scaleLinear } from 'd3-scale';
-import { min, max, sum } from 'd3-array';
+import { max } from 'd3-array';
 import { format as d3Format } from 'd3-format';
 import { format as formatEuro } from 'currency-formatter';
 
@@ -140,7 +139,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             ) : undefined,
             React.createElement(StackChart, {
                 xs: years,
-                ysByX: barchartPartitionByYear.map(partition => partition.map(part => ({value: part.partAmount}))),
+                ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
                 selectedX: year,
                 onSelectedXAxisItem: changeExplorationYear,
                 legendItems: !isLeaf ? 
