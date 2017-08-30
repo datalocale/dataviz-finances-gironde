@@ -16,7 +16,7 @@ import D3Axis from './D3Axis';
 export default function ({ xs, ysByX, 
     WIDTH = 1000, HEIGHT = 430, 
     Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 70, 
-    BRICK_PADDING = 3, MIN_BRICK_HEIGHT = 4,
+    BRICK_SPACING = 4, MIN_BRICK_HEIGHT = 4,
     legendItems,
     selectedX,
     onSelectedXAxisItem
@@ -87,28 +87,36 @@ export default function ({ xs, ysByX,
                     const stackYs = ys
                         // .map + .slice is an 0(n²) algorithm. Fine here because n is never higher than 20
                         .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
-                        .map(yValueScale);
+                        .map(yValueScale)
+                        .map(height => height < 1 ? 0 : height);
 
                     const stack = ys
                         .map((y, i) => {
-                            const height = Math.max(yValueScale(y) - BRICK_PADDING, MIN_BRICK_HEIGHT);
+                            const baseHeight = yValueScale(y);
+
+                            const height = baseHeight >= 1 ?
+                                Math.max(baseHeight - BRICK_SPACING, MIN_BRICK_HEIGHT) :
+                                0;
+
+                            const baseY = HEIGHT - HEIGHT_PADDING - height - BRICK_SPACING/2;
 
                             return {
                                 value: y,
                                 height,
                                 y: i === 0 ? 
-                                    HEIGHT - HEIGHT_PADDING - height :
-                                    HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
+                                    baseY :
+                                    baseY - stackYs.get(i) 
                             }
                         });
 
                     const totalHeight = yValueScale(total);
+
                     const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
 
-                    return React.createElement('g', {transform: `translate(${xScale(x)})`}, 
+                    return React.createElement('g', {transform: `translate(${xScale(x)})`, key: x}, 
                         React.createElement('g', {},
                             stack.map( ({value, height, y}, i) => {
-                                return React.createElement('g', {className: `area-color-${i+1}`}, 
+                                return React.createElement('g', {className: `area-color-${i+1}`, key: i}, 
                                     React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
                                 )
                             })
