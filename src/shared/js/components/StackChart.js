@@ -15,7 +15,7 @@ import D3Axis from './D3Axis';
 */
 export default function ({ xs, ysByX, 
     WIDTH = 1000, HEIGHT = 430, 
-    Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 70, 
+    Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 40, 
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
     legendItems, 
     selectedX,
@@ -119,14 +119,26 @@ export default function ({ xs, ysByX,
                                 return React.createElement(
                                     'g', 
                                     {
-                                        className: legendItems[i].colorClassName || `area-color-${i+1}`, 
+                                        transform: `translate(0, ${y})`,
+                                        className: [
+                                            (legendItems && legendItems[i] && legendItems[i].colorClassName) || `area-color-${i+1}`,
+                                            'brick'
+                                        ].join(' '), 
                                         key: i
                                     }, 
-                                    React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
+                                    React.createElement('rect', {x: -columnWidth/2, width: columnWidth, height, rx: 5, ry: 5}),
+                                    height >= 30 ? React.createElement('text', {
+                                        transform: `translate(-${columnWidth/2 - 10}, 20)`
+                                    }, (value/1000000).toFixed(0)+'M') : undefined
                                 )
                             })
                         ),
-                        React.createElement('text', {x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, (total/1000000).toFixed(1)+'M€')
+                        React.createElement(
+                            'text', 
+                            {className: 'title', x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, 
+                            React.createElement('tspan', {}, (total/1000000).toFixed(1)),
+                            React.createElement('tspan', {}, 'M€')
+                        )
                     )
                 })
             )
