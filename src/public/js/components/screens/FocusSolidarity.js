@@ -1,19 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Record } from 'immutable';
-import { scaleLinear } from 'd3-scale';
-import { min, max, sum } from 'd3-array';
+import { Record, List } from 'immutable';
 import { format } from 'd3-format';
 
-import LegendList from '../../../../shared/js/components/LegendList';
-
+import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
-import D3Axis from '../D3Axis';
 
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
@@ -23,57 +19,16 @@ import {EXPENDITURES} from '../../../../shared/js/finance/constants';
 
 interface FocusSolidarityProps{
     currentYear,
-    solidarityByYear: Map<year, Record<{
-        totalExpenditures,
-        solidarityExpenditures,
-        'DF-1-1',
-        'DF-1-2',
-        'DF-1-3',
-        'DF-1-4',
-        'DF-1-other',
-    }>[]
+    solidarityByYear: Map<year, YearSolidarityRecord>
 }
 
 */
-
-
-const WIDTH = 1000;
-const HEIGHT = 570;
-
-const HEIGHT_PADDING = 70;
-const BRICK_SPACING = 6;
-
-const Y_AXIS_MARGIN = 50;
 
 export function FocusSol({
     currentYear, currentYearSolidarity, solidarityByYear
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
-
-    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
-    const columnMargin = columnAndMarginWidth/4;
-    const columnWidth = columnAndMarginWidth - columnMargin;
-    
-    const yearScale = scaleLinear()
-        .domain([min(years), max(years)])
-        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
-
-    const solidarityTotals = solidarityByYear.valueSeq().toJS()
-        .map(ys => ys.solidarityExpenditures);
-
-    const maxSolidarityTotal = max(solidarityTotals);
-
-    const yAxisAmountScale = scaleLinear()
-        .domain([0, maxSolidarityTotal])
-        .range([HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]);
-    const yRange = yAxisAmountScale.range()[0] - yAxisAmountScale.range()[1];
-
-    const ticks = yAxisAmountScale.ticks(5);
-
-    const rectAmountScale = scaleLinear()
-        .domain([0, maxSolidarityTotal])
-        .range([0, yRange]);
 
     // TODO current number (May 29th is 0.51 which is different than what was hardcoded (0.52))
     const solidarityProportion = currentYearSolidarity &&currentYearSolidarity.solidarityExpenditures/currentYearSolidarity.totalExpenditures;
@@ -100,10 +55,6 @@ export function FocusSol({
                     React.createElement('strong', {},
                         "Avec 120 000 prestations allouées et xxx millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
                     ),
-                    ``,
-                    React.createElement('strong', {}, 
- 
-                    ),
                     ` `),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF', text: `en savoir plus`})
             ),
@@ -117,102 +68,38 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
-            React.createElement('div', {className: 'solidarity-by-year'},
-                React.createElement('svg', {width: WIDTH, height: HEIGHT},
-                    // x axis / years
-                    React.createElement(D3Axis, {className: 'x', tickData: 
-                        years.map(y => {
-                            return {
-                                transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
-                                line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
-                                text: {
-                                    x: 0, y: -10, 
-                                    dy: "2em", 
-                                    t: y
-                                }
-                                
-                            }
-                        })
-                    }),
-                    // y axis / money amounts
-                    React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
-                        return {
-                            transform: `translate(0, ${yAxisAmountScale(tick)})`,
-                            line: {
-                                x1 : 0, y1 : 0, 
-                                x2 : WIDTH, y2 : 0
-                            }, 
-                            text: {
-                                x: 0, y: -10, 
-                                anchor: 'left',
-                                t: (tick/1000000)+'M'
-                            }
-                            
-                        }
-                    })}),
-                    // content
-                    React.createElement('g', {className: 'content'},
-                        solidarityByYear.entrySeq().toJS().map(([year, yearSolidarity]) => {
-                            const stackElements = ['DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4', 'DF-2-other'];
-                            const stackYs = stackElements
-                                .map(id => yearSolidarity[id])
-                                .map( (amount, i, arr) => sum(arr.slice(0, i)) )
-                                .map(rectAmountScale);
-
-                            const stack = stackElements
-                                .map((id, i) => {
-                                    const amount = yearSolidarity[id];
-                                    const height = rectAmountScale(amount);
-
-                                    return {
-                                        id,
-                                        amount,
-                                        height,
-                                        y: HEIGHT - HEIGHT_PADDING - height - BRICK_SPACING*i - stackYs[i] 
-                                    }
-                                });
-
-                            return React.createElement('g', {className: 'column', transform: `translate(${yearScale(year)})`}, 
-                                stack.map( ({id, amount, height, y}) => {
-                                    return React.createElement('g', {className: id}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})/*,
-                                        React.createElement('text', {x: -columnWidth/2, y, dy: "1.3em", dx:"0.5em"}, (amount/1000000).toFixed(1))*/
-                                    )
-                                }),
-                                React.createElement('text', {
-                                    className: 'total',
-                                    y: HEIGHT - HEIGHT_PADDING - BRICK_SPACING*stackElements.length - rectAmountScale(yearSolidarity.solidarityExpenditures), 
-                                    dy: "-0.5em", 
-                                    textAnchor: 'middle'
-                                }, (yearSolidarity.solidarityExpenditures/1000000).toFixed(0)+'M€')
-                            )
-
-                        })
-                    )
-                ),
-                React.createElement(LegendList, {items: [
+            React.createElement(StackChart, {
+                xs: years,
+                ysByX: solidarityByYear.map(yearSolidarity => (new List([
+                    yearSolidarity['DF-2-1'],
+                    yearSolidarity['DF-2-2'],
+                    yearSolidarity['DF-2-3'],
+                    yearSolidarity['DF-2-4'],
+                    yearSolidarity['DF-2-other']
+                ]))),
+                legendItems: [
                     {
-                        className: 'DF-2-other', 
-                        text: "Prévention transversale"
+                        colorClassName: 'DF-2-1', 
+                        text: "Personnes en insertion"
                     },
                     {
-                        className: 'DF-2-4', 
-                        text: "Enfance"
-                    },
-                    {
-                        className: 'DF-2-3', 
-                        text: "Personnes âgées"
-                    },
-                    {
-                        className: 'DF-2-2', 
+                        colorClassName: 'DF-2-2', 
                         text: "Personnes handicapées"
                     },
                     {
-                        className: 'DF-2-1', 
-                        text: "Personnes en insertion"
+                        colorClassName: 'DF-2-3', 
+                        text: "Personnes âgées"
+                    },
+                    {
+                        colorClassName: 'DF-2-4', 
+                        text: "Enfance"
+                    },
+                    {
+                        colorClassName: 'DF-2-other', 
+                        text: "Prévention transversale"
                     }
-                ]})
-            )
+                ]
+            })
         ),
         React.createElement('section', {}, 
             React.createElement('h2', {}, `Les actions et les aides varient en fonction des publics`),

@@ -1,4 +1,5 @@
 @import '../../shared/style/legend-list'; 
+@import '../../shared/style/stackchart'; 
 
 @import 'finance-element-pie'; 
 @import 'top-level-vars';
@@ -56,34 +57,6 @@ $part-font-size : 1.2em;
 
     .temporal{
         margin-top: 2em;    
-    }
-
-    .over-time {
-        .content{
-
-            text{
-                font-size: 1.2em;
-                font-weight: bold;
-                paint-order: stroke;
-                stroke: #fff;
-                stroke-width: 2px;
-            }
-        }
-
-        .d3-axis{
-            .selected{
-                font-weight: bold;
-
-                text{
-                    fill: black;
-                }
-            }
-
-            .actionable{
-                cursor: pointer;
-            }
-        }
-
     }
 
     .partition{

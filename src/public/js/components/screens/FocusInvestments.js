@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { scaleLinear } from 'd3-scale';
-import { min, max, sum } from 'd3-array';
 import { format } from 'd3-format';
 
-import LegendList from '../../../../shared/js/components/LegendList';
+import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
-import D3Axis from '../D3Axis';
+
 
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
@@ -20,39 +18,13 @@ import {EXPENDITURES, DI} from '../../../../shared/js/finance/constants';
 
 import {makePartition, makeElementById} from './FinanceElement';
 
-const WIDTH = 1000;
-const HEIGHT = 430;
-
-const HEIGHT_PADDING = 70;
-const BRICK_PADDING = 6;
-
-const PARTITION_TOTAL_HEIGHT = 600;
-const MIN_STRING_HEIGHT = 30;
-
-const Y_AXIS_MARGIN = 60;
-
 export function FocusSol({
-    year, yearInvestments, partitionByYear, amountByYear, population, yearDIDetails
+    year, yearInvestments, partitionByYear, population, yearDIDetails
 }) {
 
     const investmentProportion = yearInvestments && yearInvestments.investments/yearInvestments.expenditures;
 
-    //const label = texts && texts.label || '';
-    //const atemporalText = texts && texts.atemporal;
-    //const yearText = texts && texts.get('byYear') && texts.get('byYear').get(year);
-    const amount = amountByYear.get(year);
-
     const years = partitionByYear.keySeq().toJS();
-
-    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
-    const columnMargin = columnAndMarginWidth/4;
-    const columnWidth = columnAndMarginWidth - columnMargin;
-
-    const yearScale = scaleLinear()
-        .domain([min(years), max(years)])
-        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
-
-    const maxAmount = max(amountByYear.valueSeq().toJS());
 
     // sort all partitions part according to the order in this year's partition
     let thisYearPartition = partitionByYear.get(year)
@@ -65,16 +37,7 @@ export function FocusSol({
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     })
 
-    const yAxisAmountScale = scaleLinear()
-        .domain([0, maxAmount])
-        .range([HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]);
-    const yRange = yAxisAmountScale.range()[0] - yAxisAmountScale.range()[1];
 
-    const ticks = yAxisAmountScale.ticks(5);
-
-    const rectAmountScale = scaleLinear()
-        .domain([0, maxAmount])
-        .range([0, yRange]);
 
 
     return React.createElement('article', {className: 'focus'},
@@ -107,93 +70,15 @@ export function FocusSol({
         ),
         React.createElement('section', {},
             React.createElement('h2', {}, 'Évolution des dépenses d’investissements de 2009 à 2016'),
-            React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
-                // x axis / years
-                React.createElement(D3Axis, {className: 'x', tickData: 
-                    years.map(y => {
-                        return {
-                            transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
-                            line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
-                            text: {
-                                x: 0, y: -10, 
-                                dy: "2em", 
-                                t: y
-                            }
-                            
-                        }
-                    })
-                }),
-                // y axis / money amounts
-                React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
-                    return {
-                        transform: `translate(0, ${yAxisAmountScale(tick)})`,
-                        line: {
-                            x1 : 0, y1 : 0, 
-                            x2 : WIDTH, y2 : 0
-                        }, 
-                        text: {
-                            x: 0, y: -10, 
-                            anchor: 'right',
-                            t: (tick/1000000)+'M'
-                        }
-                        
-                    }
-                })}),
-                // content
-                React.createElement('g', {className: 'content'},
-                    partitionByYear.entrySeq().toJS().map(([year, partition]) => {
-                        const yearAmount = amountByYear.get(year);
-
-                        partition = partition || List([{
-                            contentId: contentId,
-                            partAmount: yearAmount
-                        }]);
-
-                        const stackYs = partition
-                            .map(p => p.partAmount)
-                            .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
-                            .map(rectAmountScale);
-
-                        const stack = partition
-                            .map((part, i) => {
-                                const { partAmount } = part;
-                                const height = Math.max(rectAmountScale(partAmount) - BRICK_PADDING, 4);
-
-                                return {
-                                    id: part.contentId,
-                                    amount: partAmount,
-                                    height,
-                                    y: i === 0 ? 
-                                        HEIGHT - HEIGHT_PADDING - height :
-                                        HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
-                                }
-                            });
-
-                        const totalHeight = rectAmountScale(yearAmount);
-                        const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
-
-
-                        return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
-                            React.createElement('g', {},
-                                stack.map( ({id, amount, height, y}, i) => {
-                                    return React.createElement('g', {className: [id, `area-color-${i+1}`].join(' ')}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
-                                    )
-                                })
-                            ),
-                            React.createElement('text', {x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
-                        )
-                    })
-                )
-            ),
-            thisYearPartition ? React.createElement(LegendList, {
-                items: thisYearPartition.map((p, i) => ({
+            React.createElement(StackChart, {
+                xs: years,
+                ysByX: partitionByYear.map(partition => partition.map(part => part.partAmount)),
+                legendItems: thisYearPartition && thisYearPartition.map(p => ({
                     className: p.contentId, 
                     url: p.url, 
-                    text: p.texts.label, 
-                    colorClassName: `area-color-${i+1}`
-                })).reverse()
-            }) : undefined,
+                    text: p.texts.label,
+                }))
+            }),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
         ),
         React.createElement('section', {}, 
@@ -336,16 +221,6 @@ export default connect(
             return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
-        const amountByYear = m52InstructionByYear.map((m52i) => {
-            const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i))
-            );
-
-            const yearElement = elementById.get(displayedContentId);
-
-            return yearElement && yearElement.total;
-        });
-
         // DI details
         const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(
             hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear)))
@@ -366,7 +241,6 @@ export default connect(
             yearDIDetails,
             yearInvestments: investmentsByYear.get(currentYear),
             partitionByYear, 
-            amountByYear,
             population: 1505517 // source : https://www.gironde.fr/le-departement
         };
     },

@@ -1,0 +1,38 @@
+@import 'd3-axis';
+
+.stackchart {
+    .content{
+        text.title{
+            font-size: 1.2em;
+            font-weight: bold;
+            paint-order: stroke;
+            stroke: #fff;
+            stroke-width: 2px;
+
+            tspan:nth-child(2){
+                font-weight: 100;
+            }
+        }
+
+        .brick{
+            text{
+                fill: white;
+            }
+        }
+    }
+
+    .d3-axis{
+        .selected{
+            font-weight: bold;
+
+            text{
+                fill: black;
+            }
+        }
+
+        .actionable{
+            cursor: pointer;
+        }
+    }
+
+}

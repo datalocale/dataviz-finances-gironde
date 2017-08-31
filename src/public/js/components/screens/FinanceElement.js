@@ -4,8 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { format } from 'currency-formatter';
 
-import { scaleLinear } from 'd3-scale';
-import { min, max, sum } from 'd3-array';
+import { max } from 'd3-array';
 import { format as d3Format } from 'd3-format';
 import { format as formatEuro } from 'currency-formatter';
 
@@ -14,12 +13,12 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
+import StackChart from '../../../../shared/js/components/StackChart';
+
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
-import LegendList from '../../../../shared/js/components/LegendList';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
-import D3Axis from '../D3Axis';
 import FinanceElementPie from '../FinanceElementPie';
 
 /*
@@ -56,16 +55,9 @@ interface FinanceElementProps{
 */
 
 
-const WIDTH = 1000;
-const HEIGHT = 430;
-
-const HEIGHT_PADDING = 70;
-const BRICK_PADDING = 6;
 
 const PARTITION_TOTAL_HEIGHT = 600;
 const MIN_STRING_HEIGHT = 30;
-
-const Y_AXIS_MARGIN = 60;
 
 export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
@@ -75,16 +67,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
     const amount = amountByYear.get(year);
 
     const years = partitionByYear.keySeq().toJS();
-
-    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(years.length+1)
-    const columnMargin = columnAndMarginWidth/4;
-    const columnWidth = columnAndMarginWidth - columnMargin;
-
-    const yearScale = scaleLinear()
-        .domain([min(years), max(years)])
-        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
-
-    const maxAmount = max(amountByYear.valueSeq().toJS());
 
     // sort all partitions part according to the order of the last year partition
     let lastYearPartition = partitionByYear.get(max(years))
@@ -117,16 +99,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         })
     }
 
-    const yAxisAmountScale = scaleLinear()
-        .domain([0, maxAmount])
-        .range([HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]);
-    const yRange = yAxisAmountScale.range()[0] - yAxisAmountScale.range()[1];
-
-    const ticks = yAxisAmountScale.ticks(5);
-
-    const rectAmountScale = scaleLinear()
-        .domain([0, maxAmount])
-        .range([0, yRange]);
 
     const RDFIText = RDFI === DF ?
         'Dépense de fonctionnement' : 
@@ -165,102 +137,21 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             years.includes(year-1) ? React.createElement('p', {}, 
                 `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
             ) : undefined,
-            React.createElement('svg', {className: 'over-time', width: WIDTH, height: HEIGHT},
-                // x axis / years
-                React.createElement(D3Axis, {
-                    className: 'x', 
-                    tickData: years.map(y => {
-                        return {
-                            transform: `translate(${yearScale(y)}, ${HEIGHT-HEIGHT_PADDING})`,
-                            line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
-                            text: {
-                                x: 0, y: -10, 
-                                dy: "2em", 
-                                t: y
-                            },
-                            id: y,
-                            className: year === y ? 'selected' : undefined
-                        }
-                    }),
-                    onSelectedAxisItem: changeExplorationYear
-                }),
-                // y axis / money amounts
-                React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
-                    return {
-                        transform: `translate(0, ${yAxisAmountScale(tick)})`,
-                        line: {
-                            x1 : 0, y1 : 0, 
-                            x2 : WIDTH, y2 : 0
-                        }, 
-                        text: {
-                            x: 0, y: -10, 
-                            anchor: 'right',
-                            t: (tick/1000000)+'M'
-                        }
-                        
-                    }
-                })}),
-                // content
-                React.createElement('g', {className: 'content'},
-                    barchartPartitionByYear.entrySeq().toJS().map(([year, partition]) => {
-                        const yearAmount = amountByYear.get(year);
-
-                        partition = partition || List([{
-                            contentId: contentId,
-                            partAmount: yearAmount
-                        }]);
-
-                        const stackYs = partition
-                            .map(p => p.partAmount)
-                            .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
-                            .map(rectAmountScale);
-
-                        const stack = partition
-                            .map((part, i) => {
-                                const { partAmount } = part;
-                                const height = Math.max(rectAmountScale(partAmount) - BRICK_PADDING, 4);
-
-                                return {
-                                    id: part.contentId,
-                                    amount: partAmount,
-                                    height,
-                                    y: i === 0 ? 
-                                        HEIGHT - HEIGHT_PADDING - height :
-                                        HEIGHT - HEIGHT_PADDING - height - stackYs.get(i)
-                                }
-                            });
-
-                        const totalHeight = rectAmountScale(yearAmount);
-                        const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
-
-
-                        return React.createElement('g', {transform: `translate(${yearScale(year)})`}, 
-                            React.createElement('g', {},
-                                stack.map( ({id, amount, height, y}, i) => {
-                                    return React.createElement('g', {className: [id, `area-color-${i+1}`].join(' ')}, 
-                                        React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
-                                    )
-                                })
-                            ),
-                            React.createElement('text', {x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, (yearAmount/1000000).toFixed(1)+'M€')
-                        )
-                    })
-                )
-            ),
-            !isLeaf ? React.createElement(LegendList, {
-                items: barchartPartitionByYear.get(year).map((p, i) => ({
-                    className: p.contentId, 
-                    url: p.url, 
-                    text: p.texts.label, 
-                    colorClassName: `area-color-${i+1}`
-                })).reverse()
-            }) : undefined,
+            React.createElement(StackChart, {
+                xs: years,
+                ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
+                selectedX: year,
+                onSelectedXAxisItem: changeExplorationYear,
+                legendItems: !isLeaf ? 
+                    barchartPartitionByYear.get(year).map(p => ({
+                        className: p.contentId, 
+                        url: p.url, 
+                        text: p.texts && p.texts.label,
+                    })) : undefined
+            }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
 
         ),
-        
-        //yearText ? React.createElement('h3', {}, "Considérations spécifiques à l'année ",year) : undefined,
-        //yearText ? React.createElement('section', {dangerouslySetInnerHTML: {__html: yearText}}) : undefined,
 
         !isLeaf ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
@@ -309,14 +200,14 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 'a', 
                 {
                     target: '_blank', 
-                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde1', 
+                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde', 
                     style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
                 }, 
                 React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
                 ' ',
                 `Télécharger toutes les données Open Data à la norme M52 au format CSV`
             )
-        ): undefined
+        ) : undefined
 
     );
 }

@@ -17,9 +17,8 @@ visit(levels, e => {
             }
             else{
                 childToParent.set(c.id, e.id);
-                elementById.set(e.id, e);
+                elementById.set(c.id, c);
             }
-
         })
     }
 });
