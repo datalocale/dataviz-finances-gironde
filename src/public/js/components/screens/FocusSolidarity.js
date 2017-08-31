@@ -75,28 +75,28 @@ export function FocusSol({
                     yearSolidarity['DF-2-2'],
                     yearSolidarity['DF-2-3'],
                     yearSolidarity['DF-2-4'],
-                    yearSolidarity['DF-2-other'],
+                    yearSolidarity['DF-2-other']
                 ]))),
                 legendItems: [
                     {
-                        className: 'DF-2-other', 
-                        text: "Prévention transversale"
+                        colorClassName: 'DF-2-1', 
+                        text: "Personnes en insertion"
                     },
                     {
-                        className: 'DF-2-4', 
-                        text: "Enfance"
-                    },
-                    {
-                        className: 'DF-2-3', 
-                        text: "Personnes âgées"
-                    },
-                    {
-                        className: 'DF-2-2', 
+                        colorClassName: 'DF-2-2', 
                         text: "Personnes handicapées"
                     },
                     {
-                        className: 'DF-2-1', 
-                        text: "Personnes en insertion"
+                        colorClassName: 'DF-2-3', 
+                        text: "Personnes âgées"
+                    },
+                    {
+                        colorClassName: 'DF-2-4', 
+                        text: "Enfance"
+                    },
+                    {
+                        colorClassName: 'DF-2-other', 
+                        text: "Prévention transversale"
                     }
                 ]
             })

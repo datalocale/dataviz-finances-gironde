@@ -16,8 +16,8 @@ import D3Axis from './D3Axis';
 export default function ({ xs, ysByX, 
     WIDTH = 1000, HEIGHT = 430, 
     Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 70, 
-    BRICK_SPACING = 4, MIN_BRICK_HEIGHT = 4,
-    legendItems,
+    BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
+    legendItems, 
     selectedX,
     onSelectedXAxisItem
 }) {
@@ -116,7 +116,12 @@ export default function ({ xs, ysByX,
                     return React.createElement('g', {transform: `translate(${xScale(x)})`, key: x}, 
                         React.createElement('g', {},
                             stack.map( ({value, height, y}, i) => {
-                                return React.createElement('g', {className: `area-color-${i+1}`, key: i}, 
+                                return React.createElement(
+                                    'g', 
+                                    {
+                                        className: legendItems[i].colorClassName || `area-color-${i+1}`, 
+                                        key: i
+                                    }, 
                                     React.createElement('rect', {x: -columnWidth/2, y, width: columnWidth, height, rx: 5, ry: 5})
                                 )
                             })
