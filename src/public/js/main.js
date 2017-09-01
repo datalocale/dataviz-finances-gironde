@@ -41,8 +41,9 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
 // Breadcrumb
 const BREADCRUMB_CONTAINER = process.env.NODE_ENV === "production" ?
-    main.querySelector('.breadcrumb').parentNode :
+    document.body.querySelector('.breadcrumb').parentNode :
     document.body.querySelector('nav');
+
 const DEFAULT_BREADCRUMB = List([
     {
         text: 'Accueil',
