@@ -1,19 +1,24 @@
 $focus-neutral-color: #F0F0F0;
 
+$base-spacing: 0.8rem;
+$spacing-1: $base-spacing;
+$spacing-2: $base-spacing*2;
+$spacing-3: $base-spacing*4;
+
 
 .focus-detail{
 
     display: flex;
     flex-direction: row;
 
-    margin-bottom: 4em;
+    margin: $spacing-3 0;
 
     .illustration{
         flex: 1;
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
 
         margin-right: 1em;
@@ -21,13 +26,32 @@ $focus-neutral-color: #F0F0F0;
         img{
             border-radius: 50%;
             object-fit: cover;
+            margin-top: 2*$spacing-2;
         }
     }
 
     .explanation{
         flex: 4;
 
+        & > *{
+            display: block;
+            margin: $spacing-2 0;
+
+            &:first-child{
+                margin-top: 0;
+            }
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+
+        & > a.btn{
+            width: 15em;
+        }
+
         h3{
+            font-size: 1.6em;
             text-transform: uppercase;
         }
 
@@ -42,7 +66,7 @@ $focus-neutral-color: #F0F0F0;
                 color: white;
                 font-size: 1.2em;
                 font-weight: bold;
-                padding: 0.2em 1em ;
+                padding: 0.1em 1em ;
             }
         }
 
@@ -50,7 +74,6 @@ $focus-neutral-color: #F0F0F0;
             display: flex;
             flex-direction: row;
 
-            font-size: 1.2em;
             text-align: center;
 
             &> *{
@@ -60,16 +83,20 @@ $focus-neutral-color: #F0F0F0;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
 
                 padding: 1em;
 
                 &:not(:first-child){
-                    margin-left: 2em;
+                    margin-left: $spacing-1;
                 }
-
 
                 strong, span{
                     display: block;
+                }
+
+                strong{
+                    font-size: 1.5em;
                 }
             }
         }
