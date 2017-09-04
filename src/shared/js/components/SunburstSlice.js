@@ -32,7 +32,7 @@ export default class SunburstSlice extends React.Component{
 
     render(){
         const {
-            node, radius, donutWidth, startAngle, endAngle,
+            node, radius, donutWidth, startAngle, endAngle, padAngle,
             highlightedNodes, selectedNode,
             onSliceOvered, onSliceSelected
         } = this.props;
@@ -45,7 +45,8 @@ export default class SunburstSlice extends React.Component{
             .endAngle(endAngle);
         const arc = d3arc()
             .innerRadius(radius - donutWidth)
-            .outerRadius(radius);
+            .outerRadius(radius)
+            .padAngle(padAngle);
         
         const childrenArcDescs = pie(children.map(c => c.total));
         const parentArcDesc = { startAngle, endAngle };

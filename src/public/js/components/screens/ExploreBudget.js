@@ -13,12 +13,18 @@ import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 import M52ByFonction from '../M52ByFonction';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
+import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
-const MAX_HEIGHT = 50;
+const MAX_HEIGHT = 30;
 
+
+function displayMillions(amount){
+    return `${(amount/1000000).toFixed(0)} millions`;
+}
 
 export function TotalBudget({currentYear, totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}, constructionAmounts}) {
     const expenditures = totalById.get(EXPENDITURES)
@@ -26,8 +32,8 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
 
     const max = Math.max(expenditures, revenue);
 
-    const expHeight = MAX_HEIGHT*(expenditures/max)+'vh'; 
-    const revHeight = MAX_HEIGHT*(revenue/max)+'vh'; 
+    const expHeight = MAX_HEIGHT*(expenditures/max)+'em'; 
+    const revHeight = MAX_HEIGHT*(revenue/max)+'em'; 
 
     const rfHeight = 100*(totalById.get(RF)/revenue)+'%';
     const riHeight = 100*(totalById.get(RI)/revenue)+'%';
@@ -48,22 +54,26 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
         ),
  
         React.createElement('section', {},
-            React.createElement('h2', {}, 'Les grandes masses budgétaires'),
+            React.createElement(SecundaryTitle, {text: 'Les grandes masses budgétaires'}),
             React.createElement('div', {className: 'viz'},
                 React.createElement('div', {className: 'revenue'},
                     React.createElement('h1', {}, 'Recettes'),
                     React.createElement('a', {href: revURL}, 
                         React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
                             React.createElement('div', {className: 'rf', style: {height: rfHeight}},
-                                React.createElement('span', {}, "Recettes de fonctionnement")
+                                React.createElement('h2', {}, "Recettes de fonctionnement"),
+                                React.createElement('h3', {}, displayMillions(totalById.get(RF)))
                             ),
                             React.createElement('div', {className: 'ri', style: {height: riHeight}},
-                                React.createElement('span', {}, "Recettes d'investissement")
+                                React.createElement('h2', {}, "Recettes d'investissement"),
+                                React.createElement('h3', {}, displayMillions(totalById.get(RI)))
                             )
                         ),
                         React.createElement('div', {className: 'texts'}, 
-                            React.createElement('span', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2)),
-                            React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                            React.createElement('div', {}, 
+                                React.createElement('div', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
+                                React.createElement('div', {className: 'unit'}, `milliards d'euros`)
+                            ),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
                     )
@@ -73,15 +83,19 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                     React.createElement('a', {href: expURL}, 
                         React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
                             React.createElement('div', {className: 'df', style: {height: dfHeight}},
-                                React.createElement('span', {}, "Dépenses de fonctionnement")
+                                React.createElement('h2', {}, "Dépenses de fonctionnement"),
+                                React.createElement('h3', {}, displayMillions(totalById.get(DF)))
                             ),
                             React.createElement('div', {className: 'di', style: {height: diHeight}},
-                                React.createElement('span', {}, "Dépenses d'investissement")
+                                React.createElement('h2', {}, "Dépenses d'investissement"),
+                                React.createElement('h3', {}, displayMillions(totalById.get(DI)))
                             )
                         ),
-                        React.createElement('div', {className: 'texts'}, 
-                            React.createElement('span', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2)),
-                            React.createElement('span', {className: 'unit'}, `milliards d'euros`),
+                        React.createElement('div', {className: 'texts'},
+                            React.createElement('div', {}, 
+                                React.createElement('div', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
+                                React.createElement('div', {className: 'unit'}, `milliards d'euros`)
+                            ),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
                         )
                     )
@@ -89,23 +103,23 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
             )
         ),
         React.createElement('section', {className: 'm52'}, 
-            React.createElement('h2', {}, 'Les comptes sous la norme M52'),
-            React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
+            React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
             m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
-                'a', 
+                DownloadSection, 
                 {
-                    target: '_blank', 
-                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde', 
-                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em'}
-                }, 
-                React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
-                ' ',
-                `Télécharger les données brutes Open Data à la norme M52 au format CSV`
+                    title: `Données brutes sur datalocale.fr`,
+                    items: [
+                        {
+                            text: 'Comptes administratifs du Département de la Gironde',
+                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde'
+                        }
+                    ]
+                }
             )
         ),
         React.createElement('section', {},
-            React.createElement(PageTitle, {text: "Comprendre la construction d'un budget"}),
+            React.createElement(SecundaryTitle, {text: `Comprendre la construction d'un budget`}),
             React.createElement(
                 'p',
                 {},
@@ -120,9 +134,7 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                 BudgetConstructionAnimation,
                 constructionAmounts
             )
-        ),
-
-
+        )
     );
 }
 

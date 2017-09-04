@@ -29,9 +29,9 @@ interface HierarchicalData<Element>{
 
 */
 export default function({
-        hierarchicalData, width, height,
+        hierarchicalData, width, height, 
         highlightedNodes, selectedNode,
-        donutWidth, outerRadius,
+        donutWidth, outerRadius, padAngle = 0,
         onSliceOvered, onSliceSelected
     }){
 
@@ -54,16 +54,16 @@ export default function({
                 'sunburst',
                 highlightedNodes ? 'active-selection' : undefined
             ].filter(s => s).join(' '),
-            onMouseOver(e){
+            onMouseOver: onSliceOvered ? e => {
                 if(!e.target.matches('.slice *')){
                     onSliceOvered(undefined);
                 }
-            },
-            onClick(e){
+            } : undefined,
+            onClick: onSliceSelected ? e => {
                 if(!e.target.matches('.slice *')){
                     onSliceSelected(undefined);
                 }
-            }
+            } : undefined
         },
         React.createElement('svg', {width: width, height: height},
             React.createElement(
@@ -81,6 +81,7 @@ export default function({
                             donutWidth, 
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
+                            padAngle,
                             highlightedNodes,
                             selectedNode,
                             onSliceOvered,

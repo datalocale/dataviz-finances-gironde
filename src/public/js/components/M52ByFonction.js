@@ -56,28 +56,18 @@ export default class M52ByFonction extends React.Component {
                 outerRadius: 240
             }),
             React.createElement('div', {},
-                React.createElement('div', {}, 
-                    React.createElement('label', {},
-                        `Dépenses de fonctionnement`,
-                        React.createElement('input', {
-                            type: 'radio',
-                            name: 'rdfi',
-                            defaultChecked: rdfi === DF,
-                            onClick: () => {
-                                this.setState(STATE_DF)
-                            }
-                        })
-                    ), 
-                    React.createElement('label', {},
-                        `Dépenses d'investissement`,
-                        React.createElement('input', {
-                            type: 'radio',
-                            name: 'rdfi',
-                            defaultChecked: rdfi === DI,
-                            onClick: () => {
-                                this.setState(STATE_DI)
-                            }
-                        })
+                React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
+                React.createElement('div', { className: 'display-choice' }, 
+                    React.createElement('div', {}, `Afficher les dépenses `),
+                    React.createElement('div', { className: 'radio'}, 
+                        React.createElement('button', {
+                            className: rdfi === DF ? 'selected' : '',
+                            onClick: () => { this.setState(STATE_DF) }
+                        }, `de fonctionnement`), 
+                        React.createElement('button', {
+                            className: rdfi === DI ? 'selected' : '',
+                            onClick: () => { this.setState(STATE_DI) }
+                        }, `d'investissement`)
                     )
                 ),
 

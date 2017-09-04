@@ -2,7 +2,7 @@
 @import 'color-palette'; 
 @import 'top-level-vars';
 
-$expenditures-color : $area-color-1;
+$expenditures-color : #F6A84E;
 $revenue-color : $area-color-3;
 
 $RX-S: 40%;
@@ -35,11 +35,15 @@ $R9-color: $area-color-10;
         justify-content: space-around;
         
         > *{
-            width: 45%;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         h1{
-            font-size: 2em;
+            font-size: 1.6em;
+            font-weight: bold;
             text-align: left;
             text-transform: uppercase;
         }
@@ -69,20 +73,18 @@ $R9-color: $area-color-10;
         }
 
         .di{
-            background-color: lighten($expenditures-color, 20%);
+            background-color: #F8C738;
         }
     }
 
     .expenditures > a, .revenue > a{
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
         align-items: flex-end;
 
-        color: black;
 
         .areas{
-            width: 50%;
+            width: 55%;
             height: 100%;
 
             display: flex;
@@ -90,20 +92,50 @@ $R9-color: $area-color-10;
 
             &> *{
                 margin-top: 0.5em;
+                min-height: 4em;
+                border-radius: 0.5em;
+            }
+
+            h2, h3{
+                color: white;
+                margin-left: 0.5em;
+                padding: 0;
+            }
+
+            h2{
+                font-size: 1em;
+                margin-top: 0.5em;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            h3{
+                font-size: 0.9em;
+                text-transform: none;
+                font-weight: normal;
             }
         }
 
         .texts {
+            height: 100%;
+
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             padding: 0 1em;
+
+            color: black;
 
             .amount, .unit{
                 font-weight: bold;
             }
 
             .amount{
-                font-size: 5em;
+                font-size: 5em; 
+            }
+
+            .unit{
+                transform: translateY(-1em);
             }
         }
     }
@@ -113,7 +145,7 @@ $R9-color: $area-color-10;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
 
         & > :first-child{
             display: flex;
@@ -124,9 +156,35 @@ $R9-color: $area-color-10;
             flex: 2;
         }
 
-        & > *{
+        & > :nth-child(2){
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
             flex: 1;
         }
+
+        .display-choice{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .radio{
+                margin-left: 0.5em;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+
+                button{
+                    padding: 0.5em;
+                    border: 1px solid #AAA;
+
+                    &.selected{
+                        background-color: $area-color-1;
+                    }
+                }
+            }
+        }
+
 
         .M52-DF-R0 path,
         .M52-DI-R0 path{
