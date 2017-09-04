@@ -104,7 +104,6 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
         ),
         React.createElement('section', {className: 'm52'}, 
             React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
-            React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
             m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
                 DownloadSection, 
