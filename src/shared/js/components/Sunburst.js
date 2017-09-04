@@ -29,9 +29,9 @@ interface HierarchicalData<Element>{
 
 */
 export default function({
-        hierarchicalData, width, height,
+        hierarchicalData, width, height, 
         highlightedNodes, selectedNode,
-        donutWidth, outerRadius,
+        donutWidth, outerRadius, padAngle = 0,
         onSliceOvered, onSliceSelected
     }){
 
@@ -81,6 +81,7 @@ export default function({
                             donutWidth, 
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
+                            padAngle,
                             highlightedNodes,
                             selectedNode,
                             onSliceOvered,
