@@ -54,16 +54,16 @@ export default function({
                 'sunburst',
                 highlightedNodes ? 'active-selection' : undefined
             ].filter(s => s).join(' '),
-            onMouseOver(e){
+            onMouseOver: onSliceOvered ? e => {
                 if(!e.target.matches('.slice *')){
                     onSliceOvered(undefined);
                 }
-            },
-            onClick(e){
+            } : undefined,
+            onClick: onSliceSelected ? e => {
                 if(!e.target.matches('.slice *')){
                     onSliceSelected(undefined);
                 }
-            }
+            } : undefined
         },
         React.createElement('svg', {width: width, height: height},
             React.createElement(
