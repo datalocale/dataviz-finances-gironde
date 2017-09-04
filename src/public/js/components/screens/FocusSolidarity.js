@@ -6,6 +6,7 @@ import { format } from 'd3-format';
 
 import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
@@ -67,7 +68,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {}, 
-            React.createElement(PageTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
+            React.createElement(SecundaryTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: solidarityByYear.map(yearSolidarity => (new List([
@@ -102,7 +103,7 @@ export function FocusSol({
             })
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Les actions et les aides varient en fonction des publics`),
+            React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
             React.createElement('p', {}, `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
 Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
