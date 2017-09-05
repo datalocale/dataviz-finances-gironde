@@ -29,146 +29,147 @@ $focus-highlight-color : #F62727;
     & > section{
         margin-bottom: 5em;
     }
-}
 
-
-.top-infos{
-    display: flex;
-    flex-direction: row;
-
-    & > *{
-        flex:1;
-    }
-
-    & > :nth-child(2){
+    .top-infos{
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        text-align: justify;
-        
-        line-height: 1.4em;
-        font-size: 1.1em;
-
-        a{
-            width: 14em;
-        }
-
-    }
-
-    .people-fraction{
-        background-image: url(../images/bonhomme.svg);
-        background-size: contain;
-
-        position: relative;
-
-        text-transform: uppercase;
-        font-size: 1.3em;
-        font-weight: bold;
+        flex-direction: row;
 
         & > *{
-            position: absolute;
-            left: calc(50% + 1em);
-            width: 50%;
-            transform: translateY(50%);
+            flex:1;
         }
 
-        .number{
-            font-size: 4em;
-            color: $focus-highlight-color;
+        & > :nth-child(2){
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            text-align: justify;
+            
+            line-height: 1.4em;
+            font-size: 1.1em;
+
+            a{
+                width: 14em;
+            }
+
+        }
+
+        .people-fraction{
+            background-image: url(../images/bonhomme.svg);
+            background-size: contain;
+
+            position: relative;
+
+            text-transform: uppercase;
+            font-size: 1.3em;
+            font-weight: bold;
+
+            & > *{
+                position: absolute;
+                left: calc(50% + 1em);
+                width: 50%;
+                transform: translateY(50%);
+            }
+
+            .number{
+                font-size: 4em;
+                color: $focus-highlight-color;
+            }
+
         }
 
     }
 
-}
 
 
+    .stackchart{
 
-.stackchart{
+        .content{
+            .DF-1-1 rect{
+                fill: $hebergement-color;
+            }
+            .DF-1-2 rect{
+                fill: $rsa-color;
+            }
+            .DF-1-3 rect{
+                fill: $pch-actp-color;
+            }
+            .DF-1-4 rect{
+                fill: $apa-color;
+            }
+            .DF-1-other rect{
+                fill: $solidarity-other-color;
+            }
 
-    .content{
-        .DF-1-1 rect{
-            fill: $hebergement-color;
-        }
-        .DF-1-2 rect{
-            fill: $rsa-color;
-        }
-        .DF-1-3 rect{
-            fill: $pch-actp-color;
-        }
-        .DF-1-4 rect{
-            fill: $apa-color;
-        }
-        .DF-1-other rect{
-            fill: $solidarity-other-color;
+            .DF-2-1 rect{
+                fill: $insertion-color;
+            }
+            .DF-2-2 rect{
+                fill: $handicap-color;
+            }
+            .DF-2-3 rect{
+                fill: $elderly-color;
+            }
+            .DF-2-4 rect{
+                fill: $childhood-color;
+            }
+            .DF-2-other rect{
+                fill: $solidarity-other-color;
+            }
         }
 
-        .DF-2-1 rect{
-            fill: $insertion-color;
-        }
-        .DF-2-2 rect{
-            fill: $handicap-color;
-        }
-        .DF-2-3 rect{
-            fill: $elderly-color;
-        }
-        .DF-2-4 rect{
-            fill: $childhood-color;
-        }
-        .DF-2-other rect{
-            fill: $solidarity-other-color;
+        .legend-list{
+            .DF-1-1.color{
+                background-color: $hebergement-color;
+            }
+            .DF-1-2.color{
+                background-color: $rsa-color;
+            }
+            .DF-1-3.color{
+                background-color: $pch-actp-color;
+            }
+            .DF-1-4.color{
+                background-color: $apa-color;
+            }
+            .DF-1-other.color{
+                background-color: $solidarity-other-color;
+            }
+
+            .DF-2-1.color{
+                background-color: $insertion-color;
+            }
+            .DF-2-2.color{
+                background-color: $handicap-color;
+            }
+            .DF-2-3.color{
+                background-color: $elderly-color;
+            }
+            .DF-2-4.color{
+                background-color: $childhood-color;
+            }
+            .DF-2-other.color{
+                background-color: $solidarity-other-color;
+            }
         }
     }
 
-    .legend-list{
-        .DF-1-1.color{
-            background-color: $hebergement-color;
-        }
-        .DF-1-2.color{
-            background-color: $rsa-color;
-        }
-        .DF-1-3.color{
-            background-color: $pch-actp-color;
-        }
-        .DF-1-4.color{
-            background-color: $apa-color;
-        }
-        .DF-1-other.color{
-            background-color: $solidarity-other-color;
-        }
 
-        .DF-2-1.color{
-            background-color: $insertion-color;
-        }
-        .DF-2-2.color{
-            background-color: $handicap-color;
-        }
-        .DF-2-3.color{
-            background-color: $elderly-color;
-        }
-        .DF-2-4.color{
-            background-color: $childhood-color;
-        }
-        .DF-2-other.color{
-            background-color: $solidarity-other-color;
-        }
+
+    .focus-detail.insertion .explanation .proportion{
+        background-color: $area-color-3;
+    }
+
+    .focus-detail.handicap .explanation .proportion{
+        background-color: $area-color-2;
+    }
+
+    .focus-detail.elderly .explanation .proportion{
+        background-color: $area-color-4;
+    }
+
+    .focus-detail.childhood .explanation .proportion{
+        background-color: $area-color-1;
     }
 }
 
 
-
-.focus-detail.insertion .explanation .proportion{
-    background-color: $area-color-3;
-}
-
-.focus-detail.handicap .explanation .proportion{
-    background-color: $area-color-2;
-}
-
-.focus-detail.elderly .explanation .proportion{
-    background-color: $area-color-4;
-}
-
-.focus-detail.childhood .explanation .proportion{
-    background-color: $area-color-1;
-}
