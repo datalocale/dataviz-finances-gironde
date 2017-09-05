@@ -4,8 +4,7 @@
 @import 'finance-element-pie'; 
 @import 'top-level-vars';
 
-$partition-part-width: 6em;
-$part-font-size : 1.2em;
+$partition-part-width: 12em;
 
 .finance-element{
 
@@ -59,7 +58,7 @@ $part-font-size : 1.2em;
 
     .partition{
 
-        a{
+        & > a{
             display: flex;
             flex-direction: row;
 
@@ -68,24 +67,22 @@ $part-font-size : 1.2em;
 
             min-height: 10em;
 
-            &:hover{
-                background-color: lightgrey;
-            }
-
             .part{
-                background-color: cadetblue;
+                background-color: $area-color-1;
                 color: white;
-                font-size: $part-font-size;
                 font-weight: bold;
                 
                 display: flex;
                 flex-direction: column;
-                justify-content: flex-end;
                 align-items: flex-start;
                 
-                padding: 0.2em;
+                padding: 0.5em;
+
+                border: 2px solid white;
 
                 width: $partition-part-width;
+                min-height: 2.5em;
+
                 z-index: 1; // atop the a::before
             }
 
@@ -96,21 +93,17 @@ $part-font-size : 1.2em;
 
                 padding-bottom: 1em;
 
-                flex: 1;                                                                                                                                                                                                            
+                flex: 1;                                                                                                 
+
                 h1{
                     font-size: 2em; 
-                }              
-
-                a{
-                    text-decoration: underline;
-                }  
+                } 
             }
 
             &:not(:last-child)::before{
                 content: '';
-                font-size: $part-font-size;
                 transform: translateX($partition-part-width/2);
-                border-left: 1px solid black;
+                border-left: 4px solid #D8D8D8;
                 height: 100%;
                 width: 0;
             }

@@ -17,6 +17,7 @@ import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
+import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
@@ -181,7 +182,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.label || contentId),
-                        React.createElement('a', {}, 'En savoir plus')
+                        React.createElement(PrimaryCallToAction)
                     )
                 );
             })  
