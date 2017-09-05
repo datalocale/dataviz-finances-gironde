@@ -116,8 +116,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         React.createElement('section', {}, 
             parent || top ? React.createElement('div', {className: 'ratios'}, 
                 React.createElement(FinanceElementPie, {
-                    elementProportion: top ? amount/top.amount : undefined,
-                    parentProportion: parent ? parent.amount/top.amount : undefined
+                    parent,
+                    radius: 180,
+                    proportion1: parent ? parent.amount/top.amount : undefined,
+                    proportion2: top ? amount/top.amount : undefined
                 }),
                 parent && top ? React.createElement('div', {}, 
                     `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
@@ -336,11 +338,13 @@ export default connect(
             RDFI,
             amountByYear,
             parent: parentElement && parentElement !== topElement && {
+                id: parentElement.id,
                 amount: parentElement.total,
                 label: textsById.get(parentElement.id).label,
                 url: '#!/finance-details/'+parentElement.id
             },
             top: topElement && {
+                id: topElement.id,
                 amount: topElement.total,
                 label: topLabel,
                 url: '#!/finance-details/'+topElement.id
