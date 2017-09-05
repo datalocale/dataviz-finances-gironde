@@ -61,8 +61,6 @@ const DELAY = 500;
 export default class SektorComponent extends React.Component {
 
     _animate(angle1, angle2, radius, initialDelay){
-        console.log('_animate', angle1, angle2, radius);
-    
         return new Promise(resolve => {
             setTimeout(resolve, initialDelay);
         })
@@ -81,16 +79,14 @@ export default class SektorComponent extends React.Component {
     }
 
     componentDidMount(){
-        console.log('componentDidMount', this.props);
         const {proportion1, proportion2, radius} = this.props;
         this._animate(2*Math.PI*proportion1, 2*Math.PI*proportion2, radius, 2000);
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate', this.props);
         const {proportion1, proportion2, radius} = this.props;
         this._reset(radius);
-        this._animate(2*Math.PI*proportion1, 2*Math.PI*proportion2, radius, 1000);
+        this._animate(2*Math.PI*proportion1, 2*Math.PI*proportion2, radius, 500);
     } 
 
     shouldComponentUpdate(newProps){
@@ -98,12 +94,11 @@ export default class SektorComponent extends React.Component {
     }
 
     render() {
-        const { radius, colorClasses = {} } = this.props;
-        const { circle, sector1, sector2 } = colorClasses;
+        const { radius } = this.props;
         return React.createElement('svg', { width: 2*radius, height: 2*radius },
-            React.createElement('circle', { fill: '#AAA', className: circle, cx: radius, cy: radius, r: radius }),
-            React.createElement('path', { fill: '#F98361', className: sector1, ref: el => this._sector1 = el }),
-            React.createElement('path', { fill: '#EC3500', className: sector2, ref: el => this._sector2 = el })
+            React.createElement('circle', { fill: '#AAA', cx: radius, cy: radius, r: radius }),
+            React.createElement('path', { fill: '#F98361', ref: el => this._sector1 = el }),
+            React.createElement('path', { fill: '#EC3500', ref: el => this._sector2 = el })
         );
     }
 }

@@ -16,10 +16,12 @@ import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/con
 import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import FinanceElementPie from '../FinanceElementPie';
+import RollingNumber from '../RollingNumber';
 
 /*
     In this component, there are several usages of dangerouslySetInnerHTML.
@@ -112,30 +114,33 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         React.createElement(PageTitle, {text: RDFI ? 
             `${RDFIText} - ${label} en ${year}` :
             `${label} en ${year}`}), 
-        React.createElement('h2', {}, format(amount, { code: 'EUR' })),
         React.createElement('section', {}, 
-            parent || top ? React.createElement('div', {className: 'ratios'}, 
-                React.createElement(FinanceElementPie, {
+            React.createElement('div', {className: 'top-infos'},
+                parent || top ? React.createElement(FinanceElementPie, {
                     parent,
                     radius: 180,
                     proportion1: parent ? parent.amount/top.amount : undefined,
                     proportion2: top ? amount/top.amount : undefined
-                }),
-                parent && top ? React.createElement('div', {}, 
-                    `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
-                    React.createElement('a', {href: parent.url}, parent.label)
-                ) : undefined,
-                top ? React.createElement('div', {}, 
-                    `${d3Format('.1%')(amount/top.amount)} des `,
-                    React.createElement('a', {href: top.url}, top.label), 
-                    ' totales'
-                ) : undefined
-            ) : undefined,
-            atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
+                }) : undefined,
+                React.createElement('div', {},
+                    React.createElement('h2', {}, React.createElement(RollingNumber, {amount})),
+                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
+
+                    parent && top ? React.createElement('div', {}, 
+                        `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
+                        React.createElement('a', {href: parent.url}, parent.label)
+                    ) : undefined,
+                    top ? React.createElement('div', {}, 
+                        `${d3Format('.1%')(amount/top.amount)} des `,
+                        React.createElement('a', {href: top.url}, top.label), 
+                        ' totales'
+                    ) : undefined
+                )
+            )
         ),
         
         React.createElement('section', {},
-            React.createElement('h2', {}, 'Évolution sur ces dernières années'),
+            React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
             years.includes(year-1) ? React.createElement('p', {}, 
                 `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
             ) : undefined,
@@ -152,11 +157,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })) : undefined
             }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
-
         ),
 
         !isLeaf ? React.createElement('section', { className: 'partition'}, 
-            top ? React.createElement('h2', {}, `Détail des ${top.label} en ${year}`): undefined,
+            top ? React.createElement(SecundaryTitle, {text: `Détail des ${top.label} en ${year}`}): undefined,
             thisYearPartition.map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {

@@ -17,16 +17,25 @@ $part-font-size : 1.2em;
         margin-bottom: 5em;
     }
 
-    .ratios{
-        float: left;
-        margin-right: 1em;
+    .top-infos{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        
 
         svg{
+            flex:1;
+
             circle, path{
                 stroke: white;
                 stroke-width: 3px;   
             }
         } 
+
+        & > :nth-child(2){
+            flex: 2;
+        }
     }
 
     h2{
@@ -36,6 +45,7 @@ $part-font-size : 1.2em;
     .atemporal, .temporal{
         ul{
             list-style: disc;
+            list-style-position: inside;
         }
     }
 
