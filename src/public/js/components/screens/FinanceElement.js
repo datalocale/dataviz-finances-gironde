@@ -61,8 +61,8 @@ interface FinanceElementProps{
 
 
 
-const PARTITION_TOTAL_HEIGHT = 500;
-const MIN_STRING_HEIGHT = 30;
+const PARTITION_TOTAL_HEIGHT = 42;
+const MIN_STRING_HEIGHT = 2;
 
 export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
@@ -175,15 +175,15 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     {
                         href: url,
                         style:{
-                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'px'
+                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
                         }
                     },
                     React.createElement(
                         'div', 
                         {
-                            className: 'part', 
+                            className: ['part', colorClassById.get(contentId)].join(' '),
                             style:{
-                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'px'
+                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'em'
                             }
                         }, 
                         React.createElement('span', {}, d3Format(".3s")(partAmount))

@@ -15,7 +15,12 @@ visit(levels, e => {
 
         e.children.forEach(c => {
             const id = typeof c === 'string' ? c : c.id;
-            colorClassById.set(id, colorClasses[i])
+
+            colorClassById.set(
+                id,
+                colorClasses[ id === 'DF-1' || id === 'DF-2' ? 0 : i ]
+            )
+
             i++;
         })
     }
@@ -28,10 +33,6 @@ Object.keys(rubriqueIdToLabel).forEach(r => {
         colorClassById.set(`M52-${rdfi}-${r}`, colorClasses[lastFigure]);
     })
     
-    
-
-    
 })
-
 
 export default colorClassById;
