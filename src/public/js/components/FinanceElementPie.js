@@ -94,11 +94,25 @@ export default class SektorComponent extends React.Component {
     }
 
     render() {
-        const { radius } = this.props;
-        return React.createElement('svg', { width: 2*radius, height: 2*radius },
-            React.createElement('circle', { fill: '#AAA', cx: radius, cy: radius, r: radius }),
-            React.createElement('path', { fill: '#F98361', ref: el => this._sector1 = el }),
-            React.createElement('path', { fill: '#EC3500', ref: el => this._sector2 = el })
-        );
+        const { radius, colorClass1, colorClass2 } = this.props;
+        return React.createElement(
+            'svg', 
+            { 
+                width: 2*radius, 
+                height: 2*radius, 
+                className: 'finance-element-pie'
+            },
+            React.createElement('filter', {id: 'darken'},
+                React.createElement('feColorMatrix', {type: 'matrix', values: `
+                    0.5   0   0   0   0
+                    0   0.5   0   0   0
+                    0   0   0.5   0   0
+                    0   0   0   1   0 `
+                })
+            ),
+            React.createElement('circle', { cx: radius, cy: radius, r: radius }),
+            React.createElement('path', { className: colorClass1, ref: el => this._sector1 = el }),
+            React.createElement('path', { className: colorClass2, ref: el => this._sector2 = el })
+        )
     }
 }

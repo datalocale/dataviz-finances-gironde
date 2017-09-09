@@ -1,13 +1,13 @@
 .finance-element-pie{
 
-    .arc:nth-child(1) path{
-        fill: cornflowerblue;
+    background-color: transparent;
+
+    circle{
+        fill: #AAA;
     }
-    .arc:nth-child(2) path{
-        fill: lightcyan;
-    }
-    .arc:nth-child(3) path{
-        fill: lightgrey;
+
+    path:nth-of-type(1){
+        filter: url('#darken');
     }
 
 }

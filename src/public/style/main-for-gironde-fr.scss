@@ -1,9 +1,11 @@
 @import 'env-vars';
 @import 'top-level';
 
+@import 'color-palette'; 
+
 @import '../../shared/style/placeholder';
 
-@import './color-palette.scss'; 
+
 
 @import 'home';
 @import 'finance-element';
