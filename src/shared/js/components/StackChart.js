@@ -134,7 +134,7 @@ export default function ({ xs, ysByX,
                                         key: i
                                     }, 
                                     React.createElement('rect', {x: -columnWidth/2, width: columnWidth, height, rx: 5, ry: 5}),
-                                    height >= 30 && stack.size >= 2 ? React.createElement('text', {
+                                    height >= 30 && stack.length >= 2 ? React.createElement('text', {
                                         transform: `translate(-${columnWidth/2 - 10}, 20)`
                                     }, (value/1000000).toFixed(0)+'M') : undefined
                                 )
