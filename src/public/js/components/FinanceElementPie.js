@@ -95,12 +95,17 @@ export default class SektorComponent extends React.Component {
 
     render() {
         const { radius, colorClass1, colorClass2 } = this.props;
+        const diameter = 2*radius;
+
         return React.createElement(
             'svg', 
             { 
-                width: 2*radius, 
-                height: 2*radius, 
-                className: 'finance-element-pie'
+                width: diameter, 
+                height: diameter, 
+                className: 'finance-element-pie',
+                style: {
+                    minWidth: `${diameter}px`
+                }
             },
             React.createElement('circle', { cx: radius, cy: radius, r: radius }),
             React.createElement('path', { className: [colorClass1, 'darker'].join(' '), ref: el => this._sector1 = el }),

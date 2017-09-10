@@ -21,7 +21,6 @@ $partition-part-width: 12em;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        
 
         svg{
             flex:1;
@@ -33,6 +32,7 @@ $partition-part-width: 12em;
         } 
 
         & > :nth-child(2){
+            padding: 0 1em;
             flex: 2;
         }
     }
