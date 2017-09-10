@@ -1,8 +1,8 @@
 @import '../../shared/style/legend-list'; 
 @import '../../shared/style/stackchart'; 
 
-@import 'finance-element-pie'; 
 @import 'top-level-vars';
+@import 'finance-element-pie'; 
 
 $partition-part-width: 12em;
 
@@ -68,7 +68,6 @@ $partition-part-width: 12em;
             min-height: 10em;
 
             .part{
-                background-color: $area-color-1;
                 color: white;
                 font-weight: bold;
                 

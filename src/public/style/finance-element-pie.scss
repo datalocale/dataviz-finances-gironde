@@ -1,13 +1,9 @@
 .finance-element-pie{
 
-    .arc:nth-child(1) path{
-        fill: cornflowerblue;
-    }
-    .arc:nth-child(2) path{
-        fill: lightcyan;
-    }
-    .arc:nth-child(3) path{
-        fill: lightgrey;
+    background-color: transparent;
+
+    circle{
+        fill: #AAA;
     }
 
 }

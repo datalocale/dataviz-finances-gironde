@@ -2,7 +2,6 @@ import { Map as ImmutableMap, List } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { format } from 'currency-formatter';
 
 import { max } from 'd3-array';
 import { format as d3Format } from 'd3-format';
@@ -17,9 +16,12 @@ import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
+import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
+
+import colorClassById from '../../colorClassById';
 
 import FinanceElementPie from '../FinanceElementPie';
 import RollingNumber from '../RollingNumber';
@@ -59,8 +61,8 @@ interface FinanceElementProps{
 
 
 
-const PARTITION_TOTAL_HEIGHT = 600;
-const MIN_STRING_HEIGHT = 30;
+const PARTITION_TOTAL_HEIGHT = 42;
+const MIN_STRING_HEIGHT = 2;
 
 export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
@@ -111,6 +113,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
 
+    console.log('barchartPartitionByYear', barchartPartitionByYear.toJS())
+
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
             `${RDFIText} - ${label} en ${year}` :
@@ -119,6 +123,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             React.createElement('div', {className: 'top-infos'},
                 parent || top ? React.createElement(FinanceElementPie, {
                     parent,
+                    colorClass1: colorClassById.get(parent.id),
+                    colorClass2: colorClassById.get(contentId),
                     radius: 180,
                     proportion1: parent ? parent.amount/top.amount : undefined,
                     proportion2: top ? amount/top.amount : undefined
@@ -155,7 +161,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         className: p.contentId, 
                         url: p.url, 
                         text: p.texts && p.texts.label,
-                    })) : undefined
+                        colorClassName: colorClassById.get(p.contentId)
+                    })).toArray() : undefined,
+                uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined
             }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
         ),
@@ -167,15 +175,15 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     {
                         href: url,
                         style:{
-                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'px'
+                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
                         }
                     },
                     React.createElement(
                         'div', 
                         {
-                            className: 'part', 
+                            className: ['part', colorClassById.get(contentId)].join(' '),
                             style:{
-                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'px'
+                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'em'
                             }
                         }, 
                         React.createElement('span', {}, d3Format(".3s")(partAmount))
@@ -189,7 +197,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         ) : undefined,
 
         isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
-            React.createElement('h2', {}, `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`),
+            React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
             React.createElement('table', {}, 
                 m52Rows
                 .sort((r1, r2) => r2['Montant'] - r1['Montant'])
@@ -204,15 +212,16 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 })
             ),
             React.createElement(
-                'a', 
+                DownloadSection, 
                 {
-                    target: '_blank', 
-                    href: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde', 
-                    style: {display: 'block', textAlign: 'center', fontSize: '1.2em', transform: 'translateY(5em)'}
-                }, 
-                React.createElement('i', {className: "fa fa-table", ariaHidden: true}),
-                ' ',
-                `Télécharger toutes les données Open Data à la norme M52 au format CSV`
+                    title: `Données brutes sur datalocale.fr`,
+                    items: [
+                        {
+                            text: 'Comptes administratifs du Département de la Gironde',
+                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde'
+                        }
+                    ]
+                }
             )
         ) : undefined
 
@@ -231,13 +240,13 @@ export function makePartition(element, totalById, textsById){
             contentId: child.id,
             partAmount: totalById.get(child.id),
             texts: textsById.get(child.id),
-            url: '#!/finance-details/'+child.id
+            url: `#!/finance-details/${child.id}`
         })) : 
         List().push({
             contentId: element.id,
             partAmount: totalById.get(element.id),
             texts: textsById.get(element.id),
-            url: '#!/finance-details/'+element.id
+            url: `#!/finance-details/${element.id}`
         });
 }
 
@@ -336,7 +345,7 @@ export default connect(
                  element.elements :
                  element.elements.first()['M52Rows'] 
             ) :
-            undefined
+            undefined;
 
         return {
             contentId: displayedContentId, 

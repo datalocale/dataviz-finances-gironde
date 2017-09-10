@@ -17,7 +17,7 @@ export default function ({ xs, ysByX,
     WIDTH = 1000, HEIGHT = 430, 
     Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 40, 
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
-    legendItems, 
+    legendItems, uniqueColorClass,
     selectedX,
     onSelectedXAxisItem
 }) {
@@ -82,11 +82,13 @@ export default function ({ xs, ysByX,
             // content
             React.createElement('g', {className: 'content'},
                 ysByX.entrySeq().toJS().map(([x, ys]) => {
-                    const total = sum(ys.toJS());
+                    ys = ys.toJS();
+
+                    const total = sum(ys);
 
                     const stackYs = ys
                         // .map + .slice is an 0(n²) algorithm. Fine here because n is never higher than 20
-                        .map( (amount, i, arr) => sum(arr.toJS().slice(0, i)) )
+                        .map( (amount, i, arr) => sum(arr.slice(0, i)) )
                         .map(yValueScale)
                         .map(height => height < 1 ? 0 : height);
 
@@ -105,7 +107,7 @@ export default function ({ xs, ysByX,
                                 height,
                                 y: i === 0 ? 
                                     baseY :
-                                    baseY - stackYs.get(i) 
+                                    baseY - stackYs[i]
                             }
                         });
 
@@ -115,14 +117,19 @@ export default function ({ xs, ysByX,
 
                     return React.createElement('g', {transform: `translate(${xScale(x)})`, key: x}, 
                         React.createElement('g', {},
+
                             stack.map( ({value, height, y}, i) => {
+                                const colorClass = stack.length === 1 ?
+                                    uniqueColorClass :
+                                    legendItems && legendItems[i].colorClassName;
+
                                 return React.createElement(
                                     'g', 
                                     {
                                         transform: `translate(0, ${y})`,
                                         className: [
-                                            (legendItems && legendItems[i] && legendItems[i].colorClassName) || `area-color-${i+1}`,
-                                            'brick'
+                                            'brick',
+                                            colorClass,
                                         ].join(' '), 
                                         key: i
                                     }, 
