@@ -12,6 +12,7 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
+import LegendList from '../../../../shared/js/components/LegendList';
 import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
@@ -60,7 +61,6 @@ interface FinanceElementProps{
 */
 
 
-
 const PARTITION_TOTAL_HEIGHT = 42;
 const MIN_STRING_HEIGHT = 2;
 
@@ -104,7 +104,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         })
     }
 
-
     const RDFIText = RDFI === DF ?
         'Dépense de fonctionnement' : 
         RDFI === DI ?
@@ -113,7 +112,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
 
-    console.log('barchartPartitionByYear', barchartPartitionByYear.toJS())
+    const parentColorClass = parent ? [colorClassById.get(parent.id), 'darker'].join(' ') : undefined;
+    const elementColorClass = top ? colorClassById.get(contentId) : undefined;
 
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
@@ -121,36 +121,42 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             `${label} en ${year}`}), 
         React.createElement('section', {}, 
             React.createElement('div', {className: 'top-infos'},
-                parent || top ? React.createElement(FinanceElementPie, {
-                    parent,
-                    colorClass1: colorClassById.get(parent.id),
-                    colorClass2: colorClassById.get(contentId),
-                    radius: 180,
-                    proportion1: parent ? parent.amount/top.amount : undefined,
-                    proportion2: top ? amount/top.amount : undefined
-                }) : undefined,
+                parent || top ? React.createElement('div', {},
+                    React.createElement(FinanceElementPie, {
+                        parent,
+                        colorClass1: parentColorClass,
+                        colorClass2: elementColorClass,
+                        backgroundColorClass: 'discrete-grey',
+                        radius: 180,
+                        proportion1: parent ? parent.amount/top.amount : undefined,
+                        proportion2: top ? amount/top.amount : undefined
+                    }),
+                    React.createElement(LegendList, {items: [
+                        {
+                            text: label,
+                            colorClassName: elementColorClass
+                        },
+                        parent ? {
+                            url: parent.url,
+                            text: parent.label,
+                            colorClassName: parentColorClass
+                        } : undefined,
+                        top ? {
+                            url: top.url,
+                            text: top.label,
+                            colorClassName: 'discrete-grey'
+                        } : undefined,
+                    ].filter(e => e)})
+                ) : undefined,
                 React.createElement('div', {},
                     React.createElement('h2', {}, React.createElement(RollingNumber, {amount})),
-                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
-
-                    parent && top ? React.createElement('div', {}, 
-                        `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
-                        React.createElement('a', {href: parent.url}, parent.label)
-                    ) : undefined,
-                    top ? React.createElement('div', {}, 
-                        `${d3Format('.1%')(amount/top.amount)} des `,
-                        React.createElement('a', {href: top.url}, top.label), 
-                        ' totales'
-                    ) : undefined
+                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
                 )
             )
         ),
         
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
-            years.includes(year-1) ? React.createElement('p', {}, 
-                `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
-            ) : undefined,
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),

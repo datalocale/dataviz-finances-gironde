@@ -9,6 +9,10 @@ $area-color-8 : #607C8A;
 $area-color-9 : #6739B6;
 $area-color-10 : #FF5521;
 
+$discrete-grey: #AAA;
+
+
+
 @mixin apply-color($color){
     background-color: $color;
     fill: $color;
@@ -58,4 +62,8 @@ $area-color-10 : #FF5521;
 }
 .area-color-10{
     @include apply-area-color($area-color-10);
+}
+
+.discrete-grey{
+    @include apply-color($discrete-grey);
 }
