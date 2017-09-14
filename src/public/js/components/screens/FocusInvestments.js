@@ -18,6 +18,8 @@ import {EXPENDITURES, DI} from '../../../../shared/js/finance/constants';
 
 import {makePartition, makeElementById} from './FinanceElement';
 
+import colorClassById from '../../colorClassById';
+
 export function FocusSol({
     year, yearInvestments, partitionByYear, population, yearDIDetails
 }) {
@@ -35,10 +37,7 @@ export function FocusSol({
     partitionByYear = partitionByYear.map(partition => {
         // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
-    })
-
-
-
+    });
 
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
@@ -77,7 +76,8 @@ export function FocusSol({
                     className: p.contentId, 
                     url: p.url, 
                     text: p.texts.label,
-                }))
+                    colorClassName: colorClassById.get(p.contentId)
+                })).toArray()
             }),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
         ),
