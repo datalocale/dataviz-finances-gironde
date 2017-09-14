@@ -3,6 +3,8 @@ import { Map as ImmutableMap, List } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import page from 'page';
+
 import { max } from 'd3-array';
 import { format as d3Format } from 'd3-format';
 import { format as formatEuro } from 'currency-formatter';
@@ -67,7 +69,7 @@ interface FinanceElementProps{
 const PARTITION_TOTAL_HEIGHT = 42;
 const MIN_STRING_HEIGHT = 2;
 
-export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -165,8 +167,13 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                 ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
                 selectedX: year,
                 onSelectedXAxisItem: changeExplorationYear,
+                onBrickClicked: !isLeaf ? (year, id) => {
+                    const url = barchartPartitionByYear.get(year).find(e => e.contentId === id).url;
+                    page(url);
+                } : undefined,
                 legendItems: !isLeaf ? 
                     barchartPartitionByYear.get(year).map(p => ({
+                        id: p.contentId,
                         className: p.contentId, 
                         url: p.url, 
                         text: p.texts && p.texts.label,

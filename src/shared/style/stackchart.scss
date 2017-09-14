@@ -18,6 +18,10 @@
             text{
                 fill: white;
             }
+
+            &.actionable{
+                cursor: pointer;
+            }
         }
     }
 

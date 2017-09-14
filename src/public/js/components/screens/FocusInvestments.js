@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import page from 'page';
+
 import { format } from 'd3-format';
 
 import StackChart from '../../../../shared/js/components/StackChart';
@@ -74,7 +76,9 @@ export function FocusSol({
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: partitionByYear.map(partition => partition.map(part => part.partAmount)),
+                onBrickClicked: (year, id) => { page(`#!/finance-details/${id}`); },
                 legendItems: thisYearPartition && thisYearPartition.map(p => ({
+                    id: p.contentId,
                     className: p.contentId, 
                     url: p.url, 
                     text: p.texts.label,

@@ -1,7 +1,10 @@
+import { Record, List } from 'immutable';
+
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Record, List } from 'immutable';
+import page from 'page';
+
 import { format } from 'd3-format';
 
 import StackChart from '../../../../shared/js/components/StackChart';
@@ -78,24 +81,30 @@ export function FocusSol({
                     yearSolidarity['DF-2-4'],
                     yearSolidarity['DF-2-other']
                 ]))),
+                onBrickClicked: (year, id) => { page(`#!/finance-details/${id}`); },
                 legendItems: [
                     {
+                        id: 'DF-2-1',
                         colorClassName: 'DF-2-1', 
                         text: "Personnes en insertion"
                     },
                     {
+                        id: 'DF-2-2',
                         colorClassName: 'DF-2-2', 
                         text: "Personnes handicapées"
                     },
                     {
+                        id: 'DF-2-3',
                         colorClassName: 'DF-2-3', 
                         text: "Personnes âgées"
                     },
                     {
+                        id: 'DF-2-4',
                         colorClassName: 'DF-2-4', 
                         text: "Enfance"
                     },
                     {
+                        id: 'DF-2-other',
                         colorClassName: 'DF-2-other', 
                         text: "Prévention transversale"
                     }
