@@ -23,6 +23,7 @@ import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/Pri
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import colorClassById from '../../colorClassById';
+import makeHTMLSummary from '../../makeHTMLSummary';
 
 import FinanceElementPie from '../FinanceElementPie';
 import RollingNumber from '../RollingNumber';
@@ -39,6 +40,8 @@ import RollingNumber from '../RollingNumber';
 
     For these reasons, the usages of dangerouslySetInnerHTML are fine.
 */
+
+
 
 /*
 
@@ -181,7 +184,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     {
                         href: url,
                         style:{
-                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
+                            minHeight: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
                         }
                     },
                     React.createElement(
@@ -196,6 +199,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.label || contentId),
+                        React.createElement('div', {
+                            className: 'summary',
+                            dangerouslySetInnerHTML: {__html: makeHTMLSummary(texts.atemporal)}
+                        }),
                         React.createElement(PrimaryCallToAction)
                     )
                 );
@@ -205,17 +212,19 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
             React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
             React.createElement('table', {}, 
-                m52Rows
-                .sort((r1, r2) => r2['Montant'] - r1['Montant'])
-                .map(row => {
-                    return React.createElement('tr', {}, 
-                        React.createElement('td', {}, row['Rubrique fonctionnelle']),
-                        React.createElement('td', {}, row['Chapitre']),
-                        React.createElement('td', {}, row['Article']),
-                        React.createElement('td', {}, row['Libellé']),
-                        React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
-                    )
-                })
+                React.createElement('tbody', {}, 
+                    m52Rows
+                    .sort((r1, r2) => r2['Montant'] - r1['Montant'])
+                    .map(row => {
+                        return React.createElement('tr', {}, 
+                            React.createElement('td', {}, row['Rubrique fonctionnelle']),
+                            React.createElement('td', {}, row['Chapitre']),
+                            React.createElement('td', {}, row['Article']),
+                            React.createElement('td', {}, row['Libellé']),
+                            React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                        )
+                    })
+                )
             ),
             React.createElement(
                 DownloadSection, 
