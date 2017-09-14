@@ -14,6 +14,8 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
+const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabels.json');
+
 import LegendList from '../../../../shared/js/components/LegendList';
 import StackChart from '../../../../shared/js/components/StackChart';
 
@@ -216,17 +218,22 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             })  
         ) : undefined,
 
-        isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
+        isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'}, 
             React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
             React.createElement('table', {}, 
+                React.createElement('thead', {}, 
+                    React.createElement('tr', {}, 
+                        React.createElement('th', {}, 'Fonction'),
+                        React.createElement('th', {}, 'Nature'),
+                        React.createElement('th', {}, 'Montant')
+                    )
+                ),
                 React.createElement('tbody', {}, 
                     m52Rows
                     .sort((r1, r2) => r2['Montant'] - r1['Montant'])
                     .map(row => {
                         return React.createElement('tr', {}, 
-                            React.createElement('td', {}, row['Rubrique fonctionnelle']),
-                            React.createElement('td', {}, row['Chapitre']),
-                            React.createElement('td', {}, row['Article']),
+                            React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
                             React.createElement('td', {}, row['Libellé']),
                             React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
                         )

@@ -112,6 +112,16 @@ $partition-part-width: 12em;
 
         } 
 
-    } 
+    }
+
+    .raw-data{
+        table {
+            thead, tbody{
+                tr > :nth-child(3){
+                    text-align: right; 
+                }
+            }
+        }
+    }
 
 }
