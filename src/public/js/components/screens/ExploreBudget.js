@@ -26,7 +26,10 @@ function displayMillions(amount){
     return `${(amount/1000000).toFixed(0)} millions`;
 }
 
-export function TotalBudget({currentYear, totalById, m52Instruction, labelsById, urls: {expenditures: expURL, revenue: revURL, byFonction}, constructionAmounts}) {
+export function TotalBudget({
+    currentYear, totalById, m52Instruction, labelsById, 
+    urls: {expenditures: expURL, revenue: revURL, rf, ri, df, di, byFonction}, 
+    constructionAmounts}) {
     const expenditures = totalById.get(EXPENDITURES)
     const revenue = totalById.get(REVENUE)
 
@@ -58,13 +61,13 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
             React.createElement('div', {className: 'viz'},
                 React.createElement('div', {className: 'revenue'},
                     React.createElement('h1', {}, 'Recettes'),
-                    React.createElement('a', {href: revURL}, 
+                    React.createElement('div', {}, 
                         React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
-                            React.createElement('div', {className: 'rf', style: {height: rfHeight}},
+                            React.createElement('a', {className: 'rf', href: rf, style: {height: rfHeight}},
                                 React.createElement('h2', {}, "Recettes de fonctionnement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(RF)))
                             ),
-                            React.createElement('div', {className: 'ri', style: {height: riHeight}},
+                            React.createElement('a', {className: 'ri', href: ri, style: {height: riHeight}},
                                 React.createElement('h2', {}, "Recettes d'investissement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(RI)))
                             )
@@ -74,19 +77,19 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                                 React.createElement('div', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
+                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: revURL})
                         )
                     )
                 ),
                 React.createElement('div', {className: 'expenditures'},
                     React.createElement('h1', {}, 'Dépenses'),
-                    React.createElement('a', {href: expURL}, 
+                    React.createElement('div', {}, 
                         React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
-                            React.createElement('div', {className: 'df', style: {height: dfHeight}},
+                            React.createElement('a', {className: 'df', href: df, style: {height: dfHeight}},
                                 React.createElement('h2', {}, "Dépenses de fonctionnement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(DF)))
                             ),
-                            React.createElement('div', {className: 'di', style: {height: diHeight}},
+                            React.createElement('a', {className: 'di', href: di, style: {height: diHeight}},
                                 React.createElement('h2', {}, "Dépenses d'investissement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(DI)))
                             )
@@ -96,26 +99,10 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                                 React.createElement('div', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`})
+                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
                         )
                     )
                 )
-            )
-        ),
-        React.createElement('section', {className: 'm52'}, 
-            React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
-            m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
-            React.createElement(
-                DownloadSection, 
-                {
-                    title: `Données brutes sur datalocale.fr`,
-                    items: [
-                        {
-                            text: 'Comptes administratifs du Département de la Gironde',
-                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde'
-                        }
-                    ]
-                }
             )
         ),
         React.createElement('section', {},
@@ -134,7 +121,23 @@ export function TotalBudget({currentYear, totalById, m52Instruction, labelsById,
                 BudgetConstructionAnimation,
                 constructionAmounts
             )
-        )
+        ),
+        React.createElement('section', {className: 'm52'}, 
+            React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
+            m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
+            React.createElement(
+                DownloadSection, 
+                {
+                    title: `Données brutes sur datalocale.fr`,
+                    items: [
+                        {
+                            text: 'Comptes administratifs du Département de la Gironde',
+                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde'
+                        }
+                    ]
+                }
+            )
+        ),
     );
 }
 
@@ -180,6 +183,10 @@ export default connect(
             urls: {
                 expenditures: '#!/finance-details/'+EXPENDITURES, 
                 revenue: '#!/finance-details/'+REVENUE, 
+                rf: '#!/finance-details/'+RF, 
+                ri: '#!/finance-details/'+RI, 
+                df: '#!/finance-details/'+DF, 
+                di: '#!/finance-details/'+DI,
                 byFonction: {
                     'M52-DF-R0': `#!/finance-details/M52-DF-R0`,
                     'M52-DF-R1': `#!/finance-details/M52-DF-R1`,

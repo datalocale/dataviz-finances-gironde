@@ -3,6 +3,8 @@ import { Map as ImmutableMap, List } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import page from 'page';
+
 import { max } from 'd3-array';
 import { format as d3Format } from 'd3-format';
 import { format as formatEuro } from 'currency-formatter';
@@ -12,6 +14,9 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { EXPENDITURES, REVENUE, DF, DI } from '../../../../shared/js/finance/constants';
 
+const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabels.json');
+
+import LegendList from '../../../../shared/js/components/LegendList';
 import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
@@ -22,6 +27,7 @@ import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/Pri
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import colorClassById from '../../colorClassById';
+import makeHTMLSummary from '../../makeHTMLSummary';
 
 import FinanceElementPie from '../FinanceElementPie';
 import RollingNumber from '../RollingNumber';
@@ -38,6 +44,8 @@ import RollingNumber from '../RollingNumber';
 
     For these reasons, the usages of dangerouslySetInnerHTML are fine.
 */
+
+
 
 /*
 
@@ -60,11 +68,10 @@ interface FinanceElementProps{
 */
 
 
-
 const PARTITION_TOTAL_HEIGHT = 42;
 const MIN_STRING_HEIGHT = 2;
 
-export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, urls, m52Rows, changeExplorationYear}) {
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -104,7 +111,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         })
     }
 
-
     const RDFIText = RDFI === DF ?
         'Dépense de fonctionnement' : 
         RDFI === DI ?
@@ -113,7 +119,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
 
-    console.log('barchartPartitionByYear', barchartPartitionByYear.toJS())
+    const parentColorClass = parent ? [colorClassById.get(parent.id), 'darker'].join(' ') : undefined;
+    const elementColorClass = top ? colorClassById.get(contentId) : undefined;
 
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ? 
@@ -121,43 +128,54 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             `${label} en ${year}`}), 
         React.createElement('section', {}, 
             React.createElement('div', {className: 'top-infos'},
-                parent || top ? React.createElement(FinanceElementPie, {
-                    parent,
-                    colorClass1: colorClassById.get(parent.id),
-                    colorClass2: colorClassById.get(contentId),
-                    radius: 180,
-                    proportion1: parent ? parent.amount/top.amount : undefined,
-                    proportion2: top ? amount/top.amount : undefined
-                }) : undefined,
+                parent || top ? React.createElement('div', {},
+                    React.createElement(FinanceElementPie, {
+                        parent,
+                        colorClass1: parentColorClass,
+                        colorClass2: elementColorClass,
+                        backgroundColorClass: 'discrete-grey',
+                        radius: 180,
+                        proportion1: parent ? parent.amount/top.amount : undefined,
+                        proportion2: top ? amount/top.amount : undefined
+                    }),
+                    React.createElement(LegendList, {items: [
+                        {
+                            text: label,
+                            colorClassName: elementColorClass
+                        },
+                        parent ? {
+                            url: parent.url,
+                            text: parent.label,
+                            colorClassName: parentColorClass
+                        } : undefined,
+                        top ? {
+                            url: top.url,
+                            text: top.label,
+                            colorClassName: 'discrete-grey'
+                        } : undefined,
+                    ].filter(e => e)})
+                ) : undefined,
                 React.createElement('div', {},
                     React.createElement('h2', {}, React.createElement(RollingNumber, {amount})),
-                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined,
-
-                    parent && top ? React.createElement('div', {}, 
-                        `${d3Format('.1%')(amount/parent.amount)} des ${top.label} de type `,
-                        React.createElement('a', {href: parent.url}, parent.label)
-                    ) : undefined,
-                    top ? React.createElement('div', {}, 
-                        `${d3Format('.1%')(amount/top.amount)} des `,
-                        React.createElement('a', {href: top.url}, top.label), 
-                        ' totales'
-                    ) : undefined
+                    atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
                 )
             )
         ),
         
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
-            years.includes(year-1) ? React.createElement('p', {}, 
-                `Evolution par rapport à ${year-1} : ${d3Format("+.1%")( (amount/amountByYear.get(year-1)) - 1  )}`
-            ) : undefined,
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
                 selectedX: year,
                 onSelectedXAxisItem: changeExplorationYear,
+                onBrickClicked: !isLeaf ? (year, id) => {
+                    const url = barchartPartitionByYear.get(year).find(e => e.contentId === id).url;
+                    page(url);
+                } : undefined,
                 legendItems: !isLeaf ? 
                     barchartPartitionByYear.get(year).map(p => ({
+                        id: p.contentId,
                         className: p.contentId, 
                         url: p.url, 
                         text: p.texts && p.texts.label,
@@ -175,7 +193,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     {
                         href: url,
                         style:{
-                            height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
+                            minHeight: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
                         }
                     },
                     React.createElement(
@@ -190,26 +208,37 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.label || contentId),
+                        React.createElement('div', {
+                            className: 'summary',
+                            dangerouslySetInnerHTML: {__html: makeHTMLSummary(texts.atemporal)}
+                        }),
                         React.createElement(PrimaryCallToAction)
                     )
                 );
             })  
         ) : undefined,
 
-        isLeaf && m52Rows ? React.createElement('section', { className: 'partition'}, 
+        isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'}, 
             React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
             React.createElement('table', {}, 
-                m52Rows
-                .sort((r1, r2) => r2['Montant'] - r1['Montant'])
-                .map(row => {
-                    return React.createElement('tr', {}, 
-                        React.createElement('td', {}, row['Rubrique fonctionnelle']),
-                        React.createElement('td', {}, row['Chapitre']),
-                        React.createElement('td', {}, row['Article']),
-                        React.createElement('td', {}, row['Libellé']),
-                        React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                React.createElement('thead', {}, 
+                    React.createElement('tr', {}, 
+                        React.createElement('th', {}, 'Fonction'),
+                        React.createElement('th', {}, 'Nature'),
+                        React.createElement('th', {}, 'Montant')
                     )
-                })
+                ),
+                React.createElement('tbody', {}, 
+                    m52Rows
+                    .sort((r1, r2) => r2['Montant'] - r1['Montant'])
+                    .map(row => {
+                        return React.createElement('tr', {}, 
+                            React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
+                            React.createElement('td', {}, row['Libellé']),
+                            React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                        )
+                    })
+                )
             ),
             React.createElement(
                 DownloadSection, 

@@ -19,7 +19,7 @@ export default function ({ xs, ysByX,
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
     legendItems, uniqueColorClass,
     selectedX,
-    onSelectedXAxisItem
+    onSelectedXAxisItem, onBrickClicked
 }) {
     const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length+1)
     const columnMargin = columnAndMarginWidth/4;
@@ -129,12 +129,19 @@ export default function ({ xs, ysByX,
                                         transform: `translate(0, ${y})`,
                                         className: [
                                             'brick',
+                                            onBrickClicked ? 'actionable' : '',
                                             colorClass,
                                         ].join(' '), 
-                                        key: i
+                                        key: i,
+                                        onClick: onBrickClicked ? () => {
+                                            onBrickClicked(
+                                                x, 
+                                                legendItems ? legendItems[i].id : y
+                                            )
+                                        } : undefined
                                     }, 
                                     React.createElement('rect', {x: -columnWidth/2, width: columnWidth, height, rx: 5, ry: 5}),
-                                    height >= 30 && stack.size >= 2 ? React.createElement('text', {
+                                    height >= 30 && stack.length >= 2 ? React.createElement('text', {
                                         transform: `translate(-${columnWidth/2 - 10}, 20)`
                                     }, (value/1000000).toFixed(0)+'M') : undefined
                                 )

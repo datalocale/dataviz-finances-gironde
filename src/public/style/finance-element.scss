@@ -21,7 +21,6 @@ $partition-part-width: 12em;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        
 
         svg{
             flex:1;
@@ -33,6 +32,7 @@ $partition-part-width: 12em;
         } 
 
         & > :nth-child(2){
+            padding: 0 1em;
             flex: 2;
         }
     }
@@ -97,18 +97,31 @@ $partition-part-width: 12em;
                 h1{
                     font-size: 2em; 
                 } 
+
+                .summary{
+                    margin-bottom: 1em;
+                }
             }
 
             &:not(:last-child)::before{
                 content: '';
                 transform: translateX($partition-part-width/2);
                 border-left: 4px solid #D8D8D8;
-                height: 100%;
                 width: 0;
             }
 
         } 
 
-    } 
+    }
+
+    .raw-data{
+        table {
+            thead, tbody{
+                tr > :nth-child(3){
+                    text-align: right; 
+                }
+            }
+        }
+    }
 
 }

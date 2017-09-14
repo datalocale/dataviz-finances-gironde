@@ -1,6 +1,7 @@
 import { List } from 'immutable';
 
 import React from 'react';
+import page from 'page';
 
 import M52Viz from '../../../shared/js/components/M52Viz';
 import LegendList from '../../../shared/js/components/LegendList';
@@ -51,6 +52,11 @@ export default class M52ByFonction extends React.Component {
 
         return React.createElement('div', { className: 'm52-by-fonction' },
             React.createElement(M52Viz, {
+                onSliceSelected: e => {
+                    if(e){
+                        page(urlByFonction[e.id])
+                    }
+                },
                 M52Hierarchical: m52Hierarchical,
                 donutWidth: 130,
                 outerRadius: 240

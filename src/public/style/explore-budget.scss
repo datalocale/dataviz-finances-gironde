@@ -4,7 +4,7 @@
 $expenditures-color : #F6A84E;
 $revenue-color : $area-color-3;
 
-$RX-S: 40%;
+$RX-S: 40%; 
 $RX-L: 60%;
 
 $R0-color: $area-color-1;
@@ -33,11 +33,73 @@ $R9-color: $area-color-10;
         flex-direction: row;
         justify-content: space-around;
         
-        > *{
+        .revenue, .expenditures{
             width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+
+            & > div{
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+
+                .areas{
+                    width: 55%;
+                    height: 100%;
+
+                    display: flex;
+                    flex-direction: column;
+
+                    &> *{
+                        margin-top: 0.5em;
+                        min-height: 4em;
+                        border-radius: 0.5em;
+                    }
+
+                    h2, h3{
+                        color: white;
+                        margin-left: 0.5em;
+                        padding: 0;
+                    }
+
+                    h2{
+                        font-size: 1em;
+                        margin-top: 0.5em;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                    }
+
+                    h3{
+                        font-size: 0.9em;
+                        text-transform: none;
+                        font-weight: normal;
+                    }
+                }
+
+                .texts {
+                    height: 100%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    padding: 0 1em;
+
+                    color: black;
+
+                    .amount, .unit{
+                        font-weight: bold;
+                    }
+
+                    .amount{
+                        font-size: 5em; 
+                    }
+
+                    .unit{
+                        transform: translateY(-1em);
+                    }
+                }
+            }
         }
 
         h1{
@@ -47,16 +109,8 @@ $R9-color: $area-color-10;
             text-transform: uppercase;
         }
 
-        & > a{
+        & > *{
             text-decoration: none;
-
-            .rf, .ri, .df, .di{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-
         }
 
         .rf{
@@ -76,69 +130,6 @@ $R9-color: $area-color-10;
         }
     }
 
-    .expenditures > a, .revenue > a{
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-
-
-        .areas{
-            width: 55%;
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-
-            &> *{
-                margin-top: 0.5em;
-                min-height: 4em;
-                border-radius: 0.5em;
-            }
-
-            h2, h3{
-                color: white;
-                margin-left: 0.5em;
-                padding: 0;
-            }
-
-            h2{
-                font-size: 1em;
-                margin-top: 0.5em;
-                text-transform: uppercase;
-                font-weight: bold;
-            }
-
-            h3{
-                font-size: 0.9em;
-                text-transform: none;
-                font-weight: normal;
-            }
-        }
-
-        .texts {
-            height: 100%;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 0 1em;
-
-            color: black;
-
-            .amount, .unit{
-                font-weight: bold;
-            }
-
-            .amount{
-                font-size: 5em; 
-            }
-
-            .unit{
-                transform: translateY(-1em);
-            }
-        }
-    }
-
 
     .m52-by-fonction{
         display: flex;
@@ -153,6 +144,11 @@ $R9-color: $area-color-10;
             align-items: center;
 
             flex: 2;
+
+            .sunburst .slice{
+                cursor: pointer;
+            }
+
         }
 
         & > :nth-child(2){
@@ -183,7 +179,6 @@ $R9-color: $area-color-10;
                 }
             }
         }
-
 
         .M52-DF-R0 path,
         .M52-DI-R0 path{
@@ -267,6 +262,6 @@ $R9-color: $area-color-10;
             &.M52-DI-R9{
                 background-color: $R9-color;
             }
-        }
+        } 
     }
 }
