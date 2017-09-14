@@ -8,6 +8,7 @@ import { format } from 'd3-format';
 import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import FocusDetail from '../FocusDetail';
@@ -72,7 +73,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement('h2', {}, 'Évolution des dépenses d’investissements de 2009 à 2016'),
+            React.createElement(SecundaryTitle, {text: 'Évolution des dépenses d’investissements de 2009 à 2016'}),
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: partitionByYear.map(partition => partition.map(part => part.partAmount)),
@@ -88,7 +89,7 @@ export function FocusSol({
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
         ),
         React.createElement('section', {}, 
-            React.createElement('h2', {}, `Les secteurs d’investissement`),
+            React.createElement(SecundaryTitle, {text: `Les secteurs d’investissement`}),
             React.createElement('p', {}, `Le Département peut investir directement dans quelques secteurs en fonction de ses compétences. Ces domaines d’action privilégiés sont les collèges, le réseau routier départemental, son patrimoine immobilier, des espaces naturels et classés ainsi que certaines subventions aux communes pour les aider dans leur propre politique d’investissement.`),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI-1', text: `en savoir plus`}),
             React.createElement(FocusDetail, {
