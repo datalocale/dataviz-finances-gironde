@@ -1,8 +1,8 @@
 import { Record } from 'immutable';
-import _md from 'markdown-it';
+import { markdown as md } from '../../shared/js/components/Markdown';
 
-import { 
-    FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED, 
+import {
+    FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED,
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED,
     CHANGE_EXPLORATION_YEAR
 } from './constants/actions';
@@ -11,16 +11,6 @@ const FinanceElementTextsRecord = Record({
     label: undefined,
     atemporal: undefined,
     temporal: undefined
-});
-
-const md = _md({
-    html: true,
-    xhtmlOut: false,
-    breaks: false,
-    langPrefix: 'language-',
-    linkify: true,
-    typographer: false,
-    quotes: '“”‘’',
 });
 
 
