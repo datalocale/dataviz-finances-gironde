@@ -3,6 +3,7 @@ import { Map as ImmutableMap } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Markdown from '../../../../shared/js/components/Markdown';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 
 import TotalAppetizer from '../TotalAppetizer';
@@ -23,13 +24,13 @@ export function Home({
         solidarity, invest, presence
     }
 }) {
-    
+
     return React.createElement('article', {className: 'home'},
-        React.createElement('div', {}, 
+        React.createElement('div', {},
             React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
-            React.createElement('p', {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il finance l’aide sociale et la solidarité dans un contexte de croissance démographique constante : + 15 000 nouveaux Girondins en moyenne chaque année.`)
+            React.createElement(Markdown, {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il finance l’aide sociale et la solidarité dans un contexte de croissance démographique constante : + 15 000 nouveaux Girondins en moyenne chaque année.`)
         ),
-        
+
         React.createElement('section', {className: 'appetizers-container'},
             React.createElement('div', {className: 'appetizers'},
 
@@ -40,25 +41,25 @@ export function Home({
                 }),
                 React.createElement(Appetizer, {
                     h1: "Solidarités",
-                    numberMain: "120 000", 
+                    numberMain: "120 000",
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près de 845 millions d’euros pour aider et accompagner les personnes fragilisées.`, 
+                    description: `Le Département affirme sa vocation sociale et déploie près de 845 millions d’euros pour aider et accompagner les personnes fragilisées.`,
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
                     h1: "Investissements",
-                    numberMain: "1 milliard", 
+                    numberMain: "1 milliard",
                     numberSecundary: "à l’horizon 2020",
-                    description: `Avec une moyenne de 200 millions d’euros investis chaque année durant la mandature, le Département adopte une stratégie volontariste dans une période de réduction budgétaire majeure.`, 
+                    description: `Avec une moyenne de 200 millions d’euros investis chaque année durant la mandature, le Département adopte une stratégie volontariste dans une période de réduction budgétaire majeure.`,
                     moreUrl: invest
                 }),
                 React.createElement(Appetizer, {
                     h1: "Présence sur le territoire",
-                    numberMain: "125 métiers", 
+                    numberMain: "125 métiers",
                     numberSecundary: "425 sites",
-                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents mènent leur mission dans des lieux de travail et d’accueil du public répartis dans toute la Gironde.`, 
+                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents mènent leur mission dans des lieux de travail et d’accueil du public répartis dans toute la Gironde.`,
                     moreUrl: presence
-                }) 
+                })
             )
         )
     );
@@ -87,8 +88,8 @@ export default connect(
             currentYear,
             urls: {
                 explore: '#!/explorer',
-                solidarity: '#!/focus/'+SOLIDARITES, 
-                invest: '#!/focus/'+INVEST, 
+                solidarity: '#!/focus/'+SOLIDARITES,
+                invest: '#!/focus/'+INVEST,
                 presence: '#!/focus/'+PRESENCE
             },
             expenditures: totalById.get(EXPENDITURES)

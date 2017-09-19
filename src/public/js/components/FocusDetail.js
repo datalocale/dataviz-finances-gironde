@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Markdown from '../../../shared/js/components/Markdown';
 import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 /*
@@ -27,8 +28,8 @@ export default function ({className, title, illustrationUrl, amount, proportion,
             React.createElement('div', {className: 'proportion-container'},
                 React.createElement('div', {className: 'proportion', style: {width: proportion*100+'%'}}, amount)
             ),
-            React.createElement('p', {}, text),
-            React.createElement('div', {className: 'highlights'}, 
+            React.createElement(Markdown, {}, text),
+            React.createElement('div', {className: 'highlights'},
                 highlights.map(h => {
                     return React.createElement('div', {},
                         React.createElement('strong', {}, h.strong),
