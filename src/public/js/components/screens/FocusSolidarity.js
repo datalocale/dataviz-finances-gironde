@@ -57,7 +57,7 @@ export function FocusSol({
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "Avec 120 000 prestations allouées et xxx millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
+                        "Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
                     ),
                     ` `),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
