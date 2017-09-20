@@ -63,8 +63,8 @@
     "lodash.memoize": "^4.1.2",
     "markdown-it": "^8.3.1",
     "page": "^1.7.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.0.0-rc.3",
+    "react-dom": "^16.0.0-rc.3",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "uuid": "^3.0.1"
@@ -84,6 +84,7 @@
     "minifyify": "^7.3.5",
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
+    "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "^15.6.1",
     "serve": "^2.4.3",
     "watchify": "^3.8.0"
