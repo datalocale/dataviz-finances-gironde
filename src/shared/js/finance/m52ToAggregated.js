@@ -398,9 +398,16 @@ export const rules = Object.freeze({
     'DF-2-1': {
         label: "Personnes en difficultés",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R54' || f3 === 'R56');
+            
+            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R54' || f3 === 'R56') &&
+                article !== 'A6568' && 
+                article !== 'A6513' && 
+                !article.startsWith('A64') &&
+                article !== 'A6336' &&
+                article !== 'A6245';
         }
     },
     'DF-2-2': {
@@ -421,9 +428,15 @@ export const rules = Object.freeze({
     'DF-2-3': {
         label: "Personnes âgées",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R55' || f3 === 'R53');
+            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R55' || f3 === 'R53') &&
+                article !== 'A6568' && 
+                article !== 'A6513' && 
+                !article.startsWith('A64') &&
+                article !== 'A6336' &&
+                article !== 'A6245';
         }
     },
     'DF-2-4': {
@@ -460,11 +473,14 @@ export const rules = Object.freeze({
     'DF-3-2': {
         label: "Transports",
         filter(m52Row){
-            const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
+            const f = m52Row['Rubrique fonctionnelle'];
+            const f2 = f.slice(0, 2);
             const article = m52Row['Article']
 
-            return isOR(m52Row) && isDF(m52Row) && f2 === 'R8' && 
-                !article.startsWith('A64') && article !== 'A6336';
+            return isOR(m52Row) && isDF(m52Row) && (
+                (f2 === 'R8' && !article.startsWith('A64') && article !== 'A6336') ||
+                (f === 'R568' && article === 'A6245')
+            )
         }
     },
     'DF-3-3': {
@@ -546,7 +562,7 @@ export const rules = Object.freeze({
                     chap === 'C012' ||
                     (
                         (art.startsWith('A64') || art === 'A6218' || art === 'A6336') &&
-                        (chap === 'C15' || chap === 'C16' || chap === 'C17')
+                        (chap === 'C015' || chap === 'C016' || chap === 'C017')
                     )
                 ) && 
                 !(art.startsWith('A64') && f3 === 'R51');
