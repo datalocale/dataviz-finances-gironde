@@ -27,16 +27,16 @@ function displayMillions(amount){
 }
 
 export function TotalBudget({
-    currentYear, totalById, m52Instruction, labelsById, 
-    urls: {expenditures: expURL, revenue: revURL, rf, ri, df, di, byFonction}, 
+    currentYear, totalById, m52Instruction, labelsById,
+    urls: {expenditures: expURL, revenue: revURL, rf, ri, df, di, byFonction},
     constructionAmounts}) {
     const expenditures = totalById.get(EXPENDITURES)
     const revenue = totalById.get(REVENUE)
 
     const max = Math.max(expenditures, revenue);
 
-    const expHeight = MAX_HEIGHT*(expenditures/max)+'em'; 
-    const revHeight = MAX_HEIGHT*(revenue/max)+'em'; 
+    const expHeight = MAX_HEIGHT*(expenditures/max)+'em';
+    const revHeight = MAX_HEIGHT*(revenue/max)+'em';
 
     const rfHeight = 100*(totalById.get(RF)/revenue)+'%';
     const riHeight = 100*(totalById.get(RI)/revenue)+'%';
@@ -45,7 +45,7 @@ export function TotalBudget({
 
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: `Exploration des comptes ${currentYear}`}),
-        React.createElement('section', {}, 
+        React.createElement('section', {},
             React.createElement('p', {},
                 `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’augmentation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.`
             ),
@@ -55,14 +55,14 @@ export function TotalBudget({
                 une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`
             )
         ),
- 
+
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Les grandes masses budgétaires'}),
             React.createElement('div', {className: 'viz'},
                 React.createElement('div', {className: 'revenue'},
                     React.createElement('h1', {}, 'Recettes'),
-                    React.createElement('div', {}, 
-                        React.createElement('div', {className: 'areas', style: {height: revHeight}}, 
+                    React.createElement('div', {},
+                        React.createElement('div', {className: 'areas', style: {height: revHeight}},
                             React.createElement('a', {className: 'rf', href: rf, style: {height: rfHeight}},
                                 React.createElement('h2', {}, "Recettes de fonctionnement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(RF)))
@@ -72,8 +72,8 @@ export function TotalBudget({
                                 React.createElement('h3', {}, displayMillions(totalById.get(RI)))
                             )
                         ),
-                        React.createElement('div', {className: 'texts'}, 
-                            React.createElement('div', {}, 
+                        React.createElement('div', {className: 'texts', style: {height: revHeight}},
+                            React.createElement('div', {},
                                 React.createElement('div', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
@@ -83,8 +83,8 @@ export function TotalBudget({
                 ),
                 React.createElement('div', {className: 'expenditures'},
                     React.createElement('h1', {}, 'Dépenses'),
-                    React.createElement('div', {}, 
-                        React.createElement('div', {className: 'areas', style: {height: expHeight}}, 
+                    React.createElement('div', {},
+                        React.createElement('div', {className: 'areas', style: {height: expHeight}},
                             React.createElement('a', {className: 'df', href: df, style: {height: dfHeight}},
                                 React.createElement('h2', {}, "Dépenses de fonctionnement"),
                                 React.createElement('h3', {}, displayMillions(totalById.get(DF)))
@@ -94,8 +94,8 @@ export function TotalBudget({
                                 React.createElement('h3', {}, displayMillions(totalById.get(DI)))
                             )
                         ),
-                        React.createElement('div', {className: 'texts'},
-                            React.createElement('div', {}, 
+                        React.createElement('div', {className: 'texts', style: {height: expHeight}},
+                            React.createElement('div', {},
                                 React.createElement('div', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
@@ -122,11 +122,11 @@ export function TotalBudget({
                 constructionAmounts
             )
         ),
-        React.createElement('section', {className: 'm52'}, 
+        React.createElement('section', {className: 'm52'},
             React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
             m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
-                DownloadSection, 
+                DownloadSection,
                 {
                     title: `Données brutes sur datalocale.fr`,
                     items: [
@@ -170,22 +170,22 @@ export default connect(
                 Solidarité: totalById.get('DF-1'),
                 Interventions: totalById.get('DF-3') + totalById.get('DF-4'),
                 DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3', 'DF-4'].map(i => totalById.get(i)))),
-                
-                Emprunt: totalById.get('RI-EM'),
-                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')), 
 
-                RemboursementEmprunt: totalById.get('DI-EM'), 
-                Routes: totalById.get('DI-1-2'), 
-                Colleges: totalById.get('DI-1-1'), 
-                Amenagement: totalById.get('DI-1-3') + totalById.get('DI-1-4') + totalById.get('DI-1-5'), 
+                Emprunt: totalById.get('RI-EM'),
+                RIPropre: (totalById.get('RI') - totalById.get('RI-EM')),
+
+                RemboursementEmprunt: totalById.get('DI-EM'),
+                Routes: totalById.get('DI-1-2'),
+                Colleges: totalById.get('DI-1-1'),
+                Amenagement: totalById.get('DI-1-3') + totalById.get('DI-1-4') + totalById.get('DI-1-5'),
                 Subventions: totalById.get('DI-2')
             } : undefined,
             urls: {
-                expenditures: '#!/finance-details/'+EXPENDITURES, 
-                revenue: '#!/finance-details/'+REVENUE, 
-                rf: '#!/finance-details/'+RF, 
-                ri: '#!/finance-details/'+RI, 
-                df: '#!/finance-details/'+DF, 
+                expenditures: '#!/finance-details/'+EXPENDITURES,
+                revenue: '#!/finance-details/'+REVENUE,
+                rf: '#!/finance-details/'+RF,
+                ri: '#!/finance-details/'+RI,
+                df: '#!/finance-details/'+DF,
                 di: '#!/finance-details/'+DI,
                 byFonction: {
                     'M52-DF-R0': `#!/finance-details/M52-DF-R0`,
