@@ -10,17 +10,33 @@ Le code et les commentaires sont à écrire **en anglais**.
 
 A priori, nous avons besoin que ça marche sur IE11 + Firefox 47.
 
-## Développer sur sa machine
+## Installer le projet
+
+L'installation de [`node@>=6`][nodejs] est nécessaire avant de continuer.
+
+Il faut (_forker_ et) _cloner_ ce dépôt pour procéder à l'installation des dépendances du projet :
+
+```bash
+$ npm install
+```
+
+La commande suivante reconstruit les builds en continu, dès qu'un fichier source est modifié :
 
 ```bash
 $ npm run watch
 ```
 
+Enfin, les composants web sont visualisables dans un navigateur web :
+
 ```bash
 $ npm start
 ```
 
+Deux adresses sont ensuite accessibles : [http://localhost:3000/]() et [http://localhost:3000/public/]().
+
 ## Avant de déployer
+
+**Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
 
 Les artéfacts de build sont rendus disponibles dans `./build`.
 
@@ -50,4 +66,5 @@ $ convert images/Map-v1.jpg -interlace Plane -resize 1300 -strip images/map-opti
 
 [MIT](LICENSE)
 
+[nodejs]: https://nodejs.org/
 [ImageMagick]: https://www.imagemagick.org/script/download.php
