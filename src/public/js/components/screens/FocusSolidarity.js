@@ -181,7 +181,7 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                                 // changer l'illustration pour intégrer les pictos fournis par la com
                 // soit en png
                // illustrationUrl: '../images/Macaron3.png',
-                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.svg
+                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.svg',
 ',
                 // soit en svg
                 /*
