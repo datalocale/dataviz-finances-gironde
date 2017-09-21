@@ -146,16 +146,11 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                                         // changer l'illustration pour intégrer les pictos fournis par la com
                 // soit en png
                // illustrationUrl: '../images/Macaron2.png',
-                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Handicapes.png',
+                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Handicapes.svg',
                 // soit en svg
                 /*
                 https://github.com/datalocale/pictoGironde/blob/master/Handicapes.svg
-               <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.35 45.14">
-               <title>Handicapés</title>
-               <path d="M49,53.87a1.63,1.63,0,0,1-1-.3,1.76,1.76,0,0,1-.59-.77l0-.11V48.45c0-2.25,0-4.58-.15-6.1,0-.18-.13-.79-.15-.87-1.16-5.07-4.36-5.07-5.41-5.07H33.9V30.21l.39.16a10.84,10.84,0,0,0,1.75.55c.62.12.81.15.86.15,1.51.13,3.83.14,6.08.15h1.74V28.29H44.6l-1.47,0c-.87,0-1.74,0-2.56,0a23.15,23.15,0,0,1-3.85-.24,3.26,3.26,0,0,1-2.81-3.56V20.16H31V39.35h9.82a3.26,3.26,0,0,1,3.56,2.81,36.6,36.6,0,0,1,.21,6.38l0,1.19c0,.05,0,.86,0,1.63s0,1.35,0,1.39a3.39,3.39,0,0,0,.6,1.57,2.81,2.81,0,0,0,2.65,1.39h.11a4.7,4.7,0,0,0,1.58-.26l.1,0-.43-1.56Z" transform="translate(-17.21 -10.59)"/>
-               <circle cx="15.22" cy="3.55" r="3.55"/>
-               <path d="M42.45,41.79H39.17v.13A9.6,9.6,0,0,1,39.25,43a9.39,9.39,0,1,1-10.89-9.27l.11,0V25.82a3.43,3.43,0,0,0-.6-1.57,2.81,2.81,0,0,0-2.65-1.39h-.1a4.69,4.69,0,0,0-1.58.26l-.1,0,.43,1.56H24a1.63,1.63,0,0,1,1,.3,1.76,1.76,0,0,1,.59.77l0,.11v5.2l-.18.07A12.65,12.65,0,1,0,42.51,43c0-.35,0-.7-.05-1.09Z" transform="translate(-17.21 -10.59)"/></svg>
-               */
+                              */
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
@@ -186,15 +181,12 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                                 // changer l'illustration pour intégrer les pictos fournis par la com
                 // soit en png
                // illustrationUrl: '../images/Macaron3.png',
-                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.png',
+                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.svg
+',
                 // soit en svg
                 /*
-                https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.svg
-               <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.44 46.22">
-               <title>Personnesâgées</title>
-               <path d="M41.51,28.37a4.12,4.12,0,0,0-2.54-.8H35.49A21.46,21.46,0,0,1,30.1,27a4.26,4.26,0,0,1-3.57-4.67c0-.14,0-.65,0-1.19V19.57l.28-.29a3.28,3.28,0,0,1,1.39-.88V15.18a6.61,6.61,0,0,0-5.92,5.7,27.09,27.09,0,0,0-.59,3.51V51.63a4.15,4.15,0,0,0,.8,2.57,3.23,3.23,0,0,0,3.15,1.62,6.59,6.59,0,0,0,1.84-.22l-.39-1.39A2.34,2.34,0,0,1,26,53.76a2.46,2.46,0,0,1-1.14-2.09V38.79H29a4.12,4.12,0,0,1,4.36,3.58,31,31,0,0,1,.22,5.72l0,3.55a4.15,4.15,0,0,0,.8,2.57,3.23,3.23,0,0,0,3.15,1.62,6.6,6.6,0,0,0,1.84-.22L39,54.2a2.34,2.34,0,0,1-1.12-.43,2.46,2.46,0,0,1-1.14-2.09V46.54a26.39,26.39,0,0,0-.18-3.9c0-.14-.1-.64-.18-1-.92-4-2.91-5.93-6.25-6H24.83V28.09l1.51.9a10.49,10.49,0,0,0,2.95,1.15c.39.09.84.18,1,.2l.37,0a43.58,43.58,0,0,0,4.69.31h.12c.38,0,1.34-.06,2.22-.06a9.5,9.5,0,0,1,1.46.08,5.53,5.53,0,0,1,.93.31l.61.25V55.81h.58V32.91l1.62.46a6.63,6.63,0,0,0,.22-1.84A3.23,3.23,0,0,0,41.51,28.37Z" transform="translate(-21.69 -9.59)"/>
-               <circle cx="12.78" cy="4.12" r="4.12"/>
-               </svg>
+                https://github.com/datalocale/pictoGironde/blob/master/Personnesagees.png
+
                */
         
         
@@ -225,15 +217,10 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // changer l'illustration pour intégrer les pictos fournis par la com
                 // soit en png
                // illustrationUrl: '../images/Macaron4.png', 
-                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Enfance.png',
+                illustrationUrl: 'https://github.com/datalocale/pictoGironde/blob/master/Enfance.svg',
                 // soit en svg
                 /*
                 https://github.com/datalocale/pictoGironde/blob/master/Enfance.svg
-                <svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.9 44.9">
-                <title>Enfance</title>
-                <path d="M32.41,11A22.45,22.45,0,1,0,54.86,33.46,22.48,22.48,0,0,0,32.41,11Zm0,41.63A19.18,19.18,0,1,1,51.59,33.46,19.2,19.2,0,0,1,32.41,52.64Z" transform="translate(-9.95 -11)"/>
-                <circle cx="16.78" cy="16.72" r="1.91"/><circle cx="28.24" cy="16.72" r="1.91"/>
-                <path d="M32.41,43.83a9.93,9.93,0,0,1-7.34-2.67l0,0-1.49,1.49,0,0a12,12,0,0,0,8.86,3.3c4.53,0,7.42-1.64,9.28-3.73L40.2,40.73C38.66,42.47,36.23,43.83,32.41,43.83Z" transform="translate(-9.95 -11)"/></svg>
                 */
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
