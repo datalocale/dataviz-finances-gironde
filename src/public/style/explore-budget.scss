@@ -33,6 +33,8 @@ $R9-color: $area-color-10;
         flex-direction: row;
         justify-content: space-around;
         
+        margin-bottom: 1em;
+
         .revenue, .expenditures{
             width: 50%;
             display: flex;

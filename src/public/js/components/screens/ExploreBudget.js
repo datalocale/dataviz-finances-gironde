@@ -100,14 +100,13 @@ export function TotalBudget({
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
-                        )
-                        React.createElement('div', {className: 'texts', style: {height: expHeight}},
-                        React.createElement('p', {},
-                        `Les chiffres étant issus du compte administratif, la différence entre le montant des recettes et le montant des dépenses représente l'excédent de l'exercice.`
-                        )                     
+                        )                   
                     )
                 )
-            )
+            ),
+            React.createElement('p', {},
+            `Les chiffres étant issus du compte administratif, la différence entre le montant des recettes et le montant des dépenses représente l'excédent de l'exercice.`
+            )  
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Comprendre la construction d'un budget`}),
