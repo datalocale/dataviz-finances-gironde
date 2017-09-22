@@ -57,7 +57,7 @@ export function TotalBudget({
         ),
 
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: 'Les grandes masses budgétaires'}),
+            React.createElement(SecundaryTitle, {text: 'Les grandes masses budgétaires du compte administratif'}),
             React.createElement('div', {className: 'viz'},
                 React.createElement('div', {className: 'revenue'},
                     React.createElement('h1', {}, 'Recettes'),
@@ -100,10 +100,13 @@ export function TotalBudget({
                                 React.createElement('div', {className: 'unit'}, `milliards d'euros`)
                             ),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
-                        )
+                        )                   
                     )
                 )
-            )
+            ),
+            React.createElement('p', {},
+            `Les chiffres étant issus du compte administratif, la différence entre le montant des recettes et le montant des dépenses représente l'excédent de l'exercice.`
+            )  
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Comprendre la construction d'un budget`}),
@@ -123,7 +126,7 @@ export function TotalBudget({
             )
         ),
         React.createElement('section', {className: 'm52'},
-            React.createElement(SecundaryTitle, {text: 'Les comptes sous la norme M52'}),
+            React.createElement(SecundaryTitle, {text: 'Les comptes par fonction (norme M52)'}),
             m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
             React.createElement(
                 DownloadSection,
