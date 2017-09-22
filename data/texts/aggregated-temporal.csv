@@ -1,6 +1,6 @@
 id,text
 EXPENDITURES,Les dépenses ont augmenté en 2016 du fait de l'augmentation des dépenses d'actions sociales liée elle-même au contexte économique et social
-REVENUE,Les recettes ont augmenté en 2016 du fait de l'augementation du taux de fiscalité sur les propriétés bâties consenties pour faire face à l'augmentation des dépenses d'actions sociales.
+REVENUE,Les recettes ont augmenté en 2016 du fait de l'augmentation du taux de fiscalité sur les propriétés bâties consenties pour faire face à l'augmentation des dépenses d'actions sociales.
 RF,
 RF-1,"En 2016, avec 502.2M€ la fiscalité directe revient au dessus du niveau atteint en 2010 (498.6M€), avant l’application de la réforme fiscale de 2010 qui a vu la disparition de la Taxe Professionnelle et des recettes départementales issues de la taxe d’habitation et de la  foncière non bâtie .
 La suppression de ces recettes départementales a été compensée par un ensemble de ressources dénommé « panier de recettes » à la fois constitué de recettes fiscales (CVAE, IFER…) et des dotations transférées ou créées par l’Etat(DCRTP, FNGIR) sur lesquelles le Département n’a aucun pouvoir sur l’assiette ou le taux Ces recettes sont venues s’ajouter à la seule imposition directe conservée, la taxe sur le foncière sur les propriétés bâties.
@@ -22,7 +22,26 @@ RF-4-2,
 RF-4-3,
 RF-4-4,
 RF-5,"Elles sont composées en 2016 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP et du FNGIR (dotations figées issues de la réforme fiscale DE 2010) et s’élèvent à un montant de 218,8 M€. La baisse constatée depuis 2013 s’explique par la contribution du Département à la résorption du déficit national, dont l’impact s’applique à la dotation forfaitaire de la DGF qui est réduite d’un montant de 25,3 M€ en 2016. Au total, depuis 2013, la contribution de notre collectivité a atteint 64M€"
-RF-5-1,
+RF-5-1,"En 2012, la loi de finances a prévu que la dotation
+ de compensation des départements en 
+année n serait égale à celle perçue en année n-1
+la  dotation  forfaitaire  notifiée 
+en  2015  aux  départements,  c'est-à-dire 
+après application de la minoration liée à la contri
+bution au redressement des finances publiques.  
+La loi de finances pour 2015 fixe un montant de 74,
+02 euros par habitant en plus ou en 
+moins par rapport à l’année précédente. Ce montant 
+est inchangé en 2016. 
+[source](http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=11)
+Potentiel fiscal des départements 2016
+REVENU/POP   INSEE   2016 :   le   revenu   moyen   par   habitan
+t   de   l'ensemble   des 
+départements (hors Mayotte) = 14 452,76 €  
+−
+TMN  FB  2015 :  le  taux  moyen  national  d’imposition  d
+e  taxe  foncière  sur  les  propriétés 
+bâties pour l’ensemble des départements = 15,44 % "
 RF-5-2,
 RF-5-3,
 RF-5-4,
@@ -41,7 +60,7 @@ RF-7-3,
 RF-7-4,
 RF-8,
 RF-8-1,
-RF-8-2,
+RF-8-2,"Dans le cadre du projet de budget rectificatif 2015, les députés se sont prononcés en faveur d'un amendement du gouvernement créant un fonds de soutien de 50 millions d'euros pour plusieurs départements où ""la **situation financière peut être qualifiée de tendue** ""."
 RF-9,
 RF-9-1,
 RF-9-2,
@@ -52,13 +71,14 @@ RF-9-6,
 RF-9-7,
 RF-9-8,
 DF,
-DF-1,
+DF-1,"Les dépenses de solidarité (assistants familiaux compris hors transport handicapés) restent le premier poste d’augmentation avec 842.5 M€ contre 808M€ en 2015 soit +4.31% et +35 M€.
+Cette augmentation est principalement le fait des Allocations Individuelles de Solidarité (AIS) pour 20.5M€ fortement impactées par la progression enregistrée par les dépenses liées au RSA. Les frais liés aux hébergements pour les personnes âgées, handicapées et pour les enfants y contribuent aussi pour 9.7M€, les autres prestations étant en hausse de 4.6M€."
 DF-1-1,
 DF-1-1-1,
 DF-1-1-2,
 DF-1-1-3,
-DF-1-2,
-DF-1-3,
+DF-1-2,"En 2016, ce sont 229M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 5.5% et 12M€ de plus qu’en 2015. La progression initiale avait été estimée à 3.9% intégrant deux indexations nationales : 1.75% de révision annuelle prévisionnelle et 2% au titre du plan de lutte contre la pauvreté qui se terminera en 2017.Cette augmentation de 2% relève d’une décision nationale prise en 2013 et qui conjuguée à une hausse continue des bénéficiaires a contribué à accélérer la progression depuis cette date."
+DF-1-3,"La PCH s’élève à 73M€ et continue de progresser à un rythme qui reste élevé (+ 5.7%) même si ce rythme s’est infléchit par rapport à 2014 et 2015 (+8.3% et+8.6%).Cette augmentation dynamique de la PCH résulte en grande partie d’un nombre toujours plus important de bénéficiaires adultes et enfants (de 7 262 droits ouverts au 31/12/2015 à 7 458 au 31/12/2016 soit +2.7%, le nombre de bénéficiaires payés en décembre 2016 s’élevant à 6 395 soit 324 bénéficiaires de plus(+494 en 2015). A ces 73M€ s’ajoutent 8.25M€ pour l’allocation de compensation pour tierce personne (ACTP)  en baisse de 3.8%. (-40 bénéficiaires) moindre baisse que prévue car cette prestation versée en valeur et non en nature est privilégiée par les bénéficiaires."
 DF-1-4,
 DF-1-5,
 DF-1-6,
@@ -86,7 +106,7 @@ DF-4,
 DF-5,
 DF-5-1,
 DF-6,
-DF-6-1,
+DF-6-1,"Depuis 2013, les dépenses liées aux frais généraux de la structure départementale sont en baisse continue soit 5M€ de moins en 4 ans. Les postes sur lesquels les baisses sont les plus significatives concernent les dépenses d’énergie (électricité, carburant), les dépenses liées aux locations immobilières ou aux assurances ou encore celles liées aux réceptions, aux imprimés et déplacements."
 DF-6-1-1,
 DF-6-1-2,
 DF-6-1-3,
