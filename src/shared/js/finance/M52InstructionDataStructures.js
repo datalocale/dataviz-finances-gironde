@@ -5,7 +5,7 @@ import {Record} from 'immutable';
     https://datacat.datalocale.fr/file/1242019/raw/cedi_2015_CA.csv
 
 */
-export const M52RowRecord = Record({
+const m52RecordKeys = {
     //'Département': undefined,
     //'Budget': undefined,
     //'Type nomenclature': undefined,
@@ -23,7 +23,17 @@ export const M52RowRecord = Record({
     'Libellé': undefined,
     'Code devise': undefined,
     'Montant': undefined
-});
+}
+
+
+export const M52RowRecord = Record(m52RecordKeys);
+
+export const WeightedM52RowRecord = Record(Object.assign(
+    {
+        weight: undefined
+    },
+    m52RecordKeys
+))
 
 export const M52Instruction = Record({
     'département': undefined,
