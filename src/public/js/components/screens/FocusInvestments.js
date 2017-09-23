@@ -48,7 +48,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
             React.createElement('p', {}, 
-                `De nombreux Girondins sont les bénéficiaires directs des investissements du Département, qui s'élèvent en moyenne à 200 millions d’euros chaque année. Ils concernent le réaménagement des routes, la construction de collèges ou l'entretien d’espaces naturels, mais aussi des remboursements d'emprunts, prêts accordés par la collectivité ou des acquisitions mobilières et immobilières.`
+                `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles,etc.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
@@ -61,7 +61,7 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, `En 2016, le Département de la Gironde a dépensé 244 877 921,12 € en investissement soit 15,1% de la totalité des dépenses. Ce qui représente une évolution de +3.2% par rapport à 2015. Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs des investissements du Département grâce réaménagement des routes, au construction de collèges ou encore à l’entretien d’espaces naturels.`),
+                React.createElement('p', {}, `En 2016, le Département de la Gironde a investi 244 877 921,12 € soit 15,1% de la totalité des dépenses. Cela représente une augmentation de +3.2% comparé à 2015. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -90,7 +90,7 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les secteurs d’investissement`}),
-            React.createElement('p', {}, `Le Département peut investir directement dans quelques secteurs en fonction de ses compétences. Ces domaines d’action privilégiés sont les collèges, le réseau routier départemental, son patrimoine immobilier, des espaces naturels et classés ainsi que certaines subventions aux communes pour les aider dans leur propre politique d’investissement.`),
+            React.createElement('p', {}, `Le Département ne peut investir que dans les domaines liés à ses compétences. Ses investissements portent par exemple sur la construction, l’entretien et la rénovation des collèges, l'entretien du réseau routier départemental, de son patrimoine immobilier, des espaces naturels sensibles. Il verse également des subventions aux communes pour soutenir leur propre politique d’investissement.`),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI-1', text: `en savoir plus`}),
             React.createElement(FocusDetail, {
                 className: 'colleges', 
@@ -98,7 +98,7 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron1.png', 
                 amount: yearDIDetails ? format(".3s")(yearDIDetails['DI-1-1']) : '',
                 proportion: yearDIDetails ? yearDIDetails['DI-1-1']/focusDetailsDenominator : 1, 
-                text: `Le Département assure les missions relatives à la construction, l’entretien, l'équipement, la gestion des bâtiments des établissements  et le fonctionnement des collèges. 105 collèges publics girondins accueillent depuis la rentrée 2017 59 864 élèves (contre 59 768 à la rentrée 2016), et 28 collèges privés (12 835 élèves). En 2017, seront notamment livrés les restructurations des collèges Alfred Mauguin à Gradignan et Claude Massé à Ambarès-et-Lagrave, la salle de sport du Collège Marguerite Duras à Libourne, l’extension de la salle de restauration et des sanitaires au sein du Collège Georges Brassens à Podensac.`, 
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2017-2018, on comptait 58 226 collégiens dans les collèges publics girondins et 12 835 collégiens dans les collèges privés. En 2017, seront notamment livrés les restructurations des collèges Alfred Mauguin à Gradignan et Claude Massé à Ambarès-et-Lagrave, la salle de sport du Collège Marguerite Duras à Libourne, l’extension de la salle de restauration et des sanitaires au sein du Collège Georges Brassens à Podensac.`, 
                 highlights: [
                     /*{
                         strong: "",
@@ -117,7 +117,7 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron2.png',
                 amount: yearDIDetails ? format(".3s")(yearDIDetails['DI-1-2']) : '',
                 proportion: yearDIDetails ? yearDIDetails['DI-1-2']/focusDetailsDenominator : 1, 
-                text: `Le réseau routier girondin est constitué de 6 500 kilomètres de routes départementales, dont 350 kms de pistes cyclables et 1 800 ouvrages d’art (ponts et murs de soutènement). En 2017, la mise en sécurité du réseau se traduira notamment par les réfections de la RD9 à Aillas Mitton, de la RD18 à Génissac Moulon Grézillac, de la RD3 à Hourtin Lesparre, la fin des travaux du pont Eiffel, mais aussi des aménagements de sécurité entre Biganos et Arès… Le Plan départemental de déplacement traduit la volonté du Département d’élargir l’action en matière d’organisation du système de déplacements (infrastructures routières, transports collectifs départementaux et covoiturage). Ce Plan prévoit un budget total d’investissement de 14 millions d’euros entre 2017 et 2030.`, 
+                text: `Le réseau routier girondin est constitué de 6 500 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement). En 2017, la mise en sécurité du réseau se traduira notamment par les réfections de la RD9 à Aillas Mitton, de la RD18 à Génissac Moulon Grézillac, de la RD3 à Hourtin Lesparre, la fin des travaux du pont Eiffel, mais aussi des aménagements de sécurité entre Biganos et Arès, etc.  Le Plan départemental de déplacement traduit la volonté du Département d’élargir son action en matière d’organisation du système de déplacements (infrastructures routières, transports collectifs départementaux et covoiturage). Ce Plan prévoit un budget total d’investissement de 14 millions d’euros entre 2017 et 2030.`, 
                 highlights: [
                     /*{
                         strong: "",
@@ -136,7 +136,7 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron3.png',
                 amount: yearDIDetails ? format(".3s")(yearDIDetails['DI-1-3']) : '',
                 proportion: yearDIDetails ? yearDIDetails['DI-1-3']/focusDetailsDenominator : 1, 
-                text: `Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1000 bâtiments : Maison départementale de la solidarité et de l’insertion, Maison des adolescents, archives départementales, Hôtel du Département à Bordeaux,etc. `, 
+                text: `Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments : Maison départementale de la solidarité et de l’insertion, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux,etc.`, 
                 highlights: [
                     /*{
                         strong: "",
@@ -155,7 +155,7 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron4.png',
                 amount: yearDIDetails ? format(".3s")(yearDIDetails['DI-1-4']) : '',
                 proportion: yearDIDetails ? yearDIDetails['DI-1-4']/focusDetailsDenominator : 1, 
-                text: `La Gironde compte de nombreux sites classés et protégés pour préserver leur richesse biologique unique : milieux et habitats naturels, faune, flore... L’action du Département relative à la biodiversité, au paysage, aux espaces naturels sensibles se caractérise par  des missions de conservation et de réhabilitation de ces sites, à l’image du  domaine de Certes-et-Graveyron (dont les travaux s’achèveront en septembre 2017) et de  l’île Nouvelle qui font l’objet d’aménagements et d’une gestion spécifique afin que que Girondin puisse découvrir et profiter de leur caractère exceptionnel. `, 
+                text: `Le Département agit pour la protection et la valorisation des espaces naturels sensibles. Il assure leur gestion, organise des actions de sensibilisation à l'environnement, et permet au public de visiter ces sites préservés en visites libres, ou guidées par des guides naturalistes. 2017 marque la fin des travaux du pôle régional de connaissance de préservation et de valorisation de la biodiversité au domaine de Certes et Graveyron à Audenge. Celui-ci accueille dans le cadre de la préservation de la faune, de la flore et des habitants, le Conservatoire botanique Sud-Atlantique, un centre de sauvegarde de la Ligue pour la Protection des Oiseaux (LPO) et un centre de conservation et d’étude (CCE) de la Direction Régionale des Affaires Culturelles (DRAC).`, 
                 highlights: [
                     /*{
                         strong: "",
@@ -174,7 +174,7 @@ export function FocusSol({
                 illustrationUrl: '../images/Macaron4.png',
                 amount: yearDIDetails ? format(".3s")(yearDIDetails['DI-2-1']) : '',
                 proportion: yearDIDetails ? yearDIDetails['DI-2-1']/focusDetailsDenominator : 1, 
-                text: `ans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation,. l’appui des services du Département en termes d’ingénierie et les aides versées permettent de soutenir le développement local et de corriger les inégalités territoriales. Objectif : améliorer la qualité des équipements, maintenir services et commerces de proximité et s’appuyer sur des équipes pluridisciplinaires accompagnant les projets de rénovation et d’urbanisation (mobilité, urbanisme, aménagement paysager, voirie, etc.)… Aux tiers Le Département développe une politique de soutien aux initiatives portées par les entreprises, les associations et les particuliers. Elle leur octroie des aides dans des domaines divers XXX`, 
+                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne(offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`, 
                 highlights: [
                     /*{
                         strong: "",
