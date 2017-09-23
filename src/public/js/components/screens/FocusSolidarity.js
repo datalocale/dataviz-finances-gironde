@@ -142,8 +142,8 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
             }),
             React.createElement(FocusDetail, {
                 className: 'handicap', 
-                title: 'Personnes handicapées', 
-                illustrationUrl: '../images/Macaron2.png',
+                title: 'Personnes handicapées',
+                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Handicapes.svg',
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
@@ -170,8 +170,8 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
             }),
             React.createElement(FocusDetail, {
                 className: 'elderly', 
-                title: 'Personnes âgées', 
-                illustrationUrl: '../images/Macaron3.png',
+                title: 'Personnes âgées',
+                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-3')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `La principale aide en faveur des personnes âgées est l’APA (Allocation Personnalisée d’autonomie). Elle peut être versée soit directement à la personne soit à l’établissement en charge de la personne, selon des critères d'attribution précis. https://www.service-public.fr/particuliers/vosdroits/F10009 L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi ASV (Adaptation de la Société au Vieillissement).`,
@@ -193,8 +193,8 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
             }),
             React.createElement(FocusDetail, {
                 className: 'childhood', 
-                title: 'Enfance', 
-                illustrationUrl: '../images/Macaron4.png',
+                title: 'Enfance',
+                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Enfance.svg',
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
