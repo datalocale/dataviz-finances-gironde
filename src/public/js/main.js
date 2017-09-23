@@ -23,11 +23,33 @@ import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECE
 
 const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
 
-let DATA_URL_PREFIX = "..";
-if(process.env.NODE_ENV === "production"){
-    // The prod URL may be used by external consumers
-    DATA_URL_PREFIX = "https://dtc-innovation.github.io/dataviz-finances-gironde";
-}
+const makeFinanceURLByEnv = {
+    "production": function(name){
+        return `/sites/default/files/2017-07/${name}.pdf`
+    },
+    "demo": function(name){
+        return `../data/finances/${name}.csv`
+    },
+    "development": function(name){
+        return `../data/finances/${name}.csv`
+    }
+};
+
+const makeTextURLByEnv = {
+    "production": function(name){
+        return `/sites/default/files/2017-09/${name}.pdf`
+    },
+    "demo": function(name){
+        return `../data/texts/${name}.csv`
+    },
+    "development": function(name){
+        return `../data/texts/${name}.csv`
+    }
+};
+
+const makeFinanceURL = makeFinanceURLByEnv[process.env.NODE_ENV];
+const makeTextURL = makeTextURLByEnv[process.env.NODE_ENV];
+
 
 /**
  * 
@@ -37,7 +59,28 @@ if(process.env.NODE_ENV === "production"){
 const REACT_CONTAINER_SELECTOR = '.cd33-finance-dataviz';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
+/*
+    Dirty (temporary) hacks to fix the gironde.fr pages so the content displays properly
+*/
+if(process.env.NODE_ENV === 'production'){
+    const main = document.body.querySelector('main');
+    const columnsEl = main.querySelector('.columns');
+    const rowEl = main.querySelector('.row');
 
+    const elementsToMove = main.querySelectorAll('.columns > :nth-child(-n+3)');
+
+    Array.from(elementsToMove).forEach(e => {
+        if(e.querySelector('h1')){
+            // remove server-generated h1
+            e.remove();
+        }
+        else{
+            main.insertBefore(e, rowEl);
+        }
+    });
+
+    main.insertBefore(CONTAINER_ELEMENT, rowEl);
+}
 
 // Breadcrumb
 const BREADCRUMB_CONTAINER = process.env.NODE_ENV === "production" ?
@@ -107,11 +150,11 @@ store.dispatch({
  * 
  */
 [
-    DATA_URL_PREFIX+'/data/finances/cedi_2016_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2015_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2014_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2013_CA.csv',
-    DATA_URL_PREFIX+'/data/finances/cedi_2012_CA.csv'
+    makeFinanceURL('cedi_2016_CA'),
+    makeFinanceURL('cedi_2015_CA'),
+    makeFinanceURL('cedi_2014_CA'),
+    makeFinanceURL('cedi_2013_CA'),
+    makeFinanceURL('cedi_2012_CA')
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
@@ -124,7 +167,7 @@ store.dispatch({
 });
 
 [
-    DATA_URL_PREFIX+'/data/texts/aggregated-atemporal.csv',
+    makeTextURL('aggregated-atemporal'),
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)
@@ -137,7 +180,7 @@ store.dispatch({
 });
 
 [
-    DATA_URL_PREFIX+'/data/texts/aggregated-temporal.csv',
+    makeTextURL('aggregated-temporal'),
 ].forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvParse)

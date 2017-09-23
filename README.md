@@ -8,7 +8,14 @@ Le code et les commentaires sont à écrire **en anglais**.
 
 ## Compatibilité navigateur
 
-A priori, nous avons besoin que ça marche sur IE11 + Firefox 47.
+Minima:
+
+* IE11
+* Edge
+* Firefox 
+* Chrome
+* navigateurs mobiles
+
 
 ## Installer le projet
 
@@ -17,42 +24,35 @@ L'installation de [`node@>=6`][nodejs] est nécessaire avant de continuer.
 Il faut (_forker_ et) _cloner_ ce dépôt pour procéder à l'installation des dépendances du projet :
 
 ```bash
-$ npm install
+npm install
 ```
 
 La commande suivante reconstruit les builds en continu, dès qu'un fichier source est modifié :
 
 ```bash
-$ npm run watch
+npm run watch
 ```
 
 Enfin, les composants web sont visualisables dans un navigateur web :
 
 ```bash
-$ npm start
+npm start
 ```
 
 Deux adresses sont ensuite accessibles : [http://localhost:3000/]() et [http://localhost:3000/public/]().
 
-## Avant de déployer
+## Déploiement
 
 **Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
 
-Les artéfacts de build sont rendus disponibles dans `./build`.
+Il existe 3 environnements :
+* gironde.fr (`npm run build-gironde-fr:public`) où il faut créer manuellement dans le CMS une "page finale" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.pdf` est à ajouter indépendamment.
+* démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
+* dévelopement (`npm run watch`)
 
-### Créer le build applicatif
 
-Pour déployer sur le site `gironde.fr` :
+Les artéfacts de build sont rendus créés dans le dossier `./build`.
 
-```bash
-$ npm run build
-```
-
-Pour déployer sur GitHub Pages :
-
-```bash
-$ npm run build-demo
-```
 
 ### Convertir l'image de fond de la page d'accueil
 
