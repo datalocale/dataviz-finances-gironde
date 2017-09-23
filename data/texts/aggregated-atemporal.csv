@@ -4,6 +4,7 @@ EXPENDITURES,Dépenses,"Les dépenses de la collectivité permettent :
 * d'appliquer sur le territoire les dispositifs d'interventions prévus par la loi (par exemple le versement des allocations sociales, l’entretien des routes départementales, la construction et le fonctionnement des collèges, les subventions au Service d'Intervention et de Secours (les sapeurs-pompiers du SDIS), etc.] 
 * d'assurer les charges de gestion de la collectivité. 
 On distingue les dépenses :
+
 * ""de fonctionnement"" (par exemple le versement des prestations sociales, les subventions aux organismes  ou les aides aux particuliers, l'entretien de la voirie, les frais de personnel, les intérêts d'emprunts...) 
 * ""d'investissement"" (par exemple : la construction de collèges, l'aménagement des infrastructures routières, la rénovation des bâtiments départementaux, le soutien au développement du parc locatif, l'aide à l'investissement des communes...).
 "
@@ -20,13 +21,14 @@ On distingue :
 L’excédent des recettes de fonctionnement sur les dépenses de fonctionnement vient s’ajouter aux recettes d’investissement pour financer les investissements de la collectivité.
 "
 RF,Recettes de fonctionnement,"Les recettes de fonctionnement proviennent principalement :
-    * de la fiscalité directe (les impôts locaux payés par les citoyens ou les entreprises)
-    * de la fiscalité indirecte (par exemple la part des frais de notaires versée au Département, appelée «Droits de mutation»)
-    * des dotations versées par l'État (par exemple la Dotation Globale de Fonctionnement...)
-    * de la fiscalité transférée (on entend par là un ensemble de taxes dont le produit est versé pour partie au Département, par exemple la Taxe sur les contrats d’assurance…), 
-    * des ressources issues de l’exploitation du patrimoine départemental (location de bâtiments par exemple)
-    * des recettes sociales (ressources versées pour compenser des dépenses sociales assurées par la collectivité)
-    * des subventions ou participations (de l’Europe notamment)
+
+* de la fiscalité directe (les impôts locaux payés par les citoyens ou les entreprises),
+* de la fiscalité indirecte (par exemple la part des frais de notaires versée au Département, appelée «Droits de mutation»),
+* des dotations versées par l'État (par exemple la Dotation Globale de Fonctionnement...),
+* de la fiscalité transférée (on entend par là un ensemble de taxes dont le produit est versé pour partie au Département, par exemple la Taxe sur les contrats d’assurance…),
+* des ressources issues de l’exploitation du patrimoine départemental (location de bâtiments par exemple),
+* des recettes sociales (ressources versées pour compenser des dépenses sociales assurées par la collectivité),
+* des subventions ou participations (de l’Europe notamment).
 "
 RF-1,Fiscalité directe,"Les recettes de fonctionnement du Département issues de la fiscalité directe concernent : 
 * pour les particuliers : la part départementale de la **taxe foncière sur les propriétés bâties** payée par les propriétaires de bâti
@@ -37,9 +39,10 @@ RF-1-1,Taxe Foncière sur les propriétés bâties+rôles supplémentaires,"La t
 RF-1-2,Cotisation sur la valeur ajoutée des entreprises (CVAE),"Cet impôt local créé par la loi de finances 2011 (au niveau national) est un composant, avec la cotisation foncière des entreprises (CFE), de la **contribution économique territoriale (CET)** qui a remplacé la taxe professionnelle.
 Sont redevables de la CVAE les entreprises dont le chiffre d’affaires est supérieur à 152 500€. La CVAE est reversée aux collectivités à partir d'un taux unique (1.5% de la valeur ajoutée). Néanmoins le taux réel appliqué est progressif en fonction du chiffre d'affaires des entreprises. 
 ""Le *produit de la cotisation sur la valeur ajoutée des entreprises (CVAE)* est réparti entre les différents niveaux de collectivités territoriales de la façon suivante (à partir de 2017) :
-* 26,5 % pour les communes et les intercommunalités
-* 23.5 % pour les départements
-*50 % pour les régions
+* 26,5 % pour les communes et les intercommunalités,
+* 23.5 % pour les départements,
+*50 % pour les régions.
+
 [source](https://fr.wikipedia.org/wiki/Cotisation_sur_la_valeur_ajout%C3%A9e_des_entreprises)"
 RF-1-3,Imposition forfaitaire pour les entreprises de réseaux (IFER),"Cet impôt, apparu en 2010 suite à la suppression de la Taxe Professionnelle, vise certaines entreprises dont l'activité est exercée dans les secteurs de **l'énergie, des transports ferroviaires et des télécommunications**. Elle est reversée aux collectivités territoriales et aux établissements publics de coopération intercommunale.
 [source](http://www.collectivites-locales.gouv.fr/imposition-forfaitaire-sur-entreprises-reseaux-ifer-2)"
@@ -54,13 +57,12 @@ La part perçue par le Département dépend d'un taux voté par le Département 
 "
 RF-4,Autres fiscalités,"Il s'agit de différentes taxes ou impôts que perçoit le Département : taxe d'aménagement, taxe sur l'électricité,redevance des mines"
 RF-4-1,Taxe d'aménagement (incluant les anciennes Taxe Départementale Espaces Naturels Sensibles (TDENS) et financement CAUE),"La taxe d'aménagement est applicable à toutes les opérations d'aménagement, de construction, de reconstruction et d'agrandissement de bâtiments ou d'installations,  nécessitant une autorisation d'urbanisme (permis de construire ou d'aménager, déclaration préalable), et aux opérations qui 
-changent la destination des locaux dans le cas des exploitations 
-agricoles.La taxe est composée de 3 parts (communale, départementale et 
-régionale), chaque part étant instaurée par délibération de l'autorité 
-locale : conseil municipal, conseil départemental et conseil régional 
-(uniquement en Île-de-France).Le taux de la part départementale est unique et ne peut pas dépasser 2,5 % .la taxe d’aménagement se substitue à la taxe locale d’équipement (TLE), à la taxe départementale des espaces naturels et sensibles (TDENS), à la taxe 
-départementale destinée au financement des conseils d’architecture, 
-d’urbanisme et de l’environnement(TDCAUE)"
+changent la destination des locaux dans le cas des exploitations agricoles.La taxe est composée de 3 parts (communale, départementale et 
+régionale), chaque part étant instaurée par délibération de l'autorité locale : conseil municipal, conseil départemental et conseil régional 
+(uniquement en Île-de-France). Le taux de la part départementale est unique et ne peut pas dépasser 2,5 % . 
+
+La taxe d’aménagement se substitue à la taxe locale d’équipement (TLE), à la taxe départementale des espaces naturels et sensibles (TDENS), à la taxe 
+départementale destinée au financement des conseils d’architecture, d’urbanisme et de l’environnement(TDCAUE)"
 RF-4-2,Taxe sur l’électricité,"La taxe départementale sur la consommation finale d'électricité (TDCFE) est due par les abonnés aux communes et départements en **proportion des kWh consommés**. Son montant dépend d’un coefficient multiplicateur fixé et voté par les Conseils municipaux et départementaux.
 [source](http://www.energie-info.fr/Fiches-pratiques/Ma-facture-mon-compteur/CSPE-TICGN-CTA-TVA-Toutes-les-taxes-sur-ma-facture)"
 RF-4-3,Redevance des mines,"Les redevances communales et départementales des mines en France sont des redevances proportionnelles ayant pour fondement originel la loi du 21 avril 1810 concernant **les mines, les minières et les carrières** et créées sous leur forme moderne en 1941.
@@ -92,14 +94,14 @@ d’être compensées (via un reversement) par le biais d’un prélèvement sur
  les collectivités « gagnantes ». Ainsi, trois fonds ont été institués :
 
 * un fonds communal et intercommunal, 
-* un fonds départemental 
+* un fonds départemental, 
 * un fonds régional."
 ,,
 RF-6,Recettes sociales,"Les recettes sociales sont de plusieurs types :
 
-* contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA)
-* fonds de Mobilisation Départementale pour l'Insertion (FMDI)
-* recouvrements sur bénéficiaires de l'aide sociale
+* contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA),
+* fonds de Mobilisation Départementale pour l'Insertion (FMDI),
+* recouvrements sur bénéficiaires de l'aide sociale,
 * dotations diverses (ex dotation conférence des financeurs..).
 "
 RF-6-1,Indus RSA,Il s'agit des **remboursements des sommes versées** aux bénéficiaires du RSA ayant exercé une activité salariée temporaire.
@@ -128,11 +130,11 @@ RF-9-6,Remboursement charges de personnels,
 RF-9-7,Autres produits de gestions courants,
 RF-9-8,Produits financiers,
 DF,Dépenses de fonctionnement,"Les dépenses de fonctionnement regroupent principalement :
-* le versement des prestations d'action sociale
-* les interventions du Département sur les territoires, [sur le fonctionnement des collèges (dont la gestion de la restauration scolaire), le fonctionnement du Service Départemental d’Incendie et de Secours, le soutien aux partenaires, les dispositifs de transport (jusqu’en 2017) etc.] 
-* les dépenses de personnel
-* les charges dites «courantes» [l’entretien des routes et du patrimoine départemental (notamment les lieux d'accueil du public), les dépenses de fournitures et d'entretien nécessaires au fonctionnement de la collectivité, etc.]
-* les intérêts des emprunts
+* le versement des prestations d'action sociale,
+* les interventions du Département sur les territoires, [sur le fonctionnement des collèges (dont la gestion de la restauration scolaire), le fonctionnement du Service Départemental d’Incendie et de Secours, le soutien aux partenaires, les dispositifs de transport (jusqu’en 2017) etc.], 
+* les dépenses de personnel,
+* les charges dites «courantes» [l’entretien des routes et du patrimoine départemental (notamment les lieux d'accueil du public), les dépenses de fournitures et d'entretien nécessaires au fonctionnement de la collectivité, etc.],
+* les intérêts des emprunts.
 "
 DF-1,Actions sociales par prestations,"L’action sociale du département, dont le coût financier représente en moyenne plus de la moitié de son budget de fonctionnement, peut être comptabilisée en fonction de la liste des dispositifs réglémentaires d'interventions : 
 * l'aide sociale à l’**enfance** (ASE)
@@ -140,13 +142,13 @@ DF-1,Actions sociales par prestations,"L’action sociale du département, dont 
 * l'aide sociale aux **personnes âgées** (APA)
 * les prestations d’**aide sociale** (RSA)"
 DF-1-1,Frais d’hébergement,"Ces prestations concernent principalement trois dispositifs d'accueil financés par le Département : 
-* Etablissements d'hébergement pour personnes **adultes handicapées travaillant en ESAT**
-* Etablissements d'hébergement pour personnes **adultes handicapées inaptes au travail**
-* Etablissements d'**accueil de jour**"
+* Etablissements d'hébergement pour personnes **adultes handicapées travaillant en ESAT**.
+* Etablissements d'hébergement pour personnes **adultes handicapées inaptes au travail**.
+* Etablissements d'**accueil de jour**."
 DF-1-1-1,Personnes handicapées,"Les prestations versées pour l'autonomie des personnes en situation de handicap sont : 
-* L'**Allocation d’Education de l’Enfant Handicapé** (AEEH), qui apporte une aide dans l’éducation et les soins à apporter à un enfant handicapé
-* L'**Aide à domicile**, accordée aux personnes ayant besoin d'une aide matérielle pour effectuer les tâches ménagères
-* L'**Hébergement personnes handicapées**, accordée selon le niveau de ressources à toute personne handicapée adulte qui ne peut utilement être aidée à domicile mais peut être accueillie dans un établissement pour personne handicapée ou chez un particulier agréé"
+* L'**Allocation d’Education de l’Enfant Handicapé** (AEEH), qui apporte une aide dans l’éducation et les soins à apporter à un enfant handicapé.
+* L'**Aide à domicile**, accordée aux personnes ayant besoin d'une aide matérielle pour effectuer les tâches ménagères.
+* L'**Hébergement personnes handicapées**, accordée selon le niveau de ressources à toute personne handicapée adulte qui ne peut utilement être aidée à domicile mais peut être accueillie dans un établissement pour personne handicapée ou chez un particulier agréé."
 DF-1-1-2,Personnes âgées,"Les aides sociales aux personnes âgées sont : 
 * Les **aides sociales à l'hébergement** en établissement, qui s'adresse à toute personne qui ne peut utilement être aidée à son domicile et consent (ou son représentant légal) à être accueillie dans un établissement ou chez un accueillant familial agréé
 * Les **aides sociales à domicile** (aides ménagères), accordée aux personnes ayant besoin pour demeurer à leur domicile, d'une aide matérielle pour effectuer les tâches ménagères
@@ -190,10 +192,11 @@ DF-3,Actions d’intervention,Ce chapitre regroupe les dépenses liées à l'int
 DF-3-1,Service Départemental d'Incendie et de Secours (SDIS),"Le SDIS est l'établissement public à caractère administratif gérant les **sapeurs-pompiers** au niveau d'un département. Doté d'une assemblée délibérante, le SDIS est soumis à une double autorité :  opérationnelle (gérée par le préfet et le maire en collaboration dans leur pouvoir de police respectif) et  administrative (gérée par un conseil d'administration présidé par le Président du Conseil Départemental)"
 DF-3-2,Transports,"Juqu'à la loi NOTRe (art. L.3111-1 code des transports), relevaient de la compétence des départements :
 * les **transports routiers non urbains** des personnes, 
-* les **transports scolaires**
-* la **desserte des îles**
-* la construction, l’aménagement et l’exploitation de **gares publiques routières de voyageurs** 
-* les **lignes ferroviaires d’intérêt local**
+* les **transports scolaires**,
+* la **desserte des îles**,
+* la construction, l’aménagement et l’exploitation de **gares publiques routières de voyageurs**,
+* les **lignes ferroviaires d’intérêt local**.
+
 Ces compétences sont en cours de tranfert aux régions.
 [source](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)"
 DF-3-3,Transports des étudiants et des élèves handicapés,Le Département prend en charge le transport spécial des élèves handicapés vers leurs établissements scolaires.
@@ -205,9 +208,9 @@ DF-3-7,Diverses participations,
 DF-3-7-1,Fond social logement,"Le Fonds de Solidarité Logement de la Gironde a pour but d’aider les **familles ou les personnes les plus démunies** rencontrant des difficultés pour accéder à un logement décent et indépendant, ou à s’y maintenir en disposant de la fourniture d’eau, d’énergie et de service téléphonique et/ou internet. [source](http://www.fsl33.org/)"
 DF-3-7-2,Bourses départementales,"Cette aide directe destinée à **couvrir les frais de scolarité** est accordée aux **familles les plus modestes**, domiciliées en Gironde, boursières de l’Education Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public ou un collège privé sous contrat. Selon les revenus de la famille, en 2015-2016, le montant de cette aide départementale était de :
 
-* 70 € pour les familles bénéficiant du taux 1
-* 80 € pour les familles bénéficiant du taux 2
-* 100 € pour les familles bénéficiant du taux 3
+* 70 € pour les familles bénéficiant du taux 1,
+* 80 € pour les familles bénéficiant du taux 2,
+* 100 € pour les familles bénéficiant du taux 3.
 "
 DF-3-7-3,Participation diverses,
 DF-4,Frais de personnel,"L'administration départementale dispose de **ressources humaines** pour lui permettre de mettre en oeuvre ses missions de service public. Ces agents territoriaux (contractuels ou fonctionnaires) sont rémunérés par la collectivité en fonction des règles définies par le code général des collectivités territoriales.
@@ -227,10 +230,10 @@ DF-6-3-2,Charges exceptionnelles et provisions,"Ces charges concernent les **int
 DF-6-3-3,"Autres (dont budgets annexes hostens, LABO)",
 DF-7,Intérêts des emprunts,il s'agit des intérêts des emprunts long terme contractés par le Département pour financer ses investissements. Avec l'amortissement du capital comptabilisé en fonctionnement ils composent l'annuité de la dette
 RI,Recettes d’investissement,"Les recettes d'investissement sont constituées :
-* de dotations de l’Etat [par exemple, le Fonds de Compensation de la TVA (FCTVA), la Dotation Globale d'Équipement (DGE), etc.]
-* de subventions (versées en contrepartie de dépenses réalisées par les communes, la Région, l’État,ou l’Europe…)
-* des ventes de biens départementaux (cession d’immobilisation…)
-* des emprunts contractés pour financer les investissements de la collectivité
+* de dotations de l’Etat [par exemple, le Fonds de Compensation de la TVA (FCTVA), la Dotation Globale d'Équipement (DGE), etc.],
+* de subventions (versées en contrepartie de dépenses réalisées par les communes, la Région, l’État,ou l’Europe…),
+* des ventes de biens départementaux (cession d’immobilisation…),
+* des emprunts contractés pour financer les investissements de la collectivité.
 "
 RI-1,Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA),Ce fonds est une dotation de l'Etat destinée à assurer une compensation de la charge de TVA que les collectivités et leur groupement supportent sur leurs **dépenses réelles d’investissement**. Une collectivité territoriale ne récupère la TVA que sur ses dépenses d’investissement et selon certains critères.
 RI-2,Dotation Décentralisée pour l’Equipement des collèges (DDEC),Cette dotation est attribuée aux départements pour **compenser les dépenses d’investissement et d’équipement** des collèges transférés aux départements par l'Etat en 1986.[source](http://www.collectivites-locales.gouv.fr/dotations-compensation-des-transferts#Les%20dotations%20aux%20d%C3%A9partements)
@@ -242,20 +245,19 @@ pour les collectivités territoriales**."
 RI-5,Divers,
 RI-6,Cessions,"Il s’agit des ventes de biens meubles ou immeubles comme :
 
-* les **bâtiments** 
+* les **bâtiments**, 
 * les **terrains** (lotissement, parcelle zone d’activités, délaissés de voirie..........),
-* le **matériel** si le montant est supérieur à 500 € (véhicule, mobilier.....), "
+* le **matériel** si le montant est supérieur à 500 € (véhicule, mobilier.....). "
 RI-EM,Emprunt contracté,"Les emprunts contractés par le Départeemnt sont exclusivement destinés à financer des investissements, qu'il s'agisse d'un équipement spécifique, d'un ensemble de travaux relatifs à cet équipement ou encore d'acquisitions ou d'études. Les emprunts peuvent  être parfois affectés explicitement à une ou plusieurs opérations d'investissement précisément désignées au contrat. ( par exemple pour le plan collèges ou la réhabilitation thermique de batiments administratifs).mais ils sont dans la majeure partie des cas globalisés et correspondent à l'ensemble du besoin de financement de la section d'investissement."
 RI-EM-1,Emprunt nouveau,"Il s'agit de l'emprunt réalisé dans l'année mais dont le contrat a pu être signé antérieurement.Préalablement à la signature d'un contrat de prêt, le Département organise une ou deux consultations sur la base d'un cahier des charges définissant les caractéristiques des emprunts recherchés et le volume. La décision finale est prise par le Président du Conseil Départemental. Les empunts sont en général à taux fixe ou variable d'une durée de 15 ans. Ces dernières années, le Département a réalisé des émissions obligataires qui lui ont permisd'obtenir des conditions de taux plus compétitives sur des durées plus courtes."
 RI-EM-2,OCLT,"Ces emprunts baptisés Ouverture de Crédits Long Terme (OCLT) ou Crédits Long Terme Renouvelable (CLTR) sont des crédits  long  terme  classique  avec une possibilité d'utilisation en
  ligne de trésorerie. Ces droits consistent à pouvoir tirer des fonds jusqu'à un plafond fixé et pendant une période donnée afin de faire face à un besoin de trésorerie c'est à dire pour payer le décaissement des dépenses réalisées"
 ,,
 DI,Dépenses d’investissement,"Les dépenses d’investissement sont destinées à : 
- * maintenir, améliorer et développer le patrimoine dont dispose le Département [travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, etc.
+* maintenir, améliorer et développer le patrimoine dont dispose le Département [travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, etc.,
 * soutenir l’investissement de nos partenaires sur les territoires 
 
-Elles comprennent aussi le remboursement en capital des emprunts
-"
+Elles comprennent aussi le remboursement en capital des emprunts."
 ,,
 DI-1,Equipements Propres,"Les dépenses d'investissement en équipements propres sont considérées comme des immobilisations par nature, dans la mesure où elles remplissent des conditions de durabilité et de consistance. À ce titre, une liste de ces biens a été publiée par une circulaire n° NOR/INT/B/02/00059/C du 26 février 2002."
 DI-1-1,Collèges,"En fonction de l'évolution de la démographie, le département entreprend la construction de nouveaux collèges sur le département pour garantir des conditions d'accueil permettant le déroulement de la scolarité des élèves dans des locaux appropriés. D'ici à 2020, 12 nouveaux collèges doivent être construits pour répondre à ce besoin."
