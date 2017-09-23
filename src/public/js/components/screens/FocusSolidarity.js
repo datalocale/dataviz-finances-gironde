@@ -42,7 +42,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
             React.createElement('p', {}, 
-                `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. Allocations, prestations sociales et solidarité : de nombreux girondins bénéficient d’une ou plusieurs aides dans leurs parcours de vie au quotidien.`
+                `Chaque jour, sur l’ensemble du territoire girondin, le Département poursuit le même objectif: réduire les inégalités géographiques et sociales auprès de toutes les populations. Le Département est un acteur incontournable de la lutte contre l’exclusion et la précarité. Il mène des actions sociales innovantes pour accompagner les personnes fragilisées. Les Girondins peuvent ainsi bénéficier d’allocations, prestations sociales et solidarité dans leur parcours de vie au quotidien.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
@@ -57,7 +57,7 @@ export function FocusSol({
             React.createElement('div', {}, 
                 React.createElement('p', {}, 
                     React.createElement('strong', {},
-                        "Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
+                        "Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de solidarité pour soutenir les personnes en difficulté ont évolué de +4,31% par rapport à 2015."
                     ),
                     ` `),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
@@ -113,8 +113,13 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
-            React.createElement('p', {}, `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
-Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
+            React.createElement('p', {}, `On distingue  quatre catégories de public pouvant être aidé: 
+
+            - les personnes en insertion ou en situation de précarité, 
+            - les personnes handicapées
+            - les personnes âgées
+            - les enfants 
+            Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
@@ -122,8 +127,7 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-1')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `A lui seul, le RSA (Revenu de Solidarité Active) représente presque 94% des aides allouées aux personnes en insertion. Une personne française ou étrangère d'au moins 25 ans peut en bénéficier si elle remplit plusieurs conditions. https://www.service-public.fr/particuliers/vosdroits/F19778
-       `, 
+                text: `Le Revenu de Solidarité Active (RSA) représente près de 94% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier.`, 
                 highlights: [
                     {
                         strong: "+32%",
@@ -147,11 +151,12 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Trois types d’aides ont été allouées aux personnes handicapées par le Département en 2016 :
-- La PCH (Prestation de Compensation du Handicap), a été versée à 9 975 personnes bénéficiaires 
-- La prestation d’hébergement a financé 2763 places d'hébergement
-- L'ACTP (Allocation de Compensation pour Tiers Personne) a financé l'emploi d'aides à domicile pour 1 128 personnes 
-(All`, 
+                text: `Le Département a financé, en particulier, trois aides en 2016:
+- la Prestation de Compensation du Handicap (PCH) versée à 9 975 personnes 
+- la prestation d’hébergement  qui a financé 2 763 places d'hébergement
+- l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 128 personnes 
+
+L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`, 
                 highlights: [
                     {
                         strong: "73 Millions d'euros",
@@ -174,7 +179,7 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-3')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `La principale aide en faveur des personnes âgées est l’APA (Allocation Personnalisée d’autonomie). Elle peut être versée soit directement à la personne soit à l’établissement en charge de la personne, selon des critères d'attribution précis. https://www.service-public.fr/particuliers/vosdroits/F10009 L’année 2016 est marquée par l’augmentation des versements de l’APA liée à la mise en place de la loi ASV (Adaptation de la Société au Vieillissement).`,
+                text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
                         strong: "141.6 M d'€ ",
@@ -198,7 +203,8 @@ Le Département définit sa propre politique et les actions qu’il met en œuvr
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `L’Aide Sociale à l'Enfance (ASE) est le service du Département responsable de la protection des mineurs en danger ou en risque de danger (loi du 5 mars 2007). Les missions de l’ASE : apporter un soutien aux familles à leur domicile et accueillir les enfants qui lui sont confiés par leurs parents ou par un juge. Le Département s'occupe également de l’accueil familial qui représente le deuxième mode d’accueil des mineurs.`, 
+                text: `Le Département veille à protéger les enfants et les jeunes majeurs quand leur sécurité, leur santé et leur éducation sont menacées. Ce sont les professionnels de l’Aide sociale à l’enfance (ASE) qui assurent un suivi au plus près des familles. Si le danger rend impossible le maintien dans sa famille, l’enfant est pris en charge et est confié à des professionnels (familles d’accueil, maison d’enfants à caractère social, centre départemental de l’enfance et de la famille, foyer de l’enfance).
+https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`, 
                 highlights: [
                     {
                         strong: "166 M d'€",
