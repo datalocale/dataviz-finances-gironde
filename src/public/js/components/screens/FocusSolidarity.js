@@ -156,9 +156,7 @@ export function FocusSol({
 - la prestation d’hébergement  qui a financé 2 763 places d'hébergement
 - l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 128 personnes 
 
-L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`
-
-(All`, 
+L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`, 
                 highlights: [
                     {
                         strong: "73 Millions d'euros",
