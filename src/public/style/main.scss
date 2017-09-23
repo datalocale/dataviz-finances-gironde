@@ -1,13 +1,9 @@
-@import '../../shared/style/better-defaults';
-@import 'globals';
-@import 'color-palette'; 
-
 @import 'env-vars';
+@import 'globals';
+@import 'gironde-breadcrumb';
 
 @import 'top-level';
-
-@import '../../shared/style/placeholder'; 
-
+@import 'color-palette'; 
 @import 'home';
 @import 'finance-element';
 @import 'explore-budget';

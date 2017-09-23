@@ -40,18 +40,23 @@ function makeVariableObject(env){
     return o;
 }
 
+const EMPTY = Object.freeze({contents: ''});
+
 module.exports = function(file, prev){
-
-    if(file === 'env-vars'){
-        console.log('IMPORTER env', process.env.NODE_ENV);
-
-        return {
-            contents: makeFileContent(makeVariableObject(process.env.NODE_ENV))
-        }
+    switch(file){
+        case 'env-vars':
+            return {
+                contents: makeFileContent(makeVariableObject(process.env.NODE_ENV))
+            }
+        case 'globals':
+            if(process.env.NODE_ENV === 'production'){
+                return EMPTY;
+            }
+            break;
     }
-    else{
-        return {
-            file: path.join(path.dirname(prev), file + (path.extname(file) ? '' : '.scss'))
-        }
+
+    // default loader behavior
+    return {
+        file: path.join(path.dirname(prev), file + (path.extname(file) ? '' : '.scss'))
     }
 }
