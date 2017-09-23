@@ -20,7 +20,7 @@ export default function ({className, title, illustrationUrl, amount, proportion,
 
     return React.createElement('div', { className: ['focus-detail', className].filter(e => e).join(' ') },
         React.createElement('div', {className: 'illustration'},
-            React.createElement('img', {width: 263, height: 263, src: illustrationUrl})
+            React.createElement('img', {src: illustrationUrl})
         ),
         React.createElement('div', {className: 'explanation'},
             React.createElement('h3', {}, title),
