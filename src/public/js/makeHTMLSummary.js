@@ -1,4 +1,10 @@
 
+function createSpanClone(node){
+    const clone = document.createElement('span'); 
+    clone.textContent = node.textContent;
+    return clone;
+}
+
 export default function(htmlString, threshold = 500){
     const result = document.createElement('div');
     let characterCount = 0;
@@ -29,6 +35,11 @@ export default function(htmlString, threshold = 500){
         }
     });
 
+    // remove inner links
+    const links = result.querySelectorAll('a');
+    Array.from(links).forEach(l => {
+        l.replaceWith(createSpanClone(l));
+    })
     
 
     return result.innerHTML;

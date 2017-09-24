@@ -10,6 +10,7 @@ import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../../shared/js/components/Markdown';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -47,7 +48,7 @@ export function FocusSol({
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
-            React.createElement('p', {}, 
+            React.createElement(Markdown, {}, 
                 `De nombreux Girondins sont les bénéficiaires directs des investissements du Département, qui s'élèvent en moyenne à 200 millions d’euros chaque année. Ils concernent le réaménagement des routes, la construction de collèges ou l'entretien d’espaces naturels, mais aussi des remboursements d'emprunts, prêts accordés par la collectivité ou des acquisitions mobilières et immobilières.`
             )
         ),
@@ -61,7 +62,7 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, `En 2016, le Département de la Gironde a dépensé 244 877 921,12 € en investissement soit 15,1% de la totalité des dépenses. Ce qui représente une évolution de +3.2% par rapport à 2015. Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs des investissements du Département grâce réaménagement des routes, au construction de collèges ou encore à l’entretien d’espaces naturels.`),
+                React.createElement(Markdown, {}, `**En 2016, le Département de la Gironde a dépensé 244 877 921,12 € en investissement soit 15,1% de la totalité des dépenses. Ce qui représente une évolution de +3.2% par rapport à 2015. Sur une population totale de plus d’1,5 Millions d’habitants, de nombreux Girondins sont des bénéficiaires directs des investissements du Département grâce réaménagement des routes, au construction de collèges ou encore à l’entretien d’espaces naturels.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -90,7 +91,7 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les secteurs d’investissement`}),
-            React.createElement('p', {}, `Le Département peut investir directement dans quelques secteurs en fonction de ses compétences. Ces domaines d’action privilégiés sont les collèges, le réseau routier départemental, son patrimoine immobilier, des espaces naturels et classés ainsi que certaines subventions aux communes pour les aider dans leur propre politique d’investissement.`),
+            React.createElement(Markdown, {}, `Le Département peut investir directement dans quelques secteurs en fonction de ses compétences. Ces domaines d’action privilégiés sont les collèges, le réseau routier départemental, son patrimoine immobilier, des espaces naturels et classés ainsi que certaines subventions aux communes pour les aider dans leur propre politique d’investissement.`),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI-1', text: `en savoir plus`}),
             React.createElement(FocusDetail, {
                 className: 'colleges', 

@@ -16,6 +16,7 @@ import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../../shared/js/components/Markdown';
 
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
@@ -46,13 +47,11 @@ export function TotalBudget({
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: `Exploration des comptes ${currentYear}`}),
         React.createElement('section', {},
-            React.createElement('p', {},
-                `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’augmentation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.`
-            ),
-            React.createElement('p', {},
-                `Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-                une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
-                une  réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`
+            React.createElement(Markdown, {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’augmentation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
+                
+            Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
+            - une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
+            - une réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`
             )
         ),
 
@@ -104,20 +103,16 @@ export function TotalBudget({
                     )
                 )
             ),
-            React.createElement('p', {},
+            React.createElement(Markdown, {},
             `Les chiffres étant issus du compte administratif, la différence entre le montant des recettes et le montant des dépenses représente l'excédent de l'exercice.`
             )  
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Comprendre la construction d'un budget`}),
-            React.createElement(
-                'p',
-                {},
+            React.createElement(Markdown, {},
                 `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Toutefois, le compte administratif peut présenter sur l'exercice un résultat excédentaire ou déficitaire.`
             ),
-            React.createElement(
-                'p',
-                {},
+            React.createElement(Markdown, {},
                 `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
             ),
             React.createElement(

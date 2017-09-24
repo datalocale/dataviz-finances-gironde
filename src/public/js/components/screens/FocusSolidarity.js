@@ -11,6 +11,7 @@ import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../../shared/js/components/Markdown';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -41,7 +42,7 @@ export function FocusSol({
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
-            React.createElement('p', {}, 
+            React.createElement(Markdown, {}, 
                 `Face à la croissance des situations d’exclusion et de précarité, le Département poursuit ses actions sociales innovantes et s’affirme en particulier dans le domaine de l’insertion et de l’accompagnement des personnes en difficultés. Allocations, prestations sociales et solidarité : de nombreux girondins bénéficient d’une ou plusieurs aides dans leurs parcours de vie au quotidien.`
             )
         ),
@@ -55,11 +56,8 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, 
-                    React.createElement('strong', {},
-                        "Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015."
-                    ),
-                    ` `),
+                React.createElement(Markdown, {}, 
+                    `**Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -113,8 +111,9 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
-            React.createElement('p', {}, `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
-Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
+            React.createElement(Markdown, {}, 
+                `Les dépenses de solidarité concernent quatre catégories de bénéficiaires : les personnes en insertion ou en situation de précarité, les personnes handicapée, les personnes âgées, les enfants. 
+                Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 

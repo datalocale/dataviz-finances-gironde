@@ -2,7 +2,7 @@ import React from 'react';
 
 import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 import AppetizerTitle from './AppetizerTitle';
-
+import Markdown from '../../../shared/js/components/Markdown';
 
 /*
 interface AppetizerProps{
@@ -19,7 +19,7 @@ export default function ({h1, numberMain, numberSecundary, description, moreUrl}
                 React.createElement('div', { className: 'main' }, numberMain),
                 React.createElement('div', { className: 'secundary' }, numberSecundary)
             ),
-            React.createElement('p', {}, description)
+            React.createElement(Markdown, {}, description)
         ),
         React.createElement(PrimaryCallToAction, { href: moreUrl, text: 'En savoir plus'})
     );
