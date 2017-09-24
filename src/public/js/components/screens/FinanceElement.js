@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import page from 'page';
 
 import { max } from 'd3-array';
-import { format as d3Format } from 'd3-format';
-import { format as formatEuro } from 'currency-formatter';
 
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';

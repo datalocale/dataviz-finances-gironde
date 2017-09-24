@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import page from 'page';
 
-import { format } from 'd3-format';
-
 import StackChart from '../../../../shared/js/components/StackChart';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
