@@ -152,12 +152,12 @@ export default connect(
             constructionAmounts: m52Instruction ? {
                 DotationEtat: totalById.get('RF-5'),
                 FiscalitéDirecte: totalById.get('RF-1'),
-                FiscalitéIndirecte: totalById.get('RF-2'),
-                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-5'].map(i => totalById.get(i))),
+                FiscalitéIndirecte: sum(['RF-2', 'RF-3', 'RF-4'].map(i => totalById.get(i))),
+                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-4', 'RF-5'].map(i => totalById.get(i))),
 
                 Solidarité: totalById.get('DF-1'),
-                Interventions: totalById.get('DF-3') + totalById.get('DF-4'),
-                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3', 'DF-4'].map(i => totalById.get(i)))),
+                Interventions: totalById.get('DF-3'),
+                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i)))),
 
                 Emprunt: totalById.get('RI-EM'),
                 RIPropre: (totalById.get('RI') - totalById.get('RI-EM')),

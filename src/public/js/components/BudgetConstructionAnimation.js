@@ -465,10 +465,10 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 Legend(`Solidarité`, Solidarité)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height interventions' }, 
-                                Legend('Interventions', Interventions)
+                                Legend('Interventions (SDIS, Transports …)', Interventions)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height depenses-structure' }, 
-                                Legend('Dépenses de structure', DépensesStructure)
+                                Legend('Autres (personnel …)', DépensesStructure)
                             )
                         )
                     ),
@@ -478,7 +478,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/RI'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'text'}, `Recettes d'investissement`),
+                            React.createElement('div', {className: 'text'}, `Recettes d'investissements`),
                             React.createElement(MoneyAmount, {amount: ri})
                         ),
                         React.createElement(
@@ -487,13 +487,13 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent ri'
                             },
                             React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
-                                Legend('RI propres', RIPropre)
+                                Legend(`Recettes d'investissement`, RIPropre)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
-                                Legend('Emprunt', Emprunt)
+                                Legend('Emprunts', Emprunt)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height epargne' }, 
-                                Legend(`Epargne`, epargne)
+                                Legend(`Épargne`, epargne)
                             ),
                             React.createElement('div', { className: 'emptier appear-by-height' })
                         )
@@ -513,10 +513,10 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent di'
                             },
                             React.createElement('div', { className: 'brick appear-by-height remboursement-emprunt' }, 
-                                Legend(`Remboursement Emprunt`, RemboursementEmprunt)
+                                Legend(`Remboursement Emprunts`, RemboursementEmprunt)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height infra' }, 
-                                Legend(`Routes + Colleges + Amenagement`, infra)
+                                Legend(`ROUTES + COLLÈGES + BÂTIMENTS + AMÉNAGEMENT`, infra)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height subventions' }, 
                                 Legend(`Subventions`, Subventions)
