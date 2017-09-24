@@ -194,7 +194,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
 
         !isLeaf ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement(SecundaryTitle, {text: `Détail des ${top.label} en ${year}`}): undefined,
-            thisYearPartition.map(({contentId, partAmount, texts, url}) => {
+            thisYearPartition.reverse().map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
                         href: url,
