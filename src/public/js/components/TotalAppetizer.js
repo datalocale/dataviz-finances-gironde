@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../shared/js/components/Markdown';
 
 /*
 interface TotalAppetizerProps{
@@ -31,7 +32,7 @@ export default function ({total, year, exploreUrl}) {
             )
         ),
         React.createElement('hr', {}),
-        React.createElement('p', {}, 
+        React.createElement(Markdown, {}, 
             `Le département a dépensé ${toDisplay.replace('.', ',')} milliards d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})

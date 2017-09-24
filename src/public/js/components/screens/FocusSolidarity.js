@@ -11,6 +11,7 @@ import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../../shared/js/components/Markdown';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -41,7 +42,7 @@ export function FocusSol({
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: 'Solidarités'}),
-            React.createElement('p', {}, 
+            React.createElement(Markdown, {}, 
                 `Chaque jour, sur l’ensemble du territoire girondin, le Département poursuit le même objectif: réduire les inégalités géographiques et sociales auprès de toutes les populations. Le Département est un acteur incontournable de la lutte contre l’exclusion et la précarité. Il mène des actions sociales innovantes pour accompagner les personnes fragilisées. Les Girondins peuvent ainsi bénéficier d’allocations, prestations sociales et solidarité dans leur parcours de vie au quotidien.`
             )
         ),
@@ -55,11 +56,8 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, 
-                    React.createElement('strong', {},
-                        "Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de solidarité pour soutenir les personnes en difficulté ont évolué de +4,31% par rapport à 2015."
-                    ),
-                    ` `),
+                React.createElement(Markdown, {}, 
+                    `**Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -113,7 +111,7 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
-            React.createElement('p', {}, `On distingue  quatre catégories de public pouvant être aidé: 
+            React.createElement(Markdown, {}, `On distingue  quatre catégories de public pouvant être aidé: 
 
             - les personnes en insertion ou en situation de précarité, 
             - les personnes handicapées

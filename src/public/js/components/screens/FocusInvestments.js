@@ -10,6 +10,7 @@ import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../../shared/js/components/Markdown';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -47,7 +48,7 @@ export function FocusSol({
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
-            React.createElement('p', {}, 
+            React.createElement(Markdown, {}, 
                 `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles,etc.`
             )
         ),
@@ -61,7 +62,7 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement('p', {}, `En 2016, le Département de la Gironde a investi 244 877 921,12 € soit 15,1% de la totalité des dépenses. Cela représente une augmentation de +3.2% comparé à 2015. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.`),
+                React.createElement(Markdown, {}, `**En 2016, le Département de la Gironde a investi 244 877 921,12 € soit 15,1% de la totalité des dépenses. Cela représente une augmentation de +3.2% comparé à 2015. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -90,7 +91,7 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les secteurs d’investissement`}),
-            React.createElement('p', {}, `Le Département ne peut investir que dans les domaines liés à ses compétences. Ses investissements portent par exemple sur la construction, l’entretien et la rénovation des collèges, l'entretien du réseau routier départemental, de son patrimoine immobilier, des espaces naturels sensibles. Il verse également des subventions aux communes pour soutenir leur propre politique d’investissement.`),
+            React.createElement(Markdown, {}, `Le Département ne peut investir que dans les domaines liés à ses compétences. Ses investissements portent par exemple sur la construction, l’entretien et la rénovation des collèges, l'entretien du réseau routier départemental, de son patrimoine immobilier, des espaces naturels sensibles. Il verse également des subventions aux communes pour soutenir leur propre politique d’investissement.`),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI-1', text: `en savoir plus`}),
             React.createElement(FocusDetail, {
                 className: 'colleges', 
