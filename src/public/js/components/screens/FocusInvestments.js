@@ -87,7 +87,7 @@ export function FocusSol({
                     text: p.texts.label,
                     colorClassName: colorClassById.get(p.contentId)
                 })).toArray(),
-                yValueDisplay: makeAmountString,
+                yValueDisplay: makeAmountString
             }),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
         ),

@@ -18,6 +18,7 @@ const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabe
 
 import LegendList from '../../../../shared/js/components/LegendList';
 import StackChart from '../../../../shared/js/components/StackChart';
+import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
@@ -181,7 +182,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         text: p.texts && p.texts.label,
                         colorClassName: colorClassById.get(p.contentId)
                     })).toArray() : undefined,
-                uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined
+                uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
+                yValueDisplay: makeAmountString
             }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
         ),
@@ -204,7 +206,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'em'
                             }
                         }, 
-                        React.createElement('span', {}, d3Format(".3s")(partAmount))
+                        React.createElement(MoneyAmount, {amount: partAmount})
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.label || contentId),
@@ -235,7 +237,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         return React.createElement('tr', {}, 
                             React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
                             React.createElement('td', {}, row['Libellé']),
-                            React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                            React.createElement('td', {}, 
+                                React.createElement(MoneyAmount, {amount: row['Montant']})
+                            )
                         )
                     })
                 )
