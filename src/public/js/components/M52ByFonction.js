@@ -50,6 +50,8 @@ export default class M52ByFonction extends React.Component {
 
         const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
 
+        console.log('m52Hierarchical', m52Hierarchical);
+
         return React.createElement('div', { className: 'm52-by-fonction' },
             React.createElement(M52Viz, {
                 onSliceSelected: e => {
@@ -81,7 +83,7 @@ export default class M52ByFonction extends React.Component {
                     .sort((c1, c2) => c2.total - c1.total)
                     .map((e) => ({
                         url: urlByFonction[e.id], 
-                        text: labelsById.get(e.id), 
+                        text: `${labelsById.get(e.id)} (${(100*e.total/m52Hierarchical.total).toFixed(1)}%)`, 
                         colorClassName: `${e.id}`
                     }))
                 })
