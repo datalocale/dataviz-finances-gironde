@@ -144,12 +144,12 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         },
                         parent ? {
                             url: parent.url,
-                            text: parent.label,
+                            text: `Autres ${parent.label}`,
                             colorClassName: parentColorClass
                         } : undefined,
                         top ? {
                             url: top.url,
-                            text: top.label,
+                            text: `Autres ${top.label}`,
                             colorClassName: 'discrete-grey'
                         } : undefined,
                     ].filter(e => e)})
