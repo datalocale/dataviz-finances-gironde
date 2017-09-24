@@ -104,10 +104,16 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
                 contentId: df2.contentId,
                 partAmount: df2.partAmount,
-                texts: df2.texts && df2.texts.set('label', 'Actions sociales'),
+                texts: df2.texts && df2.texts.set('label', 'Actions sociales par publics'),
                 url: df2.url
             });
         })
+
+        // temporarily don't display DF-1
+        thisYearPartition = thisYearPartition && thisYearPartition.remove(
+            thisYearPartition.findIndex(p => p.contentId === 'DF-1')
+        )
+        
     }
 
     const RDFIText = RDFI === DF ?
