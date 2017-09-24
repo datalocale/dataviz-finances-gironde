@@ -18,7 +18,7 @@ export default function ({ xs, ysByX,
     Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 40, 
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
     legendItems, uniqueColorClass,
-    selectedX,
+    selectedX, yValueDisplay = x => String(x),
     onSelectedXAxisItem, onBrickClicked
 }) {
     const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length+1)
@@ -74,7 +74,7 @@ export default function ({ xs, ysByX,
                     text: {
                         x: 0, y: -10, 
                         anchor: 'right',
-                        t: (tick/1000000)+'M'
+                        t: yValueDisplay(tick)
                     }
                     
                 }
@@ -143,15 +143,14 @@ export default function ({ xs, ysByX,
                                     React.createElement('rect', {x: -columnWidth/2, width: columnWidth, height, rx: 5, ry: 5}),
                                     height >= 30 && stack.length >= 2 ? React.createElement('text', {
                                         transform: `translate(-${columnWidth/2 - 10}, 20)`
-                                    }, (value/1000000).toFixed(0)+'M') : undefined
+                                    }, yValueDisplay(value)) : undefined
                                 )
                             })
                         ),
                         React.createElement(
                             'text', 
                             {className: 'title', x: -columnWidth/2, y: totalY, dy: "-1em", dx:"0em", textAnchor: 'right'}, 
-                            React.createElement('tspan', {}, (total/1000000).toFixed(1)),
-                            React.createElement('tspan', {}, 'M€')
+                            React.createElement('tspan', {}, yValueDisplay(total))
                         )
                     )
                 })

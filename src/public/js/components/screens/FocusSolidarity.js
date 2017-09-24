@@ -5,13 +5,12 @@ import { connect } from 'react-redux';
 
 import page from 'page';
 
-import { format } from 'd3-format';
-
 import StackChart from '../../../../shared/js/components/StackChart';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 import Markdown from '../../../../shared/js/components/Markdown';
+import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -79,7 +78,6 @@ export function FocusSol({
                     yearSolidarity['DF-2-4'],
                     yearSolidarity['DF-2-other']
                 ]))),
-                onBrickClicked: (year, id) => { page(`#!/finance-details/${id}`); },
                 legendItems: [
                     {
                         id: 'DF-2-1',
@@ -106,7 +104,9 @@ export function FocusSol({
                         colorClassName: 'DF-2-other', 
                         text: "Prévention transversale"
                     }
-                ]
+                ],
+                yValueDisplay: makeAmountString,
+                onBrickClicked: (year, id) => { page(`#!/finance-details/${id}`); }
             })
         ),
         React.createElement('section', {}, 
@@ -123,7 +123,7 @@ export function FocusSol({
                 title: 'Personnes en insertion', 
                 illustrationUrl: '../images/Macaron1.png', 
                 // (May 29th) different than what was hardcoded ("244 Millions €")
-                amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-1')) : '', 
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Le Revenu de Solidarité Active (RSA) représente près de 94% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier.`, 
                 highlights: [
@@ -132,7 +132,7 @@ export function FocusSol({
                         span: "de dépenses depuis 2012"
                     },
                     {
-                        strong: "229 M d'€",
+                        strong: "229M d'€",
                         span: "dédiés au RSA en 2016"
                     },
                     {
@@ -147,7 +147,7 @@ export function FocusSol({
                 title: 'Personnes handicapées',
                 illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Handicapes.svg',
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
-                amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-2')) : '', 
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Le Département a financé, en particulier, trois aides en 2016:
 - la Prestation de Compensation du Handicap (PCH) versée à 9 975 personnes 
@@ -157,15 +157,15 @@ export function FocusSol({
 L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`, 
                 highlights: [
                     {
-                        strong: "73 Millions d'euros",
+                        strong: "73M d'€",
                         span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "122 Millions d'euros",
+                        strong: "122M d'€",
                         span: "pour des places d’hébergement"
                     },
                     {
-                        strong: "8.25 Millions d'euros",
+                        strong: "8.25M d'€",
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ], 
@@ -175,20 +175,20 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 className: 'elderly', 
                 title: 'Personnes âgées',
                 illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
-                amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-3')) : '',
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
-                        strong: "141.6 M d'€ ",
+                        strong: "141.6M d'€",
                         span: "versés en 2016 pour l’APA"
                     },
                     {
-                        strong: " + 3.53%  ",
-                        span: " en 2016 "
+                        strong: "+ 3.53%",
+                        span: "en 2016"
                     },
                     {
-                        strong: "34 046 ",
+                        strong: "34 046",
                         span: "bénéficiaires en 2016"
                     }
                 ], 
@@ -199,17 +199,17 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 title: 'Enfance',
                 illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Enfance.svg',
                 // (May 29th) different than what was hardcoded ("168 Millions €")
-                amount: currentYearSolidarity ? format(".3s")(currentYearSolidarity.get('DF-2-4')) : '',
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `Le Département veille à protéger les enfants et les jeunes majeurs quand leur sécurité, leur santé et leur éducation sont menacées. Ce sont les professionnels de l’Aide sociale à l’enfance (ASE) qui assurent un suivi au plus près des familles. Si le danger rend impossible le maintien dans sa famille, l’enfant est pris en charge et est confié à des professionnels (familles d’accueil, maison d’enfants à caractère social, centre départemental de l’enfance et de la famille, foyer de l’enfance).
 https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`, 
                 highlights: [
                     {
-                        strong: "166 M d'€",
+                        strong: "166M d'€",
                         span: "pour les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
-                        strong: "1392 ",
+                        strong: "1392",
                         span: "enfants accueillis en 2016"
                     },
                     {

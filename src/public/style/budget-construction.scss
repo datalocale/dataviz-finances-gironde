@@ -18,7 +18,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             
             justify-content: flex-end;
             align-items: center;
-            width: 19%;
+            width: 20%;
 
             & > .legend{
                 align-self: flex-start;
@@ -29,7 +29,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
                 color: black;
                 font-weight: bold;
 
-                .number{
+                .money-amount{
                     color: #BBB;
                 }
 
@@ -112,7 +112,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
 
                         color: white;
 
-                        .text, .amount{
+                        .text, .money-amount{
                             padding: 0;
                             margin: 0;
                         }
@@ -121,7 +121,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
                             text-transform: uppercase;
                         }
 
-                        .amount{
+                        .money-amount{
                             font-weight: normal;
                         }
                     }

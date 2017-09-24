@@ -4,6 +4,7 @@ import { max, sum } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 
 import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import MoneyAmount from '../../../shared/js/components/MoneyAmount';
 
 function delay(time){
     return () => new Promise(resolve => setTimeout(resolve, time))
@@ -61,7 +62,7 @@ const MILLISECONDS = 1000;
 function Legend(text, amount) {
     return React.createElement('div', { className: 'legend' },
         React.createElement('span', { className: 'text' }, text),
-        React.createElement('span', { className: 'amount' }, amount)
+        React.createElement(MoneyAmount, { amount })
     )
 }
 
@@ -413,11 +414,6 @@ export default class BudgetConstructionAnimation extends React.Component {
         const maxAmount = max([rf, ri, df, di]);
 
         const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * bricksContainerSize;
-        const rfHeight = maxHeight * rf / maxAmount;
-        const dfHeight = maxHeight * df / maxAmount;
-
-        const riHeight = maxHeight * ri / maxAmount;
-        const diHeight = maxHeight * di / maxAmount;
 
         return React.createElement('article', { className: 'budget-construction', ref: 'container' },
             React.createElement('div', { className: 'bricks' },
@@ -429,10 +425,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                         },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'text'}, `Recettes de fonctionnement`),
-                            React.createElement('div', {className: 'number'}, 
-                                (rf/1000000).toFixed(0),
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
-                            )
+                            React.createElement(MoneyAmount, {amount: rf})
                         ),
                         React.createElement(
                             'div',
@@ -440,16 +433,16 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent rf'
                             },
                             React.createElement('div', { className: 'brick appear-by-height dotation-etat'}, 
-                                Legend(`Dotation de l'Etat`, `${(DotationEtat/1000000).toFixed(0)} millions`)
+                                Legend(`Dotation de l'Etat`, DotationEtat)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height fiscalite-directe' }, 
-                                Legend('Fiscalité directe', `${(FiscalitéDirecte/1000000).toFixed(0)} millions`)
+                                Legend('Fiscalité directe', FiscalitéDirecte)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height fiscalite-indirecte'}, 
-                                Legend('Fiscalité indirecte', `${(FiscalitéIndirecte/1000000).toFixed(0)} millions`)
+                                Legend('Fiscalité indirecte', FiscalitéIndirecte)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height recettes-diverses' }, 
-                                Legend('Recettes diverses', `${(RecettesDiverses/1000000).toFixed(0)} millions`)
+                                Legend('Recettes diverses', RecettesDiverses)
                             ),
                             React.createElement('div', { className: 'emptier appear-by-height' })
                         )
@@ -461,10 +454,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                         },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'text'}, `Dépenses de fonctionnement`),
-                            React.createElement('div', {className: 'number'}, 
-                                (df/1000000).toFixed(0),
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
-                            )
+                            React.createElement(MoneyAmount, {amount: df})
                         ),
                         React.createElement(
                             'div',
@@ -472,13 +462,13 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent df'
                             },
                             React.createElement('div', { className: 'brick appear-by-height solidarite' }, 
-                                Legend(`Solidarité`, `${(Solidarité/1000000).toFixed(0)} millions`)
+                                Legend(`Solidarité`, Solidarité)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height interventions' }, 
-                                Legend('Interventions', `${(Interventions/1000000).toFixed(0)} millions`)
+                                Legend('Interventions (SDIS, Transports …)', Interventions)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height depenses-structure' }, 
-                                Legend('Dépenses de structure', `${(DépensesStructure/1000000).toFixed(0)} millions`)
+                                Legend('Autres (personnel …)', DépensesStructure)
                             )
                         )
                     ),
@@ -488,11 +478,8 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/RI'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'text'}, `Recettes d'investissement`),
-                            React.createElement('div', {className: 'number'}, 
-                                (ri/1000000).toFixed(0),
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
-                            )
+                            React.createElement('div', {className: 'text'}, `Recettes d'investissements`),
+                            React.createElement(MoneyAmount, {amount: ri})
                         ),
                         React.createElement(
                             'div',
@@ -500,13 +487,13 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent ri'
                             },
                             React.createElement('div', { className: 'brick appear-by-height ri-propres' }, 
-                                Legend('RI propres', `${(RIPropre/1000000).toFixed(0)} millions`)
+                                Legend(`Recettes d'investissement`, RIPropre)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height emprunt' }, 
-                                Legend('Emprunt', `${(Emprunt/1000000).toFixed(0)} millions`)
+                                Legend('Emprunts', Emprunt)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height epargne' }, 
-                                Legend(`Epargne`, `${(epargne/1000000).toFixed(0)} millions`)
+                                Legend(`Épargne`, epargne)
                             ),
                             React.createElement('div', { className: 'emptier appear-by-height' })
                         )
@@ -518,11 +505,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                         },
                         React.createElement('div', {className: 'legend'},
                             React.createElement('div', {className: 'text'}, `Dépenses d'investissement`),
-                            React.createElement('div', {className: 'number'}, 
-                                // "ri" purposefully so that di === ri
-                                (ri/1000000).toFixed(0),
-                                React.createElement('span', {className: 'unit'}, ` millions d'euros`)
-                            )
+                            React.createElement(MoneyAmount, {amount: di})
                         ),
                         React.createElement(
                             'div',
@@ -530,13 +513,13 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 className: 'brick parent di'
                             },
                             React.createElement('div', { className: 'brick appear-by-height remboursement-emprunt' }, 
-                                Legend(`Remboursement Emprunt`, `${(RemboursementEmprunt/1000000).toFixed(0)} millions`)
+                                Legend(`Remboursement Emprunts`, RemboursementEmprunt)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height infra' }, 
-                                Legend(`Routes + Colleges + Amenagement`, `${(infra/1000000).toFixed(0)} millions`)
+                                Legend(`ROUTES + COLLÈGES + BÂTIMENTS + AMÉNAGEMENT`, infra)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height subventions' }, 
-                                Legend(`Subventions`, `${(Subventions/1000000).toFixed(0)} millions`)
+                                Legend(`Subventions`, Subventions)
                             )
                         )
                     )

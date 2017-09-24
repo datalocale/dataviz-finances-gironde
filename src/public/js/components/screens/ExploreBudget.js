@@ -10,22 +10,18 @@ import {RF, RI, DF, DI, EXPENDITURES, REVENUE} from '../../../../shared/js/finan
 import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
-import M52ByFonction from '../M52ByFonction';
-
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
-import Markdown from '../../../../shared/js/components/Markdown';
 
+import Markdown from '../../../../shared/js/components/Markdown';
+import MoneyAmount from '../../../../shared/js/components/MoneyAmount';
+
+import M52ByFonction from '../M52ByFonction';
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
 const MAX_HEIGHT = 30;
-
-
-function displayMillions(amount){
-    return `${(amount/1000000).toFixed(0)} millions`;
-}
 
 export function TotalBudget({
     currentYear, totalById, m52Instruction, labelsById,
@@ -64,18 +60,15 @@ export function TotalBudget({
                         React.createElement('div', {className: 'areas', style: {height: revHeight}},
                             React.createElement('a', {className: 'rf', href: rf, style: {height: rfHeight}},
                                 React.createElement('h2', {}, "Recettes de fonctionnement"),
-                                React.createElement('h3', {}, displayMillions(totalById.get(RF)))
+                                React.createElement(MoneyAmount, {amount: totalById.get(RF)})
                             ),
                             React.createElement('a', {className: 'ri', href: ri, style: {height: riHeight}},
                                 React.createElement('h2', {}, "Recettes d'investissement"),
-                                React.createElement('h3', {}, displayMillions(totalById.get(RI)))
+                                React.createElement(MoneyAmount, {amount: totalById.get(RI)})
                             )
                         ),
                         React.createElement('div', {className: 'texts', style: {height: revHeight}},
-                            React.createElement('div', {},
-                                React.createElement('div', {className: 'amount'}, (revenue/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
-                                React.createElement('div', {className: 'unit'}, `milliards d'euros`)
-                            ),
+                            React.createElement(MoneyAmount, {amount: revenue}),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: revURL})
                         )
                     )
@@ -86,18 +79,15 @@ export function TotalBudget({
                         React.createElement('div', {className: 'areas', style: {height: expHeight}},
                             React.createElement('a', {className: 'df', href: df, style: {height: dfHeight}},
                                 React.createElement('h2', {}, "Dépenses de fonctionnement"),
-                                React.createElement('h3', {}, displayMillions(totalById.get(DF)))
+                                React.createElement(MoneyAmount, {amount: totalById.get(DF)})
                             ),
                             React.createElement('a', {className: 'di', href: di, style: {height: diHeight}},
                                 React.createElement('h2', {}, "Dépenses d'investissement"),
-                                React.createElement('h3', {}, displayMillions(totalById.get(DI)))
+                                React.createElement(MoneyAmount, {amount: totalById.get(DI)})
                             )
                         ),
                         React.createElement('div', {className: 'texts', style: {height: expHeight}},
-                            React.createElement('div', {},
-                                React.createElement('div', {className: 'amount'}, (expenditures/Math.pow(10, 9)).toFixed(2).replace('.', ',')),
-                                React.createElement('div', {className: 'unit'}, `milliards d'euros`)
-                            ),
+                            React.createElement(MoneyAmount, {amount: expenditures}),
                             React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
                         )                   
                     )
@@ -162,12 +152,12 @@ export default connect(
             constructionAmounts: m52Instruction ? {
                 DotationEtat: totalById.get('RF-5'),
                 FiscalitéDirecte: totalById.get('RF-1'),
-                FiscalitéIndirecte: totalById.get('RF-2'),
-                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-5'].map(i => totalById.get(i))),
+                FiscalitéIndirecte: sum(['RF-2', 'RF-3', 'RF-4'].map(i => totalById.get(i))),
+                RecettesDiverses: totalById.get('RF') - sum(['RF-1', 'RF-2', 'RF-3', 'RF-4', 'RF-5'].map(i => totalById.get(i))),
 
                 Solidarité: totalById.get('DF-1'),
-                Interventions: totalById.get('DF-3') + totalById.get('DF-4'),
-                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3', 'DF-4'].map(i => totalById.get(i)))),
+                Interventions: totalById.get('DF-3'),
+                DépensesStructure: (totalById.get('DF') - sum(['DF-1', 'DF-3'].map(i => totalById.get(i)))),
 
                 Emprunt: totalById.get('RI-EM'),
                 RIPropre: (totalById.get('RI') - totalById.get('RI-EM')),

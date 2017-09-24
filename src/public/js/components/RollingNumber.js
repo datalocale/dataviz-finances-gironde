@@ -1,5 +1,5 @@
 import React from 'react';
-import { format } from 'currency-formatter';
+import { makeAmountString } from '../../../shared/js/components/MoneyAmount';
 
 function roll(el, amount, delay){
     return new Promise(resolve => {
@@ -15,7 +15,7 @@ function roll(el, amount, delay){
                 // ease out expo to stabilize the significative numbers quickly
                 const amountToDisplay = amount * (1 - (fraction === 1 ? 0 : Math.pow( 2, -10*fraction)));
 
-                el.textContent = format(amountToDisplay, { code: 'EUR' });
+                el.textContent = makeAmountString(amountToDisplay);
 
                 if(fraction >= 1){
                     resolve();

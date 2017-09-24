@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import page from 'page';
 
 import { max } from 'd3-array';
-import { format as d3Format } from 'd3-format';
-import { format as formatEuro } from 'currency-formatter';
 
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
@@ -18,6 +16,7 @@ const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabe
 
 import LegendList from '../../../../shared/js/components/LegendList';
 import StackChart from '../../../../shared/js/components/StackChart';
+import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
 
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
@@ -105,10 +104,16 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
                 contentId: df2.contentId,
                 partAmount: df2.partAmount,
-                texts: df2.texts && df2.texts.set('label', 'Actions sociales'),
+                texts: df2.texts && df2.texts.set('label', 'Actions sociales par publics'),
                 url: df2.url
             });
         })
+
+        // temporarily don't display DF-1
+        thisYearPartition = thisYearPartition && thisYearPartition.remove(
+            thisYearPartition.findIndex(p => p.contentId === 'DF-1')
+        )
+        
     }
 
     const RDFIText = RDFI === DF ?
@@ -145,12 +150,12 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         },
                         parent ? {
                             url: parent.url,
-                            text: parent.label,
+                            text: `Autres ${parent.label}`,
                             colorClassName: parentColorClass
                         } : undefined,
                         top ? {
                             url: top.url,
-                            text: top.label,
+                            text: `Autres ${top.label}`,
                             colorClassName: 'discrete-grey'
                         } : undefined,
                     ].filter(e => e)})
@@ -181,14 +186,15 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         text: p.texts && p.texts.label,
                         colorClassName: colorClassById.get(p.contentId)
                     })).toArray() : undefined,
-                uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined
+                uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
+                yValueDisplay: makeAmountString
             }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
         ),
 
         !isLeaf ? React.createElement('section', { className: 'partition'}, 
             top ? React.createElement(SecundaryTitle, {text: `Détail des ${top.label} en ${year}`}): undefined,
-            thisYearPartition.map(({contentId, partAmount, texts, url}) => {
+            thisYearPartition.reverse().map(({contentId, partAmount, texts, url}) => {
                 return React.createElement('a',
                     {
                         href: url,
@@ -204,7 +210,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                                 height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'em'
                             }
                         }, 
-                        React.createElement('span', {}, d3Format(".3s")(partAmount))
+                        React.createElement(MoneyAmount, {amount: partAmount})
                     ),
                     React.createElement('div', {className: 'text'},
                         React.createElement('h1', {}, texts && texts.label || contentId),
@@ -235,7 +241,9 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                         return React.createElement('tr', {}, 
                             React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
                             React.createElement('td', {}, row['Libellé']),
-                            React.createElement('td', {className: 'money-amount'}, formatEuro(row['Montant'], { code: 'EUR' }))
+                            React.createElement('td', {}, 
+                                React.createElement(MoneyAmount, {amount: row['Montant']})
+                            )
                         )
                     })
                 )

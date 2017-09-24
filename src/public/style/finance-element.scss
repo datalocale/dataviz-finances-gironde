@@ -45,6 +45,10 @@ $partition-part-width: 12em;
         ul{
             list-style: disc;
             list-style-position: inside;
+
+            li p{
+                display: inline;
+            }
         }
     }
 

@@ -47,7 +47,7 @@ $R9-color: $area-color-10;
                 align-items: flex-end;
 
                 .areas{
-                    width: 55%;
+                    width: 50%;
                     height: 100%;
 
                     display: flex;
@@ -59,7 +59,7 @@ $R9-color: $area-color-10;
                         border-radius: 0.5em;
                     }
 
-                    h2, h3{
+                    h2, .money-amount{
                         color: white;
                         margin-left: 0.5em;
                         padding: 0;
@@ -72,7 +72,7 @@ $R9-color: $area-color-10;
                         font-weight: bold;
                     }
 
-                    h3{
+                    .money-amount{
                         font-size: 0.9em;
                         text-transform: none;
                         font-weight: normal;
@@ -88,17 +88,10 @@ $R9-color: $area-color-10;
                     padding: 0 1em;
 
                     color: black;
-
-                    .amount, .unit{
+                    
+                    .money-amount{
                         font-weight: bold;
-                    }
-
-                    .amount{
-                        font-size: 5em; 
-                    }
-
-                    .unit{
-                        transform: translateY(-1em);
+                        font-size: 3em; 
                     }
                 }
             }
