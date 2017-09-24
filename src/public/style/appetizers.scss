@@ -104,9 +104,13 @@ $circle-radius : 38em;
             margin: 0.7em;
         }
 
+        .markdown-rendered{
+            max-width: 80%;
+        }
+
         p{
             line-height: 1.8em;
-            max-width: 80%;
+            max-width: 100%;
         }
 
         a{

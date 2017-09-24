@@ -61,7 +61,7 @@ interface FinanceElementProps{
         contentId: string,
         partAmount: number,
         texts: FinanceElementTextsRecord,
-        url: string
+        url: stringMarkdown
     }>
 }
 

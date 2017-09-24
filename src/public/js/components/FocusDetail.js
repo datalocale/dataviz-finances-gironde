@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PrimaryCallToAction from '../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import Markdown from '../../../shared/js/components/Markdown';
 
 /*
 interface FocusDetailProps{
@@ -27,7 +28,7 @@ export default function ({className, title, illustrationUrl, amount, proportion,
             React.createElement('div', {className: 'proportion-container'},
                 React.createElement('div', {className: 'proportion', style: {width: proportion*100+'%'}}, amount)
             ),
-            React.createElement('p', {}, text),
+            React.createElement(Markdown, {}, text),
             React.createElement('div', {className: 'highlights'}, 
                 highlights.map(h => {
                     return React.createElement('div', {},
