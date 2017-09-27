@@ -1015,10 +1015,6 @@ const AggregatedInstructionRowRecord = Record({
 });
 
 
-throw `TODO
-    Finish weighted rules.
-    Hierarchical totals
-`
 
 function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
     const rule = rules[id];

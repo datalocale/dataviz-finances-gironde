@@ -1,5 +1,6 @@
 import React from 'react';
 import {format} from 'currency-formatter';
+import {sum} from 'd3-array';
 
 import {isOR} from '../../../shared/js/finance/rowFilters';
 import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
@@ -59,12 +60,40 @@ function makeDF12Diffs(aggregatedInstruction){
     const df1M52Rows = df1.elements.map(e => e['M52Rows']).flatten(1);
     const df2M52Rows = df2.elements.map(e => e['M52Rows']).flatten(1);
 
-    console.log('df1M52Rows df2M52Rows', df1M52Rows, df2M52Rows)
 
-    return {
-        onlyDF1: df1M52Rows.subtract(df2M52Rows),
-        onlyDF2: df2M52Rows.subtract(df1M52Rows)
-    }
+    // For now, weighted rows are only in DF1, so let's keep things simple
+    const weightedDF1Rows = df1M52Rows.filter(r => r.weight);
+
+    const weightedById = new Map();
+    weightedDF1Rows.forEach(r => {
+        const id = makeM52RowId(r);
+
+        let elements = weightedById.get(id);
+        if(!elements){
+            elements = [];
+        }
+        elements.push(r);
+        weightedById.set(id, elements);
+    });
+
+    let onlyDF1 = df1M52Rows.subtract(df2M52Rows);
+    let onlyDF2 = df2M52Rows.subtract(df1M52Rows);
+
+    weightedById.forEach((elements, id) => {
+        const total = sum(elements.map(r => r['Montant']*r.weight))
+
+        const corresponding = onlyDF2.find(r => makeM52RowId(r) === id);
+        
+        if(corresponding['Montant'] - total <= 0.01){
+            elements.forEach(e => {
+                onlyDF1 = onlyDF1.remove(e)
+            })
+            onlyDF2 = onlyDF2.remove(corresponding)
+        }
+    })
+
+
+    return { onlyDF1, onlyDF2 }
 
 }
 
