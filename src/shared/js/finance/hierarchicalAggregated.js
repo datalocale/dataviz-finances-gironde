@@ -191,6 +191,7 @@ const AggregatedNodeRecord = new Record({
 })
 
 
+
 /**
  * rows : ImmutableSet<Record<AggEntry>>
  */
@@ -239,7 +240,10 @@ export default function (aggRows) {
         const targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
             .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet());
 
-        correspondingTargetNode.total = targetNodeM52Rows.reduce(((acc, e) => acc + e["Montant"]), 0);
+        correspondingTargetNode.total = targetNodeM52Rows.reduce(
+            ((acc, e) => (acc + (e.weight ? e.weight*e["Montant"] : e["Montant"]))), 
+            0
+        );
 
         return AggregatedNodeRecord(correspondingTargetNode);
     }

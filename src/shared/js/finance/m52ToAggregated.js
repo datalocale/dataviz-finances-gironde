@@ -1,6 +1,7 @@
-import {Record, OrderedSet as ImmutableSet, Map as ImmutableMap} from 'immutable';
+import {Record, OrderedSet as ImmutableSet} from 'immutable';
 
 import {isOR, isRF, isDF, isRI, isDI} from './rowFilters';
+import {WeightedM52RowRecord} from './M52InstructionDataStructures';
 
 
 /*
@@ -295,7 +296,6 @@ export const rules = Object.freeze({
     },
     'DF-1-1-3': {
         label: "Liés à l’enfance",
-        status: 'TEMPORARY', // en attente de validation formule finale
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
             
@@ -311,6 +311,21 @@ export const rules = Object.freeze({
                     ].includes(m52Row['Article']) ||
                     m52Row['Article'].startsWith('A64')
                 );
+        },
+        weight(m52Row){
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const article = m52Row['Article'];
+
+            if(fonction === 'R51' && article === 'A65111'){
+                return WeightedM52RowRecord(Object.assign(
+                    {
+                        weight: 0.75
+                    },
+                    m52Row.toJS()
+                ));
+            }
+
+            return m52Row;
         }
     },
     'DF-1-2': {
@@ -339,6 +354,21 @@ export const rules = Object.freeze({
             return isOR(m52Row) && isDF(m52Row) && 
                 fonction.slice(0, 3) === 'R51' &&
                 ['A652416', 'A6514', 'A65111'].includes(m52Row['Article']);    
+        },
+        weight(m52Row){
+            const fonction = m52Row['Rubrique fonctionnelle'];
+            const article = m52Row['Article'];
+
+            if(fonction === 'R51' && article === 'A65111'){
+                return WeightedM52RowRecord(Object.assign(
+                    {
+                        weight: 0.25
+                    },
+                    m52Row.toJS()
+                ));
+            }
+
+            return m52Row;
         }
     },
     'DF-1-6': {
@@ -398,9 +428,16 @@ export const rules = Object.freeze({
     'DF-2-1': {
         label: "Personnes en difficultés",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R54' || f3 === 'R56');
+            
+            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R54' || f3 === 'R56') &&
+                article !== 'A6568' && 
+                article !== 'A6513' && 
+                !article.startsWith('A64') &&
+                article !== 'A6336' &&
+                article !== 'A6245';
         }
     },
     'DF-2-2': {
@@ -421,9 +458,15 @@ export const rules = Object.freeze({
     'DF-2-3': {
         label: "Personnes âgées",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R55' || f3 === 'R53');
+            return isOR(m52Row) && isDF(m52Row) && (f3 === 'R55' || f3 === 'R53') &&
+                article !== 'A6568' && 
+                article !== 'A6513' && 
+                !article.startsWith('A64') &&
+                article !== 'A6336' &&
+                article !== 'A6245';
         }
     },
     'DF-2-4': {
@@ -460,11 +503,14 @@ export const rules = Object.freeze({
     'DF-3-2': {
         label: "Transports",
         filter(m52Row){
-            const f2 = m52Row['Rubrique fonctionnelle'].slice(0, 2);
+            const f = m52Row['Rubrique fonctionnelle'];
+            const f2 = f.slice(0, 2);
             const article = m52Row['Article']
 
-            return isOR(m52Row) && isDF(m52Row) && f2 === 'R8' && 
-                !article.startsWith('A64') && article !== 'A6336';
+            return isOR(m52Row) && isDF(m52Row) && (
+                (f2 === 'R8' && !article.startsWith('A64') && article !== 'A6336') ||
+                (f === 'R568' && article === 'A6245')
+            )
         }
     },
     'DF-3-3': {
@@ -546,7 +592,7 @@ export const rules = Object.freeze({
                     chap === 'C012' ||
                     (
                         (art.startsWith('A64') || art === 'A6218' || art === 'A6336') &&
-                        (chap === 'C15' || chap === 'C16' || chap === 'C17')
+                        (chap === 'C015' || chap === 'C016' || chap === 'C017')
                     )
                 ) && 
                 !(art.startsWith('A64') && f3 === 'R51');
@@ -968,18 +1014,23 @@ const AggregatedInstructionRowRecord = Record({
     "Montant": 0
 });
 
+
+
 function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
     const rule = rules[id];
 
-    const m52Rows = m52InstructionRows.filter(rule.filter);
+    let m52Rows = m52InstructionRows.filter(rule.filter);
+    if(rule.weight){
+        m52Rows = m52Rows.map(rule.weight);
+    }
 
     return AggregatedInstructionRowRecord({
         id,
         "Libellé": rule.label,
         "Statut": rule.status,
         "M52Rows": m52Rows,
-        "Montant": m52Rows.reduce(((acc, curr) => {
-            return acc + curr["Montant"];
+        "Montant": m52Rows.reduce(((acc, r) => {
+            return acc + (r.weight ? r.weight*r["Montant"] : r["Montant"]);
         }), 0)
     })
 }
@@ -989,3 +1040,4 @@ export default function convert(m52Instruction){
         Object.keys(rules).map(id => makeAggregatedInstructionRowRecord(id, m52Instruction.rows))
     )
 }
+
