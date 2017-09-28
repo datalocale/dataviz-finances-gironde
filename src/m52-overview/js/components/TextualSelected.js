@@ -3,16 +3,8 @@ import {OrderedSet} from 'immutable';
 import {format} from 'currency-formatter';
 
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
+import {makeM52RowId} from '../../../shared/js/finance/M52InstructionDataStructures';
 
-
-function makeM52RowId(m52Row){
-    return [
-        m52Row['Dépense/Recette'] + m52Row['Investissement/Fonctionnement'],
-        m52Row['Chapitre'],
-        m52Row['Rubrique fonctionnelle'],
-        m52Row['Article']
-    ].join(' ');
-}
 
 export default class TextualSelected extends React.PureComponent{
 
