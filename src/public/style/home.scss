@@ -28,22 +28,19 @@ $background-height: 2470px;
     }
 
     .appetizers-container{
-
-        @media screen and (min-width: 950px) {
-            padding: 0 $column-padding;
-            max-width: $column-max-width;
+        @media screen and (min-width: $home-layout-breakpoint) {
+            background: url($home-illustration-url), #BEBC05;
+            min-height: $background-height;
+            margin-top: 9em;
         }
-        background: url($home-illustration-url), #BEBC05;
+
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
-        margin-top: 9em;
 
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        min-height: $background-height;
 
         width: 100%;
         max-width: 100%;

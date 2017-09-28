@@ -4,13 +4,27 @@ $circle-radius : 38em;
 
 
 .appetizer{
-    width: 58.3%;
+    width: 100%;
     
-    padding: 2em;
-    margin: 10em 0;
+    margin: 1em 0;
+    border: 1px solid $discrete-grey;
+    padding: 0.4em;
+
+    @media screen and (min-width: $home-layout-breakpoint) {
+        width: 58.3%;
+        margin: 10em 0;
+        padding: 2em;
+        border: 0;
+
+        box-shadow: 0 0 2px black;
+
+        p{
+            line-height: 1.8em;
+            max-width: 80%;
+        }
+    }
 
     background-color: white;
-    box-shadow: 0 0 2px black;
 
     display: flex;
     flex-direction: column;
@@ -20,10 +34,6 @@ $circle-radius : 38em;
     font-size: 14px;
 
     z-index: 2;
-
-    &:first-of-type{
-        margin: 4em 0;
-    }
 
     &:nth-child(odd){
         align-self: flex-start;
@@ -37,27 +47,26 @@ $circle-radius : 38em;
         width: 100%;
     }
 
-    p{
-        line-height: 1.8em;
-        max-width: 80%;
-    }
-
 
     &.total-appetizer{
-        border: 1.5em solid white;
-        margin: 0;
-        width: $circle-radius;
-        height: $circle-radius;
-        border-radius: 50%;
+        margin: 1em 0;
 
-        position: relative;
-        left: 10%; /* % relative to parent width */    
-        transform: translateY(-25%); /* % relative to element height */
+        @media screen and (min-width: $home-layout-breakpoint) {            
+            width: $circle-radius;
+            height: $circle-radius;    
+            position: relative;
+            left: 10%; /* % relative to parent width */    
+            transform: translateY(-25%); /* % relative to element height */
+        
+            border-radius: 50%;
+            border: 1.5em solid white;   
+            
+            text-align: center; 
+        }
 
         background-color: #EDEDED;
         box-shadow: 0 0 0;
 
-        text-align: center;
 
         display: flex;
         flex-direction: column;
@@ -124,13 +133,26 @@ $circle-radius : 38em;
 .appetizer{
     .info{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+
+        @media screen and (min-width: $home-layout-breakpoint) {
+            flex-direction: row;
+        }
 
         .number{
-            padding-right: 1em;
-            border-right: 0.5em solid #D7D7D7;
             text-align: right;
             
+            border: 0;
+            border-color: #D7D7D7;
+            border-style: solid;
+            border-bottom-width: 0.5em;  
+
+            @media screen and (min-width: $home-layout-breakpoint) {            
+                padding-right: 1em;
+                border-right-width: 0.5em;  
+                border-bottom-width: 0;  
+            }
+
 
             .main, .secundary{
                 white-space: nowrap;
