@@ -13,9 +13,13 @@ $background-height: 2470px;
     width: 100%;
     
     & > *{
-        max-width: $column-max-width;
-        padding: 0 $column-padding;
         width: 100%;
+        padding: 0 0.5em;
+
+        @media screen and (min-width: 600px) {
+            padding: 0 $column-padding;
+            max-width: $column-max-width;
+        }
     }
     
     & > section{
