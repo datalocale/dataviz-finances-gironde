@@ -4,6 +4,7 @@ import {sum} from 'd3-array';
 
 import {isOR} from '../../../shared/js/finance/rowFilters';
 import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
+import {makeM52RowId} from '../../../shared/js/finance/M52InstructionDataStructures';
 import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
@@ -97,14 +98,7 @@ function makeDF12Diffs(aggregatedInstruction){
 
 }
 
-function makeM52RowId(m52Row){
-    return [
-        m52Row['Dépense/Recette'] + m52Row['Investissement/Fonctionnement'],
-        m52Row["Chapitre"],
-        m52Row["Rubrique fonctionnelle"],
-        m52Row["Article"]
-    ].join(' ');
-}
+
 
 /*
 

@@ -1,4 +1,7 @@
 import { Record, List, Set as ImmutableSet } from 'immutable';
+import { sum } from 'd3-array';
+
+import {makeM52RowId} from './M52InstructionDataStructures';
 
 import { rules } from './m52ToAggregated';
 import { PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, EXPENDITURES, REVENUE } from './constants';
@@ -237,8 +240,34 @@ export default function (aggRows) {
         correspondingTargetNode.elements = ImmutableSet(elements);
 
         // total amount is computed off of the set of m52 row considered (this helps prevent mistakes due to duplicates)
-        const targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
-            .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet());
+        let targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
+            .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet())
+
+        // For now, weighted rows are only in DF1, so let's keep things simple
+        const weightedRows = targetNodeM52Rows.filter(r => r.weight);
+
+        const weightedById = new Map();
+        weightedRows.forEach(r => {
+            const id = makeM52RowId(r);
+
+            let elements = weightedById.get(id);
+            if(!elements){
+                elements = [];
+            }
+            elements.push(r);
+            weightedById.set(id, elements);
+        });
+
+        weightedById.forEach((elements, id) => {
+            const total = sum(elements.map(r => r['Montant']*r.weight))
+            const correspondingUnweighted = targetNodeM52Rows.find(r => makeM52RowId(r) === id);
+            
+            if(correspondingUnweighted['Montant'] - total <= 0.01){
+                elements.forEach(e => {
+                    targetNodeM52Rows = targetNodeM52Rows.remove(e)
+                })
+            }
+        });
 
         correspondingTargetNode.total = targetNodeM52Rows.reduce(
             ((acc, e) => (acc + (e.weight ? e.weight*e["Montant"] : e["Montant"]))), 

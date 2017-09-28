@@ -41,3 +41,12 @@ export const M52Instruction = Record({
     'type': undefined,
     'rows': undefined
 });
+
+export function makeM52RowId(m52Row){
+    return [
+        m52Row['Dépense/Recette'] + m52Row['Investissement/Fonctionnement'],
+        m52Row["Chapitre"],
+        m52Row["Rubrique fonctionnelle"],
+        m52Row["Article"]
+    ].join(' ');
+}
