@@ -25,18 +25,25 @@ $focus-highlight-color : #F62727;
     @media screen and (min-width: $main-column-breakpoint) {
         padding: 0 $column-padding;
         max-width: $column-max-width;
+
+        & > section{
+            margin-bottom: 5em;
+        }
     }
 
-    & > section{
-        margin-bottom: 5em;
-    }
 
     .top-infos{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
 
-        & > *{
-            flex:1;
+        @media screen and (min-width: $focus-layout-breakpoint) {
+            flex-direction: row;
+            align-items: initial;
+
+            & > *{
+                flex:1;
+            }
         }
 
         & > :nth-child(2){
@@ -64,6 +71,14 @@ $focus-highlight-color : #F62727;
             text-transform: uppercase;
             font-size: 1.3em;
             font-weight: bold;
+
+            min-height: 23em;
+            min-width: 10em;
+            transform: translateX(-20%);
+
+            @media screen and (min-width: $focus-layout-breakpoint) {                
+                transform: initial;
+            }
 
             & > *{
                 position: absolute;

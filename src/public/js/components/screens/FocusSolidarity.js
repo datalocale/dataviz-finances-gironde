@@ -29,7 +29,7 @@ interface FocusSolidarityProps{
 */
 
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear
+    currentYear, currentYearSolidarity, solidarityByYear, screenWidth
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
@@ -48,7 +48,7 @@ export function FocusSol({
         React.createElement('section', {className: 'top-infos'}, 
             React.createElement(FocusDonut, {
                 proportion: solidarityProportion, 
-                outerRadius: 188, 
+                outerRadius: screenWidth < 400 ? (screenWidth/2 - 20) : 188, 
                 innerText: [
                     `de dépenses Solidarités`,
                     `dans le total des dépenses`
@@ -241,7 +241,7 @@ const YearSolidarityRecord = Record({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear } = state;
+        const { m52InstructionByYear, currentYear, screenWidth } = state;
 
         const solidarityByYear = m52InstructionByYear.map( ((instruction, year) => {
             const agg = m52ToAggregated(instruction);
@@ -274,7 +274,8 @@ export default connect(
         return {
             currentYear,
             currentYearSolidarity: solidarityByYear.get(currentYear),
-            solidarityByYear
+            solidarityByYear,
+            screenWidth
         };
     },
     () => ({})
