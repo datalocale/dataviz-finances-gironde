@@ -1,7 +1,5 @@
 @import '../../shared/style/stackchart'; 
 
-@import 'top-level-vars';
-
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
 $rsa-color : #B8C30F;
@@ -24,7 +22,7 @@ $focus-highlight-color : #F62727;
     width: 100%;
     padding: 0 0.5em;
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: $main-column-breakpoint) {
         padding: 0 $column-padding;
         max-width: $column-max-width;
     }

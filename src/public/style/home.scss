@@ -16,7 +16,7 @@ $background-height: 2470px;
         width: 100%;
         padding: 0 0.5em;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: $main-column-breakpoint) {
             padding: 0 $column-padding;
             max-width: $column-max-width;
         }
@@ -28,6 +28,11 @@ $background-height: 2470px;
     }
 
     .appetizers-container{
+
+        @media screen and (min-width: 950px) {
+            padding: 0 $column-padding;
+            max-width: $column-max-width;
+        }
         background: url($home-illustration-url), #BEBC05;
         background-position: center top;
         background-repeat: no-repeat;
