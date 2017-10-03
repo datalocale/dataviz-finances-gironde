@@ -416,12 +416,13 @@ export const rules = Object.freeze({
                     id => !rules[id].filter(m52Row)
                 )  &&
                 !(art === 'A6556' && fonction === 'R58') &&
-                art !== 'A6568' && 
-                art !== 'A6526' && 
-                art !== 'A6513' &&
-                art !== 'A6336' &&
-                art !== 'A6218' &&
-                art !== 'A6245';
+                !(art === 'A6568' && fonction === 'R52') &&
+                !(art === 'A6526' && fonction === 'R51') &&
+                !(art === 'A6513' && fonction === 'R52') &&
+                !(art === 'A6336') &&
+                !(art === 'A6218') &&
+                !(art === 'A6245' && fonction === 'R568') &&
+                !(art === 'A6245' && fonction === 'R52')
         }
     },
     
@@ -462,7 +463,6 @@ export const rules = Object.freeze({
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
             return isOR(m52Row) && isDF(m52Row) && (f3 === 'R55' || f3 === 'R53') &&
-                article !== 'A6568' && 
                 article !== 'A6513' && 
                 !article.startsWith('A64') &&
                 article !== 'A6336' &&
@@ -509,7 +509,14 @@ export const rules = Object.freeze({
 
             return isOR(m52Row) && isDF(m52Row) && (
                 (f2 === 'R8' && !article.startsWith('A64') && article !== 'A6336') ||
-                (f === 'R568' && article === 'A6245')
+                (
+                    f === 'R568' && 
+                    (
+                        article === 'A6245' ||
+                        article === 'A6336' ||
+                        article === 'A6218'
+                    )
+                )
             )
         }
     },
@@ -585,7 +592,8 @@ export const rules = Object.freeze({
         filter(m52Row){
             const chap = m52Row['Chapitre'];
             const art = m52Row['Article'];
-            const f3 = m52Row['Rubrique fonctionnelle'].slice(0, 3);
+            const f = m52Row['Rubrique fonctionnelle']
+            const f3 = f.slice(0, 3);
 
             return isOR(m52Row) && isDF(m52Row) &&
                 (
@@ -595,7 +603,8 @@ export const rules = Object.freeze({
                         (chap === 'C015' || chap === 'C016' || chap === 'C017')
                     )
                 ) && 
-                !(art.startsWith('A64') && f3 === 'R51');
+                !(art.startsWith('A64') && f3 === 'R51') &&
+                !(art === 'A6336' && f === 'R568');
         }
     },
     'DF-5': { 
