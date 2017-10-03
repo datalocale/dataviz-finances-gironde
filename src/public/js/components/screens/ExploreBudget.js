@@ -125,7 +125,7 @@ export function TotalBudget({
                     ]
                 }
             )
-        ),
+        )
     );
 }
 

@@ -465,7 +465,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                                 Legend(`Solidarité`, Solidarité)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height interventions' }, 
-                                Legend('Interventions (SDIS, Transports …)', Interventions)
+                                Legend('Interventions (SDIS …)', Interventions)
                             ),
                             React.createElement('div', { className: 'brick appear-by-height depenses-structure' }, 
                                 Legend('Autres (personnel …)', DépensesStructure)
@@ -478,7 +478,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                             href: '#!/finance-details/RI'
                         },
                         React.createElement('div', {className: 'legend'},
-                            React.createElement('div', {className: 'text'}, `Recettes d'investissements`),
+                            React.createElement('div', {className: 'text'}, `Recettes d'investissement`),
                             React.createElement(MoneyAmount, {amount: ri})
                         ),
                         React.createElement(
