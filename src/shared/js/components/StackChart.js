@@ -13,15 +13,21 @@ import D3Axis from './D3Axis';
     It is the caller's responsibility to make sure ys (from ysByX) are sorted in a order 
     that is consistent with the legendItems order
 */
-export default function ({ xs, ysByX, 
-    WIDTH = 1000, HEIGHT = 430, 
-    Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 40, 
+export default function ({ 
+    // data
+    xs, ysByX, 
+    // aestetics
+    WIDTH = 800, HEIGHT = 430, 
+    Y_AXIS_MARGIN = 80, HEIGHT_PADDING = 40, 
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
+    // legend
     legendItems, uniqueColorClass,
+    // other
     selectedX, yValueDisplay = x => String(x),
+    // events
     onSelectedXAxisItem, onBrickClicked
 }) {
-    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
 

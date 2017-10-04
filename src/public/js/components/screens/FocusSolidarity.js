@@ -70,6 +70,9 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
             React.createElement(StackChart, {
+                WIDTH: screenWidth >= 800 + 80 ? 
+                    800 :
+                    (screenWidth - 85 >= 600 ? screenWidth - 85 : 600), 
                 xs: years,
                 ysByX: solidarityByYear.map(yearSolidarity => (new List([
                     yearSolidarity['DF-2-1'],

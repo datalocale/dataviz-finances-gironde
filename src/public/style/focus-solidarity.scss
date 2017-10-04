@@ -78,7 +78,7 @@ $focus-highlight-color : #F62727;
 
             @media screen and (min-width: $focus-layout-breakpoint) {                
                 transform: initial;
-            }
+            } 
 
             & > *{
                 position: absolute;
@@ -99,6 +99,24 @@ $focus-highlight-color : #F62727;
 
 
     .stackchart{
+        display: flex;
+        flex-direction: column;
+
+
+        @media screen and (min-width: $stackchart-medium-breakpoint) {
+            align-items: flex-start;
+        } 
+
+        @media screen and (min-width: $stackchart-large-breakpoint) {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        } 
+
+        // for super-small sizes 
+        //transform: rotate(90deg) translateY(-430px);
+        //transform-origin: 0 0;
+        
 
         .content{
             .DF-1-1 rect{
