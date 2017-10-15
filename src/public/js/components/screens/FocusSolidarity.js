@@ -72,7 +72,10 @@ export function FocusSol({
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ? 
                     800 :
-                    (screenWidth - 85 >= 600 ? screenWidth - 85 : 600), 
+                    (screenWidth - 85 >= 600 ? screenWidth - 85 : (
+                        screenWidth <= 600 ? screenWidth : 600
+                    )), 
+                portrait: screenWidth <= 600,
                 xs: years,
                 ysByX: solidarityByYear.map(yearSolidarity => (new List([
                     yearSolidarity['DF-2-1'],
