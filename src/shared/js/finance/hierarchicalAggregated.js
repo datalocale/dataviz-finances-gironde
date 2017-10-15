@@ -243,7 +243,7 @@ export default function (aggRows) {
         let targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
             .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet())
 
-        // For now, weighted rows are only in DF1, so let's keep things simple
+        // For now, weighted rows are only in DF1, so let's keep things simple when computing weighted rows
         const weightedRows = targetNodeM52Rows.filter(r => r.weight);
 
         const weightedById = new Map();
@@ -260,9 +260,11 @@ export default function (aggRows) {
 
         weightedById.forEach((elements, id) => {
             const total = sum(elements.map(r => r['Montant']*r.weight))
-            const correspondingUnweighted = targetNodeM52Rows.find(r => makeM52RowId(r) === id);
-            
-            if(correspondingUnweighted['Montant'] - total <= 0.01){
+            const correspondingUnweighted = targetNodeM52Rows.find(
+                r => makeM52RowId(r) === id && r.weight === undefined
+            );
+
+            if(correspondingUnweighted && Math.abs(correspondingUnweighted['Montant'] - total) <= 0.01){
                 elements.forEach(e => {
                     targetNodeM52Rows = targetNodeM52Rows.remove(e)
                 })
