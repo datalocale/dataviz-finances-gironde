@@ -1,7 +1,6 @@
 $focus-donut-neutral-color : #D1D1D1;
 
 .focus-donut{
-    width: 400px;
 
     .arc{
         path{
@@ -15,10 +14,20 @@ $focus-donut-neutral-color : #D1D1D1;
 
     text{
         font-weight: bold;
+        font-size: 0.8em;
+
+        @media screen and (min-width: $focus-layout-breakpoint) {                
+            font-size: 1em;
+        }
     }
 
     text.percentage{
-        font-size: 6em;
+        font-size: 5em;
+
+        @media screen and (min-width: $focus-layout-breakpoint) {                
+            font-size: 6em;
+        }
+        
         fill: $focus-donut-neutral-color;
 
         .percent{

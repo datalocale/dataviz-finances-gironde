@@ -1,7 +1,6 @@
 @import '../../shared/style/legend-list'; 
 @import '../../shared/style/stackchart'; 
 
-@import 'top-level-vars';
 @import 'finance-element-pie'; 
 
 $partition-part-width: 12em;
@@ -9,8 +8,12 @@ $partition-part-width: 12em;
 .finance-element{
 
     width: 100%;
-    max-width: $column-max-width; 
-    padding: 0 $column-padding;
+    padding: 0 0.5em;
+
+    @media screen and (min-width: $main-column-breakpoint) {
+        padding: 0 $column-padding;
+        max-width: $column-max-width;
+    }
 
     &>section{
         margin-bottom: 5em;

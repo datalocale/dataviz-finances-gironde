@@ -1,7 +1,5 @@
 @import '../../shared/style/stackchart'; 
 
-@import 'top-level-vars';
-
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
 $rsa-color : #B8C30F;
@@ -22,19 +20,30 @@ $focus-highlight-color : #F62727;
 
 .focus{
     width: 100%;
-    max-width: $column-max-width; 
-    padding: 0 $column-padding;
+    padding: 0 0.5em;
 
-    & > section{
-        margin-bottom: 5em;
+    @media screen and (min-width: $main-column-breakpoint) {
+        padding: 0 $column-padding;
+        max-width: $column-max-width;
+
+        & > section{
+            margin-bottom: 5em;
+        }
     }
+
 
     .top-infos{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        align-items: center;
 
-        & > *{
-            flex:1;
+        @media screen and (min-width: $focus-layout-breakpoint) {
+            flex-direction: row;
+            align-items: initial;
+
+            & > *{
+                flex:1;
+            }
         }
 
         & > :nth-child(2){
@@ -63,6 +72,14 @@ $focus-highlight-color : #F62727;
             font-size: 1.3em;
             font-weight: bold;
 
+            min-height: 23em;
+            min-width: 10em;
+            transform: translateX(-20%);
+
+            @media screen and (min-width: $focus-layout-breakpoint) {                
+                transform: initial;
+            } 
+
             & > *{
                 position: absolute;
                 left: calc(50% + 1em);
@@ -82,6 +99,24 @@ $focus-highlight-color : #F62727;
 
 
     .stackchart{
+        display: flex;
+        flex-direction: column;
+
+
+        @media screen and (min-width: $stackchart-medium-breakpoint) {
+            align-items: flex-start;
+        } 
+
+        @media screen and (min-width: $stackchart-large-breakpoint) {
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        } 
+
+        // for super-small sizes 
+        //transform: rotate(90deg) translateY(-430px);
+        //transform-origin: 0 0;
+        
 
         .content{
             .DF-1-1 rect{

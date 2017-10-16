@@ -29,7 +29,7 @@ interface FocusSolidarityProps{
 */
 
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear
+    currentYear, currentYearSolidarity, solidarityByYear, screenWidth
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
@@ -48,7 +48,7 @@ export function FocusSol({
         React.createElement('section', {className: 'top-infos'}, 
             React.createElement(FocusDonut, {
                 proportion: solidarityProportion, 
-                outerRadius: 188, 
+                outerRadius: screenWidth < 400 ? (screenWidth/2 - 20) : 188, 
                 innerText: [
                     `de dépenses Solidarités`,
                     `dans le total des dépenses`
@@ -70,6 +70,12 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
             React.createElement(StackChart, {
+                WIDTH: screenWidth >= 800 + 80 ? 
+                    800 :
+                    (screenWidth - 85 >= 600 ? screenWidth - 85 : (
+                        screenWidth <= 600 ? screenWidth : 600
+                    )), 
+                portrait: screenWidth <= 600,
                 xs: years,
                 ysByX: solidarityByYear.map(yearSolidarity => (new List([
                     yearSolidarity['DF-2-1'],
@@ -241,7 +247,7 @@ const YearSolidarityRecord = Record({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear } = state;
+        const { m52InstructionByYear, currentYear, screenWidth } = state;
 
         const solidarityByYear = m52InstructionByYear.map( ((instruction, year) => {
             const agg = m52ToAggregated(instruction);
@@ -274,7 +280,8 @@ export default connect(
         return {
             currentYear,
             currentYearSolidarity: solidarityByYear.get(currentYear),
-            solidarityByYear
+            solidarityByYear,
+            screenWidth
         };
     },
     () => ({})

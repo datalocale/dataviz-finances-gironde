@@ -109,7 +109,8 @@ const StoreRecord = Record({
     explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
     textsById: undefined,
-    financeDetailId: undefined
+    financeDetailId: undefined,
+    screenWidth: undefined
 });
 
 const store = createStore(
@@ -119,7 +120,8 @@ const store = createStore(
         currentYear: 2016,
         explorationYear: 2016,
         financeDetailId: undefined,
-        textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]])
+        textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]]),
+        screenWidth: window.innerWidth
     })
 );
 

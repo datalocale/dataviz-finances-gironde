@@ -13,9 +13,13 @@ $background-height: 2470px;
     width: 100%;
     
     & > *{
-        max-width: $column-max-width;
-        padding: 0 $column-padding;
         width: 100%;
+        padding: 0 0.5em;
+
+        @media screen and (min-width: $main-column-breakpoint) {
+            padding: 0 $column-padding;
+            max-width: $column-max-width;
+        }
     }
     
     & > section{
@@ -24,17 +28,19 @@ $background-height: 2470px;
     }
 
     .appetizers-container{
-        background: url($home-illustration-url), #BEBC05;
+        @media screen and (min-width: $home-layout-breakpoint) {
+            background: url($home-illustration-url), #BEBC05;
+            min-height: $background-height;
+            margin-top: 9em;
+        }
+
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
-        margin-top: 9em;
 
         display: flex;
         flex-direction: column;
         align-items: center;
-
-        min-height: $background-height;
 
         width: 100%;
         max-width: 100%;

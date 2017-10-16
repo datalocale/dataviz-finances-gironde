@@ -12,8 +12,8 @@ interface DonutProps{
 
 */
 export default function({
-        width = 400, height = 400,
         donutWidth = 50, outerRadius = 200,
+        width = 2*outerRadius, height = 2*outerRadius,
         padAngle = Math.PI/30,
         proportion,
         innerText

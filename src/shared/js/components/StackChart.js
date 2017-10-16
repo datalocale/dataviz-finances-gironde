@@ -13,27 +13,42 @@ import D3Axis from './D3Axis';
     It is the caller's responsibility to make sure ys (from ysByX) are sorted in a order 
     that is consistent with the legendItems order
 */
-export default function ({ xs, ysByX, 
-    WIDTH = 1000, HEIGHT = 430, 
-    Y_AXIS_MARGIN = 60, HEIGHT_PADDING = 40, 
+export default function ({ 
+    // data
+    xs, ysByX, 
+    // aestetics
+    portrait = false,
+    WIDTH = 800, HEIGHT = 430, 
+    Y_AXIS_MARGIN = 80, HEIGHT_PADDING = 40, 
     BRICK_SPACING = 8, MIN_BRICK_HEIGHT = 4,
+    PORTRAIT_COLUMN_WIDTH = 70,
+    // legend
     legendItems, uniqueColorClass,
+    // other
     selectedX, yValueDisplay = x => String(x),
+    // events
     onSelectedXAxisItem, onBrickClicked
 }) {
-    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length+1)
+    const columnAndMarginWidth = (WIDTH - Y_AXIS_MARGIN)/(xs.length)
     const columnMargin = columnAndMarginWidth/4;
     const columnWidth = columnAndMarginWidth - columnMargin;
 
     const xScale = scaleLinear()
         .domain([min(xs), max(xs)])
-        .range([Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]);
+        .range(portrait ?
+            [HEIGHT_PADDING, HEIGHT - PORTRAIT_COLUMN_WIDTH]:
+            [Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]
+        );
 
     const maxAmount = max(ysByX.valueSeq().toJS().map(ys =>  sum(ys))); 
 
     const yScale = scaleLinear()
         .domain([0, maxAmount])
-        .range([HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]);
+        .range(
+            portrait ?
+                [0, WIDTH]:
+                [HEIGHT - HEIGHT_PADDING, HEIGHT_PADDING]
+        );
 
     const [yMin, yMax] = yScale.range();
 
@@ -50,11 +65,16 @@ export default function ({ xs, ysByX,
                 className: 'x', 
                 tickData: xs.map(x => {
                     return {
-                        transform: `translate(${xScale(x)}, ${HEIGHT-HEIGHT_PADDING})`,
+                        transform: portrait ?
+                            `translate(0, ${xScale(x)})` :
+                            `translate(${xScale(x)}, ${HEIGHT-HEIGHT_PADDING})`,
                         line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
                         text: {
-                            x: 0, y: -10, 
-                            dy: "2em", 
+                            x: portrait ? 0 : -10, 
+                            y: 0, 
+                            dx: portrait ? '1em' : undefined, 
+                            dy: portrait ? undefined : '2em', 
+                            anchor: portrait ? 'left' : undefined,
                             t: x
                         },
                         id: x,
@@ -66,21 +86,28 @@ export default function ({ xs, ysByX,
             // y axis
             React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
                 return {
-                    transform: `translate(0, ${yScale(tick)})`,
+                    transform: portrait ?
+                        `translate(${yScale(tick)}, 0)` :    
+                        `translate(0, ${yScale(tick)})`,
                     line: {
-                        x1 : 0, y1 : 0, 
-                        x2 : WIDTH, y2 : 0
+                        x1 : 0, 
+                        y1 : 0, 
+                        x2 : portrait ? 0 : WIDTH,
+                        y2 : portrait ? HEIGHT : 0
                     }, 
                     text: {
-                        x: 0, y: -10, 
-                        anchor: 'right',
+                        x: 0, 
+                        y: portrait ? 0 : -10, 
+                        dx: portrait ? 5 : 0, 
+                        dy: portrait ? 10 : 0, 
+                        anchor: portrait ? 'left' : 'right',
                         t: yValueDisplay(tick)
                     }
                     
                 }
             })}),
             // content
-            React.createElement('g', {className: 'content'},
+            portrait === false ? React.createElement('g', {className: 'content'},
                 ysByX.entrySeq().toJS().map(([x, ys]) => {
                     ys = ys.toJS();
 
@@ -154,7 +181,7 @@ export default function ({ xs, ysByX,
                         )
                     )
                 })
-            )
+            ) : undefined
         ),
         legendItems ? React.createElement(LegendList, {
             items: legendItems.map((li, i) => (Object.assign(
