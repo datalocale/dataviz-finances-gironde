@@ -5,9 +5,13 @@
         text.title{
             font-size: 1.2em;
             font-weight: bold;
-            paint-order: stroke;
-            stroke: #fff;
-            stroke-width: 2px;
+            
+            // In cases where the title overlaps a stackchart y-tick line, a white stroke+'paint-order: stroke' 
+            // would protect against a the title being slightly harder to read
+            // however, there is no 'paint-order: stroke' in IE11, so giving up for now
+            //paint-order: stroke;
+            //stroke: #fff;
+            //stroke-width: 2px;
 
             tspan:nth-child(2){
                 font-weight: 100;
