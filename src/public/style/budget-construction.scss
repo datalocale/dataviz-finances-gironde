@@ -21,6 +21,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             width: 20%;
 
             & > .legend{
+                width: 100%;
                 align-self: flex-start;
 
                 display: flex;
@@ -34,6 +35,7 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
                 }
 
                 .text{
+                    width: 100%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
