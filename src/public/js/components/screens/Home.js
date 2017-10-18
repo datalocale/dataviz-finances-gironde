@@ -27,7 +27,7 @@ export function Home({
     
     return React.createElement('article', {className: 'home'},
         React.createElement('div', {}, 
-            React.createElement(PageTitle, {text: "Un budget au service d'une solidarité humaine et territoriale"}),
+            React.createElement(PageTitle, {text: "Un budget au service des solidarités humaine et territoriale"}),
             React.createElement(Markdown, {}, `Collèges, transport scolaire, insertion, aides aux personnes âgées, équipement des zones rurales, environnement... Le  Département intervient au quotidien pour accompagner au mieux les Girondins et leurs territoires. Il finance l’aide sociale et la solidarité dans un contexte de croissance démographique constante : + 15 000 nouveaux Girondins en moyenne chaque année.`)
         ),
         
