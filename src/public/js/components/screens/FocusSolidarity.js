@@ -127,7 +127,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
-                illustrationUrl: '../images/Macaron1.png', 
+                illustrationUrl: 'https://cdn.rawgit.com/datalocale/pictoGironde/master/Insertion.svg', 
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
