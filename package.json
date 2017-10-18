@@ -18,7 +18,7 @@
     "watch:public": "cross-env NODE_ENV=development npm-run-all --parallel watch:public:*",
     "prewatch:public:style": "npm run build:public:style",
     "watch:public:style": "node-sass --importer src/public/style/env-importer.js --watch src/public/style/main.scss build/public.css",
-    "watch:public:script": "watchify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.pdf -d -v",
+    "watch:public:script": "watchify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.pdf -v",
     "lint": "eslint --ignore-path .gitignore client/js",
     "lint-fix": "npm run lint -- --fix"
   },

@@ -29,9 +29,11 @@ $background-height: 2470px;
 
     .appetizers-container{
         @media screen and (min-width: $home-layout-breakpoint) {
-            background: url($home-illustration-url), #BEBC05;
+            background-image: url($home-illustration-url);
+            background-color:#BEBC05;
             min-height: $background-height;
-            margin-top: 9em;
+            // px because IE11
+            margin-top: 150px;
         }
 
         background-position: center top;

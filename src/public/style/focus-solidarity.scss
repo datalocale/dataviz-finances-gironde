@@ -1,5 +1,3 @@
-@import '../../shared/style/stackchart'; 
-
 $apa-color : #F35D32;
 $pch-actp-color : #F8C738;
 $rsa-color : #B8C30F;
@@ -78,6 +76,7 @@ $focus-highlight-color : #F62727;
 
             @media screen and (min-width: $focus-layout-breakpoint) {                
                 transform: initial;
+                min-width: 0;
             } 
 
             & > *{
