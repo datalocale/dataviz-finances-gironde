@@ -169,6 +169,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
+            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
+                
             React.createElement(StackChart, {
                 xs: years,
                 ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
@@ -188,8 +190,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
                     })).toArray() : undefined,
                 uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
                 yValueDisplay: makeAmountString
-            }),
-            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
+            })
         ),
 
         !isLeaf ? React.createElement('section', { className: 'partition'}, 
