@@ -10,7 +10,14 @@
         
         <meta name="description" content="....">
         
-        <script crossorigin="anonymous" src="https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find,Array.prototype.includes,Promise,fetch"></script>
+        <!--
+            In some IE11 setups (due to maybe firewalls, maybe cross-scripting restrictions), the polyfills from 
+            cdn.polyfill.io wouldn't load
+            Given IE11 is the worst browser to support, the polyfills for it have been copied from
+            https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Array.prototype.find,Array.prototype.includes,Promise,fetch&ua=ie/11&flags=gated
+            on Oct 18th 2017
+        -->
+        <script crossorigin="anonymous" src="/public/polyfills-ie-11.js"></script>
         
         <link crossorigin="anonymous" href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
