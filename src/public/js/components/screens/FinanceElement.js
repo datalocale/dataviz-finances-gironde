@@ -21,12 +21,10 @@ import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/co
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import DownloadSection from '../../../../shared/js/components/gironde.fr/DownloadSection';
-import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 
 import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import colorClassById from '../../colorClassById';
-import makeHTMLSummary from '../../makeHTMLSummary';
 
 import FinanceElementPie from '../FinanceElementPie';
 import RollingNumber from '../RollingNumber';
@@ -66,9 +64,6 @@ interface FinanceElementProps{
 
 */
 
-
-const PARTITION_TOTAL_HEIGHT = 42;
-const MIN_STRING_HEIGHT = 2;
 
 export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, m52Rows, changeExplorationYear}) {
     const label = texts && texts.label || '';
@@ -191,38 +186,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             }),
             temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
         ),
-
-        !isLeaf ? React.createElement('section', { className: 'partition'}, 
-            top ? React.createElement(SecundaryTitle, {text: `Détail des ${top.label} en ${year}`}): undefined,
-            thisYearPartition.reverse().map(({contentId, partAmount, texts, url}) => {
-                return React.createElement('a',
-                    {
-                        href: url,
-                        style:{
-                            minHeight: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + MIN_STRING_HEIGHT + 'em'
-                        }
-                    },
-                    React.createElement(
-                        'div', 
-                        {
-                            className: ['part', colorClassById.get(contentId)].join(' '),
-                            style:{
-                                height: (PARTITION_TOTAL_HEIGHT*partAmount/amount) + 'em'
-                            }
-                        }, 
-                        React.createElement(MoneyAmount, {amount: partAmount})
-                    ),
-                    React.createElement('div', {className: 'text'},
-                        React.createElement('h1', {}, texts && texts.label || contentId),
-                        React.createElement('div', {
-                            className: 'summary',
-                            dangerouslySetInnerHTML: {__html: makeHTMLSummary(texts.atemporal)}
-                        }),
-                        React.createElement(PrimaryCallToAction)
-                    )
-                );
-            })  
-        ) : undefined,
 
         isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'}, 
             React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
