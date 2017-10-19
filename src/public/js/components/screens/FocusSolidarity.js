@@ -73,7 +73,7 @@ export function FocusSol({
                 WIDTH: screenWidth >= 800 + 80 ? 
                     800 :
                     (screenWidth - 85 >= 600 ? screenWidth - 85 : (
-                        screenWidth <= 600 ? screenWidth : 600
+                        screenWidth <= 600 ? screenWidth - 10 : 600
                     )), 
                 portrait: screenWidth <= 600,
                 xs: years,
