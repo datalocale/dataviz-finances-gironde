@@ -25,8 +25,10 @@ const MAX_HEIGHT = 30;
 
 export function TotalBudget({
     currentYear, totalById, m52Instruction, labelsById,
-    urls: {expenditures: expURL, revenue: revURL, rf, ri, df, di, byFonction},
-    constructionAmounts}) {
+    urls: {expenditures: expURL, revenue: revURL, rf, ri, df, di, byFonction, animationVideo},
+    constructionAmounts,
+    screenWidth
+}) {
     const expenditures = totalById.get(EXPENDITURES)
     const revenue = totalById.get(REVENUE)
 
@@ -67,9 +69,9 @@ export function TotalBudget({
                                 React.createElement(MoneyAmount, {amount: totalById.get(RI)})
                             )
                         ),
-                        React.createElement('div', {className: 'texts', style: {height: revHeight}},
+                        React.createElement('div', {className: 'texts'},
                             React.createElement(MoneyAmount, {amount: revenue}),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: revURL})
+                            React.createElement(PrimaryCallToAction, {text: `Les recettes`, href: revURL})
                         )
                     )
                 ),
@@ -86,9 +88,9 @@ export function TotalBudget({
                                 React.createElement(MoneyAmount, {amount: totalById.get(DI)})
                             )
                         ),
-                        React.createElement('div', {className: 'texts', style: {height: expHeight}},
+                        React.createElement('div', {className: 'texts'},
                             React.createElement(MoneyAmount, {amount: expenditures}),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
+                            React.createElement(PrimaryCallToAction, {text: `Les dépenses`, href: expURL})
                         )                   
                     )
                 )
@@ -107,7 +109,10 @@ export function TotalBudget({
             ),
             React.createElement(
                 BudgetConstructionAnimation,
-                constructionAmounts
+                Object.assign(
+                    {videoURL: screenWidth <= 1000 ? animationVideo : undefined},
+                    constructionAmounts
+                )
             )
         ),
         React.createElement('section', {className: 'm52'},
@@ -131,7 +136,7 @@ export function TotalBudget({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear, textsById } = state;
+        const { m52InstructionByYear, currentYear, textsById, screenWidth } = state;
         const m52Instruction = m52InstructionByYear.get(currentYear);
         const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -196,8 +201,10 @@ export default connect(
                     'M52-DI-R7': `#!/finance-details/M52-DI-R7`,
                     'M52-DI-R8': `#!/finance-details/M52-DI-R8`,
                     'M52-DI-R9': `#!/finance-details/M52-DI-R9`
-                }
-            }
+                },
+                animationVideo: '/videos/BLOUBLOU_V0.mp4'
+            },
+            screenWidth
         };
 
     },

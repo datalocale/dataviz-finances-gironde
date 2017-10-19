@@ -18,7 +18,8 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             
             justify-content: flex-end;
             align-items: center;
-            width: 20%;
+            min-width: 17em;
+            margin: 0 1em;
 
             & > .legend{
                 width: 100%;
@@ -192,14 +193,14 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             margin: 0;
             margin-bottom: 1em;
         }
-
     }
 
-    .replay{
+
+    .play{
         position: absolute;
-        top: 0;
-        right: 0;
-        opacity: 0;
+        top: 2em;
+        right: 2em;
+        opacity: 1;
 
         font-size: 1.2em;
 
@@ -212,8 +213,18 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
 
         transition-property: opacity;
         
-        &::disabled{
+        &[disabled]{
             cursor: default;
+        }
+    }
+
+    &.video{
+        dl .column{
+            opacity: 1;
+        }
+
+        video{
+            width: 95vw;
         }
     }
 

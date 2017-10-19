@@ -66,189 +66,64 @@ function Legend(text, amount) {
     )
 }
 
+function displayPlayButton(b, time){
+    b.style.transitionDuration = `${time}s`;
+    b.style.opacity = `1`;
+    b.removeAttribute('disabled');
+
+    return delay(time)();
+}
+
+
+function hidePlayButton(b){
+    b.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+    b.style.opacity = `0`;
+    b.setAttribute('disabled', '');
+
+    return delay(100)();
+}
+
 
 function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights}) {
 
     let rfParent, rfBricks, rfEmptier, rfDefs,
         dfParent, dfBricks, dfDefs,
         riParent, epargneElement, riBricks, riEmptier, riDefs,
-        diParent, diBricks, diDefs;
+        diParent, diBricks, diDefs, 
+        playButton; // BRICK_APPEAR_DURATION
 
     const animationStart = Promise.resolve()
-        .then(() => {
-            // RF
-            rfParent = container.querySelector('.brick.rf');
-            rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
-                .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
-            rfEmptier = rfParent.querySelector('.emptier');
-            rfDefs = container.querySelector('dl .rf');
-
-            // DF
-            dfParent = container.querySelector('.brick.df');
-            dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
-            dfDefs = container.querySelector('dl .df');
-
-            // RI
-            riParent = container.querySelector('.brick.ri');
-            epargneElement = riParent.querySelector('.epargne');
-            riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
-            riEmptier = riParent.querySelector('.emptier');
-            riDefs = container.querySelector('dl .ri');
-
-            // DI
-            diParent = container.querySelector('.brick.di');
-            diBricks = [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS]
-                .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
-            diDefs = container.querySelector('dl .di');
-        })
-
-    // Bring in RF bricks
-    const rfBricksStart = animationStart;
-
-    const rfBricksDone = rfBricksStart.then(() => {
-        rfDefs.style.opacity = 1;
-
-        return [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES].reduce((previousDone, id) => {
-            return previousDone.then(() => {
-                const el = rfParent.querySelector(RF_BRICK_SELECTOR[id]);
-
-                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-                // using setTimeout otherwise the transition doesn't occur for the first element 
-                // (and transitionend event doesn't happen and other elementd don't appear)
-                setTimeout( () => {el.style.height = `${rfBrickHeights[id]}em`}, 100)
-
-                return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, { once: true });
-                })
-                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
-            })
-        }, Promise.resolve());
-    });
-
-    // DF bricks
-    const dfBricksStart = rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
-
-    const dfBricksDone = dfBricksStart.then(() => {
-        rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        let rfEmptierHeight = 0;
-
-        dfDefs.style.opacity = 1;
-
-        return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i, arr) => {
-            return previousDone.then(() => {
-                const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
-
-                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-                el.style.height = `${dfBrickHeights[id]}em`;
-
-                rfEmptierHeight += dfBrickHeights[id];
-                if(i >= 1){
-                    rfEmptierHeight += IN_BETWEEN_BRICK_SPACE;
-                }
-                if(i === arr.length - 1){ // last
-                    rfEmptier.style.height = `calc(100% - ${riBrickHeights[EPARGNE]}em)`;
-                }
-                else{
-                    rfEmptier.style.height = `${rfEmptierHeight}em`
-                }
-
-                
-                return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, { once: true });
-                })
-                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
-            })
-        }, Promise.resolve());
-
-    });
-
-
-    // Epargne brick
-    const epargneBrickStart = dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
-
-    const epargneBrickDone = epargneBrickStart.then(() => {
-        riDefs.style.opacity = 1;
-
-        const epargneHeight = riBrickHeights[EPARGNE];
-
-        epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        epargneElement.style.height = `${epargneHeight}em`;
-
-        rfEmptier.style.height = `100%`;
-
-        return new Promise(resolve => {
-            epargneElement.addEventListener('transitionend', resolve, { once: true })
-        })
-    })
-
-    // other RU bricks
-    const otherRiBricksStart = epargneBrickDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
-
-    const otherRiBricksDone = otherRiBricksStart.then(() => {
-        return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
-            return previousDone.then(() => {
-                const el = riParent.querySelector(RI_BRICK_SELECTOR[id]);
-
-                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-                el.style.height = `${riBrickHeights[id]}em`;
-
-                return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, { once: true })
-                })
-                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
-            })
-        }, Promise.resolve());
-    });
-
-    // DI bricks
-    const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
-
-    const diBricksDone = diBricksStart.then(() => {
-
-        riEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        let riEmptierHeight = 0;
-
-        diDefs.style.opacity = 1;
-        const diParent = container.querySelector('.brick.di')
-
-        return [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS].reduce((previousDone, id, i, arr) => {
-            return previousDone.then(() => {
-                const el = diParent.querySelector(DI_BRICK_SELECTOR[id]);
-
-                el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-                el.style.height = `${diBrickHeights[id]}em`;
-
-                riEmptierHeight += diBrickHeights[id];
-                if(i >= 1){
-                    riEmptierHeight += IN_BETWEEN_BRICK_SPACE;
-                }
-                if(i === arr.length - 1){ // last
-                    riEmptier.style.height = `100%`;
-                }
-                else{
-                    riEmptier.style.height = `${riEmptierHeight}em`
-                }
-
-                return new Promise(resolve => {
-                    el.addEventListener('transitionend', resolve, { once: true })
-                })
-                .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
-            })
-        }, Promise.resolve());
-    });
-
-    // Replay button
-    const addReplayButton = diBricksDone
-    .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
     .then(() => {
-        const replayButton = document.querySelector('.replay');
+        // RF
+        rfParent = container.querySelector('.brick.rf');
+        rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
+            .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
+        rfEmptier = rfParent.querySelector('.emptier');
+        rfDefs = container.querySelector('dl .rf');
 
-        replayButton.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
-        replayButton.style.opacity = `1`;
-        replayButton.removeAttribute('disabled');
+        // DF
+        dfParent = container.querySelector('.brick.df');
+        dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+        dfDefs = container.querySelector('dl .df');
 
+        // RI
+        riParent = container.querySelector('.brick.ri');
+        epargneElement = riParent.querySelector('.epargne');
+        riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+        riEmptier = riParent.querySelector('.emptier');
+        riDefs = container.querySelector('dl .ri');
+
+        // DI
+        diParent = container.querySelector('.brick.di');
+        diBricks = [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS]
+            .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+        diDefs = container.querySelector('dl .di');
+
+        // play button
+        playButton = container.querySelector('.play');
+        
         // reset styles
-        replayButton.addEventListener('click', () => {
+        playButton.addEventListener('click', () => {
             rfBricks.forEach(el => { el.style.height = 0; })
             dfBricks.forEach(el => { el.style.height = 0; })
             riBricks.forEach(el => { el.style.height = 0; })
@@ -256,23 +131,157 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
             rfEmptier.style.height = 0;
             riEmptier.style.height = 0;
-            replayButton.setAttribute('disabled', '');
-
-            // replay
-            // let some time pass so transition actually occurs
-            setTimeout( () => {
-                animate(container, { dfBrickHeights, riBrickHeights, diBrickHeights, rfBrickHeights });
-                replayButton.style.opacity = `0`;
-            }, 100);
             
-            
+            hidePlayButton(playButton)
+            .then(startAnimation)
         })
+    })
 
-    });
 
-    const endOfAnimation = addReplayButton;
-
-    return endOfAnimation.catch(e => console.error('animation error', e))
+    function startAnimation(){
+        const rfBricksStart = animationStart;
+    
+        const rfBricksDone = rfBricksStart.then(() => {
+            rfDefs.style.opacity = 1;
+    
+            return [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES].reduce((previousDone, id) => {
+                return previousDone.then(() => {
+                    const el = rfParent.querySelector(RF_BRICK_SELECTOR[id]);
+    
+                    el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                    // using setTimeout otherwise the transition doesn't occur for the first element 
+                    // (and transitionend event doesn't happen and other elementd don't appear)
+                    setTimeout( () => {el.style.height = `${rfBrickHeights[id]}em`}, 100)
+    
+                    return new Promise(resolve => {
+                        el.addEventListener('transitionend', resolve, { once: true });
+                    })
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                })
+            }, Promise.resolve());
+        });
+    
+        // DF bricks
+        const dfBricksStart = rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
+    
+        const dfBricksDone = dfBricksStart.then(() => {
+            rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+            let rfEmptierHeight = 0;
+    
+            dfDefs.style.opacity = 1;
+    
+            return [STRUCTURE, INTERVENTIONS, SOLIDARITE].reduce((previousDone, id, i, arr) => {
+                return previousDone.then(() => {
+                    const el = dfParent.querySelector(DF_BRICK_SELECTOR[id]);
+    
+                    el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                    el.style.height = `${dfBrickHeights[id]}em`;
+    
+                    rfEmptierHeight += dfBrickHeights[id];
+                    if(i >= 1){
+                        rfEmptierHeight += IN_BETWEEN_BRICK_SPACE;
+                    }
+                    if(i === arr.length - 1){ // last
+                        rfEmptier.style.height = `calc(100% - ${riBrickHeights[EPARGNE]}em)`;
+                    }
+                    else{
+                        rfEmptier.style.height = `${rfEmptierHeight}em`
+                    }
+    
+                    
+                    return new Promise(resolve => {
+                        el.addEventListener('transitionend', resolve, { once: true });
+                    })
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                })
+            }, Promise.resolve());
+    
+        });
+    
+    
+        // Epargne brick
+        const epargneBrickStart = dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
+    
+        const epargneBrickDone = epargneBrickStart.then(() => {
+            riDefs.style.opacity = 1;
+    
+            const epargneHeight = riBrickHeights[EPARGNE];
+    
+            epargneElement.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+            epargneElement.style.height = `${epargneHeight}em`;
+    
+            rfEmptier.style.height = `100%`;
+    
+            return new Promise(resolve => {
+                epargneElement.addEventListener('transitionend', resolve, { once: true })
+            })
+        })
+    
+        // other RU bricks
+        const otherRiBricksStart = epargneBrickDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
+    
+        const otherRiBricksDone = otherRiBricksStart.then(() => {
+            return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
+                return previousDone.then(() => {
+                    const el = riParent.querySelector(RI_BRICK_SELECTOR[id]);
+    
+                    el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                    el.style.height = `${riBrickHeights[id]}em`;
+    
+                    return new Promise(resolve => {
+                        el.addEventListener('transitionend', resolve, { once: true })
+                    })
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                })
+            }, Promise.resolve());
+        });
+    
+        // DI bricks
+        const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
+    
+        const diBricksDone = diBricksStart.then(() => {
+    
+            riEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+            let riEmptierHeight = 0;
+    
+            diDefs.style.opacity = 1;
+            const diParent = container.querySelector('.brick.di')
+    
+            return [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS].reduce((previousDone, id, i, arr) => {
+                return previousDone.then(() => {
+                    const el = diParent.querySelector(DI_BRICK_SELECTOR[id]);
+    
+                    el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
+                    el.style.height = `${diBrickHeights[id]}em`;
+    
+                    riEmptierHeight += diBrickHeights[id];
+                    if(i >= 1){
+                        riEmptierHeight += IN_BETWEEN_BRICK_SPACE;
+                    }
+                    if(i === arr.length - 1){ // last
+                        riEmptier.style.height = `100%`;
+                    }
+                    else{
+                        riEmptier.style.height = `${riEmptierHeight}em`
+                    }
+    
+                    return new Promise(resolve => {
+                        el.addEventListener('transitionend', resolve, { once: true })
+                    })
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                })
+            }, Promise.resolve());
+        });
+    
+        // Replay button
+        const addReplayButton = diBricksDone
+        .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
+        .then(() => {
+            return displayPlayButton(playButton, BRICK_APPEAR_DURATION)
+        })
+    
+        return addReplayButton;
+    }
 
 }
 
@@ -363,22 +372,24 @@ export default class BudgetConstructionAnimation extends React.Component {
     }
 
     componentDidMount() {
-        const bricksContainer = this.refs.container.querySelector('.bricks');
-        // these sizes are in px
-        const {fontSize, height} = getComputedStyle(bricksContainer);
+        if(!this.props.videoURL){
+            const bricksContainer = this.refs.container.querySelector('.bricks');
+            // these sizes are in px
+            const {fontSize, height} = getComputedStyle(bricksContainer);
 
-        this.setState(Object.assign(
-            {},
-            this.state,
-            {
-                bricksContainerSize: parseFloat(height) / parseFloat(fontSize)
-            }
-        ));
+            this.setState(Object.assign(
+                {},
+                this.state,
+                {
+                    bricksContainerSize: parseFloat(height) / parseFloat(fontSize)
+                }
+            ));
 
-        // so the state is actually up to date when calling animateAndLockComponent
-        setTimeout(() => {
-            this.animateAndLockComponent(this.props, this.state.bricksContainerSize)
-        });
+            // so the state is actually up to date when calling animateAndLockComponent
+            setTimeout(() => {
+                this.animateAndLockComponent(this.props, this.state.bricksContainerSize)
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -393,13 +404,13 @@ export default class BudgetConstructionAnimation extends React.Component {
 
     render() {
         const amounts = this.props;
-        const {bricksContainerSize} = this.state;
 
         const {
             DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
             Solidarité, Interventions, DépensesStructure,
             RIPropre, Emprunt,
-            RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
+            RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions,
+            videoURL
         } = amounts;
 
         const rf = DotationEtat + FiscalitéDirecte + FiscalitéIndirecte + RecettesDiverses
@@ -411,11 +422,18 @@ export default class BudgetConstructionAnimation extends React.Component {
         const infra = Routes + Colleges + Amenagement;
         const di = RemboursementEmprunt + infra + Subventions;
 
-        const maxAmount = max([rf, ri, df, di]);
-
-        const maxHeight = MAX_PARENT_BRICK_SIZE_PROPORTION * bricksContainerSize;
-
-        return React.createElement('article', { className: 'budget-construction', ref: 'container' },
+        return React.createElement('article', 
+            { 
+                className: ['budget-construction', videoURL ? 'video' : ''].filter(e => e).join(' '), 
+                ref: 'container' 
+            },
+            videoURL ?
+            React.createElement('video', 
+                { 
+                    src: videoURL, 
+                    controls: true
+                }
+            ) :
             React.createElement('div', { className: 'bricks' },
                 DotationEtat ? [
                     React.createElement('a', 
@@ -550,9 +568,9 @@ export default class BudgetConstructionAnimation extends React.Component {
                     React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 )
             ),
-            React.createElement('button', { className: 'replay' }, 
+            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
                 React.createElement('i',  { className: 'fa fa-play-circle-o' }),
-                ' rejouer'
+                ' jouer'
             )
         );
     }
