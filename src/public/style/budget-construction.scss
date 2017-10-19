@@ -193,8 +193,8 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
             margin: 0;
             margin-bottom: 1em;
         }
-
     }
+
 
     .play{
         position: absolute;
@@ -215,6 +215,16 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
         
         &[disabled]{
             cursor: default;
+        }
+    }
+
+    &.video{
+        dl .column{
+            opacity: 1;
+        }
+
+        video{
+            width: 95vw;
         }
     }
 

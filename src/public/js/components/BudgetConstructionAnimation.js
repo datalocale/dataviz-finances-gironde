@@ -372,22 +372,24 @@ export default class BudgetConstructionAnimation extends React.Component {
     }
 
     componentDidMount() {
-        const bricksContainer = this.refs.container.querySelector('.bricks');
-        // these sizes are in px
-        const {fontSize, height} = getComputedStyle(bricksContainer);
+        if(!this.props.videoURL){
+            const bricksContainer = this.refs.container.querySelector('.bricks');
+            // these sizes are in px
+            const {fontSize, height} = getComputedStyle(bricksContainer);
 
-        this.setState(Object.assign(
-            {},
-            this.state,
-            {
-                bricksContainerSize: parseFloat(height) / parseFloat(fontSize)
-            }
-        ));
+            this.setState(Object.assign(
+                {},
+                this.state,
+                {
+                    bricksContainerSize: parseFloat(height) / parseFloat(fontSize)
+                }
+            ));
 
-        // so the state is actually up to date when calling animateAndLockComponent
-        setTimeout(() => {
-            this.animateAndLockComponent(this.props, this.state.bricksContainerSize)
-        });
+            // so the state is actually up to date when calling animateAndLockComponent
+            setTimeout(() => {
+                this.animateAndLockComponent(this.props, this.state.bricksContainerSize)
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -407,7 +409,8 @@ export default class BudgetConstructionAnimation extends React.Component {
             DotationEtat, FiscalitéDirecte, FiscalitéIndirecte, RecettesDiverses,
             Solidarité, Interventions, DépensesStructure,
             RIPropre, Emprunt,
-            RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions
+            RemboursementEmprunt, Routes, Colleges, Amenagement, Subventions,
+            videoURL
         } = amounts;
 
         const rf = DotationEtat + FiscalitéDirecte + FiscalitéIndirecte + RecettesDiverses
@@ -419,7 +422,18 @@ export default class BudgetConstructionAnimation extends React.Component {
         const infra = Routes + Colleges + Amenagement;
         const di = RemboursementEmprunt + infra + Subventions;
 
-        return React.createElement('article', { className: 'budget-construction', ref: 'container' },
+        return React.createElement('article', 
+            { 
+                className: ['budget-construction', videoURL ? 'video' : ''].filter(e => e).join(' '), 
+                ref: 'container' 
+            },
+            videoURL ?
+            React.createElement('video', 
+                { 
+                    src: videoURL, 
+                    controls: true
+                }
+            ) :
             React.createElement('div', { className: 'bricks' },
                 DotationEtat ? [
                     React.createElement('a', 
@@ -554,7 +568,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                     React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 )
             ),
-            React.createElement('button', { className: 'play' }, 
+            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
                 React.createElement('i',  { className: 'fa fa-play-circle-o' }),
                 ' jouer'
             )
