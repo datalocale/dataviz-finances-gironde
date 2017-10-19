@@ -21,8 +21,13 @@ $R9-color: $area-color-10;
 
 .explore-budget{
     width: 100%;
-    max-width: $column-max-width; 
-    padding: 0 $column-padding;
+    padding: 0 0.5em;
+    
+    @media screen and (min-width: $main-column-breakpoint) {
+        max-width: $column-max-width; 
+        padding: 0 $column-padding;
+    }
+    
 
     section{
         margin-bottom: 3em;
@@ -30,25 +35,41 @@ $R9-color: $area-color-10;
 
     .viz{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
-        
+
+        @media screen and (min-width: $explore-masses-breakpoint) {
+            flex-direction: row;
+        }
         margin-bottom: 1em;
 
         .revenue, .expenditures{
-            width: 50%;
+            width: 100%;
+            @media screen and (min-width: $explore-masses-breakpoint) {
+                width: 50%;
+            }
+
             display: flex;
             flex-direction: column;
             justify-content: space-between;
 
             & > div{
                 display: flex;
-                flex-direction: row;
-                align-items: flex-end;
+                flex-direction: column-reverse;
+        
+                @media screen and (min-width: $explore-masses-breakpoint) {
+                    flex-direction: row;
+                    align-items: flex-end;
+                }
 
                 .areas{
-                    width: 50%;
+                    width: 100%;
                     height: 100%;
+        
+                    @media screen and (min-width: $explore-masses-breakpoint) {
+                        width: 50%;
+                    }
+                    
 
                     display: flex;
                     flex-direction: column;
@@ -80,7 +101,9 @@ $R9-color: $area-color-10;
                 }
 
                 .texts {
-                    height: 100%;
+                    @media screen and (min-width: $explore-masses-breakpoint) {
+                        height: 100%;
+                    }
 
                     display: flex;
                     flex-direction: column;

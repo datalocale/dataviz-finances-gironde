@@ -67,9 +67,9 @@ export function TotalBudget({
                                 React.createElement(MoneyAmount, {amount: totalById.get(RI)})
                             )
                         ),
-                        React.createElement('div', {className: 'texts', style: {height: revHeight}},
+                        React.createElement('div', {className: 'texts'},
                             React.createElement(MoneyAmount, {amount: revenue}),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: revURL})
+                            React.createElement(PrimaryCallToAction, {text: `Les recettes`, href: revURL})
                         )
                     )
                 ),
@@ -86,9 +86,9 @@ export function TotalBudget({
                                 React.createElement(MoneyAmount, {amount: totalById.get(DI)})
                             )
                         ),
-                        React.createElement('div', {className: 'texts', style: {height: expHeight}},
+                        React.createElement('div', {className: 'texts'},
                             React.createElement(MoneyAmount, {amount: expenditures}),
-                            React.createElement(PrimaryCallToAction, {text: `en savoir plus`, href: expURL})
+                            React.createElement(PrimaryCallToAction, {text: `Les dépenses`, href: expURL})
                         )                   
                     )
                 )
