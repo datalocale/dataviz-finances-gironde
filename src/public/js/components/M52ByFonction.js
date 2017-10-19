@@ -50,8 +50,6 @@ export default class M52ByFonction extends React.Component {
 
         const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
 
-        console.log('m52Hierarchical', m52Hierarchical);
-
         return React.createElement('div', { className: 'm52-by-fonction' },
             React.createElement(M52Viz, {
                 onSliceSelected: e => {
