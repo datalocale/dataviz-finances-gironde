@@ -65,7 +65,7 @@ interface FinanceElementProps{
 */
 
 
-export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, m52Rows, changeExplorationYear}) {
+export function FinanceElement({contentId, RDFI, amountByYear, parent, top, texts, partitionByYear, year, m52Rows, changeExplorationYear, screenWidth}) {
     const label = texts && texts.label || '';
     const atemporalText = texts && texts.atemporal;
     const temporalText = texts && texts.temporal;
@@ -165,6 +165,12 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
             React.createElement(StackChart, {
+                WIDTH: screenWidth >= 800 + 80 ? 
+                    800 :
+                    (screenWidth - 85 >= 600 ? screenWidth - 85 : (
+                        screenWidth <= 600 ? screenWidth - 10 : 600
+                    )), 
+                portrait: screenWidth <= 600,
                 xs: years,
                 ysByX: barchartPartitionByYear.map(partition => partition.map(part => part.partAmount)),
                 selectedX: year,
@@ -279,7 +285,7 @@ function fillChildToParent(tree, wm){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, textsById, financeDetailId, explorationYear } = state;
+        const { m52InstructionByYear, textsById, financeDetailId, explorationYear, screenWidth } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -367,7 +373,8 @@ export default connect(
             texts: textsById.get(displayedContentId),
             partitionByYear,
             m52Rows,
-            year: explorationYear
+            year: explorationYear,
+            screenWidth
         }
 
     },
