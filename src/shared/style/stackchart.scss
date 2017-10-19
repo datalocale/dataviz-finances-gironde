@@ -2,7 +2,7 @@
 
 .stackchart {
     .content{
-        text.title{
+        text.stackchart-title{
             font-size: 1.2em;
             font-weight: bold;
             
@@ -26,6 +26,19 @@
             &.actionable{
                 cursor: pointer;
             }
+        }
+    }
+
+    &.portrait{
+        .content{
+            text.stackchart-title{
+                font-size: 1em;
+                font-weight: normal;
+            }
+        }
+
+        .d3-axis.x .tick text{
+            fill: black
         }
     }
 

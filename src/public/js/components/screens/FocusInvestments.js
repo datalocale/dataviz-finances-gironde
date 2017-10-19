@@ -24,7 +24,7 @@ import {makePartition, makeElementById} from './FinanceElement';
 import colorClassById from '../../colorClassById';
 
 export function FocusSol({
-    year, yearInvestments, partitionByYear, population, yearDIDetails
+    year, yearInvestments, partitionByYear, population, yearDIDetails, screenWidth
 }) {
 
     const investmentProportion = yearInvestments && yearInvestments.investments/yearInvestments.expenditures;
@@ -54,7 +54,7 @@ export function FocusSol({
         React.createElement('section', {className: 'top-infos'}, 
             React.createElement(FocusDonut, {
                 proportion: investmentProportion, 
-                outerRadius: 188, 
+                outerRadius:  screenWidth < 400 ? (screenWidth/2 - 20) : 188, 
                 innerText: [
                     `de dépenses d'Investissements`,
                     `sur l'ensemble des dépenses`
@@ -75,6 +75,12 @@ export function FocusSol({
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution des dépenses d’investissements de 2009 à 2016'}),
             React.createElement(StackChart, {
+                WIDTH: screenWidth >= 800 + 80 ? 
+                    800 :
+                    (screenWidth - 85 >= 600 ? screenWidth - 85 : (
+                        screenWidth <= 600 ? screenWidth - 10 : 600
+                    )), 
+                portrait: screenWidth <= 600,
                 xs: years,
                 ysByX: partitionByYear.map(partition => partition.map(part => part.partAmount)),
                 onBrickClicked: (year, id) => { page(`#!/finance-details/${id}`); },
@@ -196,7 +202,7 @@ export function FocusSol({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear, textsById } = state;
+        const { m52InstructionByYear, currentYear, textsById, screenWidth} = state;
 
         const investmentsByYear = m52InstructionByYear.map( ((instruction) => {
             const agg = m52ToAggregated(instruction);
@@ -249,7 +255,8 @@ export default connect(
             yearDIDetails,
             yearInvestments: investmentsByYear.get(currentYear),
             partitionByYear, 
-            population: 1505517 // source : https://www.gironde.fr/le-departement
+            population: 1505517, // source : https://www.gironde.fr/le-departement
+            screenWidth
         };
     },
     () => ({})

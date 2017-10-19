@@ -62,64 +62,6 @@ $partition-part-width: 12em;
         margin-top: 2em;    
     }
 
-    .partition{
-
-        & > a{
-            display: flex;
-            flex-direction: row;
-
-            color: black;
-            text-decoration: none;
-
-            min-height: 10em;
-
-            .part{
-                color: white;
-                font-weight: bold;
-                
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                
-                padding: 0.5em;
-
-                border: 2px solid white;
-
-                width: $partition-part-width;
-                min-height: 2.5em;
-
-                z-index: 1; // atop the a::before
-            }
-
-            .text{
-                margin-left: 2em;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                padding-bottom: 1em;
-
-                flex: 1;                                                                                                 
-
-                h1{
-                    font-size: 2em; 
-                } 
-
-                .summary{
-                    margin-bottom: 1em;
-                }
-            }
-
-            &:not(:last-child)::before{
-                content: '';
-                transform: translateX($partition-part-width/2);
-                border-left: 4px solid #D8D8D8;
-                width: 0;
-            }
-
-        } 
-
-    }
-
     .raw-data{
         table {
             thead, tbody{
