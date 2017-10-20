@@ -28,12 +28,12 @@ export default function ({total, year, exploreUrl}) {
                 React.createElement('span', {className: 'after-comma'}, ', '+afterComma)
             ) : '',
             React.createElement('div', {className: 'text'}, 
-                `Milliards d'euros de dépenses en ${year}`
+                `Milliard${total/Math.pow(10, 9) >= 2 ? 's' : ''} d'euros de dépenses en ${year}`
             )
         ),
         React.createElement('hr', {}),
         React.createElement(Markdown, {}, 
-            `Le département a dépensé ${toDisplay.replace('.', ',')} milliards d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
+            `Le département a dépensé ${toDisplay.replace('.', ',')} milliard${total/Math.pow(10, 9) >= 2 ? 's' : ''} d’euros pour les girondins en ${year}. Explorez les comptes pour comprendre d’où vient cet argent, à quoi il sert et comment il a été dépensé.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})
     );
