@@ -1,6 +1,6 @@
 @import '../../shared/style/legend-list'; 
 
-@import 'finance-element-pie'; 
+@import 'finance-element-context'; 
 
 $partition-part-width: 12em;
 
@@ -20,23 +20,9 @@ $partition-part-width: 12em;
 
     .top-infos{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
-
-        svg{
-            flex:1;
-
-            circle, path{
-                stroke: white;
-                stroke-width: 3px;   
-            }
-        } 
-
-        & > :nth-child(2){
-            padding: 0 1em;
-            flex: 2;
-        }
     }
 
     h2{
