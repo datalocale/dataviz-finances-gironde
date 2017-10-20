@@ -202,7 +202,7 @@ export default connect(
                     'M52-DI-R8': `#!/finance-details/M52-DI-R8`,
                     'M52-DI-R9': `#!/finance-details/M52-DI-R9`
                 },
-                animationVideo: '/videos/BLOUBLOU_V0.mp4'
+                animationVideo: '../videos/BLOUBLOU_V0.mp4'
             },
             screenWidth
         };
