@@ -26,7 +26,7 @@ import {CHANGE_EXPLORATION_YEAR} from '../../constants/actions';
 
 import colorClassById from '../../colorClassById';
 
-import FinanceElementPie from '../FinanceElementPie';
+import FinanceElementContext from '../FinanceElementContext';
 import RollingNumber from '../RollingNumber';
 
 /*
@@ -128,33 +128,16 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             `${label} en ${year}`}), 
         React.createElement('section', {}, 
             React.createElement('div', {className: 'top-infos'},
-                parent || top ? React.createElement('div', {},
-                    React.createElement(FinanceElementPie, {
-                        parent,
-                        colorClass1: parentColorClass,
-                        colorClass2: elementColorClass,
-                        backgroundColorClass: 'discrete-grey',
-                        radius: 180,
-                        proportion1: parent ? parent.amount/top.amount : undefined,
-                        proportion2: top ? amount/top.amount : undefined
-                    }),
-                    React.createElement(LegendList, {items: [
-                        {
-                            text: label,
-                            colorClassName: elementColorClass
-                        },
-                        parent ? {
-                            url: parent.url,
-                            text: `Autres ${parent.label}`,
-                            colorClassName: parentColorClass
-                        } : undefined,
-                        top ? {
-                            url: top.url,
-                            text: `Autres ${top.label}`,
-                            colorClassName: 'discrete-grey'
-                        } : undefined,
-                    ].filter(e => e)})
-                ) : undefined,
+                parent || top ? React.createElement(FinanceElementContext, {
+                    label,
+                    top,
+                    parent,
+                    colorClass1: parentColorClass,
+                    colorClass2: elementColorClass,
+                    backgroundColorClass: 'discrete-grey',
+                    proportion1: parent ? parent.amount/top.amount : undefined,
+                    proportion2: top ? amount/top.amount : undefined
+                }) : undefined,
                 React.createElement('div', {},
                     React.createElement('h2', {}, React.createElement(RollingNumber, {amount})),
                     atemporalText ? React.createElement('div', {className: 'atemporal', dangerouslySetInnerHTML: {__html: atemporalText}}) : undefined
