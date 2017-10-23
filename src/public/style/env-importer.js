@@ -10,11 +10,18 @@ const PROD = 'production';  // gironde.fr website integration
 const DEMO = 'demo';        // gh-pages demo
 const DEV = 'development';  // localhost
 
+const GIRONDE_FR_DRUPAL_MEDIA_ID = "1938";
+
 const byEnv = {
     "home-illustration-url": {
-        [PROD]: '/sites/default/files/2017-07/map-optimised.jpg',
+        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_image/0`,
         [DEMO]: '../images/map-optimised.jpg',
         [DEV]: '../images/map-optimised.jpg'
+    },
+    "bonhomme-url": {
+        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/17`,
+        [DEMO]: '../images/bonhomme.svg',
+        [DEV]: '../images/bonhomme.svg'
     }
 }
 
