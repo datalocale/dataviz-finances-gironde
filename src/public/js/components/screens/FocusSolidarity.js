@@ -6,18 +6,20 @@ import { connect } from 'react-redux';
 import page from 'page';
 
 import StackChart from '../../../../shared/js/components/StackChart';
+import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 import Markdown from '../../../../shared/js/components/Markdown';
-import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
-
-import FocusDetail from '../FocusDetail';
-import FocusDonut from '../FocusDonut';
-
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
 import {EXPENDITURES} from '../../../../shared/js/finance/constants';
+
+
+import {urls, INSERTION_PICTO, ENFANCE_PICTO, HANDICAPES_PICTO, PERSONNES_AGEES_PICTO} from '../../constants/resources';
+
+import FocusDetail from '../FocusDetail';
+import FocusDonut from '../FocusDonut';
 
 /*
 
@@ -29,7 +31,7 @@ interface FocusSolidarityProps{
 */
 
 export function FocusSol({
-    currentYear, currentYearSolidarity, solidarityByYear, screenWidth
+    currentYear, currentYearSolidarity, solidarityByYear, screenWidth, urls
 }) {
 
     const years = solidarityByYear.keySeq().toJS();
@@ -127,7 +129,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'insertion', 
                 title: 'Personnes en insertion', 
-                illustrationUrl: 'https://cdn.rawgit.com/datalocale/pictoGironde/master/Insertion.svg', 
+                illustrationUrl: urls[INSERTION_PICTO], 
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1, 
@@ -151,7 +153,7 @@ export function FocusSol({
             React.createElement(FocusDetail, {
                 className: 'handicap', 
                 title: 'Personnes handicapées',
-                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Handicapes.svg',
+                illustrationUrl: urls[HANDICAPES_PICTO], 
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
@@ -180,7 +182,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
             React.createElement(FocusDetail, {
                 className: 'elderly', 
                 title: 'Personnes âgées',
-                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
+                illustrationUrl: urls[PERSONNES_AGEES_PICTO], 
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1, 
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
@@ -203,7 +205,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
             React.createElement(FocusDetail, {
                 className: 'childhood', 
                 title: 'Enfance',
-                illustrationUrl: 'https://rawgit.com/datalocale/pictoGironde/master/Enfance.svg',
+                illustrationUrl: urls[ENFANCE_PICTO], 
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1, 
@@ -281,7 +283,8 @@ export default connect(
             currentYear,
             currentYearSolidarity: solidarityByYear.get(currentYear),
             solidarityByYear,
-            screenWidth
+            screenWidth, 
+            urls
         };
     },
     () => ({})
