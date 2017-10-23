@@ -6,6 +6,7 @@ import { Record, Map as ImmutableMap, List } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
+import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './constants/resources';
 import reducer from './reducer';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
@@ -26,35 +27,7 @@ if(typeof WeakMap !== 'function'){
     window.WeakMap = Map;
 }
 
-
 const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
-
-const makeFinanceURLByEnv = {
-    "production": function(name){
-        return `/sites/default/files/2017-07/${name}.pdf`
-    },
-    "demo": function(name){
-        return `../data/finances/${name}.csv`
-    },
-    "development": function(name){
-        return `../data/finances/${name}.csv`
-    }
-};
-
-const makeTextURLByEnv = {
-    "production": function(name){
-        return `/sites/default/files/2017-09/${name}.pdf`
-    },
-    "demo": function(name){
-        return `../data/texts/${name}.csv`
-    },
-    "development": function(name){
-        return `../data/texts/${name}.csv`
-    }
-};
-
-const makeFinanceURL = makeFinanceURLByEnv[process.env.NODE_ENV];
-const makeTextURL = makeTextURLByEnv[process.env.NODE_ENV];
 
 
 /**
@@ -157,13 +130,9 @@ store.dispatch({
  * Fetching initial data
  * 
  */
-[
-    makeFinanceURL('cedi_2016_CA'),
-    makeFinanceURL('cedi_2015_CA'),
-    makeFinanceURL('cedi_2014_CA'),
-    makeFinanceURL('cedi_2013_CA'),
-    makeFinanceURL('cedi_2012_CA')
-].forEach(url => {
+[ 2016, 2015, 2014, 2013, 2012 ]
+.map(urls[COMPTE_ADMINISTRATIF])
+.forEach(url => {
     fetch(url).then(resp => resp.text())
         .then(csvStringToM52Instructions)
         .then(m52Instruction => {
@@ -174,31 +143,24 @@ store.dispatch({
         });
 });
 
-[
-    makeTextURL('aggregated-atemporal'),
-].forEach(url => {
-    fetch(url).then(resp => resp.text())
-        .then(csvParse)
-        .then(textList => {
-            store.dispatch({
-                type: ATEMPORAL_TEXTS_RECEIVED,
-                textList
-            });
-        });
+fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
+.then(csvParse)
+.then(textList => {
+    store.dispatch({
+        type: ATEMPORAL_TEXTS_RECEIVED,
+        textList
+    });
 });
 
-[
-    makeTextURL('aggregated-temporal'),
-].forEach(url => {
-    fetch(url).then(resp => resp.text())
-        .then(csvParse)
-        .then(textList => {
-            store.dispatch({
-                type: TEMPORAL_TEXTS_RECEIVED,
-                textList
-            });
-        });
+fetch(urls[AGGREGATED_TEMPORAL]).then(resp => resp.text())
+.then(csvParse)
+.then(textList => {
+    store.dispatch({
+        type: TEMPORAL_TEXTS_RECEIVED,
+        textList
+    });
 });
+
 
 
 /**
