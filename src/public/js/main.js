@@ -17,10 +17,12 @@ import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
 import FocusInvestments from './components/screens/FocusInvestments';
+import FocusPresence from './components/screens/FocusPresence';
+
 import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions';
+import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions'; 
 
 // cheapest WeakMap polyfill because the polyfill.io one threw an exception
 if(typeof WeakMap !== 'function'){
@@ -272,6 +274,20 @@ page(`/focus/${INVEST}`, () => {
             Provider,
             { store },
             React.createElement(FocusInvestments)
+        ),
+        CONTAINER_ELEMENT
+    );
+});
+
+page(`/focus/${PRESENCE}`, () => {
+    console.log('in route', `/focus/${PRESENCE}`);
+    scrollTo(0, 0);
+
+    ReactDOM.render(
+        React.createElement(
+            Provider,
+            { store },
+            React.createElement(FocusPresence)
         ),
         CONTAINER_ELEMENT
     );

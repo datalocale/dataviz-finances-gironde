@@ -50,7 +50,7 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
             React.createElement(Markdown, {}, 
-                `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles,etc.`
+                `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles, etc.`
             )
         ),
         React.createElement('section', {className: 'top-infos'}, 
