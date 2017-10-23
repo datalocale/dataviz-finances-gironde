@@ -101,6 +101,14 @@ $focus-highlight-color : #F62727;
         display: flex;
         flex-direction: column;
 
+        .over-time{
+            flex: 2;
+        }
+
+        .legend-list{
+            flex: 1;
+        }
+
 
         @media screen and (min-width: $stackchart-medium-breakpoint) {
             align-items: flex-start;
@@ -118,6 +126,7 @@ $focus-highlight-color : #F62727;
         
 
         .content{
+
             .DF-1-1 rect{
                 fill: $hebergement-color;
             }

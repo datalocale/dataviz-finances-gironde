@@ -11,10 +11,7 @@ import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/Pri
 import Markdown from '../../../../shared/js/components/Markdown';
 import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 
-
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
-import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
-import {EXPENDITURES, DI} from '../../../../shared/js/finance/constants';
 
 import {makePartition, makeElementById} from './FinanceElement';
 
@@ -23,10 +20,8 @@ import {urls} from '../../constants/resources';
 import colorClassById from '../../colorClassById';
 
 export function FocusSol({
-    year, yearInvestments, partitionByYear, population, yearDIDetails, screenWidth, urls
+    year, partitionByYear, yearDetails, screenWidth, urls
 }) {
-
-    const investmentProportion = yearInvestments && yearInvestments.investments/yearInvestments.expenditures;
 
     const years = partitionByYear.keySeq().toJS();
 
@@ -41,7 +36,7 @@ export function FocusSol({
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     });
 
-    const focusDetailsDenominator = yearDIDetails ? yearDIDetails['DI-1'] + yearDIDetails['DI-2'] : NaN;
+    const focusDetailsDenominator = yearDetails ? yearDetails['DF-6'] : NaN;
 
     return React.createElement('article', {className: 'focus'},
         React.createElement('section', {}, 
@@ -64,7 +59,7 @@ export function FocusSol({
             React.createElement(Markdown, {}, 
                 `Les frais de fonctionnement sont constitués des charges de structures qui permettent le fonctionnement de la collectivité au quotidien et sur tout le territoire girondin.`
             ),
-            /*React.createElement(StackChart, {
+            React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ? 
                     800 :
                     (screenWidth - 85 >= 600 ? screenWidth - 85 : (
@@ -82,7 +77,7 @@ export function FocusSol({
                     colorClassName: colorClassById.get(p.contentId)
                 })).toArray(),
                 yValueDisplay: makeAmountString
-            }),*/
+            }),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-6-1', text: `en savoir plus`})
         ),
         React.createElement('section', {})
@@ -90,30 +85,11 @@ export function FocusSol({
 }
 
 
+const displayedContentId = 'DF-6-1';
 
 export default connect(
     state => {
         const { m52InstructionByYear, currentYear, textsById, screenWidth} = state;
-
-        const investmentsByYear = m52InstructionByYear.map( ((instruction) => {
-            const agg = m52ToAggregated(instruction);
-
-            const hierAgg = hierarchicalAggregated(agg);
-
-            const hierAggByPrestationList = flattenTree(hierAgg);
-
-            const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
-            let investments = hierAggByPrestationList.find(e => e.id === 'DI').total;
-
-            return {
-                expenditures,
-                investments
-            }
-            
-        }))
-
-        // code adapted from FinanceElement mapStateToProps
-        const displayedContentId = DI;
 
         const partitionByYear = m52InstructionByYear.map(m52i => {
             const elementById = makeElementById(
@@ -125,28 +101,22 @@ export default connect(
             return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
-        // DI details
         const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(
             hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear)))
         ) : undefined;
 
-        const yearDIDetails = elementById ? {
-            'DI-1': elementById.get('DI-1').total,
-            'DI-2': elementById.get('DI-2').total,
-            'DI-1-1': elementById.get('DI-1-1').total,
-            'DI-1-2': elementById.get('DI-1-2').total,
-            'DI-1-3': elementById.get('DI-1-3').total,
-            'DI-1-4': elementById.get('DI-1-4').total,
-            'DI-2-1': elementById.get('DI-2-1').total,
+        const yearDetails = elementById ? {
+            'DF-6': elementById.get('DF-6').total,
+            'DF-6-1': elementById.get('DF-6-1').total,
+            'DF-6-1-1': elementById.get('DF-6-1-1').total,
+            'DF-6-3-1': elementById.get('DF-6-3-1').total
         } : undefined;
 
 
         return {
             year: currentYear,
-            yearDIDetails,
-            yearInvestments: investmentsByYear.get(currentYear),
-            partitionByYear, 
-            population: 1505517, // source : https://www.gironde.fr/le-departement
+            yearDetails,
+            partitionByYear,
             screenWidth,
             urls
         };
