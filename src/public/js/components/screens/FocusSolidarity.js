@@ -95,7 +95,7 @@ export function FocusSol({
                     {
                         id: 'DF-2-2',
                         colorClassName: 'DF-2-2', 
-                        text: "Personnes handicapées"
+                        text: "Personnes en situation de handicap"
                     },
                     {
                         id: 'DF-2-3',
@@ -119,10 +119,10 @@ export function FocusSol({
         ),
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
-            React.createElement(Markdown, {}, `On distingue  quatre catégories de public pouvant être aidé: 
+            React.createElement(Markdown, {}, `On distingue quatre catégories de public pouvant être aidé: 
 
             - les personnes en insertion ou en situation de précarité, 
-            - les personnes handicapées
+            - les personnes en situation de handicap
             - les personnes âgées
             - les enfants 
             Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
@@ -152,12 +152,12 @@ export function FocusSol({
             }),
             React.createElement(FocusDetail, {
                 className: 'handicap', 
-                title: 'Personnes handicapées',
+                title: 'Personnes en situation de handicap',
                 illustrationUrl: urls[HANDICAPES_PICTO], 
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2') : undefined, 
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1, 
-                text: `Le Département a financé, en particulier, trois aides en 2016:
+                text: `Les aides du Département versées aux personnes en situation de handicap concernent en 2016:
 - la Prestation de Compensation du Handicap (PCH) versée à 9 975 personnes 
 - la prestation d’hébergement  qui a financé 2 763 places d'hébergement
 - l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 128 personnes 
