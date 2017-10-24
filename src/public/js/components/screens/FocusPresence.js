@@ -14,8 +14,9 @@ import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 
 import {makePartition, makeElementById} from './FinanceElement';
+import FocusDetail from '../FocusDetail';
 
-import {urls} from '../../constants/resources';
+import {urls, PATRIMOINE_PICTO} from '../../constants/resources';
 
 import colorClassById from '../../colorClassById';
 
@@ -80,7 +81,55 @@ export function FocusSol({
             }),
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-6-1', text: `en savoir plus`})
         ),
-        React.createElement('section', {})
+        React.createElement('section', {}, 
+            React.createElement(SecundaryTitle, {text: `Détails de la présence`}),
+            React.createElement(Markdown, {}, ``),
+            React.createElement(FocusDetail, {
+                
+                className: 'buildings', 
+                
+                title: 'Bâtiments', 
+                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                amount: yearDetails ? yearDetails['DF-6-1'] : undefined,
+                proportion: yearDetails ? yearDetails['DF-6-1']/focusDetailsDenominator : 1, 
+                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire, il les équipe, les relie à internet à haut débit et les assure contre les risques.`, 
+                highlights: [
+                    /*{
+                        strong: "",
+                        span: ""
+                    },
+                    {
+                        strong: "",
+                        span: ""
+                    }*/
+                ], 
+                moreUrl: '#!/finance-details/DF-6-1'
+            }),
+            React.createElement(FocusDetail, {
+                
+                className: 'buildings', 
+                
+                title: 'Achats et fournitures', 
+                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                amount: yearDetails ? yearDetails['DF-6-1-1'] : undefined,
+                proportion: yearDetails ? yearDetails['DF-6-1-1']/focusDetailsDenominator : 1, 
+                text: `Il s’agit par exemple du financement de la consommation électrique des bâtiments de la collectivité, de carburant pour le déplacement des agents, le mobilier, les dépenses de consommation d’eau ou de chauffage. ou celle de ses véhicules électriques.`, 
+                highlights: [], 
+                moreUrl: '#!/finance-details/DF-6-1-1'
+            }),
+            React.createElement(FocusDetail, {
+                
+                className: 'buildings', 
+
+                title: 'Fonctionnement de l’assemblée départementale', 
+                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                amount: yearDetails ? yearDetails['DF-6-3-1'] : undefined,
+                proportion: yearDetails ? yearDetails['DF-6-3-1']/focusDetailsDenominator : 1, 
+                text: `Cette dépense concerne les indemnités versées aux élus départementaux, à leurs frais ainsi qu’aux rémunérations de leurs collaborateurs`, 
+                highlights: [], 
+                moreUrl: '#!/finance-details/DI-6-3-1'
+            })
+        )
     );
 }
 
