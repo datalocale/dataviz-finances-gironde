@@ -28,9 +28,10 @@ const m52RecordKeys = {
 
 export const M52RowRecord = Record(m52RecordKeys);
 
-export const WeightedM52RowRecord = Record(Object.assign(
+export const SplitM52RowRecord = Record(Object.assign(
     {
-        weight: undefined
+        // this field represents the id of the aggregated set the split line belongs to
+        splitFor: undefined
     },
     m52RecordKeys
 ))

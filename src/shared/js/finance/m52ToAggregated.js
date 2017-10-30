@@ -1,7 +1,8 @@
 import {Record, OrderedSet as ImmutableSet} from 'immutable';
 
 import {isOR, isRF, isDF, isRI, isDI} from './rowFilters';
-import {WeightedM52RowRecord} from './M52InstructionDataStructures';
+
+import {SplitM52RowRecord} from './M52InstructionDataStructures';
 
 
 /*
@@ -296,36 +297,29 @@ export const rules = Object.freeze({
     },
     'DF-1-1-3': {
         label: "Liés à l’enfance",
+        // Also contains R51 A65111 from a correction
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             
             return isOR(m52Row) && isDF(m52Row) && 
-                fonction.slice(0, 3) === 'R51' &&
                 (
-                    [
-                        "A6132", "A6135", "A6184",
-                        "A6234", "A6245",
-                        "A65111", "A65221", "A652222", "A65223", "A65228", 
-                        "A6523", "A652411", "A652412", "A652415", "A652418", 
-                        "A65821", "A6718"
-                    ].includes(m52Row['Article']) ||
-                    m52Row['Article'].startsWith('A64')
+                    (
+                        fonction.slice(0, 3) === 'R51' &&
+                        (
+                            [
+                                "A6132", "A6135", "A6184",
+                                "A6234", "A6245",
+                                "A65221", "A652222", "A65223", "A65228", 
+                                "A6523", "A652411", "A652412", "A652415", "A652418", 
+                                "A65821", "A6718"
+                            ].includes(article) ||
+                            article.startsWith('A64')
+                        )
+                    ) ||
+                    (fonction === 'R50' && article === 'A64121') ||
+                    (fonction === 'R50' && article === 'A64126')
                 );
-        },
-        weight(m52Row){
-            const fonction = m52Row['Rubrique fonctionnelle'];
-            const article = m52Row['Article'];
-
-            if(fonction === 'R51' && article === 'A65111'){
-                return WeightedM52RowRecord(Object.assign(
-                    {
-                        weight: 0.75
-                    },
-                    m52Row.toJS()
-                ));
-            }
-
-            return m52Row;
         }
     },
     'DF-1-2': {
@@ -348,27 +342,13 @@ export const rules = Object.freeze({
     },
     'DF-1-5': {
         label: "Préventions enfants",
+        // Also contains R51 A65111 from a correction
         filter(m52Row){
             const fonction = m52Row['Rubrique fonctionnelle'];
 
             return isOR(m52Row) && isDF(m52Row) && 
                 fonction.slice(0, 3) === 'R51' &&
-                ['A652416', 'A6514', 'A65111'].includes(m52Row['Article']);    
-        },
-        weight(m52Row){
-            const fonction = m52Row['Rubrique fonctionnelle'];
-            const article = m52Row['Article'];
-
-            if(fonction === 'R51' && article === 'A65111'){
-                return WeightedM52RowRecord(Object.assign(
-                    {
-                        weight: 0.25
-                    },
-                    m52Row.toJS()
-                ));
-            }
-
-            return m52Row;
+                ['A652416', 'A6514'].includes(m52Row['Article']);    
         }
     },
     'DF-1-6': {
@@ -472,10 +452,15 @@ export const rules = Object.freeze({
     'DF-2-4': {
         label: "Enfance",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && f3 === 'R51' && 
-                m52Row['Article'] !== 'A6526';
+            return isOR(m52Row) && isDF(m52Row) && 
+                (
+                    (f3 === 'R51' && article !== 'A6526') ||
+                    (f3 === 'R50' && article === 'A64121') ||
+                    (f3 === 'R50' && article === 'A64126')
+                );
         }
     },
     'DF-2-5': {
@@ -604,7 +589,13 @@ export const rules = Object.freeze({
                     )
                 ) && 
                 !(art.startsWith('A64') && f3 === 'R51') &&
-                !(art === 'A6336' && f === 'R568');
+                !(art === 'A6336' && f === 'R568') &&
+                !(art === 'A64121' && f === 'R50') &&
+                !(art === 'A64126' && f === 'R50') &&
+                // the line below may be added by a correction
+                !(art === 'A6451' && f === 'R50') &&
+                !(art === 'A6453' && f === 'R50') &&
+                !(art === 'A6454' && f === 'R50');
         }
     },
     'DF-5': { 
@@ -1025,13 +1016,10 @@ const AggregatedInstructionRowRecord = Record({
 
 
 
-function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
+function makeAggregatedInstructionRowRecord(id, m52InstructionRows, corrections){
     const rule = rules[id];
 
-    let m52Rows = m52InstructionRows.filter(rule.filter);
-    if(rule.weight){
-        m52Rows = m52Rows.map(rule.weight);
-    }
+    let m52Rows = m52InstructionRows.filter(rule.filter).union(corrections);
 
     return AggregatedInstructionRowRecord({
         id,
@@ -1039,14 +1027,22 @@ function makeAggregatedInstructionRowRecord(id, m52InstructionRows){
         "Statut": rule.status,
         "M52Rows": m52Rows,
         "Montant": m52Rows.reduce(((acc, r) => {
-            return acc + (r.weight ? r.weight*r["Montant"] : r["Montant"]);
+            return acc + r["Montant"];
         }), 0)
     })
 }
 
-export default function convert(m52Instruction){
+export default function convert(m52Instruction, corrections = []){
+
+    const yearCorrections = corrections.filter(c => c['Exercice'] === m52Instruction.year);
+
     return ImmutableSet(
-        Object.keys(rules).map(id => makeAggregatedInstructionRowRecord(id, m52Instruction.rows))
+        Object.keys(rules)
+        .map(id => makeAggregatedInstructionRowRecord(
+            id, 
+            m52Instruction.rows, 
+            yearCorrections.filter(c => c['splitFor'] === id)
+        ))
     )
 }
 

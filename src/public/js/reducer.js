@@ -2,8 +2,8 @@ import { Record } from 'immutable';
 import { markdown as md } from '../../shared/js/components/Markdown';
 
 import {
-    FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED,
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, LABELS_RECEIVED,
+    FINANCE_DETAIL_ID_CHANGE, M52_INSTRUCTION_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
     CHANGE_EXPLORATION_YEAR
 } from './constants/actions';
 
@@ -21,6 +21,10 @@ export default function reducer(state, action) {
         case M52_INSTRUCTION_RECEIVED:{
             const {m52Instruction} = action
             return state.setIn(['m52InstructionByYear', m52Instruction.year], m52Instruction);
+        }
+        case CORRECTION_AGGREGATION_RECEIVED: {
+            const {corrections} = action;
+            return state.set('corrections', corrections);
         }
         case FINANCE_DETAIL_ID_CHANGE:
             return state.set('financeDetailId', action.financeDetailId);
@@ -44,18 +48,6 @@ export default function reducer(state, action) {
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('temporal', md.render(text));
-                textMap = textMap.set(id, financeElementTexts);
-            });
-
-            return state.set('textsById', textMap);
-        }
-        case LABELS_RECEIVED: {
-            let textMap = state.get('textsById');
-
-            action.labelList.forEach(({id, text = ''}) => {
-                const financeElementTexts = textMap
-                    .get(id, new FinanceElementTextsRecord())
-                    .set('label', text);
                 textMap = textMap.set(id, financeElementTexts);
             });
 

@@ -138,11 +138,11 @@ const displayedContentId = 'DF-6-1';
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear, textsById, screenWidth} = state;
+        const { m52InstructionByYear, corrections, currentYear, textsById, screenWidth} = state;
 
         const partitionByYear = m52InstructionByYear.map(m52i => {
             const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i))
+                hierarchicalAggregated(m52ToAggregated(m52i, corrections))
             );
 
             const yearElement = elementById.get(displayedContentId);
@@ -151,7 +151,7 @@ export default connect(
         });
 
         const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(
-            hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear)))
+            hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear), corrections))
         ) : undefined;
 
         const yearDetails = elementById ? {

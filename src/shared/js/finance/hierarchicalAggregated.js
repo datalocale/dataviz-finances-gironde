@@ -243,28 +243,42 @@ export default function (aggRows) {
         let targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
             .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet())
 
-        // For now, weighted rows are only in DF1, so let's keep things simple when computing weighted rows
-        const weightedRows = targetNodeM52Rows.filter(r => r.weight);
+        // For now, split rows are only in DF1, so let's keep things simple when computing split rows
+        const splitRows = targetNodeM52Rows.filter(r => r.splitFor);
 
-        const weightedById = new Map();
-        weightedRows.forEach(r => {
+        const splitByRowId = new Map();
+        splitRows.forEach(r => {
             const id = makeM52RowId(r);
 
-            let elements = weightedById.get(id);
+            let elements = splitByRowId.get(id);
             if(!elements){
                 elements = [];
             }
             elements.push(r);
-            weightedById.set(id, elements);
+            splitByRowId.set(id, elements);
         });
 
-        weightedById.forEach((elements, id) => {
-            const total = sum(elements.map(r => r['Montant']*r.weight))
-            const correspondingUnweighted = targetNodeM52Rows.find(
-                r => makeM52RowId(r) === id && r.weight === undefined
+        splitByRowId.forEach((elements, rowId) => {
+            // In case ther is a split between say DF-1-1-3 (& DF-2-4) and DF-4
+            // don't count the part split in DF-1/DF-2 twice
+            if(sourceNode.id === 'DF'){
+                const df1Row = elements.find(e => e.splitFor && e.splitFor.startsWith('DF-1'));
+                const df2Row = elements.find(e => e.splitFor && e.splitFor.startsWith('DF-2'));
+
+                if(df1Row && df2Row && df1Row['Montant'] === df2Row['Montant']){
+                    targetNodeM52Rows = targetNodeM52Rows.remove(df1Row);
+                    elements = elements.splice(elements.findIndex(e => e === df1Row), 1);
+                }
+            }
+
+            const total = sum(elements.map(r => r['Montant']))
+
+            // In case there is a split between say DF-1-1-3 and DF-1-5 and there is a corresponding unsplit in DF-2-4
+            const correspondingUnsplit = targetNodeM52Rows.find(
+                r => makeM52RowId(r) === rowId && r.splitFor === undefined
             );
 
-            if(correspondingUnweighted && Math.abs(correspondingUnweighted['Montant'] - total) <= 0.01){
+            if(correspondingUnsplit && Math.abs(correspondingUnsplit['Montant'] - total) <= 0.01){
                 elements.forEach(e => {
                     targetNodeM52Rows = targetNodeM52Rows.remove(e)
                 })
@@ -272,7 +286,7 @@ export default function (aggRows) {
         });
 
         correspondingTargetNode.total = targetNodeM52Rows.reduce(
-            ((acc, e) => (acc + (e.weight ? e.weight*e["Montant"] : e["Montant"]))), 
+            ((acc, e) => (acc + e["Montant"])), 
             0
         );
 
