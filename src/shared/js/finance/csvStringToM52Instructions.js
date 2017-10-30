@@ -10,7 +10,7 @@ import {M52RowRecord, M52Instruction} from './M52InstructionDataStructures';
  * 
  * This function should be the only one allowed to mutate the data acquired from the CSV file
  */
-function cleanup(rows){
+export function cleanup(rows){
     rows = rows.filter(r => r['Type nomenclature'] === 'M52');
 
     rows.forEach(function(row){

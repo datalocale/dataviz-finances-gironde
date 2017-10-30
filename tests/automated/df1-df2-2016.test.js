@@ -8,14 +8,17 @@ import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggr
 import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
 import { M52RowRecord, M52Instruction } from '../../src/shared/js/finance/M52InstructionDataStructures';
 import csvStringToM52Instructions from '../../src/shared/js/finance/csvStringToM52Instructions.js';
+import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections.js';
 
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
+
+const corrections = csvStringToCorrections(readFileSync(join(__dirname, '../../data/finances/corrections-agregation.csv'), {encoding: 'utf-8'}))
 
 jest.addMatchers(matchers);
 
 const csv2016 = readFileSync(join(__dirname, '../../data/finances/cedi_2016_CA.csv'), {encoding: 'utf-8'});
 const docBudg2016 = csvStringToM52Instructions(csv2016);
-const aggregated2016 = m52ToAggregated(docBudg2016);
+const aggregated2016 = m52ToAggregated(docBudg2016, corrections);
 const hierAgg2016 = hierarchicalAggregated(aggregated2016);
 
 const hierAgg2016Elements = flattenTree(hierAgg2016);
@@ -35,10 +38,10 @@ test('Pour le CA 2016 de la Gironde, la ligne DF R51 A65111 est présente dans D
     const splitRow15 = df15.elements.first()['M52Rows'].find(isSplitRow);
     
     expect(splitRow113).toBeDefined();
-    expect(splitRow113.weight).toBe(0.75);
+    expect(splitRow113['Montant']).toBe(12483401.83);
     
     expect(splitRow15).toBeDefined();
-    expect(splitRow15.weight).toBe(0.25);
+    expect(splitRow15['Montant']).toBe(4084422.79);
 });
 
 

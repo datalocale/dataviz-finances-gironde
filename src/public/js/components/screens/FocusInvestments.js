@@ -204,10 +204,10 @@ export function FocusSol({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, currentYear, textsById, screenWidth} = state;
+        const { m52InstructionByYear, corrections, currentYear, textsById, screenWidth} = state;
 
         const investmentsByYear = m52InstructionByYear.map( ((instruction) => {
-            const agg = m52ToAggregated(instruction);
+            const agg = m52ToAggregated(instruction, corrections);
 
             const hierAgg = hierarchicalAggregated(agg);
 
@@ -228,7 +228,7 @@ export default connect(
 
         const partitionByYear = m52InstructionByYear.map(m52i => {
             const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i))
+                hierarchicalAggregated(m52ToAggregated(m52i, corrections))
             );
 
             const yearElement = elementById.get(displayedContentId);
@@ -238,7 +238,7 @@ export default connect(
 
         // DI details
         const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(
-            hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear)))
+            hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear), corrections))
         ) : undefined;
 
         const yearDIDetails = elementById ? {

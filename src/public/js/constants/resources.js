@@ -5,6 +5,8 @@ export const AGGREGATED_TEMPORAL = "AGGREGATED_TEMPORAL";
 export const M52_FONCTION_ATEMPORAL = "M52_FONCTION_ATEMPORAL";
 export const M52_FONCTION_TEMPORAL = "M52_FONCTION_TEMPORAL";
 
+export const CORRECTIONS_AGGREGATED = "CORRECTIONS_AGGREGATED";
+
 export const INSERTION_PICTO = "INSERTION_PICTO";
 export const COLLEGE_PICTO = "COLLEGE_PICTO";
 export const ENFANCE_PICTO = "ENFANCE_PICTO";
@@ -34,6 +36,11 @@ export const urls = {
     [COMPTE_ADMINISTRATIF]: {
         "production": (year => `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/${prodYearToVariablePart[year]}`),
         "demo": (year => `../data/finances/cedi_${year}_CA.csv`),
+        get development(){return this.demo}
+    }[env],
+    [CORRECTIONS_AGGREGATED]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/XX_TODO_XX}`,
+        "demo": `../data/finances/corrections-agregation.csv`,
         get development(){return this.demo}
     }[env],
 

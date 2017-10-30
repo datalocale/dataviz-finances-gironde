@@ -268,7 +268,7 @@ function fillChildToParent(tree, wm){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, textsById, financeDetailId, explorationYear, screenWidth } = state;
+        const { m52InstructionByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -279,7 +279,7 @@ export default connect(
 
         const m52Instruction = m52InstructionByYear.get(explorationYear);
         const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
-        const aggregated = m52Instruction && m52ToAggregated(m52Instruction);
+        const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
         const childToParent = new WeakMap();
@@ -309,7 +309,7 @@ export default connect(
 
         const partitionByYear = m52InstructionByYear.map(m52i => {
             const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i)), 
+                hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
             );
 
@@ -320,7 +320,7 @@ export default connect(
 
         const amountByYear = m52InstructionByYear.map((m52i) => {
             const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i)), 
+                hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
             );
 

@@ -1,10 +1,16 @@
+import {readFileSync} from 'fs';
+import {resolve} from 'path';
+
 import * as matchers from 'jest-immutable-matchers';
 import { OrderedSet as ImmutableSet } from 'immutable';
 import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
+import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections';
 import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
 import { M52RowRecord, M52Instruction } from '../../src/shared/js/finance/M52InstructionDataStructures';
 import { EXPENDITURES } from '../../src/shared/js/finance/constants';
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
+
+const corrections = csvStringToCorrections(readFileSync(resolve(__dirname, '../../data/finances/corrections-agregation.csv'), {encoding: 'utf-8'}))
 
 jest.addMatchers(matchers);
 
@@ -22,7 +28,7 @@ test('hierarchicalAggregated returns a node when passed dummy valid arguments', 
         'Montant': AMOUNT
     });
 
-    const m52instruction = new M52Instruction({ rows: new ImmutableSet([m52Row]) });
+    const m52instruction = new M52Instruction({ rows: new ImmutableSet([m52Row]) }, corrections);
     const aggregatedVision = m52ToAggregated(m52instruction);
 
     const hierAgg = hierarchicalAggregated(aggregatedVision);
@@ -48,7 +54,7 @@ test('a row that appears in both DF-1 and DF-2 should be counted only once in to
     });
 
     const m52instruction = new M52Instruction({ rows: new ImmutableSet([solidarityM52Row]) });
-    const aggregatedVision = m52ToAggregated(m52instruction);
+    const aggregatedVision = m52ToAggregated(m52instruction, corrections);
 
     const hierAgg = hierarchicalAggregated(aggregatedVision);
     

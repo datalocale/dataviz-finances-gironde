@@ -6,10 +6,11 @@ import { Record, Map as ImmutableMap, List } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
-import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './constants/resources';
+import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
 import reducer from './reducer';
 
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
@@ -22,7 +23,11 @@ import FocusPresence from './components/screens/FocusPresence';
 import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
-import { M52_INSTRUCTION_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, FINANCE_DETAIL_ID_CHANGE } from './constants/actions'; 
+import { 
+    M52_INSTRUCTION_RECEIVED, CORRECTION_AGGREGATION_RECEIVED, 
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, 
+    FINANCE_DETAIL_ID_CHANGE, 
+} from './constants/actions'; 
 
 // cheapest WeakMap polyfill because the polyfill.io one threw an exception
 if(typeof WeakMap !== 'function'){
@@ -86,6 +91,7 @@ const DEFAULT_BREADCRUMB = List([
 
 const StoreRecord = Record({
     m52InstructionByYear: undefined,
+    corrections: undefined,
     currentYear: undefined,
     explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
@@ -132,6 +138,15 @@ store.dispatch({
  * Fetching initial data
  * 
  */
+fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
+.then(csvStringToCorrections)
+.then(corrections => {
+    store.dispatch({
+        type: CORRECTION_AGGREGATION_RECEIVED,
+        corrections
+    });
+});
+
 [ 2016, 2015, 2014, 2013, 2012 ]
 .map(urls[COMPTE_ADMINISTRATIF])
 .forEach(url => {

@@ -243,28 +243,28 @@ export default function (aggRows) {
         let targetNodeM52Rows = new ImmutableSet(elements).map(e => e['M52Rows'])
             .reduce(((acc, rows) => acc.union(rows)), new ImmutableSet())
 
-        // For now, weighted rows are only in DF1, so let's keep things simple when computing weighted rows
-        const weightedRows = targetNodeM52Rows.filter(r => r.weight);
+        // For now, split rows are only in DF1, so let's keep things simple when computing split rows
+        const splitRows = targetNodeM52Rows.filter(r => r.splitFor);
 
-        const weightedById = new Map();
-        weightedRows.forEach(r => {
+        const splitById = new Map();
+        splitRows.forEach(r => {
             const id = makeM52RowId(r);
 
-            let elements = weightedById.get(id);
+            let elements = splitById.get(id);
             if(!elements){
                 elements = [];
             }
             elements.push(r);
-            weightedById.set(id, elements);
+            splitById.set(id, elements);
         });
 
-        weightedById.forEach((elements, id) => {
-            const total = sum(elements.map(r => r['Montant']*r.weight))
-            const correspondingUnweighted = targetNodeM52Rows.find(
-                r => makeM52RowId(r) === id && r.weight === undefined
+        splitById.forEach((elements, id) => {
+            const total = sum(elements.map(r => r['Montant']))
+            const correspondingUnsplit = targetNodeM52Rows.find(
+                r => makeM52RowId(r) === id && r.splitFor === undefined
             );
 
-            if(correspondingUnweighted && Math.abs(correspondingUnweighted['Montant'] - total) <= 0.01){
+            if(correspondingUnsplit && Math.abs(correspondingUnsplit['Montant'] - total) <= 0.01){
                 elements.forEach(e => {
                     targetNodeM52Rows = targetNodeM52Rows.remove(e)
                 })
@@ -272,7 +272,7 @@ export default function (aggRows) {
         });
 
         correspondingTargetNode.total = targetNodeM52Rows.reduce(
-            ((acc, e) => (acc + (e.weight ? e.weight*e["Montant"] : e["Montant"]))), 
+            ((acc, e) => (acc + e["Montant"])), 
             0
         );
 
