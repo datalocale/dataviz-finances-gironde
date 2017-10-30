@@ -299,19 +299,26 @@ export const rules = Object.freeze({
         label: "Liés à l’enfance",
         // Also contains R51 A65111 from a correction
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             
             return isOR(m52Row) && isDF(m52Row) && 
-                fonction.slice(0, 3) === 'R51' &&
                 (
-                    [
-                        "A6132", "A6135", "A6184",
-                        "A6234", "A6245",
-                        "A65221", "A652222", "A65223", "A65228", 
-                        "A6523", "A652411", "A652412", "A652415", "A652418", 
-                        "A65821", "A6718"
-                    ].includes(m52Row['Article']) ||
-                    m52Row['Article'].startsWith('A64')
+                    (
+                        fonction.slice(0, 3) === 'R51' &&
+                        (
+                            [
+                                "A6132", "A6135", "A6184",
+                                "A6234", "A6245",
+                                "A65221", "A652222", "A65223", "A65228", 
+                                "A6523", "A652411", "A652412", "A652415", "A652418", 
+                                "A65821", "A6718"
+                            ].includes(article) ||
+                            article.startsWith('A64')
+                        )
+                    ) ||
+                    (fonction === 'R50' && article === 'A64121') ||
+                    (fonction === 'R50' && article === 'A64126')
                 );
         }
     },
@@ -445,10 +452,15 @@ export const rules = Object.freeze({
     'DF-2-4': {
         label: "Enfance",
         filter(m52Row){
+            const article = m52Row['Article'];
             const fonction = m52Row['Rubrique fonctionnelle'];
             const f3 = fonction.slice(0, 3);
-            return isOR(m52Row) && isDF(m52Row) && f3 === 'R51' && 
-                m52Row['Article'] !== 'A6526';
+            return isOR(m52Row) && isDF(m52Row) && 
+                (
+                    (f3 === 'R51' && article !== 'A6526') ||
+                    (f3 === 'R50' && article === 'A64121') ||
+                    (f3 === 'R50' && article === 'A64126')
+                );
         }
     },
     'DF-2-5': {
@@ -577,7 +589,13 @@ export const rules = Object.freeze({
                     )
                 ) && 
                 !(art.startsWith('A64') && f3 === 'R51') &&
-                !(art === 'A6336' && f === 'R568');
+                !(art === 'A6336' && f === 'R568') &&
+                !(art === 'A64121' && f === 'R50') &&
+                !(art === 'A64126' && f === 'R50') &&
+                // the line below may be added by a correction
+                !(art === 'A6451' && f === 'R50') &&
+                !(art === 'A6453' && f === 'R50') &&
+                !(art === 'A6454' && f === 'R50');
         }
     },
     'DF-5': { 

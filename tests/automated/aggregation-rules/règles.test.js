@@ -450,3 +450,130 @@ test("DF-5 : contient DF C014 R01 A73913/A73914/A73926/A739261/A739262", () => {
     expect(aggDF5.M52Rows.includes(m52Rows[3])).toBe(true);
     expect(aggDF5.M52Rows.includes(m52Rows[4])).toBe(true);
 });
+
+
+
+test("DF C012 R50 A64121 est dans DF-1-1-2 et DF-2-4, mais pas dans DF-4", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R50',
+            'Article': 'A64121',
+            'Chapitre': 'C012',
+            'Montant': 46
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF113 = aggVision.find(row => row.id === 'DF-1-1-3');
+    const aggDF24 = aggVision.find(row => row.id === 'DF-2-4');
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF113.M52Rows.includes(m52Rows[0])).toBe(true);
+    expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(true);
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
+});
+
+test("DF C012 R50 A64126 est dans DF-1-1-3 et DF-2-4, mais pas dans DF-4", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R50',
+            'Article': 'A64126',
+            'Chapitre': 'C012',
+            'Montant': 47
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF113 = aggVision.find(row => row.id === 'DF-1-1-3');
+    const aggDF24 = aggVision.find(row => row.id === 'DF-2-4');
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF113.M52Rows.includes(m52Rows[0])).toBe(true);
+    expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(true);
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
+});
+
+test("DF C012 R50 A6451 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R50',
+            'Article': 'A6451',
+            'Chapitre': 'C012',
+            'Montant': 50
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF113 = aggVision.find(row => row.id === 'DF-1-1-3');
+    const aggDF24 = aggVision.find(row => row.id === 'DF-2-4');
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF113.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
+});
+
+test("DF C012 R50 A6453 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R50',
+            'Article': 'A6453',
+            'Chapitre': 'C012',
+            'Montant': 50
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF113 = aggVision.find(row => row.id === 'DF-1-1-3');
+    const aggDF24 = aggVision.find(row => row.id === 'DF-2-4');
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF113.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
+});
+
+test("DF C012 R50 A6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R50',
+            'Article': 'A6454',
+            'Chapitre': 'C012',
+            'Montant': 50
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF113 = aggVision.find(row => row.id === 'DF-1-1-3');
+    const aggDF24 = aggVision.find(row => row.id === 'DF-2-4');
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF113.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(false);
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
+});
