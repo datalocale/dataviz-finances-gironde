@@ -20,7 +20,7 @@ export const BONHOMME_PICTO = "BONHOMME_PICTO";
 
 const env = process.env.NODE_ENV;
 
-const GIRONDE_FR_DRUPAL_MEDIA_ID = "1938";
+const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 
 const prodYearToVariablePart = {
     2016: '0',
@@ -39,7 +39,7 @@ export const urls = {
         get development(){return this.demo}
     }[env],
     [CORRECTIONS_AGGREGATED]: {
-        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/XX_TODO_XX}`,
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21}`,
         "demo": `../data/finances/corrections-agregation.csv`,
         get development(){return this.demo}
     }[env],

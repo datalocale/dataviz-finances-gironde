@@ -46,7 +46,9 @@ Deux adresses sont ensuite accessibles : [http://localhost:3000/]() et [http://l
 **Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
 
 Il existe 3 environnements :
-* gironde.fr (`npm run build-gironde-fr:public`) où il faut créer manuellement dans le CMS une "page finale" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.pdf` est à ajouter indépendamment.
+* gironde.fr où il faut créer manuellement dans le CMS un "media dataviz" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
+    * `npm run build-preprod` pour la preprod (media id `1938`)
+    * `npm run build-production` pour la preprod (media id `2459`)
 * démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
 * dévelopement (`npm run watch`)
 
