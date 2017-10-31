@@ -349,12 +349,15 @@ export default connect(
             contentId: displayedContentId, 
             RDFI,
             amountByYear,
-            contextElements: contextList.map(c => ({
+            contextElements: contextList.map((c, i) => ({
                 id: c.id,
                 url : c.id !== displayedContentId ? '#!/finance-details/'+c.id : undefined,
                 proportion : c.total/contextList[0].total, 
                 colorClass : colorClassById.get(c.id), 
-                label: textsById.get(c.id).label
+                label: textsById.get(c.id).label + 
+                    (contextList.length >= 2 && i === contextList.length -1 ? 
+                        ` (${(c.total*100/contextList[0].total).toFixed(1)}%)` : 
+                        '')
             })),
             texts,
             partitionByYear,
