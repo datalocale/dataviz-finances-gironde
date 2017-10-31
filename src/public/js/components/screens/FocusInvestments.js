@@ -1,3 +1,5 @@
+import {List} from 'immutable';
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -28,21 +30,12 @@ import colorClassById from '../../colorClassById';
 export function FocusSol({
     year, yearInvestments, partitionByYear, population, yearDIDetails, screenWidth, urls
 }) {
-
     const investmentProportion = yearInvestments && yearInvestments.investments/yearInvestments.expenditures;
 
     const years = partitionByYear.keySeq().toJS();
 
     // sort all partitions part according to the order in this year's partition
-    let thisYearPartition = partitionByYear.get(year)
-    thisYearPartition = thisYearPartition && thisYearPartition.sort((p1, p2) => p2.partAmount - p1.partAmount);
-    const partitionIdsInOrder = thisYearPartition && thisYearPartition.map(p => p.contentId) || [];
-
-    // reorder all partitions so they adhere to partitionIdsInOrder
-    partitionByYear = partitionByYear.map(partition => {
-        // indexOf inside a .map leads to O(n^2), but lists are 10 elements long max, so it's ok
-        return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
-    });
+    let thisYearPartition = partitionByYear.get(year);
 
     const focusDetailsDenominator = yearDIDetails ? yearDIDetails['DI-1'] + yearDIDetails['DI-2'] : NaN;
 
@@ -63,7 +56,7 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {}, 
-                React.createElement(Markdown, {}, `**En 2016, le Département de la Gironde a investi 244 877 921,12 € soit 15,1% de la totalité des dépenses. Cela représente une augmentation de +3.2% comparé à 2015. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
+                React.createElement(Markdown, {}, `**En ${year}, le Département de la Gironde a investi ${yearInvestments && makeAmountString(yearInvestments.investments)} soit ${(investmentProportion*100).toFixed(1)}% de la totalité des dépenses. Cela représente une augmentation de +3.2% comparé à 2015. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
@@ -91,7 +84,8 @@ export function FocusSol({
                     className: p.contentId, 
                     url: p.url, 
                     text: p.texts.label,
-                    colorClassName: colorClassById.get(p.contentId)
+                    // .slice to keep 'DI-1' from 'DI-1-4'
+                    colorClassName: colorClassById.get(p.contentId.slice(0, 4))
                 })).toArray(),
                 yValueDisplay: makeAmountString
             }),
@@ -137,7 +131,7 @@ export function FocusSol({
                         span: ""
                     }*/
                 ], 
-                moreUrl: '#!/finance-details/DI-2-1'
+                moreUrl: '#!/finance-details/DI-1-2'
             }),
             React.createElement(FocusDetail, {
                 className: 'buildings', 
@@ -214,7 +208,8 @@ export default connect(
             const hierAggByPrestationList = flattenTree(hierAgg);
 
             const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
-            let investments = hierAggByPrestationList.find(e => e.id === 'DI').total;
+            let investments = hierAggByPrestationList.find(e => e.id === 'DI-1').total +
+                hierAggByPrestationList.find(e => e.id === 'DI-2').total;
 
             return {
                 expenditures,
@@ -233,8 +228,26 @@ export default connect(
 
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
+            return yearElement && yearElement.children && new List(
+                ['DI-1-1', 'DI-1-2', 'DI-1-3', 'DI-1-4', 'DI-2']
+                .map(id => ({
+                    contentId: id,
+                    partAmount: elementById.get(id).total,
+                    texts: textsById.get(id),
+                    url: `#!/finance-details/${id}`
+                }))
+            )
         });
+
+        /*
+        List(children)
+        .map(child => ({
+            contentId: child.id,
+            partAmount: totalById.get(child.id),
+            texts: textsById.get(child.id),
+            url: `#!/finance-details/${child.id}`
+        }))
+        */
 
         // DI details
         const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(

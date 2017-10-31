@@ -32,6 +32,7 @@ $spacing-3: $base-spacing*4;
     }
 
     .explanation{
+        position: relative;
         flex: 4;
 
         & > *{
@@ -49,6 +50,9 @@ $spacing-3: $base-spacing*4;
 
         & > a.btn{
             width: 15em;
+            position: relative;
+            left: 100%;
+            transform: translateX(-100%);
         }
 
         h3{
@@ -64,7 +68,7 @@ $spacing-3: $base-spacing*4;
             .proportion{
                 height: 100%;
 
-                color: white;
+                color: black;
                 font-size: 1.2em;
                 font-weight: bold;
                 padding: 0.1em 1em ;

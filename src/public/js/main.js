@@ -83,7 +83,7 @@ const DEFAULT_BREADCRUMB = List([
         url: '/le-departement'
     },
     {
-        text: `Un budget au service d'une solidarité humaine et territoriale`,
+        text: `Un budget au service des solidarités humaine et territoriale`,
         url: '#'
     }
 ]);
