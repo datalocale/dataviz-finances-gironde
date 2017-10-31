@@ -1,23 +1,23 @@
+$DI-1-color: $area-color-1;
+$DI-2-color: $area-color-2;
 
 .focus-detail.colleges .explanation .proportion{
-    background-color: $area-color-3;
+    background-color: $DI-1-color;
 }
 
 .focus-detail.roads .explanation .proportion{
-    background-color: $area-color-2;
+    background-color: $DI-1-color;
 }
 
 .focus-detail.buildings .explanation .proportion{
-    background-color: $area-color-4;
+    background-color: $DI-1-color;
 }
 
 .focus-detail.environment .explanation .proportion{
-    background-color: $area-color-1;
+    background-color: $DI-1-color;
 } 
 
 .focus-detail.city-subsidy .explanation .proportion{
-    background-color: $area-color-5;
+    background-color: $DI-2-color;
 } 
-
-
 
