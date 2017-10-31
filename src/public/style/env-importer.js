@@ -10,7 +10,7 @@ const PROD = 'production';  // gironde.fr website integration
 const DEMO = 'demo';        // gh-pages demo
 const DEV = 'development';  // localhost
 
-const GIRONDE_FR_DRUPAL_MEDIA_ID = "1938";
+const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 
 const byEnv = {
     "home-illustration-url": {
