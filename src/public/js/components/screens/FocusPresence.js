@@ -43,14 +43,14 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Présence du Département sur le territoire`}),
             React.createElement(Markdown, {}, 
-                `La croissance démographique est constante en Gironde : **+ de 15 000 nouveaux Girondins arrivent chaque année**, ce qui entraîne une augmentation des besoins de suivi et d’accompagnement de la population. Le Département **accorde une vigilance particulière au maintien** de ses frais de personnel et de fonctionnement.`
+                `La Gironde attire chaque année **entre 18 000 et 20 000 nouveaux habitants**. Cet afflux est un véritable défi puisque plus d’habitants signifie également plus de services publics à mettre en oeuvre. Le Département **accorde une attention particulière au maintien** de la qualité des services offerts à toutes les girondines et tous les girondins sur l’ensemble du territoire.`
             )
         ),
 
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: 'Carte de la présence du département en Gironde'}),
             React.createElement(Markdown, {}, 
-                `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… Sur le territoire de la Gironde, **6000 agents** occupent **125 métiers différents** dans **425 lieux de travail et d’accueil du public**. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail de ces frais de fonctionnement.`
+                `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… **6 551** agents exercent **125 métiers** dans **425 lieux de travail et d’accueil du public**. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail de ces frais de fonctionnement.`
             ),
             React.createElement('img', {src: 'http://www.randogps.net/images/cartes/33.png', height: '300'})
         ),
@@ -58,7 +58,7 @@ export function FocusSol({
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Les frais liés à la présence du Département sur le territoire'}),
             React.createElement(Markdown, {}, 
-                `Les frais de fonctionnement sont constitués des charges de structures qui permettent le fonctionnement de la collectivité au quotidien et sur tout le territoire girondin.`
+                `Parmi les frais de fonctionnement on trouve des charges de structure qui permettent le fonctionnement de la collectivité au quotidien et sur tout le territoire girondin.`
             ),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ? 
@@ -82,17 +82,17 @@ export function FocusSol({
             React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-6-1', text: `en savoir plus`})
         ),
         React.createElement('section', {}, 
-            React.createElement(SecundaryTitle, {text: `Détails de la présence`}),
+            React.createElement(SecundaryTitle, {text: `Détails des frais liés à la présence du Département sur le territoire`}),
             React.createElement(Markdown, {}, ``),
             React.createElement(FocusDetail, {
                 
                 className: 'buildings', 
                 
-                title: 'Bâtiments', 
+                title: 'Prestations de services', 
                 illustrationUrl: urls[PATRIMOINE_PICTO], 
-                amount: yearDetails ? yearDetails['DF-6-1'] : undefined,
-                proportion: yearDetails ? yearDetails['DF-6-1']/focusDetailsDenominator : 1, 
-                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire, il les équipe, les relie à internet à haut débit et les assure contre les risques.`, 
+                amount: yearDetails ? yearDetails['DF-6-1-2'] : undefined,
+                proportion: yearDetails ? yearDetails['DF-6-1-2']/focusDetailsDenominator : 1, 
+                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`, 
                 highlights: [
                     /*{
                         strong: "",
@@ -103,7 +103,7 @@ export function FocusSol({
                         span: ""
                     }*/
                 ], 
-                moreUrl: '#!/finance-details/DF-6-1'
+                moreUrl: '#!/finance-details/DF-6-1-2'
             }),
             React.createElement(FocusDetail, {
                 
@@ -113,7 +113,7 @@ export function FocusSol({
                 illustrationUrl: urls[PATRIMOINE_PICTO], 
                 amount: yearDetails ? yearDetails['DF-6-1-1'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-1']/focusDetailsDenominator : 1, 
-                text: `Il s’agit par exemple du financement de la consommation électrique des bâtiments de la collectivité, de carburant pour le déplacement des agents, le mobilier, les dépenses de consommation d’eau ou de chauffage. ou celle de ses véhicules électriques.`, 
+                text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`, 
                 highlights: [], 
                 moreUrl: '#!/finance-details/DF-6-1-1'
             }),
@@ -121,13 +121,13 @@ export function FocusSol({
                 
                 className: 'buildings', 
 
-                title: 'Fonctionnement de l’assemblée départementale', 
+                title: 'Frais divers', 
                 illustrationUrl: urls[PATRIMOINE_PICTO], 
-                amount: yearDetails ? yearDetails['DF-6-3-1'] : undefined,
-                proportion: yearDetails ? yearDetails['DF-6-3-1']/focusDetailsDenominator : 1, 
-                text: `Cette dépense concerne les indemnités versées aux élus départementaux, à leurs frais ainsi qu’aux rémunérations de leurs collaborateurs`, 
+                amount: yearDetails ? yearDetails['DF-6-1-3'] : undefined,
+                proportion: yearDetails ? yearDetails['DF-6-1-3']/focusDetailsDenominator : 1, 
+                text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`, 
                 highlights: [], 
-                moreUrl: '#!/finance-details/DI-6-3-1'
+                moreUrl: '#!/finance-details/DI-6-1-3'
             })
         )
     );
