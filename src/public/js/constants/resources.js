@@ -20,7 +20,7 @@ export const BONHOMME_PICTO = "BONHOMME_PICTO";
 
 const env = process.env.NODE_ENV;
 
-const GIRONDE_FR_DRUPAL_MEDIA_ID = "1938";
+const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 
 const prodYearToVariablePart = {
     2016: '0',
