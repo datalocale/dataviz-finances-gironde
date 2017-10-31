@@ -39,7 +39,7 @@ export const urls = {
         get development(){return this.demo}
     }[env],
     [CORRECTIONS_AGGREGATED]: {
-        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21}`,
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21`,
         "demo": `../data/finances/corrections-agregation.csv`,
         get development(){return this.demo}
     }[env],
