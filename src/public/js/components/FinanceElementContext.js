@@ -4,6 +4,11 @@ const DELAY = 500;
 
 export default class SektorComponent extends React.Component {
 
+    constructor(){
+        super();
+        this._elements = [];
+    }
+
     _animate(angle1, angle2, radius, initialDelay){
         return new Promise(resolve => {
             setTimeout(resolve, initialDelay);
@@ -34,47 +39,35 @@ export default class SektorComponent extends React.Component {
     } 
 
     shouldComponentUpdate(newProps){
-        return this.props.label !== newProps.label;
+        const c1 = this.props.contextElements;
+        const c2 = newProps.contextElements;
+
+        return c1.length === 0 || c2.length === 0 || c1[c1.length-1].label !== c2[c2.length-1].label;
     }
 
     render() {
-        const { label, top, parent, colorClass1, colorClass2, backgroundColorClass, proportion1, proportion2 } = this.props;
+        const { contextElements } = this.props;
 
         return React.createElement('div', { className: 'finance-element-context' },
-            React.createElement('a', { className: backgroundColorClass, href: top.url },
-                React.createElement('span', {className: 'text'}, top.label)
-            ),
-            parent && top ? React.createElement('a', 
-                { 
-                    href: parent.url,
-                    ref: el => this._context1 = el 
-                }, 
-                React.createElement('div', 
+            contextElements.map(({id, url, proportion, colorClass, label}) => {
+                return React.createElement(url ? 'a' : 'span', 
                     {
-                        className: colorClass1,
-                        style: {
-                            width: proportion1*100+'%'
+                        key: id,
+                        href: url,
+                        ref: el => this._elements.push(el)
+                    }, 
+                    React.createElement('div', 
+                        {
+                            className: colorClass,
+                            style: {
+                                width: proportion*100+'%'
+                            },
                         },
-                    },
-                    proportion1 >= 0.5 ? React.createElement('span', {className: 'text'},  parent.label)  : undefined
-                ),
-                proportion1 < 0.5 ? React.createElement('span', {className: 'text'}, parent.label) : undefined
-            ) : undefined,
-            React.createElement('div', 
-                { 
-                    ref: el => this._context2 = el,
-                }, 
-                React.createElement('div', 
-                    {
-                        className: colorClass2,
-                        style: {
-                            width: proportion2*100+'%'
-                        },
-                    },
-                    proportion2 >= 0.5 ? React.createElement('span', {className: 'text'},  label)  : undefined
-                ),
-                proportion2 < 0.5 ? React.createElement('span', {className: 'text'}, label) : undefined
-            )
+                        proportion >= 0.5 ? React.createElement('span', {className: 'text'}, label)  : undefined
+                    ),
+                    proportion < 0.5 ? React.createElement('span', {className: 'text'}, label) : undefined
+                )
+            })
         )
     }
 }
