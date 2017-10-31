@@ -14,17 +14,3 @@ export default function({items}){
         })
     )
 }
-
-/*
-React.createElement('ol', {},
-    barchartPartitionByYear.get(year).map((p, i) => {
-        return React.createElement('li', {className: p.contentId},
-            React.createElement('a', {href: p.url},
-                React.createElement('span', {className: `color area-color-${i+1}`}), ' ',
-                p.texts.label
-            )
-        )
-    })
-)
-
-*/

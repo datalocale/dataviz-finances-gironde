@@ -99,8 +99,13 @@ export function FinanceElement({contentId, RDFI, amountByYear, parent, top, text
             return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
                 contentId: df2.contentId,
                 partAmount: df2.partAmount,
-                texts: df2.texts && df2.texts.set('label', 'Actions sociales par publics'),
-                url: df2.url
+                texts: df2.texts && df2.texts.set('label', [
+                    'Actions sociales ',
+                    React.createElement('a', {href: '#!/finance-details/DF-1'}, '(par prestation)'),
+                    ' - ',
+                    React.createElement('a', {href: '#!/finance-details/DF-2'}, '(par public)')
+                ]),
+                url: undefined
             });
         })
 
