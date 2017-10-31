@@ -32,14 +32,14 @@ export default function ({className, title, illustrationUrl, amount, proportion,
                 )
             ),
             React.createElement(Markdown, {}, text),
-            React.createElement('div', {className: 'highlights'}, 
+            highlights && highlights.length >= 1 ? React.createElement('div', {className: 'highlights'}, 
                 highlights.map(h => {
                     return React.createElement('div', {},
                         React.createElement('strong', {}, h.strong),
                         React.createElement('span', {}, h.span)
                     )
                 })
-            ),
+            ) : undefined,
             React.createElement(PrimaryCallToAction, {href: moreUrl, text: 'En savoir plus'})
         )
     );
