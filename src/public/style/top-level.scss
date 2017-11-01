@@ -79,6 +79,17 @@
         border-collapse: collapse;
     }
 
+    .markdown-rendered{
+        max-width: 60em;
+    
+        ul, ol{
+            list-style: initial;
+            padding: initial;
+            margin: 1em;
+        }
+    
+    }
+
 }
 
 @import 'secundary-title';
