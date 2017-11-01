@@ -117,7 +117,7 @@ export function TotalBudget({
         ),
         React.createElement('section', {className: 'm52'},
             React.createElement(SecundaryTitle, {text: 'Les comptes par fonction (norme M52)'}),
-            m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById}) : undefined,
+            m52Instruction ? React.createElement(M52ByFonction, {m52Instruction, urlByFonction: byFonction, labelsById, screenWidth}) : undefined,
             React.createElement(
                 DownloadSection,
                 {
