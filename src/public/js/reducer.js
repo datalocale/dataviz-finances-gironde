@@ -31,11 +31,14 @@ export default function reducer(state, action) {
         case ATEMPORAL_TEXTS_RECEIVED: {
             let textMap = state.get('textsById');
 
-            action.textList.forEach(({id, label, description = ''}) => {
+            action.textList.forEach(({id, label = '', description = ''}) => {
+                // sometimes, humans leave a space somewhere
+                id = id.trim();
+
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('atemporal', md.render(description))
-                    .set('label', label);
+                    .set('label', label.trim());
                 textMap = textMap.set(id, financeElementTexts);
             });
 
@@ -45,6 +48,9 @@ export default function reducer(state, action) {
             let textMap = state.get('textsById');
 
             action.textList.forEach(({id, text = ''}) => {
+                // sometimes, humans leave a space somewhere
+                id = id.trim();
+
                 const financeElementTexts = textMap
                     .get(id, new FinanceElementTextsRecord())
                     .set('temporal', md.render(text));
