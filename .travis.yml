@@ -1,25 +1,33 @@
 language: node_js
 node_js: 6
+sudo: false
 
 cache:
   directories:
   - node_modules
 
-script:
-- npm run build-demo
-- npm test
+before_script:
+- rm -rf ./build \
+    && npm run build-production \
+    && zip -9 -j production.zip build/*
+- rm -rf ./build \
+    && npm run build-preproduction \
+    && zip -9 -j preproduction.zip build/*
+- rm -rf ./build \
+    && npm run build-demo
 
 deploy:
-  skip_cleanup: true
-  provider: script
+- provider: script
   script: bash ./tools/deploy.sh
+  skip_cleanup: true
   on:
     branch: master
-    
-branches:
-  only:
-  - master
-
-# Need to configure env variables in Travis CI settings
-# * GH_TOKEN : personal access token with read/write access to the repo
-# * DEPLOY_TARGET_BRANCH : branch being pushed to after successful build
+- provider: releases
+  api_key:
+    secure: XayCqQM8OVNGIfNsSdjohQ0tfUmh0HYRDsOKMYHsrCFgCZttk5RDnzRD5+1QenU58K3rQA7VWRJ2DvhOYwBRN4YdLIN54BMTm+bHxbSSQd6xM4rABWmIdahLnLdyKHDz8DkWuetnrRRuZMzbJChkefBj/kYZO4dROUSWjEqoCTwDEiqpdXxuSInLm+IfLBYm9xU6JPMi2EGSCoQ1AsAylLlgV/KWmAAWdk7fVFErQdYRhHPyotVzHv/4dYVeCGZ8oQHVIZJmnM8dNQwuXFAp4pbrfhFi88whRlFMM91HdF/N0biVVDZTLiE7y8aiomQTkPoey5dT5seS8noK4Pqrc/l2TJyLEyFUFMB6pb0zkaeMJDj/BQelW3c+vp+TsIHJcgpB4uA5ojr/EeLehGPYkXlWGBEGl47wAKxSYiCRpm04ygIvbylpGNDmRwqfOPalii9iE5mSlKzPfrtc7Q2w2v9xtMwM7ePYJlFMOc73M+gAWJ+htqj7YBVjJc7TUL4gQt/7HZz0M2OK858oY1qcFGHgwLMY9B37tfr+QtmKJjoIVuvJqjrl0CJ+T/8M5tHT1T4vXTmiiblWt0g++f33Dt0K/A6khpG/mEX4sF0IXOvSRTDmX50kueBdSSVd1fJfMsApkU4Wvg3L9ATBWEAr/PLGDhWkNmfZJwKrAeo5gfY=
+  file_glob: true
+  file: "*.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: dtc-innovation/dataviz-finances-gironde
