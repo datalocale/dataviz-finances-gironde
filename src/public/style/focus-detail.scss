@@ -29,7 +29,7 @@ $spacing-3: $base-spacing*4;
         img{
             max-width: 13em;
             max-height: 13em;
-            object-fit: cover;
+            object-fit: contain;
             margin-top: 2*$spacing-2;
         }
     }
