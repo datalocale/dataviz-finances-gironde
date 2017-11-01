@@ -7,14 +7,9 @@ cache:
   - node_modules
 
 before_script:
-- rm -rf ./build/* \
-    && npm run build-production \
-    && zip -9 -j production.zip build/*
-- rm -rf ./build/* \
-    && npm run build-preprod \
-    && zip -9 -j preprod.zip build/*
-- rm -rf ./build/* \
-    && npm run build-demo
+- rm -rf ./build/* && npm run build-production && zip -9 -j production.zip build/*
+- rm -rf ./build/* && npm run build-preprod && zip -9 -j preprod.zip build/*
+- rm -rf ./build/* && npm run build-demo
 
 deploy:
 - provider: script
