@@ -67,14 +67,16 @@ $focus-highlight-color : #F62727;
             position: relative;
 
             text-transform: uppercase;
-            font-size: 1.3em;
+
             font-weight: bold;
+            font-size: 1em;
 
             min-height: 23em;
             min-width: 10em;
-            transform: translateX(-20%);
+            transform: translateX(-40%);
 
             @media screen and (min-width: $focus-layout-breakpoint) {                
+                font-size: 1.3em;
                 transform: initial;
                 min-width: 0;
             } 
@@ -107,6 +109,7 @@ $focus-highlight-color : #F62727;
 
         .legend-list{
             flex: 1;
+            margin-bottom: 2em;
         }
 
 

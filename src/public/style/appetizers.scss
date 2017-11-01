@@ -88,8 +88,9 @@ $circle-radius : 38em;
             margin: 0;
 
             .number{
-                font-size: 5.5em;
+                font-size: 4em;
                 color: $gironde-green;
+                white-space: nowrap;
                 letter-spacing: -10px;
 
                 .after-comma{
@@ -97,6 +98,13 @@ $circle-radius : 38em;
                 }
             }
 
+            @media screen and (min-width: $home-layout-breakpoint) {
+                .number{
+                    font-size: 5.5em;
+                }
+            }
+
+            
             .text{
                 width: 50%;
                 text-align: center;

@@ -49,9 +49,12 @@ $background-height: 2470px;
 
         .appetizers{
             max-width: $column-max-width;
+            display: block;
 
-            display: flex;
-            flex-direction: column;
+            @media screen and (min-width: $home-layout-breakpoint) {
+                display: flex;
+                flex-direction: column;
+            }
         }
     }
 }

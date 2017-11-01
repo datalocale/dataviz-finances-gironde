@@ -45,10 +45,12 @@ export default class M52ByFonction extends React.Component {
     }
 
     render() {
-        const { m52Instruction, urlByFonction, labelsById } = this.props;
+        const { m52Instruction, urlByFonction, labelsById, screenWidth } = this.props;
         const {rdfi} = this.state;
 
         const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
+
+        const outerRadius = Math.min(screenWidth/2 - 30, 240);
 
         return React.createElement('div', { className: 'm52-by-fonction' },
             React.createElement(M52Viz, {
@@ -58,8 +60,8 @@ export default class M52ByFonction extends React.Component {
                     }
                 },
                 M52Hierarchical: m52Hierarchical,
-                donutWidth: 130,
-                outerRadius: 240
+                donutWidth: outerRadius*2/3,
+                outerRadius
             }),
             React.createElement('div', {},
                 React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
