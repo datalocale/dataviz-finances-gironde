@@ -11,13 +11,13 @@ env:
     - OCTOKIT_ACCESS_TOKEN="$GH_TOKEN"
 
 before_script:
-- rm -rf ./build \
+- rm -rf ./build/* \
     && npm run build-production \
     && zip -9 -j production.zip build/*
-- rm -rf ./build \
-    && npm run build-preproduction \
-    && zip -9 -j preproduction.zip build/*
-- rm -rf ./build \
+- rm -rf ./build/* \
+    && npm run build-preprod \
+    && zip -9 -j preprod.zip build/*
+- rm -rf ./build/* \
     && npm run build-demo
 
 deploy:
