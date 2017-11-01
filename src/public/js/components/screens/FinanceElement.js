@@ -139,6 +139,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
         
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
+            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined,
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ? 
                     800 :
@@ -164,8 +165,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                     })).toArray() : undefined,
                 uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
                 yValueDisplay: makeAmountString
-            }),
-            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined
+            })
         ),
 
         isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'}, 
