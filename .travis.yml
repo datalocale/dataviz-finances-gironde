@@ -1,16 +1,35 @@
 language: node_js
 node_js: '6'
+sudo: false
 
 cache:
   directories:
   - node_modules
 
+env:
+  global:
+    - OCTOKIT_ACCESS_TOKEN="$GH_TOKEN"
+
 before_script:
-- npm run build-demo
+- rm -rf ./build \
+    && npm run build-production \
+    && zip -9 -j production.zip build/*
+- rm -rf ./build \
+    && npm run build-preproduction \
+    && zip -9 -j preproduction.zip build/*
+- rm -rf ./build \
+    && npm run build-demo
 
 deploy:
-  skip_cleanup: true
-  provider: script
+- provider: script
   script: bash ./tools/deploy.sh
+  skip_cleanup: true
   on:
     branch: master
+- provider: releases
+  file_glob: true
+  file: "*.zip"
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: datalocale/dataviz-finances-gironde
