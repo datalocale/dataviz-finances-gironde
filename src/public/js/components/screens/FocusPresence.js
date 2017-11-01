@@ -39,7 +39,7 @@ export function FocusSol({
 
     const focusDetailsDenominator = yearDetails ? yearDetails['DF-6'] : NaN;
 
-    return React.createElement('article', {className: 'focus'},
+    return React.createElement('article', {className: 'focus presence'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Présence du Département sur le territoire`}),
             React.createElement(Markdown, {}, 
@@ -47,12 +47,12 @@ export function FocusSol({
             )
         ),
 
-        React.createElement('section', {}, 
+        React.createElement('section', {className: 'focus-map'}, 
             React.createElement(SecundaryTitle, {text: 'Carte de la présence du département en Gironde'}),
             React.createElement(Markdown, {}, 
                 `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… **6 551** agents exercent **125 métiers** dans **425 lieux de travail et d’accueil du public**. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail de ces frais de fonctionnement.`
             ),
-            React.createElement('img', {src: 'http://www.randogps.net/images/cartes/33.png', height: '300'})
+            React.createElement('iframe', {src: 'http://carto.gironde.fr/dsin_data/'})
         ),
 
         React.createElement('section', {},
@@ -94,14 +94,18 @@ export function FocusSol({
                 proportion: yearDetails ? yearDetails['DF-6-1-2']/focusDetailsDenominator : 1, 
                 text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`, 
                 highlights: [
-                    /*{
-                        strong: "",
-                        span: ""
+                    {
+                        strong: '2,58M€',
+                        span: `locations immobilières (-8%)`
                     },
                     {
-                        strong: "",
-                        span: ""
-                    }*/
+                        strong: '2,57M€',
+                        span: `entretien et de maintenance des bâtiments (-14%)`
+                    },
+                    {
+                        strong: '1,17M€',
+                        span: `contrats d’assurance (-22%)`
+                    }
                 ], 
                 moreUrl: '#!/finance-details/DF-6-1-2'
             }),
@@ -114,7 +118,20 @@ export function FocusSol({
                 amount: yearDetails ? yearDetails['DF-6-1-1'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-1']/focusDetailsDenominator : 1, 
                 text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`, 
-                highlights: [], 
+                highlights: [
+                    {
+                        strong: '1,36M€',
+                        span: `consommation énergétique (-12%)`
+                    },
+                    {
+                        strong: '557 000€',
+                        span: `dépenses de carburant (-7%)`
+                    },
+                    {
+                        strong: '459 000€',
+                        span: `dépenses de fourniture (-3,7%)`
+                    }
+                ], 
                 moreUrl: '#!/finance-details/DF-6-1-1'
             }),
             React.createElement(FocusDetail, {
@@ -126,7 +143,20 @@ export function FocusSol({
                 amount: yearDetails ? yearDetails['DF-6-1-3'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-3']/focusDetailsDenominator : 1, 
                 text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`, 
-                highlights: [], 
+                highlights: [
+                    {
+                        strong: '817 000€',
+                        span: `frais de nettoyage de locaux (+4%)`
+                    },
+                    {
+                        strong: '966 000€',
+                        span: `frais d’affranchissement (+7,7%)`
+                    },
+                    {
+                        strong: '2M€',
+                        span: `frais de télécommunications (+14%)`
+                    }
+                ], 
                 moreUrl: '#!/finance-details/DI-6-1-3'
             })
         )
@@ -156,9 +186,9 @@ export default connect(
 
         const yearDetails = elementById ? {
             'DF-6': elementById.get('DF-6').total,
-            'DF-6-1': elementById.get('DF-6-1').total,
             'DF-6-1-1': elementById.get('DF-6-1-1').total,
-            'DF-6-3-1': elementById.get('DF-6-3-1').total
+            'DF-6-1-2': elementById.get('DF-6-1-2').total,
+            'DF-6-1-3': elementById.get('DF-6-1-3').total
         } : undefined;
 
 
