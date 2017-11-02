@@ -52,12 +52,15 @@ const MAX_PARENT_BRICK_SIZE_PROPORTION = 0.80;
 const MIN_BRICK_HEIGHT = 4; // em
 const IN_BETWEEN_BRICK_SPACE = 0.5; // em // to be sync with variable of same name in budget-construction.scss
 
-// unit is seconds
+const SECOND = 1000; // in milliseconds
+
+// unit in seconds
 const BRICK_APPEAR_DURATION = 0.2; 
 const BETWEEN_BRICK_PAUSE_DURATION = 0.2; 
 const BETWEEN_COLUMN_PAUSE_DURATION = 1; 
+const READING_TIME = 5;
 
-const MILLISECONDS = 1000;
+
 
 function Legend(text, amount) {
     return React.createElement('div', { className: 'legend' },
@@ -71,7 +74,7 @@ function displayPlayButton(b, time){
     b.style.opacity = `1`;
     b.removeAttribute('disabled');
 
-    return delay(time)();
+    return delay(time*SECOND)();
 }
 
 
@@ -90,7 +93,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         dfParent, dfBricks, dfDefs,
         riParent, epargneElement, riBricks, riEmptier, riDefs,
         diParent, diBricks, diDefs, 
-        playButton; // BRICK_APPEAR_DURATION
+        textArea, playButton; // BRICK_APPEAR_DURATION
 
     const animationStart = Promise.resolve()
     .then(() => {
@@ -135,11 +138,17 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             hidePlayButton(playButton)
             .then(startAnimation)
         })
+
+        // text area
+        textArea = container.querySelector('.text-area');
+        
     })
 
 
     function startAnimation(){
         const rfBricksStart = animationStart;
+        textArea.textContent = `Pour construire son budget le Département dispose de plusieurs sources de revenus ou recettes de fonctionnement. Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations dont le montant est fixé par l'État et sont exclusivement réservées au paiement de dépenses de fonctionnement.`
+        let reading = animationStart.then( delay(READING_TIME*SECOND) );
     
         const rfBricksDone = rfBricksStart.then(() => {
             rfDefs.style.opacity = 1;
@@ -156,13 +165,22 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true });
                     })
-                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
     
         // DF bricks
-        const dfBricksStart = rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
+        const dfBricksStart = Promise.all([
+            rfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
+            reading
+        ]);
+        reading = dfBricksStart
+        .then(() => {
+            textArea.textContent = `Ces recettes financent les allocations et prestations sociales ou de solidarité gérées par le Départment, les services de secours (pompiers), les transports, les collèges, les routes et les intérêts d’emprunts.
+            Pour assurer ces missions sur l'ensemble du territoire il dépense pour disposer des ressources humaines et des moyens de son fonctionnement.`
+        })
+        .then( delay(READING_TIME*SECOND) );
     
         const dfBricksDone = dfBricksStart.then(() => {
             rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
@@ -192,7 +210,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true });
                     })
-                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
     
@@ -200,8 +218,18 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
     
     
         // Epargne brick
-        const epargneBrickStart = dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
-    
+        const epargneBrickStart = Promise.all([
+            dfBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
+            reading
+        ]);
+        
+        reading = epargneBrickStart
+        .then(() => {
+            textArea.textContent = `En contrôlant ses dépenses de fonctionnement propre le Département économise et épargne pour financer les infrastructures et services de proximité sur le territoire.`
+        })
+        .then( delay(READING_TIME*SECOND) );
+
+
         const epargneBrickDone = epargneBrickStart.then(() => {
             riDefs.style.opacity = 1;
     
@@ -218,7 +246,10 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         })
     
         // other RU bricks
-        const otherRiBricksStart = epargneBrickDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
+        const otherRiBricksStart = Promise.all([
+            epargneBrickDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
+            reading
+        ]);
     
         const otherRiBricksDone = otherRiBricksStart.then(() => {
             return [RI_PROPRES, EMPRUNT].reduce((previousDone, id) => {
@@ -228,16 +259,34 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     el.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
                     el.style.height = `${riBrickHeights[id]}em`;
     
-                    return new Promise(resolve => {
-                        el.addEventListener('transitionend', resolve, { once: true })
-                    })
-                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                    textArea.textContent = id === RI_PROPRES ?
+                        `Les recettes d'investissement sont principalement constituées de dotations de l’Etat et de subventions. Elles peuvent également provenir de vente de patrimoine.` :
+                        `Les emprunts permettent au Département d'atteindre l’équilibre budgétaire et d’investir dans des projets d’ampleur ou durables.`
+                    
+                    reading = delay(READING_TIME*SECOND)();
+
+                    return Promise.all([
+                        new Promise(resolve => {
+                            el.addEventListener('transitionend', resolve, { once: true })
+                        }),
+                        reading
+                    ])
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
     
         // DI bricks
-        const diBricksStart = otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS));
+        const diBricksStart = Promise.all([
+            otherRiBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
+            reading
+        ]);
+
+        reading = diBricksStart
+        .then(() => {
+            textArea.textContent = `Les dépenses d'investissement concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`
+        })
+        .then( delay(READING_TIME*SECOND) );
     
         const diBricksDone = diBricksStart.then(() => {
     
@@ -268,14 +317,23 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true })
                     })
-                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*MILLISECONDS))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
     
+        const animationEnd = Promise.all([
+            diBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
+            reading.then(() => {
+                textArea.textContent = `Chaque année le compte administratif du Département doit être en équilibre comme l'en oblige la loi. La qualité de sa gestion financière permet de garantir l'exercice de ses missions sur le territoire et sa capacité d'investir en faveur de son développement`
+            })
+            .then( delay(READING_TIME*SECOND) )
+        ]);
+
+        
         // Replay button
-        const addReplayButton = diBricksDone
-        .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*MILLISECONDS))
+        const addReplayButton = animationEnd
+        .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND))
         .then(() => {
             return displayPlayButton(playButton, BRICK_APPEAR_DURATION)
         })
@@ -543,6 +601,11 @@ export default class BudgetConstructionAnimation extends React.Component {
                     )
                 ] : undefined
             ),
+            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
+                React.createElement('i',  { className: 'fa fa-play-circle-o' }),
+                ' jouer'
+            ),
+            videoURL ? undefined : React.createElement('div', { className: 'text-area' }, ''),
             React.createElement('hr'),
             React.createElement('dl', {},
                 React.createElement('a', { className: 'column rf', href: '#!/finance-details/RF' },
@@ -567,10 +630,6 @@ export default class BudgetConstructionAnimation extends React.Component {
                     React.createElement('dd', {}, `Elles concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`),
                     React.createElement(PrimaryCallToAction, {text: 'explorer'})
                 )
-            ),
-            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
-                React.createElement('i',  { className: 'fa fa-play-circle-o' }),
-                ' jouer'
             )
         );
     }

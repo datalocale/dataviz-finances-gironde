@@ -228,6 +228,13 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
         }
     }
 
+    .text-area{
+        width: 40%;
+        position: absolute;
+        top: 5em;
+        right: 5%;
+    }
+
     &.video{
         dl .column{
             opacity: 1;
