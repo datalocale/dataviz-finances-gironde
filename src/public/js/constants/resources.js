@@ -18,6 +18,12 @@ export const SOUTIEN_COMMUNES_PICTO = "SOUTIEN_COMMUNES_PICTO";
 export const PERSONNES_AGEES_PICTO = "PERSONNES_AGEES_PICTO";
 export const BONHOMME_PICTO = "BONHOMME_PICTO";
 
+export const AGENTS_PICTO = 'AGENTS_PICTO';
+export const CARBURANT_PICTO = 'CARBURANT_PICTO';
+export const ELECTRICITE_PICTO = 'ELECTRICITE_PICTO';
+
+export const CARTE_PRESENCE_HTML = "CARTE_PRESENCE_HTML";
+
 const env = process.env.NODE_ENV;
 
 const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
@@ -53,6 +59,13 @@ export const urls = {
     [AGGREGATED_TEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/19`,
         "demo": `../data/texts/aggregated-temporal.csv`,
+        get development(){return this.demo}
+    }[env],
+
+    // HTML Carte présence
+    [CARTE_PRESENCE_HTML]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/22`,
+        "demo": `../public/carte-presence.html`,
         get development(){return this.demo}
     }[env],
 
@@ -100,6 +113,22 @@ export const urls = {
     [PERSONNES_AGEES_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/16`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
+        get development(){return this.demo}
+    }[env],
+
+    [AGENTS_PICTO]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/23`,
+        "demo": 'https://rawgit.com/datalocale/pictoGironde/master/AgentesDepartement.svg',
+        get development(){return this.demo}
+    }[env],
+    [CARBURANT_PICTO]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/24`,
+        "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Carburant.svg',
+        get development(){return this.demo}
+    }[env],
+    [ELECTRICITE_PICTO]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/25`,
+        "demo": 'https://rawgit.com/datalocale/pictoGironde/master/depensesElectricite.svg',
         get development(){return this.demo}
     }[env]
 }

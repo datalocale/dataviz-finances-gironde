@@ -16,7 +16,7 @@ import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/fin
 import {makePartition, makeElementById} from './FinanceElement';
 import FocusDetail from '../FocusDetail';
 
-import {urls, PATRIMOINE_PICTO} from '../../constants/resources';
+import {urls, AGENTS_PICTO, CARBURANT_PICTO, ELECTRICITE_PICTO, CARTE_PRESENCE_HTML} from '../../constants/resources';
 
 import colorClassById from '../../colorClassById';
 
@@ -52,7 +52,7 @@ export function FocusSol({
             React.createElement(Markdown, {}, 
                 `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… **6 551** agents exercent **125 métiers** dans **425 lieux de travail et d’accueil du public**. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail de ces frais de fonctionnement.`
             ),
-            React.createElement('iframe', {src: 'http://carto.gironde.fr/dsin_data/'})
+            React.createElement('iframe', {src: urls[CARTE_PRESENCE_HTML], sandbox: 'allow-scripts'})
         ),
 
         React.createElement('section', {},
@@ -89,7 +89,7 @@ export function FocusSol({
                 className: 'buildings', 
                 
                 title: 'Prestations de services', 
-                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                illustrationUrl: urls[ELECTRICITE_PICTO], 
                 amount: yearDetails ? yearDetails['DF-6-1-2'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-2']/focusDetailsDenominator : 1, 
                 text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`, 
@@ -114,7 +114,7 @@ export function FocusSol({
                 className: 'buildings', 
                 
                 title: 'Achats et fournitures', 
-                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                illustrationUrl: urls[CARBURANT_PICTO], 
                 amount: yearDetails ? yearDetails['DF-6-1-1'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-1']/focusDetailsDenominator : 1, 
                 text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`, 
@@ -139,7 +139,7 @@ export function FocusSol({
                 className: 'buildings', 
 
                 title: 'Frais divers', 
-                illustrationUrl: urls[PATRIMOINE_PICTO], 
+                illustrationUrl: urls[AGENTS_PICTO], 
                 amount: yearDetails ? yearDetails['DF-6-1-3'] : undefined,
                 proportion: yearDetails ? yearDetails['DF-6-1-3']/focusDetailsDenominator : 1, 
                 text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`, 
