@@ -17,7 +17,7 @@
     "R11": "Gendarmerie, police, sécurité, justice",
     "R18": "Autres interventions de protection des personnes et des biens",
     
-    "R2" : "Enseignement",
+    "R2" : "Collège",
     "R20": "Services communs",
     "R21": "Enseignement du premier degré",
     "R22": "Enseignement du second degré",
@@ -44,10 +44,10 @@
     "R42": "Prévention et éducation pour la santé",
     "R48": "Autres actions",
     
-    "R5": "Action sociale (hors RMI, APA, RSA)",
+    "R5": "Action sociale",
     "R50": "Services communs",
     "R51": "Famille et enfance",
-    "R52": "Personnes handicapées",
+    "R52": "Personnes en situation de handicap",
     "R53": "Personnes âgées",
     "R58": "Autres interventions sociales",
     
