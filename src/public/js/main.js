@@ -29,10 +29,6 @@ import {
     FINANCE_DETAIL_ID_CHANGE, 
 } from './constants/actions'; 
 
-// cheapest WeakMap polyfill because the polyfill.io one threw an exception
-if(typeof WeakMap !== 'function'){
-    window.WeakMap = Map;
-}
 
 const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
 
