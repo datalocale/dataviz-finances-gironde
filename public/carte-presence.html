@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Département de la Gironde - DSIN</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.5/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.5/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+    #instruction {
+      z-index: 99;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      padding: 5px;
+      margin-left: -175px;
+      height: 20px;
+      width: 350px;
+      background: rgba(25, 25, 25, 0.8);
+      color: white;
+    }
+
+  </style>
+
+  <script>
+    require([
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/layers/FeatureLayer",
+         "esri/widgets/Search",
+        "dojo/domReady!"
+      ],
+      function(
+        Map, MapView,
+        FeatureLayer,Search
+      ) {
+        var map = new Map({
+          basemap: "osm"
+        });
+
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+             center: [-1.0, 44.6088],
+        zoom: 8,
+        logo:false
+        });
+
+
+    var template = { // autocasts as new PopupTemplate()
+        title: "{LIBELLE}",
+        content: "<p>Adresse : {NUM_VOIRIE} {ADRESSE} {NOM_COMMUNE}</p>" +
+          "<ul><li>Nb bâtiment : {NB_BATIMENT}</li>" +
+          "<li>Nb Parcelles : {NB_PARCELLE}</li>" +
+          "<li>Loyer par m² : {LOYER_P_M2}</li>" +
+          "<li>Ratio Electrique : {RATIO_ELEC}</li>" +
+          "<li>Coît du nettoyage : {COUT_NETTOYAGE}</li>" +
+          "<li>Coût consommation gaz propane : {GAZ_PROP}</li>" +
+          "<li>Coût consommation gaz : {GAZ}</li>" +
+          "<li>Coût consommation fioul : {FIOUL}</li>" +
+          "<li>Coût consommation électricité : {ELEC}</li>" +
+          "<li>Coût consommation eau : {EAU}</li>" +
+          "<li>Coût consommation total : {TOTAL}</li>" +
+          "<li>Nb de M² par personne : {NOMBRE_M2_PER}</li>" +
+          "<li>Surface Plancher en m² :{SURF_PLAN_M2}</li></ul>",
+
+      };
+        /********************
+         * Add feature layer
+         ********************/
+
+        // Carte des SAGE de Gironde.
+        var featureLayer = new FeatureLayer({
+          url: "http://arcgis.extra.gironde.fr/arcgis/rest/services/DATA/DSI_DATA_SITES_INDIC/FeatureServer/0",
+          outFields: ["*"],
+        popupTemplate: template
+        });
+
+        map.add(featureLayer);
+
+
+             var searchWidget = new Search({
+        view: view
+      });
+
+      // Add the search widget to the very top left corner of the view
+      view.ui.add(searchWidget, {
+        position: "top-left",
+        index: 0
+      });
+      });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
