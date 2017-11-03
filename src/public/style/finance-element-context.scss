@@ -36,6 +36,10 @@
             align-items: center;
 
             border-radius: 0.3em;
+            width: 0;
+
+            transition: width 0.4s ease;
+            will-change: width;
         }
     }
 

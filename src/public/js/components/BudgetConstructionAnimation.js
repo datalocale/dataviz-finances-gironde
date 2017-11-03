@@ -93,7 +93,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         dfParent, dfBricks, dfDefs,
         riParent, epargneElement, riBricks, riEmptier, riDefs,
         diParent, diBricks, diDefs, 
-        textArea, playButton; // BRICK_APPEAR_DURATION
+        textArea, playButton;
 
     const animationStart = Promise.resolve()
     .then(() => {
@@ -136,16 +136,24 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             riEmptier.style.height = 0;
             
             hidePlayButton(playButton)
-            .then(startAnimation)
+            .then(() => startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}))
         })
 
         // text area
         textArea = container.querySelector('.text-area');
-        
+
+        // initial run to get show final state initially
+        startAnimation({
+            READING_TIME: 0, 
+            BRICK_APPEAR_DURATION: 0.02, 
+            BETWEEN_BRICK_PAUSE_DURATION: 0, 
+            BETWEEN_COLUMN_PAUSE_DURATION: 0
+        })
+
     })
 
 
-    function startAnimation(){
+    function startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}){
         const rfBricksStart = animationStart;
         textArea.textContent = `Pour construire son budget le Département dispose de plusieurs sources de revenus ou recettes de fonctionnement. Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations dont le montant est fixé par l'État et sont exclusivement réservées au paiement de dépenses de fonctionnement.`
         let reading = animationStart.then( delay(READING_TIME*SECOND) );
@@ -328,6 +336,9 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                 textArea.textContent = `Chaque année le compte administratif du Département doit être en équilibre comme l'en oblige la loi. La qualité de sa gestion financière permet de garantir l'exercice de ses missions sur le territoire et sa capacité d'investir en faveur de son développement`
             })
             .then( delay(READING_TIME*SECOND) )
+            .then(() => {
+                textArea.textContent = '';
+            })
         ]);
 
         
@@ -601,9 +612,9 @@ export default class BudgetConstructionAnimation extends React.Component {
                     )
                 ] : undefined
             ),
-            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
+            videoURL ? undefined : React.createElement(PrimaryCallToAction, { className: 'play' }, 
                 React.createElement('i',  { className: 'fa fa-play-circle-o' }),
-                ' jouer'
+                ` Montrer la construction du budget`
             ),
             videoURL ? undefined : React.createElement('div', { className: 'text-area' }, ''),
             React.createElement('hr'),
