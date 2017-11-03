@@ -612,9 +612,9 @@ export default class BudgetConstructionAnimation extends React.Component {
                     )
                 ] : undefined
             ),
-            videoURL ? undefined : React.createElement('button', { className: 'play' }, 
+            videoURL ? undefined : React.createElement(PrimaryCallToAction, { className: 'play' }, 
                 React.createElement('i',  { className: 'fa fa-play-circle-o' }),
-                ' jouer'
+                ` Montrer la construction du budget`
             ),
             videoURL ? undefined : React.createElement('div', { className: 'text-area' }, ''),
             React.createElement('hr'),
