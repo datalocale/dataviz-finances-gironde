@@ -19,7 +19,7 @@ const byEnv = {
         [DEV]: '../images/map-optimised.jpg'
     },
     "bonhomme-url": {
-        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/17`,
+        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/6`,
         [DEMO]: '../images/bonhomme.svg',
         [DEV]: '../images/bonhomme.svg'
     }
