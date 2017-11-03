@@ -22,14 +22,6 @@ export default class SektorComponent extends React.Component {
         this._elements = [];
     }
 
-
-    /*_reset(){
-        this._elements.forEach(e => {
-            e.style.width = 0;
-        })
-        this._elements = [];
-    }*/
-
     componentDidMount(){
         setTimeout(() => {
             animate(
@@ -40,8 +32,6 @@ export default class SektorComponent extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('els', this._container)
-
         reset(
             Array.from(this._container.children).map(c => c.querySelector('div'))
         )
