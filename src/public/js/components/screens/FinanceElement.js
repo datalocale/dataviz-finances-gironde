@@ -112,8 +112,30 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
         thisYearPartition = thisYearPartition && thisYearPartition.remove(
             thisYearPartition.findIndex(p => p.contentId === 'DF-1')
         )
-        
     }
+
+    const legendItemIds = barchartPartitionByYear
+    .map(partition => partition.map(part => part.contentId).toSet())
+    .toSet().flatten().toArray();
+    
+    const legendItems = legendItemIds.map(id => {
+        let found;
+
+        barchartPartitionByYear.find(partition => {
+            found = partition.find(p => p.contentId === id )
+            return found;
+        })
+
+        return {
+            id: found.contentId,
+            className: found.contentId, 
+            url: found.url, 
+            text: found.texts && found.texts.label,
+            colorClassName: colorClassById.get(found.contentId)
+        }
+    })
+
+
 
     const RDFIText = RDFI === DF ?
         'Dépense de fonctionnement' : 
@@ -155,14 +177,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                     const url = barchartPartitionByYear.get(year).find(e => e.contentId === id).url;
                     page(url);
                 } : undefined,
-                legendItems: !isLeaf ? 
-                    barchartPartitionByYear.get(year).map(p => ({
-                        id: p.contentId,
-                        className: p.contentId, 
-                        url: p.url, 
-                        text: p.texts && p.texts.label,
-                        colorClassName: colorClassById.get(p.contentId)
-                    })).toArray() : undefined,
+                legendItems: !isLeaf ? legendItems : undefined,
                 uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
                 yValueDisplay: makeAmountString
             })
@@ -212,6 +227,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
 
 export function makePartition(element, totalById, textsById){
+    if(!element){
+        return new List();
+    }
+
     let children = element.children;
     children = children && typeof children.toList === 'function' ? children.toList() : children;
 
@@ -322,7 +341,7 @@ export default connect(
 
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && makePartition(yearElement, elementById.map(e => e.total), textsById)
+            return makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
         const amountByYear = m52InstructionByYear.map((m52i) => {
