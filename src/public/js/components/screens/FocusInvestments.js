@@ -67,7 +67,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: 'Évolution des dépenses d’investissements de 2009 à 2016'}),
+            React.createElement(SecundaryTitle, {text: 'Évolution des dépenses d’investissements de 2012 à 2016'}),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ? 
                     800 :
