@@ -18,6 +18,8 @@ import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/Pri
 import Markdown from '../../../../shared/js/components/Markdown';
 import MoneyAmount from '../../../../shared/js/components/MoneyAmount';
 
+import {urls, ANIMATION_VIDEO} from '../../constants/resources';
+
 import M52ByFonction from '../M52ByFonction';
 import BudgetConstructionAnimation from '../BudgetConstructionAnimation'
 
@@ -202,7 +204,7 @@ export default connect(
                     'M52-DI-R8': `#!/finance-details/M52-DI-R8`,
                     'M52-DI-R9': `#!/finance-details/M52-DI-R9`
                 },
-                animationVideo: '../videos/BLOUBLOU_V0.mp4'
+                animationVideo: urls[ANIMATION_VIDEO]
             },
             screenWidth
         };

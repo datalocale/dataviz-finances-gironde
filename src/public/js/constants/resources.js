@@ -23,6 +23,8 @@ export const ELECTRICITE_PICTO = 'ELECTRICITE_PICTO';
 
 export const CARTE_PRESENCE_HTML = "CARTE_PRESENCE_HTML";
 
+export const ANIMATION_VIDEO = "ANIMATION_VIDEO";
+
 const env = process.env.NODE_ENV;
 
 const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
@@ -41,92 +43,99 @@ export const urls = {
     [COMPTE_ADMINISTRATIF]: {
         "production": (year => `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/${prodYearToVariablePart[year]}`),
         "demo": (year => `../data/finances/cedi_${year}_CA.csv`),
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [CORRECTIONS_AGGREGATED]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/19`,
         "demo": `../data/finances/corrections-agregation.csv`,
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
 
     // texts
     [AGGREGATED_ATEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21`,
         "demo": `../data/texts/aggregated-atemporal.csv`,
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [AGGREGATED_TEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/20`,
         "demo": `../data/texts/aggregated-temporal.csv`,
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
 
     // HTML Carte présence
     [CARTE_PRESENCE_HTML]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/23`,
         "demo": `../public/carte-presence.html`,
-        get development(){return this.demo}
+        get development() { return this.demo }
+    }[env],
+
+    // Vidéo de l'animation
+    [ANIMATION_VIDEO]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/26`,
+        "demo": '../videos/BLOUBLOU_V0.mp4',
+        get development() { return this.demo }
     }[env],
 
     // pictos
     [INSERTION_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/5`,
         "demo": 'https://cdn.rawgit.com/datalocale/pictoGironde/master/Insertion.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [COLLEGE_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/8`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Colleges.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [ENFANCE_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/9`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Enfance.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [ENVIRONNEMENT_AMENAGEMENT_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/7`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/EnvironnementAmenagement.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [HANDICAPES_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/10`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Handicapes.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [PATRIMOINE_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/11`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Patrimoine.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [ROUTES_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/12`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/routes.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [SOUTIEN_COMMUNES_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/13`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/SoutienCommunes.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [PERSONNES_AGEES_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/14`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Personnesagees.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [AGENTS_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/15`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/AgentesDepartement.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [CARBURANT_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/16`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/Carburant.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env],
     [ELECTRICITE_PICTO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/17`,
         "demo": 'https://rawgit.com/datalocale/pictoGironde/master/depensesElectricite.svg',
-        get development(){return this.demo}
+        get development() { return this.demo }
     }[env]
 }
