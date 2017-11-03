@@ -212,6 +212,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
 
 export function makePartition(element, totalById, textsById){
+    if(!element){
+        return new List();
+    }
+
     let children = element.children;
     children = children && typeof children.toList === 'function' ? children.toList() : children;
 
@@ -322,7 +326,7 @@ export default connect(
 
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && makePartition(yearElement, elementById.map(e => e.total), textsById)
+            return makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
         const amountByYear = m52InstructionByYear.map((m52i) => {
