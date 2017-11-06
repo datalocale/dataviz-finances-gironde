@@ -110,7 +110,7 @@ export function FocusSol({
                     {
                         id: 'DF-2-other',
                         colorClassName: 'DF-2-other', 
-                        text: "Prévention transversale"
+                        text: "Autres"
                     }
                 ],
                 yValueDisplay: makeAmountString,
