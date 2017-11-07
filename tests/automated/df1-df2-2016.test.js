@@ -11,6 +11,7 @@ import csvStringToM52Instructions from '../../src/shared/js/finance/csvStringToM
 import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections.js';
 
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
+import { EXPENDITURES, DF } from '../../src/shared/js/finance/constants';
 
 const corrections = csvStringToCorrections(readFileSync(join(__dirname, '../../data/finances/corrections-agregation.csv'), {encoding: 'utf-8'}))
 
@@ -74,9 +75,15 @@ test(`Pour le CA 2016 de la Gironde, DF-1 = DF-2`, () => {
 });
 
 test(`Pour le CA 2016 de la Gironde, DF devrait représenter ~1375,6 millions d'euros`, () => {
-    const df = hierAgg2016Elements.find(e => e.id === 'DF');
+    const df = hierAgg2016Elements.find(e => e.id === DF);
 
     expect(df.total/MILLION).toBeCloseTo(1375600000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, D devrait représenter ~1620,5 millions d'euros`, () => {
+    const df = hierAgg2016Elements.find(e => e.id === EXPENDITURES);
+
+    expect(df.total/MILLION).toBeCloseTo(1620500000/MILLION, 1);
 });
 
 
