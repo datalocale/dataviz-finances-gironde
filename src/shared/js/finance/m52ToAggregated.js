@@ -402,7 +402,8 @@ export const rules = Object.freeze({
                 !(art === 'A6336') &&
                 !(art === 'A6218') &&
                 !(art === 'A6245' && fonction === 'R568') &&
-                !(art === 'A6245' && fonction === 'R52')
+                !(art === 'A6245' && fonction === 'R52') &&
+                !(art === 'A65111' && fonction === 'R51')
         }
     },
     

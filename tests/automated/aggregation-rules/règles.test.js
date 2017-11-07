@@ -577,3 +577,23 @@ test("DF C012 R50 A6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(false);
     expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
 });
+
+test("DF C65 R51 A65111 n'est pas dans DF-1-7-2", () => {
+    const m52Rows = [
+        new M52RowRecord({
+            'Dépense/Recette': 'D',
+            'Investissement/Fonctionnement': 'F',
+            'Réel/Ordre id/Ordre diff': 'OR',
+            'Rubrique fonctionnelle': 'R51',
+            'Article': 'A65111',
+            'Chapitre': 'C65',
+            'Montant': 76
+        })
+    ];
+    const instruction = new M52Instruction({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF172 = aggVision.find(row => row.id === 'DF-1-7-2');
+    expect(aggDF172.M52Rows.includes(m52Rows[0])).toBe(false);
+});
