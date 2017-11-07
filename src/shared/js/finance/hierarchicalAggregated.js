@@ -4,7 +4,7 @@ import { sum } from 'd3-array';
 import {makeM52RowId} from './M52InstructionDataStructures';
 
 import { rules } from './m52ToAggregated';
-import { PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, EXPENDITURES, REVENUE } from './constants';
+import { EXPENDITURES, REVENUE, DF, RF, RI, DI } from './constants';
 
 const ruleIds = Object.freeze(Object.keys(rules));
 
@@ -17,7 +17,7 @@ export const levels = {
             label: 'Recettes',
             children: [
                 {
-                    id: 'RF',
+                    id: RF,
                     label: 'Recettes de fonctionnement',
                     children: [
                         {
@@ -64,7 +64,7 @@ export const levels = {
                     ]
                 },
                 {
-                    id: 'RI',
+                    id: RI,
                     label: 'Recettes d’investissement',
                     children: ruleIds
                         .filter(id => id.match(/^RI-\d+/))
@@ -84,7 +84,7 @@ export const levels = {
             label: 'Dépenses',
             children: [
                 {
-                    id: 'DF',
+                    id: DF,
                     label: 'Dépenses de fonctionnement',
                     children: [
                         {
@@ -158,7 +158,7 @@ export const levels = {
                     ]
                 },
                 {
-                    id: 'DI',
+                    id: DI,
                     label: 'Dépenses d’investissement',
                     children: [
                         {
@@ -261,7 +261,7 @@ export default function (aggRows) {
         splitByRowId.forEach((elements, rowId) => {
             // In case ther is a split between say DF-1-1-3 (& DF-2-4) and DF-4
             // don't count the part split in DF-1/DF-2 twice
-            if(sourceNode.id === 'DF'){
+            if(sourceNode.id === DF || sourceNode.id === EXPENDITURES){
                 const df1Row = elements.find(e => e.splitFor && e.splitFor.startsWith('DF-1'));
                 const df2Row = elements.find(e => e.splitFor && e.splitFor.startsWith('DF-2'));
 
