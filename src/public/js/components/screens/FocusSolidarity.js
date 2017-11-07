@@ -21,6 +21,8 @@ import {urls, INSERTION_PICTO, ENFANCE_PICTO, HANDICAPES_PICTO, PERSONNES_AGEES_
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
 
+import colorClassById from '../../colorClassById';
+
 /*
 
 interface FocusSolidarityProps{
@@ -84,33 +86,38 @@ export function FocusSol({
                     yearSolidarity['DF-2-2'],
                     yearSolidarity['DF-2-3'],
                     yearSolidarity['DF-2-4'],
-                    yearSolidarity['DF-2-other']
+                    yearSolidarity['DF-2-5']
                 ]))),
                 legendItems: [
                     {
                         id: 'DF-2-1',
-                        colorClassName: 'DF-2-1', 
-                        text: "Personnes en insertion"
+                        colorClassName: colorClassById.get('DF-2-1'), 
+                        text: "Personnes en insertion",
+                        url: `#!/finance-details/DF-2-1`
                     },
                     {
                         id: 'DF-2-2',
-                        colorClassName: 'DF-2-2', 
-                        text: "Personnes en situation de handicap"
+                        colorClassName: colorClassById.get('DF-2-2'), 
+                        text: "Personnes en situation de handicap",
+                        url: `#!/finance-details/DF-2-2`
                     },
                     {
                         id: 'DF-2-3',
-                        colorClassName: 'DF-2-3', 
-                        text: "Personnes âgées"
+                        colorClassName: colorClassById.get('DF-2-3'), 
+                        text: "Personnes âgées",
+                        url: `#!/finance-details/DF-2-3`
                     },
                     {
                         id: 'DF-2-4',
-                        colorClassName: 'DF-2-4', 
-                        text: "Enfance"
+                        colorClassName: colorClassById.get('DF-2-4'), 
+                        text: "Enfance",
+                        url: `#!/finance-details/DF-2-4`
                     },
                     {
-                        id: 'DF-2-other',
-                        colorClassName: 'DF-2-other', 
-                        text: "Autres"
+                        id: 'DF-2-5',
+                        colorClassName: colorClassById.get('DF-2-5'), 
+                        text: "Autres",
+                        url: `#!/finance-details/DF-2-5`
                     }
                 ],
                 yValueDisplay: makeAmountString,
@@ -244,7 +251,7 @@ const YearSolidarityRecord = Record({
     'DF-2-2': 0,
     'DF-2-3': 0,
     'DF-2-4': 0,
-    'DF-2-other': 0
+    'DF-2-5': 0
 })
 
 export default connect(
@@ -261,19 +268,17 @@ export default connect(
             const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
             let solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
             const ysrData = {};
-            ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4'].forEach(id => {
+            ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4', 'DF-2-5'].forEach(id => {
                 ysrData[id] = hierAggByPrestationList.find(e => e.id === id).total;
             });
 
             let df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
-            let df2other = solidarityExpenditures - (ysrData['DF-2-1'] + ysrData['DF-2-2'] + ysrData['DF-2-3'] + ysrData['DF-2-4']);
 
             return new YearSolidarityRecord(Object.assign(
                 {
                     totalExpenditures: expenditures,
                     solidarityExpenditures,
-                    'DF-1-other': df1other,
-                    'DF-2-other': df2other
+                    'DF-1-other': df1other
                 },
                 ysrData
             ))

@@ -104,7 +104,6 @@ $spacing-3: $base-spacing*4;
                 @media screen and (min-width: $focus-layout-breakpoint) {                
                     &:not(:first-child){
                         margin-left: $spacing-1;
-                        margin-bottom: 0;
                     }
                 }
 
