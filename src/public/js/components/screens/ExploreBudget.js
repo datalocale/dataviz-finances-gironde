@@ -47,11 +47,11 @@ export function TotalBudget({
     return React.createElement('article', {className: 'explore-budget'},
         React.createElement(PageTitle, {text: `Exploration des comptes ${currentYear}`}),
         React.createElement('section', {},
-            React.createElement(Markdown, {}, `L'exécution du budget 2016, premier de la mandature du président Jean-Luc Gleyze, a été marqué par l’augmentation de la contribution des collectivités locales à la réduction des déficits publics et aux évolution du périmètre d’intervention du département suite au vote des lois MAPTAM et NOTRe. Le Département de la Gironde s’est adapté en resserrant ses marges d’autofinancement et a travaillé sur la maîtrise des dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales, obligatoires et incompressibles tout en conservant les dépenses d’investissement.
+            React.createElement(Markdown, {}, `L'exécution du budget 2016 a été marqué par l’augmentation de la contribution des collectivités locales à la réduction des déficits publics et à l'évolution du périmètre d’intervention des départements (lois MAPTAM et NOTRe). La Gironde s’est adaptée en resserrant ses marges d’autofinancement et en maîtrisant ses dépenses de fonctionnement. Cette rigueur a permis de préserver les dépenses sociales tout en conservant les dépenses d’investissement.
                 
-            Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-            - une l’épargne brute en nette amélioration, fruit notamment d’une gestion rigoureuse des dépenses de fonctionnement
-            - une réduction du besoin de financement par emprunt qui entraîne une baisse du ratio de financement en % des recettes de fonctionnement indicateur de la performance financière`
+            Les résultats financiers de la Gironde pour l'exercice 2016 se traduisent par :
+            - une épargne brute en nette amélioration, (gestion rigoureuse des dépenses de fonctionnement)
+            - une réduction du besoin de financement par emprunt`
             )
         ),
 
