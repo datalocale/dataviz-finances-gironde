@@ -57,7 +57,7 @@ export function Home({
                     h1: "Présence sur le territoire",
                     numberMain: "125 métiers", 
                     numberSecundary: "425 sites",
-                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6000 agents mènent leur mission dans des lieux de travail et d’accueil du public répartis dans toute la Gironde.`, 
+                    description: `Puéricultrice, travailleur social, agent d’exploitation et de voirie, manager, chargé de mission… 6551 agents mènent leur mission dans des lieux de travail et d’accueil du public répartis dans toute la Gironde.`, 
                     moreUrl: presence
                 }) 
             )
