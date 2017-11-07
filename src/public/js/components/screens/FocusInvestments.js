@@ -63,7 +63,7 @@ export function FocusSol({
                 React.createElement('div', {},
                     React.createElement('div', {}, `Le Département a investi`),
                     React.createElement('div', {className: 'number'}, yearInvestments && (yearInvestments.investments/population).toFixed(2).replace('.', ',')),
-                    React.createElement('div', {}, `euros par habitants en 2016`)
+                    React.createElement('div', {}, `euros par habitant en 2016`)
                 )
             )
         ),
