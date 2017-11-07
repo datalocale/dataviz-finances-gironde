@@ -155,7 +155,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
     function startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}){
         const rfBricksStart = animationStart;
-        textArea.textContent = `Pour construire son budget le Département dispose de plusieurs sources de revenus ou recettes de fonctionnement. Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations dont le montant est fixé par l'État et sont exclusivement réservées au paiement de dépenses de fonctionnement.`
+        textArea.textContent = `Pour construire son budget le Département dispose de plusieurs sources de revenus ou recettes de fonctionnement. Ces recettes proviennent principalement du produit des impôts et taxes directes et indirectes, ainsi que des dotations versées par l’Etat.`
         let reading = animationStart.then( delay(READING_TIME*SECOND) );
     
         const rfBricksDone = rfBricksStart.then(() => {
@@ -185,8 +185,8 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         ]);
         reading = dfBricksStart
         .then(() => {
-            textArea.textContent = `Ces recettes financent les allocations et prestations sociales ou de solidarité gérées par le Départment, les services de secours (pompiers), les transports, les collèges, les routes et les intérêts d’emprunts.
-            Pour assurer ces missions sur l'ensemble du territoire il dépense pour disposer des ressources humaines et des moyens de son fonctionnement.`
+            textArea.textContent = `Ces recettes financent les allocations et prestations sociales ou de solidarité gérées
+            par le Département, les services de secours (pompiers), les transports, les collèges, l’entretien des routes, les intérêts d’emprunts et permettent le fonctionnement de l’administration départementale (personnel, entretien bâtiments, charges courantes…)`
         })
         .then( delay(READING_TIME*SECOND) );
     
@@ -233,7 +233,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         
         reading = epargneBrickStart
         .then(() => {
-            textArea.textContent = `En contrôlant ses dépenses de fonctionnement propre le Département économise et épargne pour financer les infrastructures et services de proximité sur le territoire.`
+            textArea.textContent = `La maitrise de ces dépenses de fonctionnement permet au Département de constituer une épargne`
         })
         .then( delay(READING_TIME*SECOND) );
 
@@ -268,8 +268,9 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     el.style.height = `${riBrickHeights[id]}em`;
     
                     textArea.textContent = id === RI_PROPRES ?
-                        `Les recettes d'investissement sont principalement constituées de dotations de l’Etat et de subventions. Elles peuvent également provenir de vente de patrimoine.` :
-                        `Les emprunts permettent au Département d'atteindre l’équilibre budgétaire et d’investir dans des projets d’ampleur ou durables.`
+                        `Les recettes d'investissement sont constituées de dotations de l’Etat et de subventions mais peuvent également provenir de la vente de patrimoine` :
+                        `Les emprunts permettent au Département d'atteindre l’équilibre budgétaire et
+                        d’investir dans des projets d’ampleur ou durables.`
                     
                     reading = delay(READING_TIME*SECOND)();
 
@@ -292,7 +293,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
 
         reading = diBricksStart
         .then(() => {
-            textArea.textContent = `Les dépenses d'investissement concernent des programmes structurants ou stratégiques pour le développement du territoire girondin : bâtiments, routes, collèges, etc.`
+            textArea.textContent = `L’épargne ajoutée aux recettes d'investissement et à l’emprunt va permettre le financement des dépenses d’investissement structurantes nécessaires au développement du territoire girondin : collèges, routes bâtiments, subventions aux partenaires territoriaux (communes, bailleurs sociaux…)`
         })
         .then( delay(READING_TIME*SECOND) );
     
@@ -333,7 +334,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         const animationEnd = Promise.all([
             diBricksDone.then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND)),
             reading.then(() => {
-                textArea.textContent = `Chaque année le compte administratif du Département doit être en équilibre comme l'en oblige la loi. La qualité de sa gestion financière permet de garantir l'exercice de ses missions sur le territoire et sa capacité d'investir en faveur de son développement`
+                textArea.textContent = `Chaque année le vote du compte administratif du Département valide les équilibres budgétaires issus du vote du budget. La qualité de la gestion financière permet de garantir l'exercice des missions et la capacité d'investir en faveur du développement du territoire girondin`
             })
             .then( delay(READING_TIME*SECOND) )
             .then(() => {
