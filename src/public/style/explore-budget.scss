@@ -49,6 +49,8 @@ $R9-color: $area-color-10;
                 width: 50%;
             }
 
+            margin-bottom: 2em;
+
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -65,12 +67,11 @@ $R9-color: $area-color-10;
                 .areas{
                     width: 100%;
                     height: 100%;
-                    max-height: 70vh;
+                    max-height: 60vh;
         
                     @media screen and (min-width: $explore-masses-breakpoint) {
                         width: 50%;
                     }
-                    
 
                     display: flex;
                     flex-direction: column;
@@ -95,27 +96,36 @@ $R9-color: $area-color-10;
                     }
 
                     .money-amount{
-                        font-size: 0.9em;
+                        font-size: 1em;
                         text-transform: none;
                         font-weight: normal;
+
+                        @media screen and (min-width: $explore-masses-breakpoint) {
+                            font-size: 0.9em;
+                        }
                     }
+                    
                 }
 
                 .texts {
-                    @media screen and (min-width: $explore-masses-breakpoint) {
-                        height: 100%;
-                    }
-
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    padding: 0 1em;
 
                     color: black;
                     
                     .money-amount{
                         font-weight: bold;
-                        font-size: 3em; 
+                        font-size: 2em; 
+                    }
+
+                    @media screen and (min-width: $explore-masses-breakpoint) {
+                        height: 100%;
+                        padding: 0 1em;
+
+                        .money-amount{
+                            font-size: 3em; 
+                        }
                     }
                 }
             }
@@ -126,6 +136,15 @@ $R9-color: $area-color-10;
             font-weight: bold;
             text-align: left;
             text-transform: uppercase;
+
+            @media screen and (min-width: $explore-masses-breakpoint) {
+                color: black;
+                text-decoration: none;
+
+                &:hover{
+                    color: black;
+                }
+            }
         }
 
         & > *{
@@ -146,6 +165,14 @@ $R9-color: $area-color-10;
 
         .di{
             background-color: #F8C738;
+        }
+
+        .btn{
+            display: none;
+
+            @media screen and (min-width: $explore-masses-breakpoint) {
+                display: block;
+            }
         }
     }
 
@@ -185,6 +212,8 @@ $R9-color: $area-color-10;
             display: flex;
             flex-direction: row;
             align-items: center;
+
+            margin: 1em 0 2em 0;
 
             .radio{
                 margin-left: 0.5em;
