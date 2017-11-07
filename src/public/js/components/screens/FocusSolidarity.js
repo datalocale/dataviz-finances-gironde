@@ -60,7 +60,7 @@ export function FocusSol({
             }),
             React.createElement('div', {}, 
                 React.createElement(Markdown, {}, 
-                    `**Avec 120 000 prestations allouées et 813 millions d'euros mobilisés en 2016, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015.**`),
+                    `**Avec 120 000 prestations allouées et ${(currentYearSolidarity.solidarityExpenditures/1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +4,31% par rapport à 2015.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
