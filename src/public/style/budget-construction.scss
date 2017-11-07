@@ -222,10 +222,12 @@ $in-between-brick-space: 0.5em; // to be sync with variable of same name in Budg
     }
 
     .text-area{
-        width: 40%;
-        position: absolute;
-        top: 5em;
-        right: 5%;
+        width: 60%;
+        height: 5em;
+        margin: 1em 0;
+        transform: translateX(30%);
+
+        text-align: center;
     }
 
     &.video{
