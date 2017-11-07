@@ -157,7 +157,7 @@ export function FocusSol({
                         span: `frais de télécommunications (+14%)`
                     }
                 ], 
-                moreUrl: '#!/finance-details/DI-6-1-3'
+                moreUrl: '#!/finance-details/DF-6-1-3'
             })
         )
     );

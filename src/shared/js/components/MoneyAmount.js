@@ -6,7 +6,7 @@ export function makeAmountString(amount){
     return (
         amount < 100000 ?
     `${(amount).toFixed(0)}€` :
-    `${(amount/MILLION).toFixed(1)}M€`
+    `${(amount/MILLION).toFixed(1)} M€`
     )
     .replace('.', ',');
 }

@@ -59,7 +59,7 @@ export function TotalBudget({
             React.createElement(SecundaryTitle, {text: 'Les grandes masses budgétaires du compte administratif'}),
             React.createElement('div', {className: 'viz'},
                 React.createElement('div', {className: 'revenue'},
-                    React.createElement('h1', {}, 'Recettes'),
+                    React.createElement('a', {href: revURL}, React.createElement('h1', {}, 'Recettes')),
                     React.createElement('div', {},
                         React.createElement('div', {className: 'areas', style: {height: revHeight}},
                             React.createElement('a', {className: 'rf', href: rf, style: {height: rfHeight}},
@@ -78,7 +78,7 @@ export function TotalBudget({
                     )
                 ),
                 React.createElement('div', {className: 'expenditures'},
-                    React.createElement('h1', {}, 'Dépenses'),
+                    React.createElement('a', {href: expURL}, React.createElement('h1', {}, 'Dépenses')),
                     React.createElement('div', {},
                         React.createElement('div', {className: 'areas', style: {height: expHeight}},
                             React.createElement('a', {className: 'df', href: df, style: {height: dfHeight}},

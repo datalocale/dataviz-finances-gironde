@@ -60,9 +60,10 @@ export function FocusSol({
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'}, 
-                React.createElement('div', {}, 
+                React.createElement('div', {},
+                    React.createElement('div', {}, `Le Département a investi`),
                     React.createElement('div', {className: 'number'}, yearInvestments && (yearInvestments.investments/population).toFixed(2).replace('.', ',')),
-                    React.createElement('div', {}, `euros par habitants`)
+                    React.createElement('div', {}, `euros par habitant en 2016`)
                 )
             )
         ),
@@ -93,7 +94,6 @@ export function FocusSol({
         React.createElement('section', {}, 
             React.createElement(SecundaryTitle, {text: `Les secteurs d’investissement`}),
             React.createElement(Markdown, {}, `Le Département ne peut investir que dans les domaines liés à ses compétences. Ses investissements portent par exemple sur la construction, l’entretien et la rénovation des collèges, l'entretien du réseau routier départemental, de son patrimoine immobilier, des espaces naturels sensibles. Il verse également des subventions aux communes pour soutenir leur propre politique d’investissement.`),
-            React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI-1', text: `en savoir plus`}),
             React.createElement(FocusDetail, {
                 className: 'colleges', 
                 title: 'Les Collèges', 
@@ -172,22 +172,26 @@ export function FocusSol({
             }),
             React.createElement(FocusDetail, {
                 className: 'city-subsidy', 
-                title: 'Subventions Aux communes', 
+                title: 'Subventions', 
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO], 
-                amount: yearDIDetails ? yearDIDetails['DI-2-1'] : undefined,
-                proportion: yearDIDetails ? yearDIDetails['DI-2-1']/focusDetailsDenominator : 1, 
+                amount: yearDIDetails ? yearDIDetails['DI-2'] : undefined,
+                proportion: yearDIDetails ? yearDIDetails['DI-2']/focusDetailsDenominator : 1, 
                 text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne(offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`, 
                 highlights: [
-                    /*{
-                        strong: "",
-                        span: ""
+                    {
+                        strong: "25,1 M€",
+                        span: "subventions aux communes"
                     },
                     {
-                        strong: "",
-                        span: ""
-                    }*/
+                        strong: "7,9 M€",
+                        span: "subvention au logement social"
+                    },
+                    {
+                        strong: "6,8 M€",
+                        span: "subventions pour la fibre optique"
+                    }
                 ], 
-                moreUrl: '#!/finance-details/DI-2-1'
+                moreUrl: '#!/finance-details/DI-2'
             })
         )
     );
