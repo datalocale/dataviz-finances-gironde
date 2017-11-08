@@ -180,15 +180,15 @@ export function FocusSol({
                 highlights: [
                     {
                         strong: "25,1 M€",
-                        span: "subventions aux communes"
+                        span: "de subventions aux communes"
                     },
                     {
                         strong: "7,9 M€",
-                        span: "subvention au logement social"
+                        span: "de subventions au logement social"
                     },
                     {
                         strong: "6,8 M€",
-                        span: "subventions pour l'accès au très haut débit"
+                        span: "de subventions pour l'accès au très haut débit"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DI-2'
