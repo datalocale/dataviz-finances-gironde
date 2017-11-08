@@ -73,7 +73,7 @@ export const urls = {
     // Vidéo de l'animation
     [ANIMATION_VIDEO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/26`,
-        "demo": '../videos/BLOUBLOU_V0.mp4',
+        "demo": '../videos/BLOUBLOU_V2_5.mp4',
         get development() { return this.demo }
     }[env],
 

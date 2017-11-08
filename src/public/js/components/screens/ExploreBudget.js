@@ -112,7 +112,11 @@ export function TotalBudget({
             React.createElement(
                 BudgetConstructionAnimation,
                 Object.assign(
-                    {videoURL: screenWidth <= 1000 ? animationVideo : undefined},
+                    {
+                        videoURL: process.env.NODE_ENV === 'production' ?
+                            animationVideo :    
+                            (screenWidth <= 1000 ? animationVideo : undefined)
+                    },
                     constructionAmounts
                 )
             )
