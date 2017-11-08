@@ -618,7 +618,7 @@ export default class BudgetConstructionAnimation extends React.Component {
                 ` Montrer la construction du budget`
             ),
             videoURL ? undefined : React.createElement('div', { className: 'text-area' }, ''),
-            React.createElement('hr'),
+            videoURL ? undefined : React.createElement('hr'),
             React.createElement('dl', {},
                 React.createElement('a', { className: 'column rf', href: '#!/finance-details/RF' },
                     React.createElement('dt', {}, 'Recettes de fonctionnement'),
