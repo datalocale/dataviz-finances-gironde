@@ -75,7 +75,11 @@ $spacing-3: $base-spacing*4;
                 color: black;
                 font-size: 1.2em;
                 font-weight: bold;
-                padding: 0.1em 1em ;
+                padding: 0.1em 1em;
+
+                .money-amount{
+                    white-space: nowrap;
+                }
             }
         }
 
