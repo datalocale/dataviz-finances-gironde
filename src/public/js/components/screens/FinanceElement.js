@@ -1,4 +1,4 @@
-import { Map as ImmutableMap, List } from 'immutable';
+import { Map as ImmutableMap, List, Set as ImmutableSet } from 'immutable';
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -226,7 +226,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
 
 
-export function makePartition(element, totalById, textsById){
+export function makePartition(element, totalById, textsById, possibleChildrenIds){
     if(!element){
         return new List();
     }
@@ -235,13 +235,17 @@ export function makePartition(element, totalById, textsById){
     children = children && typeof children.toList === 'function' ? children.toList() : children;
 
     return children && children.size >= 1 ? 
-        List(children)
-        .map(child => ({
-            contentId: child.id,
-            partAmount: totalById.get(child.id),
-            texts: textsById.get(child.id),
-            url: `#!/finance-details/${child.id}`
-        })) : 
+        possibleChildrenIds.map(id => {
+            // .find over all possibleChildrenIds is O(n²), but n is small (<= 10)
+            const child = children.find(c => c.id === id);
+
+            return {
+                contentId: id,
+                partAmount: child ? totalById.get(child.id) : 0,
+                texts: textsById.get(id),
+                url: `#!/finance-details/${id}`
+            };
+        }) : 
         List().push({
             contentId: element.id,
             partAmount: totalById.get(element.id),
@@ -333,23 +337,39 @@ export default connect(
 
         const contextList = makeContextList(element, childToParent);
 
-        const partitionByYear = m52InstructionByYear.map(m52i => {
-            const elementById = makeElementById(
+        const elementByIdByYear = m52InstructionByYear.map(m52i => {
+            return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined
             );
-
-            const yearElement = elementById.get(displayedContentId);
-
-            return makePartition(yearElement, elementById.map(e => e.total), textsById)
         });
 
-        const amountByYear = m52InstructionByYear.map((m52i) => {
-            const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
-                RDFI ? hierarchicalM52(m52i, RDFI): undefined
-            );
+        const displayedElementByYear = elementByIdByYear.map(elementById => {
+            return elementById.get(displayedContentId);
+        })
 
+        // Depending on the year, all elements may not have the same children ids.
+        // This is the set of all possible ids for the given years
+        const displayedElementPossibleChildrenIds = displayedElementByYear.map(element => {
+            if(!element)
+                return new ImmutableSet();
+
+            let children = element.children;
+            children = children && typeof children.toList === 'function' ? children.toList() : children;
+        
+            if(!children)
+                return new ImmutableSet();
+
+            return new ImmutableSet(children).map(child => child.id);
+        }).toSet().flatten().toList();
+
+        const partitionByYear = elementByIdByYear.map((elementById) => {
+            const yearElement = elementById.get(displayedContentId);
+
+            return makePartition(yearElement, elementById.map(e => e.total), textsById, displayedElementPossibleChildrenIds)
+        });
+
+        const amountByYear = elementByIdByYear.map((elementById) => {
             const yearElement = elementById.get(displayedContentId);
 
             return yearElement && yearElement.total;
