@@ -132,6 +132,7 @@ export function FocusSol({
             - les personnes en situation de handicap
             - les personnes âgées
             - les enfants 
+
             Le Département définit sa propre politique et les actions qu’il met en œuvre pour chacun de ces publics : hébergements, prestations, subventions, allocations.`),
             React.createElement(FocusDetail, {
                 className: 'insertion', 
@@ -147,7 +148,7 @@ export function FocusSol({
                         span: "de dépenses depuis 2012"
                     },
                     {
-                        strong: "229M€",
+                        strong: "229 M€",
                         span: "dédiés au RSA en 2016"
                     },
                     {
@@ -172,15 +173,15 @@ export function FocusSol({
 L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`, 
                 highlights: [
                     {
-                        strong: "73M€",
+                        strong: "73M €",
                         span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "122M€",
+                        strong: "122 M€",
                         span: "pour des places d’hébergement"
                     },
                     {
-                        strong: "8.25M€",
+                        strong: "8.25 M€",
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ], 
@@ -195,7 +196,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
-                        strong: "141.6M€",
+                        strong: "141.6 M€",
                         span: "versés en 2016 pour l’APA"
                     },
                     {
@@ -220,7 +221,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
 https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`, 
                 highlights: [
                     {
-                        strong: "166M€",
+                        strong: "166 M€",
                         span: "pour les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
