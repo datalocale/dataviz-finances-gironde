@@ -188,7 +188,7 @@ export function FocusSol({
                     },
                     {
                         strong: "6,8 M€",
-                        span: "de subventions pour la fibre optique"
+                        span: "de subventions pour l'accès au très haut débit"
                     }
                 ], 
                 moreUrl: '#!/finance-details/DI-2'
