@@ -237,6 +237,10 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
     let children = element.children;
     children = children && typeof children.toList === 'function' ? children.toList() : children;
 
+    if(!possibleChildrenIds){
+        possibleChildrenIds = children.map(c => c.id);
+    }
+
     return children && children.size >= 1 ? 
         possibleChildrenIds.map(id => {
             // .find over all possibleChildrenIds is O(n²), but n is small (<= 10)
