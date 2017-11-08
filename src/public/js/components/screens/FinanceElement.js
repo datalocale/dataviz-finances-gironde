@@ -116,7 +116,10 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
     const legendItemIds = barchartPartitionByYear
     .map(partition => partition.map(part => part.contentId).toSet())
-    .toSet().flatten().toArray();
+    .toSet().flatten().toArray()
+    .sort( (lid1, lid2) => {
+        return partitionIdsInOrder.indexOf(lid1) - partitionIdsInOrder.indexOf(lid2)
+    } );
     
     const legendItems = legendItemIds.map(id => {
         let found;
@@ -133,7 +136,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
             text: found.texts && found.texts.label,
             colorClassName: colorClassById.get(found.contentId)
         }
-    })
+    });
 
 
 
