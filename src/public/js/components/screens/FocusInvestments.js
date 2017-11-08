@@ -39,7 +39,7 @@ export function FocusSol({
 
     const focusDetailsDenominator = yearDIDetails ? yearDIDetails['DI-1'] + yearDIDetails['DI-2'] : NaN;
 
-    return React.createElement('article', {className: 'focus'},
+    return React.createElement('article', {className: 'focus invest'},
         React.createElement('section', {}, 
             React.createElement(PageTitle, {text: `Focus Investissements`}),
             React.createElement(Markdown, {}, 
@@ -85,7 +85,9 @@ export function FocusSol({
                     url: p.url, 
                     text: p.texts.label,
                     // .slice to keep 'DI-1' from 'DI-1-4'
-                    colorClassName: colorClassById.get(p.contentId.slice(0, 4))
+                    colorClassName: p.contentId === 'DI-2' ?
+                        colorClassById.get(p.contentId.slice(0, 4)) :
+                        p.contentId
                 })).toArray(),
                 yValueDisplay: makeAmountString
             }),
