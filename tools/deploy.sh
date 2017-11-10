@@ -6,6 +6,10 @@ git config user.email "bruant.d+travisci@gmail.com"
 git remote add upstream "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git"
 git fetch upstream && git reset upstream/$DEPLOY_TARGET_BRANCH
 
+PKG_VERSION=$(node -p 'require("./package.json").version')
+git tag "$PKG_VERSION+$TRAVIS_BUILD_ID"
+git push upstream --tags
+
 git add -A .
 git add -f build/*
 git commit -m "build of repo at commit https://github.com/$TRAVIS_REPO_SLUG/tree/$TRAVIS_COMMIT"
