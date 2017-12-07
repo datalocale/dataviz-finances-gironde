@@ -1,13 +1,12 @@
 language: node_js
-node_js: 6
+node_js: '6'
 
 cache:
   directories:
   - node_modules
 
-script:
+before_script:
 - npm run build-demo
-- npm test
 
 deploy:
   skip_cleanup: true
@@ -15,11 +14,3 @@ deploy:
   script: bash ./tools/deploy.sh
   on:
     branch: master
-    
-branches:
-  only:
-  - master
-
-# Need to configure env variables in Travis CI settings
-# * GH_TOKEN : personal access token with read/write access to the repo
-# * DEPLOY_TARGET_BRANCH : branch being pushed to after successful build
