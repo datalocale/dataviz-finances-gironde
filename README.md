@@ -27,6 +27,8 @@ Il faut (_forker_ et) _cloner_ ce dépôt pour procéder à l'installation des d
 npm install
 ```
 
+## Développer
+
 La commande suivante reconstruit les builds en continu, dès qu'un fichier source est modifié :
 
 ```bash
@@ -43,7 +45,7 @@ Deux adresses sont ensuite accessibles : [http://localhost:3000/]() et [http://l
 
 ## Intégration continue
 
-L'intégration continue est automatise les éléments suivants :
+L'intégration continue automatise les éléments suivants :
 
 * exécution des tests sur _chaque branche_ ;
 * déploiement de la [démo][] depuis _master_ ;
@@ -81,18 +83,34 @@ Le token créé est à renseigner dans la [configuration Travis CI](#configurer-
 
 ## Déploiement
 
-**Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
+### Pré-production et Production
 
-Il existe 3 environnements :
+Il faut créer manuellement un "media dataviz" dans le CMS gironde.fr.
+Il faut également créer un contenu de type "Code HTML5" où il faut coller le contenu du fichier `gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
 
-* gironde.fr où il faut créer manuellement dans le CMS un "media dataviz" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
-    * `npm run build-preprod` pour la preprod (media id `1938`)
-    * `npm run build-production` pour la preprod (media id `2459`)
-* démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
-* dévelopement (`npm run watch`)
+Ces fichiers sont contenus dans les `zip` suivants :
 
+| | Pré-production | Production |
+| --- | --- | --- |
+| Media ID | `1938`  | `2459`  |
+| [Release][releases] | `preprod.zip`  | `production.zip`  |
 
-Les artéfacts de build sont rendus créés dans le dossier `./build`.
+Ces archives sont automatiquement rendus disponibles dans l'[onglet GitHub Releases][releases].
+
+Ces artéfacts peuvent néanmoins être générés manuellement avec ces commandes (cf. [Installer le projet](#installer-le-projet)) :
+
+* `npm run build-preprod`
+* `npm run build-production`
+
+Les artéfacts nouvellement créés sont disponibles dans le répertoire `./build` du projet.
+
+### Démo
+
+La [démo][] est déployée automatiquement.
+
+Ses artéfacts peuvent néanmoins être générés manuellement avec la commande (cf. [Installer le projet](#installer-le-projet)): `npm run build-demo:public`.
+
+Les artéfacts nouvellement créés sont disponibles dans le répertoire `./build` du projet.
 
 ### Convertir l'image de fond de la page d'accueil
 
