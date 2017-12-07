@@ -24,7 +24,7 @@ export default function({
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
         selection,
-        onM52NodeOvered, onAggregatedNodeOvered, 
+        onM52NodeOvered, onAggregatedNodeOvered,
         onM52NodeSelected, onAggregatedNodeSelected,
         onRDFIChange, onAggregatedDFViewChange,
         onNewM52CSVFile
@@ -32,7 +32,7 @@ export default function({
 
     return m52Instruction ? React.createElement('div', {className: 'top-level'},
         React.createElement(
-            DepartmentFinanceHeader, 
+            DepartmentFinanceHeader,
             {
                 department: m52Instruction.département,
                 year: m52Instruction.year,
@@ -53,21 +53,25 @@ export default function({
         ),
         React.createElement('div', {},
             React.createElement(M52Viz, {
-                M52Hierarchical, 
+                M52Hierarchical,
                 M52HighlightedNodes,
                 selectedNode: selection && selection.type === M52_INSTRUCTION ? selection.node : undefined,
                 onSliceOvered: onM52NodeOvered,
-                onSliceSelected: onM52NodeSelected
+                onSliceSelected: onM52NodeSelected,
+                width: 450,
+                height: 450,
             }),
             React.createElement(RDFISelector, { rdfi, onRDFIChange }),
             React.createElement(AggregatedViz, {
-                aggregatedHierarchical, 
+                aggregatedHierarchical,
                 aggregatedHighlightedNodes,
                 selectedNode: selection && selection.type === AGGREGATED_INSTRUCTION ? selection.node : undefined,
                 rdfi, dfView,
                 onSliceOvered: onAggregatedNodeOvered,
                 onSliceSelected: onAggregatedNodeSelected,
-                onAggregatedDFViewChange
+                onAggregatedDFViewChange,
+                width: 450,
+                height: 450,
             })
         ),
         selection ? React.createElement(TextualSelected, {selection}) : undefined,
