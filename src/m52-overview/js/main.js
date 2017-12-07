@@ -167,7 +167,7 @@ function mapStateToProps(state){
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    if (!aggregatedInstruction) {
+    if (!m52Instruction) {
         return {};
     }
 
