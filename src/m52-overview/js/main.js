@@ -167,10 +167,6 @@ function mapStateToProps(state){
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    if (!m52Instruction) {
-        return {};
-    }
-
     const aggregatedInstruction = m52ToAggregated(m52Instruction, corrections);
     const M52Hierarchical = hierarchicalM52(m52Instruction, rdfi);
 
