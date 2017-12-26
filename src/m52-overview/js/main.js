@@ -6,8 +6,15 @@ import { connect, Provider } from 'react-redux';
 
 import {hierarchicalM52, hierarchicalAggregated, m52ToAggregated} from '../../shared/js/finance/memoized';
 import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
+import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from '../../public/js/constants/resources';
 import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
+import {
+    M52_INSTRUCTION_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
+    FINANCE_DETAIL_ID_CHANGE,
+} from '../../public/js/constants/actions';
 
 import TopLevel from './components/TopLevel.js';
 
@@ -16,24 +23,28 @@ function reducer(state, action){
     const {type} = action;
 
     switch(type){
+    case CORRECTION_AGGREGATION_RECEIVED: {
+        const {corrections} = action;
+        return state.set('corrections', corrections);
+    }
     case 'M52_INSTRUCTION_RECEIVED':
         return state.set('M52Instruction', action.m52Instruction);
     case 'M52_INSTRUCTION_USER_NODE_OVERED':
         return state
-            .set('over', action.node ? 
+            .set('over', action.node ?
                 new InstructionNodeRecord({
                     type: M52_INSTRUCTION,
                     node: action.node
-                }) : 
+                }) :
                 undefined
             );
     case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
         return state
-            .set('over', action.node ? 
+            .set('over', action.node ?
                 new InstructionNodeRecord({
                     type: AGGREGATED_INSTRUCTION,
                     node: action.node
-                }) : 
+                }) :
                 undefined
             );
     case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
@@ -41,11 +52,11 @@ function reducer(state, action){
         const {node: alreadySelectedNode} = state.set('selection') || {};
 
         return state
-            .set('selection', node && node !== alreadySelectedNode ? 
+            .set('selection', node && node !== alreadySelectedNode ?
                 new InstructionNodeRecord({
                     type: M52_INSTRUCTION,
                     node
-                }) : 
+                }) :
                 undefined
             );
     }
@@ -54,11 +65,11 @@ function reducer(state, action){
         const {node: alreadySelectedNode} = state.set('selection') || {};
 
         return state
-            .set('selection', node && node !== alreadySelectedNode ? 
+            .set('selection', node && node !== alreadySelectedNode ?
                 new InstructionNodeRecord({
                     type: AGGREGATED_INSTRUCTION,
                     node
-                }) : 
+                }) :
                 undefined
             );
     }
@@ -97,7 +108,7 @@ function findSelectedNodeAncestors(tree, selectedNode){
         }
         return new ImmutableSet(result);
     }
-    
+
     let ret;
 
     if(tree.children){
@@ -140,6 +151,7 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
 
 function mapStateToProps(state){
     const m52Instruction = state.get('M52Instruction');
+    const corrections = state.get('corrections');
     const rdfi = state.get('RDFI');
     const view = state.get('DF_VIEW');
     const over = state.get('over');
@@ -155,9 +167,9 @@ function mapStateToProps(state){
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    const aggregatedInstruction = m52ToAggregated(m52Instruction);
+    const aggregatedInstruction = m52ToAggregated(m52Instruction, corrections);
     const M52Hierarchical = hierarchicalM52(m52Instruction, rdfi);
-    
+
     const aggregatedHierarchical = hierarchicalAggregated(aggregatedInstruction);
 
     const rdNode = [...aggregatedHierarchical.children].find(c => c.id === expOrRev);
@@ -165,11 +177,11 @@ function mapStateToProps(state){
 
     if(rdfi === 'DF'){
         switch(view){
-            case PAR_PUBLIC_VIEW: 
+            case PAR_PUBLIC_VIEW:
                 // per public is DF-2, so remove DF-1
                 rdfiNode = rdfiNode.removeIn(['children', 0]);
-                break;   
-            case PAR_PRESTATION_VIEW: 
+                break;
+            case PAR_PRESTATION_VIEW:
                 // per prestation is DF-1, so remove DF-2
                 rdfiNode = rdfiNode.removeIn(['children', 1]);
                 break;
@@ -181,7 +193,7 @@ function mapStateToProps(state){
     let M52HighlightedNodes;
     let aggregatedHighlightedNodes;
 
-    
+
     if(mainHighlightType === M52_INSTRUCTION){
         M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
         aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(rdfiNode, Array.from(mainHighlightNode.elements))
@@ -267,6 +279,7 @@ const InstructionNodeRecord = Record({
 
 const StoreRecord = Record({
     M52Instruction: undefined,
+    corrections: undefined,
     selection: undefined,
     over: undefined,
     RDFI: undefined,
@@ -282,12 +295,21 @@ const store = createStore(
 );
 
 
-fetch('./data/finances/cedi_2015_CA.csv').then(resp => resp.text())
+fetch(urls[COMPTE_ADMINISTRATIF](2016)).then(resp => resp.text())
     .then(csvStringToM52Instructions)
     .then(m52Instruction => {
         store.dispatch({
             type: 'M52_INSTRUCTION_RECEIVED',
             m52Instruction,
+        });
+    });
+
+fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
+    .then(csvStringToCorrections)
+    .then(corrections => {
+        store.dispatch({
+            type: CORRECTION_AGGREGATION_RECEIVED,
+            corrections
         });
     });
 
@@ -299,4 +321,3 @@ ReactDOM.render(
     ),
     document.querySelector('.react-container')
 );
-

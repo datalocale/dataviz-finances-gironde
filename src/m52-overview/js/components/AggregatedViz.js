@@ -13,27 +13,28 @@ interface AggregatedViZProps{
 */
 export default function({
     aggregatedHierarchical, aggregatedHighlightedNodes, selectedNode,
-    rdfi, dfView, 
-    onSliceOvered, onSliceSelected, onAggregatedDFViewChange
+    rdfi, dfView,
+    onSliceOvered, onSliceSelected, onAggregatedDFViewChange,
+    width, height,
     }){
 
     return React.createElement('div', {},
         React.createElement('h1', {}, 'Instruction agrégée'),
         (rdfi === 'DF' ? React.createElement(
-            'div', 
+            'div',
             {
                 className: 'view-selector',
                 onChange: e => {
                     onAggregatedDFViewChange(e.currentTarget.querySelector('input[type="radio"][name="view"]:checked').value)
                 }
             },
-            React.createElement('label', {}, 
+            React.createElement('label', {},
                 'Actions par public ',
                 React.createElement('input',
                     {name: 'view', value: PAR_PUBLIC_VIEW, type: "radio", defaultChecked: dfView === PAR_PUBLIC_VIEW}
                 )
             ),
-            React.createElement('label', {}, 
+            React.createElement('label', {},
                 'Actions par prestation ',
                 React.createElement('input',
                     {name: 'view', value: PAR_PRESTATION_VIEW, type: "radio", defaultChecked: dfView === PAR_PRESTATION_VIEW}
@@ -41,10 +42,11 @@ export default function({
             )
         ) : undefined),
         React.createElement(Sunburst, {
-            hierarchicalData: aggregatedHierarchical, 
+            hierarchicalData: aggregatedHierarchical,
             highlightedNodes: aggregatedHighlightedNodes, selectedNode,
             donutWidth: 55, outerRadius: 120,
-            onSliceOvered, onSliceSelected
+            onSliceOvered, onSliceSelected,
+            height, width
         })
     );
 }
