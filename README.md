@@ -66,7 +66,7 @@ Deux variables d'environnement doivent être configurées dans l'[onglet Setting
 
 | Name | Value | Display value in build logs |
 | --- | --- | --- |
-| `GH_TOKEN` | _voir [Générer un token](#générer-un-token)_ | ⚠️ **Off** ⚠️ |
+| `GH_TOKEN` | _voir [Générer un token](#générer-un-token)_ | **Off** |
 | `DEPLOY_TARGET_BRANCH` | gh-pages | _On_ |
 
 ![](docs/ci-settings.png)
