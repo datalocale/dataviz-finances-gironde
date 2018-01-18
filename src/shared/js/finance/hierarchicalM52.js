@@ -1,5 +1,7 @@
 import { Map as ImmutableMap, Set as ImmutableSet } from 'immutable';
 
+import { isOR } from './rowFilters';
+
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
 const rubriqueIdToLabel = require('./m52FonctionLabels.json'); 
@@ -31,7 +33,9 @@ const levelCategories = [
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
  */
 export default function({rows}, RDFI) {
-    rows = rows.filter(row => {
+    rows = rows
+    .filter(isOR)
+    .filter(row => {
         return row['Dépense/Recette'] === RDFI[0] && row['Investissement/Fonctionnement'] === RDFI[1];
     });
     
