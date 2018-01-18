@@ -4,11 +4,7 @@ node_modules
 
 *-bundle.js
 
-notes.md
-
 build/
-
-data/finances/*.xml
 
 # temporary
 data/*.pdf
