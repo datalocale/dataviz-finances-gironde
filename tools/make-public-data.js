@@ -98,7 +98,9 @@ mkdir(BUILD_FINANCE_DIR)
 
                 const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
                 .filter(l => 
+                    // Garder seulement les ordres réels
                     l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0' && 
+                    // ... et les lignes dont le montant n'est pas nul
                     Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) > 0
                 )
                 .map(l => {
