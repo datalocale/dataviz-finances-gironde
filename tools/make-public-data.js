@@ -1,6 +1,7 @@
 import {join} from 'path';
 import * as fs from 'fs-extra';
 import {DOMParser} from 'xmldom';
+import {sum} from 'd3-array';
 
 const {mkdir, readFile, writeFile} = fs;
 
@@ -64,6 +65,10 @@ const natureToSectionP = readFile(join(SOURCE_FINANCE_DIR, 'planDeCompte-2017.xm
 })
 
 
+function rowId({RD, fonction, nature}){
+    return `${RD}-${fonction}-${nature}`;
+}
+
 
 mkdir(BUILD_FINANCE_DIR)
 .catch(err => {
@@ -86,35 +91,67 @@ mkdir(BUILD_FINANCE_DIR)
             return (new DOMParser()).parseFromString(str, "text/xml");
         })
         .then(doc => {
+            const BlocBudget = doc.getElementsByTagName('BlocBudget')[0];
 
             return natureToSectionP.then(natureToSection => {
-                // TODO merge amounts of same RD/nat/fonc rows
+                const xmlRowsById = new Map();
+
+                const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
+                .filter(l => 
+                    l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0' && 
+                    Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) > 0
+                )
+                .map(l => {
+                    const ret = {};
+
+                    ['Nature', 'Fonction', 'CodRD', 'MtReal'].forEach(key => {
+                        ret[key] = l.getElementsByTagName(key)[0].getAttribute('V')
+                    })
+
+                    ret['MtReal'] = Number(ret['MtReal']);
+                    ret['FI'] = natureToSection(ret['Nature'], ret['CodRD'])
+
+                    return ret;
+                })
+
+                for(const r of lignes){
+                    const id = rowId({
+                        RD: r['CodRD'],
+                        fonction: r['Fonction'],
+                        nature: r['Nature']
+                    });
+            
+                    const idRows = xmlRowsById.get(id) || [];
+                    idRows.push(r);
+                    xmlRowsById.set(id, idRows);
+                }
+
                 return {
-                    rows: Array.from(doc.getElementsByTagName('LigneBudget'))
-                        .filter(l => 
-                            l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0' && 
-                            Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) > 0
+                    LibelleColl: doc.getElementsByTagName('LibelleColl')[0].getAttribute('V'),
+                    Nomenclature: doc.getElementsByTagName('Nomenclature')[0].getAttribute('V'),
+                    NatDec: BlocBudget.getElementsByTagName('NatDec')[0].getAttribute('V'),
+                    Exer: Number(BlocBudget.getElementsByTagName('Exer')[0].getAttribute('V')),
+                    IdColl: doc.getElementsByTagName('IdColl')[0].getAttribute('V'),
+
+                    rows: Array.from(xmlRowsById.values())
+                    .map(xmlRows => {
+                        const amount = sum(xmlRows.map(r => Number(r['MtReal'])))
+                        const r = xmlRows[0];
+    
+                        return Object.assign(
+                            {},
+                            r,
+                            {'MtReal': amount}
                         )
-                        .map(l => {
-                            const ret = {};
-
-                            ['Nature', 'Fonction', 'CodRD', 'MtReal'].forEach(key => {
-                                ret[key] = l.getElementsByTagName(key)[0].getAttribute('V')
-                            })
-
-                            ret['MtReal'] = Number(ret['MtReal']);
-                            ret['FI'] = natureToSection(ret['Nature'], ret['CodRD'])
-
-                            return ret;
-                        })
+                    })
                 }
 
             })
 
         })
-        .then( docBudg => JSON.stringify(docBudg, null, 3) )
-        .then(str => writeFile(join(BUILD_FINANCE_DIR, f.replace('.xml', '.json')), str, 'utf-8'))
     }))
+    .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
+    .then(str => writeFile(join(BUILD_FINANCE_DIR, 'doc-budgs.json'), str, 'utf-8'))
 
 })
 .catch(err => {
