@@ -1,7 +1,3 @@
-import {csvParse} from 'd3-dsv';
-import {OrderedSet as ImmutableSet} from 'immutable';
-
-import {M52RowRecord, M52Instruction} from './M52InstructionDataStructures';
 
 /**
  * rows : array of objects.
@@ -32,22 +28,4 @@ export function cleanup(rows){
     });
 
     return rows;
-}
-
-export default function(csvString){
-    const rows = csvParse(csvString);
-    const cleanRows = cleanup(rows);
-
-    const firstRow = cleanRows[0];
-    const year = firstRow['Exercice'];
-    const type = firstRow['Type fichier'];
-
-    return new M52Instruction({
-        // sadly harcoded for now, because cannot be inferred from the data
-        'département': 33,
-        year,
-        type,
-        rows: ImmutableSet( cleanRows.map(M52RowRecord) )
-    });
-
 }

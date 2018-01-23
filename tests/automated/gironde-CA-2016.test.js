@@ -1,11 +1,13 @@
+import {Set as ImmutableSet} from 'immutable'
+
 import {readFileSync} from 'fs'
 import {join} from 'path'
 
 import * as matchers from 'jest-immutable-matchers';
 
+import { DocumentBudgetaire, LigneBudgetRecord } from '../../src/shared/js/finance/DocBudgDataStructures';
 import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
 import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
-import csvStringToM52Instructions from '../../src/shared/js/finance/csvStringToM52Instructions.js';
 import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections.js';
 
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
@@ -15,8 +17,13 @@ const corrections = csvStringToCorrections(readFileSync(join(__dirname, '../../d
 
 jest.addMatchers(matchers);
 
-const csv2016 = readFileSync(join(__dirname, '../../data/finances/cedi_2016_CA.csv'), {encoding: 'utf-8'});
-const docBudg2016 = csvStringToM52Instructions(csv2016);
+const docBudgs = require('../../build/finances/doc-budgs.json').map(d => {
+    d.rows = new ImmutableSet( d.rows.map(LigneBudgetRecord) )
+    return DocumentBudgetaire(d)
+});
+const docBudg2016 = docBudgs.find(db => db['Exer'] === 2016);
+//console.log('2016', docBudg2016);
+
 const aggregated2016 = m52ToAggregated(docBudg2016, corrections);
 const hierAgg2016 = hierarchicalAggregated(aggregated2016);
 

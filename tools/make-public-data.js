@@ -110,6 +110,8 @@ mkdir(BUILD_FINANCE_DIR)
                         ret[key] = l.getElementsByTagName(key)[0].getAttribute('V')
                     })
 
+                    throw `TODO add Chapitres`
+
                     ret['MtReal'] = Number(ret['MtReal']);
                     ret['FI'] = natureToSection(ret['Nature'], ret['CodRD'])
 

@@ -6,7 +6,9 @@ import { OrderedSet as ImmutableSet } from 'immutable';
 import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
 import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections';
 import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
-import { M52RowRecord, M52Instruction } from '../../src/shared/js/finance/M52InstructionDataStructures';
+
+import { LigneBudgetRecord, DocumentBudgetaire } from '../../src/shared/js/finance/DocBudgDataStructures';
+
 import { EXPENDITURES } from '../../src/shared/js/finance/constants';
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';
 
@@ -18,18 +20,17 @@ test('hierarchicalAggregated returns a node when passed dummy valid arguments', 
     const AMOUNT = 1037;
 
     // DF-3-1
-    const m52Row = new M52RowRecord({
-        'Dépense/Recette': 'D',
-        'Investissement/Fonctionnement': 'F',
-        'Réel/Ordre id/Ordre diff': 'OR',
-        'Chapitre': 'C65',
-        'Article': 'A6553',
-        'Rubrique fonctionnelle': 'R12',
-        'Montant': AMOUNT
+    const m52Row = new LigneBudgetRecord({
+        'CodRD': 'D',
+        'FI': 'F',
+        'Chapitre': '65',
+        'Nature': '6553',
+        'Fonction': '12',
+        'MtReal': AMOUNT
     });
 
-    const m52instruction = new M52Instruction({ rows: new ImmutableSet([m52Row]) }, corrections);
-    const aggregatedVision = m52ToAggregated(m52instruction);
+    const docBudg = new DocumentBudgetaire({ rows: new ImmutableSet([m52Row]) }, corrections);
+    const aggregatedVision = m52ToAggregated(docBudg);
 
     const hierAgg = hierarchicalAggregated(aggregatedVision);
 
@@ -41,20 +42,19 @@ test('hierarchicalAggregated returns a node when passed dummy valid arguments', 
 
 
 test('a row that appears in both DF-1 and DF-2 should be counted only once in total expenditures', () => {
-    const AMOUNT = 1037;
+    const AMOUNT = 1038;
 
-    const solidarityM52Row = new M52RowRecord({
-        'Dépense/Recette': 'D',
-        'Investissement/Fonctionnement': 'F',
-        'Réel/Ordre id/Ordre diff': 'OR',
-        'Chapitre': 'C65',
-        'Article': 'A652412',
-        'Rubrique fonctionnelle': 'R51',
-        'Montant': AMOUNT
+    const solidarityM52Row = new LigneBudgetRecord({
+        'CodRD': 'D',
+        'FI': 'F',
+        'Chapitre': '65',
+        'Nature': '652412',
+        'Fonction': '51',
+        'MtReal': AMOUNT
     });
 
-    const m52instruction = new M52Instruction({ rows: new ImmutableSet([solidarityM52Row]) });
-    const aggregatedVision = m52ToAggregated(m52instruction, corrections);
+    const docBudg = new DocumentBudgetaire({ rows: new ImmutableSet([solidarityM52Row]) });
+    const aggregatedVision = m52ToAggregated(docBudg, corrections);
 
     const hierAgg = hierarchicalAggregated(aggregatedVision);
     

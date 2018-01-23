@@ -2,7 +2,7 @@ import {Set} from 'immutable';
 
 import {csvParse} from 'd3-dsv';
 import {cleanup} from './csvStringToM52Instructions.js';
-import {SplitM52RowRecord} from './M52InstructionDataStructures.js';
+import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
 
 export default function(csvString){
     const rows = csvParse(csvString);
@@ -15,7 +15,7 @@ export default function(csvString){
             c
         )
     }))
-    .map(c => new SplitM52RowRecord(c));
+    .map(c => new SplitLigneBudgetRecord(c));
 
     return new Set(corrections);
 
