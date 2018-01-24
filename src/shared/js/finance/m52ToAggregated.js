@@ -580,10 +580,10 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 (
-                    chap === 'C012' ||
+                    chap === '012' ||
                     (
                         (art.startsWith('64') || art === '6218' || art === '6336') &&
-                        (chap === 'C015' || chap === 'C016' || chap === 'C017')
+                        (chap === '015' || chap === '016' || chap === '017')
                     )
                 ) && 
                 !(art.startsWith('64') && f2 === '51') &&
@@ -756,7 +756,7 @@ export const rules = Object.freeze({
                 article !== '204' && 
                 (
                     ["165", "1676", "454121", "454421", "454428", "45821", '1335', '1345'].includes(article) ||
-                    ['C20', 'C21', 'C22', 'C23', 'C26', 'C27'].includes(m52Row['Chapitre'])
+                    ['20', '21', '22', '23', '26', '27'].includes(m52Row['Chapitre'])
                 )
         }
     },

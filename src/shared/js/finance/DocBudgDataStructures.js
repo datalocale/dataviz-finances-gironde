@@ -5,6 +5,7 @@ import { Record } from 'immutable';
     http://odm-budgetaire.org/doc-schema/Class_Budget_xsd_Complex_Type_TBudget.html#TBudget_LigneBudget
 
     'FI' has been added and refers to 'Fonctionnement/Investissement'
+    'Chapitre' was added as well
 */
 const LigneBudgetKeys = {
     'Nature': undefined,

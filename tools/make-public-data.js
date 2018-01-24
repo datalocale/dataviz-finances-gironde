@@ -60,7 +60,10 @@ const natureToSectionP = readFile(join(SOURCE_FINANCE_DIR, 'planDeCompte-2017.xm
         if(!section)
             console.warn('No section for', RD, nature, chapitreCode);
 
-        return section
+        return {
+            section,
+            Chapitre: chapitreCode
+        }
     }
 })
 
@@ -93,7 +96,7 @@ mkdir(BUILD_FINANCE_DIR)
         .then(doc => {
             const BlocBudget = doc.getElementsByTagName('BlocBudget')[0];
 
-            return natureToSectionP.then(natureToSection => {
+            return natureToSectionP.then(natureToChapitreSection => {
                 const xmlRowsById = new Map();
 
                 const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
@@ -110,10 +113,11 @@ mkdir(BUILD_FINANCE_DIR)
                         ret[key] = l.getElementsByTagName(key)[0].getAttribute('V')
                     })
 
-                    throw `TODO add Chapitres`
-
                     ret['MtReal'] = Number(ret['MtReal']);
-                    ret['FI'] = natureToSection(ret['Nature'], ret['CodRD'])
+                    
+                    const {section, Chapitre} = natureToChapitreSection(ret['Nature'], ret['CodRD'])
+                    ret['FI'] = section
+                    ret['Chapitre'] = Chapitre
 
                     return ret;
                 })
