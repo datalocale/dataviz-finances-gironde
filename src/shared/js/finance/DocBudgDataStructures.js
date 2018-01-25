@@ -22,7 +22,8 @@ export const LigneBudgetRecord = Record(LigneBudgetKeys);
 export const SplitLigneBudgetRecord = Record(Object.assign(
     {
         // this field represents the id of the aggregated set the split line belongs to
-        splitFor: undefined
+        splitFor: undefined,
+        'Exer': undefined
     },
     LigneBudgetKeys
 ))

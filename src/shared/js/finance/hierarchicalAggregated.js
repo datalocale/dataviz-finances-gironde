@@ -150,11 +150,7 @@ export const levels = {
                                 }
                             ]
                         },
-                        {
-                            id: 'DF-7',
-                            label: "Frais généraux",
-                            children: ruleIds.filter(id => id.startsWith('DF-7-'))
-                        }
+                        'DF-7',
                     ]
                 },
                 {

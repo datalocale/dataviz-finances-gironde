@@ -1,12 +1,23 @@
 import {Set} from 'immutable';
 
 import {csvParse} from 'd3-dsv';
-import {cleanup} from './csvStringToM52Instructions.js';
 import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
+
+export function format(rows){
+
+    rows.forEach(function(row){
+        row["MtReal"] = Number(row["MtReal"]);
+        row["Exer"] = Number(row["Exer"]);
+        
+        Object.freeze(row);
+    });
+
+    return rows;
+}
 
 export default function(csvString){
     const rows = csvParse(csvString);
-    const corrections = cleanup(rows.map(c => {
+    const corrections = format(rows.map(c => {
         return Object.assign(
             {
                 'Type nomenclature': 'M52',

@@ -652,10 +652,10 @@ export const rules = Object.freeze({
             const art = m52Row['Nature'];
 
             return isDF(m52Row) && 
-                art.startsWith('A63') &&
+                art.startsWith('63') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
-                art !== 'A6336';
+                art !== '6336';
         }
     },
     'DF-6-2': { 
@@ -709,7 +709,7 @@ export const rules = Object.freeze({
                 !(['4', '5', '8'].includes(f1));
         }
     },
-    'DF-7-1': { 
+    'DF-7': { 
         label: "Intérêts des emprunts",
         filter(m52Row){
             return isDF(m52Row) && m52Row['Nature'].startsWith('66');
@@ -1031,7 +1031,7 @@ function makeAggregatedInstructionRowRecord(id, rows, corrections){
 
 export default function convert(docBudg, corrections = []){
 
-    const yearCorrections = corrections.filter(c => c['Exercice'] === docBudg['Exer']);
+    const yearCorrections = corrections.filter(c => c['Exer'] === docBudg['Exer']);
 
     return ImmutableSet(
         Object.keys(rules)

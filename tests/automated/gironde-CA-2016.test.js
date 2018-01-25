@@ -30,7 +30,7 @@ const hierAgg2016 = hierarchicalAggregated(aggregated2016);
 const hierAgg2016Elements = flattenTree(hierAgg2016);
 
 function isSplitRow(r){
-    return r['Article'] === 'A65111' && r['Rubrique fonctionnelle'] === 'R51';
+    return r['Nature'] === '65111' && r['Fonction'] === '51';
 }
 
 const MILLION = 1000000;
@@ -107,10 +107,64 @@ test(`Pour le CA 2016 de la Gironde, RF devrait représenter ~1527,4 millions d'
  * DF
  */
 
+test(`Pour le CA 2016 de la Gironde, DF-3 devrait représenter ~219,2 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-3')
+
+    expect(df1.total/MILLION).toBeCloseTo(219200000/MILLION, 1);
+});
+
 test(`Pour le CA 2016 de la Gironde, DF-4 devrait représenter ~212,4 millions d'euros`, () => {
     const df1 = hierAgg2016Elements.find(e => e.id === 'DF-4')
 
     expect(df1.total/MILLION).toBeCloseTo(212400000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-5 devrait représenter ~35,1 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-5')
+
+    expect(df1.total/MILLION).toBeCloseTo(35100000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6-1-1 devrait représenter ~4,5 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6-1-1')
+
+    expect(df1.total/MILLION).toBeCloseTo(4500000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6-1-2 devrait représenter ~14,4 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6-1-2')
+
+    expect(df1.total/MILLION).toBeCloseTo(14400000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6-1-3 devrait représenter ~12,6 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6-1-3')
+
+    expect(df1.total/MILLION).toBeCloseTo(12600000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6-1-4 devrait représenter ~232590 d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6-1-4')
+
+    expect(df1.total/MILLION).toBeCloseTo(235000/MILLION, 4);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6-1 devrait représenter ~31,7 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6-1')
+
+    expect(df1.total/MILLION).toBeCloseTo(31700000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-6 devrait représenter ~49,1 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-6')
+
+    expect(df1.total/MILLION).toBeCloseTo(49100000/MILLION, 1);
+});
+
+test(`Pour le CA 2016 de la Gironde, DF-7 devrait représenter ~16,3 millions d'euros`, () => {
+    const df1 = hierAgg2016Elements.find(e => e.id === 'DF-7')
+
+    expect(df1.total/MILLION).toBeCloseTo(16300000/MILLION, 1);
 });
 
 test(`Pour le CA 2016 de la Gironde, DF-2-2 devrait représenter ~207,3 millions d'euros`, () => {
@@ -178,10 +232,10 @@ test('Pour le CA 2016 de la Gironde, la ligne DF R51 A65111 est présente dans D
     const splitRow15 = df15.elements.first()['M52Rows'].find(isSplitRow);
     
     expect(splitRow113).toBeDefined();
-    expect(splitRow113['Montant']).toBe(12483401.83);
+    expect(splitRow113['MtReal']).toBe(12483401.83);
     
     expect(splitRow15).toBeDefined();
-    expect(splitRow15['Montant']).toBe(4084422.79);
+    expect(splitRow15['MtReal']).toBe(4084422.79);
 });
 
 
