@@ -104,7 +104,7 @@ mkdir(BUILD_FINANCE_DIR)
                     // Garder seulement les ordres réels
                     l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0' && 
                     // ... et les lignes dont le montant n'est pas nul
-                    Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) > 0
+                    Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) !== 0
                 )
                 .map(l => {
                     const ret = {};
