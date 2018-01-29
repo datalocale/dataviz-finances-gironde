@@ -4,7 +4,7 @@ import {sum} from 'd3-array';
 
 import {isOR} from '../../../shared/js/finance/rowFilters';
 import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
-import {makeM52RowId} from '../../../shared/js/finance/M52InstructionDataStructures';
+import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructures';
 import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
@@ -67,7 +67,7 @@ function makeDF12Diffs(aggregatedInstruction){
 
     const weightedById = new Map();
     weightedDF1Rows.forEach(r => {
-        const id = makeM52RowId(r);
+        const id = makeLigneBudgetId(r);
 
         let elements = weightedById.get(id);
         if(!elements){
@@ -83,7 +83,7 @@ function makeDF12Diffs(aggregatedInstruction){
     weightedById.forEach((elements, id) => {
         const total = sum(elements.map(r => r['Montant']*r.weight))
 
-        const corresponding = onlyDF2.find(r => makeM52RowId(r) === id);
+        const corresponding = onlyDF2.find(r => makeLigneBudgetId(r) === id);
         
         if(corresponding['Montant'] - total <= 0.01){
             elements.forEach(e => {
@@ -142,7 +142,7 @@ export default class TextualSelected extends React.PureComponent{
             React.createElement('div', {}, 
                 React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
                 React.createElement('table', {}, unusedM52Set.map(m52 => {
-                    const m52Id = makeM52RowId(m52);
+                    const m52Id = makeLigneBudgetId(m52);
 
                     return React.createElement('tr', {key: m52Id}, 
                         React.createElement('td', {}, m52Id),
@@ -153,7 +153,7 @@ export default class TextualSelected extends React.PureComponent{
             React.createElement('div', {}, 
                 React.createElement('h1', {}, "Lignes M52 utilisées dans au moins 2 formules d'aggrégation ("+usedMoreThanOnceM52RowsSet.size+")"),
                 React.createElement('ul', {}, Array.from(usedMoreThanOnceM52RowsSet).map(([m52Row, aggSet]) => {
-                    const m52Id = makeM52RowId(m52Row);
+                    const m52Id = makeLigneBudgetId(m52Row);
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
@@ -166,7 +166,7 @@ export default class TextualSelected extends React.PureComponent{
             React.createElement('div', {}, 
                 React.createElement('h1', {}, "Lignes M52 utilisées dans DF-1, mais pas dans DF-2 ("+onlyDF1.size+")"),
                 React.createElement('ul', {}, Array.from(onlyDF1).map(m52Row => {
-                    const m52Id = makeM52RowId(m52Row);
+                    const m52Id = makeLigneBudgetId(m52Row);
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
@@ -177,7 +177,7 @@ export default class TextualSelected extends React.PureComponent{
             React.createElement('div', {}, 
                 React.createElement('h1', {}, "Lignes M52 utilisées dans DF-2, mais pas dans DF-1 ("+onlyDF2.size+")"),
                 React.createElement('ul', {}, Array.from(onlyDF2).map(m52Row => {
-                    const m52Id = makeM52RowId(m52Row);
+                    const m52Id = makeLigneBudgetId(m52Row);
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
@@ -187,4 +187,4 @@ export default class TextualSelected extends React.PureComponent{
             )        
         );
     }
-};
+}

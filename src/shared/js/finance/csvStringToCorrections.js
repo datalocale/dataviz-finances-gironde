@@ -20,7 +20,6 @@ export default function(csvString){
     const corrections = format(rows.map(c => {
         return Object.assign(
             {
-                'Type nomenclature': 'M52',
                 splitFor: c['Identifiant agrégé']
             },
             c
