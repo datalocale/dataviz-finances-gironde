@@ -30,7 +30,7 @@ export default class TextualSelected extends React.PureComponent{
 
                         return React.createElement('tr', {key: m52Id+i},
                             React.createElement('td', {}, m52Id),
-                            React.createElement('td', {className: 'money-amount'}, format(m52['Montant'], { code: 'EUR' }))
+                            React.createElement('td', {className: 'money-amount'}, format(m52['MtReal'], { code: 'EUR' }))
                         );
                     })
                 )

@@ -2,14 +2,13 @@ import React from 'react';
 import {format} from 'currency-formatter';
 import {sum} from 'd3-array';
 
-import {isOR} from '../../../shared/js/finance/rowFilters';
 import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
 import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructures';
 import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
     return rows.filter(m52row => {
-        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row)) && isOR(m52row);
+        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row));
     })
 }
 
@@ -81,11 +80,11 @@ function makeDF12Diffs(aggregatedInstruction){
     let onlyDF2 = df2M52Rows.subtract(df1M52Rows);
 
     weightedById.forEach((elements, id) => {
-        const total = sum(elements.map(r => r['Montant']*r.weight))
+        const total = sum(elements.map(r => r['MtReal']*r.weight))
 
         const corresponding = onlyDF2.find(r => makeLigneBudgetId(r) === id);
         
-        if(corresponding['Montant'] - total <= 0.01){
+        if(corresponding['MtReal'] - total <= 0.01){
             elements.forEach(e => {
                 onlyDF1 = onlyDF1.remove(e)
             })
@@ -111,8 +110,8 @@ interface TextualAggregated{
 export default class TextualSelected extends React.PureComponent{
 
     render(){
-        const {aggregatedInstruction, m52Instruction} = this.props;
-        const m52Rows = m52Instruction.rows;
+        const {aggregatedInstruction, documentBudgetaire} = this.props;
+        const m52Rows = documentBudgetaire.rows;
 
         const unusedM52Set = makeUnusedM52RowsSet(aggregatedInstruction, m52Rows);
         const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, m52Rows);
@@ -146,7 +145,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('tr', {key: m52Id}, 
                         React.createElement('td', {}, m52Id),
-                        React.createElement('td', {className: 'money-amount'}, format(m52["Montant"], { code: 'EUR' }))
+                        React.createElement('td', {className: 'money-amount'}, format(m52["MtReal"], { code: 'EUR' }))
                     )
                 }))
             ),
@@ -157,7 +156,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
-                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `,
+                        ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `,
                         ' utilisé dans ',
                         [...aggSet].map(aggRow => aggRow.id).join(', ')
                     )
@@ -170,7 +169,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
-                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `
+                        ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `
                     )
                 }))
             ) ,
@@ -181,7 +180,7 @@ export default class TextualSelected extends React.PureComponent{
 
                     return React.createElement('li', {key: m52Id}, 
                         m52Id,
-                        ` (${format(m52Row["Montant"], { code: 'EUR' })}) `
+                        ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `
                     )
                 }))
             )        

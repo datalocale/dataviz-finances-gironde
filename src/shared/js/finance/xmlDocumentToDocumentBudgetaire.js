@@ -1,6 +1,8 @@
+import {Set as ImmutableSet} from 'immutable';
+
 import {sum} from 'd3-array';
 
-import {makeLigneBudgetId} from './DocBudgDataStructures';
+import {makeLigneBudgetId, LigneBudgetRecord,  DocumentBudgetaire} from './DocBudgDataStructures';
 
 export default function(doc, natureToChapitreFI){
     const BlocBudget = doc.getElementsByTagName('BlocBudget')[0];
@@ -25,7 +27,10 @@ export default function(doc, natureToChapitreFI){
 
         ret['MtReal'] = Number(ret['MtReal']);
         
-        Object.assign(ret, natureToChapitreFI(exer, ret['CodRD'], ret['Nature']))
+        Object.assign(
+            ret, 
+            natureToChapitreFI(exer, ret['CodRD'], ret['Nature'])
+        )
 
         return ret;
     })
@@ -38,24 +43,24 @@ export default function(doc, natureToChapitreFI){
         xmlRowsById.set(id, idRows);
     }
 
-    return {
+    return DocumentBudgetaire({
         LibelleColl: doc.getElementsByTagName('LibelleColl')[0].getAttribute('V'),
         Nomenclature: doc.getElementsByTagName('Nomenclature')[0].getAttribute('V'),
         NatDec: BlocBudget.getElementsByTagName('NatDec')[0].getAttribute('V'),
         Exer: exer,
         IdColl: doc.getElementsByTagName('IdColl')[0].getAttribute('V'),
 
-        rows: Array.from(xmlRowsById.values())
+        rows: ImmutableSet(Array.from(xmlRowsById.values())
         .map(xmlRows => {
             const amount = sum(xmlRows.map(r => Number(r['MtReal'])))
             const r = xmlRows[0];
 
-            return Object.assign(
+            return LigneBudgetRecord(Object.assign(
                 {},
                 r,
                 {'MtReal': amount}
-            )
-        })
-    }
+            ))
+        }))
+    })
 
 }
