@@ -142,8 +142,8 @@ export function TotalBudget({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, corrections, currentYear, textsById, screenWidth } = state;
-        const m52Instruction = m52InstructionByYear.get(currentYear);
+        const { docBudgByYear, corrections, currentYear, textsById, screenWidth } = state;
+        const m52Instruction = docBudgByYear.get(currentYear);
         const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 

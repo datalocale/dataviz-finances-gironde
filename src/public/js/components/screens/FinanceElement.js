@@ -315,7 +315,7 @@ function makeContextList(element, childToParent){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
+        const { docBudgByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -324,7 +324,7 @@ export default connect(
             RDFI = financeDetailId.slice(4, 4+2);
         }
 
-        const m52Instruction = m52InstructionByYear.get(explorationYear);
+        const m52Instruction = docBudgByYear.get(explorationYear);
         const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -344,7 +344,7 @@ export default connect(
 
         const contextList = makeContextList(element, childToParent);
 
-        const elementByIdByYear = m52InstructionByYear.map(m52i => {
+        const elementByIdByYear = docBudgByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined

@@ -257,9 +257,9 @@ const YearSolidarityRecord = Record({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, corrections, currentYear, screenWidth } = state;
+        const { docBudgByYear, corrections, currentYear, screenWidth } = state;
 
-        const solidarityByYear = m52InstructionByYear.map( ((instruction, year) => {
+        const solidarityByYear = docBudgByYear.map( ((instruction) => {
             const agg = m52ToAggregated(instruction, corrections);
 
             const hierAgg = hierarchicalAggregated(agg);

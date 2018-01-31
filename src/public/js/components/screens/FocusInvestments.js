@@ -21,7 +21,7 @@ import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/fin
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
 import {EXPENDITURES, DI} from '../../../../shared/js/finance/constants';
 
-import {makePartition, makeElementById} from './FinanceElement';
+import {makeElementById} from './FinanceElement';
 
 import {urls, COLLEGE_PICTO, ENVIRONNEMENT_AMENAGEMENT_PICTO, PATRIMOINE_PICTO, ROUTES_PICTO, SOUTIEN_COMMUNES_PICTO} from '../../constants/resources';
 
@@ -203,9 +203,9 @@ export function FocusSol({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, corrections, currentYear, textsById, screenWidth} = state;
+        const { docBudgByYear, corrections, currentYear, textsById, screenWidth} = state;
 
-        const investmentsByYear = m52InstructionByYear.map( ((instruction) => {
+        const investmentsByYear = docBudgByYear.map( ((instruction) => {
             const agg = m52ToAggregated(instruction, corrections);
 
             const hierAgg = hierarchicalAggregated(agg);
@@ -226,7 +226,7 @@ export default connect(
         // code adapted from FinanceElement mapStateToProps
         const displayedContentId = DI;
 
-        const partitionByYear = m52InstructionByYear.map(m52i => {
+        const partitionByYear = docBudgByYear.map(m52i => {
             const elementById = makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections))
             );
@@ -255,8 +255,8 @@ export default connect(
         */
 
         // DI details
-        const elementById = m52InstructionByYear.get(currentYear) ? makeElementById(
-            hierarchicalAggregated(m52ToAggregated(m52InstructionByYear.get(currentYear), corrections))
+        const elementById = docBudgByYear.get(currentYear) ? makeElementById(
+            hierarchicalAggregated(m52ToAggregated(docBudgByYear.get(currentYear), corrections))
         ) : undefined;
 
         const yearDIDetails = elementById ? {
