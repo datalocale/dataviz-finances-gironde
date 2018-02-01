@@ -19,7 +19,7 @@ export default class RDFISelector extends React.PureComponent{
                 style: {
                     padding: "1em"
                 },
-                onChange: e => {
+                onClick: e => {
                     const t = e.currentTarget;
 
                     onRDFIChange(

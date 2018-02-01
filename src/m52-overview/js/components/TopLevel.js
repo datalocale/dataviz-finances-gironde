@@ -39,7 +39,7 @@ export default function({
                 NatDec: documentBudgetaire.NatDec
             },
             React.createElement('label', {},
-                'Fichier XML instruction M52 au format <DocumentBudgetaire>: ',
+                'Fichier XML au format <DocumentBudgetaire>: ',
                 React.createElement('input', {type: 'file', onChange(e){
                     const file = e.target.files[0];
                     if (file) {

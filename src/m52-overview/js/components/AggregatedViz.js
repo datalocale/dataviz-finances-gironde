@@ -24,7 +24,7 @@ export default function({
             'div',
             {
                 className: 'view-selector',
-                onChange: e => {
+                onClick: e => {
                     onAggregatedDFViewChange(e.currentTarget.querySelector('input[type="radio"][name="view"]:checked').value)
                 }
             },

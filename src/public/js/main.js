@@ -31,12 +31,6 @@ import {
 
 
 import {fonctionLabels} from '../../../build/finances/m52-strings.json';
-/*
-throw `TODO
-- M52 string encoding
-- outil métier, bug reclic sur RDFI
-`
-*/
 
 
 /**
