@@ -30,12 +30,11 @@ import {
 } from './constants/actions'; 
 
 
-const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
+import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 /*
 throw `TODO
-- Remove m52FonctionLabels.json entirely
-- Load labels
 - Test everything
+- M52 string encoding
 `
 */
 
@@ -119,18 +118,18 @@ const store = createStore(
 
 store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
-    textList: Object.keys(rubriqueIdToLabel)
+    textList: Object.keys(fonctionLabels)
         .map(fonction => ({
             id: `M52-DF-${fonction}`, 
-            label: rubriqueIdToLabel[fonction]
+            label: fonctionLabels[fonction]
         }))
 });
 store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
-    textList: Object.keys(rubriqueIdToLabel)
+    textList: Object.keys(fonctionLabels)
         .map(fonction => ({
             id: `M52-DI-${fonction}`, 
-            label: rubriqueIdToLabel[fonction]
+            label: fonctionLabels[fonction]
         }))
 });
 

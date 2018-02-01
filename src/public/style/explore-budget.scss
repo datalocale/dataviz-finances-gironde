@@ -7,16 +7,16 @@ $revenue-color : $area-color-3;
 $RX-S: 40%; 
 $RX-L: 60%;
 
-$R0-color: $area-color-1;
-$R1-color: $area-color-2;
-$R2-color: $area-color-3;
-$R3-color: $area-color-4;
-$R4-color: $area-color-5;
-$R5-color: $area-color-6;
-$R6-color: $area-color-7;
-$R7-color: $area-color-8;
-$R8-color: $area-color-9;
-$R9-color: $area-color-10;
+$F0-color: $area-color-1;
+$F1-color: $area-color-2;
+$F2-color: $area-color-3;
+$F3-color: $area-color-4;
+$F4-color: $area-color-5;
+$F5-color: $area-color-6;
+$F6-color: $area-color-7;
+$F7-color: $area-color-8;
+$F8-color: $area-color-9;
+$F9-color: $area-color-10;
 
 
 .explore-budget{
@@ -232,87 +232,87 @@ $R9-color: $area-color-10;
             }
         }
 
-        .M52-DF-R0 path,
-        .M52-DI-R0 path{
-            fill: $R0-color;
+        .M52-DF-0 path,
+        .M52-DI-0 path{
+            fill: $F0-color;
         }
-        .M52-DF-R1 path,
-        .M52-DI-R1 path{
-            fill: $R1-color;
+        .M52-DF-1 path,
+        .M52-DI-1 path{
+            fill: $F1-color;
         }
-        .M52-DF-R2 path,
-        .M52-DI-R2 path{
-            fill: $R2-color;
+        .M52-DF-2 path,
+        .M52-DI-2 path{
+            fill: $F2-color;
         }
-        .M52-DF-R3 path,
-        .M52-DI-R3 path{
-            fill: $R3-color;
+        .M52-DF-3 path,
+        .M52-DI-3 path{
+            fill: $F3-color;
         }
-        .M52-DF-R4 path,
-        .M52-DI-R4 path{
-            fill: $R4-color;
+        .M52-DF-4 path,
+        .M52-DI-4 path{
+            fill: $F4-color;
         }
-        .M52-DF-R5 path,
-        .M52-DI-R5 path{
-            fill: $R5-color;
+        .M52-DF-5 path,
+        .M52-DI-5 path{
+            fill: $F5-color;
         }
-        .M52-DF-R6 path,
-        .M52-DI-R6 path{
-            fill: $R6-color;
+        .M52-DF-6 path,
+        .M52-DI-6 path{
+            fill: $F6-color;
         }
-        .M52-DF-R7 path,
-        .M52-DI-R7 path{
-            fill: $R7-color;
+        .M52-DF-7 path,
+        .M52-DI-7 path{
+            fill: $F7-color;
         }
-        .M52-DF-R8 path,
-        .M52-DI-R8 path{
-            fill: $R8-color;
+        .M52-DF-8 path,
+        .M52-DI-8 path{
+            fill: $F8-color;
         }
-        .M52-DF-R9 path,
-        .M52-DI-R9 path{
-            fill: $R9-color;
+        .M52-DF-9 path,
+        .M52-DI-9 path{
+            fill: $F9-color;
         }
  
         .legend-list .color{
-            &.M52-DF-R0,
-            &.M52-DI-R0{
-                background-color: $R0-color;
+            &.M52-DF-0,
+            &.M52-DI-0{
+                background-color: $F0-color;
             }
-            &.M52-DF-R1,
-            &.M52-DI-R1{
-                background-color: $R1-color;
+            &.M52-DF-1,
+            &.M52-DI-1{
+                background-color: $F1-color;
             }
-            &.M52-DF-R2,
-            &.M52-DI-R2{
-                background-color: $R2-color;
+            &.M52-DF-2,
+            &.M52-DI-2{
+                background-color: $F2-color;
             }
-            &.M52-DF-R3,
-            &.M52-DI-R3{
-                background-color: $R3-color;
+            &.M52-DF-3,
+            &.M52-DI-3{
+                background-color: $F3-color;
             }
-            &.M52-DF-R4,
-            &.M52-DI-R4{
-                background-color: $R4-color;
+            &.M52-DF-4,
+            &.M52-DI-4{
+                background-color: $F4-color;
             }
-            &.M52-DF-R5,
-            &.M52-DI-R5{
-                background-color: $R5-color;
+            &.M52-DF-5,
+            &.M52-DI-5{
+                background-color: $F5-color;
             }
-            &.M52-DF-R6,
-            &.M52-DI-R6{
-                background-color: $R6-color;
+            &.M52-DF-6,
+            &.M52-DI-6{
+                background-color: $F6-color;
             }
-            &.M52-DF-R7,
-            &.M52-DI-R7{
-                background-color: $R7-color;
+            &.M52-DF-7,
+            &.M52-DI-7{
+                background-color: $F7-color;
             }
-            &.M52-DF-R8,
-            &.M52-DI-R8{
-                background-color: $R8-color;
+            &.M52-DF-8,
+            &.M52-DI-8{
+                background-color: $F8-color;
             }
-            &.M52-DF-R9,
-            &.M52-DI-R9{
-                background-color: $R9-color;
+            &.M52-DF-9,
+            &.M52-DI-9{
+                background-color: $F9-color;
             }
         } 
     }
