@@ -12,7 +12,7 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
 
-const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabels.json');
+import {fonctionLabels, natureLabels} from '../../../../../build/finances/m52-strings.json';
 
 import StackChart from '../../../../shared/js/components/StackChart';
 import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
@@ -198,13 +198,13 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 ),
                 React.createElement('tbody', {}, 
                     m52Rows
-                    .sort((r1, r2) => r2['Montant'] - r1['Montant'])
+                    .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
                     .map(row => {
                         return React.createElement('tr', {}, 
-                            React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
-                            React.createElement('td', {}, row['Libellé']),
+                            React.createElement('td', {}, fonctionLabels[row['Fonction']]),
+                            React.createElement('td', {}, natureLabels[row['Nature']]),
                             React.createElement('td', {}, 
-                                React.createElement(MoneyAmount, {amount: row['Montant']})
+                                React.createElement(MoneyAmount, {amount: row['MtReal']})
                             )
                         )
                     })
