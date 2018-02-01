@@ -16,7 +16,8 @@
     "build-demo:public": "cross-env NODE_ENV=demo npm-run-all --parallel build:public:*",
     "build:public:style": "node-sass --importer src/public/style/env-importer.js src/public/style/main.scss build/public.css",
     "build:public:script": "browserify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.script -p [minifyify --no-map]",
-    "build:public:data": "node -r @std/esm tools/make-public-data.js",
+    "build:public:data:finance-data": "node -r @std/esm tools/make-public-data.js",
+    "build:public:data:m52-strings": "node -r @std/esm tools/make-doc-budg-strings.js",
     "watch:m52overview": "cross-env NODE_ENV=development watchify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
     "watch:public": "cross-env NODE_ENV=development npm-run-all --parallel watch:public:*",
     "prewatch:public:style": "npm run build:public:style",
@@ -84,6 +85,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "uuid": "^3.0.1",
+    "xml-buffer-tostring": "^0.2.0",
     "xmldom": "^0.1.27"
   },
   "devDependencies": {

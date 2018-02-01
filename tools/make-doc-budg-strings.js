@@ -1,5 +1,6 @@
 import {join} from 'path';
 import * as fs from 'fs-extra';
+import xmlBufferToString from 'xml-buffer-tostring';
 import {DOMParser} from 'xmldom';
 
 const {readFile, writeFile} = fs;
@@ -14,7 +15,8 @@ Promise.all([
     'planDeCompte-2016.xml',
     'planDeCompte-2017.xml'
 ].map(f => {
-    return readFile(join(SOURCE_FINANCE_DIR, f), {encoding: 'utf-8'})
+    return readFile(join(SOURCE_FINANCE_DIR, f))
+    .then(xmlBufferToString)
     .then( str => {
         return (new DOMParser()).parseFromString(str, "text/xml");
     })
@@ -59,5 +61,5 @@ Promise.all([
     }
 })
 .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
-.then(str => writeFile(join(BUILD_FINANCE_DIR, 'm52-strings.json'), str, 'utf-8'))
+.then(str => writeFile(join(BUILD_FINANCE_DIR, 'm52-strings.json'), str, {encoding: 'utf8'}))
 .catch(err => console.error('make-doc-budg-strings', err))
