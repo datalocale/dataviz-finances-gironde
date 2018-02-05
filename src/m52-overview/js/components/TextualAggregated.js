@@ -7,8 +7,11 @@ import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructure
 import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
+    // an M52 row is not used if its id is used in no agg row
+
     return rows.filter(m52row => {
-        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].has(m52row));
+        const rid = makeLigneBudgetId(m52row);
+        return !aggregatedInstruction.some(aggRow => aggRow['M52Rows'].map(makeLigneBudgetId).has(rid));
     })
 }
 
@@ -62,29 +65,29 @@ function makeDF12Diffs(aggregatedInstruction){
 
 
     // For now, weighted rows are only in DF1, so let's keep things simple
-    const weightedDF1Rows = df1M52Rows.filter(r => r.weight);
+    const splitDF1Rows = df1M52Rows.filter(r => r.splitFor);
 
-    const weightedById = new Map();
-    weightedDF1Rows.forEach(r => {
+    const splitByRowId = new Map();
+    splitDF1Rows.forEach(r => {
         const id = makeLigneBudgetId(r);
 
-        let elements = weightedById.get(id);
+        let elements = splitByRowId.get(id);
         if(!elements){
             elements = [];
         }
         elements.push(r);
-        weightedById.set(id, elements);
+        splitByRowId.set(id, elements);
     });
 
     let onlyDF1 = df1M52Rows.subtract(df2M52Rows);
     let onlyDF2 = df2M52Rows.subtract(df1M52Rows);
 
-    weightedById.forEach((elements, id) => {
-        const total = sum(elements.map(r => r['MtReal']*r.weight))
+    splitByRowId.forEach((elements, id) => {
+        const total = sum(elements.map(r => r['MtReal']))
 
         const corresponding = onlyDF2.find(r => makeLigneBudgetId(r) === id);
         
-        if(corresponding['MtReal'] - total <= 0.01){
+        if(Math.abs(corresponding['MtReal'] - total) <= 0.01){
             elements.forEach(e => {
                 onlyDF1 = onlyDF1.remove(e)
             })
@@ -92,9 +95,7 @@ function makeDF12Diffs(aggregatedInstruction){
         }
     })
 
-
     return { onlyDF1, onlyDF2 }
-
 }
 
 

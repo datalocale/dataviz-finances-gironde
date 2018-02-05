@@ -12,12 +12,17 @@ export default function(doc, natureToChapitreFI){
     const xmlRowsById = new Map();
 
     const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
-    .filter(l => 
-        // Garder seulement les ordres réels
-        l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0' && 
-        // ... et les lignes dont le montant n'est pas nul
-        Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) !== 0
-    )
+    .filter(l => {
+        const isOR = l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0';
+        const hasNon0Amount = Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) !== 0;
+
+        const n = l.getElementsByTagName('Nature')[0].getAttribute('V');
+        const f = l.getElementsByTagName('Fonction')[0].getAttribute('V');
+
+        return isOR && hasNon0Amount &&
+            !(n === '001' && f === '01') &&
+            !(n === '002' && f === '0202')
+    })
     .map(l => {
         const ret = {};
 

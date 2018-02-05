@@ -852,7 +852,7 @@ export const rules = Object.freeze({
                         "23152", "23153"
                     ].includes(article) &&
                     f3 === '738' ) ||
-                    article === '454418' || article === '454411' 
+                    article === '45441'
                 );
         }
     },

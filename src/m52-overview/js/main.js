@@ -21,7 +21,6 @@ import TopLevel from './components/TopLevel.js';
 
 const SOURCE_FINANCE_DIR = './data/finances/'
 
-
 function reducer(state, action){
     const {type} = action;
 

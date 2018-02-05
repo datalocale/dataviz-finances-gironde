@@ -10,13 +10,12 @@ import DepartmentFinanceHeader from './DepartmentFinanceHeader';
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
 
 /*
-        rdfi, dfView,
-        documentBudgetaire, aggregatedInstruction,
-        M52Hierarchical, M52OveredNodes,
-        aggregatedHierarchical, aggregatedOveredNodes,
-        over
-
- */
+    rdfi, dfView,
+    documentBudgetaire, aggregatedInstruction,
+    M52Hierarchical, M52OveredNodes,
+    aggregatedHierarchical, aggregatedOveredNodes,
+    over
+*/
 
 export default function({
         rdfi, dfView,
