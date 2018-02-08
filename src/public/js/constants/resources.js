@@ -33,39 +33,39 @@ export const urls = {
     // finance data
     [COMPTES_ADMINISTRATIFS]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/XX`,
-        "demo": `../build/finances/doc-budgs.json`,
-        get development() { return this.demo }
+        "demo": `/dataviz-finances-gironde/build/finances/doc-budgs.json`, 
+        "development": `../build/finances/doc-budgs.json`,
     }[env],
     [CORRECTIONS_AGGREGATED]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/19`,
-        "demo": `../data/finances/corrections-agregation.csv`,
-        get development() { return this.demo }
+        "demo": `/dataviz-finances-gironde/data/finances/corrections-agregation.csv`,
+        "development": `/data/finances/corrections-agregation.csv`
     }[env],
 
     // texts
     [AGGREGATED_ATEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21`,
-        "demo": `../data/texts/aggregated-atemporal.csv`,
-        get development() { return this.demo }
+        "demo": `/dataviz-finances-gironde/data/texts/aggregated-atemporal.csv`,
+        "development": `../data/texts/aggregated-atemporal.csv`
     }[env],
     [AGGREGATED_TEMPORAL]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/20`,
-        "demo": `../data/texts/aggregated-temporal.csv`,
-        get development() { return this.demo }
+        "demo":  `/dataviz-finances-gironde/data/texts/aggregated-temporal.csv`,
+        "development": `../data/texts/aggregated-temporal.csv`
     }[env],
 
     // HTML Carte présence
     [CARTE_PRESENCE_HTML]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/23`,
-        "demo": `../public/carte-presence.html`,
-        get development() { return this.demo }
+        "demo": `/dataviz-finances-gironde/public/carte-presence.html`,
+        "development": `../public/carte-presence.html`
     }[env],
 
     // Vidéo de l'animation
     [ANIMATION_VIDEO]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/26`,
-        "demo": '../videos/BLOUBLOU_V2_5.mp4',
-        get development() { return this.demo }
+        "demo": `/dataviz-finances-gironde/videos/BLOUBLOU_V2_5.mp4`,
+        "development": '../videos/BLOUBLOU_V2_5.mp4'
     }[env],
 
     // pictos
