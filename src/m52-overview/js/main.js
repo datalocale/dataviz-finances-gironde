@@ -314,7 +314,7 @@ const natureToChapitreFIP = Promise.all([
 .then(makeNatureToChapitreFI)
 
 
-fetch(`../data/finances/CA/CA2016BPAL.xml`).then(resp => resp.text())
+fetch(`${SOURCE_FINANCE_DIR}CA/CA2016BPAL.xml`).then(resp => resp.text())
 .then(str => {
     return (new DOMParser()).parseFromString(str, "text/xml");
 })
@@ -331,13 +331,13 @@ fetch(`../data/finances/CA/CA2016BPAL.xml`).then(resp => resp.text())
 });
 
 fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
-    .then(csvStringToCorrections)
-    .then(corrections => {
-        store.dispatch({
-            type: CORRECTION_AGGREGATION_RECEIVED,
-            corrections
-        });
+.then(csvStringToCorrections)
+.then(corrections => {
+    store.dispatch({
+        type: CORRECTION_AGGREGATION_RECEIVED,
+        corrections
     });
+});
 
 ReactDOM.render(
     React.createElement(
