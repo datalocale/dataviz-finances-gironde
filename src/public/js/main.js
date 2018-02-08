@@ -2,14 +2,14 @@ import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Record, Map as ImmutableMap, List } from 'immutable';
+import { Record, Map as ImmutableMap, List, Set as ImmutableSet } from 'immutable';
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
-import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
+import {urls, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
 import reducer from './reducer';
 
-import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
 import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
@@ -24,13 +24,13 @@ import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import { 
-    M52_INSTRUCTION_RECEIVED, CORRECTION_AGGREGATION_RECEIVED, 
+    DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED, 
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, 
     FINANCE_DETAIL_ID_CHANGE, 
 } from './constants/actions'; 
 
 
-const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
+import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 
 
 /**
@@ -86,7 +86,7 @@ const DEFAULT_BREADCRUMB = List([
 
 
 const StoreRecord = Record({
-    m52InstructionByYear: undefined,
+    docBudgByYear: undefined,
     corrections: undefined,
     currentYear: undefined,
     explorationYear: undefined,
@@ -99,7 +99,7 @@ const StoreRecord = Record({
 const store = createStore(
     reducer,
     new StoreRecord({
-        m52InstructionByYear: new ImmutableMap(),
+        docBudgByYear: new ImmutableMap(),
         currentYear: 2016,
         explorationYear: 2016,
         financeDetailId: undefined,
@@ -112,18 +112,18 @@ const store = createStore(
 
 store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
-    textList: Object.keys(rubriqueIdToLabel)
+    textList: Object.keys(fonctionLabels)
         .map(fonction => ({
             id: `M52-DF-${fonction}`, 
-            label: rubriqueIdToLabel[fonction]
+            label: fonctionLabels[fonction]
         }))
 });
 store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
-    textList: Object.keys(rubriqueIdToLabel)
+    textList: Object.keys(fonctionLabels)
         .map(fonction => ({
             id: `M52-DI-${fonction}`, 
-            label: rubriqueIdToLabel[fonction]
+            label: fonctionLabels[fonction]
         }))
 });
 
@@ -143,18 +143,20 @@ fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
     });
 });
 
-[ 2016, 2015, 2014, 2013, 2012 ]
-.map(urls[COMPTE_ADMINISTRATIF])
-.forEach(url => {
-    fetch(url).then(resp => resp.text())
-        .then(csvStringToM52Instructions)
-        .then(m52Instruction => {
-            store.dispatch({
-                type: M52_INSTRUCTION_RECEIVED,
-                m52Instruction,
-            });
-        });
+
+fetch(urls[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
+.then(docBudgs => {
+    docBudgs = docBudgs.map(db => {
+        db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
+        return DocumentBudgetaire(db)
+    })
+
+    store.dispatch({
+        type: DOCUMENTS_BUDGETAIRES_RECEIVED,
+        docBudgs,
+    });
 });
+
 
 fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
 .then(csvParse)

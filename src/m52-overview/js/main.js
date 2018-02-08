@@ -1,91 +1,93 @@
+
+import { Record, OrderedSet as ImmutableSet } from 'immutable';
+
 import { createStore } from 'redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Record, OrderedSet as ImmutableSet} from 'immutable';
 import { connect, Provider } from 'react-redux';
 
 import {hierarchicalM52, hierarchicalAggregated, m52ToAggregated} from '../../shared/js/finance/memoized';
-import csvStringToM52Instructions from '../../shared/js/finance/csvStringToM52Instructions.js';
+import xmlDocumentToDocumentBudgetaire from '../../shared/js/finance/xmlDocumentToDocumentBudgetaire';
+import makeNatureToChapitreFI from '../../shared/js/finance/makeNatureToChapitreFI.js';
 import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
-import {urls, COMPTE_ADMINISTRATIF, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from '../../public/js/constants/resources';
+import {urls, CORRECTIONS_AGGREGATED} from '../../public/js/constants/resources';
 import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
 import {
-    M52_INSTRUCTION_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
-    FINANCE_DETAIL_ID_CHANGE,
+    DOCUMENT_BUDGETAIRE_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
 } from '../../public/js/constants/actions';
 
 import TopLevel from './components/TopLevel.js';
 
+const SOURCE_FINANCE_DIR = './data/finances/'
 
 function reducer(state, action){
     const {type} = action;
 
     switch(type){
-    case CORRECTION_AGGREGATION_RECEIVED: {
-        const {corrections} = action;
-        return state.set('corrections', corrections);
-    }
-    case 'M52_INSTRUCTION_RECEIVED':
-        return state.set('M52Instruction', action.m52Instruction);
-    case 'M52_INSTRUCTION_USER_NODE_OVERED':
-        return state
-            .set('over', action.node ?
-                new InstructionNodeRecord({
-                    type: M52_INSTRUCTION,
-                    node: action.node
-                }) :
-                undefined
-            );
-    case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
-        return state
-            .set('over', action.node ?
-                new InstructionNodeRecord({
-                    type: AGGREGATED_INSTRUCTION,
-                    node: action.node
-                }) :
-                undefined
-            );
-    case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
-        const { node } = action;
-        const {node: alreadySelectedNode} = state.set('selection') || {};
+        case CORRECTION_AGGREGATION_RECEIVED: {
+            const {corrections} = action;
+            return state.set('corrections', corrections);
+        }
+        case DOCUMENT_BUDGETAIRE_RECEIVED:
+            return state.set('documentBudgetaire', action.docBudg);
+        case 'M52_INSTRUCTION_USER_NODE_OVERED':
+            return state
+                .set('over', action.node ?
+                    new InstructionNodeRecord({
+                        type: M52_INSTRUCTION,
+                        node: action.node
+                    }) :
+                    undefined
+                );
+        case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
+            return state
+                .set('over', action.node ?
+                    new InstructionNodeRecord({
+                        type: AGGREGATED_INSTRUCTION,
+                        node: action.node
+                    }) :
+                    undefined
+                );
+        case 'M52_INSTRUCTION_USER_NODE_SELECTED': {
+            const { node } = action;
+            const {node: alreadySelectedNode} = state.set('selection') || {};
 
-        return state
-            .set('selection', node && node !== alreadySelectedNode ?
-                new InstructionNodeRecord({
-                    type: M52_INSTRUCTION,
-                    node
-                }) :
-                undefined
-            );
-    }
-    case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
-        const { node } = action;
-        const {node: alreadySelectedNode} = state.set('selection') || {};
+            return state
+                .set('selection', node && node !== alreadySelectedNode ?
+                    new InstructionNodeRecord({
+                        type: M52_INSTRUCTION,
+                        node
+                    }) :
+                    undefined
+                );
+        }
+        case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
+            const { node } = action;
+            const {node: alreadySelectedNode} = state.set('selection') || {};
 
-        return state
-            .set('selection', node && node !== alreadySelectedNode ?
-                new InstructionNodeRecord({
-                    type: AGGREGATED_INSTRUCTION,
-                    node
-                }) :
-                undefined
-            );
-    }
-    case 'RDFI_CHANGE':
-        return state
-            .set('RDFI', action.rdfi)
-            .set('over', undefined)
-            .set('selection', undefined);
-    case 'DF_VIEW_CHANGE':
-        return state
-            .set('DF_VIEW', action.dfView)
-            .set('over', undefined)
-            .set('selection', undefined);
-    default:
-        console.warn('Unknown action type', type);
-        return state;
+            return state
+                .set('selection', node && node !== alreadySelectedNode ?
+                    new InstructionNodeRecord({
+                        type: AGGREGATED_INSTRUCTION,
+                        node
+                    }) :
+                    undefined
+                );
+        }
+        case 'RDFI_CHANGE':
+            return state
+                .set('RDFI', action.rdfi)
+                .set('over', undefined)
+                .set('selection', undefined);
+        case 'DF_VIEW_CHANGE':
+            return state
+                .set('DF_VIEW', action.dfView)
+                .set('over', undefined)
+                .set('selection', undefined);
+        default:
+            console.warn('Unknown action type', type);
+            return state;
     }
 }
 
@@ -150,7 +152,7 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
 
 
 function mapStateToProps(state){
-    const m52Instruction = state.get('M52Instruction');
+    const documentBudgetaire = state.get('documentBudgetaire');
     const corrections = state.get('corrections');
     const rdfi = state.get('RDFI');
     const view = state.get('DF_VIEW');
@@ -161,14 +163,14 @@ function mapStateToProps(state){
 
     const expOrRev = rdfi[0] === 'D' ? EXPENDITURES : REVENUE;
 
-    if(!m52Instruction)
+    if(!documentBudgetaire)
         return {};
 
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    const aggregatedInstruction = m52ToAggregated(m52Instruction, corrections);
-    const M52Hierarchical = hierarchicalM52(m52Instruction, rdfi);
+    const aggregatedInstruction = m52ToAggregated(documentBudgetaire, corrections);
+    const M52Hierarchical = hierarchicalM52(documentBudgetaire, rdfi);
 
     const aggregatedHierarchical = hierarchicalAggregated(aggregatedInstruction);
 
@@ -193,7 +195,6 @@ function mapStateToProps(state){
     let M52HighlightedNodes;
     let aggregatedHighlightedNodes;
 
-
     if(mainHighlightType === M52_INSTRUCTION){
         M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
         aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(rdfiNode, Array.from(mainHighlightNode.elements))
@@ -210,7 +211,7 @@ function mapStateToProps(state){
 
     return {
         rdfi, dfView: view,
-        m52Instruction, aggregatedInstruction,
+        documentBudgetaire, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical: rdfiNode, aggregatedHighlightedNodes,
         over, selection
@@ -258,10 +259,14 @@ function mapDispatchToProps(dispatch){
             });
         },
         onNewM52CSVFile(content){
-            dispatch({
-                type: 'M52_INSTRUCTION_RECEIVED',
-                m52Instruction: csvStringToM52Instructions(content),
-            });
+            const doc = (new DOMParser()).parseFromString(content, "text/xml");
+            natureToChapitreFIP.then(natureToChapitreFI => {
+                dispatch({
+                    type: DOCUMENT_BUDGETAIRE_RECEIVED,
+                    docBudg: xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+                });
+            })
+
         }
     };
 }
@@ -278,7 +283,7 @@ const InstructionNodeRecord = Record({
 });
 
 const StoreRecord = Record({
-    M52Instruction: undefined,
+    documentBudgetaire: undefined,
     corrections: undefined,
     selection: undefined,
     over: undefined,
@@ -295,14 +300,35 @@ const store = createStore(
 );
 
 
-fetch(urls[COMPTE_ADMINISTRATIF](2016)).then(resp => resp.text())
-    .then(csvStringToM52Instructions)
-    .then(m52Instruction => {
-        store.dispatch({
-            type: 'M52_INSTRUCTION_RECEIVED',
-            m52Instruction,
-        });
+const natureToChapitreFIP = Promise.all([
+    'planDeCompte-2013.xml',
+    'planDeCompte-2014.xml',
+    'planDeCompte-2015.xml',
+    'planDeCompte-2016.xml',
+    'planDeCompte-2017.xml'
+].map(f => fetch(`${SOURCE_FINANCE_DIR}plansDeCompte/${f}`).then(r => r.text())
+    .then( str => {
+        return (new DOMParser()).parseFromString(str, "text/xml");
+    })
+))
+.then(makeNatureToChapitreFI)
+
+
+fetch(`../data/finances/CA/CA2016BPAL.xml`).then(resp => resp.text())
+.then(str => {
+    return (new DOMParser()).parseFromString(str, "text/xml");
+})
+.then(doc => {
+    return natureToChapitreFIP.then(natureToChapitreFI => {
+        return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+    })
+})
+.then(docBudg => {
+    store.dispatch({
+        type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
+        docBudg,
     });
+});
 
 fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
     .then(csvStringToCorrections)

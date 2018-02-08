@@ -3,7 +3,7 @@ import {OrderedSet} from 'immutable';
 import {format} from 'currency-formatter';
 
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
-import {makeM52RowId} from '../../../shared/js/finance/M52InstructionDataStructures';
+import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructures';
 
 
 export default class TextualSelected extends React.PureComponent{
@@ -26,11 +26,11 @@ export default class TextualSelected extends React.PureComponent{
                 React.createElement('tbody', {}, 
 
                     m52Rows.map((m52, i) => {
-                        const m52Id = makeM52RowId(m52);
+                        const m52Id = makeLigneBudgetId(m52);
 
                         return React.createElement('tr', {key: m52Id+i},
                             React.createElement('td', {}, m52Id),
-                            React.createElement('td', {className: 'money-amount'}, format(m52['Montant'], { code: 'EUR' }))
+                            React.createElement('td', {className: 'money-amount'}, format(m52['MtReal'], { code: 'EUR' }))
                         );
                     })
                 )

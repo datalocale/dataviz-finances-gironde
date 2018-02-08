@@ -12,7 +12,7 @@ import {default as visit, flattenTree} from '../../../../shared/js/finance/visit
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
 
-const rubriqueIdToLabel = require('../../../../shared/js/finance/m52FonctionLabels.json');
+import {fonctionLabels, natureLabels} from '../../../../../build/finances/m52-strings.json';
 
 import StackChart from '../../../../shared/js/components/StackChart';
 import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
@@ -198,13 +198,13 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 ),
                 React.createElement('tbody', {}, 
                     m52Rows
-                    .sort((r1, r2) => r2['Montant'] - r1['Montant'])
+                    .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
                     .map(row => {
                         return React.createElement('tr', {}, 
-                            React.createElement('td', {}, rubriqueIdToLabel[row['Rubrique fonctionnelle']]),
-                            React.createElement('td', {}, row['Libellé']),
+                            React.createElement('td', {}, fonctionLabels[row['Fonction']]),
+                            React.createElement('td', {}, natureLabels[row['Nature']]),
                             React.createElement('td', {}, 
-                                React.createElement(MoneyAmount, {amount: row['Montant']})
+                                React.createElement(MoneyAmount, {amount: row['MtReal']})
                             )
                         )
                     })
@@ -315,7 +315,7 @@ function makeContextList(element, childToParent){
 
 export default connect(
     state => {        
-        const { m52InstructionByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
+        const { docBudgByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
@@ -324,7 +324,7 @@ export default connect(
             RDFI = financeDetailId.slice(4, 4+2);
         }
 
-        const m52Instruction = m52InstructionByYear.get(explorationYear);
+        const m52Instruction = docBudgByYear.get(explorationYear);
         const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
         const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
@@ -344,7 +344,7 @@ export default connect(
 
         const contextList = makeContextList(element, childToParent);
 
-        const elementByIdByYear = m52InstructionByYear.map(m52i => {
+        const elementByIdByYear = docBudgByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections)), 
                 RDFI ? hierarchicalM52(m52i, RDFI): undefined

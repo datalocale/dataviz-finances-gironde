@@ -142,8 +142,8 @@ export function TotalBudget({
 
 export default connect(
     state => {
-        const { m52InstructionByYear, corrections, currentYear, textsById, screenWidth } = state;
-        const m52Instruction = m52InstructionByYear.get(currentYear);
+        const { docBudgByYear, corrections, currentYear, textsById, screenWidth } = state;
+        const m52Instruction = docBudgByYear.get(currentYear);
         const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
@@ -187,26 +187,26 @@ export default connect(
                 df: '#!/finance-details/'+DF,
                 di: '#!/finance-details/'+DI,
                 byFonction: {
-                    'M52-DF-R0': `#!/finance-details/M52-DF-R0`,
-                    'M52-DF-R1': `#!/finance-details/M52-DF-R1`,
-                    'M52-DF-R2': `#!/finance-details/M52-DF-R2`,
-                    'M52-DF-R3': `#!/finance-details/M52-DF-R3`,
-                    'M52-DF-R4': `#!/finance-details/M52-DF-R4`,
-                    'M52-DF-R5': `#!/finance-details/M52-DF-R5`,
-                    'M52-DF-R6': `#!/finance-details/M52-DF-R6`,
-                    'M52-DF-R7': `#!/finance-details/M52-DF-R7`,
-                    'M52-DF-R8': `#!/finance-details/M52-DF-R8`,
-                    'M52-DF-R9': `#!/finance-details/M52-DF-R9`,
-                    'M52-DI-R0': `#!/finance-details/M52-DI-R0`,
-                    'M52-DI-R1': `#!/finance-details/M52-DI-R1`,
-                    'M52-DI-R2': `#!/finance-details/M52-DI-R2`,
-                    'M52-DI-R3': `#!/finance-details/M52-DI-R3`,
-                    'M52-DI-R4': `#!/finance-details/M52-DI-R4`,
-                    'M52-DI-R5': `#!/finance-details/M52-DI-R5`,
-                    'M52-DI-R6': `#!/finance-details/M52-DI-R6`,
-                    'M52-DI-R7': `#!/finance-details/M52-DI-R7`,
-                    'M52-DI-R8': `#!/finance-details/M52-DI-R8`,
-                    'M52-DI-R9': `#!/finance-details/M52-DI-R9`
+                    'M52-DF-0': `#!/finance-details/M52-DF-0`,
+                    'M52-DF-1': `#!/finance-details/M52-DF-1`,
+                    'M52-DF-2': `#!/finance-details/M52-DF-2`,
+                    'M52-DF-3': `#!/finance-details/M52-DF-3`,
+                    'M52-DF-4': `#!/finance-details/M52-DF-4`,
+                    'M52-DF-5': `#!/finance-details/M52-DF-5`,
+                    'M52-DF-6': `#!/finance-details/M52-DF-6`,
+                    'M52-DF-7': `#!/finance-details/M52-DF-7`,
+                    'M52-DF-8': `#!/finance-details/M52-DF-8`,
+                    'M52-DF-9': `#!/finance-details/M52-DF-9`,
+                    'M52-DI-0': `#!/finance-details/M52-DI-0`,
+                    'M52-DI-1': `#!/finance-details/M52-DI-1`,
+                    'M52-DI-2': `#!/finance-details/M52-DI-2`,
+                    'M52-DI-3': `#!/finance-details/M52-DI-3`,
+                    'M52-DI-4': `#!/finance-details/M52-DI-4`,
+                    'M52-DI-5': `#!/finance-details/M52-DI-5`,
+                    'M52-DI-6': `#!/finance-details/M52-DI-6`,
+                    'M52-DI-7': `#!/finance-details/M52-DI-7`,
+                    'M52-DI-8': `#!/finance-details/M52-DI-8`,
+                    'M52-DI-9': `#!/finance-details/M52-DI-9`
                 },
                 animationVideo: urls[ANIMATION_VIDEO]
             },

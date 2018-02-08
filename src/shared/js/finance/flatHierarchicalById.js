@@ -3,8 +3,8 @@ import visit from './visitHierarchical';
 import {levels} from './hierarchicalAggregated';
 import {rules} from './m52ToAggregated';
 
-const rubriqueIdToLabel = require('./m52FonctionLabels.json');
-
+import {fonctionLabels} from '../../../../build/finances/m52-strings.json';
+ 
 export const childToParent = new Map();
 export const elementById = new Map();
 
@@ -24,10 +24,10 @@ visit(levels, e => {
 });
 
 
-Object.keys(rubriqueIdToLabel).forEach(r => {
-    elementById.set(r, {label: rubriqueIdToLabel[r]});
+Object.keys(fonctionLabels).forEach(r => {
+    elementById.set(r, {label: fonctionLabels[r]});
 
-    if(r.length >= 3){
+    if(r.length >= 2){
         const parentId = r.slice(0, -1);
         childToParent.set(r, parentId);
     }

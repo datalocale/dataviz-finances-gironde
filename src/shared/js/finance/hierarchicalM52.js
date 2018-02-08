@@ -1,27 +1,25 @@
 import { Map as ImmutableMap, Set as ImmutableSet } from 'immutable';
 
-import { isOR } from './rowFilters';
-
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
-const rubriqueIdToLabel = require('./m52FonctionLabels.json'); 
+import {fonctionLabels} from '../../../../build/finances/m52-strings.json'; 
 
 const levelCategories = [
     r => {
-        const R = r['Rubrique fonctionnelle'];
-        return R.slice(0, 2);
+        const R = r['Fonction'];
+        return R.slice(0, 1);
     },
     r => {
-        const R = r['Rubrique fonctionnelle'];
+        const R = r['Fonction'];
+        return R[1] ? R.slice(0, 2) : undefined;
+    },
+    r => {
+        const R = r['Fonction'];
         return R[2] ? R.slice(0, 3) : undefined;
     },
     r => {
-        const R = r['Rubrique fonctionnelle'];
+        const R = r['Fonction'];
         return R[3] ? R.slice(0, 4) : undefined;
-    },
-    r => {
-        const R = r['Rubrique fonctionnelle'];
-        return R[4] ? R.slice(0, 5) : undefined;
     }
 ]
 
@@ -34,17 +32,13 @@ const levelCategories = [
  */
 export default function({rows}, RDFI) {
     rows = rows
-    .filter(isOR)
-    .filter(row => {
-        return row['Dépense/Recette'] === RDFI[0] && row['Investissement/Fonctionnement'] === RDFI[1];
-    });
+    .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
     
     const root = {
         id: 'M52',
         label: "Instruction M52",
         elements: rows,
     };
-
 
 
     /* TreeNode : HierarchicalData<M52Entry> 
@@ -67,17 +61,17 @@ export default function({rows}, RDFI) {
 
         node.elements.forEach(r => {
             const category = categorizer(r);
-            total += r["Montant"];
+            total += r["MtReal"];
 
             if(category){
                 if(category === parentCategory){
                     // value belongs to ownValue, not children
-                    ownValue += r["Montant"]
+                    ownValue += r["MtReal"]
                 }
                 else{
                     let categoryChild = children.get(category);
                     if(!categoryChild){
-                        const label = rubriqueIdToLabel[category]
+                        const label = fonctionLabels[category]
 
                         if(!label){
                             console.warn('No label for rubrique', category);

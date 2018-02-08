@@ -10,17 +10,16 @@ import DepartmentFinanceHeader from './DepartmentFinanceHeader';
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
 
 /*
-        rdfi, dfView,
-        M52Instruction, aggregatedInstruction,
-        M52Hierarchical, M52OveredNodes,
-        aggregatedHierarchical, aggregatedOveredNodes,
-        over
-
- */
+    rdfi, dfView,
+    documentBudgetaire, aggregatedInstruction,
+    M52Hierarchical, M52OveredNodes,
+    aggregatedHierarchical, aggregatedOveredNodes,
+    over
+*/
 
 export default function({
         rdfi, dfView,
-        m52Instruction, aggregatedInstruction,
+        documentBudgetaire, aggregatedInstruction,
         M52Hierarchical, M52HighlightedNodes,
         aggregatedHierarchical, aggregatedHighlightedNodes,
         selection,
@@ -30,16 +29,16 @@ export default function({
         onNewM52CSVFile
     }){
 
-    return m52Instruction ? React.createElement('div', {className: 'top-level'},
+    return documentBudgetaire ? React.createElement('div', {className: 'top-level'},
         React.createElement(
             DepartmentFinanceHeader,
             {
-                department: m52Instruction.département,
-                year: m52Instruction.year,
-                type: m52Instruction.type
+                LibelleColl: documentBudgetaire.LibelleColl,
+                Exer: documentBudgetaire.Exer,
+                NatDec: documentBudgetaire.NatDec
             },
             React.createElement('label', {},
-                'Fichier CSV instruction M52 au format CEDI: ',
+                'Fichier XML au format <DocumentBudgetaire>: ',
                 React.createElement('input', {type: 'file', onChange(e){
                     const file = e.target.files[0];
                     if (file) {
@@ -75,6 +74,6 @@ export default function({
             })
         ),
         selection ? React.createElement(TextualSelected, {selection}) : undefined,
-        React.createElement(TextualAggregated, {m52Instruction, aggregatedInstruction})
+        React.createElement(TextualAggregated, {documentBudgetaire, aggregatedInstruction})
     ) : React.createElement('div', {});
 }

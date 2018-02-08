@@ -3,7 +3,7 @@ import visit from '../../shared/js/finance/visitHierarchical';
 import {DF, DI, RF, RI} from '../../shared/js/finance/constants';
 import {levels} from '../../shared/js/finance/hierarchicalAggregated';
 
-const rubriqueIdToLabel = require('../../shared/js/finance/m52FonctionLabels.json');
+import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 
 const colorClasses = Array(10).fill().map((e, i) => `area-color-${i+1}`);
 
@@ -26,7 +26,7 @@ visit(levels, e => {
     }
 });
 
-Object.keys(rubriqueIdToLabel).forEach(r => {
+Object.keys(fonctionLabels).forEach(r => {
     const lastFigure = Number(r[r.length - 1]);
 
     [DF, DI, RF, RI].forEach(rdfi => {

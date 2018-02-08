@@ -1,7 +1,7 @@
 import { Record, List, Set as ImmutableSet } from 'immutable';
 import { sum } from 'd3-array';
 
-import {makeM52RowId} from './M52InstructionDataStructures';
+import {makeLigneBudgetId} from './DocBudgDataStructures';
 
 import { rules } from './m52ToAggregated';
 import { EXPENDITURES, REVENUE, DF, RF, RI, DI } from './constants';
@@ -150,11 +150,7 @@ export const levels = {
                                 }
                             ]
                         },
-                        {
-                            id: 'DF-7',
-                            label: "Frais généraux",
-                            children: ruleIds.filter(id => id.startsWith('DF-7-'))
-                        }
+                        'DF-7',
                     ]
                 },
                 {
@@ -248,7 +244,7 @@ export default function (aggRows) {
 
         const splitByRowId = new Map();
         splitRows.forEach(r => {
-            const id = makeM52RowId(r);
+            const id = makeLigneBudgetId(r);
 
             let elements = splitByRowId.get(id);
             if(!elements){
@@ -271,14 +267,14 @@ export default function (aggRows) {
                 }
             }
 
-            const total = sum(elements.map(r => r['Montant']))
+            const total = sum(elements.map(r => r['MtReal']))
 
             // In case there is a split between say DF-1-1-3 and DF-1-5 and there is a corresponding unsplit in DF-2-4
             const correspondingUnsplit = targetNodeM52Rows.find(
-                r => makeM52RowId(r) === rowId && r.splitFor === undefined
+                r => makeLigneBudgetId(r) === rowId && r.splitFor === undefined
             );
 
-            if(correspondingUnsplit && Math.abs(correspondingUnsplit['Montant'] - total) <= 0.01){
+            if(correspondingUnsplit && Math.abs(correspondingUnsplit['MtReal'] - total) <= 0.01){
                 elements.forEach(e => {
                     targetNodeM52Rows = targetNodeM52Rows.remove(e)
                 })
@@ -286,7 +282,7 @@ export default function (aggRows) {
         });
 
         correspondingTargetNode.total = targetNodeM52Rows.reduce(
-            ((acc, e) => (acc + e["Montant"])), 
+            ((acc, e) => (acc + e['MtReal'])), 
             0
         );
 

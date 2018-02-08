@@ -9,13 +9,16 @@
     "start": "serve --cors -p 3000",
     "test": "jest",
     "build-demo": "npm-run-all --parallel build-demo:public build:m52overview",
-    "build:m52overview": "browserify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -p [minifyify --no-map]",
+    "build:m52overview": "npm-run-all build:public:data:m52-strings build:m52overview:script",
+    "build:m52overview:script": "browserify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -p [minifyify --no-map]",
     "build-preprod": "cross-env GIRONDE_FR_DRUPAL_MEDIA_ID=1938 npm run build-gironde-fr:public",
     "build-production": "cross-env GIRONDE_FR_DRUPAL_MEDIA_ID=2459 npm run build-gironde-fr:public",
-    "build-gironde-fr:public": "cross-env NODE_ENV=production npm-run-all --parallel build:public:*",
-    "build-demo:public": "cross-env NODE_ENV=demo npm-run-all --parallel build:public:*",
+    "build-gironde-fr:public": "cross-env NODE_ENV=production npm-run-all build:public:data:* build:public:style build:public:script",
+    "build-demo:public": "cross-env NODE_ENV=demo npm-run-all build:public:data:* build:public:style build:public:script",
     "build:public:style": "node-sass --importer src/public/style/env-importer.js src/public/style/main.scss build/public.css",
     "build:public:script": "browserify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.script -p [minifyify --no-map]",
+    "build:public:data:finance-data": "node -r @std/esm tools/make-public-data.js",
+    "build:public:data:m52-strings": "node -r @std/esm tools/make-doc-budg-strings.js",
     "watch:m52overview": "cross-env NODE_ENV=development watchify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
     "watch:public": "cross-env NODE_ENV=development npm-run-all --parallel watch:public:*",
     "prewatch:public:style": "npm run build:public:style",
@@ -26,14 +29,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dtc-innovation/dataviz-finances-gironde"
+    "url": "https://github.com/datalocale/dataviz-finances-gironde"
   },
   "author": "dtc innovation",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dtc-innovation/dataviz-finances-gironde/issues"
+    "url": "https://github.com/datalocale/dataviz-finances-gironde/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/datalocale/dataviz-finances-gironde",
   "browserify": {
     "transform": [
       [
@@ -57,14 +60,22 @@
       ]
     ]
   },
+  "@std/esm": {
+    "esm": "js",
+    "cjs": {
+      "namedExports": true
+    }
+  },
   "dependencies": {
+    "@std/esm": "^0.18.0",
     "currency-formatter": "^1.0.8",
-    "d3-array": "^1.1.1",
+    "d3-array": "^1.2.1",
     "d3-color": "^1.0.2",
     "d3-dsv": "^1.0.3",
     "d3-scale": "^1.0.5",
     "d3-shape": "^1.0.0",
     "event-emitter": "^0.3.4",
+    "fs-extra": "^4.0.2",
     "immutable": "^3.8.1",
     "lodash.memoize": "^4.1.2",
     "markdown-it": "^8.3.1",
@@ -74,7 +85,9 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "xml-buffer-tostring": "^0.2.0",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",

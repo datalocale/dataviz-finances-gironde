@@ -1,4 +1,4 @@
-export const COMPTE_ADMINISTRATIF = 'COMPTE_ADMINISTRATIF';
+export const COMPTES_ADMINISTRATIFS = 'COMPTES_ADMINISTRATIFS';
 
 export const AGGREGATED_ATEMPORAL = "AGGREGATED_ATEMPORAL";
 export const AGGREGATED_TEMPORAL = "AGGREGATED_TEMPORAL";
@@ -29,20 +29,11 @@ const env = process.env.NODE_ENV;
 
 const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 
-const prodYearToVariablePart = {
-    2012: '0',
-    2013: '1',
-    2014: '2',
-    2015: '3',
-    2016: '4',
-    // 2017: '???'
-};
-
 export const urls = {
     // finance data
-    [COMPTE_ADMINISTRATIF]: {
-        "production": (year => `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/${prodYearToVariablePart[year]}`),
-        "demo": (year => `../data/finances/cedi_${year}_CA.csv`),
+    [COMPTES_ADMINISTRATIFS]: {
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/XX`,
+        "demo": `../build/finances/doc-budgs.json`,
         get development() { return this.demo }
     }[env],
     [CORRECTIONS_AGGREGATED]: {
