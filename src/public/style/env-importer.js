@@ -3,7 +3,7 @@
 var path = require('path');
 
 /*
-    This file defines a Sass importer that exports a single "env-vars" module 
+    This file defines a Sass importer that exports a single "env-vars" module
     containing env-sensitive variable values
 */
 const PROD = 'production';  // gironde.fr website integration
@@ -19,7 +19,7 @@ const byEnv = {
         [DEV]: '../images/map-optimised.jpg'
     },
     "bonhomme-url": {
-        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/0`,
+        [PROD]: `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/1`,
         [DEMO]: '../images/bonhomme.svg',
         [DEV]: '../images/bonhomme.svg'
     }
