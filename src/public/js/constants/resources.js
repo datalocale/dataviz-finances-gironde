@@ -32,7 +32,7 @@ const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 export const urls = {
     // finance data
     [COMPTES_ADMINISTRATIFS]: {
-        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/XX`,
+        "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/21`,
         "demo": `/dataviz-finances-gironde/build/finances/doc-budgs.json`, 
         "development": `../build/finances/doc-budgs.json`,
     }[env],
