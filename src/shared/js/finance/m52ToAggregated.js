@@ -112,12 +112,18 @@ export const rules = Object.freeze({
         label: "Fonds National de Garantie Individuelle de Ressources (FNGIR)",
         filter(m52Row){
             return isRF(m52Row) && '73121' === m52Row['Nature'];
+        },
+    'RF-5-6': {
+        label: "Autres dotations",
+        filter(m52Row){
+            return isRF(m52Row) && '744' === m52Row['Nature'];
         }
     },
     'RF-6-1': {
         label: "Indus RSA",
         filter(m52Row){
-            return isRF(m52Row) && ['75342', '75343'].includes(m52Row['Nature']);
+            // modifié pour le CA 2017
+            return isRF(m52Row) && ['75342', '75343', '7531'].includes(m52Row['Nature']);
         }
     },
     'RF-6-2': {
@@ -215,7 +221,8 @@ export const rules = Object.freeze({
             const f1 = fonction.slice(0, 1);
             return isRF(m52Row) && f1!=='4' && f1!=='5' && [
                 '7817', '7711', '7714', '7718', 
-                '773', '7788', '7875', '7816'
+                '773', '7788', '7875', '7816', '7866'
+                // ajout de l'article 7866 pour le CA 2017
             ].includes(m52Row['Nature']);
         }
     },
@@ -267,7 +274,14 @@ export const rules = Object.freeze({
                 article !== '752' &&
                 article !== '7513' &&
                 article !== '75342' &&
-                article !== '75343';
+                article !== '75343' &&
+                // article exclus pour le CA 2017
+                article !== '7511' &&
+                article !== '7535' &&
+                article !== '7533' &&
+                article !== '7512' &&
+                article !== '7588' &&
+                article !== '7531' &&;
         }
     },
     'RF-9-8': {
@@ -310,7 +324,7 @@ export const rules = Object.freeze({
                                 "6234", "6245",
                                 "65221", "652222", "65223", "65228", 
                                 "6523", "652411", "652412", "652415", "652418", 
-                                "65821", "6718"
+                                "65821", "6718", "6336"
                             ].includes(article) ||
                             article.startsWith('64')
                         )
@@ -563,11 +577,15 @@ export const rules = Object.freeze({
         label: "Participation diverses",
         filter(m52Row){
             const f1 = m52Row['Fonction'].slice(0, 1);
+            const f2 = m52Row['Fonction'].slice(0, 2);
 
             return isDF(m52Row) &&
             (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
             ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
-            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58');
+            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')  ||
+            (f2 !== '91' &&   
+            ['6561', '6568'].includes(m52Row['Nature']))
+            ;
         }
     },
     'DF-4': { 
@@ -587,13 +605,7 @@ export const rules = Object.freeze({
                     )
                 ) && 
                 !(art.startsWith('64') && f2 === '51') &&
-                !(art === '6336' && f === '568') &&
-                !(art === '64121' && f === '50') &&
-                !(art === '64126' && f === '50') &&
-                // the line below may be added back by a correction
-                !(art === '6451' && f === '50') &&
-                !(art === '6453' && f === '50') &&
-                !(art === '6454' && f === '50');
+                !(art === '6336' && f === '568');
         }
     },
     'DF-5': { 
@@ -709,6 +721,17 @@ export const rules = Object.freeze({
                 !(['4', '5', '8'].includes(f1));
         }
     },
+    'DF-6-4': { 
+        label: "Dotations transferts",
+        filter(m52Row){
+            const art = m52Row['Nature'];
+            const f2 = m52Row['Fonction'].slice(0, 2);
+
+            return isDF(m52Row) &&
+                f2 === '91' &&
+                ['6561', '6568'].includes(art)
+        }
+    },
     'DF-7': { 
         label: "Intérêts des emprunts",
         filter(m52Row){
@@ -813,7 +836,9 @@ export const rules = Object.freeze({
                 (
                     article.startsWith('20') ||
                     article.startsWith('21') ||
-                    article.startsWith('23')
+                    article.startsWith('23') ||
+                    // ajout des investissements effectués pour le compte de tiers articles 1321/1324 fonction 621
+                    article.startsWith('13')
                 ) &&
                 !article.startsWith('204') &&
                 ['621', '622', '628'].includes(f3)

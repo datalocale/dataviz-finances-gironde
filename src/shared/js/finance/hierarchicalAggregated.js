@@ -147,7 +147,8 @@ export const levels = {
                                     id: 'DF-6-3',
                                     label: "Autres charges",
                                     children: ruleIds.filter(id => id.startsWith('DF-6-3-'))
-                                }
+                                },
+                                'DF-6-4'
                             ]
                         },
                         'DF-7',
