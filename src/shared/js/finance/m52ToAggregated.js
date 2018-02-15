@@ -1025,7 +1025,7 @@ export const rules = Object.freeze({
             return isRI(m52Row) && article === '1068';
         }
     }
-});
+};
 
 
 const AggregatedInstructionRowRecord = Record({
