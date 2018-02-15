@@ -281,7 +281,7 @@ export const rules = Object.freeze({
                 article !== '7533' &&
                 article !== '7512' &&
                 article !== '7588' &&
-                article !== '7531' ;
+                article !== '7531'
         }
     },
     'RF-9-8': {
