@@ -1022,8 +1022,10 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
 
             return isRI(m52Row) && article === '1068';
+            }
         }
-    }
+};
+
 
 
 const AggregatedInstructionRowRecord = Record({
