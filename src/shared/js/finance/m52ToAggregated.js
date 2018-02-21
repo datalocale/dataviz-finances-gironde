@@ -1,5 +1,4 @@
 import {Record, OrderedSet as ImmutableSet} from 'immutable';
-
 import {isRF, isDF, isRI, isDI} from './rowFilters';
 
 /*
@@ -7,8 +6,6 @@ import {isRF, isDF, isRI, isDI} from './rowFilters';
     It describes, documents and encodes the rules that allows to get from
     an "M52 budget" to a "budget agrégé"
 */
-
-
 export const rules = Object.freeze({
 
     /**
@@ -20,18 +17,19 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
 
-            return isRF(m52Row) && 
+            return isRF(m52Row) &&
                 ['73111', '7318'].includes(article);
         }
-    },
-    'RF-1-2' :{
-        label: 'Cotisation sur la valeur ajoutée des entreprises (CVAE)',
+    }
+    ,
+    'RF-1-2' : {
+        label: "Cotisation sur la valeur ajoutée des entreprises (CVAE)",
         filter(m52Row){
             return isRF(m52Row) && ['7311', '73112'].includes(m52Row['Nature']);
         }
     },
     'RF-1-3': {
-        label: 'Imposition forfaitaire pour les entreprises de réseaux (IFER)',
+        label: "Imposition forfaitaire pour les entreprises de réseaux (IFER)",
         filter(m52Row){
             return isRF(m52Row) && m52Row['Nature'] === '73114';
         }
@@ -43,13 +41,13 @@ export const rules = Object.freeze({
         }
     },
     'RF-2-1': {
-        label: 'Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE)',
+        label: "Taxe Intérieure de Consommation sur les Produits Energétiques (TICPE)",
         filter(m52Row){
             return isRF(m52Row) && '7352' === m52Row['Nature'];
         }
     },
     'RF-2-2': {
-        label: 'Taxe Sur les Contrats d’Assurance (TSCA)',
+        label: "Taxe Sur les Contrats d’Assurance (TSCA)",
         filter(m52Row){
             return isRF(m52Row) && m52Row['Nature'] === '7342';
         }
@@ -112,7 +110,8 @@ export const rules = Object.freeze({
         label: "Fonds National de Garantie Individuelle de Ressources (FNGIR)",
         filter(m52Row){
             return isRF(m52Row) && '73121' === m52Row['Nature'];
-        },
+        }
+    },
     'RF-5-6': {
         label: "Autres dotations",
         filter(m52Row){
@@ -198,9 +197,9 @@ export const rules = Object.freeze({
     'RF-8-1': {
         label: "Fonds de Péréquation DMTO et Fonds de solidarité",
         filter(m52Row){
-            return isRF(m52Row) && ['7326', '73261', '73262'].includes(m52Row['Nature']); 
+            return isRF(m52Row) && ['7326', '73261', '73262'].includes(m52Row['Nature']);
         }
-    },    
+    },
     'RF-8-2': {
         label: "Fonds exceptionnel pour les départements en difficulté",
         status: 'TEMPORARY',
@@ -220,7 +219,7 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f1 = fonction.slice(0, 1);
             return isRF(m52Row) && f1!=='4' && f1!=='5' && [
-                '7817', '7711', '7714', '7718', 
+                '7817', '7711', '7714', '7718',
                 '773', '7788', '7875', '7816', '7866'
                 // ajout de l'article 7866 pour le CA 2017
             ].includes(m52Row['Nature']);
@@ -233,8 +232,8 @@ export const rules = Object.freeze({
             const f1 = fonction.slice(0, 1);
 
             return isRF(m52Row) && f1!=='4' && f1!=='5' && [
-                '7475', '7476', '74771', '74772', '74778', 
-                '74788', '74888', '74718', '7474', '7472', 
+                '7475', '7476', '74771', '74772', '74778',
+                '74788', '74888', '74718', '7474', '7472',
                 '7473', '7478228'
             ].includes(m52Row['Nature']);
         }
@@ -249,7 +248,7 @@ export const rules = Object.freeze({
         label: "Produits des services",
         filter(m52Row){
             const fonction = m52Row['Fonction'];
-            const f1 = fonction.slice(0, 1); 
+            const f1 = fonction.slice(0, 1);
 
             return isRF(m52Row) && f1 !== '4' && f1 !== '5' && m52Row['Nature'].startsWith('70');
         }
@@ -266,11 +265,11 @@ export const rules = Object.freeze({
         label: "Autres produits de gestions courants",
         filter(m52Row){
             const fonction = m52Row['Fonction'];
-            const article = m52Row['Nature']
+            const article = m52Row['Nature'];
             const f1 = fonction.slice(0, 2);
             return isRF(m52Row) &&
-                f1 !== '4' && f1 !== '5' && 
-                article.startsWith('75') && 
+                f1 !== '4' && f1 !== '5' &&
+                article.startsWith('75') &&
                 article !== '752' &&
                 article !== '7513' &&
                 article !== '75342' &&
@@ -281,18 +280,18 @@ export const rules = Object.freeze({
                 article !== '7533' &&
                 article !== '7512' &&
                 article !== '7588' &&
-                article !== '7531' &&;
+                article !== '7531';
         }
     },
     'RF-9-8': {
         label: "Produits financiers",
         filter(m52Row){
-            return isRF(m52Row) && m52Row['Nature'].startsWith('76'); 
+            return isRF(m52Row) && m52Row['Nature'].startsWith('76');
         }
     },
-    
+
     /**
-     * Dépenses de fonctionnement 
+     * Dépenses de fonctionnement
      */
 
     'DF-1-1-1': {
@@ -313,22 +312,21 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            
-            return isDF(m52Row) && 
+
+            return isDF(m52Row) &&
                 (
-                    (
                         fonction.slice(0, 2) === '51' &&
                         (
                             [
-                                "6132", "6135", "6184", 
+                                "6132", "6135", "6184",
                                 "6234", "6245",
-                                "65221", "652222", "65223", "65228", 
-                                "6523", "652411", "652412", "652415", "652418", 
+                                "65221", "652222", "65223", "65228",
+                                "6523", "652411", "652412", "652415", "652418",
                                 "65821", "6718", "6336"
                             ].includes(article) ||
                             article.startsWith('64')
                         )
-                    ) ||
+                     ||
                     (fonction === '50' && article === '64121') ||
                     (fonction === '50' && article === '64126')
                 );
@@ -358,18 +356,18 @@ export const rules = Object.freeze({
         filter(m52Row){
             const fonction = m52Row['Fonction'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 fonction.slice(0, 2) === '51' &&
-                ['652416', '6514'].includes(m52Row['Nature']);    
+                ['652416', '6514'].includes(m52Row['Nature']);
         }
     },
     'DF-1-6': {
         label: "Subventions sociales",
-        filter(m52Row){ 
+        filter(m52Row){
             const fonction = m52Row['Fonction'];
             const art = m52Row['Nature'];
             const f1 = fonction.slice(0, 1);
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (f1 === '4' || f1 === '5') &&
                 art.startsWith('657') &&
                 fonction !== '51';
@@ -380,28 +378,28 @@ export const rules = Object.freeze({
         filter(m52Row){
             const fonction = m52Row['Fonction'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 fonction.slice(0, 2) === '51' &&
                 [
-                    "6068", "6188", "616", "62268", "6227", 
-                    "62878", "654", "6541", "6542", "6568", 
+                    "6068", "6188", "616", "62268", "6227",
+                    "62878", "654", "6541", "6542", "6568",
                     "65734", "65737", "6574", "673", "6745"
                 ].includes(m52Row['Nature']);
         }
     },
     'DF-1-7-2': {
         label: "Divers social - Autres",
-        filter(m52Row){ 
+        filter(m52Row){
             const fonction = m52Row['Fonction'];
             const art = m52Row['Nature'];
             const f1 = fonction.slice(0, 1);
             const parPrestationRuleIds = Object.keys(rules).filter(id => id.startsWith('DF-1-') && id !== 'DF-1-7-2');
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (f1 === '4' || f1 === '5') &&
                 (
-                    art.startsWith('60') || art.startsWith('61') || art.startsWith('62') || 
-                    art.startsWith('63') || art.startsWith('65') || art.startsWith('67') 
+                    art.startsWith('60') || art.startsWith('61') || art.startsWith('62') ||
+                    art.startsWith('63') || art.startsWith('65') || art.startsWith('67')
                 ) &&
                 parPrestationRuleIds.every(
                     id => !rules[id].filter(m52Row)
@@ -414,20 +412,20 @@ export const rules = Object.freeze({
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
-                !(art === '65111' && fonction === '51')
+                !(art === '65111' && fonction === '51');
         }
     },
-    
+
     'DF-2-1': {
         label: "Personnes en difficultés",
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
-            
+
             return isDF(m52Row) && (f2 === '54' || f2 === '56') &&
-                article !== '6568' && 
-                article !== '6513' && 
+                article !== '6568' &&
+                article !== '6513' &&
                 !article.startsWith('64') &&
                 article !== '6336' &&
                 article !== '6245';
@@ -441,8 +439,8 @@ export const rules = Object.freeze({
             const f2 = fonction.slice(0, 2);
 
             return isDF(m52Row) && f2 === '52' &&
-                article !== '6568' && 
-                article !== '6513' && 
+                article !== '6568' &&
+                article !== '6513' &&
                 !article.startsWith('64') &&
                 article !== '6336' &&
                 article !== '6245';
@@ -455,7 +453,7 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
             return isDF(m52Row) && (f2 === '55' || f2 === '53') &&
-                article !== '6513' && 
+                article !== '6513' &&
                 !article.startsWith('64') &&
                 article !== '6336' &&
                 article !== '6245';
@@ -467,12 +465,12 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     (f2 === '51' && article !== '6526') ||
                     (f2 === '50' && article === '64121') ||
                     (f2 === '50' && article === '64126')
-                );
+                )
         }
     },
     'DF-2-5': {
@@ -482,7 +480,7 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const f2 = fonction.slice(0, 2);
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 ['58', '50', '40', '41', '42', '48'].includes(f2) &&
                 !(article === '6556' && fonction === '58')
                  && !article.startsWith('64')
@@ -507,7 +505,7 @@ export const rules = Object.freeze({
             return isDF(m52Row) && (
                 (f1 === '8' && !article.startsWith('64') && article !== '6336') ||
                 (
-                    f === '568' && 
+                    f === '568' &&
                     (
                         article === '6245' ||
                         article === '6336' ||
@@ -523,12 +521,12 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 f2 === '52' &&
                 ['6245', '6513', '6568'].includes(m52Row['Nature']);
         }
     },
-    'DF-3-4': { 
+    'DF-3-4': {
         label: "Prévention spécialisée",
         filter(m52Row){
             const f = m52Row['Fonction'];
@@ -548,10 +546,10 @@ export const rules = Object.freeze({
             const f1 = m52Row['Fonction'].slice(0, 1);
             return isDF(m52Row) &&
                 [
-                    "65731", "65732", "65733", "65734", "65735", 
+                    "65731", "65732", "65733", "65734", "65735",
                     "65736", "65737", "65738", "6574"
                 ].includes(art) &&
-                !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8') );
+                !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8'));
         }
     },
     'DF-3-7-1': {
@@ -559,21 +557,21 @@ export const rules = Object.freeze({
         filter(m52Row){
             const f2 = m52Row['Fonction'].slice(0, 2);
 
-            return isDF(m52Row) && 
-                ( f2 === '72') && 
+            return isDF(m52Row) &&
+                (f2 === '72') &&
                 ('6556' === m52Row['Nature'] ||
                 '65561' === m52Row['Nature']);
         }
     },
-    'DF-3-7-2': { 
+    'DF-3-7-2': {
         label: "Bourses départementales",
         filter(m52Row){
             const f2 = m52Row['Fonction'].slice(0, 2);
-            return isDF(m52Row) && m52Row['Nature'] === '6513' && 
+            return isDF(m52Row) && m52Row['Nature'] === '6513' &&
             f2 !== '52' && f2 !== '81';
         }
     },
-    'DF-3-7-3': { 
+    'DF-3-7-3': {
         label: "Participation diverses",
         filter(m52Row){
             const f1 = m52Row['Fonction'].slice(0, 1);
@@ -583,17 +581,16 @@ export const rules = Object.freeze({
             (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
             ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
             (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')  ||
-            (f2 !== '91' &&   
-            ['6561', '6568'].includes(m52Row['Nature']))
-            ;
+            (f2 !== '91' &&
+            ['6561', '6568'].includes(m52Row['Nature']));
         }
     },
-    'DF-4': { 
+    'DF-4': {
         label: "Frais de personnel",
         filter(m52Row){
             const chap = m52Row['Chapitre'];
             const art = m52Row['Nature'];
-            const f = m52Row['Fonction']
+            const f = m52Row['Fonction'];
             const f2 = f.slice(0, 2);
 
             return isDF(m52Row) &&
@@ -603,12 +600,12 @@ export const rules = Object.freeze({
                         (art.startsWith('64') || art === '6218' || art === '6336') &&
                         (chap === '015' || chap === '016' || chap === '017')
                     )
-                ) && 
+                ) &&
                 !(art.startsWith('64') && f2 === '51') &&
                 !(art === '6336' && f === '568');
         }
     },
-    'DF-5': { 
+    'DF-5': {
         label: "Péréquation verticale",
         filter(m52Row){
             const art = m52Row['Nature'];
@@ -617,7 +614,7 @@ export const rules = Object.freeze({
             ['73913', '73914', '73926', '739261', '739262'].includes(art);
         }
     },
-    'DF-6-1-1': { 
+    'DF-6-1-1': {
         label: "Achats et fournitures",
         filter(m52Row){
             const f3 = m52Row['Fonction'].slice(0, 3);
@@ -629,48 +626,48 @@ export const rules = Object.freeze({
                 !(f3 === '621');
         }
     },
-    'DF-6-1-2': { 
-        label: "Prestations de services (entretien et réparation, assurances, locations, frais divers formation colloques…)",
+    'DF-6-1-2': {
+        label: "Prestations de services (entretien et réparation, assurances, locations, frais divers, formation, colloques…)",
         filter(m52Row){
             const f3 = m52Row['Fonction'].slice(0, 3);
             const f1 = m52Row['Fonction'].slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 art.startsWith('61') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621');
         }
     },
-    'DF-6-1-3': { 
+    'DF-6-1-3': {
         label: "Frais divers (honoraires, conseils, reception, frais télécom, affranchissement, services bancaires…)",
         filter(m52Row){
             const f3 = m52Row['Fonction'].slice(0, 3);
             const f1 = m52Row['Fonction'].slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 art.startsWith('62') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
                 art !== '6218';
         }
     },
-    'DF-6-1-4': { 
+    'DF-6-1-4': {
         label: "Autres impôts et taxes",
         filter(m52Row){
             const f3 = m52Row['Fonction'].slice(0, 3);
             const f1 = m52Row['Fonction'].slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 art.startsWith('63') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
                 art !== '6336';
         }
     },
-    'DF-6-2': { 
+    'DF-6-2': {
         label: "Dépenses de voirie",
         filter(m52Row){
             const art = m52Row['Nature'];
@@ -685,43 +682,44 @@ export const rules = Object.freeze({
     },
 
 
-    'DF-6-3-1': { 
+    'DF-6-3-1': {
         label: "Questure/indemnités des élus",
         filter(m52Row){
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
             [
-                "65861", "65862", "6531", "6532", "6533", 
+                "65861", "65862", "6531", "6532", "6533",
                 "6534", "65372", '6535'
             ].includes(m52Row['Nature']);
         }
     },
-    'DF-6-3-2': { 
+    'DF-6-3-2': {
         label: "Charges exceptionnelles et provisions",
         filter(m52Row){
             const f1 = m52Row['Fonction'].slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (art.startsWith('67') || art.startsWith('68')) &&
                 !(['4', '5', '8'].includes(f1));
         }
     },
-    'DF-6-3-3': { 
+    'DF-6-3-3': {
         label: "Autres",
         filter(m52Row){
             const f1 = m52Row['Fonction'].slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
-                    (art.startsWith('73') && 
+                    (art.startsWith('73') &&
                     !['73913', '73914', '73926', '739261', '739262'].includes(art)
                 ) ||
-                ['654', '6541', '6542', '6581', '65821', '65888', '65661'].includes(art)) &&
+                ['654', '6541', '6542', '6581', '65821', '65888', '65661'].includes(art)
+                ) &&
                 !(['4', '5', '8'].includes(f1));
         }
     },
-    'DF-6-4': { 
+    'DF-6-4': {
         label: "Dotations transferts",
         filter(m52Row){
             const art = m52Row['Nature'];
@@ -729,10 +727,10 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 f2 === '91' &&
-                ['6561', '6568'].includes(art)
+                ['6561', '6568'].includes(art);
         }
     },
-    'DF-7': { 
+    'DF-7': {
         label: "Intérêts des emprunts",
         filter(m52Row){
             return isDF(m52Row) && m52Row['Nature'].startsWith('66');
@@ -765,7 +763,7 @@ export const rules = Object.freeze({
         label: "Subventions",
         filter(m52Row){
             const art = m52Row['Nature'];
-            return isRI(m52Row) && 
+            return isRI(m52Row) &&
                 art !== '1332' && art !== '1341' && art !== '1335' && art !== '1345' &&
                 (art.startsWith('13') || art.startsWith('204'))
         }
@@ -775,8 +773,8 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
 
-            return isRI(m52Row) && 
-                article !== '204' && 
+            return isRI(m52Row) &&
+                article !== '204' &&
                 (
                     ["165", "1676", "454121", "454421", "454428", "45821", '1335', '1345'].includes(article) ||
                     ['20', '21', '22', '23', '26', '27'].includes(m52Row['Chapitre'])
@@ -814,7 +812,7 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f3 = fonction.slice(0, 3);
-            
+
             return isDI(m52Row) &&
                 (
                     article.startsWith('20') ||
@@ -831,7 +829,7 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f3 = fonction.slice(0, 3);
-            
+
             return isDI(m52Row) &&
                 (
                     article.startsWith('20') ||
@@ -841,7 +839,7 @@ export const rules = Object.freeze({
                     article.startsWith('13')
                 ) &&
                 !article.startsWith('204') &&
-                ['621', '622', '628'].includes(f3)
+                ['621', '622', '628'].includes(f3);
         }
     },
     'DI-1-3': {
@@ -852,14 +850,16 @@ export const rules = Object.freeze({
             const f3 = fonction.slice(0, 3);
 
             return isDI(m52Row) &&
-                ((
+                (
+                  (
                     article.startsWith('20') ||
                     article.startsWith('21') ||
                     article.startsWith('23')
-                ) &&
+                  ) &&
                 !article.startsWith('204') &&
                 !['221', '621', '622', '628', '738'].includes(f3) ||
-                article === '1322');
+                article === '1322'
+              );
         }
     },
     'DI-1-4': {
@@ -872,8 +872,8 @@ export const rules = Object.freeze({
             return isDI(m52Row) &&
                 (
                     ([
-                        "1311", "2031", "2111", "2157", 
-                        "2182", "21848", "2312", "231351", "2314", 
+                        "1311", "2031", "2111", "2157",
+                        "2182", "21848", "2312", "231351", "2314",
                         "23152", "23153"
                     ].includes(article) &&
                     f3 === '738' ) ||
@@ -903,9 +903,9 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
-            
+
             return isDI(m52Row) &&
-                f2 !== '72' && 
+                f2 !== '72' &&
                 ['20414', '204141', '204142'].includes(article);
         }
     },
@@ -916,7 +916,7 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
 
-            return isDI(m52Row) && 
+            return isDI(m52Row) &&
                 ['204142', '204182', '20422'].includes(article) &&
                 f2 === '72';
         }
@@ -925,7 +925,7 @@ export const rules = Object.freeze({
         label: "sdis",
         filter(m52Row){
             const article = m52Row['Nature'];
-            
+
             return isDI(m52Row) && article === '2041781';
         }
     },
@@ -935,16 +935,16 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
 
-            return isDI(m52Row) && 
+            return isDI(m52Row) &&
                 [
-                    "204112", "204113", "204122", "204131", "204132", 
-                    "204151", "204152", "204162", "2041721", "2041722", 
-                    "2041782", "204181", "204182", "204182", "20421", 
-                    "20422", "20431", '2761', '261', '20421', '204183', 
+                    "204112", "204113", "204122", "204131", "204132",
+                    "204151", "204152", "204162", "2041721", "2041722",
+                    "2041782", "204181", "204182", "204182", "20421",
+                    "20422", "20431", '2761', '261', '20421', '204183',
                     '204113', '1321','2748','1328','13278'
                 ].includes(article) &&
-                fonction !== '72' && 
-                !(article === '204152' && fonction === '93') && 
+                fonction !== '72' &&
+                !(article === '204152' && fonction === '93') &&
                 !(article === '204182' && fonction === '68');
         }
     },
@@ -955,19 +955,19 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
 
-            return isDI(m52Row) && 
+            return isDI(m52Row) &&
                 "204182" === article &&
                 f2 === '68';
         }
     },
     'DI-2-6': {
-        label: "GIRONDE Numérique",
+        label: "Gironde Numérique",
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
             const f2 = fonction.slice(0, 2);
 
-            return isDI(m52Row) && 
+            return isDI(m52Row) &&
                 "204152" === article &&
                 f2 === '93';
         }
@@ -1007,7 +1007,7 @@ export const rules = Object.freeze({
             return (isDI(m52Row) || isRI(m52Row)) && article === '166';
         }
     },
-    // 2 lignes en DI et RI qui s'annulent  
+    // 2 lignes en DI et RI qui s'annulent
     'REAM-OCLT-2': {
         label: "Opération tirage ligne de trésorerie",
         filter(m52Row){
@@ -1026,6 +1026,7 @@ export const rules = Object.freeze({
         }
     }
 });
+
 
 
 const AggregatedInstructionRowRecord = Record({
@@ -1061,10 +1062,9 @@ export default function convert(docBudg, corrections = []){
     return ImmutableSet(
         Object.keys(rules)
         .map(id => makeAggregatedInstructionRowRecord(
-            id, 
-            docBudg.rows, 
+            id,
+            docBudg.rows,
             yearCorrections.filter(c => c['splitFor'] === id)
         ))
     )
 }
-
