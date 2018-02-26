@@ -282,7 +282,7 @@ export const rules = Object.freeze({
                 article !== '7533' &&
                 article !== '7512' &&
                 article !== '7588' &&
-                article !== '7531'
+                article !== '7531';
         }
     },
     'RF-9-8': {
@@ -414,7 +414,7 @@ export const rules = Object.freeze({
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
-                !(art === '65111' && fonction === '51')
+                !(art === '65111' && fonction === '51');
         }
     },
 
@@ -584,6 +584,7 @@ export const rules = Object.freeze({
             ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
             (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58') &&
             ((m52Row['Nature'] === '6561' || m52Row['Nature'] === '6568') && m52Row['Fonction'] === '91');
+
         }
     },
     'DF-4': {
@@ -728,6 +729,7 @@ export const rules = Object.freeze({
 //            const f2 = m52Row['Fonction'].slice(0, 2);
             return isDF(m52Row) &&
                 art === '65542'
+
         }
     },
     'DF-7': {
@@ -839,7 +841,7 @@ export const rules = Object.freeze({
                     article.startsWith('13')
                 ) &&
                 !article.startsWith('204') &&
-                ['621', '622', '628'].includes(f3)
+                ['621', '622', '628'].includes(f3);
         }
     },
     'DI-1-3': {
@@ -1023,9 +1025,10 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
 
             return isRI(m52Row) && article === '1068';
+            }
         }
-    }
-});
+};
+
 
 
 const AggregatedInstructionRowRecord = Record({
