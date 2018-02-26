@@ -275,6 +275,8 @@ export const rules = Object.freeze({
                 article !== '75342' &&
                 article !== '75343' &&
                 // article exclus pour le CA 2017
+                // on veut enlever ces articles seulement pour les fonctions 4 et 5
+                // alors que cela semble les enlever dans les autres fonctions également
                 article !== '7511' &&
                 article !== '7535' &&
                 article !== '7533' &&
@@ -575,14 +577,13 @@ export const rules = Object.freeze({
         label: "Participation diverses",
         filter(m52Row){
             const f1 = m52Row['Fonction'].slice(0, 1);
-            const f2 = m52Row['Fonction'].slice(0, 2);
+      //      const f2 = m52Row['Fonction'].slice(0, 2);
 
             return isDF(m52Row) &&
             (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
             ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
-            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')  ||
-            (f2 !== '91' &&
-            ['6561', '6568'].includes(m52Row['Nature']));
+            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58') &&
+            ((m52Row['Nature'] === '6561' || m52Row['Nature'] === '6568') && m52Row['Fonction'] === '91');
         }
     },
     'DF-4': {
@@ -602,7 +603,8 @@ export const rules = Object.freeze({
                     )
                 ) &&
                 !(art.startsWith('64') && f2 === '51') &&
-                !(art === '6336' && f === '568');
+                !(art === '6336' && f === '568') &&
+                !(art === '6336' && f === '51') ;
         }
     },
     'DF-5': {
@@ -723,11 +725,9 @@ export const rules = Object.freeze({
         label: "Dotations transferts",
         filter(m52Row){
             const art = m52Row['Nature'];
-            const f2 = m52Row['Fonction'].slice(0, 2);
-
+//            const f2 = m52Row['Fonction'].slice(0, 2);
             return isDF(m52Row) &&
-                f2 === '91' &&
-                ['6561', '6568'].includes(art)
+                art === '65542'
         }
     },
     'DF-7': {
@@ -941,7 +941,7 @@ export const rules = Object.freeze({
                     "204151", "204152", "204162", "2041721", "2041722",
                     "2041782", "204181", "204182", "204182", "20421",
                     "20422", "20431", '2761', '261', '20421', '204183',
-                    '204113', '1321','2748','1328','13278'
+                    '204113','2748','1328','13278'
                 ].includes(article) &&
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
