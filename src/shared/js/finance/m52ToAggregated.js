@@ -266,7 +266,7 @@ export const rules = Object.freeze({
         filter(m52Row){
             const fonction = m52Row['Fonction'];
             const article = m52Row['Nature'];
-            const f1 = fonction.slice(0, 2);
+            const f1 = fonction.slice(0, 1);
             return isRF(m52Row) &&
                 f1 !== '4' && f1 !== '5' &&
                 article.startsWith('75') &&
