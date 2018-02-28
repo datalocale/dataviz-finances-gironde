@@ -266,21 +266,11 @@ export const rules = Object.freeze({
         filter(m52Row){
             const fonction = m52Row['Fonction'];
             const article = m52Row['Nature'];
-            const f1 = fonction.slice(0, 2);
+            const f1 = fonction.slice(0, 1);
             return isRF(m52Row) &&
                 f1 !== '4' && f1 !== '5' &&
                 article.startsWith('75') &&
-                article !== '752' &&
-                article !== '7513' &&
-                article !== '75342' &&
-                article !== '75343' &&
-                // article exclus pour le CA 2017
-                article !== '7511' &&
-                article !== '7535' &&
-                article !== '7533' &&
-                article !== '7512' &&
-                article !== '7588' &&
-                article !== '7531';
+                article !== '752' ;
         }
     },
     'RF-9-8': {
@@ -579,10 +569,11 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
             (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
-            ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
-            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')  ||
             (f2 !== '91' &&
-            ['6561', '6568'].includes(m52Row['Nature']));
+            ['6561', '6568'].includes(m52Row['Nature'])) &&
+            ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
+            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')
+            ;
         }
     },
     'DF-4': {
@@ -726,7 +717,7 @@ export const rules = Object.freeze({
             const f2 = m52Row['Fonction'].slice(0, 2);
 
             return isDF(m52Row) &&
-                f2 === '91' &&
+                f2 == '91' &&
                 ['6561', '6568'].includes(art);
         }
     },
