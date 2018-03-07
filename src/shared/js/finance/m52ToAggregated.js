@@ -424,7 +424,7 @@ export const rules = Object.freeze({
             return isDF(m52Row) &&
                 fonction.startsWith('53') &&
                 [
-                    "61113", "6568"
+                    "65113", "6568"
                 ].includes(m52Row['Nature']);
         }
     },
