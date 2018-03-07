@@ -602,31 +602,39 @@ export const rules = Object.freeze({
               ['6561', '6568'].includes(m52Row['Nature'])
             );
 
-            /*
-            D 91 6561 (600 000,00 €) utilisé dans DF-3-7-3, DF-6-4
-D 91 6568 (151 221,00 €) utilisé dans DF-3-7-3, DF-6-4
-            */
         }
     },
     'DF-4': {
         label: "Frais de personnel",
-        filter(m52Row){
+        filter(m52Row, exer){
             const chap = m52Row['Chapitre'];
             const art = m52Row['Nature'];
             const f = m52Row['Fonction'];
             const f2 = f.slice(0, 2);
 
-            return isDF(m52Row) &&
+            return isDF(m52Row) && 
                 (
-                    chap === '012' ||
                     (
-                        (art.startsWith('64') || art === '6218' || art === '6336') &&
-                        (chap === '015' || chap === '016' || chap === '017')
+                        chap === '012' ||
+                        (
+                            (art.startsWith('64') || art === '6218' || art === '6336') &&
+                            (chap === '015' || chap === '016' || chap === '017')
+                        )
+                    ) &&
+                    !((art.startsWith('64') || art === '6336') && f2 === '51') &&
+                    !(art === '6336' && f === '568') &&
+                    !((art === '64126' || art === '64121') && f2 === '50') &&
+                    !(
+                        // These lines should be added only for 2017 and later
+                        exer < 2017 && 
+                        (
+                            (art === '6451' && f === '50') ||
+                            (art === '6453' && f === '50') ||
+                            (art === '6454' && f === '50')
+                        )
                     )
-                ) &&
-                !((art.startsWith('64') || art === '6336') && f2 === '51') &&
-                !(art === '6336' && f === '568') &&
-                !((art === '64126' || art === '64121') && f2 === '50');
+                ) 
+                
         }
     },
     'DF-5': {
@@ -1067,10 +1075,10 @@ const AggregatedInstructionRowRecord = Record({
 
 
 
-function makeAggregatedInstructionRowRecord(id, rows, corrections){
+function makeAggregatedInstructionRowRecord(id, rows, corrections, exer){
     const rule = rules[id];
 
-    let relevantDocBudgRows = rows.filter(rule.filter).union(corrections);
+    let relevantDocBudgRows = rows.filter(r => rule.filter(r, exer)).union(corrections);
 
     return AggregatedInstructionRowRecord({
         id,
@@ -1092,7 +1100,8 @@ export default function convert(docBudg, corrections = []){
         .map(id => makeAggregatedInstructionRowRecord(
             id,
             docBudg.rows,
-            yearCorrections.filter(c => c['splitFor'] === id)
+            yearCorrections.filter(c => c['splitFor'] === id),
+            docBudg['Exer']
         ))
     )
 }
