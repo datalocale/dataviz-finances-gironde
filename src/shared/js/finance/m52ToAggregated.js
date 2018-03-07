@@ -266,7 +266,7 @@ export const rules = Object.freeze({
         filter(m52Row){
             const fonction = m52Row['Fonction'];
             const article = m52Row['Nature'];
-            const f1 = fonction.slice(0, 2);
+            const f1 = fonction.slice(0, 1);
             return isRF(m52Row) &&
                 f1 !== '4' && f1 !== '5' &&
                 article.startsWith('75') &&
@@ -279,6 +279,7 @@ export const rules = Object.freeze({
                 article !== '7535' &&
                 article !== '7533' &&
                 article !== '7512' &&
+
                 article !== '7531';
         }
     },
@@ -579,7 +580,7 @@ export const rules = Object.freeze({
             return isDF(m52Row) &&
             (
               f1 !== '4' && f1 !== '5' && f1 !== '8' &&
-              ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])
+              ['6512', '65568'].includes(m52Row['Nature'])
             ) ||
             (
               m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58'
@@ -588,6 +589,11 @@ export const rules = Object.freeze({
               f1 !== '4' && f1 !== '5' && f1 !== '8' && f2 !== '91' &&
               ['6561', '6568'].includes(m52Row['Nature'])
             );
+
+            /*
+            D 91 6561 (600 000,00 €) utilisé dans DF-3-7-3, DF-6-4
+D 91 6568 (151 221,00 €) utilisé dans DF-3-7-3, DF-6-4
+            */
         }
     },
     'DF-4': {
@@ -606,7 +612,7 @@ export const rules = Object.freeze({
                         (chap === '015' || chap === '016' || chap === '017')
                     )
                 ) &&
-                !((art.startsWith('64') || art === '6236') && f2 === '51') &&
+                !((art.startsWith('64') || art === '6336') && f2 === '51') &&
                 !(art === '6336' && f === '568') &&
                 !((art === '64126' || art === '64121') && f2 === '50');
         }
@@ -954,6 +960,7 @@ export const rules = Object.freeze({
                 ].includes(article) &&
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
+                !(article === '1321' && fonction === '621') &&
                 !(article === '204182' && fonction === '68');
         }
     },
