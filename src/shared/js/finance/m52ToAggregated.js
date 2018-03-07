@@ -279,7 +279,6 @@ export const rules = Object.freeze({
                 article !== '7535' &&
                 article !== '7533' &&
                 article !== '7512' &&
-                article !== '7588' &&
                 article !== '7531';
         }
     },
@@ -578,11 +577,17 @@ export const rules = Object.freeze({
             const f2 = m52Row['Fonction'].slice(0, 2);
 
             return isDF(m52Row) &&
-            (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
-            ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
-            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')  ||
-            (f2 !== '91' &&
-            ['6561', '6568'].includes(m52Row['Nature']));
+            (
+              f1 !== '4' && f1 !== '5' && f1 !== '8' &&
+              ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])
+            ) ||
+            (
+              m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58'
+            ) ||
+            (
+              f1 !== '4' && f1 !== '5' && f1 !== '8' && f2 !== '91' &&
+              ['6561', '6568'].includes(m52Row['Nature'])
+            );
         }
     },
     'DF-4': {
@@ -601,8 +606,9 @@ export const rules = Object.freeze({
                         (chap === '015' || chap === '016' || chap === '017')
                     )
                 ) &&
-                !(art.startsWith('64') && f2 === '51') &&
-                !(art === '6336' && f === '568');
+                !((art.startsWith('64') || art === '6236') && f2 === '51') &&
+                !(art === '6336' && f === '568') &&
+                !((art === '64126' || art === '64121') && f2 === '50');
         }
     },
     'DF-5': {
@@ -726,8 +732,11 @@ export const rules = Object.freeze({
             const f2 = m52Row['Fonction'].slice(0, 2);
 
             return isDF(m52Row) &&
-                f2 === '91' &&
-                ['6561', '6568'].includes(art);
+                (
+                  f2 === '91' &&
+                ['6561', '6568'].includes(art)
+              ) ||
+              ['65542'].includes(m52Row['Nature']);
         }
     },
     'DF-7': {
