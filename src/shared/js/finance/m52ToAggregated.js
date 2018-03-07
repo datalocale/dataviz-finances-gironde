@@ -412,10 +412,22 @@ export const rules = Object.freeze({
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
-                !(art === '65111' && fonction === '51');
+                !(art === '65111' && fonction === '51') &&
+                !((art === '65113' || art === '6568') && fonction.startsWith('53'));
         }
     },
+    'DF-1-8': {
+        label: "Conférence des financeurs",
+        filter(m52Row){
+            const fonction = m52Row['Fonction'];
 
+            return isDF(m52Row) &&
+                fonction.startsWith('53') &&
+                [
+                    "61113", "6568"
+                ].includes(m52Row['Nature']);
+        }
+    },
     'DF-2-1': {
         label: "Personnes en difficultés",
         filter(m52Row){
