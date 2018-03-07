@@ -23,20 +23,20 @@ import FocusPresence from './components/screens/FocusPresence';
 import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
-import { 
-    DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED, 
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, 
-    FINANCE_DETAIL_ID_CHANGE, 
-} from './constants/actions'; 
+import {
+    DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
+    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
+    FINANCE_DETAIL_ID_CHANGE,
+} from './constants/actions';
 
 
 import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 
 
 /**
- * 
+ *
  * Initialize Redux store + React binding
- * 
+ *
  */
 const REACT_CONTAINER_SELECTOR = '.cd33-finance-dataviz';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
@@ -100,8 +100,8 @@ const store = createStore(
     reducer,
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
-        currentYear: 2016,
-        explorationYear: 2016,
+        currentYear: 2017,
+        explorationYear: 2017,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]]),
         screenWidth: window.innerWidth
@@ -114,7 +114,7 @@ store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
     textList: Object.keys(fonctionLabels)
         .map(fonction => ({
-            id: `M52-DF-${fonction}`, 
+            id: `M52-DF-${fonction}`,
             label: fonctionLabels[fonction]
         }))
 });
@@ -122,7 +122,7 @@ store.dispatch({
     type: ATEMPORAL_TEXTS_RECEIVED,
     textList: Object.keys(fonctionLabels)
         .map(fonction => ({
-            id: `M52-DI-${fonction}`, 
+            id: `M52-DI-${fonction}`,
             label: fonctionLabels[fonction]
         }))
 });
@@ -130,9 +130,9 @@ store.dispatch({
 
 
 /**
- * 
+ *
  * Fetching initial data
- * 
+ *
  */
 fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
 .then(csvStringToCorrections)
@@ -179,9 +179,9 @@ fetch(urls[AGGREGATED_TEMPORAL]).then(resp => resp.text())
 
 
 /**
- * 
+ *
  * Routing
- * 
+ *
  */
 
 page('/', () => {
@@ -257,7 +257,7 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
         text: 'Explorer',
         url: `#!/explorer`
     })
-    
+
     const breadcrumb = DEFAULT_BREADCRUMB.concat(breadcrumbData.reverse());
 
     ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
@@ -314,9 +314,9 @@ page.base(location.pathname);
 page({ hashbang: true });
 window.addEventListener('hashchange', () => {
     scrollTo(0, 0);
-    page.redirect(location.hash); 
+    page.redirect(location.hash);
 });
 window.addEventListener('popstate', () => {
     scrollTo(0, 0);
-    page.redirect(location.hash); 
+    page.redirect(location.hash);
 });
