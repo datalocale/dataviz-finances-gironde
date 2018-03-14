@@ -405,13 +405,15 @@ export const rules = Object.freeze({
                 !(art === '65111' && fonction === '51');
         }
     },
-        'DF-1-8': {
+    'DF-1-8': {
         label: "Conférence des financeurs",
+
         filter(m52Row){
+            const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
 
             return isDF(m52Row) &&
-                ( 
+                (
                     article === '65113' && fonction === 53
                 ) &&
                 (
