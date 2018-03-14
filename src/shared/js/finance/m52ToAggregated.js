@@ -405,7 +405,21 @@ export const rules = Object.freeze({
                 !(art === '65111' && fonction === '51');
         }
     },
+        'DF-1-8': {
+        label: "Conférence des financeurs",
+        filter(m52Row){
+            const fonction = m52Row['Fonction'];
 
+            return isDF(m52Row) &&
+                ( 
+                    article === '65113' && fonction === 53
+                ) &&
+                (
+                    (article === '65113' || article === '6568') && (fonction === '531' || fonction === '532')
+                )
+            ;
+        }
+    },
     'DF-2-1': {
         label: "Personnes en difficultés",
         filter(m52Row){
