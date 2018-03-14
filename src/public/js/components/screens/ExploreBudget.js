@@ -114,7 +114,7 @@ export function TotalBudget({
                 Object.assign(
                     {
                         videoURL: process.env.NODE_ENV === 'production' ?
-                            animationVideo :    
+                            animationVideo :
                             (screenWidth <= 1000 ? animationVideo : undefined)
                     },
                     constructionAmounts
@@ -130,8 +130,8 @@ export function TotalBudget({
                     title: `Données brutes sur datalocale.fr`,
                     items: [
                         {
-                            text: 'Comptes administratifs du Département de la Gironde',
-                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde'
+                            text: 'Comptes administratifs du Département de la Gironde au format XML TOTEM',
+                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde'
                         }
                     ]
                 }

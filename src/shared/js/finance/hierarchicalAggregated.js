@@ -105,7 +105,8 @@ export const levels = {
                                     id: 'DF-1-7',
                                     label: "Autre social",
                                     children: ruleIds.filter(id => id.startsWith('DF-1-7-'))
-                                }
+                                },
+                                'DF-1-8'
                             ]
                         },
                         {
@@ -209,7 +210,7 @@ export default function (aggRows) {
 
         // build the tree first
         sourceNode.children.forEach(child => {
-            
+
             if (typeof child === 'string') {
                 // aggRows.find over all tree nodes is O(n²)
                 const childRow = aggRows.find(r => r.id === child);
@@ -283,7 +284,7 @@ export default function (aggRows) {
         });
 
         correspondingTargetNode.total = targetNodeM52Rows.reduce(
-            ((acc, e) => (acc + e['MtReal'])), 
+            ((acc, e) => (acc + e['MtReal'])),
             0
         );
 

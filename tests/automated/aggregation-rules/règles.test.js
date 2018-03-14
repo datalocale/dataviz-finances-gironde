@@ -478,7 +478,7 @@ test("D 50 64126 est dans DF-1-1-3 et DF-2-4, mais pas dans DF-4", () => {
     expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
 });
 
-test("D 50 6451 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+test("Avant 2017, D 50 6451 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     const m52Rows = [
         new LigneBudgetRecord({
             'CodRD': 'D',
@@ -489,7 +489,9 @@ test("D 50 6451 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
             'MtReal': 50
         })
     ];
-    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows) });
+    const exer = 2016;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
 
     const aggVision = m52ToAggregated(instruction);
 
@@ -502,7 +504,29 @@ test("D 50 6451 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
 });
 
-test("D 50 6453 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+test("Après 2017 inclus, D 50 6451 est dans DF-4", () => {
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'F',
+            'Fonction': '50',
+            'Nature': '6451',
+            'Chapitre': '012',
+            'MtReal': 50
+        })
+    ];
+    const exer = 2017;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(true);
+});
+
+test("Avant 2017, D 50 6453 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     const m52Rows = [
         new LigneBudgetRecord({
             'CodRD': 'D',
@@ -513,7 +537,9 @@ test("D 50 6453 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
             'MtReal': 50
         })
     ];
-    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows) });
+    const exer = 2016;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
 
     const aggVision = m52ToAggregated(instruction);
 
@@ -526,7 +552,29 @@ test("D 50 6453 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
 });
 
-test("D 50 6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
+test("Après 2017 inclus, D 50 6453 est dans DF-4", () => {
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'F',
+            'Fonction': '50',
+            'Nature': '6453',
+            'Chapitre': '012',
+            'MtReal': 50
+        })
+    ];
+    const exer = 2017;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(true);
+});
+
+test("Avant 2017, D 50 6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     const m52Rows = [
         new LigneBudgetRecord({
             'CodRD': 'D',
@@ -537,7 +585,9 @@ test("D 50 6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
             'MtReal': 50
         })
     ];
-    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows) });
+    const exer = 2016;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
 
     const aggVision = m52ToAggregated(instruction);
 
@@ -549,6 +599,29 @@ test("D 50 6454 est ni dans DF-1-1-3 ni DF-2-4 ni DF-4", () => {
     expect(aggDF24.M52Rows.includes(m52Rows[0])).toBe(false);
     expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(false);
 });
+
+test("Après 2017 inclus, D 50 6454 est dans DF-4", () => {
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'F',
+            'Fonction': '50',
+            'Nature': '6454',
+            'Chapitre': '012',
+            'MtReal': 50
+        })
+    ];
+    const exer = 2017;
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: exer });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF4 = aggVision.find(row => row.id === 'DF-4');
+
+    expect(aggDF4.M52Rows.includes(m52Rows[0])).toBe(true);
+});
+
 
 test("D 51 65111 n'est pas dans DF-1-7-2", () => {
     const m52Rows = [
