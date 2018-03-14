@@ -348,7 +348,7 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 fonction.slice(0, 2) === '51' &&
-                ['652416', '6514'].includes(m52Row['Nature']);
+                ['652416', '6514','65111'].includes(m52Row['Nature']);
         }
     },
     'DF-1-6': {
@@ -567,13 +567,20 @@ export const rules = Object.freeze({
             const f1 = m52Row['Fonction'].slice(0, 1);
             const f2 = m52Row['Fonction'].slice(0, 2);
 
+            // fonction = 4 & article = 6561 => false
+
             return isDF(m52Row) &&
-            (f1 !== '4' && f1 !== '5' && f1 !== '8' &&
-            (f2 !== '91' &&
-            ['6561', '6568'].includes(m52Row['Nature'])) &&
-            ['6512', '65568', '6561', '6568'].includes(m52Row['Nature'])) ||
-            (m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58')
-            ;
+                (
+                    f1 !== '4' && f1 !== '5' && f1 !== '8' &&
+                    ['6512', '65568'].includes(m52Row['Nature'])
+                ) ||
+                (
+                    m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58'
+                ) ||
+                (
+                    f1 !== '4' && f1 !== '5' && f1 !== '8' && f2 !== '91' &&
+                    ['6561', '6568'].includes(m52Row['Nature'])
+                );
         }
     },
     'DF-4': {
@@ -592,8 +599,9 @@ export const rules = Object.freeze({
                         (chap === '015' || chap === '016' || chap === '017')
                     )
                 ) &&
-                !(art.startsWith('64') && f2 === '51') &&
-                !(art === '6336' && f === '568');
+                !((art.startsWith('64') || art === '6336') && f2 === '51') &&
+                !(art === '6336' && f === '568') &&
+                !(art === '6336' && f2 === '50') ;
         }
     },
     'DF-5': {
@@ -716,9 +724,14 @@ export const rules = Object.freeze({
             const art = m52Row['Nature'];
             const f2 = m52Row['Fonction'].slice(0, 2);
 
+            // 6561
+
             return isDF(m52Row) &&
-                f2 == '91' &&
-                ['6561', '6568'].includes(art);
+                (
+                    f2 === '91' &&
+                    ['6561', '6568'].includes(art)
+                ) ||
+                ['65542'].includes(m52Row['Nature']);
         }
     },
     'DF-7': {
