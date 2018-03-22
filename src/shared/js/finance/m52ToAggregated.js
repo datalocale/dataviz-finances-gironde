@@ -617,7 +617,7 @@ export const rules = Object.freeze({
             const f = m52Row['Fonction'];
             const f2 = f.slice(0, 2);
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     (
                         chap === '012' ||
@@ -631,7 +631,7 @@ export const rules = Object.freeze({
                     !((art === '64126' || art === '64121') && f2 === '50') &&
                     !(
                         // These lines should be added only for 2017 and later
-                        exer < 2017 && 
+                        exer < 2017 &&
                         (
                             (art === '6451' && f === '50') ||
                             (art === '6453' && f === '50') ||
@@ -864,9 +864,16 @@ export const rules = Object.freeze({
                     article.startsWith('23')
                 ) &&
                 !article.startsWith('204') &&
-                f3 === '221';
+                f3 === '221' &&
+                (
+                  (article === '2031' || article === '21838' && fonction === '21')
+                );
         }
-    },
+    }
+    /*
+    art(20XXX+21XXX+23XXX)  - (article 204) de la fonction 221 + (A2031+A21838) de la fonction F21
+    */
+    ,
     'DI-1-2': {
         label: "Routes",
         filter(m52Row){
@@ -876,14 +883,32 @@ export const rules = Object.freeze({
 
             return isDI(m52Row) &&
                 (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23') ||
-                    // ajout des investissements effectués pour le compte de tiers articles 1321/1324 fonction 621
-                    article.startsWith('13')
-                ) &&
-                !article.startsWith('204') &&
-                ['621', '622', '628'].includes(f3);
+                    (
+                      (
+                        (article.startsWith('20') || article.startsWith('21') || article.startsWith('23') || article === '1321' || article === '1324')
+                        && fonction === '621'
+                      )
+                    )  ||
+                    (
+                      (article === '23153' && fonction === '18')
+                    ) ||
+                    (
+                      (article === '23151' || article === '2315' && fonction === '52')
+                    ) ||
+                    (
+                      !(article === '2111' || article === '231318' && fonction === '621')
+                    ) ||
+                    (
+                      (article === '1322' && fonction === '821')
+                    )
+                  ) ;
+                /*
+                  art(20XXX+21XXX+23XXX+1321+1324)la fonction 621
+                  +A23153*F18
+                  +(A23151+A2315)*F52
+                  -(A2111+A231318)*F621
+                  +A1322*F821
+                */
         }
     },
     'DI-1-3': {
@@ -896,15 +921,37 @@ export const rules = Object.freeze({
             return isDI(m52Row) &&
                 (
                   (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23')
+                    (article.startsWith('20') || article.startsWith('21') || article.startsWith('23') || article === '1321' || article === '1324') && (fonction !== '221' || fonction !== '621' || fonction !== '738' || fonction !== '50')
                   ) &&
-                !article.startsWith('204') &&
-                !['221', '621', '622', '628', '738'].includes(f3) ||
-                article === '1322'
+                  (
+                    (article !== '23153' && fonction === '18')
+                  ) &&
+                  (
+                    ( article === '23151' || article === '2315' && fonction === '52')
+                  ) &&
+                  (
+                    (article !== '21313' && fonction === '40')
+                  ) &&
+                  (
+                    (article === '2188' && fonction === '41')
+                  ) &&
+                  (
+                    (article !== '1322' && fonction === '821')
+                  ) &&
+                !article.startsWith('204')
               );
         }
+        /*
+        tous les art 20XXX+21XXX+23XXX +1321+1324 de ttes les fonctions hors 221,621,738,50
+        - (A2031+A21838)*F21
+        -A23153*F18
+        +(A23151+A2315)*F52
+        +(A2111+A231318)*F621
+        -(A21313*F40)
+        +(A2188*F41)
+        -A1322*F821
+        - (A204 de toutes les fonctions)
+        */
     },
     'DI-1-4': {
         label: "Aménagement",
@@ -931,11 +978,27 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             //const otherEquipementPropreRuleIds = Object.keys(rules).filter(id => id.startsWith('DI-1') && id !== 'DI-1-4');
 
-            return isDI(m52Row) && article === '1675';
-            /* &&
-            otherEquipementPropreRuleIds.every(
-                id => !rules[id].filter(m52Row)
-            );*/
+            return isDI(m52Row) &&
+            article === '1675' &&
+            (
+              (
+                (article.startsWith('20') || article.startsWith('21') || article.startsWith('23') || article !== '204') && fonction === '50'
+              )
+            ) &&
+            (
+              (article === '21313' && fonction === '40')
+            ) &&
+            (
+              (article === '2188' && fonction === '41')
+            )
+            ;
+            /*
+            A1675
+            + ((art 20XXX+21XXX+23XXX
+            - (A204) de la fonction F 50 )
+            + (A21313*F40)
+            + (A2188*F41)
+            */
         }
     },
 
