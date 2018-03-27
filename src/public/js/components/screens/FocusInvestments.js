@@ -234,7 +234,7 @@ export default connect(
             const yearElement = elementById.get(displayedContentId);
 
             return yearElement && yearElement.children && new List(
-                ['DI-1-1', 'DI-1-2', 'DI-1-3', 'DI-1-4', 'DI-2']
+                ['DI-1-1', 'DI-1-2', 'DI-1-3', 'DI-1-4', 'DI-1-5', 'DI-2']
                 .map(id => ({
                     contentId: id,
                     partAmount: elementById.get(id).total,
@@ -266,6 +266,7 @@ export default connect(
             'DI-1-2': elementById.get('DI-1-2').total,
             'DI-1-3': elementById.get('DI-1-3').total,
             'DI-1-4': elementById.get('DI-1-4').total,
+            'DI-1-5': elementById.get('DI-1-5').total,
             'DI-2-1': elementById.get('DI-2-1').total,
         } : undefined;
 
