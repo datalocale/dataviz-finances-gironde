@@ -420,12 +420,17 @@ export const rules = Object.freeze({
         label: "Conférence des financeurs",
         filter(m52Row){
             const fonction = m52Row['Fonction'];
+            const nature = m52Row['Nature'];
 
             return isDF(m52Row) &&
-                fonction.startsWith('53') &&
-                [
-                    "65113", "6568"
-                ].includes(m52Row['Nature']);
+                ( 
+                    fonction === '53' &&
+                    nature === "65113"
+                ) ||
+                (
+                    ['531', '532'].includes(fonction) &&
+                    ['65113', '6568'].includes(nature)
+                )
         }
     },
     'DF-2-1': {
