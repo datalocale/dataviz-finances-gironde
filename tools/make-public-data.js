@@ -12,11 +12,11 @@ const SOURCE_FINANCE_DIR = './data/finances';
 
 
 const natureToChapitreFIP = Promise.all([
+    'planDeCompte-2013.xml',
     'planDeCompte-2014.xml',
     'planDeCompte-2015.xml',
     'planDeCompte-2016.xml',
-    'planDeCompte-2017.xml',
-    'planDeCompte-2018.xml'
+    'planDeCompte-2017.xml'
 ].map(f => {
     return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
     .then( str => {
