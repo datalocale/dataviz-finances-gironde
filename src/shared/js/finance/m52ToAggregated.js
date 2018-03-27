@@ -930,16 +930,28 @@ export const rules = Object.freeze({
         }
     },
     'DI-1-5': {
-        label: "Autres",
+        label: "Immobilier Social",
         filter(m52Row){
             const article = m52Row['Nature'];
-            //const otherEquipementPropreRuleIds = Object.keys(rules).filter(id => id.startsWith('DI-1') && id !== 'DI-1-4');
+            const fonction = m52Row['Fonction'];
 
-            return isDI(m52Row) && article === '1675';
-            /* &&
-            otherEquipementPropreRuleIds.every(
-                id => !rules[id].filter(m52Row)
-            );*/
+            return isDI(m52Row) && 
+            (
+                article === '1675' || 
+                (
+                    (
+                        fonction === '50' &&
+                        (
+                          article.startsWith('20') ||
+                          article.startsWith('21') ||
+                          article.startsWith('23')
+                        ) &&
+                        !article.startsWith('204')
+                    )
+                ) ||
+                ( fonction === '40' && article === '21313' ) ||
+                ( fonction === '41' && article === '2188' )
+            )
         }
     },
 
