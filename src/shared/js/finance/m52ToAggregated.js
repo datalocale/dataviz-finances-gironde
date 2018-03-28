@@ -895,19 +895,46 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            const f3 = fonction.slice(0, 3);
 
             return isDI(m52Row) &&
                 (
-                  (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23')
-                  ) &&
-                !article.startsWith('204') &&
-                !['221', '621', '622', '628', '738'].includes(f3) ||
-                article === '1322'
-              );
+                    (
+                        (
+                            article.startsWith('20') ||
+                            article.startsWith('21') ||
+                            article.startsWith('23') ||
+                            article === '1321' ||
+                            article === '1324'
+                        ) &&
+                        !['221', '621', '738', '50'].includes(fonction)
+                    ) ||
+                    (
+                        (
+                            article === '23151' ||
+                            article === '2315'
+                        ) &&
+                        fonction === '52'
+                    ) ||
+                    (
+                        (
+                            article === '2111' ||
+                            article === '231318'
+                        ) &&
+                        fonction === '621'
+                    ) ||
+                    ( article === '2188' && fonction === '41' )
+                ) &&
+                !( article === '21313' && fonction === '40' ) &&
+                !( article === '1322' && fonction === '821' ) &&
+                !(
+                    (
+                        article === '2031' ||
+                        article === '21838'
+                    ) &&
+                    fonction === '21'
+                ) &&
+                !( article === '23153' && fonction === '18' ) &&
+                !article.startsWith('204');
         }
     },
     'DI-1-4': {
