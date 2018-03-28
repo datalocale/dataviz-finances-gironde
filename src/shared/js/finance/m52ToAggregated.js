@@ -876,18 +876,24 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            const f3 = fonction.slice(0, 3);
-
+            
             return isDI(m52Row) &&
                 (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23') ||
-                    // ajout des investissements effectués pour le compte de tiers articles 1321/1324 fonction 621
-                    article.startsWith('13')
+                    (
+                        fonction === '621' && 
+                        (
+                            article.startsWith('20') ||
+                            article.startsWith('21') ||
+                            article.startsWith('23') ||
+                            article === '1321' ||
+                            article === '1324'
+                        )
+                    ) ||
+                    (fonction === '18' && article === '23153') ||
+                    (fonction === '52' && ['23151', '2315'].includes(article)) ||
+                    (fonction === '821' && article === '1322')
                 ) &&
-                !article.startsWith('204') &&
-                ['621', '622', '628'].includes(f3);
+                !( fonction === '621' && ['2111', '231318'].includes(article) )
         }
     },
     'DI-1-3': {
