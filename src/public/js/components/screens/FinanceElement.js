@@ -7,6 +7,7 @@ import page from 'page';
 
 import { max } from 'd3-array';
 
+import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
@@ -200,7 +201,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                     m52Rows
                     .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
                     .map(row => {
-                        return React.createElement('tr', {},
+                        return React.createElement('tr', {title: makeLigneBudgetId(row)},
                             React.createElement('td', {}, fonctionLabels[row['Fonction']]),
                             React.createElement('td', {}, natureLabels[row['Nature']]),
                             React.createElement('td', {},

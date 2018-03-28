@@ -850,12 +850,20 @@ export const rules = Object.freeze({
 
             return isDI(m52Row) &&
                 (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23')
-                ) &&
-                !article.startsWith('204') &&
-                f3 === '221';
+                    f3 === '221' &&
+                    (
+                        article.startsWith('20') ||
+                        article.startsWith('21') ||
+                        article.startsWith('23')
+                    ) &&
+                    !article.startsWith('204')
+                ) ||
+                (
+                    fonction === '21' && 
+                    (
+                        ['2031', '21838'].includes(article)
+                    )
+                )
         }
     },
     'DI-1-2': {
