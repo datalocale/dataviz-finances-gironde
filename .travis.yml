@@ -1,12 +1,25 @@
+# Language and env
+
 language: node_js
-node_js: '6'
+node_js: 'node'
 
-cache:
-  directories:
-  - node_modules
+# What is built
 
-before_script:
-- npm run build-demo
+branches:
+  only:
+  - master
+
+# Travis Lifecycle
+
+before_install:
+  - npm i -g npm@5.7.1 # this should be deleted once 5.7.X is out of "pre-release"
+
+install:
+  - npm ci
+
+script:
+  - npm run build-demo
+  - npm test
 
 deploy:
   skip_cleanup: true
@@ -14,3 +27,8 @@ deploy:
   script: bash ./tools/deploy.sh
   on:
     branch: master
+
+# Other configs
+
+git:
+  depth: 10
