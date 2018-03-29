@@ -103,7 +103,7 @@
     "jest": "^18.1.0",
     "jest-immutable-matchers": "^1.4.0",
     "minifyify": "^7.3.5",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.8.3",
     "npm-run-all": "^4.0.2",
     "react-test-renderer": "^15.6.1",
     "serve": "^2.4.3",
