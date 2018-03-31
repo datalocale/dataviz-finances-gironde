@@ -1,5 +1,3 @@
-                highlights: [
-                    {
                       import {List} from 'immutable';
 
                       import React from 'react';
