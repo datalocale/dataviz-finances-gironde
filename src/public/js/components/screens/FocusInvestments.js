@@ -212,7 +212,7 @@ React.createElement(FocusDetail, {
       strong: "",
       span: ""
     }*/
-  ,
+  ],
     moreUrl: '#!/finance-details/DI-1-5'
             })
         )
