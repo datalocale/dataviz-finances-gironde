@@ -718,3 +718,29 @@ test("DI-1-2 contient D 52 23151, mais pas DI-1-3", () => {
     expect(aggDI12.M52Rows.first()).toBe(m52Rows[0]);
     expect(aggDI13.M52Rows.size).toBe(0);
 });
+
+
+test("DI-1-5 contient D 41 2188, mais pas DI-1-3", () => {
+
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'I',
+            'Fonction': '41',
+            'Nature': '2188',
+            'Chapitre': '21',
+            'MtReal': 1
+        })
+    ];
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDI15 = aggVision.find(row => row.id === 'DI-1-5');
+    const aggDI13 = aggVision.find(row => row.id === 'DI-1-3');
+
+    expect(aggDI15.M52Rows.first()).toBe(m52Rows[0]);
+    expect(aggDI13.M52Rows.size).toBe(0);
+});
+
