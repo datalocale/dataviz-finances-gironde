@@ -664,3 +664,33 @@ test("D 51 65111 n'est pas dans DF-1-7-2", () => {
     const aggDF172 = aggVision.find(row => row.id === 'DF-1-7-2');
     expect(aggDF172.M52Rows.includes(m52Rows[0])).toBe(false);
 });
+
+
+/**
+ * DI - Dépenses d'Investissement
+ */
+
+test("DI-2-4 contient D 621 204182, mais pas DI-1-2", () => {
+
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'I',
+            'Fonction': '621',
+            'Nature': '204182',
+            'Chapitre': '204',
+            'MtReal': 1
+        })
+    ];
+
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows) });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDI24 = aggVision.find(row => row.id === 'DI-2-4');
+    const aggDI12 = aggVision.find(row => row.id === 'DI-1-2');
+
+    expect(aggDI24.M52Rows.first()).toBe(m52Rows[0]);
+    expect(aggDI12.M52Rows.size).toBe(0);
+});
+
