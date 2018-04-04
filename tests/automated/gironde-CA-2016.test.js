@@ -179,13 +179,13 @@ test(`Pour le CA 2016 de la Gironde, DF-1-4 devrait représenter ~141,7 millions
     expect(df1.total/MILLION).toBeCloseTo(141700000/MILLION, 1);
 });
 
-test(`Pour le CA 2016 de la Gironde, DF-1 devrait représenter ~814 millions d'euros`, () => {
+test(`Pour le CA 2016 de la Gironde, DF-1 devrait représenter ~844 millions d'euros`, () => {
     const df1 = hierAgg2016Elements.find(e => e.id === 'DF-1')
 
     expect(df1.total/MILLION).toBeCloseTo(843560000/MILLION, 1);
 });
 
-test(`Pour le CA 2016 de la Gironde, DF-2 devrait représenter ~814 millions d'euros`, () => {
+test(`Pour le CA 2016 de la Gironde, DF-2 devrait représenter ~844 millions d'euros`, () => {
     const df2 = hierAgg2016Elements.find(e => e.id === 'DF-2')
 
     expect(df2.total/MILLION).toBeCloseTo(843560000/MILLION, 1);
