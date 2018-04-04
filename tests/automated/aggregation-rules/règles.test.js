@@ -666,6 +666,26 @@ test("D 51 65111 n'est pas dans DF-1-7-2", () => {
 });
 
 
+test("D 52 6568 n'est pas dans DF-3-3 (est dans une correction à partir de 2017)", () => {
+    const m52Rows = [
+        new LigneBudgetRecord({
+            'CodRD': 'D',
+            'FI': 'F',
+            'Fonction': '52',
+            'Nature': '6568',
+            'Chapitre': '65',
+            'MtReal': 76
+        })
+    ];
+    const instruction = new DocumentBudgetaire({ rows: new ImmutableSet(m52Rows), Exer: 2017 });
+
+    const aggVision = m52ToAggregated(instruction);
+
+    const aggDF172 = aggVision.find(row => row.id === 'DF-3-3');
+    expect(aggDF172.M52Rows.includes(m52Rows[0])).toBe(false);
+});
+
+
 test("D 58 6574 n'est pas dans DF-3-6 (est dans une correction)", () => {
     const m52Rows = [
         new LigneBudgetRecord({

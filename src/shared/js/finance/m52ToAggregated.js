@@ -537,13 +537,15 @@ export const rules = Object.freeze({
     },
     'DF-3-3': {
         label: "Transports des étudiants et des élèves handicapés",
-        filter(m52Row){
+        filter(m52Row, Exer){
             const fonction = m52Row['Fonction'];
+            const nature = m52Row['Nature'];
             const f2 = fonction.slice(0, 2);
 
             return isDF(m52Row) &&
                 f2 === '52' &&
-                ['6245', '6513', '6568'].includes(m52Row['Nature']);
+                ['6245', '6513', '6568'].includes(nature) &&
+                !(Exer >= 2017 && nature === '6568' && fonction === '52');
         }
     },
     'DF-3-4': {
