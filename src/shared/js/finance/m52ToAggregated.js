@@ -370,8 +370,9 @@ export const rules = Object.freeze({
             return isDF(m52Row) &&
                 (f1 === '4' || f1 === '5') &&
                 art.startsWith('657') &&
-                fonction !== '51';
-        }
+                fonction !== '51' &&
+                !(fonction === '58' && art === '6574');
+        } 
     },
     'DF-1-7-1': {
         label: "Autres divers enfants",
@@ -413,6 +414,7 @@ export const rules = Object.freeze({
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
                 !(art === '65111' && fonction === '51') &&
+                !(art === '6574' && fonction === '58') &&
                 !(fonction.startsWith('53') && art === '65113');
         }
     },
@@ -502,7 +504,8 @@ export const rules = Object.freeze({
                 !(article === '6556' && fonction === '58')
                  && !article.startsWith('64')
                  && article !== '6336' &&
-                article !== '6218';
+                article !== '6218' &&
+                !(fonction === '58' && article === '6574');
         }
     },
 
@@ -560,13 +563,16 @@ export const rules = Object.freeze({
         label: "Subventions de fonctionnement",
         filter(m52Row){
             const art = m52Row['Nature'];
-            const f1 = m52Row['Fonction'].slice(0, 1);
-            return isDF(m52Row) &&
-                [
-                    "65731", "65732", "65733", "65734", "65735",
-                    "65736", "65737", "65738", "6574"
-                ].includes(art) &&
-                !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8'));
+            const fonction = m52Row['Fonction']
+            const f1 = fonction.slice(0, 1);
+            return isDF(m52Row) && 
+                (
+                    [
+                        "65731", "65732", "65733", "65734", "65735",
+                        "65736", "65737", "65738", "6574"
+                    ].includes(art) &&
+                    !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8'))
+                )
         }
     },
     'DF-3-7-1': {
