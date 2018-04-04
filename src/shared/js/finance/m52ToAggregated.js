@@ -947,7 +947,9 @@ export const rules = Object.freeze({
                         fonction === '621'
                     ) ||
                     ( fonction === '52' && article === '2315' ) ||
-                    ( fonction === '50' && article === '231351' )
+                    ( fonction === '50' && article === '231351' ) ||
+                    ( fonction === '01' && article === '2761' ) ||
+                    ( fonction === '01' && article === '2748' )
                 ) &&
                 !( article === '21313' && fonction === '40' ) &&
                 !( article === '1322' && fonction === '821' ) &&
@@ -1061,7 +1063,9 @@ export const rules = Object.freeze({
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
                 !(article === '1321' && ['621', '18'].includes(fonction)) &&
-                !(article === '204182' && fonction === '68');
+                !(article === '204182' && fonction === '68') &&
+                !(article === '2761' && fonction === '01') &&
+                !(article === '2748' && fonction === '01'); 
         }
     },
     'DI-2-5': {
