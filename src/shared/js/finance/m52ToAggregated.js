@@ -408,18 +408,12 @@ export const rules = Object.freeze({
                 !(art === '6568' && fonction === '52') &&
                 !(art === '6526' && fonction === '51') &&
                 !(art === '6513' && fonction === '52') &&
-                !(art === '6336') &&
+                !(art === '6336') && 
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
                 !(art === '65111' && fonction === '51') &&
-                (
-                    !(
-                        fonction.startsWith('53') &&
-                        (art === '65113' || art === '6568') 
-                    ) ||
-                    (art === '6568' && fonction === '538')
-                );
+                !(fonction.startsWith('53') && art === '65113');
         }
     },
     'DF-1-8': {
