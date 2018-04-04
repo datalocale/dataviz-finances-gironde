@@ -938,15 +938,16 @@ export const rules = Object.freeze({
                             article === '1324'
                         ) &&
                         !['221', '621', '738', '50'].includes(fonction)
-                    ) ||
-                    ( fonction === '52' && article === '2315' ) ||
+                    ) || 
                     (
                         (
                             article === '2111' ||
                             article === '231318'
                         ) &&
                         fonction === '621'
-                    )
+                    ) ||
+                    ( fonction === '52' && article === '2315' ) ||
+                    ( fonction === '50' && article === '231351' )
                 ) &&
                 !( article === '21313' && fonction === '40' ) &&
                 !( article === '1322' && fonction === '821' ) &&
@@ -1004,7 +1005,8 @@ export const rules = Object.freeze({
                 ) ||
                 ( fonction === '40' && article === '21313' ) ||
                 ( fonction === '41' && article === '2188' )
-            )
+            ) &&
+            !( fonction === '50' && article === '231351' )
         }
     },
 
