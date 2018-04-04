@@ -62,10 +62,10 @@ test(`Pour le CA 2016 de la Gironde, RI devrait représenter ~107,3 millions d'e
  * DI
  */
 
-test(`Pour le CA 2016 de la Gironde, DI-2-4 devrait représenter ~11,4 millions d'euros`, () => {
+test(`Pour le CA 2016 de la Gironde, DI-2-4 devrait représenter ~10,6 millions d'euros`, () => {
     const df1 = hierAgg2016Elements.find(e => e.id === 'DI-2-4')
 
-    expect(df1.total/MILLION).toBeCloseTo(11400000/MILLION, 1);
+    expect(df1.total/MILLION).toBeCloseTo(10600000/MILLION, 1);
 });
 
 test(`Pour le CA 2016 de la Gironde, DI-EM-1 devrait représenter ~37,9 millions d'euros`, () => {

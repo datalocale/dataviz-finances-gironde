@@ -1033,7 +1033,7 @@ export const rules = Object.freeze({
                 ].includes(article) &&
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
-                !(article === '1321' && fonction === '621') &&
+                !(article === '1321' && ['621', '18'].includes(fonction)) &&
                 !(article === '204182' && fonction === '68');
         }
     },
