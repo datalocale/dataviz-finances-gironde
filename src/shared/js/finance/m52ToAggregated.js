@@ -415,7 +415,9 @@ export const rules = Object.freeze({
                 !(art === '6245' && fonction === '52') &&
                 !(art === '65111' && fonction === '51') &&
                 !(art === '6574' && fonction === '58') &&
-                !(fonction.startsWith('53') && art === '65113');
+                !(fonction.startsWith('53') && art === '65113')  &&
+                !( fonction === '40' && ['614', '6132'].includes(art) ) &&
+                !( fonction === '50' && ['6161', '6168'].includes(art) );
         }
     },
     'DF-1-8': {
@@ -505,7 +507,9 @@ export const rules = Object.freeze({
                  && !article.startsWith('64')
                  && article !== '6336' &&
                 article !== '6218' &&
-                !(fonction === '58' && article === '6574');
+                !(fonction === '58' && article === '6574') &&
+                !( fonction === '40' && ['614', '6132'].includes(article) ) &&
+                !( fonction === '50' && ['6161', '6168'].includes(article) )
         }
     },
 
@@ -674,14 +678,21 @@ export const rules = Object.freeze({
     'DF-6-1-2': {
         label: "Prestations de services (entretien et réparation, assurances, locations, frais divers, formation, colloques…)",
         filter(m52Row){
-            const f3 = m52Row['Fonction'].slice(0, 3);
-            const f1 = m52Row['Fonction'].slice(0, 1);
+            const fonction = m52Row['Fonction']
+            const f3 = fonction.slice(0, 3);
+            const f1 = fonction.slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) &&
-                art.startsWith('61') &&
-                !(['4', '5', '8'].includes(f1)) &&
-                !(f3 === '621');
+            return isDF(m52Row) && 
+                (
+                    (
+                        art.startsWith('61') &&
+                        !(['4', '5', '8'].includes(f1)) &&
+                        !(f3 === '621')
+                    ) ||
+                    ( fonction === '40' && ['614', '6132'].includes(art) ) ||
+                    ( fonction === '50' && ['6161', '6168'].includes(art) )
+                )
         }
     },
     'DF-6-1-3': {
