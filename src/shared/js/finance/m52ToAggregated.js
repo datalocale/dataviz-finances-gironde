@@ -315,18 +315,17 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 (
-                        fonction.slice(0, 2) === '51' &&
-                        (
-                            [
-                                "6132", "6135", "6184",
-                                "6234", "6245",
-                                "65221", "652222", "65223", "65228",
-                                "6523", "652411", "652412", "652415", "652418",
-                                "65821", "6718", "6336"
-                            ].includes(article) ||
-                            article.startsWith('64')
-                        )
-                     ||
+                    fonction.slice(0, 2) === '51' &&
+                    (
+                        [
+                            "6132", "6135", "6184",
+                            "6234", "6245", '6251',
+                            "65221", "652222", "65223", "65228",
+                            "6523", "652411", "652412", "652415", "652418",
+                            "65821", "6718", "6336"
+                        ].includes(article) ||
+                        article.startsWith('64')
+                    ) ||
                     (fonction === '50' && article === '64121') ||
                     (fonction === '50' && article === '64126')
                 );
@@ -370,8 +369,9 @@ export const rules = Object.freeze({
             return isDF(m52Row) &&
                 (f1 === '4' || f1 === '5') &&
                 art.startsWith('657') &&
-                fonction !== '51';
-        }
+                fonction !== '51' &&
+                !(fonction === '58' && art === '6574');
+        } 
     },
     'DF-1-7-1': {
         label: "Autres divers enfants",
@@ -408,24 +408,34 @@ export const rules = Object.freeze({
                 !(art === '6568' && fonction === '52') &&
                 !(art === '6526' && fonction === '51') &&
                 !(art === '6513' && fonction === '52') &&
-                !(art === '6336') &&
+                !(art === '6336') && 
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
                 !(art === '65111' && fonction === '51') &&
-                !((art === '65113' || art === '6568') && fonction.startsWith('53'));
+                !(art === '6574' && fonction === '58') &&
+                !(fonction.startsWith('53') && art === '65113')  &&
+                !( fonction === '40' && ['614', '6132'].includes(art) ) &&
+                !( fonction === '50' && ['6161', '6168'].includes(art) ) &&
+                !( art === '6556' && fonction === '52') &&
+                !( art === '6568' && fonction === '58');
         }
     },
     'DF-1-8': {
         label: "Conférence des financeurs",
         filter(m52Row){
             const fonction = m52Row['Fonction'];
+            const nature = m52Row['Nature'];
 
             return isDF(m52Row) &&
-                fonction.startsWith('53') &&
-                [
-                    "65113", "6568"
-                ].includes(m52Row['Nature']);
+                ( 
+                    fonction === '53' &&
+                    nature === "65113"
+                ) ||
+                (
+                    ['531', '532'].includes(fonction) &&
+                    ['65113', '6568'].includes(nature)
+                )
         }
     },
     'DF-2-1': {
@@ -455,7 +465,8 @@ export const rules = Object.freeze({
                 article !== '6513' &&
                 !article.startsWith('64') &&
                 article !== '6336' &&
-                article !== '6245';
+                article !== '6245' &&
+                !( article === '6556' && fonction === '52');
         }
     },
     'DF-2-3': {
@@ -497,7 +508,11 @@ export const rules = Object.freeze({
                 !(article === '6556' && fonction === '58')
                  && !article.startsWith('64')
                  && article !== '6336' &&
-                article !== '6218';
+                article !== '6218' &&
+                !(fonction === '58' && article === '6574') &&
+                !( fonction === '40' && ['614', '6132'].includes(article) ) &&
+                !( fonction === '50' && ['6161', '6168'].includes(article) ) &&
+                !( article === '6568' && fonction === '58')
         }
     },
 
@@ -529,13 +544,15 @@ export const rules = Object.freeze({
     },
     'DF-3-3': {
         label: "Transports des étudiants et des élèves handicapés",
-        filter(m52Row){
+        filter(m52Row, Exer){
             const fonction = m52Row['Fonction'];
+            const nature = m52Row['Nature'];
             const f2 = fonction.slice(0, 2);
 
             return isDF(m52Row) &&
                 f2 === '52' &&
-                ['6245', '6513', '6568'].includes(m52Row['Nature']);
+                ['6245', '6513', '6568'].includes(nature) &&
+                !(Exer >= 2017 && nature === '6568' && fonction === '52');
         }
     },
     'DF-3-4': {
@@ -555,13 +572,16 @@ export const rules = Object.freeze({
         label: "Subventions de fonctionnement",
         filter(m52Row){
             const art = m52Row['Nature'];
-            const f1 = m52Row['Fonction'].slice(0, 1);
-            return isDF(m52Row) &&
-                [
-                    "65731", "65732", "65733", "65734", "65735",
-                    "65736", "65737", "65738", "6574"
-                ].includes(art) &&
-                !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8'));
+            const fonction = m52Row['Fonction']
+            const f1 = fonction.slice(0, 1);
+            return isDF(m52Row) && 
+                (
+                    [
+                        "65731", "65732", "65733", "65734", "65735",
+                        "65736", "65737", "65738", "6574"
+                    ].includes(art) &&
+                    !( art.startsWith('657') && (f1 === '4' || f1 === '5' || f1 === '8'))
+                )
         }
     },
     'DF-3-7-1': {
@@ -585,23 +605,26 @@ export const rules = Object.freeze({
     },
     'DF-3-7-3': {
         label: "Participation diverses",
-        filter(m52Row){
-            const f1 = m52Row['Fonction'].slice(0, 1);
-            const f2 = m52Row['Fonction'].slice(0, 2);
+        filter(m52Row) {
+            const fonction = m52Row['Fonction']
+            const nature = m52Row['Nature']
+            const f1 = fonction.slice(0, 1);
+            const f2 = fonction.slice(0, 2);
 
-            return isDF(m52Row) &&
-            (
-              f1 !== '4' && f1 !== '5' && f1 !== '8' &&
-              ['6512', '65568'].includes(m52Row['Nature'])
-            ) ||
-            (
-              m52Row['Nature'] === '6556' && m52Row['Fonction'] === '58'
-            ) ||
-            (
-              f1 !== '4' && f1 !== '5' && f1 !== '8' && f2 !== '91' &&
-              ['6561', '6568'].includes(m52Row['Nature'])
-            );
-
+            return isDF(m52Row) && 
+                (
+                    (
+                        f1 !== '4' && f1 !== '5' && f1 !== '8' &&
+                        ['6512', '65568'].includes(nature)
+                    ) ||
+                    (
+                        f1 !== '4' && f1 !== '5' && f1 !== '8' && f2 !== '91' &&
+                        ['6561', '6568'].includes(nature)
+                    ) ||
+                    ( nature === '6556' && fonction === '58') ||
+                    ( nature === '6556' && fonction === '52') ||
+                    ( nature === '6568' && fonction === '58')
+                )
         }
     },
     'DF-4': {
@@ -661,14 +684,21 @@ export const rules = Object.freeze({
     'DF-6-1-2': {
         label: "Prestations de services (entretien et réparation, assurances, locations, frais divers, formation, colloques…)",
         filter(m52Row){
-            const f3 = m52Row['Fonction'].slice(0, 3);
-            const f1 = m52Row['Fonction'].slice(0, 1);
+            const fonction = m52Row['Fonction']
+            const f3 = fonction.slice(0, 3);
+            const f1 = fonction.slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) &&
-                art.startsWith('61') &&
-                !(['4', '5', '8'].includes(f1)) &&
-                !(f3 === '621');
+            return isDF(m52Row) && 
+                (
+                    (
+                        art.startsWith('61') &&
+                        !(['4', '5', '8'].includes(f1)) &&
+                        !(f3 === '621')
+                    ) ||
+                    ( fonction === '40' && ['614', '6132'].includes(art) ) ||
+                    ( fonction === '50' && ['6161', '6168'].includes(art) )
+                )
         }
     },
     'DF-6-1-3': {
@@ -871,18 +901,24 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            const f3 = fonction.slice(0, 3);
-
+            
             return isDI(m52Row) &&
                 (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23') ||
-                    // ajout des investissements effectués pour le compte de tiers articles 1321/1324 fonction 621
-                    article.startsWith('13')
+                    (
+                        fonction === '621' && 
+                        (
+                            article.startsWith('20') ||
+                            article.startsWith('21') ||
+                            article.startsWith('23') ||
+                            article === '1321' ||
+                            article === '1324'
+                        )
+                    ) ||
+                    (fonction === '18' && article === '23153') ||
+                    (fonction === '52' && ['23151', '2315'].includes(article)) ||
+                    (fonction === '821' && article === '1322')
                 ) &&
-                !article.startsWith('204') &&
-                ['621', '622', '628'].includes(f3);
+                !( fonction === '621' && ['2111', '231318', '204182'].includes(article) )
         }
     },
     'DI-1-3': {
@@ -890,19 +926,44 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            const f3 = fonction.slice(0, 3);
 
             return isDI(m52Row) &&
                 (
-                  (
-                    article.startsWith('20') ||
-                    article.startsWith('21') ||
-                    article.startsWith('23')
-                  ) &&
-                !article.startsWith('204') &&
-                !['221', '621', '622', '628', '738'].includes(f3) ||
-                article === '1322'
-              );
+                    (
+                        (
+                            article.startsWith('20') ||
+                            article.startsWith('21') ||
+                            article.startsWith('23') ||
+                            article === '1321' ||
+                            article === '1324'
+                        ) &&
+                        !['221', '621', '738', '50'].includes(fonction)
+                    ) || 
+                    (
+                        (
+                            article === '2111' ||
+                            article === '231318'
+                        ) &&
+                        fonction === '621'
+                    ) ||
+                    ( fonction === '52' && article === '2315' ) ||
+                    ( fonction === '50' && article === '231351' ) ||
+                    ( fonction === '01' && article === '2761' ) ||
+                    ( fonction === '01' && article === '2748' )
+                ) &&
+                !( article === '21313' && fonction === '40' ) &&
+                !( article === '1322' && fonction === '821' ) &&
+                !( article === '23151' && fonction === '52' ) && 
+                !( article === '2188' && fonction === '41' ) &&
+                !(
+                    (
+                        article === '2031' ||
+                        article === '21838'
+                    ) &&
+                    fonction === '21'
+                ) &&
+                !( article === '23153' && fonction === '18' ) &&
+                !article.startsWith('204');
         }
     },
     'DI-1-4': {
@@ -925,16 +986,29 @@ export const rules = Object.freeze({
         }
     },
     'DI-1-5': {
-        label: "Autres",
+        label: "Immobilier Social",
         filter(m52Row){
             const article = m52Row['Nature'];
-            //const otherEquipementPropreRuleIds = Object.keys(rules).filter(id => id.startsWith('DI-1') && id !== 'DI-1-4');
+            const fonction = m52Row['Fonction'];
 
-            return isDI(m52Row) && article === '1675';
-            /* &&
-            otherEquipementPropreRuleIds.every(
-                id => !rules[id].filter(m52Row)
-            );*/
+            return isDI(m52Row) && 
+            (
+                article === '1675' || 
+                (
+                    (
+                        fonction === '50' &&
+                        (
+                          article.startsWith('20') ||
+                          article.startsWith('21') ||
+                          article.startsWith('23')
+                        ) &&
+                        !article.startsWith('204')
+                    )
+                ) ||
+                ( fonction === '40' && article === '21313' ) ||
+                ( fonction === '41' && article === '2188' )
+            ) &&
+            !( fonction === '50' && article === '231351' )
         }
     },
 
@@ -982,14 +1056,16 @@ export const rules = Object.freeze({
                 [
                     "204112", "204113", "204122", "204131", "204132",
                     "204151", "204152", "204162", "2041721", "2041722",
-                    "2041782", "204181", "204182", "204182", "20421",
+                    "2041782", "204181", "204182",
                     "20422", "20431", '2761', '261', '20421', '204183',
-                    '204113', '1321','2748','1328','13278'
+                    '204113', '1321', '2748', '1328', '13278'
                 ].includes(article) &&
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
-                !(article === '1321' && fonction === '621') &&
-                !(article === '204182' && fonction === '68');
+                !(article === '1321' && ['621', '18'].includes(fonction)) &&
+                !(article === '204182' && fonction === '68') &&
+                !(article === '2761' && fonction === '01') &&
+                !(article === '2748' && fonction === '01'); 
         }
     },
     'DI-2-5': {
