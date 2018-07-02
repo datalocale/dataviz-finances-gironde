@@ -166,9 +166,9 @@ export function FocusSol({
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Les aides du Département versées aux personnes en situation de handicap concernent en 2017:
-- la Prestation de Compensation du Handicap (PCH) versée à 6 636 personnes en 2017 (9 975 en 2016)
+- la Prestation de Compensation du Handicap (PCH) versée à 8520 personnes en 2017
 - la prestation d’hébergement  qui a financé 2728 places d'hébergement en 2017 (2 763 en 2016)
-- l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1077 personnes en 2017 (1 128 en 2016)
+- l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1125 personnes en 2017
 
 L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`,
                 highlights: [
@@ -204,7 +204,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                         span: "en 2017"
                     },
                     {
-                        strong: "35 100",
+                        strong: "34 446",
                         span: "bénéficiaires en 2017"
                     }
                 ],
@@ -225,8 +225,8 @@ https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                         span: "pour les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
-                        strong: "1359",
-                        span: "enfants accueillis en 2017"
+                        strong: "4269",
+                        span: "enfants accueillis en établissement et familles d’accueil en 2017"
                     },
                     {
                         strong: "796",
