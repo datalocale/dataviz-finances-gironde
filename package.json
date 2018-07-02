@@ -17,8 +17,8 @@
     "build-demo:public": "npm-run-all build:public:data:* build:public:style build:public:script",
     "build:public:style": "node-sass --importer src/public/style/env-importer.js src/public/style/main.scss build/public.css",
     "build:public:script": "browserify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.script -p [minifyify --no-map]",
-    "build:public:data:finance-data": "node -r @std/esm tools/make-public-data.js",
-    "build:public:data:m52-strings": "node -r @std/esm tools/make-doc-budg-strings.js",
+    "build:public:data:finance-data": "node -r esm tools/make-public-data.js",
+    "build:public:data:m52-strings": "node -r esm tools/make-doc-budg-strings.js",
     "watch:m52overview": "cross-env NODE_ENV=development watchify src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
     "prewatch:public": "npm run build:public:data:m52-strings",
     "watch:public": "cross-env NODE_ENV=development npm-run-all --parallel watch:public:*",
@@ -61,20 +61,20 @@
       ]
     ]
   },
-  "@std/esm": {
-    "esm": "js",
+  "esm": {
+    "mode": "auto",
     "cjs": {
       "namedExports": true
     }
   },
   "dependencies": {
-    "@std/esm": "^0.18.0",
     "currency-formatter": "^1.0.8",
     "d3-array": "^1.2.1",
     "d3-color": "^1.0.2",
     "d3-dsv": "^1.0.3",
     "d3-scale": "^1.0.5",
     "d3-shape": "^1.0.0",
+    "esm": "^3.0.61",
     "event-emitter": "^0.3.4",
     "fs-extra": "^4.0.2",
     "immutable": "^3.8.1",
@@ -103,7 +103,7 @@
     "jest": "^18.1.0",
     "jest-immutable-matchers": "^1.4.0",
     "minifyify": "^7.3.5",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.9.0",
     "npm-run-all": "^4.0.2",
     "react-test-renderer": "^15.6.1",
     "serve": "^2.4.3",
