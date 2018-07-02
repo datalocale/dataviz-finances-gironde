@@ -56,14 +56,14 @@
                         ]
                       }),
                       React.createElement('div', {},
-                      React.createElement(Markdown, {}, `**En ${year}, le Département de la Gironde a investi ${yearInvestments && makeAmountString(yearInvestments.investments)} soit ${(investmentProportion*100).toFixed(1)}% de la totalité des dépenses. Cela représente une augmentation de +2.4% comparé à 2016. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
+                      React.createElement(Markdown, {}, `**En ${year}, le Département de la Gironde a investi ${yearInvestments && makeAmountString(yearInvestments.investments)} soit ${(investmentProportion*100).toFixed(1)}% de la totalité des dépenses. Ce sont les 1,5 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
                       React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DI', text: `en savoir plus`})
                     ),
                     React.createElement('div', {className: 'people-fraction'},
                     React.createElement('div', {},
                     React.createElement('div', {}, `Le Département a investi`),
                     React.createElement('div', {className: 'number'}, yearInvestments && (yearInvestments.investments/population).toFixed(2).replace('.', ',')),
-                    React.createElement('div', {}, `euros par habitant en 2016`)
+                    React.createElement('div', {}, `euros par habitant en 2017`)
                   )
                 )
               ),
