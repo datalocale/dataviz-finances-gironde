@@ -43,7 +43,7 @@ export function Home({
                     h1: "Solidarités",
                     numberMain: "120 000",
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près de 875 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`, 
+                    description: `Le Département affirme sa vocation sociale et déploie près de 875 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
@@ -57,7 +57,7 @@ export function Home({
                     h1: "Présence sur le territoire",
                     numberMain: "125 métiers",
                     numberSecundary: "425 sites",
-                    description: `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… 6 551 agents exercent 125 métiers dans 425 lieux de travail et d’accueil du public. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail des frais de fonctionnement.`,
+                    description: `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… 6 670 agents exercent 125 métiers dans 425 lieux de travail et d’accueil du public. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail des frais de fonctionnement.`,
                     moreUrl: presence
                 })
             )
