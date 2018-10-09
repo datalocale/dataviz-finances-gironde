@@ -218,7 +218,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                     items: [
                         {
                             text: 'Comptes administratifs du Département de la Gironde au format TOTEM',
-                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde'
+                            url: 'https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1'
                         }
                     ]
                 }
