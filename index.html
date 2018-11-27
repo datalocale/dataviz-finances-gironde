@@ -1,190 +1,193 @@
 <!doctype html>
 <html lang=fr>
-    <head>
-        <meta charset="utf-8">
-        <title>dataviz 33</title>
-        
-        <meta name="description" content="....">
- 
-        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-        <link rel="stylesheet" href="https://rawgit.com/DavidBruant/better-defaults/master/defaults.css"> 
-        
-        <script defer src="./build/m52-overview-bundle.js"></script>
 
-        
+<head>
+    <meta charset="utf-8">
+    <title>dataviz 93</title>
 
-        <style>
-            html, body{
-                height: 100%;
-                width: 100%;
-            }
+    <meta name="description" content="....">
 
-            body{
-                display: flex;
-                flex-direction: column;
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <link rel="stylesheet" href="https://rawgit.com/DavidBruant/better-defaults/master/defaults.css">
 
-                justify-content: start;
-                align-items: center;
-            }
-
-            td{
-                border: 1px solid #BBB;
-                padding: 0.1em 0.5em;
-            }
-
-            h1, h2, h3{
-                margin: 0.2em 0;
-            }
-
-            .react-container{
-                width: 100%;
-            }
+    <script defer src="./build/m52-overview-bundle.js"></script>
 
 
-            /*
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+
+            justify-content: start;
+            align-items: center;
+        }
+
+        td {
+            border: 1px solid #BBB;
+            padding: 0.1em 0.5em;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0.2em 0;
+        }
+
+        .react-container {
+            width: 100%;
+        }
+
+
+        /*
                 Top level
             */
-            .top-level{
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
+        .top-level {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-            .top-level > *:nth-child(2){
-                display: flex;
-                flex-direction: row;
-                width: 100%;
-            }
+        .top-level>*:nth-child(2) {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
 
-            .top-level > *:nth-child(2) > *{
-                flex: 2;
-            }
-            .top-level > *:nth-child(2) > *:nth-child(2){
-                flex: 1;
-            }
+        .top-level>*:nth-child(2)>* {
+            flex: 2;
+        }
 
-            /*
+        .top-level>*:nth-child(2)>*:nth-child(2) {
+            flex: 1;
+        }
+
+        /*
                 Departement Finance Header
             */
-            header.departement-finance{
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-            }
+        header.departement-finance {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
 
 
 
 
 
-            /*
+        /*
                 Money amounts
             */
-            td.money-amount{
-                text-align: right
-            }
+        td.money-amount {
+            text-align: right
+        }
 
-            /*
+        /*
                 Textual aggregated
             */
-            .aggregated{
+        .aggregated {}
 
-            }
+        .aggregated .zero-m52 {
+            font-weight: bold;
+        }
 
-            .aggregated .zero-m52{
-                font-weight: bold;
-            }
+        .aggregated .temporary {
+            color: orangered;
+        }
 
-            .aggregated .temporary{
-                color: orangered;
-            }
+        .aggregated .amount-issue td:nth-child(3) {
+            background-color: gold;
+        }
 
-            .aggregated .amount-issue td:nth-child(3){
-                background-color: gold;
-            }
+        h1 {
+            text-align: center;
+        }
 
-            h1{
-                text-align: center;
-            }
-
-            /*
+        /*
                 Sunburst
             */
 
-            .sunburst{}
+        .sunburst {}
 
-            .sunburst .slice path {
-                fill: #d4c685
-            }
+        .sunburst .slice path {
+            fill: #d4c685
+        }
 
-            .sunburst .slice > .slice path {
-                fill: #f7ef81
-            }
+        .sunburst .slice>.slice path {
+            fill: #f7ef81
+        }
 
-            .sunburst .slice > .slice > .slice path {
-                fill: #cfe795
-            }
+        .sunburst .slice>.slice>.slice path {
+            fill: #cfe795
+        }
 
-            .sunburst .slice > .slice > .slice > .slice path {
-                fill: #a7d3a6
-            }
+        .sunburst .slice>.slice>.slice>.slice path {
+            fill: #a7d3a6
+        }
 
-            .sunburst .slice > .slice > .slice > .slice > .slice path {
-                fill: #add2c2
-            }
+        .sunburst .slice>.slice>.slice>.slice>.slice path {
+            fill: #add2c2
+        }
 
-            .slice > .piece path{
-                stroke: #AAA;
-            }
+        .slice>.piece path {
+            stroke: #AAA;
+        }
 
-            text{
-                color: black;
-                stroke-width: 0;
-            }
-
-
-            .sunburst.active-selection{}
-
-            .sunburst.active-selection .slice > .piece path,
-            .sunburst.active-selection .slice > .piece text{
-                opacity: 0.3;
-            }
-
-            .sunburst.active-selection .slice.highlighted > .piece path,
-            .sunburst.active-selection .slice.highlighted > .piece text{
-                opacity: 1;
-            }
-
-            .sunburst.active-selection .slice.selected > .piece path{
-                stroke: indianred;
-                stroke-width: 2px;
-            }
+        text {
+            color: black;
+            stroke-width: 0;
+        }
 
 
-            /*
+        .sunburst.active-selection {}
+
+        .sunburst.active-selection .slice>.piece path,
+        .sunburst.active-selection .slice>.piece text {
+            opacity: 0.3;
+        }
+
+        .sunburst.active-selection .slice.highlighted>.piece path,
+        .sunburst.active-selection .slice.highlighted>.piece text {
+            opacity: 1;
+        }
+
+        .sunburst.active-selection .slice.selected>.piece path {
+            stroke: indianred;
+            stroke-width: 2px;
+        }
+
+
+        /*
                 RDFI Selector
             */
 
-            .rdfi{
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
+        .rdfi {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
 
-                min-width: 28em;
-            }
+            min-width: 28em;
+        }
 
-            .rdfi .selector{
-                
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
+        .rdfi .selector {
 
-        </style>
-    </head>
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
 
-    <body>
-        <div class="react-container"></div>
-    </body>
+<body>
+    <div class="react-container"></div>
+</body>
+
 </html>
