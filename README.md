@@ -155,8 +155,8 @@ https://docs.google.com/spreadsheets/d/1vb9YLAcjjkW1QA5bkuOpYOmD9y34YHwJAcgzepnL
 
 Cette association est encodée en JavaScript dans les deux fichier suivants :
 
-https://github.com/dtc-innovation/dataviz-finances-gironde/blob/master/src/shared/js/finance/m52ToAggregated.js
-https://github.com/dtc-innovation/dataviz-finances-gironde/blob/master/src/shared/js/finance/hierarchicalAggregated.js
+https://github.com/datalocale/dataviz-finances-gironde/blob/master/src/shared/js/finance/m52ToAggregated.js
+https://github.com/datalocale/dataviz-finances-gironde/blob/master/src/shared/js/finance/hierarchicalAggregated.js
 
 Par ailleurs, il a été découvert début octobre 2017 que dans de rares cas, un montant associé à une même ligne M52 (fonction/article) se découpe dans 2 agrégats différents. Pour résoudre ce cas, un fichier de “correction” a été ajouté. Il peut être trouvé ici : https://github.com/datalocale/dataviz-finances-gironde/blob/master/data/finances/corrections-agregation.csv 
 
