@@ -118,7 +118,7 @@ Les actions nécessaires à la mise à jour des contenus sont de plusieurs natur
   
 ### mise à jour des labels finances
 
-Actuellement les labels des articles de la norme comptable M52 sont stockés dans un fichier csv. Ce fichier est mis à disposition via l'outil google spreadshett afon d'en faciliter l'édition collaborative.
+Actuellement les labels des articles de la norme comptable M52 sont stockés dans un fichier csv. Ce fichier est mis à disposition via l'outil google spreadsheet afin d'en faciliter l'édition collaborative.
 En complément un fichier contient des textes conjoncturels permettant d'expliciter l'évolution d'une recette ou d'une dépense significative sur la période couverte par l'outil. Ce fichier est géré de la même manière que le fichier de définition.
 
 https://docs.google.com/spreadsheets/d/1RQ6YAhFlFZaamvl6HpUxH_4MaG7Yg8l45pdTey14tOU/edit#gid=1852965930
