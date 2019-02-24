@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {mkdir, readFile, writeFile} from 'fs-extra';
+import {mkdir, readFile, writeFile, readdir} from 'fs-extra';
 import {DOMParser} from 'xmldom';
 
 import getPlansDeCompte from './shared/getPlansDeCompte.js'
@@ -24,23 +24,20 @@ mkdir(BUILD_FINANCE_DIR)
     throw err;
 })
 .then( () => {
-    return Promise.all([
-        'CA2013BPAL.xml',
-        'CA2014BPAL.xml',
-        'CA2015BPAL.xml',
-        'CA2016BPAL.xml',
-        'CA2017BPAL.xml'
-    ].map(f => {
-        return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
-        .then( str => {
-            return (new DOMParser()).parseFromString(str, "text/xml");
-        })
-        .then(doc => {
-            return natureToChapitreFIP.then(natureToChapitreFI => {
-                return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+    return readdir(join(SOURCE_FINANCE_DIR, 'CA'))
+    .then(files => {
+        return Promise.all(files.map(f => {
+            return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
+            .then( str => {
+                return (new DOMParser()).parseFromString(str, "text/xml");
             })
-        })
-    }))
+            .then(doc => {
+                return natureToChapitreFIP.then(natureToChapitreFI => {
+                    return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+                })
+            })
+        }))
+    })
     .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
     .then(str => writeFile(join(BUILD_FINANCE_DIR, 'doc-budgs.json'), str, 'utf-8'))
 
