@@ -44,6 +44,10 @@ export default function reducer(state, action) {
                 newState = newState.setIn(['docBudgByYear', db.Exer], db);
             })
 
+            const maxYear = Math.max(...docBudgs.map(db => db.Exer))
+
+            newState = newState.set('currentYear', maxYear).set('explorationYear', maxYear)
+
             return newState
         }
         case CORRECTION_AGGREGATION_RECEIVED: {

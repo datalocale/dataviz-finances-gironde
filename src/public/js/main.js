@@ -100,8 +100,8 @@ const store = createStore(
     reducer,
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
-        currentYear: 2017,
-        explorationYear: 2017,
+        currentYear: (new Date()).getFullYear() - 1,
+        explorationYear: (new Date()).getFullYear() - 1,
         financeDetailId: undefined,
         textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]]),
         screenWidth: window.innerWidth
