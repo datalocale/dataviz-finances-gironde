@@ -1,30 +1,18 @@
 import {join} from 'path';
-import * as fs from 'fs-extra';
+import {mkdir, readFile, writeFile} from 'fs-extra';
 import {DOMParser} from 'xmldom';
+
+import getPlansDeCompte from './shared/getPlansDeCompte.js'
 
 import xmlDocumentToDocumentBudgetaire from '../src/shared/js/finance/xmlDocumentToDocumentBudgetaire';
 import makeNatureToChapitreFI from '../src/shared/js/finance/makeNatureToChapitreFI';
-
-const {mkdir, readFile, writeFile} = fs;
 
 const BUILD_FINANCE_DIR = './build/finances';
 const SOURCE_FINANCE_DIR = './data/finances';
 
 
-const natureToChapitreFIP = Promise.all([
-    'planDeCompte-2013.xml',
-    'planDeCompte-2014.xml',
-    'planDeCompte-2015.xml',
-    'planDeCompte-2016.xml',
-    'planDeCompte-2017.xml'
-].map(f => {
-    return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
-    .then( str => {
-        return (new DOMParser()).parseFromString(str, "text/xml");
-    })
-}))
-.then(makeNatureToChapitreFI);
-
+const natureToChapitreFIP = getPlansDeCompte(join(SOURCE_FINANCE_DIR, 'plansDeCompte'))
+    .then(makeNatureToChapitreFI);
 
 
 mkdir(BUILD_FINANCE_DIR)
