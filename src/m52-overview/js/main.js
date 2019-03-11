@@ -301,12 +301,12 @@ const store = createStore(
 
 
 const natureToChapitreFIP = Promise.all([
-    'planDeCompte-2013.xml',
-    'planDeCompte-2014.xml',
-    'planDeCompte-2015.xml',
-    'planDeCompte-2016.xml',
-    'planDeCompte-2017.xml',
-    'planDeCompte-2018.xml'
+    'plan-de-compte-M52-M52-2013.xml',
+    'plan-de-compte-M52-M52-2014.xml',
+    'plan-de-compte-M52-M52-2015.xml',
+    'plan-de-compte-M52-M52-2016.xml',
+    'plan-de-compte-M52-M52-2017.xml',
+    'plan-de-compte-M52-M52-2018.xml'
 ].map(f => fetch(`${SOURCE_FINANCE_DIR}plansDeCompte/${f}`).then(r => r.text())
     .then( str => {
         return (new DOMParser()).parseFromString(str, "text/xml");
