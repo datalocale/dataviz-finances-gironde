@@ -220,11 +220,14 @@ export const rules = Object.freeze({
         filter(m52Row) {
             const fonction = m52Row['Fonction'];
             const f1 = fonction.slice(0, 1);
-            return isRF(m52Row) && f1 !== '4' && f1 !== '5' && [
-                '7817', '7711', '7714', '7718',
-                '773', '7788', '7875', '7816', '7866'
-                // ajout de l'article 7866 pour le CA 2017
-            ].includes(m52Row['Nature']);
+            return isRF(m52Row) &&
+                // suppression pour CA 2018 f1 !== '4' && f1 !== '5' && 
+                [
+                    '7817', '7711', '7714', '7718',
+                    '773', '7788', '7875', '7816', '7866', '7713'
+                    // ajout de l'article 7866 pour le CA 2017
+                    // ajour de l'article 7713 pour le CA 2018
+                ].includes(m52Row['Nature']);
         }
     },
     'RF-9-3': {
