@@ -853,7 +853,8 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
 
             return isRI(m52Row) &&
-                article !== '204' &&
+                // mise à jour CA 2018 article !== '204' 
+                article === '204' &&
                 (
                     ["165", "1676", "454121", "454421", "454428", "45821", '1335', '1345'].includes(article) ||
                     ['20', '21', '22', '23', '26', '27'].includes(m52Row['Chapitre'])
