@@ -842,7 +842,9 @@ export const rules = Object.freeze({
             const art = m52Row['Nature'];
             return isRI(m52Row) &&
                 art !== '1332' && art !== '1341' && art !== '1335' && art !== '1345' &&
-                (art.startsWith('13') || art.startsWith('204'))
+                (art.startsWith('13')
+                    // modif CA 2018 || art.startsWith('204')
+                )
         }
     },
     'RI-5': {
