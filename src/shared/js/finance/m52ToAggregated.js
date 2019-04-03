@@ -868,6 +868,14 @@ export const rules = Object.freeze({
             return isRF(m52Row) && m52Row['Nature'] === '775';
         }
     },
+    'RI-7': {
+        label: "Amendes radars automatiques",
+        filter(m52Row) {
+            const article = m52Row['Nature'];
+            // The choice of picking from "Recette de Fonctionnement" (RF) and not RI is deliberate
+            return isRI(m52Row) && ['1335', '1345'].includes(article);
+        }
+    },
     'RI-EM-1': {
         label: "Emprunt nouveau",
         filter(m52Row) {
