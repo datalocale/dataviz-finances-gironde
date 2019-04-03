@@ -488,7 +488,8 @@ export const rules = Object.freeze({
                 article !== '6513' &&
                 !article.startsWith('64') &&
                 article !== '6336' &&
-                article !== '6245';
+                // mise à jour CA 2018
+                (article == '6245' && fonction === '538');
         }
     },
     'DF-2-4': {
@@ -721,7 +722,8 @@ export const rules = Object.freeze({
                 art.startsWith('62') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
-                art !== '6218';
+                art !== '6218' &&
+                (art === '6251' && f3 === '621');
         }
     },
     'DF-6-1-4': {
