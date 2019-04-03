@@ -162,24 +162,6 @@ export const rules = Object.freeze({
         }
 
     },
-    'RF-6-6': {
-        label: "Autres",
-        //Fonction 4 et 5 – les articles précédents - A74784 - A752
-        filter(m52Row) {
-            const fonction = m52Row['Fonction'];
-            const f1 = fonction.slice(0, 1);
-            const otherRecetteSocialeIds = Object.keys(rules)
-                .filter(id => id !== 'RF-6-6' && id.startsWith('RF-6-'));
-
-            return isRF(m52Row) &&
-                m52Row['Nature'] !== '74784' &&
-                m52Row['Nature'] !== '752' &&
-                (f1 === '4' || f1 === '5') &&
-                otherRecetteSocialeIds.every(
-                    id => !rules[id].filter(m52Row)
-                )
-        }
-    },
 
     'RF-7-1': {
         label: "Fonds de Mobilisation Départementale pour l'Insertion (FMDI)",
@@ -194,10 +176,17 @@ export const rules = Object.freeze({
         }
     },
     'RF-7-3': {
-        label: "Fonds d'appui d'aide à domicile (CNSA AAD)",
-        status: 'TEMPORARY',
+        label: "Fonds d'appui aux politiques d'insertion",
+        //status: 'TEMPORARY',
+        // 74718*F01 +74713*F01
+        //filter(m52Row) {
+        //return isRF(m52Row) && m52Row['Nature'] === 'A74788';
+        //
         filter(m52Row) {
-            //return isRF(m52Row) && m52Row['Nature'] === 'A74788';
+            const fonction = m52Row['Fonction'];
+
+            return isRF(m52Row) && (
+                ['74718', '74713'].includes(m52Row['Nature']) && fonction === '01')
         }
     },
     'RF-7-4': {
