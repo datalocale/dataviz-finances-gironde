@@ -939,7 +939,9 @@ export const rules = Object.freeze({
                     ) ||
                     (fonction === '18' && article === '23153') ||
                     (fonction === '52' && ['23151', '2315', '2118' + '23152'].includes(article)) ||
-                    (fonction === '821' && article === '1322') || (fonction === '33' && article === '23153')
+                    (fonction === '821' && article === '1322') ||
+                    // mise à jour CA 2018 
+                    (fonction === '33' && article === '23153')
                 ) &&
                 !(fonction === '621' && ['2111', '231318', '204182'].includes(article))
         }
@@ -985,6 +987,8 @@ export const rules = Object.freeze({
                     ) &&
                     fonction === '21'
                 ) &&
+                // mise à jour CA 2018
+                (article === '2764' && fonction === '91') &&
                 !(article === '23153' && fonction === '18') &&
                 !article.startsWith('204');
         }
