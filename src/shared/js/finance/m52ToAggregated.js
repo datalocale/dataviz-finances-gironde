@@ -750,7 +750,8 @@ export const rules = Object.freeze({
                 f3 === '621' &&
                 (art.startsWith('60') || art.startsWith('61') || art.startsWith('62') || art.startsWith('63')) &&
                 art !== '6336' &&
-                art !== '6215';
+                art !== '6215' &&
+                !(art === '6251' && f3 === '621');
         }
     },
 
