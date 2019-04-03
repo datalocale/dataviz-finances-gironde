@@ -258,8 +258,8 @@ export const rules = Object.freeze({
             const f1 = fonction.slice(0, 1);
 
             return isRF(m52Row) &&
-            // suppression mise à jour CA 2018 f1 !== '4' && f1 !== '5' 
-            && m52Row['Nature'].startsWith('70');
+                // suppression mise à jour CA 2018 f1 !== '4' && f1 !== '5' 
+                m52Row['Nature'].startsWith('70');
         }
     },
     'RF-9-6': {
