@@ -914,7 +914,7 @@ export const rules = Object.freeze({
                 (
                     fonction === '21' &&
                     (
-                        ['2031', '21838'].includes(article)
+                        ['2031', '21838', '2157', '21831', '21841'].includes(article)
                     )
                 )
         }
