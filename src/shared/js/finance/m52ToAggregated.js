@@ -240,7 +240,8 @@ export const rules = Object.freeze({
                 // suppression mise à jour CA 2018 f1 !== '4' && f1 !== '5' && 
                 [
                     '7475', '7476', '74771', '74772', '74778',
-                    '74788', '74888', '74718', '7474', '7472',
+                    // mise à jour CA 2018 '74788',
+                    '74888', '74718', '7474', '7472',
                     '7473', '7478228'
                 ].includes(m52Row['Nature']);
         }
@@ -487,9 +488,9 @@ export const rules = Object.freeze({
             return isDF(m52Row) && (f2 === '55' || f2 === '53') &&
                 article !== '6513' &&
                 !article.startsWith('64') &&
-                article !== '6336' &&
-                // mise à jour CA 2018
-                (article == '6245' && fonction === '538');
+                article !== '6336'
+            // mise à jour CA 2018
+            // && (article == '6245' && fonction === '538');
         }
     },
     'DF-2-4': {
