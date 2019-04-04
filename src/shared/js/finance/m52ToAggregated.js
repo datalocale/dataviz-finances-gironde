@@ -488,9 +488,9 @@ export const rules = Object.freeze({
             return isDF(m52Row) && (f2 === '55' || f2 === '53') &&
                 article !== '6513' &&
                 !article.startsWith('64') &&
-                article !== '6336' &&
-                // mise à jour CA 2018
-                (article == '6245' && fonction === '538');
+                article !== '6336'
+            // mise à jour CA 2018
+            // && (article == '6245' && fonction === '538');
         }
     },
     'DF-2-4': {
