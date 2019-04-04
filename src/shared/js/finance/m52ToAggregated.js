@@ -724,6 +724,7 @@ export const rules = Object.freeze({
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
                 art !== '6218' &&
+                //mise à jour CA 2018
                 (art === '6251' && f3 === '621');
         }
     },
@@ -752,6 +753,7 @@ export const rules = Object.freeze({
                 (art.startsWith('60') || art.startsWith('61') || art.startsWith('62') || art.startsWith('63')) &&
                 art !== '6336' &&
                 art !== '6215' &&
+                //mise à jour CA 2018
                 !(art === '6251' && f3 === '621');
         }
     },
