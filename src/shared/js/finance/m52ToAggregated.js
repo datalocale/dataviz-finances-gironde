@@ -941,7 +941,7 @@ export const rules = Object.freeze({
                         )
                     ) ||
                     (fonction === '18' && article === '23153') ||
-                    (fonction === '52' && ['23151', '2315', '2118' + '23152'].includes(article)) ||
+                    (fonction === '52' && ['23151', '2315', '2118', '23152'].includes(article)) ||
                     (fonction === '821' && article === '1322') ||
                     // mise à jour CA 2018 
                     (fonction === '33' && article === '23153')
