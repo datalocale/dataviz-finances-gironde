@@ -158,7 +158,8 @@ export const rules = Object.freeze({
 
             return isRF(m52Row) && (
                 // mise à jour 2019 CA 2018 74788 * F538
-                ['74788'].includes(m52Row['Nature']) && fonction === '538')
+                (['74788'].includes(m52Row['Nature']) && fonction === '538')
+            )
         }
 
     },
