@@ -281,9 +281,9 @@ export const rules = Object.freeze({
                 f1 !== '4' && f1 !== '5' &&
                 article.startsWith('75') &&
                 article !== '752' &&
-                //article !== '7513' &&
-                //article !== '75342' &&
-                //article !== '75343' &&
+                article !== '7513' &&
+                article !== '75342' &&
+                article !== '75343' &&
                 // article exclus pour le CA 2017
                 article !== '7511' &&
                 article !== '7535' &&
