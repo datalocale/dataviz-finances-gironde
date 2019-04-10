@@ -1,7 +1,9 @@
 # Language and env
 
 language: node_js
-node_js: 'node'
+node_js: 
+  - node # latest stable
+  - lts/* # All LTS (Long-Term Support) versions
 
 # What is built
 
