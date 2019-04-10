@@ -23,12 +23,19 @@ script:
   - npm run build-demo
   - npm test
 
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: bash ./tools/deploy.sh
-  on:
-    branch: master
+
+jobs:
+  include:
+    - stage: deploy to gh-pages
+      node_js: node
+      deploy:
+        skip_cleanup: true
+        provider: script
+        script: bash ./tools/deploy.sh
+        on:
+          branch: master
+
+
 
 # Other configs
 
