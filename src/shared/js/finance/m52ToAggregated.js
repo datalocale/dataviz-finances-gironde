@@ -158,10 +158,27 @@ export const rules = Object.freeze({
 
             return isRF(m52Row) && (
                 // mise à jour 2019 CA 2018 74788 * F538
-                (['74788'].includes(m52Row['Nature']) && fonction === '538')
-            )
+                ['74788'].includes(m52Row['Nature']) && fonction === '538')
         }
 
+    },
+    'RF-6-6': {
+        label: "Autres",
+        //Fonction 4 et 5 – les articles précédents - A74784 - A752
+        filter(m52Row) {
+            const fonction = m52Row['Fonction'];
+            const f1 = fonction.slice(0, 1);
+            const otherRecetteSocialeIds = Object.keys(rules)
+                .filter(id => id !== 'RF-6-6' && id.startsWith('RF-6-'));
+
+            return isRF(m52Row) &&
+                m52Row['Nature'] !== '74784' &&
+                m52Row['Nature'] !== '752' &&
+                (f1 === '4' || f1 === '5') &&
+                otherRecetteSocialeIds.every(
+                    id => !rules[id].filter(m52Row)
+                )
+        }
     },
 
     'RF-7-1': {
@@ -177,17 +194,10 @@ export const rules = Object.freeze({
         }
     },
     'RF-7-3': {
-        label: "Fonds d'appui aux politiques d'insertion",
-        //status: 'TEMPORARY',
-        // 74718*F01 +74713*F01
-        //filter(m52Row) {
-        //return isRF(m52Row) && m52Row['Nature'] === 'A74788';
-        //
+        label: "Fonds d'appui d'aide à domicile (CNSA AAD)",
+        status: 'TEMPORARY',
         filter(m52Row) {
-            const fonction = m52Row['Fonction'];
-
-            return isRF(m52Row) && (
-                ['74718', '74713'].includes(m52Row['Nature']) && fonction === '01')
+            //return isRF(m52Row) && m52Row['Nature'] === 'A74788';
         }
     },
     'RF-7-4': {
@@ -221,14 +231,11 @@ export const rules = Object.freeze({
         filter(m52Row) {
             const fonction = m52Row['Fonction'];
             const f1 = fonction.slice(0, 1);
-            return isRF(m52Row) &&
-                // suppression pour CA 2018 f1 !== '4' && f1 !== '5' && 
-                [
-                    '7817', '7711', '7714', '7718',
-                    '773', '7788', '7875', '7816', '7866', '7713'
-                    // ajout de l'article 7866 pour le CA 2017
-                    // ajour de l'article 7713 pour le CA 2018
-                ].includes(m52Row['Nature']);
+            return isRF(m52Row) && f1 !== '4' && f1 !== '5' && [
+                '7817', '7711', '7714', '7718',
+                '773', '7788', '7875', '7816', '7866'
+                // ajout de l'article 7866 pour le CA 2017
+            ].includes(m52Row['Nature']);
         }
     },
     'RF-9-3': {
@@ -237,14 +244,11 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f1 = fonction.slice(0, 1);
 
-            return isRF(m52Row) &&
-                // suppression mise à jour CA 2018 f1 !== '4' && f1 !== '5' && 
-                [
-                    '7475', '7476', '74771', '74772', '74778',
-                    // mise à jour CA 2018 '74788',
-                    '74888', '74718', '7474', '7472',
-                    '7473', '7478228'
-                ].includes(m52Row['Nature']);
+            return isRF(m52Row) && f1 !== '4' && f1 !== '5' && [
+                '7475', '7476', '74771', '74772', '74778',
+                '74788', '74888', '74718', '7474', '7472',
+                '7473', '7478228'
+            ].includes(m52Row['Nature']);
         }
     },
     'RF-9-4': {
@@ -259,9 +263,7 @@ export const rules = Object.freeze({
             const fonction = m52Row['Fonction'];
             const f1 = fonction.slice(0, 1);
 
-            return isRF(m52Row) &&
-                // suppression mise à jour CA 2018 f1 !== '4' && f1 !== '5' 
-                m52Row['Nature'].startsWith('70');
+            return isRF(m52Row) && f1 !== '4' && f1 !== '5' && m52Row['Nature'].startsWith('70');
         }
     },
     'RF-9-6': {
@@ -489,9 +491,8 @@ export const rules = Object.freeze({
             return isDF(m52Row) && (f2 === '55' || f2 === '53') &&
                 article !== '6513' &&
                 !article.startsWith('64') &&
-                article !== '6336'
-            // mise à jour CA 2018
-            // && (article == '6245' && fonction === '538');
+                article !== '6336' &&
+                article !== '6245';
         }
     },
     'DF-2-4': {
@@ -724,9 +725,7 @@ export const rules = Object.freeze({
                 art.startsWith('62') &&
                 !(['4', '5', '8'].includes(f1)) &&
                 !(f3 === '621') &&
-                art !== '6218' &&
-                //mise à jour CA 2018
-                (art === '6251' && f3 === '621');
+                art !== '6218';
         }
     },
     'DF-6-1-4': {
@@ -753,9 +752,7 @@ export const rules = Object.freeze({
                 f3 === '621' &&
                 (art.startsWith('60') || art.startsWith('61') || art.startsWith('62') || art.startsWith('63')) &&
                 art !== '6336' &&
-                art !== '6215' &&
-                //mise à jour CA 2018
-                !(art === '6251' && f3 === '621');
+                art !== '6215';
         }
     },
 
@@ -846,9 +843,7 @@ export const rules = Object.freeze({
             const art = m52Row['Nature'];
             return isRI(m52Row) &&
                 art !== '1332' && art !== '1341' && art !== '1335' && art !== '1345' &&
-                (art.startsWith('13')
-                    // modif CA 2018 || art.startsWith('204')
-                )
+                (art.startsWith('13') || art.startsWith('204'))
         }
     },
     'RI-5': {
@@ -857,8 +852,7 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
 
             return isRI(m52Row) &&
-                // mise à jour CA 2018 article !== '204' 
-                article === '204' &&
+                article !== '204' &&
                 (
                     ["165", "1676", "454121", "454421", "454428", "45821", '1335', '1345'].includes(article) ||
                     ['20', '21', '22', '23', '26', '27'].includes(m52Row['Chapitre'])
@@ -870,14 +864,6 @@ export const rules = Object.freeze({
         filter(m52Row) {
             // The choice of picking from "Recette de Fonctionnement" (RF) and not RI is deliberate
             return isRF(m52Row) && m52Row['Nature'] === '775';
-        }
-    },
-    'RI-7': {
-        label: "Amendes radars automatiques",
-        filter(m52Row) {
-            const article = m52Row['Nature'];
-            // The choice of picking from "Recette de Fonctionnement" (RF) and not RI is deliberate
-            return isRI(m52Row) && ['1335', '1345'].includes(article);
         }
     },
     'RI-EM-1': {
@@ -918,7 +904,7 @@ export const rules = Object.freeze({
                 (
                     fonction === '21' &&
                     (
-                        ['2031', '21838', '2157', '21831', '21841'].includes(article)
+                        ['2031', '21838'].includes(article)
                     )
                 )
         }
@@ -942,10 +928,8 @@ export const rules = Object.freeze({
                         )
                     ) ||
                     (fonction === '18' && article === '23153') ||
-                    (fonction === '52' && ['23151', '2315', '2118', '23152'].includes(article)) ||
-                    (fonction === '821' && article === '1322') ||
-                    // mise à jour CA 2018 
-                    (fonction === '33' && article === '23153')
+                    (fonction === '52' && ['23151', '2315'].includes(article)) ||
+                    (fonction === '821' && article === '1322')
                 ) &&
                 !(fonction === '621' && ['2111', '231318', '204182'].includes(article))
         }
@@ -978,9 +962,7 @@ export const rules = Object.freeze({
                     (fonction === '52' && article === '2315') ||
                     (fonction === '50' && article === '231351') ||
                     (fonction === '01' && article === '2761') ||
-                    (fonction === '01' && article === '2748') ||
-                    // mise à jour CA 2018
-                    (fonction === '91' && article === '2764')
+                    (fonction === '01' && article === '2748')
                 ) &&
                 !(article === '21313' && fonction === '40') &&
                 !(article === '1322' && fonction === '821') &&
@@ -1009,9 +991,7 @@ export const rules = Object.freeze({
                     ([
                         "1311", "2031", "2111", "2157",
                         "2182", "21848", "2312", "231351", "2314",
-                        "23152", "23153",
-                        //ajout article CA 2018
-                        "2051"
+                        "23152", "23153"
                     ].includes(article) &&
                         f3 === '738') ||
                     article === '45441'
@@ -1091,9 +1071,7 @@ export const rules = Object.freeze({
                     "204151", "204152", "204162", "2041721", "2041722",
                     "2041782", "204181", "204182",
                     "20422", "20431", '2761', '261', '20421', '204183',
-                    '204113', '1321', '2748', '1328', '13278',
-                    //ajout article CA 2018
-                    '204153'
+                    '204113', '1321', '2748', '1328', '13278'
                 ].includes(article) &&
                 fonction !== '72' &&
                 !(article === '204152' && fonction === '93') &&
