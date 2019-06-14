@@ -27,13 +27,12 @@ script:
 jobs:
   include:
     - stage: deploy to gh-pages
+      if: branch = master && type != pull_request
       node_js: node
       deploy:
         skip_cleanup: true
         provider: script
         script: bash ./tools/deploy.sh
-        on:
-          branch: master
 
 
 
