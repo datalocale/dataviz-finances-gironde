@@ -1,6 +1,6 @@
 import * as matchers from 'jest-immutable-matchers';
 import { OrderedSet as ImmutableSet } from 'immutable';
-import m52ToAggregated from '../../../src/shared/js/finance/m52ToAggregated';
+//import m52ToAggregated from '../../../src/shared/js/finance/m52ToAggregated';
 import { LigneBudgetRecord, DocumentBudgetaire } from '../../../src/shared/js/finance/DocBudgDataStructures';
 
 jest.addMatchers(matchers);

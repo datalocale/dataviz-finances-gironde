@@ -6,8 +6,8 @@ import {join} from 'path'
 import * as matchers from 'jest-immutable-matchers';
 
 import { DocumentBudgetaire, LigneBudgetRecord } from '../../src/shared/js/finance/DocBudgDataStructures';
-import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
-import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
+//import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
+//import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
 import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections.js';
 
 import { flattenTree } from '../../src/shared/js/finance/visitHierarchical';

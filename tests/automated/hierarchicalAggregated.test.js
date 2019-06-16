@@ -3,9 +3,10 @@ import {resolve} from 'path';
 
 import * as matchers from 'jest-immutable-matchers';
 import { OrderedSet as ImmutableSet } from 'immutable';
-import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
+//import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
+//import hierarchicalAggregated from '../../src/shared/js/finance/hierarchicalAggregated';
 import csvStringToCorrections from '../../src/shared/js/finance/csvStringToCorrections';
-import m52ToAggregated from '../../src/shared/js/finance/m52ToAggregated';
+
 
 import { LigneBudgetRecord, DocumentBudgetaire } from '../../src/shared/js/finance/DocBudgDataStructures';
 
