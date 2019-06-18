@@ -1,3 +1,5 @@
+import memoize from '../memoize.js'
+
 
 export function fromXMLDocument(pc){
     const Nomenclature = pc.getElementsByTagName('Nomenclature')[0]
@@ -19,6 +21,12 @@ export function fromXMLDocument(pc){
         
         FIByChapitreCode.set(code, ch.getAttribute('Section'))
     }
+
+    const comptesArray = Array.from(Nomenclature.getElementsByTagName(`Compte`))
+
+    const getCompteElement = memoize(Nature => {
+        return comptesArray.find(compteElement => compteElement.getAttribute('Code') === Nature)
+    })
 
     return {
         Norme: Nomenclature.getAttribute('Norme'),
@@ -42,9 +50,8 @@ export function fromXMLDocument(pc){
             return chapitreCode === chapitre
         },
         ligneBudgetIsInCompte({Nature}, compte){
-            const compteElement = Array.from(Nomenclature.getElementsByTagName(`Compte`))
-                .find(compteElement => compteElement.getAttribute('Code') === Nature)
-
+            const compteElement = getCompteElement(Nature)
+            
             if(!compteElement) // compte does not exist for this nature
                 return false;
 

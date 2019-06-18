@@ -23,8 +23,6 @@ function pathToXMLDocument(path){
     return (new DOMParser()).parseFromString(planDeCompteXMLString, "text/xml");
 }
 
-console.time('fichiers')
-
 const planDeCompte = fromXMLDocument(
     pathToXMLDocument(join(__dirname, '..', '..', 'data', 'finances', 'plansDeCompte', 'plan-de-compte-M52-M52-2016.xml'))
 )
@@ -35,12 +33,8 @@ const CA2016 = xmlDocumentToDocumentBudgetaire(
 
 const corrections = csvStringToCorrections(readFileSync(join(__dirname, '../../data/finances/corrections-agregation.csv'), {encoding: 'utf-8'}))
 
-console.timeEnd('fichiers')
-
-console.time('agrégation')
 const aggregate = makeAggregateFunction(aggregationDescription, planDeCompte)
 const aggregated2016Elements = flattenTree(aggregate(CA2016, corrections));
-console.timeEnd('agrégation')
 
 
 

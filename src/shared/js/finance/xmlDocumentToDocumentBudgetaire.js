@@ -43,7 +43,7 @@ export default function xmlDocumentToDocumentBudgetaire(doc){
         xmlRowsById.set(id, idRows);
     }
 
-    return new DocumentBudgetaire({
+    return {
         LibelleColl: doc.getElementsByTagName('LibelleColl')[0].getAttribute('V'),
         Nomenclature: doc.getElementsByTagName('Nomenclature')[0].getAttribute('V'),
         NatDec: BlocBudget.getElementsByTagName('NatDec')[0].getAttribute('V'),
@@ -55,16 +55,13 @@ export default function xmlDocumentToDocumentBudgetaire(doc){
                 const amount = sum(xmlRows.map(r => Number(r['MtReal'])))
                 const r = xmlRows[0];
 
-                return new LigneBudgetRecord(Object.assign(
+                return Object.assign(
                     {},
                     r, 
                     { 'MtReal': amount}
-                ))
+                )
             })
         )
-    })
+    }
 
 }
-/*
-
-*/

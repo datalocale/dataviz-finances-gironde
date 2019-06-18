@@ -24,11 +24,9 @@ export default memoize(function makeAggregateFunction(aggregationDescription, pl
             // leaf, has .formula
             {
                 id, name, 
-                elements: new Set(
-                    [...documentBudgetaire.rows]
-                        .filter(makeLigneBudgetFilterFromFormula(formula, planDeCompte))
-                        .concat(relevantCorrections)
-                )
+                elements: [...documentBudgetaire.rows]
+                    .filter(makeLigneBudgetFilterFromFormula(formula, planDeCompte))
+                    .concat(relevantCorrections)
             }
     });
 
