@@ -70,7 +70,8 @@
   "esm": {
     "mode": "auto",
     "cjs": {
-      "namedExports": true
+      "namedExports": true,
+      "vars":true
     }
   },
   "dependencies": {

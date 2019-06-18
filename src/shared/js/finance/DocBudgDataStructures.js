@@ -11,9 +11,7 @@ const LigneBudgetKeys = {
     'Nature': undefined,
     'Fonction': undefined,
     'CodRD': undefined,
-    'MtReal': undefined,
-    'Chapitre': undefined,
-    'FI': undefined
+    'MtReal': undefined
 }
 
 

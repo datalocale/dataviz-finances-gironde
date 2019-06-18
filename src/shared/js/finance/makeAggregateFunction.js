@@ -2,6 +2,8 @@ import memoize from '../memoize.js'
 
 import makeLigneBudgetFilterFromFormula from '../DocumentBudgetaireQueryLanguage/makeLigneBudgetFilterFromFormula.js'
 
+const SPECIAL_ID = 'S'; // keep in sync with description-agrégation.json
+
 export default memoize(function makeAggregateFunction(aggregationDescription, planDeCompte){
 
     const aggregationDescriptionNodeToAggregatedDocumentBudgetaireNode = memoize(function(aggregationDescriptionNode, documentBudgetaire, planDeCompte, corrections){
@@ -9,14 +11,12 @@ export default memoize(function makeAggregateFunction(aggregationDescription, pl
 
         const relevantCorrections = corrections.filter(ligne => ligne.splitFor === aggregationDescriptionNode.id)
 
-        if(relevantCorrections.length >= 1)
-            console.log('relevantCorrections', aggregationDescriptionNode.id, relevantCorrections)
-
         return children ?
             // non-leaf
             {
                 id, name, 
                 children: Object.values(children)
+                    .filter(c => c.id !== SPECIAL_ID) // removing 'Spécial' category
                     .map(n => aggregationDescriptionNodeToAggregatedDocumentBudgetaireNode(
                         n, documentBudgetaire, planDeCompte, corrections
                     ))
@@ -32,11 +32,9 @@ export default memoize(function makeAggregateFunction(aggregationDescription, pl
             }
     });
 
-    return memoize(function aggregate(docBudg, corrections = []){
-        corrections = corrections.filter(ligne => ligne.Exer === docBudg.Exer)
+    return memoize(function aggregate(docBudg, corrections){
+        const yearCorrections = (corrections || []).filter(ligne => ligne.Exer === docBudg.Exer)
 
-        console.log('relevantCorrections', docBudg.Exer, corrections)
-
-        return aggregationDescriptionNodeToAggregatedDocumentBudgetaireNode(aggregationDescription, docBudg, planDeCompte, corrections)
+        return aggregationDescriptionNodeToAggregatedDocumentBudgetaireNode(aggregationDescription, docBudg, planDeCompte, yearCorrections)
     })
 })

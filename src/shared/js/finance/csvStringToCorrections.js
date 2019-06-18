@@ -1,7 +1,5 @@
-import {dsvFormat} from 'd3-dsv';
+import {csvParse} from 'd3-dsv';
 import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
-
-const semiColonSVParse = dsvFormat(';').parse
 
 export function format(rows){
 
@@ -16,7 +14,7 @@ export function format(rows){
 }
 
 export default function(csvString){
-    const rows = semiColonSVParse(csvString);
+    const rows = csvParse(csvString);
     const corrections = format(rows.map(c => {
         return Object.assign(
             {
