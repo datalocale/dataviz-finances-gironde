@@ -9,118 +9,6 @@
       "useInAnalysis": true,
       "children": [
         {
-          "id": "DI",
-          "name": "DEPENSES D'INVESTISSEMENT",
-          "useInAnalysis": true,
-          "children": [
-            {
-              "id": "DI.1",
-              "name": "•Dépenses d' Equipements Propres",
-              "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "DI.1.1",
-                  "name": "COLLEGES",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C20+C21+C23-C204)∩F221+(C2031+C21838+C2157+C21831+C21841)∩F21-RI∩C2031"
-                },
-                {
-                  "id": "DI.1.2",
-                  "name": "ROUTES",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C20+C21+C23+C1321+C1324)∩F621+(C23153∩F18)+(C2118+C23152+C23151+C2315)∩F52-((C2111+C231318)∩F621)+(C23153∩F33)+C1322∩F821-RI∩(C1322∩F821)-RI∩(C2315+C23151)∩F52-C204182-RI∩C23153∩F18-(C1322∩F821∩Ann2018)-(C231351+C21848+C2188)∩F621"
-                },
-                {
-                  "id": "DI.1.3",
-                  "name": "BATIMENTS",
-                  "useInAnalysis": true,
-                  "formula": "DI∩((C20+C21+C23+C1321+C1324)-(C20+C21+C23+C1321+C1324)∩(F221+F621+F738+F50))-((C2031+C21838)∩F21)-(C23153∩F18)+((C2111+C231318)∩F621)-(C21313∩F40)+(C2188∩F41)-C204+(C2764∩F91)-(C21831+C21841+C2157)∩F21-(C2118+C23151+C23152)∩F52-(C23153∩F33)-(C2188∩F41)+(C45441+C454418)∩F01+(C1322∩F821∩Ann2018)+(C231351∩F50)+(C2188+C231351+C21848)∩F621+(C261+C2748)∩F01+(C261∩F0202)-RI∩(C2748∩F01)"
-                },
-                {
-                  "id": "DI.1.4",
-                  "name": "AMENAGEMENT",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C1311+C2031+C2111+C2157+C2182+C21848+C2312+C231351+C2314+C23152+C23153+C2051)∩F738"
-                },
-                {
-                  "id": "DI.1.5",
-                  "name": "IMMOBILIER SOCIAL",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C1675+(C20+C21+C23)∩F50+C21313∩F40+C2188∩F41-(C204∩F50)-RI∩(C231313+C21313)∩F50-(C231351∩F50)"
-                }
-              ]
-            },
-            {
-              "id": "DI.2 ",
-              "name": "Subventions",
-              "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "DI.2.1",
-                  "name": "SUBVENTIONS AUX COMMUNES",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C20414+C204141+C204142)-(C204142∩F72)"
-                },
-                {
-                  "id": "DI.2.2",
-                  "name": "LOGEMENT",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C204142+C204182+C20422)∩F72"
-                },
-                {
-                  "id": "DI.2.3",
-                  "name": "SDIS",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C2041781"
-                },
-                {
-                  "id": "DI.2.4",
-                  "name": "SUBVENTIONS AUX TIERS",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C204-(C204182+C20422)∩F72-(C204182∩F68)-(C204152∩F93)-C2041781-C20414-C204141-C204142+(C2761+C1328+C13278)-RI∩(C1328+C2761+C13278)-RI∩C2748∩(F0202∪F01)"
-                },
-                {
-                  "id": "DI.2.5",
-                  "name": "LGV",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C204182∩F68)"
-                },
-                {
-                  "id": "DI.2.6",
-                  "name": "GIRONDE NUMERIQUE",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C204152∩F93)"
-                }
-              ]
-            },
-            {
-              "id": "DI.EM",
-              "name": "Emprunt remboursé",
-              "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "DI.EM.1",
-                  "name": "Amortissement Emprunt",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C1641+C16311+C167+C168+C16811+C166)-C1675-C1672"
-                },
-                {
-                  "id": "DI.EM.2",
-                  "name": "Amortissement OCLT",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C16441"
-                }
-              ]
-            },
-            {
-              "id": "DI.EM.3",
-              "name": "DIVERS EMPRUNTS",
-              "useInAnalysis": true,
-              "formula": "DI∩C1672+C165+C275-RI∩C165-RI∩C275"
-            }
-          ]
-        },
-        {
           "id": "DF",
           "name": "DEPENSES DE FONCTIONNEMENT",
           "useInAnalysis": true,
@@ -151,7 +39,7 @@
                       "id": "DF.1.1.3",
                       "name": "Enfants",
                       "useInAnalysis": true,
-                      "formula": "DF∩(C652222+C65223+C6523+C652411+C652415+C652418+C65821+C6132+C6135+C62268+C6234+C6245+C6184+C65228+C652412+C65221+C6336+C64121+C64126+C64128+C6451+C6453+C6454+C6475+C65111+C6251+C617+C6227+C6135+C6132+C6232+C6718)∩F51+(C64121+C64126)∩F50"
+                      "formula": "DF∩(C652222+C65223+C6523+C652411+C652415+C652418+C65821+C6132+C6135+C62268+C6234+C6245+C6184+C65228+C652412+C65221+C6336+C64121+C64126+C64128+C6451+C6453+C6454+C6475+C6251+C617+C6227+C6135+C6132+C6232+C6718)∩F51+(C64121+C64126)∩F50"
                     }
                   ]
                 },
@@ -160,12 +48,6 @@
                   "name": "Revenu de Solidarité Active (RSA)",
                   "useInAnalysis": true,
                   "formula": "DF∩(C6515+C65171+C65172)"
-                },
-                {
-                  "id": "DF1.3",
-                  "name": "Prestation Compensatoire du Handicap (PCH) + Allocation Compensatrice aux Tierces Personnes (ACTP)",
-                  "useInAnalysis": true,
-                  "formula": "DF∩(C6511211+C6511212+C651128+C651122)"
                 },
                 {
                   "id": "DF.1.4",
@@ -177,13 +59,13 @@
                   "id": "DF.1.5",
                   "name": "Préventions enfants",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C652416 ∪ C6514+C65111)∩F51"
+                  "formula": "DF∩(C652416 ∪ C6514)∩F51"
                 },
                 {
                   "id": "DF.1.6",
                   "name": "Subventions sociales",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C65734+C65737+C65738+C6574)∩(F4 ∪ F5)"
+                  "formula": "DF∩(C65734+C65737+C65738+C6574)∩(F4 ∪ F5)-C6574∩F58"
                 },
                 {
                   "id": "DF.1.7",
@@ -209,6 +91,12 @@
                   "name": "Conférence des financeurs",
                   "useInAnalysis": true,
                   "formula": "DF∩((C65113∩F53)+((C65113+C6568)∩F531)+((C65113+C6568)∩F532))"
+                },
+                {
+                  "id": "DF.1.3",
+                  "name": "Prestation Compensatoire du Handicap (PCH) + Allocation Compensatrice aux Tierces Personnes (ACTP)",
+                  "useInAnalysis": true,
+                  "formula": "DF∩(C6511211+C6511212+C651128+C651122)"
                 }
               ]
             },
@@ -239,13 +127,13 @@
                   "id": "DF.2.4",
                   "name": "Enfance",
                   "useInAnalysis": true,
-                  "formula": "DF∩F51-C6526+(C64126+C64121∩F50∩Ann2016)"
+                  "formula": "DF∩F51-C6526+(C64126+C64121∩F50∩Ann2016)+(C64126+C64121∩F50∩Ann2015)+(C64126+C64121∩F50∩Ann2014)"
                 },
                 {
                   "id": "DF.2.5",
                   "name": "Autres",
                   "useInAnalysis": true,
-                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336"
+                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336-C6574∩F58"
                 }
               ]
             },
@@ -288,7 +176,7 @@
                   "id": "DF.3.6",
                   "name": "Subventions de fonctionnement",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C65731+C65732+C65733+C65734+C65735+C65736+C65737+C65738+C6574)-(C657∩F4+C657∩F5-C657∩F8)"
+                  "formula": "DF∩(C65731+C65732+C65733+C65734+C65735+C65736+C65737+C65738+C6574)-(C657∩F4+C657∩F5+C657∩F8)"
                 },
                 {
                   "id": "DF.3.7",
@@ -321,7 +209,7 @@
               "id": "DF.4",
               "name": "DEPENSES DE PERSONNEL",
               "useInAnalysis": true,
-              "formula": "DF∩Ch012+(C64+C6218+C6336)∩(Ch015+Ch016+Ch017)-(C64+C6336)∩F51-(C64121+C64126)∩F50"
+              "formula": "DF∩Ch012+(C64+C6218+C6336)∩(Ch015+Ch016+Ch017)-(C64+C6336)∩F51-(C64121+C64126)∩F50-(C6451+C6453+C6454)∩F50∩(Ann2016+Ann2015+Ann2014)"
             },
             {
               "id": "DF.5",
@@ -411,6 +299,118 @@
               "formula": "Ch66"
             }
           ]
+        },
+        {
+          "id": "DI",
+          "name": "DEPENSES D'INVESTISSEMENT",
+          "useInAnalysis": true,
+          "children": [
+            {
+              "id": "DI.1",
+              "name": "•Dépenses d' Equipements Propres",
+              "useInAnalysis": true,
+              "children": [
+                {
+                  "id": "DI.1.1",
+                  "name": "COLLEGES",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C20+C21+C23-C204)∩F221+(C2031+C21838+C2157+C21831+C21841)∩F21-RI∩C2031"
+                },
+                {
+                  "id": "DI.1.2",
+                  "name": "ROUTES",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C20+C21+C23+C1321+C1324)∩F621+(C23153∩F18)+(C2118+C23152+C23151+C2315)∩F52-((C2111+C231318)∩F621)+(C23153∩F33)+C1322∩F821-RI∩(C1322∩F821)-RI∩(C2315+C23151)∩F52-C204182-RI∩C23153∩F18-(C1322∩F821∩Ann2018)-(C231351+C21848+C2188+C2031)∩F621-(C2118∩F621∩Ann2018)"
+                },
+                {
+                  "id": "DI.1.3",
+                  "name": "BATIMENTS",
+                  "useInAnalysis": true,
+                  "formula": "DI∩((C20+C21+C23+C1321+C1324)-(C20+C21+C23+C1321+C1324)∩(F221+F621+F738+F50))-((C2031+C21838)∩F21)-(C23153∩F18)+((C2111+C231318)∩F621)-(C21313∩F40)+(C2188∩F41)-C204+(C2764∩F91)-(C21831+C21841+C2157)∩F21-(C2118+C23151+C23152)∩F52-(C23153∩F33)-(C2188∩F41)+(C45441+C454418)∩F01+(C1322∩F821∩Ann2018)+(C231351∩F50)+(C2188+C231351+C21848)∩F621+(C261+C2748)∩F01+(C261∩F0202)-RI∩(C2748∩F01)"
+                },
+                {
+                  "id": "DI.1.4",
+                  "name": "AMENAGEMENT",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C1311+C2031+C2111+C2157+C2182+C21848+C2312+C231351+C2314+C23152+C23153+C2051)∩F738"
+                },
+                {
+                  "id": "DI.1.5",
+                  "name": "IMMOBILIER SOCIAL",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C1675+(C20+C21+C23)∩F50+C21313∩F40+C2188∩F41-(C204∩F50)-RI∩(C231313+C21313)∩F50-(C231351∩F50)"
+                }
+              ]
+            },
+            {
+              "id": "DI.2 ",
+              "name": "Subventions",
+              "useInAnalysis": true,
+              "children": [
+                {
+                  "id": "DI.2.1",
+                  "name": "SUBVENTIONS AUX COMMUNES",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C20414+C204141+C204142)-(C204142∩F72)"
+                },
+                {
+                  "id": "DI.2.2",
+                  "name": "LOGEMENT",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C204142+C204182+C20422)∩F72"
+                },
+                {
+                  "id": "DI.2.3",
+                  "name": "SDIS",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C2041781"
+                },
+                {
+                  "id": "DI.2.4",
+                  "name": "SUBVENTIONS AUX TIERS",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C204-(C204182+C20422)∩F72-(C204182∩F68)-(C204152∩F93)-C2041781-C20414-C204141-C204142+(C2761+C1328+C13278)-RI∩(C1328+C2761+C13278)-RI∩C2748∩(F0202∪F01)"
+                },
+                {
+                  "id": "DI.2.5",
+                  "name": "LGV",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C204182∩F68)"
+                },
+                {
+                  "id": "DI.2.6",
+                  "name": "GIRONDE NUMERIQUE",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C204152∩F93)"
+                }
+              ]
+            },
+            {
+              "id": "DI.EM",
+              "name": "Emprunt Remboursé",
+              "useInAnalysis": true,
+              "children": [
+                {
+                  "id": "DI.EM.1",
+                  "name": "Amortissement Emprunt",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C1641+C16311+C167+C168+C16811+C166)-C1675-C1672"
+                },
+                {
+                  "id": "DI.EM.2",
+                  "name": "Amortissement OCLT",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C16441"
+                },
+                {
+                  "id": "DI.EM.3",
+                  "name": "Opération tirage ligne de trésorerie",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C16449∩F01"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -420,106 +420,45 @@
       "useInAnalysis": true,
       "children": [
         {
-          "id": "RI",
-          "name": "RECETTES D'INVESTISSEMENT",
-          "useInAnalysis": true,
-          "children": [
-            {
-              "id": "RI.1",
-              "name": "• Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA)",
-              "useInAnalysis": true,
-              "formula": "RI∩C10222"
-            },
-            {
-              "id": "RI.2",
-              "name": "• Dotation Décentralisée pour l’Equipement des collèges (DDEC)",
-              "useInAnalysis": true,
-              "formula": "RI∩C1332"
-            },
-            {
-              "id": "RI.3",
-              "name": "• Dotation Globale d’Equipement (DGE)",
-              "useInAnalysis": true,
-              "formula": "RI∩C1341+C10221"
-            },
-            {
-              "id": "RI.4",
-              "name": "Subventions",
-              "useInAnalysis": true,
-              "formula": "RI∩C13-C1332-C1341-C1335-C1345"
-            },
-            {
-              "id": "RI.5",
-              "name": "Divers",
-              "useInAnalysis": true,
-              "formula": "RI∩(C204+C165+C1676+C454121+C454421+C454428+C45821+C45442)+RI∩(C20+C21+C22+C23+C26+C27)"
-            },
-            {
-              "id": "RI.6",
-              "name": "Cessions",
-              "useInAnalysis": true,
-              "formula": "RF∩C775"
-            },
-            {
-              "id": "RI.7",
-              "name": "Amendes radars automatiques",
-              "useInAnalysis": true,
-              "formula": "RI∩C1335+C1345"
-            },
-            {
-              "id": "RI.EM",
-              "name": "EMPRUNT MOBILISE",
-              "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "RI.EM.1",
-                  "name": "EMPRUNT NOUVEAU",
-                  "useInAnalysis": true,
-                  "formula": "RI∩(C1641+C16311+C166)"
-                },
-                {
-                  "id": "RI.EM.2",
-                  "name": "OCLT",
-                  "useInAnalysis": true,
-                  "formula": "RI∩C16441"
-                }
-              ]
-            }
-          ]
-        },
-        {
           "id": "RF",
           "name": "RECETTES DE FONCTIONNEMENT",
           "useInAnalysis": true,
           "children": [
             {
-              "id": "RF-1",
-              "name": "FISCALITE DIRECTE",
+              "id": "RF.7",
+              "name": "• Dispositif de compensation sociale",
               "useInAnalysis": true,
               "children": [
                 {
-                  "id": "RF-1-1",
-                  "name": "Taxes foncières sur les propriétés bâties+ rôles supplémentaires",
+                  "id": "RF.7.1",
+                  "name": "Fonds de Mobilisation Départementale pour l'Insertion (FMDI)",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C73111+C7318)"
+                  "formula": "RF∩(C74783)"
                 },
                 {
-                  "id": "RF-1-2",
-                  "name": "Cotisation sur la valeur ajoutée des entreprises (CVAE)",
+                  "id": "RF.7.2",
+                  "name": "Dotation de compensation peréquée DCP",
                   "useInAnalysis": true,
-                  "formula": "RF∩C73112"
+                  "formula": "RF∩(C73125)"
                 },
                 {
-                  "id": "RF.1.3",
-                  "name": "Imposition forfaitaire pour les entreprises de réseau (IFER)",
+                  "id": "RF.7.3",
+                  "name": "Divers fonds (fonds d'urgence, FAPI...)",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C73114)"
-                },
+                  "formula": "RF∩(C74718+C74713)∩F01 "
+                }
+              ]
+            },
+            {
+              "id": "RF.8",
+              "name": "Péréquation horizontale",
+              "useInAnalysis": true,
+              "children": [
                 {
-                  "id": "RF.1.4",
-                  "name": "Reversement CVAE région",
+                  "id": "RF.8.1",
+                  "name": "Fonds de Péréquation DMTO et Fonds de solidarité",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C73123)"
+                  "formula": "RF∩(C7326+C73261+C73262)"
                 }
               ]
             },
@@ -541,12 +480,6 @@
                   "formula": "RF∩(C7342)"
                 }
               ]
-            },
-            {
-              "id": "RF.3",
-              "name": "• Droits de mutation à titre onéreux (DMTO)",
-              "useInAnalysis": true,
-              "formula": "RF∩(C7321+C7322+C7482)"
             },
             {
               "id": "RF.4",
@@ -580,47 +513,10 @@
               ]
             },
             {
-              "id": "RF.5",
-              "name": "• Dotations de l’État et compensations",
+              "id": "RF.3",
+              "name": "• Droits de mutation à titre onéreux (DMTO)",
               "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "RF.5.1",
-                  "name": "Dotation Globale de Fonctionnement (DGF)",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C7411+C74122+C74123)"
-                },
-                {
-                  "id": "RF.5.2",
-                  "name": "Dotation Globale de Décentralisation (DGD)",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C7461)"
-                },
-                {
-                  "id": "RF.5.3",
-                  "name": "Compensations fiscales",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C74833+C74834+C74835)"
-                },
-                {
-                  "id": "RF.5.4",
-                  "name": "Dotation de compensation de la réforme de la taxe professionnelle (DCRTP)",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C74832)"
-                },
-                {
-                  "id": "RF5.5",
-                  "name": "Fonds National de Garantie Individuelle de Ressources (FNGIR)",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C73121)"
-                },
-                {
-                  "id": "RF.5.6",
-                  "name": "Autres (FCTVA...)",
-                  "useInAnalysis": true,
-                  "formula": "RF∩(C744)"
-                }
-              ]
+              "formula": "RF∩(C7321+C7322+C7482)"
             },
             {
               "id": "RF.6",
@@ -715,44 +611,173 @@
               ]
             },
             {
-              "id": "RF.7",
-              "name": "• Dispositif de compensation sociale",
+              "id": "RF.5",
+              "name": "• Dotations de l’État et compensations",
               "useInAnalysis": true,
               "children": [
                 {
-                  "id": "RF.7.1",
-                  "name": "Fonds de Mobilisation Départementale pour l'Insertion (FMDI)",
+                  "id": "RF.5.1",
+                  "name": "Dotation Globale de Fonctionnement (DGF)",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C74783)"
+                  "formula": "RF∩(C7411+C74122+C74123)"
                 },
                 {
-                  "id": "RF.7.2",
-                  "name": "Dotation de compensation peréquée DCP",
+                  "id": "RF.5.2",
+                  "name": "Dotation Globale de Décentralisation (DGD)",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C73125)"
+                  "formula": "RF∩(C7461)"
                 },
                 {
-                  "id": "RF.7.3",
-                  "name": "Divers fonds (fonds d'urgence, FAPI...)",
+                  "id": "RF.5.3",
+                  "name": "Compensations fiscales",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C74718+C74713)∩F01 "
+                  "formula": "RF∩(C74833+C74834+C74835)"
+                },
+                {
+                  "id": "RF.5.4",
+                  "name": "Dotation de compensation de la réforme de la taxe professionnelle (DCRTP)",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C74832)"
+                },
+                {
+                  "id": "RF.5.6",
+                  "name": "Autres (FCTVA...)",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C744)"
+                },
+                {
+                  "id": "RF.5.5",
+                  "name": "Fonds National de Garantie Individuelle de Ressources (FNGIR)",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C73121)"
                 }
               ]
             },
             {
-              "id": "RF.8",
-              "name": "Péréquation horizontale",
+              "id": "RF.1",
+              "name": "FISCALITE DIRECTE",
               "useInAnalysis": true,
               "children": [
                 {
-                  "id": "RF.8.1",
-                  "name": "Fonds de Péréquation DMTO et Fonds de solidarité",
+                  "id": "RF.1.3",
+                  "name": "Imposition forfaitaire pour les entreprises de réseau (IFER)",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C7326+C73261+C73262)"
+                  "formula": "RF∩(C73114)"
+                },
+                {
+                  "id": "RF.1.4",
+                  "name": "Reversement CVAE région",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C73123)"
+                },
+                {
+                  "id": "RF.1.2",
+                  "name": "Cotisation sur la valeur ajoutée des entreprises (CVAE)",
+                  "useInAnalysis": true,
+                  "formula": "RF∩C73112"
+                },
+                {
+                  "id": "RF.1.1",
+                  "name": "Taxes foncières sur les propriétés bâties+ rôles supplémentaires",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C73111+C7318)"
                 }
               ]
             }
           ]
+        },
+        {
+          "id": "RI",
+          "name": "RECETTES D'INVESTISSEMENT",
+          "useInAnalysis": true,
+          "children": [
+            {
+              "id": "RI.1",
+              "name": "• Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA)",
+              "useInAnalysis": true,
+              "formula": "RI∩C10222"
+            },
+            {
+              "id": "RI.2",
+              "name": "• Dotation Décentralisée pour l’Equipement des collèges (DDEC)",
+              "useInAnalysis": true,
+              "formula": "RI∩C1332"
+            },
+            {
+              "id": "RI.3",
+              "name": "• Dotation Globale d’Equipement (DGE)",
+              "useInAnalysis": true,
+              "formula": "RI∩C1341+C10221"
+            },
+            {
+              "id": "RI.4",
+              "name": "Subventions",
+              "useInAnalysis": true,
+              "formula": "RI∩C13-C1332-C1341-C1335-C1345"
+            },
+            {
+              "id": "RI.5",
+              "name": "Divers",
+              "useInAnalysis": true,
+              "formula": "RI∩(C204+C165+C1676+C454121+C454421+C454428+C45821+C45442)+RI∩(C20+C21+C22+C23+C26+C27)"
+            },
+            {
+              "id": "RI.6",
+              "name": "Cessions",
+              "useInAnalysis": true,
+              "formula": "RF∩C775"
+            },
+            {
+              "id": "RI.7",
+              "name": "Amendes radars automatiques",
+              "useInAnalysis": true,
+              "formula": "RI∩C1335+C1345"
+            },
+            {
+              "id": "RI.EM",
+              "name": "Emprunt mobilisé",
+              "useInAnalysis": true,
+              "children": [
+                {
+                  "id": "RI.EM.1",
+                  "name": "EMPRUNT NOUVEAU",
+                  "useInAnalysis": true,
+                  "formula": "RI∩(C1641+C16311+C166)"
+                },
+                {
+                  "id": "RI.EM.2",
+                  "name": "OCLT",
+                  "useInAnalysis": true,
+                  "formula": "RI∩C16441"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S",
+      "name": "Spécial",
+      "useInAnalysis": true,
+      "children": [
+        {
+          "id": "RI.EM.3",
+          "name": "Opération tirage ligne de trésorerie",
+          "useInAnalysis": true,
+          "formula": "RI∩C16449∩F01"
+        },
+        {
+          "id": "RI.8",
+          "name": "Excédents de fonctionnement",
+          "useInAnalysis": true,
+          "formula": "RI∩C1068∩F01"
+        },
+        {
+          "id": "DI.EM.3",
+          "name": "Opération tirage ligne de trésorerie",
+          "useInAnalysis": true,
+          "formula": "DI∩C16449∩F01"
         }
       ]
     }

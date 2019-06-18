@@ -1,7 +1,7 @@
-import {Set} from 'immutable';
-
-import {csvParse} from 'd3-dsv';
+import {dsvFormat} from 'd3-dsv';
 import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
+
+const semiColonSVParse = dsvFormat(';').parse
 
 export function format(rows){
 
@@ -16,7 +16,7 @@ export function format(rows){
 }
 
 export default function(csvString){
-    const rows = csvParse(csvString);
+    const rows = semiColonSVParse(csvString);
     const corrections = format(rows.map(c => {
         return Object.assign(
             {
@@ -27,6 +27,5 @@ export default function(csvString){
     }))
     .map(c => new SplitLigneBudgetRecord(c));
 
-    return new Set(corrections);
-
+    return corrections;
 }
