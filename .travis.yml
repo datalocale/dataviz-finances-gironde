@@ -15,28 +15,26 @@ branches:
 install:
   - npm ci
 
-stages:
-  - name: deploy
-    if: branch = master && type != pull_request
-
 jobs:
   include:
     - stage: "Test"
       script: echo "tests disabled for now" #npm test
     - stage: deploy
-    - script: npm run build-demo
+      script: npm run build-demo
       env: DEPLOY_TARGET_BRANCH=gh-pages
       deploy:
         - provider: script
           skip_cleanup: true
           script: bash ./tools/deploy.sh
-    - script: npm run build-preprod
+    - stage: deploy
+      script: npm run build-preprod
       env: DEPLOY_TARGET_BRANCH=preprod-gironde.fr
       deploy:
         - provider: script
           skip_cleanup: true
           script: bash ./tools/deploy.sh
-    - script: npm run build-production
+    - stage: deploy
+      script: npm run build-production
       env: DEPLOY_TARGET_BRANCH=gironde.fr
       deploy:
         - provider: script
