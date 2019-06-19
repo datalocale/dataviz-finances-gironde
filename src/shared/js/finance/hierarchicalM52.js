@@ -30,9 +30,9 @@ const levelCategories = [
  * M52Entry keys are column names of 
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
  */
-export default function({rows}, RDFI) {
+export default function({rows}, planDeCompte, RDFI) {
     rows = rows
-    .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
+    .filter(row => row['CodRD'] === RDFI[0] && planDeCompte.ligneBudgetFI(row) === RDFI[1]);
     
     const root = {
         id: 'M52',

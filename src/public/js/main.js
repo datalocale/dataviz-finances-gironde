@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Record, Map as ImmutableMap, List, Set as ImmutableSet } from 'immutable';
-import { csvParse } from 'd3-dsv';
+import { csv, xml, json } from 'd3-fetch';
 import page from 'page';
 
 import {urls, FINANCE_DATA, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './constants/resources';
@@ -11,6 +11,7 @@ import reducer from './reducer';
 
 import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
+import { fromXMLDocument } from '../../shared/js/finance/planDeCompte';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
 import Home from './components/screens/Home';
@@ -23,7 +24,7 @@ import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import {
-    FINANCE_DATA_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
+    FINANCE_DATA_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, PLAN_DE_COMPTE_RECEIVED,
     FINANCE_DETAIL_ID_CHANGE,
 } from './constants/actions';
 
@@ -86,7 +87,7 @@ const DEFAULT_BREADCRUMB = List([
 const StoreRecord = Record({
     docBudgByYear: undefined,
     aggregationByYear: undefined,
-    corrections: undefined,
+    planDeCompteByYear: undefined,
     currentYear: undefined,
     explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
@@ -100,6 +101,7 @@ const store = createStore(
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
         aggregationByYear: new ImmutableMap(),
+        planDeCompteByYear: new ImmutableMap(),
         currentYear: (new Date()).getFullYear() - 1,
         explorationYear: (new Date()).getFullYear() - 1,
         financeDetailId: undefined,
@@ -135,7 +137,7 @@ store.dispatch({
  *
  */
 
-fetch(urls[FINANCE_DATA]).then(resp => resp.json())
+json(urls[FINANCE_DATA])
 .then(({documentBudgetaires, aggregations}) => {
     store.dispatch({
         type: FINANCE_DATA_RECEIVED,
@@ -145,11 +147,22 @@ fetch(urls[FINANCE_DATA]).then(resp => resp.json())
         }), 
         aggregations
     });
+
+    for(const {Exer} of documentBudgetaires){
+        xml(`https://datalocale.github.io/dataviz-finances-gironde/data/finances/plansDeCompte/plan-de-compte-M52-M52-${Exer}.xml`)
+        .then(fromXMLDocument)
+        .then(planDeCompte => {
+            store.dispatch({
+                type: PLAN_DE_COMPTE_RECEIVED,
+                planDeCompte
+            });
+        })
+    }
+
 });
 
 
-fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
-.then(csvParse)
+csv(urls[AGGREGATED_ATEMPORAL])
 .then(textList => {
     store.dispatch({
         type: ATEMPORAL_TEXTS_RECEIVED,
@@ -157,8 +170,7 @@ fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
     });
 });
 
-fetch(urls[AGGREGATED_TEMPORAL]).then(resp => resp.text())
-.then(csvParse)
+csv(urls[AGGREGATED_TEMPORAL])
 .then(textList => {
     store.dispatch({
         type: TEMPORAL_TEXTS_RECEIVED,

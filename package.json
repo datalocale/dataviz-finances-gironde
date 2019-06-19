@@ -71,7 +71,7 @@
     "mode": "auto",
     "cjs": {
       "namedExports": true,
-      "vars":true
+      "vars": true
     }
   },
   "dependencies": {
@@ -79,6 +79,7 @@
     "d3-array": "^1.2.1",
     "d3-color": "^1.2.0",
     "d3-dsv": "^1.0.8",
+    "d3-fetch": "^1.1.2",
     "d3-scale": "^1.0.7",
     "d3-shape": "^1.0.0",
     "esm": "^3.2.14",
@@ -86,7 +87,6 @@
     "fast-memoize": "^2.5.1",
     "fs-extra": "^4.0.3",
     "immutable": "^3.8.1",
-    "lodash.memoize": "^4.1.2",
     "markdown-it": "^8.4.1",
     "markdown-it-link-attributes": "^2.1.0",
     "nearley": "^2.16.0",

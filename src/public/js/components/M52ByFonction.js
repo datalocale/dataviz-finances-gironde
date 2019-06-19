@@ -45,24 +45,24 @@ export default class M52ByFonction extends React.Component {
     }
 
     render() {
-        const { m52Instruction, urlByFonction, labelsById, screenWidth } = this.props;
+        const { m52Instruction, planDeCompte, urlByFonction, labelsById, screenWidth } = this.props;
         const {rdfi} = this.state;
 
-        const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
+        const m52Hierarchical = m52Instruction && planDeCompte ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, planDeCompte, rdfi)) : undefined;
 
         const outerRadius = Math.min(screenWidth/2 - 30, 240);
 
         return React.createElement('div', { className: 'm52-by-fonction' },
-            React.createElement(M52Viz, {
+            m52Hierarchical ? React.createElement(M52Viz, {
                 onSliceSelected: e => {
                     if(e){
                         page(urlByFonction[e.id])
                     }
                 },
-                M52Hierarchical: m52Hierarchical,
+                m52Hierarchical,
                 donutWidth: outerRadius*2/3,
                 outerRadius
-            }),
+            }) : undefined,
             React.createElement('div', {},
                 React.createElement('p', {}, `La norme M52 est la norme comptable sous laquelle tous les Départements de France doivent fournir leurs comptes.`),
                 React.createElement('div', { className: 'display-choice' }, 
@@ -79,14 +79,14 @@ export default class M52ByFonction extends React.Component {
                     )
                 ),
 
-                React.createElement(LegendList, {items: new List(m52Hierarchical.children)
+                m52Hierarchical ? React.createElement(LegendList, {items: new List(m52Hierarchical.children)
                     .sort((c1, c2) => c2.total - c1.total)
                     .map((e) => ({
                         url: urlByFonction[e.id], 
                         text: `${labelsById.get(e.id)} (${(100*e.total/m52Hierarchical.total).toFixed(1)}%)`, 
                         colorClassName: `${e.id}`
                     }))
-                })
+                }) : undefined
             )
         )
     }
