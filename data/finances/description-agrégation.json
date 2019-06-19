@@ -127,7 +127,7 @@
                   "id": "DF.2.4",
                   "name": "Enfance",
                   "useInAnalysis": true,
-                  "formula": "DF∩F51-C6526+(C64126+C64121∩F50∩Ann2016)+(C64126+C64121∩F50∩Ann2015)+(C64126+C64121∩F50∩Ann2014)"
+                  "formula": "DF∩F51-C6526+((C64126+C64121+C6453+C6454)∩F50∩Ann2016)+((C64126+C64121+C6453+C6454)∩F50∩Ann2015)+((C64126+C64121+C6453+C6454)∩F50∩Ann2014)"
                 },
                 {
                   "id": "DF.2.5",
@@ -152,7 +152,7 @@
                   "id": "DF.3.2",
                   "name": "Transports",
                   "useInAnalysis": true,
-                  "formula": "DF∩((F568∩(C6336 ∪ C6218+C6245)) ∪ (F8 - F8∩(C6336+C64)))"
+                  "formula": "DF∩((F568∩C6245) ∪ (F8 - F8∩(C6336+C64)))"
                 },
                 {
                   "id": "DF.3.3",
@@ -343,7 +343,32 @@
               ]
             },
             {
-              "id": "DI.2 ",
+              "id": "DI.EM",
+              "name": "Emprunt Remboursé",
+              "useInAnalysis": true,
+              "children": [
+                {
+                  "id": "DI.EM.1",
+                  "name": "Amortissement Emprunt",
+                  "useInAnalysis": true,
+                  "formula": "DI∩(C1641+C16311+C167+C168+C16811+C166)-C1675-C1672"
+                },
+                {
+                  "id": "DI.EM.2",
+                  "name": "Amortissement OCLT",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C16441"
+                },
+                {
+                  "id": "DI.EM.3",
+                  "name": "Divers emprunts",
+                  "useInAnalysis": true,
+                  "formula": "DI∩C1672+C165+C275-RI∩C165-RI∩C275"
+                }
+              ]
+            },
+            {
+              "id": "DI.2",
               "name": "Subventions",
               "useInAnalysis": true,
               "children": [
@@ -382,31 +407,6 @@
                   "name": "GIRONDE NUMERIQUE",
                   "useInAnalysis": true,
                   "formula": "DI∩(C204152∩F93)"
-                }
-              ]
-            },
-            {
-              "id": "DI.EM",
-              "name": "Emprunt Remboursé",
-              "useInAnalysis": true,
-              "children": [
-                {
-                  "id": "DI.EM.1",
-                  "name": "Amortissement Emprunt",
-                  "useInAnalysis": true,
-                  "formula": "DI∩(C1641+C16311+C167+C168+C16811+C166)-C1675-C1672"
-                },
-                {
-                  "id": "DI.EM.2",
-                  "name": "Amortissement OCLT",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C16441"
-                },
-                {
-                  "id": "DI.EM.3",
-                  "name": "Opération tirage ligne de trésorerie",
-                  "useInAnalysis": true,
-                  "formula": "DI∩C16449∩F01"
                 }
               ]
             }
@@ -778,6 +778,12 @@
           "name": "Opération tirage ligne de trésorerie",
           "useInAnalysis": true,
           "formula": "DI∩C16449∩F01"
+        },
+        {
+          "id": "dur",
+          "name": "Formules en dur",
+          "useInAnalysis": true,
+          "formula": "DF∩(C6451∩F50∩Ann2014)+(C6451∩F50∩Ann2015)+(C6451∩F50∩Ann2016)+(DF∩C6574∩F58)+DI∩C2031∩F621+(DI∩C2118∩F621∩Ann2018)+DF∩C65111∩F51"
         }
       ]
     }
