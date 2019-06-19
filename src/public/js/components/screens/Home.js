@@ -1,7 +1,8 @@
-import { Map as ImmutableMap } from 'immutable';
-
 import React from 'react';
 import { connect } from 'react-redux';
+
+import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import { EXPENDITURES } from '../../../../shared/js/finance/constants';
 
 import Markdown from '../../../../shared/js/components/Markdown';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
@@ -9,11 +10,7 @@ import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
 
-import {flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
-import {m52ToAggregated, hierarchicalAggregated}  from '../../../../shared/js/finance/memoized';
-
 import { SOLIDARITES, INVEST, PRESENCE } from '../../constants/pages';
-import { EXPENDITURES } from '../../../../shared/js/finance/constants';
 
 
 export function Home({
@@ -35,7 +32,7 @@ export function Home({
             React.createElement('div', {className: 'appetizers'},
 
                 React.createElement(TotalAppetizer, {
-                    total: expenditures, // (May 29th) different than what was hardcoded (1.616*Math.pow(10, 9))
+                    total: expenditures,
                     year: currentYear,
                     exploreUrl: explore
                 }),
@@ -68,21 +65,11 @@ export function Home({
 
 export default connect(
     state => {
-        const { docBudgByYear, corrections, currentYear } = state;
-        const m52Instruction = docBudgByYear.get(currentYear);
+        const { aggregationByYear, currentYear } = state;
 
-        const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
-        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+        const aggregated = aggregationByYear.get(currentYear)
 
-        let elementById = new ImmutableMap();
-
-        if(m52Instruction){
-            flattenTree(hierAgg).forEach(aggHierNode => {
-                elementById = elementById.set(aggHierNode.id, aggHierNode);
-            });
-        }
-
-        const totalById = elementById.map(e => e.total);
+        let expendituresNode = aggregated && aggregated.children.find(n => n.id === EXPENDITURES)
 
         return {
             currentYear,
@@ -92,9 +79,8 @@ export default connect(
                 invest: '#!/focus/'+INVEST,
                 presence: '#!/focus/'+PRESENCE
             },
-            expenditures: totalById.get(EXPENDITURES)
+            expenditures: expendituresNode && aggregatedDocumentBudgetaireNodeTotal(expendituresNode)
         }
-
 
     },
     () => ({})

@@ -207,7 +207,7 @@ test(`Pour le CA 2016 de la Gironde, DF.1 = DF.2`, () => {
 test(`Pour le CA 2016 de la Gironde, DF devrait représenter ~1375,6 millions d'euros`, () => {
     const df = aggregated2016Elements.find(e => e.id === DF);
 
-    expect(aggregatedDocumentBudgetaireNodeTotal(df)).toBeCloseTo(1375600000/MILLION, 1);
+    expect(aggregatedDocumentBudgetaireNodeTotal(df)/MILLION).toBeCloseTo(1375600000/MILLION, 1);
 });
 
 /**

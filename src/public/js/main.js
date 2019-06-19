@@ -6,11 +6,10 @@ import { Record, Map as ImmutableMap, List, Set as ImmutableSet } from 'immutabl
 import { csvParse } from 'd3-dsv';
 import page from 'page';
 
-import {urls, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
+import {urls, FINANCE_DATA, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './constants/resources';
 import reducer from './reducer';
 
 import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
-import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
@@ -24,8 +23,7 @@ import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import {
-    DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
+    FINANCE_DATA_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
     FINANCE_DETAIL_ID_CHANGE,
 } from './constants/actions';
 
@@ -87,6 +85,7 @@ const DEFAULT_BREADCRUMB = List([
 
 const StoreRecord = Record({
     docBudgByYear: undefined,
+    aggregationByYear: undefined,
     corrections: undefined,
     currentYear: undefined,
     explorationYear: undefined,
@@ -100,6 +99,7 @@ const store = createStore(
     reducer,
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
+        aggregationByYear: new ImmutableMap(),
         currentYear: (new Date()).getFullYear() - 1,
         explorationYear: (new Date()).getFullYear() - 1,
         financeDetailId: undefined,
@@ -134,26 +134,16 @@ store.dispatch({
  * Fetching initial data
  *
  */
-fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
-.then(csvStringToCorrections)
-.then(corrections => {
+
+fetch(urls[FINANCE_DATA]).then(resp => resp.json())
+.then(({documentBudgetaires, aggregations}) => {
     store.dispatch({
-        type: CORRECTION_AGGREGATION_RECEIVED,
-        corrections
-    });
-});
-
-
-fetch(urls[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
-.then(docBudgs => {
-    docBudgs = docBudgs.map(db => {
-        db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
-        return DocumentBudgetaire(db)
-    })
-
-    store.dispatch({
-        type: DOCUMENTS_BUDGETAIRES_RECEIVED,
-        docBudgs,
+        type: FINANCE_DATA_RECEIVED,
+        documentBudgetaires: documentBudgetaires.map(db => {
+            db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
+            return DocumentBudgetaire(db)
+        }), 
+        aggregations
     });
 });
 

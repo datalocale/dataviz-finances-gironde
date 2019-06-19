@@ -5,7 +5,7 @@ export default function ({ items }) {
         React.createElement('nav', {},
             React.createElement('ul', {},
                 items.map(({ url, text }, i) => {
-                    const li = React.createElement('li', {},
+                    const li = React.createElement('li', {key: i},
                         url ? React.createElement('a', { href: url }, text) : text
                     )
 
