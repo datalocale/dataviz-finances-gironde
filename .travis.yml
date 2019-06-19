@@ -15,13 +15,15 @@ branches:
 install:
   - npm ci
 
-script:
-  - echo "tests disabled" #npm test
+stages:
+  - name: deploy
+    if: branch = master && type != pull_request
 
 jobs:
   include:
-    - stage: "Deploy"
-      if: branch = master && type != pull_request
+    - stage: "Test"
+      script: echo "tests disabled for now" #npm test
+    - stage: deploy
     - script: npm run build-demo
       env: DEPLOY_TARGET_BRANCH=gh-pages
       deploy:
