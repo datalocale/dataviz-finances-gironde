@@ -88,10 +88,10 @@ function rawAggregatedDocumentBudgetaireNodeElements(node){
         const union = new Set()
     
         for(const child of node.children){
-            // When computing the total of DF, ignore everything that's in DF-1
-            // There is supposed to be the same amount elements (and amounts) in DF-2
+            // When computing the total of DF, ignore everything that's in DF.1
+            // There is supposed to be the same amount elements (and amounts) in DF.2
             // Given the same elements, things should cancel out naturally with the fact hat
-            // 'union' is a set. But there are split rows which are unique to DF-1 and others to DF-2
+            // 'union' is a set. But there are split rows which are unique to DF.1 and others to DF.2
             // and they are hard to disambiguate
             if(!(node.id === 'DF' && child.id === 'DF.1')){
                 for(const el of aggregatedDocumentBudgetaireNodeElements(child)){

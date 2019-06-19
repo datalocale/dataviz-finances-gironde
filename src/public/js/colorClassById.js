@@ -1,7 +1,7 @@
 import visit from '../../shared/js/finance/visitHierarchical';
 
 import {DF, DI, RF, RI} from '../../shared/js/finance/constants';
-import {levels} from '../../shared/js/finance/hierarchicalAggregated';
+import aggregationDescription from '../../../data/finances/description-agrégation.json';
 
 import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 
@@ -9,7 +9,7 @@ const colorClasses = Array(10).fill().map((e, i) => `area-color-${i+1}`);
 
 const colorClassById = new Map();
 
-visit(levels, e => {
+visit(aggregationDescription, e => {
     if(e.children){
         let i = 0;
 
@@ -18,7 +18,7 @@ visit(levels, e => {
 
             colorClassById.set(
                 id,
-                colorClasses[ id === 'DF-1' || id === 'DF-2' ? 0 : i ]
+                colorClasses[ id === 'DF.1' || id === 'DF.2' ? 0 : i ]
             )
 
             i++;

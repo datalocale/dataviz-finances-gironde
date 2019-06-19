@@ -43,7 +43,7 @@ test('aggregate returns an AggregatedDocumentBudgetaire', () => {
 test('aggregate returns a node when passed simple valid arguments', () => {
     const AMOUNT = 1037;
 
-    // DF-3-1
+    // DF.3.1
     const ligneBudget = new LigneBudgetRecord({
         'CodRD': 'D',
         'Nature': '6553',
@@ -59,7 +59,7 @@ test('aggregate returns a node when passed simple valid arguments', () => {
 });
 
 
-test('aggregate returns an AggregatedDocumentBudgetaire of one DF-3-1 element with same amount when passed an DocumentBudgetaire with only D 12 6553', () => {
+test('aggregate returns an AggregatedDocumentBudgetaire of one DF.3.1 element with same amount when passed an DocumentBudgetaire with only D 12 6553', () => {
     const AMOUNT = 1037;
     const AGGREGATED_ROW_ID = 'DF.3.1';
 
@@ -88,7 +88,7 @@ test('aggregate returns an AggregatedDocumentBudgetaire of one DF-3-1 element wi
 });
 
 
-test('A ligneBudget that appears in both DF-1 and DF-2 should be counted only once in total expenditures', () => {
+test('A ligneBudget that appears in both DF.1 and DF.2 should be counted only once in total expenditures', () => {
     const AMOUNT = 1038;
 
     const ligneBudget = new LigneBudgetRecord({

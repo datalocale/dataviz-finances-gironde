@@ -10,8 +10,8 @@ import {urls, FINANCE_DATA, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './c
 import reducer from './reducer';
 
 import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
-import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 import { fromXMLDocument } from '../../shared/js/finance/planDeCompte';
+import {makeChildToParent, flattenTree} from '../../shared/js/finance/visitHierarchical.js';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
 import Home from './components/screens/Home';
@@ -239,20 +239,37 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
         CONTAINER_ELEMENT
     );
 
+
+    const {docBudgByYear, aggregationByYear, planDeCompteByYear, currentYear, textsById} = store.getState()
+
+    const isM52Element = contentId.startsWith('M52-');
+
+    let RDFI;
+    if(isM52Element){
+        RDFI = contentId.slice('M52-'.length, 'M52-XX'.length);
+    }
+
+    const documentBudgetaire = docBudgByYear.get(currentYear);
+    const aggregatedDocumentBudgetaire = aggregationByYear.get(currentYear);
+    const planDeCompte = planDeCompteByYear.get(currentYear)
+
+    const hierM52 = documentBudgetaire && RDFI && planDeCompte && hierarchicalM52(documentBudgetaire, planDeCompte, RDFI);
+
+    const childToParent = makeChildToParent(...[aggregatedDocumentBudgetaire, hierM52].filter(x => x !== undefined))
+
     const breadcrumbData = [];
 
-    let currentContentId = contentId.startsWith('M52-') ?
-        contentId.slice(7) :
-        contentId;
+    let currentElement = (aggregatedDocumentBudgetaire && flattenTree(aggregatedDocumentBudgetaire).find(el => el.id === contentId)) ||
+        (hierM52 && flattenTree(hierM52).find(el => el.id === contentId))
 
-    while(currentContentId){
-        if(currentContentId !== 'Total'){
+    while(currentElement){
+        if(currentElement.id !== 'racine'){
             breadcrumbData.push({
-                text: elementById.get(currentContentId).label,
-                url: `#!/finance-details/${currentContentId}`
+                text: textsById.get(currentElement.id).label,
+                url: `#!/finance-details/${currentElement.id}`
             })
         }
-        currentContentId = childToParent.get(currentContentId);
+        currentElement = childToParent.get(currentElement);
     }
 
     breadcrumbData.push({

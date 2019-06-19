@@ -8,8 +8,9 @@ import page from 'page';
 import { max } from 'd3-array';
 
 import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
-import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
-import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
+import {aggregatedDocumentBudgetaireNodeTotal, aggregatedDocumentBudgetaireNodeElements} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import {hierarchicalM52}  from '../../../../shared/js/finance/memoized';
+import {makeChildToParent, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
 
@@ -90,28 +91,28 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
     let barchartPartitionByYear = partitionByYear;
     if(contentId === 'DF'){
         // For DF, for the split thing at the end, the whole partition is needed.
-        // However, DF-1 === DF-2, so for the barchart, we only want one of them with the label "solidarité"
+        // However, DF.1 === DF.2, so for the barchart, we only want one of them with the label "solidarité"
         barchartPartitionByYear = barchartPartitionByYear.map(partition => {
-            partition = partition.remove(partition.findIndex(p => p.contentId === 'DF-1'))
+            partition = partition.remove(partition.findIndex(p => p.contentId === 'DF.1'))
 
-            const df2 = partition.find(p => p.contentId === 'DF-2');
+            const df2 = partition.find(p => p.contentId === 'DF.2');
 
-            return partition.set(partition.findIndex(p => p.contentId === 'DF-2'), {
+            return partition.set(partition.findIndex(p => p.contentId === 'DF.2'), {
                 contentId: df2.contentId,
                 partAmount: df2.partAmount,
                 texts: df2.texts && df2.texts.set('label', [
                     'Actions sociales ',
-                    React.createElement('a', {href: '#!/finance-details/DF-1'}, '(par prestation)'),
+                    React.createElement('a', {href: '#!/finance-details/DF.1'}, '(par prestation)'),
                     ' - ',
-                    React.createElement('a', {href: '#!/finance-details/DF-2'}, '(par public)')
+                    React.createElement('a', {href: '#!/finance-details/DF.2'}, '(par public)')
                 ]),
                 url: undefined
             });
         })
 
-        // temporarily don't display DF-1
+        // temporarily don't display DF.1
         thisYearPartition = thisYearPartition && thisYearPartition.remove(
-            thisYearPartition.findIndex(p => p.contentId === 'DF-1')
+            thisYearPartition.findIndex(p => p.contentId === 'DF.1')
         )
     }
 
@@ -242,7 +243,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
         possibleChildrenIds = children.map(c => c.id);
     }
 
-    return children && children.size >= 1 ?
+    return children && (children.size >= 1 || children.length >= 1) ?
         possibleChildrenIds.map(id => {
             // .find over all possibleChildrenIds is O(n²), but n is small (<= 10)
             const child = children.find(c => c.id === id);
@@ -264,29 +265,23 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
 
 
 
-export function makeElementById(hierAgg, hierM52 = {}){
+export function makeElementById(aggregated, hierM52){
     let elementById = new ImmutableMap();
 
-    flattenTree(hierAgg).forEach(aggHierNode => {
-        elementById = elementById.set(aggHierNode.id, aggHierNode);
+    flattenTree(aggregated).forEach(aggNode => {
+        elementById = elementById.set(aggNode.id, aggNode);
     });
 
-    flattenTree(hierM52).forEach(m52HierNode => {
-        elementById = elementById.set(m52HierNode.id, m52HierNode);
-    });
+    if(hierM52){
+        flattenTree(hierM52).forEach(m52HierNode => {
+            elementById = elementById.set(m52HierNode.id, m52HierNode);
+        });
+    }
 
     return elementById;
 }
 
-function fillChildToParent(tree, wm){
-    visit(tree, e => {
-        if(e.children){
-            e.children.forEach(c => {
-                wm.set(c, e);
-            })
-        }
-    });
-}
+
 
 function makeContextList(element, childToParent){
     let contextList = [];
@@ -316,39 +311,34 @@ function makeContextList(element, childToParent){
 
 export default connect(
     state => {
-        const { docBudgByYear, corrections, textsById, financeDetailId, explorationYear, screenWidth } = state;
+        const { docBudgByYear, aggregationByYear, planDeCompteByYear, textsById, financeDetailId, explorationYear, screenWidth } = state;
 
         const isM52Element = financeDetailId.startsWith('M52-');
 
         let RDFI;
         if(isM52Element){
-            RDFI = financeDetailId.slice(4, 4+2);
+            RDFI = contentId.slice('M52-'.length, 'M52-XX'.length);
         }
 
-        const m52Instruction = docBudgByYear.get(explorationYear);
-        const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
-        const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
-        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+        const documentBudgetaire = docBudgByYear.get(explorationYear);
+        const aggregatedDocumentBudgetaire = aggregationByYear.get(explorationYear);
+        const planDeCompte = planDeCompteByYear.get(explorationYear)
 
-        const childToParent = new WeakMap();
-        if(m52Instruction){
-            if(hierM52)
-                fillChildToParent(hierM52, childToParent);
+        const hierM52 = documentBudgetaire && RDFI && planDeCompte && hierarchicalM52(documentBudgetaire, planDeCompte, RDFI);
 
-            fillChildToParent(hierAgg, childToParent);
-        }
+        const childToParent = makeChildToParent(...[aggregatedDocumentBudgetaire, hierM52].filter(x => x !== undefined))
 
         const displayedContentId = financeDetailId;
 
-        const elementById = (m52Instruction && makeElementById(hierAgg, hierM52)) || new ImmutableMap();
+        const elementById = (documentBudgetaire && makeElementById(aggregatedDocumentBudgetaire, hierM52)) || new ImmutableMap();
         const element = elementById.get(displayedContentId);
 
         const contextList = makeContextList(element, childToParent);
 
-        const elementByIdByYear = docBudgByYear.map(m52i => {
+        const elementByIdByYear = docBudgByYear.map((m52i, year) => {
             return makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i, corrections)),
-                RDFI ? hierarchicalM52(m52i, RDFI): undefined
+                aggregationByYear.get(year),
+                RDFI ? hierarchicalM52(m52i, planDeCompteByYear.get(year), RDFI) : undefined
             );
         });
 
@@ -374,20 +364,17 @@ export default connect(
         const partitionByYear = elementByIdByYear.map((elementById) => {
             const yearElement = elementById.get(displayedContentId);
 
-            return makePartition(yearElement, elementById.map(e => e.total), textsById, displayedElementPossibleChildrenIds)
+            return makePartition(yearElement, elementById.map(e => e.total || aggregatedDocumentBudgetaireNodeTotal(e)), textsById, displayedElementPossibleChildrenIds)
         });
 
         const amountByYear = elementByIdByYear.map((elementById) => {
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && yearElement.total;
+            return yearElement && yearElement.total || aggregatedDocumentBudgetaireNodeTotal(yearElement);
         });
 
-        const m52Rows = element && (!element.children || element.children.size === 0) ?
-            (isM52Element ?
-                 element.elements :
-                 element.elements.first()['M52Rows']
-            ) :
+        const m52Rows = element && (!element.children || element.children.size === 0 || element.children.length === 0) ?
+            (isM52Element ? element.elements : aggregatedDocumentBudgetaireNodeElements(element) ) :
             undefined;
 
         const texts = textsById.get(displayedContentId);
@@ -396,16 +383,21 @@ export default connect(
             contentId: displayedContentId,
             RDFI,
             amountByYear,
-            contextElements: contextList.map((c, i) => ({
-                id: c.id,
-                url : c.id !== displayedContentId ? '#!/finance-details/'+c.id : undefined,
-                proportion : c.total/contextList[0].total,
-                colorClass : colorClassById.get(c.id),
-                label: textsById.get(c.id).label +
-                    (contextList.length >= 2 && i === contextList.length -1 ?
-                        ` (${(c.total*100/contextList[0].total).toFixed(1)}%)` :
-                        '')
-            })),
+            contextElements: contextList.map((c, i) => {
+                const rdTotal = contextList[0].total || aggregatedDocumentBudgetaireNodeTotal(contextList[0])
+                const total = c.total || aggregatedDocumentBudgetaireNodeTotal(c)
+
+                return ({
+                    id: c.id,
+                    url : c.id !== displayedContentId ? '#!/finance-details/'+c.id : undefined,
+                    proportion : total/rdTotal,
+                    colorClass : colorClassById.get(c.id),
+                    label: textsById.get(c.id).label +
+                        (contextList.length >= 2 && i === contextList.length -1 ?
+                            ` (${(total*100/rdTotal).toFixed(1)}%)` :
+                            '')
+                })
+            }),
             texts,
             partitionByYear,
             m52Rows,
