@@ -21,7 +21,7 @@ jobs:
       script: echo "tests disabled" #npm test
     - stage: deploy
       if: branch = master && type != pull_request
-    - script: npm run build-demo
+      script: npm run build-demo
       env: DEPLOY_TARGET_BRANCH=gh-pages
       deploy:
         - provider: script
