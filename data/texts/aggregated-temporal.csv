@@ -1,157 +1,157 @@
 id,text
-EXPENDITURES,Les dépenses ont augmenté en 2017 essentiellement du fait de l'augmentation des dépenses d'actions sociales liée elle-même au contexte économique et social
-REVENUE,Les recettes ont augmenté en 2017 du fait de l'augmentation des droits de mutation liée à la forte évolution du marché immobilier
+D,Les dépenses ont augmenté en 2017 essentiellement du fait de l'augmentation des dépenses d'actions sociales liée elle-même au contexte économique et social
+R,Les recettes ont augmenté en 2017 du fait de l'augmentation des droits de mutation liée à la forte évolution du marché immobilier
 RF,
-RF-1,"En 2017, avec un montant de 461,66 M€ le poids relatif de cette ressource est en baisse et représente moins du tiers de nos recettes totales.
+RF.1,"En 2017, avec un montant de 461,66 M€ le poids relatif de cette ressource est en baisse et représente moins du tiers de nos recettes totales.
 Cette diminution est une des conséquences de la Loi Notre qui a prévu la prise de la compétence des transports interurbains et scolaires par la Région en 2017, et la Loi de Finances pour 2016 a organisé parallèlement le transfert de plus de la moitié de la CVAE revenant aux départements pour financer cette compétence. Ainsi la CVAE est passée de 168 M€
 en 2016 à 88,5 M€ en 2017.Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de 2,35% (+7,6 M€) et s’élèvent à 331,53 M€. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé pour 2017 à 17.46%. Il est à noter que 2017 est la première année de prise en compte des nouvelles valeurs locatives des locaux professionnels.
 
 
 "
-RF-1-1,
-RF-1-2,
-RF-1-3,
-RF-1-4,
-RF-2,
-RF-2-1,
-RF-2-2,
-RF-3,"Ouverte pour 2 ans par la loi de finances pour 2014, la possibilité de « déplafonner » les DMTO avait été décidée dans le Pacte de confiance et de responsabilité afin d’atténuer le reste à charge des départements (estimé à 5,5 milliards pour 2014) sur les dépenses liées aux allocations individuelles de solidarité, compensée en partie par l’Etat depuis leur transfert.
+RF.1.1,
+RF.1.2,
+RF.1.3,
+RF.1.4,
+RF.2,
+RF.2.1,
+RF.2.2,
+RF.3,"Ouverte pour 2 ans par la loi de finances pour 2014, la possibilité de « déplafonner » les DMTO avait été décidée dans le Pacte de confiance et de responsabilité afin d’atténuer le reste à charge des départements (estimé à 5,5 milliards pour 2014) sur les dépenses liées aux allocations individuelles de solidarité, compensée en partie par l’Etat depuis leur transfert.
 
 Après avoir marqué une baisse en 2013 les DMTO sont repartis à la hausse ces dernières années avec notamment en 2015 l’application de la  possibilité laissée aux départements par le Pacte de Confiance et Responsabilité d’augmenter le taux de 0.7% pour contribuer au financement des Allocations Individuelles de Solidarité. Le montant des droits de mutation perçu en 2017 qui s'élève à 396M€ est en hausse de 23 % soit + 74 M€ par rapport à 2016 (+11% en moyenne pour les autres départements). Depuis 2015 La Gironde connaît un important dynamisme du marché de l’immobilier porté à la fois par le volume des transactions mais aussi par l'augmentation des prix."
-RF-4,"Elles atteignent un volume de 37,17 M€ en augmentation de 20,33%. Elles se composent de la taxe d’aménagement, de la taxe sur l’électricité et d’autres recettes fiscales diverses comme la redevance des mines"
-RF-4-1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2017, la taxe d’aménagement poursuit sa forte progression déjà amorcée en 2016 et passe d’une évolution de plus de 30% à une évolution de 48,32 % pour s’établir à un niveau de 17,05 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€. Cette augmentation trouve son origine à la fois dans l’augmentation des demandes de permis de construire mais aussi dans un effet de rattrapage suite aux problèmes de recouvrement qu’avait rencontré l’Etat suite à la mise en place de la TA."
-RF-4-2,
-RF-4-3,
-RF-4-4,
-RF-5,"Elles sont composées en 2017 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP et du FNGIR (dotations figées issues de la réforme fiscale de 2010) et s’élèvent à un montant de 187.32M€. La baisse constatée depuis 2013 s’explique par la contribution du Département à la résorption du déficit national, dont l’impact s’applique à la dotation forfaitaire de la DGF qui est réduite d’un montant de 25,2 M€ en 2017. Au total, depuis 2013, la contribution de notre collectivité a atteint 87.5M€"
-RF-5-1,"En 2012, la loi de finances a prévu que la dotation de compensation des départements en année n serait égale à celle perçue en année n-1
+RF.4,"Elles atteignent un volume de 37,17 M€ en augmentation de 20,33%. Elles se composent de la taxe d’aménagement, de la taxe sur l’électricité et d’autres recettes fiscales diverses comme la redevance des mines"
+RF.4.1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2017, la taxe d’aménagement poursuit sa forte progression déjà amorcée en 2016 et passe d’une évolution de plus de 30% à une évolution de 48,32 % pour s’établir à un niveau de 17,05 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€. Cette augmentation trouve son origine à la fois dans l’augmentation des demandes de permis de construire mais aussi dans un effet de rattrapage suite aux problèmes de recouvrement qu’avait rencontré l’Etat suite à la mise en place de la TA."
+RF.4.2,
+RF.4.3,
+RF.4.4,
+RF.5,"Elles sont composées en 2017 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP et du FNGIR (dotations figées issues de la réforme fiscale de 2010) et s’élèvent à un montant de 187.32M€. La baisse constatée depuis 2013 s’explique par la contribution du Département à la résorption du déficit national, dont l’impact s’applique à la dotation forfaitaire de la DGF qui est réduite d’un montant de 25,2 M€ en 2017. Au total, depuis 2013, la contribution de notre collectivité a atteint 87.5M€"
+RF.5.1,"En 2012, la loi de finances a prévu que la dotation de compensation des départements en année n serait égale à celle perçue en année n-1
 La dotation forfaitaire notifiée en 2015 aux départements, c'est-à-dire après application de la minoration liée à la contribution au redressement des finances publiques.  
 La loi de finances pour 2015 fixe un montant de 74,02 euros par habitant en plus ou en moins par rapport à l’année précédente. Ce montant est inchangé en 2016. [source](http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=11)
 Le potentiel fiscal des départements 2016 est établi de la manière suivante : 
 REVENU/POP INSEE 2016 : le revenu moyen par habitant de l'ensemble des départements (hors Mayotte) = 14 452,76 €  
 TMN FB 2015 : le taux moyen national d’imposition de taxe foncière sur les propriétés bâties pour l’ensemble des départements = 15,44 % "
-RF-5-2,
-RF-5-3,
-RF-5-4,
-RF-5-5,
+RF.5.2,
+RF.5.3,
+RF.5.4,
+RF.5.5,
 ,
-RF-6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance d’un nouveau dispositif, le Fonds d’Appui aux Politiques d’Insertion instauré par la loi de finances 2017
+RF.6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance d’un nouveau dispositif, le Fonds d’Appui aux Politiques d’Insertion instauré par la loi de finances 2017
 
 
 
 
 "
-RF-6-1,
-RF-6-2,
-RF-6-3,
-RF-6-4,
-RF-6-5 ,
-RF-7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP)"
-RF-7-1,
-RF-7-2,
-RF-7-3,
-RF-7-4,
-RF-8,"Il s’agit du Fonds
+RF.6.1,
+RF.6.2,
+RF.6.3,
+RF.6.4,
+RF.6.5 ,
+RF.7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP)"
+RF.7.1,
+RF.7.2,
+RF.7.3,
+RF.7.4,
+RF.8,"Il s’agit du Fonds
 National de Péréquation des Droits de Mutation à Titre Onéreux, créé en
 2011 et au titre duquel le Département de la Gironde a perçu pour l’exercice
 2017 un montant de 12,78 M€, qu’il faut rapprocher du montant de la
 contribution de 32,22 M€, soit un solde net négatif de -19,44 M€.
 
 "
-RF-8-1,
-RF-8-2,"Dans le cadre du projet de budget rectificatif 2015, les députés se sont prononcés en faveur d'un amendement du gouvernement créant un fonds de soutien de 50 millions d'euros pour plusieurs départements où ""la **situation financière peut être qualifiée de tendue** ""."
-RF-9,"D’un montant de 78 M€,elles ont plus que doublé en 2017.Outre les habituelles recettes des produits des services, des domaines et ventes diverses (9,04 M€),les dotations et participations (10,17 M€) et la restauration des collèges(FARPI pour 5,32 M€), la forte progression est due aux produits exceptionnels(hors cessions), d’un montant total de 49 M€.Ce montant intègre 39,04M€ perçus de la région dans le cadre du transfert des transports prévu par la Loi Notre. En effet, la compétence transports interurbains a été transférée auxrégions au 1er janvier 2017 tandis que la compétence transportsscolaires l’a été au 1er septembre 2017. Sans tenir compte de ces dates,l’intégralité de la recette de la CVAE compensant ce transfert, a été perçuepar la région dès le 1er janvier 2017. Du 1er janvier au 1er septembre, la Région a délégué la compétence
+RF.8.1,
+RF.8.2,"Dans le cadre du projet de budget rectificatif 2015, les députés se sont prononcés en faveur d'un amendement du gouvernement créant un fonds de soutien de 50 millions d'euros pour plusieurs départements où ""la **situation financière peut être qualifiée de tendue** ""."
+RF.9,"D’un montant de 78 M€,elles ont plus que doublé en 2017.Outre les habituelles recettes des produits des services, des domaines et ventes diverses (9,04 M€),les dotations et participations (10,17 M€) et la restauration des collèges(FARPI pour 5,32 M€), la forte progression est due aux produits exceptionnels(hors cessions), d’un montant total de 49 M€.Ce montant intègre 39,04M€ perçus de la région dans le cadre du transfert des transports prévu par la Loi Notre. En effet, la compétence transports interurbains a été transférée auxrégions au 1er janvier 2017 tandis que la compétence transportsscolaires l’a été au 1er septembre 2017. Sans tenir compte de ces dates,l’intégralité de la recette de la CVAE compensant ce transfert, a été perçuepar la région dès le 1er janvier 2017. Du 1er janvier au 1er septembre, la Région a délégué la compétence
 transports interurbains au département et lui a versé le niveau de recettes correspondant aux dépenses réalisées (23,71 M€). Pendant cette période, le Département, toujours compétent, a exercé la compétence transports scolaires,qui s’est également traduite par un reversement de CVAE de la part de la Région(15,33 M€).
 "
-RF-9-1,
-RF-9-2,
-RF-9-3,
-RF-9-4,
-RF-9-5,
-RF-9-6,
-RF-9-7,
-RF-9-8,
+RF.9.1,
+RF.9.2,
+RF.9.3,
+RF.9.4,
+RF.9.5,
+RF.9.6,
+RF.9.7,
+RF.9.8,
 DF,
-DF-1,"Les dépenses de solidarité (assistants familiaux compris hors transport handicapés) passent de 843M€ en  2016 à 875M€ en 2017 soit +3.8% . Cette augmentation reste principalement le fait des Allocations Individuelles de Solidarité (AIS) qui représentent 54% des dépenses de solidarité et des dépenses d'hébergement. Au sein des AIS en 2017 c'est la Prestation de Compensation du Handicap (PCH)qui connait la progression la plus forte avec +8%, le RSA n'évoluant plus que de 4.1% contre 5.5% en 2016. Les frais liés aux hébergements pour les personnes âgées, handicapées et pour les enfants  contribuent à l'augmentation pour 13.4M€ avec notamment une forte progression liée aux créations de place pour l'hébergement des mineurs non accompagnés(MNA)."
-DF-1-1,Les dépenses liées aux hébergements est le 2ème poste de progression des dépenses de solidarité après le RSA 
-DF-1-1-1,L'hébergement pour les personnes handicapées est un secteur d'intervention trés important qui progresse de 3.5% en 2017
-DF-1-1-2,Les dépenses liées aux hebergements pour personnes âgées poursuivent leur baisse en 2017 avec -3.2% corrélativement à la baisse des bénéficiaires (-5.3%)
-DF-1-1-3,"Les frais d'hébergement des enfants qui comprennent principalement les dépenses relatives aux assistants familiaux, aux Maisons d'enfants à caractère social, la subvention de fonctionnement au Centre Départemental de la Famille et de l'Enfance (CEDEF) augmentent de 6.2% en 2017. Cette augmentation est justifiée par une augmentation des placements liés à la complexité des situations des enfants et au besoin de places et de moyens supplémentaires pour l'accueil des mineurs non accompagnés. "
-DF-1-2,"En 2017, ce sont 239M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 4.1% et 10M€ de plus qu’en 2016. Cette évolution représente la plus faible progression depuis 2013 même si elle reste élevée au regard de la moyenne nationale.Tandis que le nombre d'allocataire affiche une tendance à la baisse, le montant mensuel de l'allocation versée par foyer progresse de 4.6%, le montant moyen s'établit à 490€ contre 484€ pour la moyenne nationale"
-DF-1-3,La PCH s’élève à 79M€ et continue de progresser à un rythme qui reste trés élevé (+ 8%) après une inflexion en 2016.Cette augmentation dynamique de la PCH résulte en grande partie d’un nombre toujours plus important de bénéficiaires adultes et enfants ( le nombre de bénéficiaires ayant au moins reçu un paiement dans l'année 2017 s’éleva à 8 520 ). A ces 79M€ s’ajoutent 8.25M€ pour l’allocation de compensation pour tierce personne (ACTP)  en baisse de 1.5% soit 1125 bénéficiaires (-30 bénéficiaires).
-DF-1-4,Les dépenses liées à l'APA se ralentissent à nouveau en 2017 avec une augmentation limitée à 1.36%. Le nombre de bénéficiaires payés au titre de décembre 2017 s'est élèvé à 34 446 contre 34 046 en 2016 soit 400 bénéficiaires de plus qui concernent essentiellement les dépenses APA en établissement. 
-DF-1-5,
-DF-1-6,
-DF-1-7,
-DF-1-7-1,
-DF-1-7-2,
-DF-2,
-DF-2-1,"Sur 251 M€ consacrés en 2017 aux personnes en insertion, 238.5M€ ont concerné le versement du RSA, correspondant à un nombre de foyers ayant un droit ouvert à percevoir le RSA en 2017 de  40 944, contre 40 825 en 2016 et 41 295 en 2015 "
-DF-2-2,Le nombre de personnes souffrant d'un handicap ayant au moins un droit ouvert à une prestation servie par le Département augmente chaque année depuis 2012. Il s'élève à 15 837 à fin 2017.
-DF-2-3,"Le nombre de personnes âgées ayant au moins un droit ouvert à une prestation servie par le Département a augmenté entre 2012 et 2014 et a diminué depuis. En 2012 il était de 40 997, et s'établit en 2017 à 32 083"
-DF-2-4,"Le nombre des bénéficiaires de prestations d'aides à l'enfance en difficultés (AED, AEMO, Enfants confiés, centres maternels, TISF, CEDEF) est en progression depuis 2015 : 9 249 en 2015, 9461 en 2016 et 9863 en 2017.Les dépenses consacrées à l'enfance ont augmenté en 2017 de 6.2% suite à l'augmentation des placements et des besoins d'accueil et de moyens pour la prise en charge de mineurs non accompagnés"
-DF-2-5,
-DF-3,
-DF-3-1,
-DF-3-2,
-DF-3-3,
-DF-3-4,
-DF-3-5,
-DF-3-6,
-DF-3-7,
-DF-3-7-1,
-DF-3-7-2,
-DF-3-7-3,
-DF-4,
-DF-5,
-DF-5-1,
-DF-6,les charges courantes ont subi en 2017 une augmentation de 17% liée au versement de dotations transferts pour un montant de 6M€ à la Métropole et au titre du transfert des ports.
-DF-6-1,"Depuis 2013, les dépenses liées aux frais généraux de la structure départementale ont baissé de 5M€ . En 2017, les dépenses liées aux prestations de service comme le paiement des assurances sont restées stables.Dans les frais divers, les frais d'affranchissements ont encore baissé; dans les achats et fournitures, les postes  en baisse  concernent les dépenses d’énergie (électricité, carburant), les dépenses liées aux locations immobilières ou aux frais d'imprimerie. Par contre, l'ouverture du domaine de Certes a occasioné une augmentation exceptionnelle des frais de publicité  et de communication "
-DF-6-1-1,
-DF-6-1-2,
-DF-6-1-3,
-DF-6-1-4,
-DF-6-2,
-DF-6-3,"Elles concernent pour l'essentiel la questure, les subventions aux budgets annexes du Domaine d'Hostens et du laboratoire vétérinaire départemental et des régularisations diverses, provisions, charges exceptionnelles"
-DF-6-3-1,
-DF-6-3-2,
-DF-6-3-3,
-DF-7,
+DF.1,"Les dépenses de solidarité (assistants familiaux compris hors transport handicapés) passent de 843M€ en  2016 à 875M€ en 2017 soit +3.8% . Cette augmentation reste principalement le fait des Allocations Individuelles de Solidarité (AIS) qui représentent 54% des dépenses de solidarité et des dépenses d'hébergement. Au sein des AIS en 2017 c'est la Prestation de Compensation du Handicap (PCH)qui connait la progression la plus forte avec +8%, le RSA n'évoluant plus que de 4.1% contre 5.5% en 2016. Les frais liés aux hébergements pour les personnes âgées, handicapées et pour les enfants  contribuent à l'augmentation pour 13.4M€ avec notamment une forte progression liée aux créations de place pour l'hébergement des mineurs non accompagnés(MNA)."
+DF.1.1,Les dépenses liées aux hébergements est le 2ème poste de progression des dépenses de solidarité après le RSA 
+DF.1.1.1,L'hébergement pour les personnes handicapées est un secteur d'intervention trés important qui progresse de 3.5% en 2017
+DF.1.1.2,Les dépenses liées aux hebergements pour personnes âgées poursuivent leur baisse en 2017 avec -3.2% corrélativement à la baisse des bénéficiaires (-5.3%)
+DF.1.1.3,"Les frais d'hébergement des enfants qui comprennent principalement les dépenses relatives aux assistants familiaux, aux Maisons d'enfants à caractère social, la subvention de fonctionnement au Centre Départemental de la Famille et de l'Enfance (CEDEF) augmentent de 6.2% en 2017. Cette augmentation est justifiée par une augmentation des placements liés à la complexité des situations des enfants et au besoin de places et de moyens supplémentaires pour l'accueil des mineurs non accompagnés. "
+DF.1.2,"En 2017, ce sont 239M€ qui ont été versés au titre de l’Allocation RSA non minorée des indus soit + 4.1% et 10M€ de plus qu’en 2016. Cette évolution représente la plus faible progression depuis 2013 même si elle reste élevée au regard de la moyenne nationale.Tandis que le nombre d'allocataire affiche une tendance à la baisse, le montant mensuel de l'allocation versée par foyer progresse de 4.6%, le montant moyen s'établit à 490€ contre 484€ pour la moyenne nationale"
+DF.1.3,La PCH s’élève à 79M€ et continue de progresser à un rythme qui reste trés élevé (+ 8%) après une inflexion en 2016.Cette augmentation dynamique de la PCH résulte en grande partie d’un nombre toujours plus important de bénéficiaires adultes et enfants ( le nombre de bénéficiaires ayant au moins reçu un paiement dans l'année 2017 s’éleva à 8 520 ). A ces 79M€ s’ajoutent 8.25M€ pour l’allocation de compensation pour tierce personne (ACTP)  en baisse de 1.5% soit 1125 bénéficiaires (-30 bénéficiaires).
+DF.1.4,Les dépenses liées à l'APA se ralentissent à nouveau en 2017 avec une augmentation limitée à 1.36%. Le nombre de bénéficiaires payés au titre de décembre 2017 s'est élèvé à 34 446 contre 34 046 en 2016 soit 400 bénéficiaires de plus qui concernent essentiellement les dépenses APA en établissement. 
+DF.1.5,
+DF.1.6,
+DF.1.7,
+DF.1.7.1,
+DF.1.7.2,
+DF.2,
+DF.2.1,"Sur 251 M€ consacrés en 2017 aux personnes en insertion, 238.5M€ ont concerné le versement du RSA, correspondant à un nombre de foyers ayant un droit ouvert à percevoir le RSA en 2017 de  40 944, contre 40 825 en 2016 et 41 295 en 2015 "
+DF.2.2,Le nombre de personnes souffrant d'un handicap ayant au moins un droit ouvert à une prestation servie par le Département augmente chaque année depuis 2012. Il s'élève à 15 837 à fin 2017.
+DF.2.3,"Le nombre de personnes âgées ayant au moins un droit ouvert à une prestation servie par le Département a augmenté entre 2012 et 2014 et a diminué depuis. En 2012 il était de 40 997, et s'établit en 2017 à 32 083"
+DF.2.4,"Le nombre des bénéficiaires de prestations d'aides à l'enfance en difficultés (AED, AEMO, Enfants confiés, centres maternels, TISF, CEDEF) est en progression depuis 2015 : 9 249 en 2015, 9461 en 2016 et 9863 en 2017.Les dépenses consacrées à l'enfance ont augmenté en 2017 de 6.2% suite à l'augmentation des placements et des besoins d'accueil et de moyens pour la prise en charge de mineurs non accompagnés"
+DF.2.5,
+DF.3,
+DF.3.1,
+DF.3.2,
+DF.3.3,
+DF.3.4,
+DF.3.5,
+DF.3.6,
+DF.3.7,
+DF.3.7.1,
+DF.3.7.2,
+DF.3.7.3,
+DF.4,
+DF.5,
+DF.5.1,
+DF.6,les charges courantes ont subi en 2017 une augmentation de 17% liée au versement de dotations transferts pour un montant de 6M€ à la Métropole et au titre du transfert des ports.
+DF.6.1,"Depuis 2013, les dépenses liées aux frais généraux de la structure départementale ont baissé de 5M€ . En 2017, les dépenses liées aux prestations de service comme le paiement des assurances sont restées stables.Dans les frais divers, les frais d'affranchissements ont encore baissé; dans les achats et fournitures, les postes  en baisse  concernent les dépenses d’énergie (électricité, carburant), les dépenses liées aux locations immobilières ou aux frais d'imprimerie. Par contre, l'ouverture du domaine de Certes a occasioné une augmentation exceptionnelle des frais de publicité  et de communication "
+DF.6.1.1,
+DF.6.1.2,
+DF.6.1.3,
+DF.6.1.4,
+DF.6.2,
+DF.6.3,"Elles concernent pour l'essentiel la questure, les subventions aux budgets annexes du Domaine d'Hostens et du laboratoire vétérinaire départemental et des régularisations diverses, provisions, charges exceptionnelles"
+DF.6.3.1,
+DF.6.3.2,
+DF.6.3.3,
+DF.7,
 RI,
-RI-1,
-RI-2,
-RI-3,
-RI-4,
-RI-5,
-RI-6,
-RI-EM,
-RI-EM-1,
-RI-EM-2,
+RI.1,
+RI.2,
+RI.3,
+RI.4,
+RI.5,
+RI.6,
+RI.EM,
+RI.EM.1,
+RI.EM.2,
 ,
 DI,
 ,
-DI-1,
-DI-1-1,
-DI-1-2,
-DI-1-3,
-DI-1-4,
-DI-1-5,
+DI.1,
+DI.1.1,
+DI.1.2,
+DI.1.3,
+DI.1.4,
+DI.1.5,
 ,
-DI-2,
-DI-2-1,
-DI-2-2,
-DI-2-3,
-DI-2-4,
-DI-2-5,
-DI-2-6,
+DI.2,
+DI.2.1,
+DI.2.2,
+DI.2.3,
+DI.2.4,
+DI.2.5,
+DI.2.6,
 ,
-DI-EM,
-DI-EM-1,
-DI-EM-2,
-DI-EM-3,
+DI.EM,
+DI.EM.1,
+DI.EM.2,
+DI.EM.3,
 ,
-REAM-OCLT,
-"REAM-OCLT-1
+REAM.OCLT,
+"REAM.OCLT.1
 ",
-REAM-OCLT-2,
+REAM.OCLT.2,
 EXC,

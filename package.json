@@ -22,7 +22,7 @@
     "build:public:script": "browserify src/public/js/main.js -o build/dataviz-finance-gironde-fr-bundle.script -p [minifyify --no-map]",
     "prepare:plan-de-compte": "plans-de-compte --in data/finances/CA --out data/finances/plansDeCompte",
     "prebuild:public:data:finance-data": "npm run prepare:plan-de-compte",
-    "build:public:data:finance-data": "node -r esm tools/make-public-data.js",
+    "build:public:data:finance-data": "node -r esm tools/make-finance-data.js",
     "prebuild:public:data:m52-strings": "npm run prepare:plan-de-compte",
     "build:public:data:m52-strings": "node -r esm tools/make-doc-budg-strings.js",
     "watch:m52overview": "cross-env NODE_ENV=development watchify --iw **/node_modules/** src/m52-overview/js/main.js -o build/m52-overview-bundle.js -d -v",
@@ -70,7 +70,8 @@
   "esm": {
     "mode": "auto",
     "cjs": {
-      "namedExports": true
+      "namedExports": true,
+      "vars": true
     }
   },
   "dependencies": {
@@ -78,15 +79,17 @@
     "d3-array": "^1.2.1",
     "d3-color": "^1.2.0",
     "d3-dsv": "^1.0.8",
+    "d3-fetch": "^1.1.2",
     "d3-scale": "^1.0.7",
     "d3-shape": "^1.0.0",
     "esm": "^3.2.14",
     "event-emitter": "^0.3.4",
+    "fast-memoize": "^2.5.1",
     "fs-extra": "^4.0.3",
     "immutable": "^3.8.1",
-    "lodash.memoize": "^4.1.2",
     "markdown-it": "^8.4.1",
     "markdown-it-link-attributes": "^2.1.0",
+    "nearley": "^2.16.0",
     "page": "^1.8.6",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",

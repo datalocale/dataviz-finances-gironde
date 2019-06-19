@@ -14,10 +14,8 @@ import {
     REVENUE
 } from "../../../../shared/js/finance/constants";
 
-import {
-    m52ToAggregated,
-    hierarchicalAggregated
-} from "../../../../shared/js/finance/memoized";
+
+import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
 import { flattenTree } from "../../../../shared/js/finance/visitHierarchical.js";
 
 import PageTitle from "../../../../shared/js/components/gironde.fr/PageTitle";
@@ -39,6 +37,7 @@ export function TotalBudget({
     currentYear,
     totalById,
     m52Instruction,
+    planDeCompte,
     labelsById,
     urls: {
         expenditures: expURL,
@@ -269,6 +268,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             m52Instruction
                 ? React.createElement(M52ByFonction, {
                       m52Instruction,
+                      planDeCompte,
                       urlByFonction: byFonction,
                       labelsById,
                       screenWidth
@@ -293,22 +293,21 @@ export default connect(
     state => {
         const {
             docBudgByYear,
-            corrections,
+            aggregationByYear,
+            planDeCompteByYear,
             currentYear,
             textsById,
             screenWidth
         } = state;
+        
         const m52Instruction = docBudgByYear.get(currentYear);
-        const aggregated =
-            m52Instruction &&
-            corrections &&
-            m52ToAggregated(m52Instruction, corrections);
-        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
+        const aggregated = aggregationByYear.get(currentYear);
+        const planDeCompte = planDeCompteByYear.get(currentYear)
 
         let totalById = new ImmutableMap();
-        if (hierAgg) {
-            flattenTree(hierAgg).forEach(aggHierNode => {
-                totalById = totalById.set(aggHierNode.id, aggHierNode.total);
+        if (aggregated) {
+            flattenTree(aggregated).forEach(aggNode => {
+                totalById = totalById.set(aggNode.id, aggregatedDocumentBudgetaireNodeTotal(aggNode));
             });
         }
 
@@ -316,41 +315,42 @@ export default connect(
             currentYear,
             totalById,
             m52Instruction,
+            planDeCompte,
             labelsById: textsById.map(texts => texts.label),
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
-            constructionAmounts: m52Instruction
-                ? {
-                      DotationEtat: totalById.get("RF-5"),
-                      FiscalitéDirecte: totalById.get("RF-1"),
-                      FiscalitéIndirecte: sum(
-                          ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
-                      ),
-                      RecettesDiverses:
-                          totalById.get("RF") -
-                          sum(
-                              ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
-                                  totalById.get(i)
-                              )
-                          ),
+            constructionAmounts: aggregated ? 
+                {
+                    DotationEtat: totalById.get("RF.5"),
+                    FiscalitéDirecte: totalById.get("RF.1"),
+                    FiscalitéIndirecte: sum(
+                        ["RF.2", "RF.3", "RF.4"].map(i => totalById.get(i))
+                    ),
+                    RecettesDiverses:
+                        totalById.get("RF") -
+                        sum(
+                            ["RF.1", "RF.2", "RF.3", "RF.4", "RF.5"].map(i =>
+                                totalById.get(i)
+                            )
+                        ),
 
-                      Solidarité: totalById.get("DF-1"),
-                      Interventions: totalById.get("DF-3"),
-                      DépensesStructure:
-                          totalById.get("DF") -
-                          sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
+                    Solidarité: totalById.get("DF.1"),
+                    Interventions: totalById.get("DF.3"),
+                    DépensesStructure:
+                        totalById.get("DF") -
+                        sum(["DF.1", "DF.3"].map(i => totalById.get(i))),
 
-                      Emprunt: totalById.get("RI-EM"),
-                      RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
+                    Emprunt: totalById.get("RI.EM"),
+                    RIPropre: totalById.get("RI") - totalById.get("RI.EM"),
 
-                      RemboursementEmprunt: totalById.get("DI-EM"),
-                      Routes: totalById.get("DI-1-2"),
-                      Colleges: totalById.get("DI-1-1"),
-                      Amenagement:
-                          totalById.get("DI-1-3") +
-                          totalById.get("DI-1-4") +
-                          totalById.get("DI-1-5"),
-                      Subventions: totalById.get("DI-2")
-                  }
+                    RemboursementEmprunt: totalById.get("DI.EM"),
+                    Routes: totalById.get("DI.1.2"),
+                    Colleges: totalById.get("DI.1.1"),
+                    Amenagement:
+                        totalById.get("DI.1.3") +
+                        totalById.get("DI.1.4") +
+                        totalById.get("DI.1.5"),
+                    Subventions: totalById.get("DI.2")
+                }
                 : undefined,
             urls: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,

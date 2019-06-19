@@ -1,13 +1,11 @@
 import { Record } from 'immutable';
 import { markdown as md } from '../../shared/js/components/Markdown';
-import { hierarchicalM52, hierarchicalAggregated, m52ToAggregated } from '../../shared/js/finance/memoized';
 
 import {
-    FINANCE_DETAIL_ID_CHANGE, DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
+    FINANCE_DETAIL_ID_CHANGE, FINANCE_DATA_RECEIVED, PLAN_DE_COMPTE_RECEIVED,
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
     CHANGE_EXPLORATION_YEAR
 } from './constants/actions';
-import { DF, DI } from './constants/pages';
 
 const FinanceElementTextsRecord = Record({
     label: undefined,
@@ -20,39 +18,27 @@ export default function reducer(state, action) {
     const {type} = action;
 
     switch (type) {
-        case DOCUMENTS_BUDGETAIRES_RECEIVED:{
-            const {docBudgs} = action;
-            const {corrections} = state;
-
-            if(corrections){
-                // these variables will be unused. These calls exist for the sole purpose of memoization as
-                // soon as the data arrives
-                docBudgs.forEach(db => {
-                    const aggregated = m52ToAggregated(db, corrections);
-                    const hierAgg = hierarchicalAggregated(aggregated);
-                    const hierarchicalM52DF = hierarchicalM52(db, DF);
-                    const hierarchicalM52DI = hierarchicalM52(db, DI);
-                    
-                    // to prevent minifier optimizations
-                    console.log('memz', hierarchicalM52DI, hierarchicalM52DF, hierAgg);
-                })
-            }
+        case FINANCE_DATA_RECEIVED:{
+            const {documentBudgetaires, aggregations} = action;
 
             let newState = state;
 
-            docBudgs.forEach(db => {
+            for(const db of documentBudgetaires){
                 newState = newState.setIn(['docBudgByYear', db.Exer], db);
-            })
+            }
+            for(const {year, aggregation} of aggregations){
+                newState = newState.setIn(['aggregationByYear', year], aggregation);
+            }
 
-            const maxYear = Math.max(...docBudgs.map(db => db.Exer))
+            const maxYear = Math.max(...documentBudgetaires.map(db => db.Exer))
 
             newState = newState.set('currentYear', maxYear).set('explorationYear', maxYear)
 
             return newState
         }
-        case CORRECTION_AGGREGATION_RECEIVED: {
-            const {corrections} = action;
-            return state.set('corrections', corrections);
+        case PLAN_DE_COMPTE_RECEIVED: {
+            const {planDeCompte} = action;
+            return state = state.setIn(['planDeCompteByYear', planDeCompte.Exer], planDeCompte);
         }
         case FINANCE_DETAIL_ID_CHANGE:
             return state.set('financeDetailId', action.financeDetailId);

@@ -1,14 +1,14 @@
-import {Set as ImmutableSet} from 'immutable';
-
 import {sum} from 'd3-array';
 
-import {makeLigneBudgetId, LigneBudgetRecord,  DocumentBudgetaire} from './DocBudgDataStructures';
+import {LigneBudgetRecord, DocumentBudgetaire, makeLigneBudgetId} from './DocBudgDataStructures.js';
 
-export default function(doc, natureToChapitreFI){
+export default function xmlDocumentToDocumentBudgetaire(doc){
     const BlocBudget = doc.getElementsByTagName('BlocBudget')[0];
 
     const exer = Number(BlocBudget.getElementsByTagName('Exer')[0].getAttribute('V'))
 
+    // In the XML files, the same (CodRD, Nature, Fonction) tuple can appear
+    // We consider them as a single LigneBudget
     const xmlRowsById = new Map();
 
     const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
@@ -31,11 +31,6 @@ export default function(doc, natureToChapitreFI){
         })
 
         ret['MtReal'] = Number(ret['MtReal']);
-        
-        Object.assign(
-            ret, 
-            natureToChapitreFI(exer, ret['CodRD'], ret['Nature'])
-        )
 
         return ret;
     })
@@ -48,24 +43,25 @@ export default function(doc, natureToChapitreFI){
         xmlRowsById.set(id, idRows);
     }
 
-    return DocumentBudgetaire({
+    return {
         LibelleColl: doc.getElementsByTagName('LibelleColl')[0].getAttribute('V'),
         Nomenclature: doc.getElementsByTagName('Nomenclature')[0].getAttribute('V'),
         NatDec: BlocBudget.getElementsByTagName('NatDec')[0].getAttribute('V'),
         Exer: exer,
         IdColl: doc.getElementsByTagName('IdColl')[0].getAttribute('V'),
 
-        rows: ImmutableSet(Array.from(xmlRowsById.values())
-        .map(xmlRows => {
-            const amount = sum(xmlRows.map(r => Number(r['MtReal'])))
-            const r = xmlRows[0];
+        rows: new Set([...xmlRowsById.values()]
+            .map(xmlRows => {
+                const amount = sum(xmlRows.map(r => Number(r['MtReal'])))
+                const r = xmlRows[0];
 
-            return LigneBudgetRecord(Object.assign(
-                {},
-                r,
-                {'MtReal': amount}
-            ))
-        }))
-    })
+                return Object.assign(
+                    {},
+                    r, 
+                    { 'MtReal': amount}
+                )
+            })
+        )
+    }
 
 }

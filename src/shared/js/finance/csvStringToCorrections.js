@@ -1,5 +1,3 @@
-import {Set} from 'immutable';
-
 import {csvParse} from 'd3-dsv';
 import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
 
@@ -27,6 +25,5 @@ export default function(csvString){
     }))
     .map(c => new SplitLigneBudgetRecord(c));
 
-    return new Set(corrections);
-
+    return corrections;
 }

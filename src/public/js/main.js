@@ -3,15 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Record, Map as ImmutableMap, List, Set as ImmutableSet } from 'immutable';
-import { csvParse } from 'd3-dsv';
+import { csv, xml, json } from 'd3-fetch';
 import page from 'page';
 
-import {urls, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
+import {urls, FINANCE_DATA, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL} from './constants/resources';
 import reducer from './reducer';
 
 import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
-import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
-import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
+import { fromXMLDocument } from '../../shared/js/finance/planDeCompte';
+import {makeChildToParent, flattenTree} from '../../shared/js/finance/visitHierarchical.js';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
 import Home from './components/screens/Home';
@@ -24,8 +24,7 @@ import ExploreBudget from './components/screens/ExploreBudget';
 
 import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
 import {
-    DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
-    ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
+    FINANCE_DATA_RECEIVED, ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED, PLAN_DE_COMPTE_RECEIVED,
     FINANCE_DETAIL_ID_CHANGE,
 } from './constants/actions';
 
@@ -87,7 +86,8 @@ const DEFAULT_BREADCRUMB = List([
 
 const StoreRecord = Record({
     docBudgByYear: undefined,
-    corrections: undefined,
+    aggregationByYear: undefined,
+    planDeCompteByYear: undefined,
     currentYear: undefined,
     explorationYear: undefined,
     // ImmutableMap<id, FinanceElementTextsRecord>
@@ -100,6 +100,8 @@ const store = createStore(
     reducer,
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
+        aggregationByYear: new ImmutableMap(),
+        planDeCompteByYear: new ImmutableMap(),
         currentYear: (new Date()).getFullYear() - 1,
         explorationYear: (new Date()).getFullYear() - 1,
         financeDetailId: undefined,
@@ -134,32 +136,33 @@ store.dispatch({
  * Fetching initial data
  *
  */
-fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
-.then(csvStringToCorrections)
-.then(corrections => {
+
+json(urls[FINANCE_DATA])
+.then(({documentBudgetaires, aggregations}) => {
     store.dispatch({
-        type: CORRECTION_AGGREGATION_RECEIVED,
-        corrections
+        type: FINANCE_DATA_RECEIVED,
+        documentBudgetaires: documentBudgetaires.map(db => {
+            db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
+            return DocumentBudgetaire(db)
+        }), 
+        aggregations
     });
+
+    for(const {Exer} of documentBudgetaires){
+        xml(`https://datalocale.github.io/dataviz-finances-gironde/data/finances/plansDeCompte/plan-de-compte-M52-M52-${Exer}.xml`)
+        .then(fromXMLDocument)
+        .then(planDeCompte => {
+            store.dispatch({
+                type: PLAN_DE_COMPTE_RECEIVED,
+                planDeCompte
+            });
+        })
+    }
+
 });
 
 
-fetch(urls[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
-.then(docBudgs => {
-    docBudgs = docBudgs.map(db => {
-        db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
-        return DocumentBudgetaire(db)
-    })
-
-    store.dispatch({
-        type: DOCUMENTS_BUDGETAIRES_RECEIVED,
-        docBudgs,
-    });
-});
-
-
-fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
-.then(csvParse)
+csv(urls[AGGREGATED_ATEMPORAL])
 .then(textList => {
     store.dispatch({
         type: ATEMPORAL_TEXTS_RECEIVED,
@@ -167,8 +170,7 @@ fetch(urls[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
     });
 });
 
-fetch(urls[AGGREGATED_TEMPORAL]).then(resp => resp.text())
-.then(csvParse)
+csv(urls[AGGREGATED_TEMPORAL])
 .then(textList => {
     store.dispatch({
         type: TEMPORAL_TEXTS_RECEIVED,
@@ -237,20 +239,37 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
         CONTAINER_ELEMENT
     );
 
+
+    const {docBudgByYear, aggregationByYear, planDeCompteByYear, currentYear, textsById} = store.getState()
+
+    const isM52Element = contentId.startsWith('M52-');
+
+    let RDFI;
+    if(isM52Element){
+        RDFI = contentId.slice('M52-'.length, 'M52-XX'.length);
+    }
+
+    const documentBudgetaire = docBudgByYear.get(currentYear);
+    const aggregatedDocumentBudgetaire = aggregationByYear.get(currentYear);
+    const planDeCompte = planDeCompteByYear.get(currentYear)
+
+    const hierM52 = documentBudgetaire && RDFI && planDeCompte && hierarchicalM52(documentBudgetaire, planDeCompte, RDFI);
+
+    const childToParent = makeChildToParent(...[aggregatedDocumentBudgetaire, hierM52].filter(x => x !== undefined))
+
     const breadcrumbData = [];
 
-    let currentContentId = contentId.startsWith('M52-') ?
-        contentId.slice(7) :
-        contentId;
+    let currentElement = (aggregatedDocumentBudgetaire && flattenTree(aggregatedDocumentBudgetaire).find(el => el.id === contentId)) ||
+        (hierM52 && flattenTree(hierM52).find(el => el.id === contentId))
 
-    while(currentContentId){
-        if(currentContentId !== 'Total'){
+    while(currentElement){
+        if(currentElement.id !== 'racine'){
             breadcrumbData.push({
-                text: elementById.get(currentContentId).label,
-                url: `#!/finance-details/${currentContentId}`
+                text: textsById.get(currentElement.id).label,
+                url: `#!/finance-details/${currentElement.id}`
             })
         }
-        currentContentId = childToParent.get(currentContentId);
+        currentElement = childToParent.get(currentElement);
     }
 
     breadcrumbData.push({

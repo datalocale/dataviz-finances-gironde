@@ -61,7 +61,7 @@ export function FocusSol({
             React.createElement('div', {},
                 React.createElement(Markdown, {},
                     `**Avec 120 000 prestations allouées et ${currentYearSolidarity && (currentYearSolidarity.solidarityExpenditures/1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +3,8% par rapport à 2016.**`),
-                React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-2', text: `en savoir plus`})
+                React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF.2', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'},
                 React.createElement('div', {},
@@ -82,42 +82,42 @@ export function FocusSol({
                 portrait: screenWidth <= 600,
                 xs: years,
                 ysByX: solidarityByYear.map(yearSolidarity => (new List([
-                    yearSolidarity['DF-2-1'],
-                    yearSolidarity['DF-2-2'],
-                    yearSolidarity['DF-2-3'],
-                    yearSolidarity['DF-2-4'],
-                    yearSolidarity['DF-2-5']
+                    yearSolidarity['DF.2.1'],
+                    yearSolidarity['DF.2.2'],
+                    yearSolidarity['DF.2.3'],
+                    yearSolidarity['DF.2.4'],
+                    yearSolidarity['DF.2.5']
                 ]))),
                 legendItems: [
                     {
-                        id: 'DF-2-1',
-                        colorClassName: colorClassById.get('DF-2-1'),
+                        id: 'DF.2.1',
+                        colorClassName: colorClassById.get('DF.2.1'),
                         text: "Personnes en insertion",
-                        url: `#!/finance-details/DF-2-1`
+                        url: `#!/finance-details/DF.2.1`
                     },
                     {
-                        id: 'DF-2-2',
-                        colorClassName: colorClassById.get('DF-2-2'),
+                        id: 'DF.2.2',
+                        colorClassName: colorClassById.get('DF.2.2'),
                         text: "Personnes en situation de handicap",
-                        url: `#!/finance-details/DF-2-2`
+                        url: `#!/finance-details/DF.2.2`
                     },
                     {
-                        id: 'DF-2-3',
-                        colorClassName: colorClassById.get('DF-2-3'),
+                        id: 'DF.2.3',
+                        colorClassName: colorClassById.get('DF.2.3'),
                         text: "Personnes âgées",
-                        url: `#!/finance-details/DF-2-3`
+                        url: `#!/finance-details/DF.2.3`
                     },
                     {
-                        id: 'DF-2-4',
-                        colorClassName: colorClassById.get('DF-2-4'),
+                        id: 'DF.2.4',
+                        colorClassName: colorClassById.get('DF.2.4'),
                         text: "Enfance",
-                        url: `#!/finance-details/DF-2-4`
+                        url: `#!/finance-details/DF.2.4`
                     },
                     {
-                        id: 'DF-2-5',
-                        colorClassName: colorClassById.get('DF-2-5'),
+                        id: 'DF.2.5',
+                        colorClassName: colorClassById.get('DF.2.5'),
                         text: "Autres",
-                        url: `#!/finance-details/DF-2-5`
+                        url: `#!/finance-details/DF.2.5`
                     }
                 ],
                 yValueDisplay: makeAmountString,
@@ -139,8 +139,8 @@ export function FocusSol({
                 title: 'Personnes en insertion',
                 illustrationUrl: urls[INSERTION_PICTO],
                 // (May 29th) different than what was hardcoded ("244 Millions €")
-                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-1')/currentYearSolidarity.solidarityExpenditures : 1,
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1') : undefined,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Le Revenu de Solidarité Active (RSA) représente près de 94% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier.`,
                 highlights: [
                     {
@@ -156,15 +156,15 @@ export function FocusSol({
                         span: "d'allocations RSA par rapport à 2016"
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-2-1'
+                moreUrl: '#!/finance-details/DF.2.1'
             }),
             React.createElement(FocusDetail, {
                 className: 'handicap',
                 title: 'Personnes en situation de handicap',
                 illustrationUrl: urls[HANDICAPES_PICTO],
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
-                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-2')/currentYearSolidarity.solidarityExpenditures : 1,
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2') : undefined,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Les aides du Département versées aux personnes en situation de handicap concernent en 2017:
 - la Prestation de Compensation du Handicap (PCH) versée à 8520 personnes en 2017.
 - la prestation d’hébergement  qui a financé 2728 places d'hébergement en 2017.
@@ -185,14 +185,14 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-2-2'
+                moreUrl: '#!/finance-details/DF.2.2'
             }),
             React.createElement(FocusDetail, {
                 className: 'elderly',
                 title: 'Personnes âgées',
                 illustrationUrl: urls[PERSONNES_AGEES_PICTO],
-                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-3')/currentYearSolidarity.solidarityExpenditures : 1,
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.3') : undefined,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.3')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
@@ -208,15 +208,15 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                         span: "bénéficiaires en 2017"
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-2-3'
+                moreUrl: '#!/finance-details/DF.2.3'
             }),
             React.createElement(FocusDetail, {
                 className: 'childhood',
                 title: 'Enfance',
                 illustrationUrl: urls[ENFANCE_PICTO],
                 // (May 29th) different than what was hardcoded ("168 Millions €")
-                amount: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF-2-4')/currentYearSolidarity.solidarityExpenditures : 1,
+                amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.4') : undefined,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.4')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Le Département veille à protéger les enfants et les jeunes majeurs quand leur sécurité, leur santé et leur éducation sont menacées. Ce sont les professionnels de l’Aide sociale à l’enfance (ASE) qui assurent un suivi au plus près des familles. Si le danger rend impossible le maintien dans sa famille, l’enfant est pris en charge et est confié à des professionnels (familles d’accueil, maison d’enfants à caractère social, centre départemental de l’enfance et de la famille, foyer de l’enfance).
 https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                 highlights: [
@@ -233,7 +233,7 @@ https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                         span: " assistants familiaux pour l'accueil familial"
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-2-4'
+                moreUrl: '#!/finance-details/DF.2.4'
             })
         )
     );
@@ -243,16 +243,16 @@ https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
 const YearSolidarityRecord = Record({
     totalExpenditures: 0,
     solidarityExpenditures: 0,
-    'DF-1-1': 0,
-    'DF-1-2': 0,
-    'DF-1-3': 0,
-    'DF-1-4': 0,
-    'DF-1-other': 0,
-    'DF-2-1': 0,
-    'DF-2-2': 0,
-    'DF-2-3': 0,
-    'DF-2-4': 0,
-    'DF-2-5': 0
+    'DF.1.1': 0,
+    'DF.1.2': 0,
+    'DF.1.3': 0,
+    'DF.1.4': 0,
+    'DF.1.other': 0,
+    'DF.2.1': 0,
+    'DF.2.2': 0,
+    'DF.2.3': 0,
+    'DF.2.4': 0,
+    'DF.2.5': 0
 })
 
 export default connect(
@@ -267,19 +267,19 @@ export default connect(
             const hierAggByPrestationList = flattenTree(hierAgg);
 
             const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
-            let solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF-1').total;
+            let solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF.1').total;
             const ysrData = {};
-            ['DF-1-1', 'DF-1-2', 'DF-1-3', 'DF-1-4', 'DF-2-1', 'DF-2-2', 'DF-2-3', 'DF-2-4', 'DF-2-5'].forEach(id => {
+            ['DF.1.1', 'DF.1.2', 'DF.1.3', 'DF.1.4', 'DF.2.1', 'DF.2.2', 'DF.2.3', 'DF.2.4', 'DF.2.5'].forEach(id => {
                 ysrData[id] = hierAggByPrestationList.find(e => e.id === id).total;
             });
 
-            let df1other = solidarityExpenditures - (ysrData['DF-1-1'] + ysrData['DF-1-2'] + ysrData['DF-1-3'] + ysrData['DF-1-4']);
+            let df1other = solidarityExpenditures - (ysrData['DF.1.1'] + ysrData['DF.1.2'] + ysrData['DF.1.3'] + ysrData['DF.1.4']);
 
             return new YearSolidarityRecord(Object.assign(
                 {
                     totalExpenditures: expenditures,
                     solidarityExpenditures,
-                    'DF-1-other': df1other
+                    'DF.1.other': df1other
                 },
                 ysrData
             ))

@@ -1,4 +1,4 @@
-export const COMPTES_ADMINISTRATIFS = 'COMPTES_ADMINISTRATIFS';
+export const FINANCE_DATA = 'FINANCE_DATA';
 
 export const AGGREGATED_ATEMPORAL = "AGGREGATED_ATEMPORAL";
 export const AGGREGATED_TEMPORAL = "AGGREGATED_TEMPORAL";
@@ -31,10 +31,10 @@ const GIRONDE_FR_DRUPAL_MEDIA_ID = process.env.GIRONDE_FR_DRUPAL_MEDIA_ID;
 
 export const urls = {
     // finance data
-    [COMPTES_ADMINISTRATIFS]: {
+    [FINANCE_DATA]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/22`,
-        "demo": `/dataviz-finances-gironde/build/finances/doc-budgs.json`,
-        "development": `../build/finances/doc-budgs.json`,
+        "demo": `/dataviz-finances-gironde/build/finances/finance-data.json`,
+        "development": `../build/finances/finance-data.json`,
     }[env],
     [CORRECTIONS_AGGREGATED]: {
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/14`,

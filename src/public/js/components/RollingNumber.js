@@ -15,6 +15,8 @@ function roll(el, amount, delay){
                 // ease out expo to stabilize the significative numbers quickly
                 const amountToDisplay = amount * (1 - (fraction === 1 ? 0 : Math.pow( 2, -10*fraction)));
 
+                //console.log('amountToDisplay', amountToDisplay, amount, fraction)
+
                 el.textContent = makeAmountString(amountToDisplay);
 
                 if(fraction >= 1){
@@ -32,29 +34,32 @@ const DELAY = 500;
 
 export default class SektorComponent extends React.Component {
 
-    _animate(amount, initialDelay){
-        return new Promise(resolve => {
-            setTimeout(resolve, initialDelay);
-        })
+    _animate(amount){
+        return this._readyP
         .then(() => {
             return roll(this._el, amount, DELAY);
         })
-        
     }
 
     _reset(){
-        this._el.textContent = ' ';
+        this._el.textContent = '- €';
     }
 
     componentDidMount(){
         const { amount } = this.props;
-        this._animate(amount, 2000);
+
+        this._readyP = new Promise(resolve => { setTimeout(resolve, 1500); })
+        this._animate(amount);
+    }
+
+    componentWillUnmount(){
+        this._readyP = undefined;
     }
 
     componentDidUpdate() {
         const { amount } = this.props;
         this._reset();
-        this._animate(amount, 500);
+        this._animate(amount);
     } 
 
     shouldComponentUpdate(newProps){
@@ -62,6 +67,6 @@ export default class SektorComponent extends React.Component {
     }
 
     render() {
-        return React.createElement('span', { ref: el => this._el = el }, ' ');
+        return React.createElement('span', { ref: el => this._el = el }, '- €');
     }
 }

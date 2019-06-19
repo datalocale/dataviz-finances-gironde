@@ -19,12 +19,12 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, rows){
     const m52RowToAggRows = new Map();
 
     const actionsSocialesParPrestationsRows = aggregatedInstruction
-        .filter( r => r.id.startsWith('DF-1'))
+        .filter( r => r.id.startsWith('DF.1'))
         .map( r => r["M52Rows"] )
         .flatten(1);
 
     const actionsSocialesParPubliqueRows = aggregatedInstruction
-        .filter( r => r.id.startsWith('DF-2'))
+        .filter( r => r.id.startsWith('DF.2'))
         .map( r => r["M52Rows"] )
         .flatten(1);
 
@@ -57,8 +57,8 @@ function makeDF12Diffs(aggregatedInstruction){
     const hierAgg = hierarchicalAggregated(aggregatedInstruction)
     const aggRows = flattenTree(hierAgg);
 
-    const df1 = aggRows.find(r => r.id === 'DF-1');
-    const df2 = aggRows.find(r => r.id === 'DF-2');
+    const df1 = aggRows.find(r => r.id === 'DF.1');
+    const df2 = aggRows.find(r => r.id === 'DF.2');
 
     const df1M52Rows = df1.elements.map(e => e['M52Rows']).flatten(1);
     const df2M52Rows = df2.elements.map(e => e['M52Rows']).flatten(1);
@@ -164,7 +164,7 @@ export default class TextualSelected extends React.PureComponent{
                 }))
             ),
             React.createElement('div', {}, 
-                React.createElement('h1', {}, "Lignes M52 utilisées dans DF-1, mais pas dans DF-2 ("+onlyDF1.size+")"),
+                React.createElement('h1', {}, "Lignes M52 utilisées dans DF.1, mais pas dans DF-2 ("+onlyDF1.size+")"),
                 React.createElement('ul', {}, Array.from(onlyDF1).map(m52Row => {
                     const m52Id = makeLigneBudgetId(m52Row);
 

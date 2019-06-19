@@ -37,7 +37,7 @@ export function FocusSol({
         return partition && partition.sort((p1, p2) => partitionIdsInOrder.indexOf(p1.contentId) - partitionIdsInOrder.indexOf(p2.contentId))
     });
 
-    const focusDetailsDenominator = yearDetails ? yearDetails['DF-6'] : NaN;
+    const focusDetailsDenominator = yearDetails ? yearDetails['DF.6'] : NaN;
 
     return React.createElement('article', {className: 'focus presence'},
         React.createElement('section', {},
@@ -79,7 +79,7 @@ export function FocusSol({
                 })).toArray(),
                 yValueDisplay: makeAmountString
             }),
-            React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF-6-1', text: `en savoir plus`})
+            React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF.6.1', text: `en savoir plus`})
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Détails des frais liés à la présence du Département sur le territoire`}),
@@ -90,8 +90,8 @@ export function FocusSol({
 
                 title: 'Prestations de services',
                 illustrationUrl: urls[ELECTRICITE_PICTO],
-                amount: yearDetails ? yearDetails['DF-6-1-2'] : undefined,
-                proportion: yearDetails ? yearDetails['DF-6-1-2']/focusDetailsDenominator : 1,
+                amount: yearDetails ? yearDetails['DF.6.1.2'] : undefined,
+                proportion: yearDetails ? yearDetails['DF.6.1.2']/focusDetailsDenominator : 1,
                 text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`,
                 highlights: [
                     {
@@ -107,7 +107,7 @@ export function FocusSol({
                         span: `contrats d’assurance (-4.5%)`
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-6-1-2'
+                moreUrl: '#!/finance-details/DF.6.1.2'
             }),
             React.createElement(FocusDetail, {
 
@@ -115,8 +115,8 @@ export function FocusSol({
 
                 title: 'Achats et fournitures',
                 illustrationUrl: urls[CARBURANT_PICTO],
-                amount: yearDetails ? yearDetails['DF-6-1-1'] : undefined,
-                proportion: yearDetails ? yearDetails['DF-6-1-1']/focusDetailsDenominator : 1,
+                amount: yearDetails ? yearDetails['DF.6.1.1'] : undefined,
+                proportion: yearDetails ? yearDetails['DF.6.1.1']/focusDetailsDenominator : 1,
                 text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`,
                 highlights: [
                     {
@@ -132,7 +132,7 @@ export function FocusSol({
                         span: `dépenses de fourniture (-2.3%)`
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-6-1-1'
+                moreUrl: '#!/finance-details/DF.6.1.1'
             }),
             React.createElement(FocusDetail, {
 
@@ -140,8 +140,8 @@ export function FocusSol({
 
                 title: 'Frais divers',
                 illustrationUrl: urls[AGENTS_PICTO],
-                amount: yearDetails ? yearDetails['DF-6-1-3'] : undefined,
-                proportion: yearDetails ? yearDetails['DF-6-1-3']/focusDetailsDenominator : 1,
+                amount: yearDetails ? yearDetails['DF.6.1.3'] : undefined,
+                proportion: yearDetails ? yearDetails['DF.6.1.3']/focusDetailsDenominator : 1,
                 text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`,
                 highlights: [
                     {
@@ -157,14 +157,14 @@ export function FocusSol({
                         span: `frais de télécommunications (+2%)`
                     }
                 ],
-                moreUrl: '#!/finance-details/DF-6-1-3'
+                moreUrl: '#!/finance-details/DF.6.1.3'
             })
         )
     );
 }
 
 
-const displayedContentId = 'DF-6-1';
+const displayedContentId = 'DF.6.1';
 
 export default connect(
     state => {
@@ -185,10 +185,10 @@ export default connect(
         ) : undefined;
 
         const yearDetails = elementById ? {
-            'DF-6': elementById.get('DF-6').total,
-            'DF-6-1-1': elementById.get('DF-6-1-1').total,
-            'DF-6-1-2': elementById.get('DF-6-1-2').total,
-            'DF-6-1-3': elementById.get('DF-6-1-3').total
+            'DF.6': elementById.get('DF.6').total,
+            'DF.6.1.1': elementById.get('DF.6.1.1').total,
+            'DF.6.1.2': elementById.get('DF.6.1.2').total,
+            'DF.6.1.3': elementById.get('DF.6.1.3').total
         } : undefined;
 
 
