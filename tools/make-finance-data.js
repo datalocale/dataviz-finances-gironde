@@ -17,8 +17,6 @@ const corrections = csvStringToCorrections(readFileSync(join(__dirname, '../data
 const BUILD_FINANCE_DIR = './build/finances';
 const SOURCE_FINANCE_DIR = './data/finances';
 
-console.time('make-finance-data')
-
 const plansDeComptesP = getPlansDeCompte(join(SOURCE_FINANCE_DIR, 'plansDeCompte'))
 .then(pdcs => pdcs.map(fromXMLDocument))
 
@@ -43,7 +41,6 @@ mkdir(BUILD_FINANCE_DIR)
 })
 .then( documentBudgetaires => {
     return plansDeComptesP.then(plansDeCompte => {
-        console.time('aggregation')
         const ret = {
             documentBudgetaires : documentBudgetaires.map(db => {
                 return Object.assign({}, db, {rows: [...db.rows]})
@@ -58,14 +55,12 @@ mkdir(BUILD_FINANCE_DIR)
                 }
             })
         }
-        console.timeEnd('aggregation')
         return ret;
     })
     
 })
 .then(data => {
-    console.timeEnd('make-finance-data')
-    return writeFile(join(BUILD_FINANCE_DIR, 'finance-data.json'), JSON.stringify(data, null, 2), 'utf-8')
+    return writeFile(join(BUILD_FINANCE_DIR, 'finance-data.json'), JSON.stringify(data), 'utf-8')
 })
 .catch(err => {
     console.error('err', err);

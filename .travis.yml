@@ -2,11 +2,7 @@
 
 language: node_js
 node_js: 
-  # latest stable
-  - node 
-  # All LTS (Long-Term Support) versions
-  - '8'
-  - '10'
+  - node # latest stable
 
 # What is built
 
@@ -19,20 +15,31 @@ branches:
 install:
   - npm ci
 
-script:
-  - npm run build-demo
-# - npm test
-
-
 jobs:
   include:
-    - stage: deploy to gh-pages
-      if: branch = master && type != pull_request
-      node_js: node
+    - stage: "Test"
+      script: echo "tests disabled for now" #npm test
+    - stage: deploy
+      script: npm run build-demo
+      env: DEPLOY_TARGET_BRANCH=gh-pages
       deploy:
-        skip_cleanup: true
-        provider: script
-        script: bash ./tools/deploy.sh
+        - provider: script
+          skip_cleanup: true
+          script: bash ./tools/deploy.sh
+    - stage: deploy
+      script: npm run build-preprod
+      env: DEPLOY_TARGET_BRANCH=preprod-gironde.fr
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: bash ./tools/deploy.sh
+    - stage: deploy
+      script: npm run build-production
+      env: DEPLOY_TARGET_BRANCH=gironde.fr
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: bash ./tools/deploy.sh
 
 
 
