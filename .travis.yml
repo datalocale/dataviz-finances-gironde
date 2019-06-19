@@ -15,10 +15,11 @@ branches:
 install:
   - npm ci
 
+script:
+  - echo "tests disabled" #npm test
+
 jobs:
   include:
-    - stage: "Test"
-      script: echo "tests disabled" #npm test
     - stage: "Deploy"
       if: branch = master && type != pull_request
     - script: npm run build-demo
