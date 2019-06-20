@@ -70,7 +70,7 @@ test("RF.1.1 : ne contient pas R 221 7788", () => {
 
     const aggRF11 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF11.elements.size).toBe(0);
+    expect(aggRF11.elements.length).toBe(0);
 });
 
 test("RF.1.1 : ne contient pas R 567 7788", () => {
@@ -91,7 +91,7 @@ test("RF.1.1 : ne contient pas R 567 7788", () => {
 
     const aggRF11 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF11.elements.size).toBe(0);
+    expect(aggRF11.elements.length).toBe(0);
 });
 
 
@@ -136,7 +136,7 @@ test("RF.4.4 : ne contient pas R 01 7353", () => {
 
     const aggRF44 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF44.elements.size).toBe(0);
+    expect(aggRF44.elements.length).toBe(0);
 });
 
 
@@ -165,7 +165,7 @@ test("RF.6.1 : contient R 567 75342 et R 567 75343", () => {
 
     const aggRF61 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF61.elements.size).toBe(2);
+    expect(aggRF61.elements.length).toBe(2);
     expect(aggRF61.elements).toContain(lignesBudget[0]);
     expect(aggRF61.elements).toContain(lignesBudget[1]);
 });
@@ -191,7 +191,7 @@ test("RF.9.2 : contient R 0202 7875", () => {
 
     const aggRF92 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF92.elements.size).toBe(1);
+    expect(aggRF92.elements.length).toBe(1);
     expect(aggRF92.elements).toContain(lignesBudget[0]);
 });
 
@@ -215,7 +215,7 @@ test("RF.9.7 : ne contient pas l'article 7513", () => {
 
     const aggRF97 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF97.elements.size).toBe(0);
+    expect(aggRF97.elements.length).toBe(0);
 });
 
 test("RF.9.7 : ne contient pas R 567 75342 et R 567 75343", () => {
@@ -242,7 +242,7 @@ test("RF.9.7 : ne contient pas R 567 75342 et R 567 75343", () => {
 
     const aggRF97 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggRF97.elements.size).toBe(0);
+    expect(aggRF97.elements.length).toBe(0);
 });
 
 
@@ -283,7 +283,7 @@ test("DF.3.6 : ne contient pas d'article commençant par 657 des fonctions 4, 5 
 
     const aggDF36 = flattenTree(aggregated).find(node => node.id === AGGREGATED_ROW_ID);
 
-    expect(aggDF36.elements.size).toBe(0);
+    expect(aggDF36.elements.length).toBe(0);
 });
 
 test("DF.3.6 : contient D 311 6574", () => {
@@ -611,7 +611,7 @@ test("DI.2.4 contient D 621 204182, mais pas DI.1.2", () => {
     const aggDI12 = flattenTree(aggregated).find(row => row.id === 'DI.1.2');
 
     expect(aggDI24.elements).toContain(lignesBudget[0]);
-    expect(aggDI12.elements.size).toBe(0);
+    expect(aggDI12.elements.length).toBe(0);
 });
 
 
@@ -633,7 +633,7 @@ test("DI.1.2 contient D 52 23151, mais pas DI.1.3", () => {
     const aggDI13 = flattenTree(aggregated).find(row => row.id === 'DI.1.3');
 
     expect(aggDI12.elements).toContain(lignesBudget[0]);
-    expect(aggDI13.elements.size).toBe(0);
+    expect(aggDI13.elements.length).toBe(0);
 });
 
 
@@ -655,7 +655,7 @@ test("DI.1.5 contient D 41 2188, mais pas DI.1.3", () => {
     const aggDI15 = flattenTree(aggregated).find(row => row.id === 'DI.1.5');
 
     expect(aggDI15.elements).toContain(lignesBudget[0]);
-    expect(aggDI13.elements.size).toBe(0);
+    expect(aggDI13.elements.length).toBe(0);
 });
 
 
@@ -677,7 +677,7 @@ test("DI.1.3 contient D 18 1321, mais pas DI.2.4", () => {
     const aggDI15 = flattenTree(aggregated).find(row => row.id === 'DI.1.5');
 
     expect(aggDI13.elements).toContain(lignesBudget[0]);
-    expect(aggDI15.elements.size).toBe(0);
+    expect(aggDI15.elements.length).toBe(0);
 });
 
 
