@@ -9,7 +9,7 @@ import { max } from 'd3-array';
 
 import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
 import {aggregatedDocumentBudgetaireNodeTotal, aggregatedDocumentBudgetaireNodeElements} from '../../../../shared/js/finance/AggregationDataStructures.js'
-import {hierarchicalM52}  from '../../../../shared/js/finance/memoized';
+import hierarchicalM52 from '../../../../shared/js/finance/hierarchicalM52.js';
 import {makeChildToParent, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
@@ -244,7 +244,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
     }
 
     return children && (children.size >= 1 || children.length >= 1) ?
-        possibleChildrenIds.map(id => {
+        new List(possibleChildrenIds.map(id => {
             // .find over all possibleChildrenIds is O(n²), but n is small (<= 10)
             const child = children.find(c => c.id === id);
 
@@ -254,7 +254,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
                 texts: textsById.get(id),
                 url: `#!/finance-details/${id}`
             };
-        }) :
+        })) :
         List().push({
             contentId: element.id,
             partAmount: totalById.get(element.id),

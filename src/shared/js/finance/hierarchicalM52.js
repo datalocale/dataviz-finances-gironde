@@ -1,5 +1,7 @@
 import { Map as ImmutableMap, Set as ImmutableSet } from 'immutable';
 
+import memoize from '../memoize';
+
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
 import {fonctionLabels} from '../../../../build/finances/m52-strings.json'; 
@@ -23,6 +25,7 @@ const levelCategories = [
     }
 ]
 
+
 /**
  * Transforms an M52 instruction to its hierarchical form so it can be represented visually with hierarchy
  * 
@@ -30,7 +33,7 @@ const levelCategories = [
  * M52Entry keys are column names of 
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
  */
-export default function({rows}, planDeCompte, RDFI) {
+export function hierarchicalM52({rows}, planDeCompte, RDFI) {
     rows = rows
     .filter(row => row['CodRD'] === RDFI[0] && planDeCompte.ligneBudgetFI(row) === RDFI[1]);
     
@@ -102,3 +105,5 @@ export default function({rows}, planDeCompte, RDFI) {
 
     return root;
 }
+
+export default memoize(hierarchicalM52)

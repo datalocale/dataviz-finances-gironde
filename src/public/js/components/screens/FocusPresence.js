@@ -11,7 +11,7 @@ import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/Pri
 import Markdown from '../../../../shared/js/components/Markdown';
 import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 
-import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
+import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
 
 import {makePartition, makeElementById} from './FinanceElement';
 import FocusDetail from '../FocusDetail';
@@ -168,27 +168,25 @@ const displayedContentId = 'DF.6.1';
 
 export default connect(
     state => {
-        const { docBudgByYear, corrections, currentYear, textsById, screenWidth} = state;
+        const { aggregationByYear, currentYear, textsById, screenWidth} = state;
 
-        const partitionByYear = docBudgByYear.map(m52i => {
-            const elementById = makeElementById(
-                hierarchicalAggregated(m52ToAggregated(m52i, corrections))
-            );
+        const partitionByYear = aggregationByYear.map(aggregated => {
+            const elementById = makeElementById(aggregated);
 
             const yearElement = elementById.get(displayedContentId);
 
-            return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => e.total), textsById)
+            return yearElement && yearElement.children && makePartition(yearElement, elementById.map(e => aggregatedDocumentBudgetaireNodeTotal(e)), textsById)
         });
 
-        const elementById = docBudgByYear.get(currentYear) ? makeElementById(
-            hierarchicalAggregated(m52ToAggregated(docBudgByYear.get(currentYear), corrections))
-        ) : undefined;
+        const elementById = aggregationByYear.get(currentYear) ? 
+            makeElementById(aggregationByYear.get(currentYear)) : 
+            undefined;
 
         const yearDetails = elementById ? {
-            'DF.6': elementById.get('DF.6').total,
-            'DF.6.1.1': elementById.get('DF.6.1.1').total,
-            'DF.6.1.2': elementById.get('DF.6.1.2').total,
-            'DF.6.1.3': elementById.get('DF.6.1.3').total
+            'DF.6': aggregatedDocumentBudgetaireNodeTotal(elementById.get('DF.6')),
+            'DF.6.1.1': aggregatedDocumentBudgetaireNodeTotal(elementById.get('DF.6.1.1')),
+            'DF.6.1.2': aggregatedDocumentBudgetaireNodeTotal(elementById.get('DF.6.1.2')),
+            'DF.6.1.3': aggregatedDocumentBudgetaireNodeTotal(elementById.get('DF.6.1.3'))
         } : undefined;
 
 

@@ -77,7 +77,7 @@ test('aggregate returns an AggregatedDocumentBudgetaire of one DF.3.1 element wi
     const otherAggregationLeaves = flattenTree(aggregated).filter(node => !node.children && node.id !== AGGREGATED_ROW_ID)
 
     expect(aggDF_3_1.id).toEqual(AGGREGATED_ROW_ID);
-    expect(aggDF_3_1.elements).toBeInstanceOf(Set);
+    expect(aggDF_3_1.elements).toBeInstanceOf(Array);
     expect([...aggDF_3_1.elements][0]).toBe(ligneBudget);
     expect( aggregatedDocumentBudgetaireNodeTotal(aggDF_3_1) ).toBe(AMOUNT);
 
