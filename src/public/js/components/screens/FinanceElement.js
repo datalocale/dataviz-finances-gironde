@@ -317,7 +317,7 @@ export default connect(
 
         let RDFI;
         if(isM52Element){
-            RDFI = contentId.slice('M52-'.length, 'M52-XX'.length);
+            RDFI = financeDetailId.slice('M52-'.length, 'M52-XX'.length);
         }
 
         const documentBudgetaire = docBudgByYear.get(explorationYear);

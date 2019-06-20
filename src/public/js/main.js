@@ -12,6 +12,7 @@ import reducer from './reducer';
 import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
 import { fromXMLDocument } from '../../shared/js/finance/planDeCompte';
 import {makeChildToParent, flattenTree} from '../../shared/js/finance/visitHierarchical.js';
+import hierarchicalM52 from '../../shared/js/finance/hierarchicalM52.js';
 
 import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
 import Home from './components/screens/Home';
