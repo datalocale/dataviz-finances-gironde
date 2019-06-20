@@ -9,7 +9,7 @@ import { max } from 'd3-array';
 
 import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
 import {aggregatedDocumentBudgetaireNodeTotal, aggregatedDocumentBudgetaireNodeElements} from '../../../../shared/js/finance/AggregationDataStructures.js'
-import {hierarchicalM52}  from '../../../../shared/js/finance/memoized';
+import hierarchicalM52 from '../../../../shared/js/finance/hierarchicalM52.js';
 import {makeChildToParent, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
