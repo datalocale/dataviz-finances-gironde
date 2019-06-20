@@ -4,44 +4,44 @@ $DI-1-3-color: lighten($area-color-1, 8%);
 $DI-1-4-color: lighten($area-color-1, 16%);
 $DI-1-5-color: lighten($area-color-1, 24%);
 
-$DI-2-color: $area-color-2;
+$DI-2-color: $area-color-3;
 
 .focus.invest{
 
     .stackchart{
         .brick{
-            &.DI-1-1{
+            &.DI\.1\.1{
                 fill: $DI-1-1-color;
             }
-            &.DI-1-2{
+            &.DI\.1\.2{
                 fill: $DI-1-2-color;
             }
-            &.DI-1-3{
+            &.DI\.1\.3{
                 fill: $DI-1-3-color;
             }
-            &.DI-1-4{
+            &.DI\.1\.4{
                 fill: $DI-1-4-color;
             }
-            &.DI-1-5{
+            &.DI\.1\.5{
                 fill: $DI-1-5-color;
             }
         }
 
         .legend-list{
             .color{
-                &.DI-1-1{
+                &.DI\.1\.1{
                     background-color: $DI-1-1-color;
                 }
-                &.DI-1-2{
+                &.DI\.1\.2{
                     background-color: $DI-1-2-color;
                 }
-                &.DI-1-3{
+                &.DI\.1\.3{
                     background-color: $DI-1-3-color;
                 }
-                &.DI-1-4{
+                &.DI\.1\.4{
                     background-color: $DI-1-4-color;
                 }
-                &.DI-1-5{
+                &.DI\.1\.5{
                     background-color: $DI-1-5-color;
                 }
             }
@@ -66,5 +66,9 @@ $DI-2-color: $area-color-2;
 
     .focus-detail.social-estate .explanation .proportion{
         background-color: $DI-1-5-color;
+    }
+
+    .focus-detail.city-subsidy .explanation .proportion{
+        background-color: $DI-2-color;
     }
 }

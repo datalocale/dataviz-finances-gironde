@@ -10,8 +10,8 @@ import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
+import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
 import Markdown from '../../../../shared/js/components/Markdown';
-import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
 import {EXPENDITURES} from '../../../../shared/js/finance/constants';
 
@@ -257,20 +257,16 @@ const YearSolidarityRecord = Record({
 
 export default connect(
     state => {
-        const { docBudgByYear, corrections, currentYear, screenWidth } = state;
+        const { aggregationByYear, currentYear, screenWidth } = state;
 
-        const solidarityByYear = docBudgByYear.map( ((instruction) => {
-            const agg = m52ToAggregated(instruction, corrections);
+        const solidarityByYear = aggregationByYear.map( (aggregated => {
+            const hierAggByPrestationList = flattenTree(aggregated);
 
-            const hierAgg = hierarchicalAggregated(agg);
-
-            const hierAggByPrestationList = flattenTree(hierAgg);
-
-            const expenditures = hierAggByPrestationList.find(e => e.id === EXPENDITURES).total;
-            let solidarityExpenditures = hierAggByPrestationList.find(e => e.id === 'DF.1').total;
+            const expenditures = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === EXPENDITURES));
+            let solidarityExpenditures = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === 'DF.1'));
             const ysrData = {};
             ['DF.1.1', 'DF.1.2', 'DF.1.3', 'DF.1.4', 'DF.2.1', 'DF.2.2', 'DF.2.3', 'DF.2.4', 'DF.2.5'].forEach(id => {
-                ysrData[id] = hierAggByPrestationList.find(e => e.id === id).total;
+                ysrData[id] = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === id));
             });
 
             let df1other = solidarityExpenditures - (ysrData['DF.1.1'] + ysrData['DF.1.2'] + ysrData['DF.1.3'] + ysrData['DF.1.4']);

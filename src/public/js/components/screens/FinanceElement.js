@@ -244,7 +244,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
     }
 
     return children && (children.size >= 1 || children.length >= 1) ?
-        possibleChildrenIds.map(id => {
+        new List(possibleChildrenIds.map(id => {
             // .find over all possibleChildrenIds is O(n²), but n is small (<= 10)
             const child = children.find(c => c.id === id);
 
@@ -254,7 +254,7 @@ export function makePartition(element, totalById, textsById, possibleChildrenIds
                 texts: textsById.get(id),
                 url: `#!/finance-details/${id}`
             };
-        }) :
+        })) :
         List().push({
             contentId: element.id,
             partAmount: totalById.get(element.id),
