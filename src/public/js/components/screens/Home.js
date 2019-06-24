@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import { aggregatedDocumentBudgetaireNodeTotal } from '../../../../shared/js/finance/AggregationDataStructures.js'
 import { EXPENDITURES } from '../../../../shared/js/finance/constants';
 
 import Markdown from '../../../../shared/js/components/Markdown';
@@ -22,14 +22,14 @@ export function Home({
     }
 }) {
 
-    return React.createElement('article', {className: 'home'},
+    return React.createElement('article', { className: 'home' },
         React.createElement('div', {},
-            React.createElement(PageTitle, {text: "Un budget au service des solidarités humaine et territoriale"}),
+            React.createElement(PageTitle, { text: "Un budget au service des solidarités humaine et territoriale" }),
             React.createElement(Markdown, {}, `Gestion des collèges, voirie départementale, aménagement numérique, insertion, aides aux personnes âgées, équipement des zones rurales, gestion des espaces naturels sensibles, etc…Le Département agit tous les jours avec un objectif : assurer sa mission de chef de file des solidarités humaines et territoriales. Les agents du Département se mobilisent pour accompagner les Girondines et les Girondins au quotidien.`)
         ),
 
-        React.createElement('section', {className: 'appetizers-container'},
-            React.createElement('div', {className: 'appetizers'},
+        React.createElement('section', { className: 'appetizers-container' },
+            React.createElement('div', { className: 'appetizers' },
 
                 React.createElement(TotalAppetizer, {
                     total: expenditures,
@@ -38,9 +38,9 @@ export function Home({
                 }),
                 React.createElement(Appetizer, {
                     h1: "Solidarités",
-                    numberMain: "120 000",
+                    numberMain: "125 000",
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près de 875 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
+                    description: `Le Département affirme sa vocation sociale et déploie près de 920 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
@@ -75,9 +75,9 @@ export default connect(
             currentYear,
             urls: {
                 explore: '#!/explorer',
-                solidarity: '#!/focus/'+SOLIDARITES,
-                invest: '#!/focus/'+INVEST,
-                presence: '#!/focus/'+PRESENCE
+                solidarity: '#!/focus/' + SOLIDARITES,
+                invest: '#!/focus/' + INVEST,
+                presence: '#!/focus/' + PRESENCE
             },
             expenditures: expendituresNode && aggregatedDocumentBudgetaireNodeTotal(expendituresNode)
         }

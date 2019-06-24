@@ -15,7 +15,7 @@ import {
 } from "../../../../shared/js/finance/constants";
 
 
-import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import { aggregatedDocumentBudgetaireNodeTotal } from '../../../../shared/js/finance/AggregationDataStructures.js'
 import { flattenTree } from "../../../../shared/js/finance/visitHierarchical.js";
 
 import PageTitle from "../../../../shared/js/components/gironde.fr/PageTitle";
@@ -265,12 +265,12 @@ Ainsi les résultats financiers 2018 du Département de la GIRONDE, traduisent l
             }),
             m52Instruction
                 ? React.createElement(M52ByFonction, {
-                      m52Instruction,
-                      planDeCompte,
-                      urlByFonction: byFonction,
-                      labelsById,
-                      screenWidth
-                  })
+                    m52Instruction,
+                    planDeCompte,
+                    urlByFonction: byFonction,
+                    labelsById,
+                    screenWidth
+                })
                 : undefined,
             React.createElement(DownloadSection, {
                 title: `Données brutes sur datalocale.fr`,
@@ -279,7 +279,7 @@ Ainsi les résultats financiers 2018 du Département de la GIRONDE, traduisent l
                         text:
                             "Comptes administratifs du Département de la Gironde au format XML TOTEM",
                         url:
-                            "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1"
+                            "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde"
                     }
                 ]
             })
@@ -297,7 +297,7 @@ export default connect(
             textsById,
             screenWidth
         } = state;
-        
+
         const m52Instruction = docBudgByYear.get(currentYear);
         const aggregated = aggregationByYear.get(currentYear);
         const planDeCompte = planDeCompteByYear.get(currentYear)
@@ -316,7 +316,7 @@ export default connect(
             planDeCompte,
             labelsById: textsById.map(texts => texts.label),
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
-            constructionAmounts: aggregated ? 
+            constructionAmounts: aggregated ?
                 {
                     DotationEtat: totalById.get("RF.5"),
                     FiscalitéDirecte: totalById.get("RF.1"),
