@@ -6,17 +6,17 @@ import { connect } from 'react-redux';
 import page from 'page';
 
 import StackChart from '../../../../shared/js/components/StackChart';
-import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
+import { makeAmountString } from '../../../../shared/js/components/MoneyAmount';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
 import SecundaryTitle from '../../../../shared/js/components/gironde.fr/SecundaryTitle';
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
-import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import { aggregatedDocumentBudgetaireNodeTotal } from '../../../../shared/js/finance/AggregationDataStructures.js'
 import Markdown from '../../../../shared/js/components/Markdown';
-import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
-import {EXPENDITURES} from '../../../../shared/js/finance/constants';
+import { flattenTree } from '../../../../shared/js/finance/visitHierarchical';
+import { EXPENDITURES } from '../../../../shared/js/finance/constants';
 
 
-import {urls, INSERTION_PICTO, ENFANCE_PICTO, HANDICAPES_PICTO, PERSONNES_AGEES_PICTO} from '../../constants/resources';
+import { urls, INSERTION_PICTO, ENFANCE_PICTO, HANDICAPES_PICTO, PERSONNES_AGEES_PICTO } from '../../constants/resources';
 
 import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
@@ -39,20 +39,20 @@ export function FocusSol({
     const years = solidarityByYear.keySeq().toJS();
 
     // TODO current number (May 29th is 0.51 which is different than what was hardcoded (0.52))
-    const solidarityProportion = currentYearSolidarity &&currentYearSolidarity.solidarityExpenditures/currentYearSolidarity.totalExpenditures;
+    const solidarityProportion = currentYearSolidarity && currentYearSolidarity.solidarityExpenditures / currentYearSolidarity.totalExpenditures;
 
 
-    return React.createElement('article', {className: 'focus'},
+    return React.createElement('article', { className: 'focus' },
         React.createElement('section', {},
-            React.createElement(PageTitle, {text: 'Solidarités'}),
+            React.createElement(PageTitle, { text: 'Solidarités' }),
             React.createElement(Markdown, {},
                 `Chaque jour, sur l’ensemble du territoire girondin, le Département poursuit le même objectif: réduire les inégalités géographiques et sociales auprès de toutes les populations. Le Département est un acteur incontournable de la lutte contre l’exclusion et la précarité. Il mène des actions sociales innovantes pour accompagner les personnes fragilisées. Les Girondins peuvent ainsi bénéficier d’allocations, prestations sociales et solidarité dans leur parcours de vie au quotidien.`
             )
         ),
-        React.createElement('section', {className: 'top-infos'},
+        React.createElement('section', { className: 'top-infos' },
             React.createElement(FocusDonut, {
                 proportion: solidarityProportion,
-                outerRadius: screenWidth < 400 ? (screenWidth/2 - 20) : 188,
+                outerRadius: screenWidth < 400 ? (screenWidth / 2 - 20) : 188,
                 innerText: [
                     `de dépenses Solidarités`,
                     `dans le total des dépenses`
@@ -60,19 +60,19 @@ export function FocusSol({
             }),
             React.createElement('div', {},
                 React.createElement(Markdown, {},
-                    `**Avec 120 000 prestations allouées et ${currentYearSolidarity && (currentYearSolidarity.solidarityExpenditures/1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +3,8% par rapport à 2016.**`),
-                React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF.2', text: `en savoir plus`})
+                    `**Avec 125 000 prestations allouées et ${currentYearSolidarity && (currentYearSolidarity.solidarityExpenditures / 1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +5,21% par rapport à 2017.**`),
+                React.createElement(PrimaryCallToAction, { href: '#!/finance-details/DF.2', text: `en savoir plus` })
             ),
-            React.createElement('div', {className: 'people-fraction'},
+            React.createElement('div', { className: 'people-fraction' },
                 React.createElement('div', {},
                     React.createElement('div', {}, 'Près de'),
-                    React.createElement('div', {className: 'number'}, '1/10'),
+                    React.createElement('div', { className: 'number' }, '1/10'),
                     React.createElement('div', {}, `personne accompagnée par le département`)
                 )
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
+            React.createElement(SecundaryTitle, { text: `Les dépenses "Solidarités" augmentent pour tous les publics` }),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -125,7 +125,7 @@ export function FocusSol({
             })
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: `Les actions et les aides varient en fonction des publics`}),
+            React.createElement(SecundaryTitle, { text: `Les actions et les aides varient en fonction des publics` }),
             React.createElement(Markdown, {}, `On distingue quatre catégories de public pouvant être aidé:
 
             - les personnes en insertion ou en situation de précarité,
@@ -140,7 +140,7 @@ export function FocusSol({
                 illustrationUrl: urls[INSERTION_PICTO],
                 // (May 29th) different than what was hardcoded ("244 Millions €")
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1')/currentYearSolidarity.solidarityExpenditures : 1,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1') / currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Le Revenu de Solidarité Active (RSA) représente près de 94% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier.`,
                 highlights: [
                     {
@@ -148,12 +148,12 @@ export function FocusSol({
                         span: "de dépenses depuis 2013"
                     },
                     {
-                        strong: "238,5 M€",
-                        span: "dédiés au RSA en 2017"
+                        strong: "244,6 M€",
+                        span: "dédiés au RSA en 2018"
                     },
                     {
-                        strong: "+4.15%",
-                        span: "d'allocations RSA par rapport à 2016"
+                        strong: "+2.5%",
+                        span: "d'allocations RSA par rapport à 2017"
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.2.1'
@@ -164,24 +164,26 @@ export function FocusSol({
                 illustrationUrl: urls[HANDICAPES_PICTO],
                 // (May 29th) different than what was hardcoded ("218 Millions €",)
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2')/currentYearSolidarity.solidarityExpenditures : 1,
-                text: `Les aides du Département versées aux personnes en situation de handicap concernent en 2017:
-- la Prestation de Compensation du Handicap (PCH) versée à 8520 personnes en 2017.
-- la prestation d’hébergement  qui a financé 2728 places d'hébergement en 2017.
-- l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1125 personnes en 2017.
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2') / currentYearSolidarity.solidarityExpenditures : 1,
+                text: `Les aides du Département versées aux personnes en situation de handicap concernent en 2018:
 
-L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`,
+-	la Prestation de Compensation du Handicap (PCH) a été versée à 7 221 personnes en 2018
+-	la prestation d’hébergement a concerné plus de 3000 bénéficiaires en 2018
+-	l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 077 personnes en moyenne
+
+L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.
+`,
                 highlights: [
                     {
-                        strong: "78,9 M €",
+                        strong: "86,4 M €",
                         span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "126,4 M€",
+                        strong: "136 M€",
                         span: "pour des places d’hébergement"
                     },
                     {
-                        strong: "8.12 M€",
+                        strong: "7,8 M€",
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ],
@@ -192,20 +194,20 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 title: 'Personnes âgées',
                 illustrationUrl: urls[PERSONNES_AGEES_PICTO],
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.3') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.3')/currentYearSolidarity.solidarityExpenditures : 1,
-                text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.3') / currentYearSolidarity.solidarityExpenditures : 1,
+                text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées. Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
-                        strong: "143.6 M€",
-                        span: "versés en 2017 pour l’APA"
+                        strong: "145 M€",
+                        span: "versés en 2018 pour l’APA"
                     },
                     {
-                        strong: "+ 1.4%",
-                        span: "en 2017"
+                        strong: "+ 1%",
+                        span: "en 2018"
                     },
                     {
-                        strong: "34 446",
-                        span: "bénéficiaires en 2017"
+                        strong: "22 149",
+                        span: "bénéficiaires en 2018"
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.2.3'
@@ -216,20 +218,19 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 illustrationUrl: urls[ENFANCE_PICTO],
                 // (May 29th) different than what was hardcoded ("168 Millions €")
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.4') : undefined,
-                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.4')/currentYearSolidarity.solidarityExpenditures : 1,
-                text: `Le Département veille à protéger les enfants et les jeunes majeurs quand leur sécurité, leur santé et leur éducation sont menacées. Ce sont les professionnels de l’Aide sociale à l’enfance (ASE) qui assurent un suivi au plus près des familles. Si le danger rend impossible le maintien dans sa famille, l’enfant est pris en charge et est confié à des professionnels (familles d’accueil, maison d’enfants à caractère social, centre départemental de l’enfance et de la famille, foyer de l’enfance).
-https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
+                proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.4') / currentYearSolidarity.solidarityExpenditures : 1,
+                text: `Le Département veille à protéger les enfants et les jeunes majeurs quand leur sécurité, leur santé et leur éducation sont menacées. Ce sont les professionnels de l’Aide sociale à l’enfance (ASE) qui assurent un suivi au plus près des familles. Si le danger rend impossible le maintien dans sa famille, l’enfant est pris en charge et est confié à des professionnels (familles d’accueil, maison d’enfants à caractère social, centre départemental de l’enfance et de la famille, foyer de l’enfance). https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                 highlights: [
                     {
-                        strong: "177 M€",
+                        strong: "193,7 M€",
                         span: "pour les Maisons d’Enfants à Caractère Sociale"
                     },
                     {
-                        strong: "4269",
-                        span: "enfants accueillis en établissement et familles d’accueil en 2017"
+                        strong: "1245",
+                        span: "enfants accueillis en établissement et familles d’accueil en 2018"
                     },
                     {
-                        strong: "796",
+                        strong: "776",
                         span: " assistants familiaux pour l'accueil familial"
                     }
                 ],
@@ -259,7 +260,7 @@ export default connect(
     state => {
         const { aggregationByYear, currentYear, screenWidth } = state;
 
-        const solidarityByYear = aggregationByYear.map( (aggregated => {
+        const solidarityByYear = aggregationByYear.map((aggregated => {
             const hierAggByPrestationList = flattenTree(aggregated);
 
             const expenditures = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === EXPENDITURES));

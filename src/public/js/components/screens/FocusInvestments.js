@@ -17,7 +17,7 @@ import FocusDetail from '../FocusDetail';
 import FocusDonut from '../FocusDonut';
 
 
-import {aggregatedDocumentBudgetaireNodeTotal} from '../../../../shared/js/finance/AggregationDataStructures.js'
+import { aggregatedDocumentBudgetaireNodeTotal } from '../../../../shared/js/finance/AggregationDataStructures.js'
 import { flattenTree } from '../../../../shared/js/finance/visitHierarchical';
 import { EXPENDITURES, DI } from '../../../../shared/js/finance/constants';
 
@@ -43,7 +43,7 @@ export function FocusSol({
         React.createElement('section', {},
             React.createElement(PageTitle, { text: `Focus Investissements` }),
             React.createElement(Markdown, {},
-                `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles, etc.`
+                `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de nouveaux collèges, entretenir des espaces naturels sensibles, etc. 10% de dépenses d'Investissements sur l'ensemble des dépenses. En 2018, le Département de la Gironde a investi plus de 189 M€ soit 11.7% de la totalité des dépenses. Ce sont les 1,6 Millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.`
             )
         ),
         React.createElement('section', { className: 'top-infos' },
@@ -68,7 +68,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2013 à 2017' }),
+            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2014 à 2018' }),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -102,7 +102,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2018-2019, on comptait 60 715 collégiens dans les collèges publics girondins et 12 489 collégiens dans les collèges privés. En 2017, ont été notamment livrés les restructurations des collèges Alfred Mauguin à Gradignan et Claude Massé à Ambarès-et-Lagrave, la salle de sport du Collège Marguerite Duras à Libourne, l’extension de la salle de restauration et des sanitaires au sein du Collège Georges Brassens à Podensac.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2017-2018, on comptait 61288 collégiens dans les collèges publics girondins et 12 597 collégiens dans les collèges privés. En 2018, les travaux ont concerné le collège de Bazas, la SEGPA de Pauillac, le collège de Salles et de Vérac.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -121,7 +121,8 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Le réseau routier girondin est constitué de 6 500 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement). En 2017, la mise en sécurité du réseau se traduira notamment par les réfections de la RD9 à Aillas Mitton, de la RD18 à Génissac Moulon Grézillac, de la RD3 à Hourtin Lesparre, la fin des travaux du pont Eiffel, mais aussi des aménagements de sécurité entre Biganos et Arès, et le contournement de Libourne.  Le Plan départemental de déplacement traduit la volonté du Département d’élargir son action en matière d’organisation du système de déplacements (infrastructures routières, transports collectifs départementaux et covoiturage). Ce Plan prévoit un budget total d’investissement de 14 millions d’euros entre 2017 et 2030.`,
+                text: `Le réseau routier girondin est constitué de 6 500 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement). En 2018, les travaux ont concerné notamment  la RD 18 à Génissac,Moulon, le calibrage de la route Cadillac/sauveterre/Monségur, l’échangeur de la Prade, ou la RD 1250 à la Teste
+Le Plan départemental de déplacement traduit la volonté du Département d’élargir son action en matière d’organisation du système de déplacements (infrastructures routières, transports collectifs départementaux et covoiturage). Ce Plan a prévu un budget total d’investissement de 14 millions d’euros entre 2017 et 2030.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -141,7 +142,9 @@ export function FocusSol({
                 amount: yearDIDetails ? yearDIDetails['DI.1.3'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.3'] / focusDetailsDenominator : 1,
                 text: `Il s’agit ici de la maintenance et de la rénovation du patrimoine bâti hors immobilier social et des investissements liés à la politique informatique et numérique ou à la sécurisation (digues par exemple)
-      Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc...`,
+Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc.. ;
+2018 a également vu l’acquisition de plusieurs bâtiments  notamment l’achat d’un immeuble à Bègles pour reloger l’IDDAC.
+`,
                 highlights: [
                     /*{
                     strong: "",
@@ -179,18 +182,18 @@ export function FocusSol({
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.2'] / focusDetailsDenominator : 1,
-                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne(offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`,
+                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne (offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`,
                 highlights: [
                     {
-                        strong: "27,3 M€",
+                        strong: "26,4 M€",
                         span: "de subventions aux communes"
                     },
                     {
-                        strong: "7,8 M€",
+                        strong: "10 M€",
                         span: "de subventions au logement social"
                     },
                     {
-                        strong: "3,6 M€",
+                        strong: "8,6 M€",
                         span: "de subventions pour l'accès au très haut débit"
                     }
                 ],
@@ -202,7 +205,7 @@ export function FocusSol({
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.5'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.5'] / focusDetailsDenominator : 1,
-                text: `Il s’agit des travaux de construction ou de rénovation des bâtiments sociaux faisant suite au programme Solidarité 2013. En 2017, les travaux ont concerné notamment  le Pôle social de Lormont pour 4.6M€ et la MDSI de Ste Foy la Grande.`,
+                text: `Il s’agit des travaux de construction ou de rénovation des bâtiments sociaux faisant suite au programme Solidarité 2013. En 2018, les travaux ont concerné notamment  le Pôle social de Bordeaux Grand Par et la MDSI de Villenave d’Ornon, mais aussi l’acquisition de la Tour Aquitaine pour loger la MDSI de Bordeaux et des immeubles destinés à l’aide sociale à l’enfance.`,
                 highlights: [
                     /*{
                       strong: "",
@@ -230,7 +233,7 @@ export default connect(
 
             const expenditures = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === EXPENDITURES));
             let investments = aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === 'DI.1')) +
-            aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === 'DI.2'));
+                aggregatedDocumentBudgetaireNodeTotal(hierAggByPrestationList.find(e => e.id === 'DI.2'));
 
             return {
                 expenditures,
@@ -269,8 +272,8 @@ export default connect(
         */
 
         // DI details
-        const elementById = aggregationByYear.get(currentYear) ? 
-            makeElementById(aggregationByYear.get(currentYear)) : 
+        const elementById = aggregationByYear.get(currentYear) ?
+            makeElementById(aggregationByYear.get(currentYear)) :
             undefined;
 
         const yearDIDetails = elementById ? {
