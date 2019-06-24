@@ -36,7 +36,8 @@ export const urls = {
         "demo": `/dataviz-finances-gironde/build/finances/finance-data.json`,
         "development": `../build/finances/finance-data.json`,
     }[env],
-    [CORRECTIONS_AGGREGATED]: {
+
+    [CORRECTIONS_AGGREGATED]: { // now useless since it's used in pre-precessing in tools/make-finance-data.js
         "production": `/media/${GIRONDE_FR_DRUPAL_MEDIA_ID}/field_dataviz_files/14`,
         "demo": `/dataviz-finances-gironde/data/finances/corrections-agregation.csv`,
         "development": `/data/finances/corrections-agregation.csv`

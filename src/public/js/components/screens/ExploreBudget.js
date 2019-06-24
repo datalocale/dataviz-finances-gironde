@@ -251,8 +251,7 @@ Ainsi les résultats financiers 2018 du Département de la GIRONDE, traduisent l
                 BudgetConstructionAnimation,
                 Object.assign(
                     {
-                        videoURL:
-                            screenWidth <= 1000 ? animationVideo : undefined
+                        videoURL: screenWidth <= 1000 ? animationVideo : undefined
                     },
                     constructionAmounts
                 )
