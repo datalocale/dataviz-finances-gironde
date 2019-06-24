@@ -77,16 +77,15 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `Le contexte financier dans lequel s’est déroulée l’exécution de ce troisième budget de la mandature a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et par une modification des compétences résultant de la mise en œuvre des transferts de compétences avec la Région et Bordeaux Métropole issus des lois MAPTAM de 2014 et NOTRe de 2015.
+                `L’année 2018 a été marquée par la mise en oeuvre de la loi de programmation des finances publiques(LPFP) 2018/2022.
 
-Dans un contexte national où les contraintes financières se sont durcies, l’année 2017 confirme le dynamisme des dépenses de solidarité obligatoires et incompressibles et la difficulté d’accentuer encore la maitrise des dépenses de gestion courante.
-
-Le Département voit également ses recettes de fonctionnement évoluer plus favorablement que prévu grâce aux droits de mutation recette conjoncturelle mais non pérenne liée au fort dynamisme de l’immobilier et à l’attraction du département.
-
-Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
-
--	Une épargne brute qui s’améliore fortement
--	Une réduction importante du besoin de financement par l’emprunt`
+En effet un double objectif a été assigné aux collectivités locales par l’article 13 de la loi de la LPFP 2018/2022 afin de  maitriser les dépenses publiques et réaliser un plan d’économie de 13Md€ par réduction de la dette publique 
+                
+- la limitation de l’évolution des dépenses de fonctionnement à un maximum de 1.2% par an par rapport à une base 2017 modulée à la hausse ou à la baisse en fonction des critères propres à la Collectivité 
+                
+- l’amélioration du besoin de financement (c'est-à-dire les emprunts contractés moins le remboursement de la dette)
+                
+Ainsi les résultats financiers 2018 du Département de la GIRONDE, traduisent la volonté  du département de poursuivre la stratégie financière qui repose sur la réservation d’une partie de nos recettes de fonctionnement (l’épargne brute) pour le financement d’un plan d’investissement ambitieux`
             )
         ),
 
@@ -252,8 +251,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                 BudgetConstructionAnimation,
                 Object.assign(
                     {
-                        videoURL:
-                            screenWidth <= 1000 ? animationVideo : undefined
+                        videoURL: screenWidth <= 1000 ? animationVideo : undefined
                     },
                     constructionAmounts
                 )
