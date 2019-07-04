@@ -86,13 +86,19 @@ Le token créé est à renseigner dans la [configuration Travis CI](#configurer-
 Il existe 3 environnements :
 
 * gironde.fr où il faut créer manuellement dans le CMS un "media dataviz" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
-    * `npm run build-preprod` pour la preprod (media id `1938`)
-    * `npm run build-production` pour la preprod (media id `2459`)
+    * `npm run build-preprod` pour la preprod (media id `2459`)
+    * `npm run build-production` pour gironde.fr, la production (media id `2459`)
 * démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
 * dévelopement (`npm run watch`)
 
-
 Les artéfacts de build sont rendus créés dans le dossier `./build`.
+
+[Travis CI](https://travis-ci.org/datalocale/dataviz-finances-gironde) est [configuré](https://github.com/datalocale/dataviz-finances-gironde/blob/master/.travis.yml) pour builder automatiquement les artefacts des 3 environnements et les pousser sur les branches : 
+- [`gh-pages`](https://github.com/datalocale/dataviz-finances-gironde/tree/gh-pages) pour l'environnement de [démo](https://datalocale.github.io/dataviz-finances-gironde/public/)
+- [`preprod-gironde.fr`](https://github.com/datalocale/dataviz-finances-gironde/tree/preprod-gironde.fr) pour l'environnement de preprod (non disponible publiquement)
+- [`gironde.fr`](https://github.com/datalocale/dataviz-finances-gironde/tree/gironde.fr) pour le déploiement en production sur [gironde.fr](https://www.gironde.fr/un-budget-au-service-des-solidarites-humaine-et-territoriale)
+
+
 
 ### Convertir l'image de fond de la page d'accueil
 
