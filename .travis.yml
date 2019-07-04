@@ -18,7 +18,7 @@ install:
 jobs:
   include:
     - stage: "Test"
-      script: echo "tests disabled for now" #npm test
+      script: npm test
     - stage: deploy
       script: npm run build-demo
       env: DEPLOY_TARGET_BRANCH=gh-pages
