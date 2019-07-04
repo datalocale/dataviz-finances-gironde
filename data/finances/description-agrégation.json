@@ -65,7 +65,7 @@
                   "id": "DF.1.6",
                   "name": "Subventions sociales",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C65734+C65737+C65738+C6574)∩(F4 ∪ F5)-C6574∩F58"
+                  "formula": "DF∩(C65734+C65737+C65738+C6574)∩(F4 ∪ F5)-C6574∩F58-(C65734+C65738)∩F58-C6574∩F51"
                 },
                 {
                   "id": "DF.1.7",
