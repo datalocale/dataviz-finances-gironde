@@ -127,13 +127,13 @@
                   "id": "DF.2.4",
                   "name": "Enfance",
                   "useInAnalysis": true,
-                  "formula": "DF∩F51-C6526+((C64126+C64121)∩F50∩Ann2016)+((C64126+C64121)∩F50∩Ann2015)+((C64126+C64121)∩F50∩Ann2014)"
+                  "formula": "DF∩F51-C6526+((C64126+C64121)∩F50∩Ann2016)+((C64126+C64121)∩F50∩Ann2015)+((C64126+C64121)∩F50∩Ann2014)-C6574∩F51"
                 },
                 {
                   "id": "DF.2.5",
                   "name": "Autres",
                   "useInAnalysis": true,
-                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336-C6574∩F58-C6161-C6132-C614"
+                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336-C6574∩F58-C6161-C6132-C614-(C65734+C65738)∩F58"
                 }
               ]
             },
@@ -783,7 +783,7 @@
           "id": "dur",
           "name": "Formules en dur",
           "useInAnalysis": true,
-          "formula": "DF∩(C6451+C6453+C6454)∩F50∩Ann2014+(C6451+C6453+C6454)∩F50∩Ann2015+(C6451+C6453+C6454)∩F50∩Ann2016+(DF∩C6574∩F58)+DI∩C2031∩F621+(DI∩C2118∩F621∩Ann2018)+DF∩C65111∩F51+DF∩C6251∩F0202+((C6568∩F52)∩(Ann2017+Ann2018))"
+          "formula": "DF∩(C6451+C6453+C6454)∩F50∩Ann2014+(C6451+C6453+C6454)∩F50∩Ann2015+(C6451+C6453+C6454)∩F50∩Ann2016+(DF∩C6574∩F58)+DI∩C2031∩F621+(DI∩C2118∩F621∩Ann2018)+DF∩C65111∩F51+DF∩C6251∩F0202+((C6568∩F52)∩(Ann2017+Ann2018))+DF∩(C65734+C65738)∩F58+C6574∩F51"
         }
       ]
     }
