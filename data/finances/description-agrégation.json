@@ -16,7 +16,7 @@
             {
               "id": "DF.1",
               "name": "• Dépenses de Solidarité par prestations",
-              "useInAnalysis": true,
+              "useInAnalysis": false,
               "children": [
                 {
                   "id": "DF.1.1",
@@ -215,7 +215,7 @@
               "id": "DF.5",
               "name": "PEREQUATION HORIZONTALE",
               "useInAnalysis": true,
-              "formula": "DF∩C73914+C73926+C73913+C739261+C739262"
+              "formula": "DF∩C73914+C73926+C73913+C739261+C739262+C73928"
             },
             {
               "id": "DF.6",
@@ -289,6 +289,12 @@
                   "name": "Dotations de transfert",
                   "useInAnalysis": true,
                   "formula": "DF∩C65542+(C656+C6568)∩F91"
+                },
+                {
+                  "id": "DF.6.5",
+                  "name": "Reprise financière",
+                  "useInAnalysis": true,
+                  "formula": "DF∩C73918\n\n"
                 }
               ]
             },
@@ -552,6 +558,12 @@
                   "name": "Fonds d'appui d'aide à domicile (CNSA AAD)",
                   "useInAnalysis": true,
                   "formula": "RF∩(C74788)∩F538"
+                },
+                {
+                  "id": "RF.6.6",
+                  "name": "Financement des SAAD",
+                  "useInAnalysis": true,
+                  "formula": "RF∩(C747818∩F538)"
                 }
               ]
             },
@@ -576,7 +588,7 @@
                   "id": "RF.9.2",
                   "name": "Produits exceptionnels +reprise sur provisions",
                   "useInAnalysis": true,
-                  "formula": "RF∩(C7817+C7875+C7711+C7714+C7718+C773+C7788+C7816+C7866+C7713)"
+                  "formula": "RF∩(C7817+C7875+C7711+C7714+C7718+C773+C7788+C7816+C7866+C7713+C7748)"
                 },
                 {
                   "id": "RF.9.3",
@@ -719,7 +731,7 @@
               "id": "RI.5",
               "name": "Divers",
               "useInAnalysis": true,
-              "formula": "RI∩(C204+C165+C1676+C454121+C454421+C454428+C45821+C45442)+RI∩(C20+C21+C22+C23+C26+C27)"
+              "formula": "RI∩(C204+C165+C1676+C454121+C454421+C454428+C45821+C4582+C45442)+RI∩(C20+C21+C22+C23+C26+C27)"
             },
             {
               "id": "RI.6",
@@ -742,7 +754,7 @@
                   "id": "RI.EM.1",
                   "name": "EMPRUNT NOUVEAU",
                   "useInAnalysis": true,
-                  "formula": "RI∩(C1641+C16311+C166)"
+                  "formula": "RI∩(C1641+C16311+C166+C16318)"
                 },
                 {
                   "id": "RI.EM.2",
