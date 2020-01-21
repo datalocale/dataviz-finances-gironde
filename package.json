@@ -108,7 +108,7 @@
     "browserify": "^13.1.1",
     "cross-env": "^3.2.4",
     "enzyme": "^2.9.1",
-    "eslint": "^3.14.0",
+    "eslint": "^4.18.2",
     "jest": "^18.1.0",
     "jest-immutable-matchers": "^1.4.0",
     "minifyify": "^7.3.5",
