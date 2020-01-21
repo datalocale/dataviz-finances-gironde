@@ -249,6 +249,7 @@ DF.6.3.1,Questure/indemnités des élus,Ces dépenses concernent les **frais de 
 DF.6.3.2,Charges exceptionnelles et provisions,"Ces charges concernent les **intérêts moratoires, amendes fiscales, subventions aux SPIC** (service public industriel et commercial)."
 DF.6.3.3,"Autres (dont budgets annexes hostens, LABO)","Contributions aux budgets annexes des structures administratives rattachées au Département comme le domaine d'Hostens, ou le Laboratoire départemental."
 DF.6.4,Dotation transferts,Ces dépenses sont liées à l'application de la loi MAPTAM et  aux transferts de certaines  dépenses à Bordeaux Métropole 
+DF.6.5,Reprise financière,test d'affichage
 DF.7,Intérêts des emprunts,Il s'agit des intérêts des emprunts long terme contractés par le Département pour financer ses investissements. Avec l'amortissement du capital comptabilisé en investissement ils composent l'annuité de la dette
 RI,Recettes d’investissement,"Les recettes d'investissement sont constituées :
 * de dotations de l’Etat [par exemple, le Fonds de Compensation de la TVA (FCTVA), la Dotation Globale d'Équipement (DGE), etc.]
