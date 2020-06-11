@@ -1,9 +1,9 @@
 id,text
-D,Les dépenses ont augmenté en 2018 essentiellement du fait de l'augmentation des dépenses de solidarité et de péréquation liées elle-même au contexte économique et social
-R,Les recettes ont augmenté en 2018 sans recours au levier fiscal
-RF,Les recettes de fonctionnement sont en baisse en 2018 suite à la disparition des recettes reçues de la Région au titre du transfert des transports. Corrigé de ce montant(39M€) les recettes de fonctionnement sont en hausse de 2.28%
-RF.1,"En 2018, avec un montant de 475 M€ le poids relatif de cette ressource est en hausse mais représente moins du tiers de nos recettes totales.
-Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de 2,82% (+9.34 M€) et s’élèvent à 341 M€. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé pour 2018 à 17.46%.
+D,Les dépenses ont augmenté en 2019 essentiellement du fait de l'augmentation des dépenses de solidarité et de péréquation liées elle-même au contexte économique et social
+R,Les recettes ont augmenté en 2019 sans recours au levier fiscal
+RF,Les recettes de fonctionnement sont en progression en 2019  de 3.92% suite à de bonnes rentrées fiscales (droits de mutation et fiscalité directe)
+RF.1,"En 2019, avec un montant de 475 M€ le poids relatif de cette ressource est en légerè hausse mais représente moins du tiers de nos recettes totales.
+Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de 4.45% (+21 M€) et s’élèvent à  M€. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé pour 2018 à 17.46%.
 
 
 "
@@ -15,25 +15,20 @@ RF.2,
 RF.2.1,
 RF.2.2,
 RF.3,"Ouverte pour 2 ans par la loi de finances pour 2014, la possibilité de « déplafonner » les DMTO avait été décidée dans le Pacte de confiance et de responsabilité afin d’atténuer le reste à charge des départements (estimé à 5,5 milliards pour 2014) sur les dépenses liées aux allocations individuelles de solidarité, compensée en partie par l’Etat depuis leur transfert.
-Depuis 2015 La Gironde connaît un important dynamisme du marché de l’immobilier porté à la fois par le volume des transactions mais aussi par l'augmentation des prix. Après la forte  hausse de 23 % en 2017 par rapport à 2016 (+11% en moyenne pour les autres départements), en 2018 les DMTO n'ont enregistré qu'une augmentation de  1%."
-RF.4,"Elles atteignent un volume de 36.7 M€ en augmentation de 1.35%. Elles se composent de la taxe d’aménagement, de la taxe sur l’électricité et d’autres recettes fiscales diverses comme la redevance des mines"
-RF.4.1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2018, la taxe d’aménagement diminue pour s’établir à un niveau de 16.42 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€. Cette baisse fait suite à une année 2017marquée parl’augmentation des demandes de permis de construire mais aussi par un effet de rattrapage suite aux problèmes de recouvrement qu’avait rencontré l’Etat suite à la mise en place de la TA."
+Depuis 2015 La Gironde connaît un important dynamisme du marché de l’immobilier porté à la fois par le volume des transactions mais aussi par l'augmentation des prix. Après la forte  hausse de 23 % en 2017 par rapport à 2016 (+11% en moyenne pour les autres départements), suivie en 2018 d'une augmentation de seulement 1%, les DMTO ont enregistrés en 2019 une nouvelle hausse avec + 7.6 %. Cette recette subie des variations importantes d'une année sur l'autre fortement liées à la conjoncture économique."
+RF.4,"Elles atteignent un volume de 36.4 M€ en augmentation de 0.83%. Elles se composent de la taxe d’aménagement, de la taxe sur l’électricité et d’autres recettes fiscales diverses comme la redevance des mines ou la taxe de séjour."
+RF.4.1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2019, la taxe d’aménagement diminue pourladeuxième année consécutive pour s’établir à un niveau de 14.86 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€.En 2019 ,le montant perçu est impacté par la fin du phénomène de rattrapage suite aux problèmes de recouvrement  rencontré l’Etat lors à la mise en place de la TA et d'un prélèvement d'1.4M€ au titre d'indus."
 RF.4.2,
 RF.4.3,
 RF.4.4,
-RF.5,"Elles sont composées comme en 2017 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP, du FNGIR (dotations figées issues de la réforme fiscale de 2010) et du FCTVA ^perçu sur les dépenses d'entretien et s’élèvent à un montant de 187.6M€. Elles sont en hausse de 0.15% après 6 années de baisse."
-RF.5.1,"En 2012, la loi de finances a prévu que la dotation de compensation des départements en année n serait égale à celle perçue en année n-1
-La dotation forfaitaire notifiée en 2015 aux départements, c'est-à-dire après application de la minoration liée à la contribution au redressement des finances publiques.  
-La loi de finances pour 2015 fixe un montant de 74,02 euros par habitant en plus ou en moins par rapport à l’année précédente. Ce montant est inchangé en 2016. [source](http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=11)
-Le potentiel fiscal des départements 2016 est établi de la manière suivante : 
-REVENU/POP INSEE 2016 : le revenu moyen par habitant de l'ensemble des départements (hors Mayotte) = 14 452,76 €  
-TMN FB 2015 : le taux moyen national d’imposition de taxe foncière sur les propriétés bâties pour l’ensemble des départements = 15,44 % "
+RF.5,"Elles sont composées comme en 2018 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP, du FNGIR (dotations figées issues de la réforme fiscale de 2010) et du FCTVA perçu sur les dépenses d'entretien et s’élèvent à un montant de M€. Elles sont en leger repli de 0.28% impactées par les diminutions de 3% sur des compensations fiscales et la DCRTP"
+RF.5.1,
 RF.5.2,
 RF.5.3,
 RF.5.4,
 RF.5.5,
 RF.5.6,
-RF.6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance d’un nouveau dispositif, le Fonds d’Appui d'Aide à domicile
+RF.6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance de plusieurs fonds : le Fonds d'Appui aux politiques d'Insertion(FAPI), le Fonds d’Appui d'Aide à domicile, le Fonds stratégique de pauvreté. elles représentent un total de 128M€ en 2019 en progression de 0.27%.
 
 
 "
@@ -42,16 +37,12 @@ RF.6.2,
 RF.6.3,
 RF.6.4,
 RF.6.5 ,
-RF.7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP) mais également du fonds d'appui aux politiques d'insertion"
+RF.7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP) mais également du fonds de solidarité( pour le quel le Département n'est que contributeur) et le Fonds de stabilisation créé par la loi de finances pour 2019 au titre duquel le Département a reçu 9.8M€. Ces recettes représentent en 2019 40.9M€ soit une progression de 35%"
 RF.7.1,
 RF.7.2,
 RF.7.3,
 RF.7.4,
-RF.8,"Il s’agit du Fonds
-National de Péréquation des Droits de Mutation à Titre Onéreux, créé en
-2011 et au titre duquel le Département de la Gironde a perçu pour l’exercice
-2018 un montant de 13.10M€, qu’il faut rapprocher du montant de la
-contribution de 39.6 M€, soit un solde net négatif de -26.55 M€.
+RF.8,"En 2019 la péréquation horizontale composée Fonds National de Péréquation des droits de mutation (FNPDMTO) et du fonds de péréquation de la CVAE, a été élargie à un nouveau fonds le Fonds de soutien interdépartemental pour lequel le Département contribue à hauteur de 8.26M€. Le département de la Gironde est seulement bénéficiaire du Fonds National de Péréquation des droits de mutation au titre duquel il a reçu 14.33M€
 
 "
 RF.8.1,

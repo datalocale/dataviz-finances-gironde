@@ -1,4 +1,226 @@
-id,text
-R0,Les services généraux sont les fonctions support. Elles sont transverses et très importante pour mener à bien le reste des missions du Département
-R1,"Les missions de sécurité recouvrent notamment la gendarmerie, la police, les pompiers, la justice et tout ce qui a trait à la protection des personnes et des biens"
-R2,On ne gère que les collèges. Voir les villes pour les écoles et la Région Nouvelle Aquitaine pour les lycées et l'enseignement supérieur
+id,label,description
+EXPENDITURES,Dépenses,
+REVENUE,Recettes,
+RF,Recettes de fonctionnement,
+M52-DF-R0,Services généraux,Services généraux
+M52-DF-R01,Opérations non ventilables,Opérations non ventilables
+M52-DF-R02,Administration générale,Administration générale
+M52-DF-R020,Administration générale de la collectivité,Administration générale collectivité
+M52-DF-R0201,Personnel non ventilable,Admin. géné. (personnel non ventilable)
+M52-DF-R0202,Autres moyens généraux,Admin. géné. (autres moyens généraux)
+M52-DF-R021,Assemblée locale,Assemblée locale
+M52-DF-R023,"Information, communication, publicité","Information, communication, publicité"
+M52-DF-R04,"Coopération décentralisée, action européenne et internationale","Coopération décent., action européenne"
+M52-DF-R041,Subvention globale,Subvention globale
+M52-DF-R048,Autres,Autres
+M52-DF-R1,Sécurité (SDIS),Sécurité (SDIS)
+M52-DF-R10,Services communs,Services communs
+M52-DF-R11,"Gendarmerie, police, sécurité, justice","Gendarmerie, police, sécurité, justice"
+M52-DF-R12,Incendie et Secours,Incendie et Secours
+M52-DF-R18,Autres interventions de protection des personnes et des biens,Autres interventions de protection
+M52-DF-R2,Collèges,Enseignement
+M52-DF-R20,Services communs,Services communs
+M52-DF-R21,Enseignement du premier degré,Enseignement du premier degré
+M52-DF-R22,Enseignement du second degré,Enseignement du second degré
+M52-DF-R221,Collèges,Collèges
+M52-DF-R222,Lycées,Lycées
+M52-DF-R23,Enseignement supérieur,Enseignement supérieur
+M52-DF-R24,Formation professionnelle et apprentissage (COM),"Formation pro. , apprentissage (COM)"
+M52-DF-R28,Autres services périscolaires et annexes,Autres services périscolaires
+M52-DF-R3,"Culture, vie sociale, jeunesse, sports et loisirs","Culture, jeunesse, sports"
+M52-DF-R30,Services communs,Services communs
+M52-DF-R31,Culture,Culture
+M52-DF-R311,Activités artistiques et action culturelle,"Activités artistiques, action culturelle"
+M52-DF-R312,"Patrimoine (musées, monuments...)","Patrimoine (musées, monuments...)"
+M52-DF-R313,Bibliothèques et médiathèques,Bibliothèques et médiathèques
+M52-DF-R314,Musées,Musées
+M52-DF-R315,Services d'archives,Services d'archives
+M52-DF-R32,Sports,Sports
+M52-DF-R33,Jeunesse (action socio-éducative...) et loisirs,Jeunesse (action socio-éducative...)
+M52-DF-R4,Prévention médico-sociale,Prévention médico-sociale
+M52-DF-R40,Services communs,Services communs
+M52-DF-R41,PMI et planification familiale,PMI et planification familiale
+M52-DF-R42,Prévention et éducation pour la santé,Prévention et éducation pour la santé
+M52-DF-R48,Autres actions,Autres actions
+M52-DF-R5,Action sociale,Action sociale
+M52-DF-R50,Services communs,Services communs
+M52-DF-R51,Famille et enfance,Famille et enfance
+M52-DF-R52,Personnes handicapées,Personnes handicapées
+M52-DF-R53,Personnes âgées,Personnes âgées
+M52-DF-R531,Forfait autonomie,Forfait autonomie
+M52-DF-R532,Autres actions de prévention,Autres actions de prévention
+M52-DF-R538,Autres,Autres
+M52-DF-R54,Revenu minimum d'insertion,Revenu minimum d'insertion
+M52-DF-R541,Insertion sociale,Insertion sociale
+M52-DF-R542,Santé,Santé
+M52-DF-R543,Logement,Logement
+M52-DF-R544,Insertion professionnelle,Insertion professionnelle
+M52-DF-R545,Évaluation des dépenses engagées,Évaluation des dépenses engagées
+M52-DF-R546,Dépenses de structure,Dépenses de structure
+M52-DF-R547,Revenu minimum d'insertion - Revenu de Solidarité Active,Revenu de Solidarité Active - RSA
+M52-DF-R5471,Revenu minimum d'insertion - Allocations,Revenu minimum d'insertion - Allocations
+M52-DF-R5472,Revenu de Solidirarité Active,Revenue de Solidarité Active
+M52-DF-R548,Autres dépenses au titre du RMI,Autres dépenses au titre du RMI
+M52-DF-R55,Personnes dépendantes (APA),Personnes dépendantes (APA)
+M52-DF-R550,Services communs,Services communs
+M52-DF-R551,APA à domicile,APA à domicile
+M52-DF-R552,APA versée au bénéficiaire en établissement,APA versée au bénéficiaire en établissement
+M52-DF-R553,APA versée à l'établissement,APA versée à l'établissement
+M52-DF-R56,Revenu de solidarité active,Revenu de solidarité active
+M52-DF-R561,Insertion sociale,Insertion sociale
+M52-DF-R562,Santé,Santé
+M52-DF-R563,Logement,Logement
+M52-DF-R564,Insertion professionnelle,Insertion professionnelle
+M52-DF-R565,Evaluation des dépenses engagées,Evaluation des dépenses engagées
+M52-DF-R566,Dépenses de structure,Dépenses de structure
+M52-DF-R567,Allocations RSA,Allocations RSA
+M52-DF-R568,Autres dépenses au titre du RSA,Autres dépenses au titre du RSA
+M52-DF-R58,Autres interventions sociales,Autres interventions sociales
+M52-DF-R6,Réseaux et infrastructures,Réseaux et infrastructures
+M52-DF-R60,Services communs,Services communs
+M52-DF-R61,Eaux et assainissement,Eaux et assainissement
+M52-DF-R62,Routes et voirie,Routes et voirie
+M52-DF-R621,Réseau routier départemental,Réseau routier départemental
+M52-DF-R622,Viabilité hivernale et aléas climatiques,Viabilité hivernale et aléas climatiques
+M52-DF-R628,Autres réseaux de voirie,Autres réseaux de voirie
+M52-DF-R63,Infrastructures ferroviaires et aéroportuaires,Infrastructures ferroviaires et aéroport
+M52-DF-R64,"Infrastructures fluviales, maritimes et portuaires","Infrastructures fluviales, maritimes"
+M52-DF-R68,Autres réseaux,Autres réseaux
+M52-DF-R7,Aménagement et environnement,Aménagement et environnement
+M52-DF-R70,Services communs,Services communs
+M52-DF-R71,Aménagement et développement urbain,Aménagement et développement urbain
+M52-DF-R72,Logement,Logement
+M52-DF-R73,Environnement,Environnement
+M52-DF-R731,Actions en matière de traitement des déchets,Actions de traitement des déchets
+M52-DF-R738,Autres actions en faveur du milieu naturel,Autres actions en faveur milieu naturel
+M52-DF-R74,Aménagement et développement rural,Aménagement et développement rural
+M52-DF-R8,Transports,Transports
+M52-DF-R80,Services communs,Services communs
+M52-DF-R81,Transports scolaires,Transports scolaires
+M52-DF-R82,Transports publics de voyageurs,Transports publics de voyageurs
+M52-DF-R821,Routier,Routier
+M52-DF-R822,Ferroviaire,Ferroviaire
+M52-DF-R823,Maritime,Maritime
+M52-DF-R824,Fluvial,Fluvial
+M52-DF-R825,Aérien,Aérien
+M52-DF-R88,Autres,Autres
+M52-DF-R9,Développement économique,Développement économique
+M52-DF-R90,Services communs,Services communs
+M52-DF-R91,Structures d'animation et de développement économique,"Structures animation, développement éco."
+M52-DF-R92,Agriculture et pêche,Agriculture et pêche
+M52-DF-R921,Laboratoire départemental,Laboratoire départemental
+M52-DF-R928,Autres,Autres
+M52-DF-R93,"Industrie, commerce et artisanat","Industrie, commerce et artisanat"
+M52-DF-R94,Développement touristique,Développement touristique
+M52-DF-R95,Maintien et développement des services publics non départementaux,Maintien services publics non départementaux
+M52-DI-R0,Services généraux,Services généraux
+M52-DI-R01,Opérations non ventilables,Opérations non ventilables
+M52-DI-R02,Administration générale,Administration générale
+M52-DI-R020,Administration générale de la collectivité,Administration générale collectivité
+M52-DI-R0201,Personnel non ventilable,Admin. géné. (personnel non ventilable)
+M52-DI-R0202,Autres moyens généraux,Admin. géné. (autres moyens généraux)
+M52-DI-R021,Assemblée locale,Assemblée locale
+M52-DI-R023,"Information, communication, publicité","Information, communication, publicité"
+M52-DI-R04,"Coopération décentralisée, action européenne et internationale","Coopération décent., action européenne"
+M52-DI-R041,Subvention globale,Subvention globale
+M52-DI-R048,Autres,Autres
+M52-DI-R1,Sécurité,Sécurité
+M52-DI-R10,Services communs,Services communs
+M52-DI-R11,"Gendarmerie, police, sécurité, justice","Gendarmerie, police, sécurité, justice"
+M52-DI-R12,Incendie et Secours,Incendie et Secours
+M52-DI-R18,Autres interventions de protection des personnes et des biens,Autres interventions de protection
+M52-DI-R2,Enseignement,Enseignement
+M52-DI-R20,Services communs,Services communs
+M52-DI-R21,Enseignement du premier degré,Enseignement du premier degré
+M52-DI-R22,Enseignement du second degré,Enseignement du second degré
+M52-DI-R221,Collèges,Collèges
+M52-DI-R222,Lycées,Lycées
+M52-DI-R23,Enseignement supérieur,Enseignement supérieur
+M52-DI-R24,Formation professionnelle et apprentissage (COM),"Formation pro. , apprentissage (COM)"
+M52-DI-R28,Autres services périscolaires et annexes,Autres services périscolaires
+M52-DI-R3,"Culture, vie sociale, jeunesse, sports et loisirs","Culture, jeunesse, sports"
+M52-DI-R30,Services communs,Services communs
+M52-DI-R31,Culture,Culture
+M52-DI-R311,Activités artistiques et action culturelle,"Activités artistiques, action culturelle"
+M52-DI-R312,"Patrimoine (musées, monuments...)","Patrimoine (musées, monuments...)"
+M52-DI-R313,Bibliothèques et médiathèques,Bibliothèques et médiathèques
+M52-DI-R314,Musées,Musées
+M52-DI-R315,Services d'archives,Services d'archives
+M52-DI-R32,Sports,Sports
+M52-DI-R33,Jeunesse (action socio-éducative...) et loisirs,Jeunesse (action socio-éducative...)
+M52-DI-R4,Prévention médico-sociale,Prévention médico-sociale
+M52-DI-R40,Services communs,Services communs
+M52-DI-R41,PMI et planification familiale,PMI et planification familiale
+M52-DI-R42,Prévention et éducation pour la santé,Prévention et éducation pour la santé
+M52-DI-R48,Autres actions,Autres actions
+M52-DI-R5,Action sociale,Action sociale
+M52-DI-R50,Services communs,Services communs
+M52-DI-R51,Famille et enfance,Famille et enfance
+M52-DI-R52,Personnesen situation de handicap,Personnes en situation de handicap
+M52-DI-R53,Personnes âgées,Personnes âgées
+M52-DI-R531,Forfait autonomie,Forfait autonomie
+M52-DI-R532,Autres actions de prévention,Autres actions de prévention
+M52-DI-R538,Autres,Autres
+M52-DI-R54,Revenu minimum d'insertion,Revenu minimum d'insertion
+M52-DI-R541,Insertion sociale,Insertion sociale
+M52-DI-R542,Santé,Santé
+M52-DI-R543,Logement,Logement
+M52-DI-R544,Insertion professionnelle,Insertion professionnelle
+M52-DI-R545,Évaluation des dépenses engagées,Évaluation des dépenses engagées
+M52-DI-R546,Dépenses de structure,Dépenses de structure
+M52-DI-R547,Revenu minimum d'insertion - Revenu minimum d'activité,Revenu minimum d'insertion - RMA
+M52-DI-R5471,Revenu minimum d'insertion - Allocations,Revenu minimum d'insertion - Allocations
+M52-DI-R5472,Revenu minimum d'activité,Revenu minimum d'activité
+M52-DI-R548,Autres dépenses au titre du RMI,Autres dépenses au titre du RMI
+M52-DI-R55,Personnes dépendantes (APA),Personnes dépendantes (APA)
+M52-DI-R550,Services communs,Services communs
+M52-DI-R551,APA à domicile,APA à domicile
+M52-DI-R552,APA versée au bénéficiaire en établissement,APA versée au bénéficiaire en établisst
+M52-DI-R553,APA versée à l'établissement,APA versée à l'établissement
+M52-DI-R56,Revenu de solidarité active,Revenu de solidarité active
+M52-DI-R561,Insertion sociale,Insertion sociale
+M52-DI-R562,Santé,Santé
+M52-DI-R563,Logement,Logement
+M52-DI-R564,Insertion professionnelle,Insertion professionnelle
+M52-DI-R565,Evaluation des dépenses engagées,Evaluation des dépenses engagées
+M52-DI-R566,Dépenses de structure,Dépenses de structure
+M52-DI-R567,Allocations RSA,Allocations RSA
+M52-DI-R568,Autres dépenses au titre du RSA,Autres dépenses au titre du RSA
+M52-DI-R58,Autres interventions sociales,Autres interventions sociales
+M52-DI-R6,Réseaux et infrastructures,Réseaux et infrastructures
+M52-DI-R60,Services communs,Services communs
+M52-DI-R61,Eaux et assainissement,Eaux et assainissement
+M52-DI-R62,Routes et voirie,Routes et voirie
+M52-DI-R621,Réseau routier départemental,Réseau routier départemental
+M52-DI-R622,Viabilité hivernale et aléas climatiques,Viabilité hivernale et aléas climatiques
+M52-DI-R628,Autres réseaux de voirie,Autres réseaux de voirie
+M52-DI-R63,Infrastructures ferroviaires et aéroportuaires,Infrastructures ferroviaires et aéroport
+M52-DI-R64,"Infrastructures fluviales, maritimes et portuaires","Infrastructures fluviales, maritimes"
+M52-DI-R68,Autres réseaux,Autres réseaux
+M52-DI-R7,Aménagement et environnement,Aménagement et environnement
+M52-DI-R70,Services communs,Services communs
+M52-DI-R71,Aménagement et développement urbain,Aménagement et développement urbain
+M52-DI-R72,Logement,Logement
+M52-DI-R73,Environnement,Environnement
+M52-DI-R731,Actions en matière de traitement des déchets,Actions de traitement des déchets
+M52-DI-R738,Autres actions en faveur du milieu naturel,Autres actions en faveur milieu naturel
+M52-DI-R74,Aménagement et développement rural,Aménagement et développement rural
+M52-DI-R8,Transports,Transports
+M52-DI-R80,Services communs,Services communs
+M52-DI-R81,Transports scolaires,Transports scolaires
+M52-DI-R82,Transports publics de voyageurs,Transports publics de voyageurs
+M52-DI-R821,Routier,Routier
+M52-DI-R822,Ferroviaire,Ferroviaire
+M52-DI-R823,Maritime,Maritime
+M52-DI-R824,Fluvial,Fluvial
+M52-DI-R825,Aérien,Aérien
+M52-DI-R88,Autres,Autres
+M52-DI-R9,Développement économique,Développement économique
+M52-DI-R90,Services communs,Services communs
+M52-DI-R91,Structures d'animation et de développement économique,"Structures animation, développement éco."
+M52-DI-R92,Agriculture et pêche,Agriculture et pêche
+M52-DI-R921,Laboratoire départemental,Laboratoire départemental
+M52-DI-R928,Autres,Autres
+M52-DI-R93,"Industrie, commerce et artisanat","Industrie, commerce et artisanat"
+M52-DI-R94,Développement touristique,Développement touristique
+M52-DI-R95,Maintien et développement des services publics non départementaux,Maintien services publics non départementaux
