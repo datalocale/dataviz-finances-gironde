@@ -62,7 +62,7 @@ export function FocusSol({
             }),
             React.createElement('div', {},
                 React.createElement(Markdown, {},
-                    `**Avec 125 000 prestations allouées et ${currentYearSolidarity && (currentYearSolidarity.solidarityExpenditures/1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +5.21% par rapport à 2017.**`),
+                    `**Avec 125 000 prestations allouées et ${currentYearSolidarity && (currentYearSolidarity.solidarityExpenditures/1000000).toFixed(0)} millions d'euros mobilisés en ${currentYear}, les dépenses de Solidarités pour soutenir les personnes fragilisées évoluent de +3.43% par rapport à 2018.**`),
                 React.createElement(PrimaryCallToAction, {href: '#!/finance-details/DF.2', text: `en savoir plus`})
             ),
             React.createElement('div', {className: 'people-fraction'},
@@ -142,10 +142,10 @@ export function FocusSol({
                 illustrationUrl: urls[INSERTION_PICTO],
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.1')/currentYearSolidarity.solidarityExpenditures : 1,
-                text: `Le Revenu de Solidarité Active (RSA) représente près de 94% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier.`,
+                text: `Le Revenu de Solidarité Active (RSA) représente près de 96% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier. `,
                 highlights: [
                     {
-                        strong: "244,6 M€",
+                        strong: "243,2 M€",
                         span: `dédiés au RSA en ${currentYear}`
                     },
                     {
@@ -162,22 +162,22 @@ export function FocusSol({
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Les aides du Département versées aux personnes en situation de handicap concernent en ${currentYear}:
-- la Prestation de Compensation du Handicap (PCH) versée à 7 221 personnes en ${currentYear}.
+- la Prestation de Compensation du Handicap (PCH) versée à 7 800 personnes en ${currentYear}.
 - la prestation d’hébergement a concerné plus de 3000 bénéficiaires en ${currentYear}.
 - l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 077 personnes en ${currentYear}.
 
 L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`,
                 highlights: [
                     {
-                        strong: "86.4 M €",
+                        strong: "94.2 M €",
                         span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "136 M€",
+                        strong: "140 M€",
                         span: "pour des places d’hébergement"
                     },
                     {
-                        strong: "7.8 M€",
+                        strong: "7.5 M€",
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ],
@@ -192,7 +192,7 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
-                        strong: "145 M€",
+                        strong: "145.1 M€",
                         span: `versés en ${currentYear} pour l’APA`
                     },
                     {
@@ -200,8 +200,12 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                         span: `en ${currentYear}`
                     },
                     {
-                        strong: "22 149",
-                        span: `bénéficiaires en ${currentYear}`
+                        strong: "22 315",
+                        span: `bénéficiaires de l'APA à domicile fin ${currentYear}`
+                    },
+                    {
+                        strong: "14 647",
+                        span: `bénéficiaires de l'APA en établissement fin ${currentYear}`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.2.3'
@@ -216,15 +220,15 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
 https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                 highlights: [
                     {
-                        strong: "193.7 M€",
+                        strong: "212.1 M€",
                         span: "pour les Maisons d’Enfants à Caractère Sociale et les hébergements accueillant des enfants"
                     },
                     {
-                        strong: "776",
+                        strong: "744",
                         span: "assistants familiaux pour l'accueil familial"
                     },
                     {
-                        strong: "1245",
+                        strong: "1151",
                         span: `enfants accueillis en ${currentYear}`
                     }
                 ],
