@@ -95,16 +95,16 @@ export function FocusSol({
                 text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`,
                 highlights: [
                     {
-                        strong: '2,1M€',
-                        span: `locations immobilières (-38%)`
+                        strong: '1,7 M€',
+                        span: `locations immobilières (+3.7%)`
                     },
                     {
-                        strong: '2,7M€',
-                        span: `entretien et de maintenance des bâtiments (+3.9%)`
+                        strong: '0.74M€',
+                        span: `entretien et de maintenance des bâtiments (-4.5%)`
                     },
                     {
-                        strong: '1,1M€',
-                        span: `contrats d’assurance (-4.5%)`
+                        strong: '1M€',
+                        span: `contrats d’assurance (+2.96%)`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.2'
@@ -120,16 +120,20 @@ export function FocusSol({
                 text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`,
                 highlights: [
                     {
-                        strong: '1,3M€',
-                        span: `consommation énergétique (-1,1%)`
+                        strong: '1,48M€',
+                        span: `drais d'electicité (+7.43%)`
                     },
                     {
-                        strong: '561 000€',
-                        span: `dépenses de carburant (+0.7%)`
+                        strong: '0.58 M€',
+                        span: `dépenses de carburant (-0.74%)`
                     },
                     {
-                        strong: '448 000€',
-                        span: `dépenses de fourniture (-2.3%)`
+                        strong: '0.45 M€',
+                        span: `dépenses de fourniture (-2.5%)`
+                    },
+                    {
+                        strong: '0.275 M€',
+                        span: `dépenses d'entretien (-1.75%)`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.1'
@@ -145,16 +149,16 @@ export function FocusSol({
                 text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`,
                 highlights: [
                     {
-                        strong: '838 362€',
-                        span: `frais de nettoyage de locaux (+1.16%)`
+                        strong: '0.856 M€',
+                        span: `frais de nettoyage de locaux (+1.03%)`
                     },
                     {
-                        strong: '833 375€',
-                        span: `frais d’affranchissement (-13,7%)`
+                        strong: '0.748 M€',
+                        span: `frais d’affranchissement (+2.44%)`
                     },
                     {
-                        strong: '1.7 M€',
-                        span: `frais de télécommunications (+2%)`
+                        strong: '3.2 M€',
+                        span: `frais de télécommunications (-8.4%)`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.3'
