@@ -69,7 +69,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2014 à 2018' }),
+            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2015 à 2019' }),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -103,7 +103,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2017-2018, on comptait 61288 collégiens dans les collèges publics girondins et 12 597 collégiens dans les collèges privés. En 2018, les travaux ont concerné le collège de Bazas, la SEGPA de Pauillac, le collège de Salles et de Vérac.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2018-2019, on comptait 61288 collégiens dans les collèges publics girondins et 12 597 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 12 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations prévues au PPI collèges se sont également poursuivies avec 9M€ de réalisés en 2019 sur des opérations majeures comme Bazas avec 5.7M€, et Salles pour 1.6M€.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -122,9 +122,10 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Le réseau routier girondin est constitué de 6 500 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement). En 2018, les travaux ont concerné notamment la RD 18 à Génissac,Moulon, le calibrage de la route Cadillac/sauveterre/Monségur, l’échangeur de la Prade, ou la RD 1250 à la Teste
-                Le Plan départemental de déplacement traduit la volonté du Département d’élargir son action en matière d’organisation
-                du système de déplacements (infrastructures routières, transports collectifs départementaux et covoiturage). Ce Plan a prévu un budget total d’investissement de 14 millions d’euros entre 2017 et 2030.`,
+                text: `Le réseau routier girondin est constitué de 6 360 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 12 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations prévues au PPI collèges se sont également poursuivies avec 9M€ de réalisés en 2019 sur des opérations majeures comme Bazas avec 5.7M€, et Salles pour 1.6M€. En 2019, les travaux ont concerné notamment :
+                      •	La préservation du patrimoine départemental (renforcements programmés, et les travaux de confortement de certaines des 1500 carrières situées sur le territoire girondin). 
+                      •	La modernisation et la sécurisation du réseau départemental avec notamment des d’opérations ponctuelles visant au renforcement de la sécurité routière, et les recalibrages de routes de faible largeur (RD 3 Hourtin Lesparre, RD 18 Génissac Moulon,RD 630 268 Cadillac Sauveterre) 
+                      •	Le développement du réseau départemental avec le début des travaux sur la déviation de Fargues St Hilaire, le plan routier du médoc avec la Déviation de St Aubin le Taillan mais aussi l’aménagement du carrefour de la RD 1250 à la Teste `,
                 highlights: [
                     /*{
                     strong: "",
@@ -146,7 +147,7 @@ export function FocusSol({
                 text: `Il s’agit ici de la maintenance et de la rénovation du patrimoine bâti hors immobilier social et des investissements liés à la politique informatique et numérique ou à la sécurisation (digues par exemple)
                 Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc.. ;
                 
-2018 a également vu l’acquisition de plusieurs bâtiments  notamment l’achat d’un immeuble à Bègles pour reloger l’IDDAC`,
+                2019 a également vu l’acquisition de plusieurs ensembles immobiliers effectuées dans le cadre du plan d’acquisition pour l’Aide sociale à l’enfance (ASE) pour 9.7M€, du programme biblio gironde, et au titre du Domaine départemental structurant en Médoc `,
                 highlights: [
                     /*{
                     strong: "",
@@ -165,7 +166,7 @@ export function FocusSol({
                 illustrationUrl: urls[ENVIRONNEMENT_AMENAGEMENT_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.4'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.4'] / focusDetailsDenominator : 1,
-                text: `Le Département agit pour la protection et la valorisation des espaces naturels sensibles. Il assure leur gestion, organise des actions de sensibilisation à l'environnement, et permet au public de visiter ces sites préservés en visites libres, ou guidées par des guides naturalistes. 2017 marque la fin des travaux du pôle régional de connaissance de préservation et de valorisation de la biodiversité au domaine de Certes et Graveyron à Audenge. Celui-ci accueille dans le cadre de la préservation de la faune, de la flore et des habitants, le Conservatoire botanique Sud-Atlantique, un centre de sauvegarde de la Ligue pour la Protection des Oiseaux (LPO) et un centre de conservation et d’étude (CCE) de la Direction Régionale des Affaires Culturelles (DRAC).`,
+                text: `Le Département agit pour la protection et la valorisation des espaces naturels sensibles. Il assure leur gestion, organise des actions de sensibilisation à l'environnement, et permet au public de visiter ces sites préservés en visites libres, ou guidées par des guides naturalistes. Ces dépenses ont été principalement consacrées aux déplacements doux aux acquisitions destinées à la création ou extension de ZPENS (Vallée de la LEYRE, Ciron Bernos Beaulac.) et à leur gestion (gestion du projet Maharans à Captieux). Des travaux hydrauliques ou d’exploitation forestière ont été réalisés en particulier au domaine de Certes ou l’île nouvelle ainsi que sur les domaines départementaux de loisirs `,
                 highlights: [
                     /*{
                       strong: "",
@@ -208,8 +209,7 @@ export function FocusSol({
                 amount: yearDIDetails ? yearDIDetails['DI.1.5'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.5'] / focusDetailsDenominator : 1,
                 text: `Il s’agit des travaux de construction ou de rénovation des bâtiments sociaux faisant suite au programme Solidarité 2013.
-                En 2018, les travaux ont concerné notamment le Pôle social de Bordeaux Grand Par et la MDSI de Villenave d’Ornon,
-                mais aussi l’acquisition de la Tour Aquitaine pour loger la MDSI de Bordeaux et des immeubles destinés à l’aide sociale à l’enfance.`,
+                En 2019, les travaux ont concerné notamment les travaux sur les pôles sociaux (Pôles sociaux du Grand Parc et de Langon) et les MDSI`,
                 highlights: [
                     /*{
                       strong: "",
