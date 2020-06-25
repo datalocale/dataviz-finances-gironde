@@ -74,7 +74,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, {text: `Les dépenses "Solidarités" augmentent pour tous les publics`}),
+            React.createElement(SecundaryTitle, {text: `LE DEPARTEMENT POURSUIT SES EFFORTS EN MATIERE DE SOLIDARITES HUMAINES`}),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -149,8 +149,8 @@ export function FocusSol({
                         span: `dédiés au RSA en ${currentYear}`
                     },
                     {
-                        strong: "+2,5%",
-                        span: `d'allocations RSA par rapport à ${currentYear-1}`
+                        strong: "-0,6%",
+                        span: `d'allocations RSA par rapport à ${currentYear-1} en raison d’une baisse des bénéficiaires`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.2.1'

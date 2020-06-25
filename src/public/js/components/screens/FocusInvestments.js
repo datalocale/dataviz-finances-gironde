@@ -122,7 +122,8 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Le réseau routier girondin est constitué de 6 360 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 12 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations prévues au PPI collèges se sont également poursuivies avec 9M€ de réalisés en 2019 sur des opérations majeures comme Bazas avec 5.7M€, et Salles pour 1.6M€. En 2019, les travaux ont concerné notamment :
+                text: `Le réseau routier girondin est constitué de 6 360 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) 
+				       En 2019, les travaux ont concerné notamment :
                       •	La préservation du patrimoine départemental (renforcements programmés, et les travaux de confortement de certaines des 1500 carrières situées sur le territoire girondin). 
                       •	La modernisation et la sécurisation du réseau départemental avec notamment des d’opérations ponctuelles visant au renforcement de la sécurité routière, et les recalibrages de routes de faible largeur (RD 3 Hourtin Lesparre, RD 18 Génissac Moulon,RD 630 268 Cadillac Sauveterre) 
                       •	Le développement du réseau départemental avec le début des travaux sur la déviation de Fargues St Hilaire, le plan routier du médoc avec la Déviation de St Aubin le Taillan mais aussi l’aménagement du carrefour de la RD 1250 à la Teste `,
@@ -179,30 +180,7 @@ export function FocusSol({
                 ],
                 moreUrl: '#!/finance-details/DI.1.4'
             }),
-            React.createElement(FocusDetail, {
-                className: 'city-subsidy',
-                title: 'Subventions',
-                illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
-                amount: yearDIDetails ? yearDIDetails['DI.2'] : undefined,
-                proportion: yearDIDetails ? yearDIDetails['DI.2'] / focusDetailsDenominator : 1,
-                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne (offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`,
-                highlights: [
-                    {
-                        strong: "26,4 M€",
-                        span: "de subventions aux communes"
-                    },
-                    {
-                        strong: "10 M€",
-                        span: "de subventions au logement social"
-                    },
-                    {
-                        strong: "8,6 M€",
-                        span: "de subventions pour l'accès au très haut débit"
-                    }
-                ],
-                moreUrl: '#!/finance-details/DI.2'
-            }),
-            React.createElement(FocusDetail, {
+			React.createElement(FocusDetail, {
                 className: 'social-estate',
                 title: 'Immobilier social',
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
@@ -221,7 +199,31 @@ export function FocusSol({
                     }*/
                 ],
                 moreUrl: '#!/finance-details/DI.1.5'
+            }),
+            React.createElement(FocusDetail, {
+                className: 'city-subsidy',
+                title: 'Subventions',
+                illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
+                amount: yearDIDetails ? yearDIDetails['DI.2'] : undefined,
+                proportion: yearDIDetails ? yearDIDetails['DI.2'] / focusDetailsDenominator : 1,
+                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne (offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`,
+                highlights: [
+                    {
+                        strong: "31,7 M€",
+                        span: "de subventions aux communes"
+                    },
+                    {
+                        strong: "8 M€",
+                        span: "de subventions au logement social"
+                    },
+                    {
+                        strong: "4,7 M€",
+                        span: "de subventions pour l'accès au très haut débit"
+                    }
+                ],
+                moreUrl: '#!/finance-details/DI.2'
             })
+            
         )
     );
 }

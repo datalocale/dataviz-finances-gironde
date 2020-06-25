@@ -121,7 +121,7 @@ export function FocusSol({
                 highlights: [
                     {
                         strong: '1,48M€',
-                        span: `drais d'electicité (+7.43%)`
+                        span: `frais d'electicité (+7.43%)`
                     },
                     {
                         strong: '0.58 M€',
