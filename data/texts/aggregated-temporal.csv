@@ -1,9 +1,8 @@
 id,text
 D,Les dépenses ont augmenté en 2019 essentiellement du fait de l'augmentation des dépenses de solidarité et de péréquation liées elle-même au contexte économique et social
 R,Les recettes ont augmenté en 2019 sans recours au levier fiscal
-RF,Les recettes de fonctionnement sont en progression en 2019  de 3.92% suite à de bonnes rentrées fiscales (droits de mutation et fiscalité directe)
-RF.1,"En 2019, avec un montant de 475 M€ le poids relatif de cette ressource est en légerè hausse mais représente moins du tiers de nos recettes totales.
-Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de 4.45% (+21 M€) et s’élèvent à  M€. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé pour 2018 à 17.46%.
+RF,Les recettes de fonctionnement sont en progression en 2019  de 3.92% suite à de bonnes rentrées fiscales (droits de mutation et fiscalité directe) sans augmentation de la fiscalité directe
+RF.1,"En 2019, les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de 4.45% (+21 M€). Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé pour 2018 à 17.46%.
 
 
 "
@@ -14,21 +13,20 @@ RF.1.4,
 RF.2,
 RF.2.1,
 RF.2.2,
-RF.3,"Ouverte pour 2 ans par la loi de finances pour 2014, la possibilité de « déplafonner » les DMTO avait été décidée dans le Pacte de confiance et de responsabilité afin d’atténuer le reste à charge des départements (estimé à 5,5 milliards pour 2014) sur les dépenses liées aux allocations individuelles de solidarité, compensée en partie par l’Etat depuis leur transfert.
-Depuis 2015 La Gironde connaît un important dynamisme du marché de l’immobilier porté à la fois par le volume des transactions mais aussi par l'augmentation des prix. Après la forte  hausse de 23 % en 2017 par rapport à 2016 (+11% en moyenne pour les autres départements), suivie en 2018 d'une augmentation de seulement 1%, les DMTO ont enregistrés en 2019 une nouvelle hausse avec + 7.6 %. Cette recette subie des variations importantes d'une année sur l'autre fortement liées à la conjoncture économique."
-RF.4,"Elles atteignent un volume de 36.4 M€ en augmentation de 0.83%. Elles se composent de la taxe d’aménagement, de la taxe sur l’électricité et d’autres recettes fiscales diverses comme la redevance des mines ou la taxe de séjour."
-RF.4.1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2019, la taxe d’aménagement diminue pourladeuxième année consécutive pour s’établir à un niveau de 14.86 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€.En 2019 ,le montant perçu est impacté par la fin du phénomène de rattrapage suite aux problèmes de recouvrement  rencontré l’Etat lors à la mise en place de la TA et d'un prélèvement d'1.4M€ au titre d'indus."
+RF.3,"Depuis 2015 La Gironde connaît un important dynamisme du marché de l’immobilier porté à la fois par le volume des transactions mais aussi par l'augmentation des prix. Après la forte  hausse de 23 % en 2017 par rapport à 2016 (+11% en moyenne pour les autres départements), suivie en 2018 d'une augmentation de seulement 1%, les DMTO ont enregistrés en 2019 une nouvelle hausse avec + 7.6 %. Cette recette subie des variations importantes d'une année sur l'autre fortement liées à la conjoncture économique."
+RF.4,Ces recettes augmentent de 0.83% en 2019. 
+RF.4.1,"La Taxe d’Aménagement a remplacé en 2012 la TDENS (Taxe Départementale des Espaces Naturels Sensibles) et la TDCAUE (Taxe Départementale pour le CAUE). En 2019, la taxe d’aménagement diminue pour la deuxième année consécutive pour s’établir à un niveau de 14.86 M€, dépassant désormais largement les montants perçus avant la réforme de l’ordre de 11,5 M€.En 2019 ,le montant perçu est impacté par la fin du phénomène de rattrapage suite aux problèmes de recouvrement  rencontré l’Etat lors à la mise en place de la TA et d'un prélèvement d'1.4M€ au titre d'indus."
 RF.4.2,
 RF.4.3,
 RF.4.4,
-RF.5,"Elles sont composées comme en 2018 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP, du FNGIR (dotations figées issues de la réforme fiscale de 2010) et du FCTVA perçu sur les dépenses d'entretien et s’élèvent à un montant de M€. Elles sont en leger repli de 0.28% impactées par les diminutions de 3% sur des compensations fiscales et la DCRTP"
+RF.5,"Elles sont composées comme en 2018 de la DGF, de la Dotation Globale de Décentralisation (DGD), des compensations fiscales, de la DCRTP, du FNGIR (dotations figées issues de la réforme fiscale de 2010) et du FCTVA perçu sur les dépenses d'entretien et sont en léger repli de 0.28% impactées par les diminutions de 3% sur des compensations fiscales et la DCRTP"
 RF.5.1,
 RF.5.2,
 RF.5.3,
 RF.5.4,
 RF.5.5,
 RF.5.6,
-RF.6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance de plusieurs fonds : le Fonds d'Appui aux politiques d'Insertion(FAPI), le Fonds d’Appui d'Aide à domicile, le Fonds stratégique de pauvreté. elles représentent un total de 128M€ en 2019 en progression de 0.27%.
+RF.6,"Les recettes sociales sont constituées, d’une part, par les dotations destinées à compenser les allocations individuelles de Solidarité APA et PCH et d’autre part, par les recouvrements sur bénéficiaires, le recouvrement des indus au titre du RSA et des recettes en provenance de plusieurs fonds : le Fonds d'Appui aux politiques d'Insertion(FAPI), le Fonds d’Appui d'Aide à domicile, le Fonds stratégique de pauvreté. Elles représentent un total de 128M€ en 2019 en progression de 0.27%.
 
 
 "
@@ -37,11 +35,11 @@ RF.6.2,
 RF.6.3,
 RF.6.4,
 RF.6.5 ,
-RF.7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP) mais également du fonds de solidarité( pour le quel le Département n'est que contributeur) et le Fonds de stabilisation créé par la loi de finances pour 2019 au titre duquel le Département a reçu 9.8M€. Ces recettes représentent en 2019 40.9M€ soit une progression de 35%"
+RF.6.6,"Le FAPI est perçu pour la dernière année en 2019 pour un total de 1,12 M€ en baisse par rapport à 2018. Le Fonds Stratégique Pauvreté, a permis au Département de la Gironde de recevoir  un montant de 1,403 M€ en 2019 en contrepartie d'actions relevant de l'enfance (jeunes majeurs) ou de l'insertion."
+RF.7,"Ces recettes ont été instaurées dans le but de compenser les allocations individuelles de solidarité de manière individuelle ou globale. Il s'agit notamment du Fonds de mobilisation départemental pour l'insertion (FMDI), de la Dotation de Compensation péréquée (DCP) mais également du Fonds de solidarité( pour le quel le Département n'est que contributeur) et le Fonds de stabilisation créé par la loi de finances pour 2019 au titre duquel le Département a reçu 9.8M€. Ces recettes représentent en 2019 40.9M€ soit une progression de 35%"
 RF.7.1,
 RF.7.2,
 RF.7.3,
-RF.7.4,
 RF.8,"En 2019 la péréquation horizontale composée Fonds National de Péréquation des droits de mutation (FNPDMTO) et du fonds de péréquation de la CVAE, a été élargie à un nouveau fonds le Fonds de Soutien Interdépartemental (FSID)pour lequel le Département contribue à hauteur de 8.26M€. Le département de la Gironde est seulement bénéficiaire du Fonds National de Péréquation des droits de mutation au titre duquel il a reçu 14.33M€
 
 "
@@ -60,19 +58,16 @@ RF.9.8,
 DF,"En 2019, les dépenses de fonctionnement ont été maitrisées, malgré l'impact de la reprise financière et de la péréquation horizontale 
 Ces dépenses, y compris les frais financiers ont évolué de 4.48% . Corrigées de la reprise financière, l'évolution s'établie à +3,62% contre +4,6% entre 2018 et 2017."
 DF.1,"Le Département a mobilisé plus de 952M€ pour ses politiques de solidarité
-Les dépenses de solidarité (assistants familiaux compris hors transport des handicapés) passent de
-920.7 M€ en 2018 à 952.2M€ en 2019 soit +3.4% et +31.5 M€ et marquent un ralentissement par
-rapport au 5.21% constatés en 2018. Pour la 1ère fois depuis 2015, la part des Allocations individuelles de Solidarité (AIS) hors ACTP passe de 52% à 50% alors que les dépenses liées aux hébergements voient leur part progresser de 2%, de 40% à 42%. La progression des AIS s’est fortement ralentie en 2019 à +1.22% contre 3.3% en 2018
-soit +5.8M€ alors que les dépenses liées aux hébergements augmentent de 6.5% soit +24M€."
-DF.1.1,"les dépenses liées aux hébergements qui enregistrent une progression de 6.46% atteignant 398M€ soit +24M€ par rapport à 2018. Cette hausse est en majeure partie liée au soutien en faveur de l’hébergement des enfants qui traduit la volonté du Département de répondre aux besoins d’accompagnement des enfants confiés.
+Les dépenses de solidarité (assistants familiaux compris hors transport des handicapés) évoluent donc de +3.4% et +31.5 M€ et marquent un ralentissement par rapport au 5.21% constatés en 2018. En effet, la progression des AIS s’est fortement ralentie en 2019 à +1.22% contre 3.3% en 2018 alors que les dépenses liées aux hébergements augmentent de 6.5% soit +24M€."
+DF.1.1,"les dépenses liées aux hébergements qui enregistrent une progression de 6.5% soit +24M€ par rapport à 2018. Cette hausse est en majeure partie liée au soutien en faveur de l’hébergement des enfants qui traduit la volonté du Département de répondre aux besoins d’accompagnement des enfants confiés.
 En effet, ce sont 18M€ supplémentaires qui ont été consacrés en 2019 aux frais d’hébergement liés à l’enfance (y compris le salaire des assistants familiaux et les frais annexes) "
-DF.1.1.1,L’hébergement pour les personnes handicapées qui concerne l’accueil permanent et temporaire de personnes en situation de handicap dans des établissements atteint 139.93M€ soit +2.7% par rapport à 2018.
-DF.1.1.2,L’hébergement pour les personnes âgées : les dépenses liées à ce secteur de l’aide sociale se ralentissent après la forte progression constatée en 2018 soit +4.87%contre +8.2% en 2018.
+DF.1.1.1,L’hébergement pour les personnes handicapées qui concerne l’accueil permanent et temporaire de personnes en situation de handicap dans des établissements augmente de +2.7% par rapport à 2018.
+DF.1.1.2,Les dépenses liées à ce secteur de l’aide sociale se ralentissent après la forte progression constatée en 2018 soit +4.87%contre +8.2% en 2018.
 DF.1.1.3,"Les frais d'hébergement des enfants qui comprennent principalement les dépenses relatives aux assistants familiaux, aux Maisons d'enfants à caractère social, la subvention de fonctionnement au Centre Départemental de la Famille et de l'Enfance (CEDEF) augmentent de 9.5% en 2019. Cette augmentation s’explique par la nécessité de créer des places pour répondre aux besoins d’accueil des mineurs confiés par décisions de justice et notamment des placements séquentiels liés à la complexité des situations des enfants, soit 2 261 enfants placés en 2019. L’augmentation des moyens en personnel dans les MECS pour faire face à ces situations de plus en plus complexes contribue également à cette forte progression."
 DF.1.2,"En 2019, ce sont 243.2M€ qui ont été versés au titre de l’Allocation RSA (non minorée des indus) soit -0.6% et -1.4M€ par rapport à 2018. Pour le Département de la Gironde la moyenne mensuelle des versements est passée de 20.39 M€ fin 2018 à 20.26 M€ fin 2019.
 En effet, le nombre de foyers bénéficiaires s’établit à 40 809 à fin décembre 2019 contre 41 171 fin décembre 2018 soit une diminution de 0.9%"
 DF.1.3,"La Prestation de Compensation du Handicap (PCH) s’élève à 93.2M€ et continue de progresser à un rythme soutenu de 8.3% contre 9.7% en 2018. Cette augmentation toujours dynamique de la PCH résulte en grande partie d’un nombre d’une évolution continue des bénéficiaires adultes, enfants et en établissement.
-Le nombre de bénéficiaires moyens payés au titre de la PCH adultes à domicile s’élève à 6 457 fin 2019 contre 5 964 en 2018 soit +8.24%. Par ailleurs, aux 93.2M€ de PCH s’ajoutent 7.5M€ pour l’Allocation de Compensation pour Tierce Personne (ACTP) en baisse constante depuis la création de la PCH (-3.2%) et ayant vocation à disparaitre."
+Le nombre de bénéficiaires moyens payés au titre de la PCH adultes à domicile s’élève à 6 457 fin 2019 contre 5 964 en 2018 soit +8.24%. Quant à l’Allocation de Compensation pour Tierce Personne (ACTP) est en baisse constante depuis la création de la PCH (-3.2%) "
 DF.1.4,"Les dépenses liées à l’APA (allocation hors frais induits) s’élèvent à 145.1M€ en 2019 contre 145M€ en 2018 soit une quasi stabilité.Il faut néanmoins distinguer entre la prestation APA à domicile et celle versée aux établissements. En effet, l’APA versée aux bénéficiaires à domicile qui représente un volume de 83.7M€ baisse de 2.97% alors que celle versée aux établissements augmente de 4.4% passant de 58.6M€ à 61.2M€."
 DF.1.5,
 DF.1.6,
@@ -85,7 +80,7 @@ DF.2.2,"Le nombre de personnes souffrant d'un handicap ayant au moins un droit
 DF.2.3,
 DF.2.4,
 DF.2.5,
-DF.3,Elles s’élèvent à 170M€ et sont en très légère progression (+0.58
+DF.3,Elles s’élèvent à 170M€ et sont en très légère progression (+0.58%)
 DF.3.1,La participation au SDIS a été revalorisée de 1% en 2019 pour la porter à 90M€.
 DF.3.2,
 DF.3.3,"Le transport des personnes à mobilité réduite pour un montant de 7.23M€ en légère hausse (+2.38%), "
@@ -96,22 +91,24 @@ DF.3.7,"Les participations passent de 11.9M€ à 11.7M€. Elles comprennent la
 DF.3.7.1,
 DF.3.7.2,
 DF.3.7.3,
-DF.4," Les dépenses de personnel hors assistants familiaux (28.5M€) intégrés dans les dépenses de solidarités ont augmenté de 2.2% , principalement liée à des facteurs sur lesquels la collectivité départementale a peu de maitrise (GVT, modifications statutaires..), les besoins de poste (à l'exception de ceux dans les collèges )sont en partie couverts par des redéploiements"
+DF.4," Les dépenses de personnel hors assistants familiaux (28.5M€) intégrés dans les dépenses de solidarités ont augmenté de 2.2% , principalement liée à des facteurs sur lesquels la collectivité départementale a peu de maitrise (GVT, modifications statutaires..), les besoins de poste (à l'exception de ceux dans les collèges ) sont en partie couverts par des redéploiements"
 DF.5,Le bilan 2019 des dispositifs de péréquation se traduit  par un accroissement de nos contributions de plus de 30M€ entre 2015 et 2019 qui passent de 27.83M€ à 58.27M€.
 DF.5.1,
-DF.6," Les charges courantes et participations annexes correspondent aux frais généraux de fonctionnement de la structure départementale, aux dépenses liées à l’entretien de la voirie et à diverses charges et participations annexes (hors contribution aux fonds de péréquation, hors dotations aux collèges, FSL et prévention spécialisée évoqués par ailleurs). En 2019, elles s’établissent à 76.8M€ comprenant la reprise financière de 12.85M€."
+DF.6," Les charges courantes et participations annexes correspondent aux frais généraux de fonctionnement de la structure départementale, aux dépenses liées à l’entretien de la voirie et à diverses charges et participations annexes (hors contribution aux fonds de péréquation, hors dotations aux collèges, FSL et prévention spécialisée évoqués par ailleurs). En 2019, elles s’établissent à 76.9M€ comprenant la reprise financière de 12.85M€."
 DF.6.1,"En 2019, les frais généraux sont en augmentation de 0.5M€ soit + 1.6%,"
 DF.6.1.1,
 DF.6.1.2,
 DF.6.1.3,
 DF.6.1.4,
-DF.6.2,Les dépenses de voirie sont en légère diminution de -0.25%. En effet les fournitures de voirie sont en fortes augmentation (+8.4%) mais les dépenses liées au carburant et à l’entretien se réduisent de respectivement -2.5% et - 5.9%
-DF.6.3,"Elles regroupent les dépenses non assimilables à des frais généraux telles que les subventions d’équilibre aux budgets annexes(Laboratoire départemental; Domaines départementaux) ou des dépenses de gestion exceptionnelles et les frais liés à la questure. En 2019, ce poste accuse une augmentation de 4M€ due principalement aux 2M€ réalisées sur la dotation aux provisions et 1M€ sur une opération de régulation au titre du fonctionnement de la restauration collective."
+DF.6.2,Les fournitures de voirie sont en fortes augmentation (+8.4%) mais les dépenses liées au carburant et à l’entretien se réduisent de respectivement -2.5% et - 5.9%
+DF.6.3,"En 2019, ce poste accuse une augmentation de 4M€ due principalement aux 2M€ réalisées sur la dotation aux provisions et 1M€ sur une opération de régulation au titre du fonctionnement de la restauration collective."
 DF.6.3.1,
 DF.6.3.2,
 DF.6.3.3,
+DF.6.4,
+DF.6.5,
 DF.7,"Les intérêts de la dette sont toujours en baisse à 13.86M€ et contribuent à maintenir un bon niveau d’épargne. Bénéficiant de la performance des taux monétaires mais aussi de la contractualisation de taux fixes au taux moyen très compétitifs de 0.89%, le coût moyen total s’établit à 2.07% contre 2.21% en 2018. Ce coût moyen illustre la performance et la sécurisation confortable de l’encours."
-RI,Les recettes d’investissement propres augmentent légèrement en 2019 avec 33.6 M€ contre 33.1M€ auxquelles s’ajoutent les cessions d’immobilisation qui en 2019 ne s’élèvent qu’à 2.6M€ soit un total qui reste stable à 36.2M€ contre 36.3 M€ en 2018. Le FCTVA qui les compose à plus de 50% est en baisse de 0.9M€ conséquence d’un niveau de dépenses d’investissement moindre en 2018
+RI,Les recettes d’investissement propres (hors emprunt ) augmentent légèrement en 2019 avec 33.6 M€ contre 33.1M€ auxquelles s’ajoutent les cessions d’immobilisation qui en 2019 ne s’élèvent qu’à 2.6M€ soit un total qui reste stable à 36.2M€ contre 36.3 M€ en 2018. Le FCTVA qui les compose à plus de 50% est en baisse de 0.9M€ conséquence d’un niveau de dépenses d’investissement moindre en 2018
 RI.1,
 RI.2,
 RI.3,
@@ -123,16 +120,16 @@ RI.EM,
 RI.EM.1,"En 2019, ce sont 70 M€ qui ont été mobilisés à un taux moyen de 0.89%, ce qui est particulièrement compétitif. L’encours de dette du département est performant et assure une bonne visibilité des charges financières. En effet, la répartition avec une part de taux fixe à 74.5% a permis de sécuriser l’encours sur les frais financiers, le taux fixe moyen ressortant à 2.31% contre 2.59 % fin 2018. Les émissions obligataires représentent plus de 25% des sources de financement et ont généré, depuis 2014, 17.8M€ d’économie par rapport à des emprunts bancaires équivalents amortissables."
 RI.EM.2,
 ,
-DI,"Comme prévu lors du vote du budget 2019, le Département accélère sa politique de construction et de rénovation du patrimoine départemental, réaffirmant les priorités de la politique départementale : les 12 nouveaux collèges avec  le plan Collèges ambition 2024 et la réhabilitation de 10 collèges, le réseau routier, le patrimoine immobilier (CDR et MDSI) avec un plan d’acquisitions pour l’Aide sociale à l’Enfance notamment; et ceci tout en renforçant l’accompagnement et le soutien au développement des territoires à travers l’appui aux communes, associations et partenaires. La Gironde s’inscrit depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement du territoire : ce sont 200.4M€ investis en 2019 soit 5.8% de plus qu’en 2018 et 940M€ au total depuis 2015."
+DI,"Comme prévu lors du vote du budget 2019, le Département accélère sa politique de construction et de rénovation du patrimoine départemental, réaffirmant les priorités de la politique départementale : les 12 nouveaux collèges avec  le plan Collèges ambition 2024 et la réhabilitation de 10 collèges, le réseau routier, le patrimoine immobilier (CDR et MDSI) avec un plan d’acquisitions pour l’Aide sociale à l’Enfance notamment; et ceci tout en renforçant l’accompagnement et le soutien au développement des territoires à travers l’appui aux communes, associations et partenaires. La Gironde s’inscrit depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement du territoire : ce sont 200.4M€ hors remboursement de la dette qui ont été  investis en 2019 soit 5.8% de plus qu’en 2018 et 940M€ au total depuis 2015."
 ,
 DI.1,"Les dépenses liées au patrimoine départemental soutiennent l’évolution des dépenses d’investissement
-Elles sont passées de 130M€ à 142M€ soit 12M€ de plus qu’en 2018 et + 9.1% :
+Elles sont passées de 130M€ à près de 142M€ soit 12M€ de plus qu’en 2018 et + 9.1% :
 "
-DI.1.1,"Avec une progression de +25M€, les dépenses liées aux collèges ont atteint 64M€ soit 94% des crédits votés, avec la concrétisation financière du lancement d’un certain nombre d’opérations importantes du plan Collèges Ambition 2024, qui je vous le rappelle comprend la construction de 12 nouveaux collèges et 10 réhabilitations. "
+DI.1.1,"Avec une progression de +25M€, les dépenses liées aux collèges ont atteint 64M€ soit 94% des crédits votés, avec la concrétisation financière du lancement d’un certain nombre d’opérations importantes du plan Collèges Ambition 2024, qui comprend la construction de 12 nouveaux collèges et 10 réhabilitations. "
 DI.1.2,"Les enjeux concernant le réseau routier départemental composé de 6 360 km de RD restent toujours une préoccupation majeure comme en témoignent les 41.3 M€ investis en 2019 soit une moyenne de 41.4M€ par an sur 5 ans. 
 "
 DI.1.3,"En plus de la maintenance et de la rénovation du patrimoine bâti, l’année 2019 a vu l’acquisition de plusieurs ensembles immobiliers pour un total de 12M€ dont celles effectuées dans le cadre du plan d’acquisition pour l’Aide sociale à l’enfance (ASE) pour 9.7M€, du programme biblio gironde pour 0.9M€, et au titre du Domaine départemental structurant en Médoc pour 1.2M€."
-DI.1.4,Les dépenses liées aux travaux sur le patrimoine naturel financé principalement par la taxe d’aménagement se sont élevées à 3.3 M€ en 2019 en baisse de 15% par rapport à 2018
+DI.1.4,Les dépenses liées aux travaux sur le patrimoine naturel financé principalement par la taxe d’aménagement se sont élevées à 3.7 M€ en 2019 en baisse de 15% par rapport à 2018
 DI.1.5,Les opérations du programme Immobilier Social concernent pour 0.8M€ les travaux sur les pôles sociaux (Pôles sociaux du Grand Parc et de Langon) et les MDSI
 ,
 DI.2,"Avec 58.7M€ versés le Département poursuit son soutien des territoires en les accompagnant en vue de favoriser la solidarité territoriale, avec des opérations d’équipement portées par des structures publiques et privées "

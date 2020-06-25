@@ -80,7 +80,7 @@ Ainsi, sont considérés comme “urbains” les Départements remplissant les d
  
 [en savoir plus](http://www.dotations-dgcl.interieur.gouv.fr/consultation/documentAffichage.php?id=11)"
 RF.5.2,Dotation Globale de Décentralisation (DGD),"En vertu du principe de neutralité financière des transferts de compétences, la compensation des transferts de compétences organisée par l'Acte I de la décentralisation en faveur Des départements s'est effectuée par le transfert d'impôts principalement et, pour le solde, sous forme de Dotation Générale de Décentralisation (DGD)."
-RF.5.3,Compensations fiscales,Les Dotations Globales de Fonctionnement (DGF) peuvent servir à compenser des **transferts de compétences** de l’État aux collectivités. Elles peuvent aussi servir à compenser les **exonérations et dégrèvements** consentis par l’État sur la fiscalité locale.
+RF.5.3,Compensations fiscales, Elles servent à compenser les **exonérations et dégrèvements** consentis par l’État sur la fiscalité locale.
 RF.5.4,Dotation de compensation de la réforme de la taxe professionnelle (DCRTP),"Le principe de compensation intégrale, instauré par la loi de finances pour 2010, se traduit par la mise en place à compter de 2011 de deux mécanismes : 
 * une dotation de compensation de la réforme de la taxe professionnelle (DCRTP) permettant le maintien d’un plancher de ressources pour chaque catégorie de collectivités 
 * un fonds national de garantie individuelle des ressources (FNGIR) afin d’assurer une compensation intégrale des pertes répertoriées par chaque collectivité "
@@ -90,7 +90,7 @@ Ainsi, trois fonds ont été institués :
 * un fonds communal et intercommunal, 
 * un fonds départemental 
 * un fonds régional."
-,,
+RF.5.6,Autres (FCTVA),recettes du Fonds de compensation de la TVA sur les dépenses d'entretien
 RF.6,Recettes sociales,"On compte plusieurs types de recettes sociales: 
 
 * contributions de la Caisse nationale de solidarité pour l'autonomie (CNSA)
@@ -101,21 +101,22 @@ RF.6.2,Contributions de la Caisse nationale de solidarité pour l'autonomie (CNS
 Depuis la loi du 30 juin 2004, c'est la Caisse nationale de solidarité pour l’autonomie (CNSA) qui verse ces recettes au Département."
 RF.6.3,Recouvrements sur bénéficiaires PA/PH,"Il s'agit des recettes relatives à la récupération des actifs successoraux, sur les obligés alimentaires (personnes handicapées et personnes âgées)"
 RF.6.4,Conférence des financeurs,"La loi du 28 décembre 2015 d'adaptation de la société au vieillissement s'est traduite par la revalorisation de l'aide aux personnes âgées (APA) à domicile avec en contrepartie une dotation supplémentaire appelée ""conférence des financeurs"""
-RF.6.5,Autres,Il s'agit de participations au titre de l'aide sociale ou de remboursements liés aux aides sociales accordées.
-RF.7,Dispositifs de compensation sociale,Il s'agit d'un ensemble de ressources visant à compenser les charges liées à l'aide sociale et notamment aux allocations individuelles de solidarité (AIS).
-RF.7.1,Fonds de Mobilisation Départementale pour l'Insertion (FMDI),"Ce fonds vise à soutenir les Départements qui se sont investis pour accompagner les bénéficiaires du RSA à **reprendre une activité**. 
-[en savoir plus](http://circulaire.legifrance.gouv.fr/pdf/2012/12/cir_36160.pdf)"
-RF.7.2,Dotation de compensation peréquée DCP,"Cette dotation assure aux Départements une nouvelle ressource pour financer les **allocations individuelles de solidarité (AIS)**. Le DCP consiste à affecter aux Départements les produits nets des frais de gestion de la taxe foncière sur les propriétés bâties jusque-là perçus par l’Etat.
-[en savoir plus](http://www.lagazettedescommunes.com/220517/le-dispositif-de-compensation-perequee-une-nouvelle-ressource-departementale-pour-aider-au-financement-des-allocations-de-solidarite/)"
-RF.7.3,Fonds d'appui d'aide à domicile (CNSA AAD),"Ce fonds, doté de 50 millions d’euros au plan national, permet de soutenir : 
+RF.6.5,Fonds de financement des SAAD,"Ce fonds aide au financement des services d'aide à domicile.Ce fonds, doté de 50 millions d’euros au plan national, permet de soutenir : 
 * la définition d’une stratégie territoriale d’aide à domicile (volet 1) ;
 * des bonnes pratiques partagées entre le Département et les services d’aide à domicile de son territoire (volet 2) ; 
 * la restructuration de services d’aide à domicile en difficulté (volet 3).
 
 L’aide apportée et les engagements pris sont également formalisés dans un contrat pluriannuel d'objectifs et de moyens (CPOM) entre le Département et le services d’aide à domicile bénéficiaires.
 Pour bénéficier du fonds, les Départements doivent signer une convention avec la Caisse nationale de solidarité pour l'autonomie (CNSA) et s’engager à conclure des CPOM avec les services bénéficiaires. 
-50 Départements ont signé leur convention avec la CNSA au 31 juillet 2017."
-RF.7.4,Fonds d'appui aux politiques d'insertion,"Ce fonds s'adresse aux Départements dont le président du Conseil départemental a conclu avec le préfet une convention d'appui aux politiques d'insertion, définissant des priorités conjointes en matière de lutte contre la pauvreté, d'insertion sociale et professionnelle et de développement social."
+50 Départements ont signé leur convention avec la CNSA au 31 juillet 2017.La compatibilité du lecteur d'écran est activée.
+ "
+RF.6.6,"Divers fonds (FAPI,Fonds stratégique pauvreté...)","Le Fonds d’Appui aux Politiques d’Insertion (FAPI), vise à soutenir et valoriser les efforts des départements déployés en faveur de l’insertion. Ce fonds s'adresse aux Départements dont le président du Conseil départemental a conclu avec le préfet une convention d'appui aux politiques d'insertion, définissant des priorités conjointes en matière de lutte contre la pauvreté, d'insertion sociale et professionnelle et de développement social.Le Département a bénéficié d’une nouvelle recette en 2019, le Fonds Stratégique Pauvreté, destinée à lutter contre la pauvreté et favoriser l’accès à l’emploi."
+RF.7,Dispositifs de compensation sociale,Il s'agit d'un ensemble de ressources visant à compenser les charges liées à l'aide sociale et notamment aux allocations individuelles de solidarité (AIS).
+RF.7.1,Fonds de Mobilisation Départementale pour l'Insertion (FMDI),"Ce fonds vise à soutenir les Départements qui se sont investis pour accompagner les bénéficiaires du RSA à **reprendre une activité**. 
+[en savoir plus](http://circulaire.legifrance.gouv.fr/pdf/2012/12/cir_36160.pdf)"
+RF.7.2,Dotation de compensation peréquée DCP,"Cette dotation assure aux Départements une nouvelle ressource pour financer les **allocations individuelles de solidarité (AIS)**. Le DCP consiste à affecter aux Départements les produits nets des frais de gestion de la taxe foncière sur les propriétés bâties jusque-là perçus par l’Etat.
+[en savoir plus](http://www.lagazettedescommunes.com/220517/le-dispositif-de-compensation-perequee-une-nouvelle-ressource-departementale-pour-aider-au-financement-des-allocations-de-solidarite/)"
+RF.7.3,Fonds de stabilisation,
 RF.8,Péréquation horizontale,La finalité de la péréquation est d'atténuer les disparités entre les collectivités par une redistribution des ressources en fonction d'indicateurs physiques et financiers. Le mécanisme de péréquation horizontale consiste à prélever une fraction de ressources fiscales de certains départements pour la reverser à d'autres moins favorisés.
 RF.8.1,Fonds de Péréquation DMTO et Fonds de solidarité,"Le fonds national de péréquation des droits de mutation à titre onéreux (DMTO) perçus par les Départements a été mis en place en 2011. Ce fonds est alimenté par 2 prélèvements :
 * un premier prélèvement sur «stock» lié au niveau des DMTO du Département relativement à la moyenne de l’ensemble des départements ;
@@ -127,7 +128,7 @@ RF.8.2,Fonds exceptionnel pour les départements en difficulté,Il arrive que le
 RF.9,Recettes diverses,Il s'agit d'un ensemble de recettes allant des loyers perçus à des participations de l'Europe en passant par les encaissements au titre de la restauration des collègiens ou des recouvrements exceptionnels
 RF.9.1,Produits des domaines (ventes),Il s'agit des loyers perçus sur des biens appartenant au Département ou des rémunérations liées à une convention d’occupation du domaine public départemental.
 RF.9.2,Produits exceptionnels,"Il s'agit de recettes qui ont des origines diverses et qui n'ont pas vocation à se reproduire (ex : annulation mandat, etc.)"
-RF.9.3,Dotations et participations (dont fonds européens et FCTVA),"Il s'agit de participations d'autres collectivités (métropole, régions, communes...) ou de l'Europe."
+RF.9.3,Dotations et participations (dont fonds européens ),"Il s'agit de participations d'autres collectivités (métropole, régions, communes...) ou de l'Europe."
 RF.9.4,Restauration collèges,Participation des familles au titre de la restauration scolaire des collègiens.
 RF.9.5,Produits des services,"Il s'agit des revenus issus des services publics locaux, de redevances d'occupation du domaine public départemental ou de recouvrement suite à la mise à disposition de personnel (Maison Départementale des Personnes Handicapées ou autres organismes)."
 RF.9.6,Remboursement charges de personnels,Il s'agit de remboursement au titre des rémunérations ou des charges sécurité sociale ou prévoyance.
@@ -203,7 +204,7 @@ Chaque Girondin peut bénéficier de l’écoute, de l’accompagnement de profe
 [en savoir plus](https://www.gironde.fr/enfance-et-famille)
 Le centre de lutte anti-tuberculose, le centre de vaccinations et l’accompagnement santé des adultes en précarité complètent cette offre.
 [en savoir plus](https://www.gironde.fr/sante-sexualite)"
-DF.3,Actions d’intervention,Ce chapitre regroupe les dépenses liées à l'intervention du Département sur le territoire avec notamment la contribution financière au fonctionnement du **service d'incendie et de secours** (SDIS) gérant les sapeurs-pompiers.
+DF.3,Actions d’intervention,Ce chapitre regroupe les dépenses liées à l'intervention du Département sur le territoire avec notamment la contribution financière au fonctionnement du **service d'incendie et de secours** (SDIS) gérant les sapeurs-pompiers. La baisse en 2018 marque le transfert de la compétence transports à la Région
 DF.3.1,Service Départemental d'Incendie et de Secours (SDIS),"Le SDIS est l'établissement public à caractère administratif gérant les **sapeurs-pompiers** au niveau d'un département. Doté d'une assemblée délibérante, le SDIS est soumis à une double autorité : opérationnelle (gérée par le préfet et le maire en collaboration dans leur pouvoir de police respectif) et administrative (gérée par un conseil d'administration présidé par le Président du Conseil départemental)."
 DF.3.2,Transports,"Jusqu'à la loi NOTRe (art. L.3111-1 code des transports), relevaient de la compétence des Départements :
 * les **transports routiers non urbains** des personnes, 
