@@ -79,10 +79,22 @@ export function TotalBudget({
                 {},
                 `L’année 2019 s’est inscrite dans un environnement financier contraint à la fois par la limitation de l’évolution des dépenses de fonctionnement à un maximum de 1.2% conformément à l’arrêté du Préfet en date du 17 septembre 2018 pris dans le cadre de l’article 29 de la loi de programmation des finances publiques 2018 2022 appelé aussi « Pacte de Cahors », mais également par la rigidité des dépenses sociales sous compensées par l’Etat et le renforcement de la péréquation.
                 C’est donc dans ce contexte de mise sous contrainte de l’autonomie de gestion des collectivités locales et du renforcement des solidarités, que le Département de la Gironde a exécuté son budget 2019 qui traduit la permanence des engagements pris en début de mandat, à savoir :  
-				Une évolution des dépenses d’investissement afin d’atteindre le milliard d’euros en fin de mandature  
-				Une épargne supérieure à 100M€  
-				Un endettement limité  
-				Des dépenses de fonctionnement maitrisées  `
+				TUne évolution des dépenses d’investissement afin d’atteindre le milliard d’euros en fin de mandature  
+				TUne épargne supérieure à 100M€  
+				TUn endettement limité  
+				TDes dépenses de fonctionnement maitrisées  `
+            )
+        ),
+		React.createElement(
+            "section",
+            {},
+            React.createElement(
+                Markdown,
+                {},
+                `TUne évolution des dépenses d’investissement afin d’atteindre le milliard d’euros en fin de mandature  
+				TUne épargne supérieure à 100M€  
+				TUn endettement limité  
+				TDes dépenses de fonctionnement maitrisées`
             )
         ),
 
