@@ -1,4 +1,4 @@
-{
+﻿{
   "id": "racine",
   "name": "racine",
   "useInAnalysis": true,
@@ -291,7 +291,7 @@
                   "formula": "DF∩C65542+(C656+C6568)∩F91"
                 },
                 {
-                  "id": "",
+                  "id": "DF.6.5",
                   "name": "Reprise financière",
                   "useInAnalysis": true,
                   "formula": "DF∩(C73918)∩F01"
