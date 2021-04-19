@@ -133,7 +133,7 @@
                   "id": "DF.2.5",
                   "name": "Autres",
                   "useInAnalysis": true,
-                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336-C6574∩F58-C6161-C6132-C614-(C65734+C65738)∩F58\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-(C6068∩F58∩Ann2020)\n\n\n\n\n\n\n\n"
+                  "formula": "DF∩(F58+F50+F40+F41+F42+F48)-(C6556∩F58)-C64-C6218-C6336-C6574∩F58-C6161-C6132-C614-(C65734+C65738)∩F58\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n-((C6068+C6188)∩F58∩Ann2020)\n\n\n\n\n\n\n\n"
                 }
               ]
             },
