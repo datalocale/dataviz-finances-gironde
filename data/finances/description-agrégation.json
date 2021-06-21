@@ -249,7 +249,7 @@
                       "id": "DF.6.1.1",
                       "name": "Achats et fournitures",
                       "useInAnalysis": true,
-                      "formula": "DF∩C60-(C60∩F4)-(C60∩F5)-(C60∩F8)+(C60612∩F621∩Ann2020)+(C60611∩F621∩Ann2020)-((C60633+C60632+C60622+C60636+C6068+C60631+C60668)∩F621∩Ann2020)-(C60613∩F621∩Ann2020)+(C6068∩F58∩Ann2020)"
+                      "formula": "DF∩C60-(C60∩F4)-(C60∩F5)-(C60∩F8)+C60612∩F621+C60611∩F621-((C60633+C60632+C60622+C60636+C6068+C60631+C60668)∩F621)-C60613∩F621+(C6068∩F58∩Ann2020)"
                     }
                   ]
                 },
@@ -278,7 +278,7 @@
                     },
                     {
                       "id": "DF.6.3.3",
-                      "name": "Autres (dont budgets annexes hostens, LABO)",
+                      "name": "Autres (dont budgets annexes hostens, LABO, DTM)",
                       "useInAnalysis": true,
                       "formula": "DF∩((C651123+C6556+C654+C6541+C6542+C6581+C65821+C65888+C65661+C7398)-(F4+F5+F8))-(C6556∩F72)-C65568∩(F91+F0202)+C6743∩F921+C651123+(C6743∩F823∩Ann2020)-(C6581∩(F0202+F312)∩Ann2020)"
                     }
