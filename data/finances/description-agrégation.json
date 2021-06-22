@@ -231,7 +231,7 @@
                       "id": "DF.6.1.2",
                       "name": "Prestations de services( entretien et réparation, assurances, locations, frais divers formation colloques…)",
                       "useInAnalysis": true,
-                      "formula": "DF∩(C61-(C61∩F4)-(C61∩F5)-(C61∩F8)-(C61∩F621))+(C6132+C614)∩F40+C6161∩F50+C6161∩F51+C6168∩F50+(C6188∩(F50)∩Ann2020)+(C615221∩F621∩Ann2020)"
+                      "formula": "DF∩(C61-(C61∩F4)-(C61∩F5)-(C61∩F8)-(C61∩F621))+(C6132+C614)∩F40+C6161∩F50+C6161∩F51+C6168∩F50+(C6188∩(F50)∩Ann2020)+(C615221∩F621∩Ann2020)+C65111"
                     },
                     {
                       "id": "DF.6.1.3",
