@@ -2,8 +2,8 @@
 
 language: node_js
 node_js: 
-  - node # latest stable
-
+  #- node # latest stable
+  - 15
 # What is built
 
 branches:
