@@ -44,7 +44,7 @@ export function FocusSol({
             React.createElement(PageTitle, { text: `Focus Investissements` }),
             React.createElement(Markdown, {},
                 `Le Département investit en moyenne 200 millions d’euros chaque année pour réaménager les routes, construire de
-                nouveaux collèges, entretenir des espaces naturels sensibles, etc.`
+                nouveaux collèges, entretenir des espaces naturels sensibles, etc. Ce sont 1 164M€ qui ont été investis depuis 2015 par le Département pour soutenir l’économie locale et le développement du territoire`
             )
         ),
         React.createElement('section', { className: 'top-infos' },
@@ -69,7 +69,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2015 à 2019' }),
+            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2015 à 2020' }),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -103,7 +103,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2018-2019, on comptait 61288 collégiens dans les collèges publics girondins et 12 597 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 12 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations prévues au PPI collèges se sont également poursuivies avec 9M€ de réalisés en 2019 sur des opérations majeures comme Bazas avec 5.7M€, et Salles pour 1.6M€.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2019-2020, on comptait 61288 collégiens dans les collèges publics girondins et 12 597 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 13 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations de construction prévues se sont donc accélérées avec 67.1M€ de dépensés en 2020. Les principales opérations concernées sont : le collège de Marsas pour 10M€, le collège Mayaudon pour 10M€ le collège du Pian Médoc pour 3.5M€, le collège de St-Selve pour 3.4M€, le collège de Bordeaux Ginko pour 1.5M€ et le collège Bordeaux Euratlantique pour 3.8M€. Sur la partie réhabilitation où 48.8M€ ont été dépensés entre les études et les travaux, il s’agit principalement des collèges d’Arveyres pour 4.8M€, Bordeaux Edouard Vaillant pour 3.9M€, Cenon Jean Jaurès pour 11M€, Langon Toulouse-Lautrec pour 11M€ et du collège Mérignac Jules Ferry pour 3.7M€.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -122,11 +122,13 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Le réseau routier girondin est constitué de 6 360 kilomètres de routes départementales, dont 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) 
-				       En 2019, les travaux ont concerné notamment :
-                      •	La préservation du patrimoine départemental (renforcements programmés, et les travaux de confortement de certaines des 1500 carrières situées sur le territoire girondin). 
-                      •	La modernisation et la sécurisation du réseau départemental avec notamment des d’opérations ponctuelles visant au renforcement de la sécurité routière, et les recalibrages de routes de faible largeur (RD 3 Hourtin Lesparre, RD 18 Génissac Moulon,RD 630 268 Cadillac Sauveterre) 
-                      •	Le développement du réseau départemental avec le début des travaux sur la déviation de Fargues St Hilaire, le plan routier du médoc avec la Déviation de St Aubin le Taillan mais aussi l’aménagement du carrefour de la RD 1250 à la Teste `,
+                text: `Les enjeux concernant le réseau routier départemental composé de 6 360 km de routes départementales, 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) et avec 800.000 usagers quotidiens restent toujours une préoccupation majeure comme en témoignent les 38.6 M€ investis en 2020, soit une moyenne de 41M€ par an depuis 2015. En 2020, les réalisations ont été importantes et ce malgré une interruption liée au confinement en mars /avril qui a été rattrapée durant l’été et l’automne notamment sur le chantier du Taillan et de Fargues St-Hilaire. Elles concernent :
+
+                       · La préservation du patrimoine départemental
+
+                       · La modernisation et la sécurisation du réseau départemental, avec notamment 2M€ pour les recalibrages de routes de faible largeur (RD 209 Parempuyre, RD 18 Génissac Moulon, RD671 St Brice Sauveterre)
+
+                       · Le développement du réseau départemental au travers d’un PPI routes qui a surtout vu en 2020 la poursuite des travaux sur la déviation de Fargues St Hilaire pour 5.8M€ et 9.3M€ concernant essentiellement le plan routier du Médoc avec la déviation de St-Aubin / le Taillan complétée par des achats de parcelles au Pian. Par ailleurs, en terme de mobilité, les pistes cyclables ont mobilisé 1.3M€, les travaux sur les aires de covoiturage ayant été en grande partie décalés`,
                 highlights: [
                     /*{
                     strong: "",
@@ -148,7 +150,7 @@ export function FocusSol({
                 text: `Il s’agit ici de la maintenance et de la rénovation du patrimoine bâti hors immobilier social et des investissements liés à la politique informatique et numérique ou à la sécurisation (digues par exemple)
                 Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc.. ;
                 
-                2019 a également vu l’acquisition de plusieurs ensembles immobiliers effectuées dans le cadre du plan d’acquisition pour l’Aide sociale à l’enfance (ASE) pour 9.7M€, du programme biblio gironde, et au titre du Domaine départemental structurant en Médoc `,
+                Après un important programme d’acquisition pour l’Aide sociale à l’enfance (ASE) en 2019 de 9.7M€, 2020 Les travaux de maintenance et de rénovation du patrimoine bâti (11.5M€) ont essentiellement porté sur les centres d’exploitation à hauteur de 8M€ dont celui de St Martin Lacaussade pour 3M€, Cestas pour 2.8M€ et St Avit St Nazaire pour 1.9M€.  `,
                 highlights: [
                     /*{
                     strong: "",
@@ -187,7 +189,7 @@ export function FocusSol({
                 amount: yearDIDetails ? yearDIDetails['DI.1.5'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.5'] / focusDetailsDenominator : 1,
                 text: `Il s’agit des travaux de construction ou de rénovation des bâtiments sociaux faisant suite au programme Solidarité 2013.
-                En 2019, les travaux ont concerné notamment les travaux sur les pôles sociaux (Pôles sociaux du Grand Parc et de Langon) et les MDSI`,
+                En 2020, Les opérations du programme Immobilier Social ont concerné pour 0.8M€ les travaux sur les Maisons du Département des Solidarités (notamment les Pôles territoriaux de solidarité de Bordeaux au Grand Parc et du Sud-Gironde à Langon).`,
                 highlights: [
                     /*{
                       strong: "",
@@ -206,14 +208,14 @@ export function FocusSol({
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.2'] / focusDetailsDenominator : 1,
-                text: `Le Département est le chef de file des solidarités humaines et territoriales. Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale. Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Face à cette situation, le Département les accompagne (offre d’ingénierie avec Gironde Ressources et subventions) pour un développement harmonieux et équilibré du territoire.`,
+                text: `Le Département est le chef de file des solidarités humaines et territoriales.  Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale (offre d’ingénierie avec Gironde Ressources et subventions). Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. En outre, la réduction des marges de manœuvre financières dues à la crise sanitaire combinée au décalage du calendrier électoral municipal a eu un impact sur le niveau d’investissement porté par les communes en 2020.`,
                 highlights: [
                     {
-                        strong: "31,7 M€",
+                        strong: "29,7 M€",
                         span: "de subventions aux communes"
                     },
                     {
-                        strong: "8 M€",
+                        strong: "7 M€",
                         span: "de subventions au logement social"
                     },
                     {
