@@ -77,14 +77,15 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `L’année 2019 s’est inscrite dans un environnement financier contraint à la fois par la limitation de l’évolution des dépenses de fonctionnement à un maximum de 1.2% conformément à l’arrêté du Préfet en date du 17 septembre 2018 pris dans le cadre de l’article 29 de la loi de programmation des finances publiques 2018 2022 appelé aussi « Pacte de Cahors », mais également par la rigidité des dépenses sociales sous compensées par l’Etat et le renforcement de la péréquation.  
-				  
-				C’est donc dans ce contexte de mise sous contrainte de l’autonomie de gestion des collectivités locales et du renforcement des solidarités, que le Département de la Gironde a exécuté son budget 2019 qui traduit la permanence des engagements pris en début de mandat, à savoir :  
-				  
-				Une évolution des dépenses d’investissement afin d’atteindre le milliard d’euros en fin de mandature  
-				Une épargne supérieure à 100M€  
-				Un endettement limité  
-				Des dépenses de fonctionnement maitrisées  `
+                `L’année 2020 restera particulière à plusieurs égards :
+
+· Elle restera marquée par une crise sanitaire et économique qui certes a affecté le budget du Département mais conforte l’utilité de ses politiques publiques à l’égard des plus vulnérables et en faveur de l’équilibre des territoires Cette crise a placé une nouvelle fois les départements au cœur de l’action du fait de leurs compétences en matière sociales mais aussi leur rôle d’acteurs des solidarités humaines et territoriales
+
+· Elle est la dernière année de perception de la taxe sur le foncier des propriétés bâties (TFPB), dernier levier fiscal que conservaient les départements
+
+· Elle aura vu la suspension du Pacte de Cahors pour 2020 au vu des dépenses exceptionnelles considérables engagées par les départements pour combattre la crise sanitaire puis sociale. Le Département de la Gironde aura quant à lui obtenu gain de cause grâce au jugement rendu en toute fin d’année par le tribunal administratif confirmant qu’il était éligible à un taux prenant en compte sa dynamique démographique.
+
+· La crise sanitaire aura clairement démontré et mis en exergue les effets préoccupants de la dé-corrélation entre la structure des dépenses et des recettes départementales qui, en temps de crise, aggravent l’effet de ciseau et menacent la stabilité du soutien aux territoires et aux plus fragiles. · Elle porte le dernier budget voté et exécuté de la mandature `
             )
         ),
 
