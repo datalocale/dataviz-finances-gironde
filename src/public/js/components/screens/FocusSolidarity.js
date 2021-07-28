@@ -145,11 +145,11 @@ export function FocusSol({
                 text: `Le Revenu de Solidarité Active (RSA) représente près de 96% des aides financières versées aux personnes en insertion. Si vos ressources financières sont faibles ou inexistantes, vous pouvez demander le RSA. Plus d’infos sur: https://www.gironde.fr/insertion-rsa/vous-etes-un-particulier. `,
                 highlights: [
                     {
-                        strong: "243,2 M€",
+                        strong: "254,8 M€",
                         span: `dédiés au RSA en ${currentYear}`
                     },
                     {
-                        strong: "-0,6%",
+                        strong: "+4,8%",
                         span: `d'allocations RSA par rapport à ${currentYear-1} en raison d’une baisse des bénéficiaires`
                     }
                 ],
@@ -162,22 +162,22 @@ export function FocusSol({
                 amount: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2') : undefined,
                 proportion: currentYearSolidarity ? currentYearSolidarity.get('DF.2.2')/currentYearSolidarity.solidarityExpenditures : 1,
                 text: `Les aides du Département versées aux personnes en situation de handicap concernent en ${currentYear}:
-- la Prestation de Compensation du Handicap (PCH) versée à 7 800 personnes en ${currentYear}.
+- la Prestation de Compensation du Handicap (PCH) versée à 8294 personnes en ${currentYear}.
 - la prestation d’hébergement a concerné plus de 3000 bénéficiaires en ${currentYear}.
 - l’Allocation Compensation pour Tierce Personne (ACTP) a financé l'emploi d'aides à domicile pour 1 077 personnes en ${currentYear}.
 
 L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’accessibilité au logement, à l’emploi, à la scolarisation et à la vie sociale.`,
                 highlights: [
                     {
-                        strong: "94.2 M €",
+                        strong: "100.8 M €",
                         span: "pour compenser la perte d'autonomie"
                     },
                     {
-                        strong: "140 M€",
+                        strong: "141 M€",
                         span: "pour des places d’hébergement"
                     },
                     {
-                        strong: "7.5 M€",
+                        strong: "7 M€",
                         span: "pour l'emploi de 757 aides à domicile"
                     }
                 ],
@@ -192,19 +192,19 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
                 text: `L’Allocation Personnalisée d’Autonomie (APA) est la principale aide financière destinée à favoriser l’autonomie des personnes âgées.  Elle est versée directement à la personne ou à l’établissement en charge de cette personne, selon des critères d’attribution précis. https://www.gironde.fr/handicap-grand-age/aides-et-prestations-apa-pch-et-cmi L’application de la loi d’adaptation de la société au vieillissement (ASV) a entraîné une revalorisation de l’APA.`,
                 highlights: [
                     {
-                        strong: "145.1 M€",
+                        strong: "147 M€",
                         span: `versés en ${currentYear} pour l’APA`
                     },
                     {
-                        strong: "+ 1%",
+                        strong: "+ 1,3%",
                         span: `en ${currentYear}`
                     },
                     {
-                        strong: "22 315",
+                        strong: "22 466",
                         span: `bénéficiaires de l'APA à domicile fin ${currentYear}`
                     },
                     {
-                        strong: "14 647",
+                        strong: "14 698",
                         span: `bénéficiaires de l'APA en établissement fin ${currentYear}`
                     }
                 ],
@@ -220,15 +220,15 @@ L’objectif de ces aides est de soutenir la vie à domicile, faciliter l’acce
 https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                 highlights: [
                     {
-                        strong: "212.1 M€",
+                        strong: "228 M€",
                         span: "pour les Maisons d’Enfants à Caractère Sociale et les hébergements accueillant des enfants"
                     },
                     {
-                        strong: "744",
+                        strong: "690 ",
                         span: "assistants familiaux pour l'accueil familial"
                     },
                     {
-                        strong: "1151",
+                        strong: "1259",
                         span: `enfants accueillis en ${currentYear}`
                     }
                 ],
