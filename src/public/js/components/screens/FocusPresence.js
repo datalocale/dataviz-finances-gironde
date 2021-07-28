@@ -83,7 +83,7 @@ export function FocusSol({
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Détails des frais liés à la présence du Département sur le territoire`}),
-            React.createElement(Markdown, {}, ``),
+            React.createElement(Markdown, {}, `Avec la crise sanitaire, une extrême attention aux dépenses a été demandée aux services, et un important travail de régulation a été mené en 2020 afin de limiter les dépenses non essentielles`),
             React.createElement(FocusDetail, {
 
                 className: 'buildings',
@@ -92,19 +92,19 @@ export function FocusSol({
                 illustrationUrl: urls[ELECTRICITE_PICTO],
                 amount: yearDetails ? yearDetails['DF.6.1.2'] : undefined,
                 proportion: yearDetails ? yearDetails['DF.6.1.2']/focusDetailsDenominator : 1,
-                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`,
+                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques. Ce poste est en baisse de 16% en 2020`,
                 highlights: [
                     {
-                        strong: '1,7 M€',
-                        span: `locations immobilières (+3.7%)`
+                        strong: '1,56 M€',
+                        span: `locations immobilières (-7.7%)`
                     },
                     {
                         strong: '0.74M€',
                         span: `entretien et de maintenance des bâtiments (-4.5%)`
                     },
                     {
-                        strong: '1M€',
-                        span: `contrats d’assurance (+2.96%)`
+                        strong: '1,07M€',
+                        span: `contrats d’assurance (+7%)`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.2'
@@ -120,21 +120,21 @@ export function FocusSol({
                 text: `Cela correspond par exemple au financement de la consommation électrique des bâtiments de la collectivité, du carburant pour le déplacement des agents, de l’achat de mobilier, des dépenses de consommation d’eau ou de chauffage ou encore celle de ses véhicules électriques.`,
                 highlights: [
                     {
-                        strong: '1,48M€',
-                        span: `frais d'electicité (+7.43%)`
+                        strong: '1,6M€',
+                        span: `frais d'electicité (+13%)`
                     },
                     {
-                        strong: '0.58 M€',
-                        span: `dépenses de carburant (-0.74%)`
+                        strong: '0.4 M€',
+                        span: `dépenses de carburant (-36%)`
                     },
                     {
-                        strong: '0.45 M€',
-                        span: `dépenses de fourniture (-2.5%)`
-                    },
-                    {
+                        strong: '0.38 M€',
+                        span: `dépenses de fourniture (-14%)`
+                    }
+                    /*{
                         strong: '0.275 M€',
                         span: `dépenses d'entretien (-1.75%)`
-                    }
+                    }*/
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.1'
             }),
@@ -149,16 +149,16 @@ export function FocusSol({
                 text: `Cela concerne en particulier les honoraires, le conseil, les frais de réception, les frais télécom, l’affranchissement, les services bancaires…`,
                 highlights: [
                     {
-                        strong: '0.856 M€',
-                        span: `frais de nettoyage de locaux (+1.03%)`
+                        strong: '0.8 M€',
+                        span: `frais de nettoyage de locaux (-6.4%)`
                     },
                     {
-                        strong: '0.748 M€',
-                        span: `frais d’affranchissement (+2.44%)`
+                        strong: '0.7 M€',
+                        span: `frais d’affranchissement (-6.1%)`
                     },
                     {
-                        strong: '3.2 M€',
-                        span: `frais de télécommunications (-8.4%)`
+                        strong: '2.6 M€',
+                        span: `frais de télécommunications (-17.5%)`
                     }
                 ],
                 moreUrl: '#!/finance-details/DF.6.1.3'
