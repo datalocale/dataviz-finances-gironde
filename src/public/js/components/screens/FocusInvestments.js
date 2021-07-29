@@ -103,7 +103,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2019-2020, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 13 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations de construction prévues se sont donc accélérées avec 67.1M€ de dépensés en 2020. Les principales opérations concernées sont : le collège de Marsas pour 10M€, le collège Mayaudon pour 10M€ le collège du Pian Médoc pour 3.5M€, le collège de St-Selve pour 3.4M€, le collège de Bordeaux Ginko pour 1.5M€ et le collège Bordeaux Euratlantique pour 3.8M€. Sur la partie réhabilitation où 48.8M€ ont été dépensés entre les études et les travaux, il s’agit principalement des collèges d’Arveyres pour 4.8M€, Bordeaux Edouard Vaillant pour 3.9M€, Cenon Jean Jaurès pour 11M€, Langon Toulouse-Lautrec pour 11M€ et du collège Mérignac Jules Ferry pour 3.7M€.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2019-2020, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 13 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations de construction prévues se sont donc accélérées avec 67.1M€ de dépensés en 2020.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -122,13 +122,7 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Les enjeux concernant le réseau routier départemental composé de 6 360 km de routes départementales, 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) et avec 800.000 usagers quotidiens restent toujours une préoccupation majeure comme en témoignent les 38.6 M€ investis en 2020, soit une moyenne de 41M€ par an depuis 2015. En 2020, les réalisations ont été importantes et ce malgré une interruption liée au confinement en mars /avril qui a été rattrapée durant l’été et l’automne notamment sur le chantier du Taillan et de Fargues St-Hilaire. Elles concernent :
-
-                       · La préservation du patrimoine départemental
-
-                       · La modernisation et la sécurisation du réseau départemental, avec notamment 2M€ pour les recalibrages de routes de faible largeur (RD 209 Parempuyre, RD 18 Génissac Moulon, RD671 St Brice Sauveterre)
-
-                       · Le développement du réseau départemental au travers d’un PPI routes qui a surtout vu en 2020 la poursuite des travaux sur la déviation de Fargues St Hilaire pour 5.8M€ et 9.3M€ concernant essentiellement le plan routier du Médoc avec la déviation de St-Aubin / le Taillan complétée par des achats de parcelles au Pian. Par ailleurs, en terme de mobilité, les pistes cyclables ont mobilisé 1.3M€, les travaux sur les aires de covoiturage ayant été en grande partie décalés`,
+                text: `Les enjeux concernant le réseau routier départemental composé de 6 400 km de routes départementales, 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) et avec 800.000 usagers quotidiens restent toujours une préoccupation majeure comme en témoignent les 38.6 M€ investis en 2020, soit une moyenne de 41M€ par an depuis 2015. En 2020, les réalisations ont été importantes et ce malgré une interruption liée au confinement en mars /avril qui a été rattrapée durant l’été et l’automne notamment sur le chantier du Taillan et de Fargues St-Hilaire. Ce sont 5.8M€ et 9.3M€ qui ont été investis respectivement pour ces deux opérations.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -147,10 +141,7 @@ export function FocusSol({
                 illustrationUrl: urls[PATRIMOINE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.3'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.3'] / focusDetailsDenominator : 1,
-                text: `Il s’agit ici de la maintenance et de la rénovation du patrimoine bâti hors immobilier social et des investissements liés à la politique informatique et numérique ou à la sécurisation (digues par exemple)
-                Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc.. ;
-                
-                Après un important programme d’acquisition pour l’Aide sociale à l’enfance (ASE) en 2019 de 9.7M€, 2020 Les travaux de maintenance et de rénovation du patrimoine bâti (11.5M€) ont essentiellement porté sur les centres d’exploitation à hauteur de 8M€ dont celui de St Martin Lacaussade pour 3M€, Cestas pour 2.8M€ et St Avit St Nazaire pour 1.9M€.  `,
+                text: `Il s’agit ici de la maintenance et de la rénovation du patrimoine bâti hors immobilier social et des investissements liés à la politique informatique et numérique ou à la sécurisation (digues par exemple) Avec 425 sites de travail et lieux d’accueil des publics répartis sur la Gironde, le Département doit entretenir, rénover ou construire près de 1 000 bâtiments, Maison des adolescents, Archives départementales, Hôtel du Département à Bordeaux, Immeuble Gironde et Immeuble Egalité (ex Croix du Palais), centres routiers départementaux, réhabilitation du parc routier etc..`,
                 highlights: [
                     /*{
                     strong: "",
