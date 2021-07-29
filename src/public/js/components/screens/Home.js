@@ -54,7 +54,7 @@ export function Home({
                     h1: "Présence sur le territoire",
                     numberMain: "125 métiers",
                     numberSecundary: "425 sites",
-                    description: `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… 6 670 agents exercent 125 métiers dans 425 lieux de travail et d’accueil du public. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail des frais de fonctionnement.`,
+                    description: `Puéricultrices, travailleurs sociaux, agents d’exploitation et de voirie, adjoints techniques territoriaux des établissements d’enseignement, juristes… 6 914 agents exercent 125 métiers dans 425 lieux de travail et d’accueil du public. A chaque lieu sont associés des frais de structure (consommation énergétique, éventuellement loyer) gérés dans le cadre de la stratégie patrimoniale départementale. Explorez la carte ci-dessous pour visualiser le détail des frais de fonctionnement.`,
                     moreUrl: presence
                 })
             )
