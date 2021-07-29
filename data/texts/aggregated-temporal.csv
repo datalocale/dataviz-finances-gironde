@@ -2,8 +2,8 @@ id,text
 D,"En 2020, les dépenses ont progressé principalement du fait de l'augmentation des dépenses de solidarité en partie liées à l'impact de la crise sanitaire économique et sociale sans précédent et aux dépenses relevant de la péréquation entre départements."
 R,Les recettes ont légèrement augmenté en 2020 sans augmentation du taux de la taxe foncière sur les propriétés bâties (dernière année de perception de la taxe ).
 RF,"En 2020, les recettes de fonctionnement sont en hausse de 1.28%, soit la plus faible progression depuis 2015. L'augmentation des produits de la fiscalité directe et de la péréquation horizontale(entre départements) viennent compenser la baisse sensible des DMTO."
-RF.1,"Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de + 2.93% (+14,55 M€) en 2020. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé depuis 2017 (17.46%). A compter de 2021, le produit de la taxe foncière sur les propriétés bâties transféré aux communes est remplacé par une fraction du produit net de la TVA nationale."
-RF.1.1,
+RF.1,
+RF.1.1,"Les recettes au titre de la Taxe Foncière sur les Propriétés Bâties sont en hausse de + 2.93% (+14,55 M€) en 2020. Cette progression résulte uniquement de l’effet base, étant donné que le Département a laissé le taux inchangé depuis 2017 (17.46%). A compter de 2021, le produit de la taxe foncière sur les propriétés bâties transféré aux communes est remplacé par une fraction du produit net de la TVA nationale."
 RF.1.2,
 RF.1.3,
 RF.1.4,
@@ -115,15 +115,15 @@ DF.6.4,
 DF.6.5,"Les résultats de l’exercice 2019 replacés dans le contexte du Pacte de Cahors ont conduit à l’application d’une reprise financière pour le Département de la Gironde.
  En 2020, le Département, après un important travail de négociation avec les services de la Préfecture sur la possibilité de retraiter certaines dépenses supplémentaires, dont les dépenses FSE non assimilables à des subventions, pour un montant total de 2.5M€, s’est vu notifier la reprise financière de 2019 à hauteur de 100% du montant des dépassements constatés, soit un peu plus de 24M€. Le Département de la Gironde ayant intenté un recours contentieux devant le Tribunal administratif contre l'arrêté préfectoral de notification du taux de 1.2% justifié au regard notamment de sa non modulation à la hausse de 0.15% au titre de l’évolution de sa population, a obtenu gain de cause le 11 décembre 2020, l’Etat se voyant obligé d’appliquer un taux de 1.35%. Cela s’est ainsi traduit par une reprise financière 2019 mandatée en 2020 diminuée de 4.1M€ et d’une reprise 2018 payée en 2019 diminuée de 2M€ qui fera l’objet d’un titre de recette sur 2021 soit un total de 6.1M€ remboursés par l'Etat."
 DF.7,"Bénéficiant de la performance des taux monétaires mais aussi de la contractualisation de prêts à taux fixes le coût moyen de la dette s’élève à 1.84% au lieu de 2% en 2019. Ce coût moyen reste parmi les plus performants des Départements. La baisse du coût moyen de la dette se traduit ainsi dans le poids des intérêts dans les recettes réelles de fonctionnement qui, après 6 ans de baisse, représente, avec 13.6 M€, 0,82 % de ces recettes."
-RI,Les recettes d’investissement ont fortement progressé en 2020 (+100M€) consécutivement à la hausse des emprunts (+60M€)  au versement d'une avance remboursable par l'Etat destinée à compenser la perte des DMTO (+28.4M€) et à des subventions versées au ttre notamment de travaux routiers
-RI.1,Le FCTVA qui  compose les recettes d'investissement à plus de 50% est en progression de 1.8M€ conséquence d’un niveau de dépenses d’investissement plus important en 2019
+RI,Les recettes d’investissement ont fortement progressé en 2020 (+100M€) consécutivement à la hausse des emprunts (+60M€)  au versement d'une avance remboursable par l'Etat destinée à compenser la perte des DMTO (+28.4M€) et à des subventions versées au titre notamment de travaux routiers.
+RI.1,Le FCTVA qui  compose les recettes d'investissement à plus de 50% est en progression de 1.8M€ conséquence d’un niveau de dépenses d’investissement plus important en 2019.
 RI.2,
 RI.3,
 RI.4,"Les recettes issues de subventions et de participations augmentent de 10.2M€ pour s’établir 20.2M€.Cette augmentation est pour partie due à des régularisations d’avances au titre de travaux dans 
 les collèges en contrepartie de la dépense à hauteur de 3.9M€ qui n’étaient pas comptabilisées en 2019.
 Par ailleurs, certaines opérations réalisées par le Département font l’objet de subventions ou de 
 participations. Tel est le cas pour la déviation du Taillan avec une participation de la Région et de l’Etat 
-pour respectivement 1.87M€ et 1.3M€, ou pour l’aménagement de l’échangeur de la Prade"
+pour respectivement 1.87M€ et 1.3M€, ou pour l’aménagement de l’échangeur de la Prade et du Carrefour à la Teste avec un versement de 1.1M€ et de 0.7M€ des communes respectives."
 RI.5,
 RI.6,
 RI.7,
