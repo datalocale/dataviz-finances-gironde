@@ -77,7 +77,7 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `L’année 2020 restera particulière à plusieurs égards :
+                `L’année 2020 a été une année particulière à plusieurs égards :
 
 · Elle restera marquée par une crise sanitaire et économique qui certes a affecté le budget du Département mais conforte l’utilité de ses politiques publiques à l’égard des plus vulnérables et en faveur de l’équilibre des territoires Cette crise a placé une nouvelle fois les départements au cœur de l’action du fait de leurs compétences en matière sociales mais aussi leur rôle d’acteurs des solidarités humaines et territoriales
 
