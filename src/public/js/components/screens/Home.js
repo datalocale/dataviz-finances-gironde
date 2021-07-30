@@ -40,7 +40,7 @@ export function Home({
                     h1: "Solidarités",
                     numberMain: "125 000",
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près de 920 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
+                    description: `Le Département affirme sa vocation sociale et déploie près de 993 millions d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
