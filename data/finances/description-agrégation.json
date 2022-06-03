@@ -429,12 +429,12 @@
               "useInAnalysis": true,
               "children": [
                 {
-                  "id": "RF2.1",
+                  "id": "RF.2.1",
                   "name": "Fiscalité directe avec pouvoir de taux",
                   "useInAnalysis": true,
                   "children": [
                     {
-                      "id": "RF2.1.1",
+                      "id": "RF.2.1.1",
                       "name": "Foncier bâti et rôles supplémentaires",
                       "useInAnalysis": true,
                       "formula": "RF∩(C73111+C7318)"
@@ -442,7 +442,7 @@
                   ]
                 },
                 {
-                  "id": "RF2.2",
+                  "id": "RF.2.2",
                   "name": "Fiscalité directe sans pouvoir de taux",
                   "useInAnalysis": true,
                   "children": [
