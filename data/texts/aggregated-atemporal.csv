@@ -256,7 +256,7 @@ RI.EM,Emprunt contracté,"Les emprunts contractés par le Département sont excl
 RI.EM.1,Emprunt nouveau,"Il s'agit de l'emprunt réalisé dans l'année mais dont le contrat a pu être signé antérieurement. Préalablement à la signature d'un contrat de prêt, le Département organise une ou deux consultations sur la base d'un cahier des charges définissant les caractéristiques des emprunts recherchés et le volume. La décision finale est prise par le Président du Conseil Départemental. Les empunts sont en général à taux fixe ou variable d'une durée de 15 à 25 ans. Ces dernières années, le Département a réalisé des émissions obligataires qui lui ont permis d'obtenir des conditions de taux plus compétitives sur des durées plus courtes ou plus longues."
 RI.EM.2,OCLT,Ces emprunts baptisés Ouverture de Crédits Long Terme (OCLT) ou Crédits Long Terme Renouvelable (CLTR) sont des crédits long terme classique avec une possibilité d'utilisation en ligne de trésorerie. Ces droits consistent à pouvoir tirer des fonds jusqu'à un plafond fixé et pendant une période donnée afin de faire face à un besoin de trésorerie c'est à dire pour payer le décaissement des dépenses réalisées.
 RI.EM.3,Emprunt refinancés,
-RI.EM.3,Emprunt refinancé,
+,,
 DI,Dépenses d’investissement (y compris le remboursement en capital des emprunts),"Les dépenses d’investissement sont destinées à : 
  * maintenir, améliorer et développer le patrimoine dont dispose le Département [travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, etc.
  * soutenir l’investissement de nos partenaires sur les territoires 
