@@ -7,19 +7,16 @@ D,Dépenses,"Les dépenses de la collectivité permettent :
  * ""de fonctionnement"" (par exemple le versement des prestations sociales, les subventions aux organismes ou les aides aux particuliers, l'entretien de la voirie, les frais de personnel, les intérêts d'emprunts...) 
  * ""d'investissement"" (par exemple : la construction de collèges, l'aménagement des infrastructures routières, la rénovation des bâtiments départementaux, le soutien au développement du parc locatif, l'aide à l'investissement des communes...)."
 R,Recettes,"Dans le cadre des lois de décentralisation, les collectivités locales doivent disposer des moyens financiers d’exercer la libre administration de leurs compétences.
- Les recettes du Département sont constituées de taxes, d'impôts locaux, des dotations de l'Etat, de subventions, d'emprunts... 
+ Les recettes du Département sont constituées de taxes, des dotations de l'Etat, de subventions, d'emprunts et des impôts locaux jusqu'en 2021
  
  Le montant de la plupart de ces recettes est déterminé au niveau national et évolue en fonction d’éléments conjoncturels (démographie, inflation, situation économique, marché de l’immobilier…)
  
- Le Département ne peut moduler qu’un petit nombre de ses recettes, principalement le produit de la Taxe foncière sur les propriétés bâties (par le vote des taux).
- On distingue :
- * les recettes de fonctionnement
- * les recettes d'investissement
+ Le Département ne peut plus moduler que 2% de ces recettes (taxe d'aménagement et taxe sur l'électricité) suite au transfert de la taxe sur le foncier bâti aux communes en 2021
  
  L’excédent des recettes de fonctionnement sur les dépenses de fonctionnement vient s’ajouter aux recettes d’investissement pour financer les investissements de la collectivité."
 RF,Recettes de fonctionnement,"Les recettes de fonctionnement proviennent principalement :
-  * de la fiscalité directe (les impôts locaux payés par les citoyens ou les entreprises)jusqu'en 2020 remplacée par un fraction de TVA à partir de 2021
-  * de la fiscalité indirecte (par exemple la part des frais de notaires versée au Département, appelée «Droits de mutation»)
+  * de la fiscalité directe (composée depuis 2021 seulement de la CVAE et des IFER sur lesquelles le Département n'a aucun pouvoir de taux)
+  * de la fiscalité indirecte (dont principalement la part des frais de notaires versée au Département, appelée «Droits de mutation» et depuis 2021 de la fraction TVA qui est venue remplacée la taxe sur le foncier bâti)
   * des dotations versées par l'État (par exemple la Dotation Globale de Fonctionnement)
   * de la fiscalité transférée (on entend par là un ensemble de taxes dont le produit est versé pour partie au Département, par exemple la Taxe sur les contrats d’assurance)
   * des ressources issues de l’exploitation du patrimoine départemental (location de bâtiments par exemple)
@@ -49,13 +46,12 @@ RF.1.1.5,Compensations fiscales,Elles servent à compenser les **exonérations e
 RF.1.1.6,Dotation de compensation de la réforme de la taxe professionnelle (DCRTP),"Le principe de compensation intégrale, instauré par la loi de finances pour 2010, se traduit par la mise en place à compter de 2011 de deux mécanismes : 
  * une dotation de compensation de la réforme de la taxe professionnelle (DCRTP) permettant le maintien d’un plancher de ressources pour chaque catégorie de collectivités 
  * un fonds national de garantie individuelle des ressources (FNGIR) afin d’assurer une compensation intégrale des pertes répertoriées par chaque collectivité"
-RF.2,Fiscalité directe,"Les recettes de fonctionnement du Département issues de la fiscalité directe concernent : 
- * pour les particuliers : la part départementale de la **taxe foncière sur les propriétés bâties** payée par les propriétaires de bâti
+RF.2,Fiscalité directe,"Les recettes de fonctionnement du Département issues de la fiscalité directe ne concernent plus depuis 2021 les particuliers , il reste :
  * pour les entreprises : la part départementale de la **cotisation sur la valeur ajoutée** (CVAE)
  * pour les réseaux d'énergie, transport ferroviaire et télécommunications : **l'imposition forfaitaire sur les entreprises de réseaux** correspondant au service déployé sur le territoire (IFER)"
 RF.2.1,Fiscalité directe avec pouvoir de taux,
-RF.2.1.1,Foncier bâti et rôles supplémentaires,"La taxe foncière sur les propriétés bâties est un impôt à la charge de tout proprietaire d'un immeuble bâti, par opposition aux immeubles non bâtis (terrains nus, terrains à bâtir) résultant de l'application d'un taux voté par le Département sur la valeur locative du bien.[en savoir plus](http://www.collectivites-locales.gouv.fr/taxe-fonciere-sur-proprietes-baties-0)"
-RF.2.2,Fiscalité directe sans pouvoir de taux,
+RF.2.1.1,Foncier bâti et rôles supplémentaires,Le Département ne reçoit plus de recettes à  ce titre depuis 2021 hormis des rôles supplémentaires issus relatifs à des années antérieures
+RF.2.2,Fiscalité directe sans pouvoir de taux,Le produit de la taxe foncière sur les propriétés bâties transféré aux communes est remplacé à partir de 2021 par une fraction du produit net de la TVA nationale considérée comme un impôt indirect.
 RF.2.2.1,CVAE,"Cet impôt local créé par la loi de finances 2011 (au niveau national) est un composant, avec la cotisation foncière des entreprises (CFE), de la **contribution économique territoriale (CET)** qui a remplacé la taxe professionnelle.
  Sont redevables de la CVAE les entreprises dont le chiffre d’affaires est supérieur à 152 500€. La CVAE est reversée aux collectivités à partir d'un taux unique (1.5% de la valeur ajoutée). Néanmoins le taux réel appliqué est progressif en fonction du chiffre d'affaires des entreprises. 
  ""Le *produit de la cotisation sur la valeur ajoutée des entreprises (CVAE)* est réparti entre les différents niveaux de collectivités territoriales de la façon suivante (à partir de 2017) :
@@ -67,7 +63,7 @@ RF.2.2.1,CVAE,"Cet impôt local créé par la loi de finances 2011 (au niveau na
  [en savoir plus](https://fr.wikipedia.org/wiki/Cotisation_sur_la_valeur_ajout%C3%A9e_des_entreprises)"
 RF.2.2.2,IFER,"Cet impôt, apparu en 2010 suite à la suppression de la Taxe Professionnelle, vise certaines entreprises dont l'activité est exercée dans les secteurs de **l'énergie, des transports ferroviaires et des télécommunications**. Elle est reversée aux collectivités territoriales et aux établissements publics de coopération intercommunale."
 RF.2.2.3,Attribution de compensation transports (Région),"Dans le cadre de la loi NOTRe et du transfert de la compétence des transports scolaires et interurbains à la Région, ce reversement correspondent au surplus de recettes de CVAE perçu par la Région dans le cadre du transfert des transports scolaires et interurbains. Cette attribution de compensation financière figée ne bénéficie cependant pas du dynamisme de la taxe, elle est figée."
-RF.3,Fiscalité indirecte,
+RF.3,Fiscalité indirecte,"Suite à la réforme fiscale, elle représente dorénavant la part la plus importante des recettes de fonctionnement (68%). Elle se compose de cinq catégories de recettes : les DMTO, la fiscalité transférée, la fraction de TVA, la fiscalité affectée et les autres recettes fiscales."
 RF.3.1,Droits de mutation à titre onéreux (DMTO),"Les droits de mutation à titre onéreux, qui comprennent les **droits d'enregistrement** et la **taxe de publicité foncière**, sont perçus à l'occasion de la publication d'une opération au fichier immobilier et notamment lors d'une vente immobilière (les fameux ""frais de notaire""). 
  La part perçue par le Département dépend d'un taux voté par le Département. Ce taux peut varier dans une fourchette fixée par la loi."
 RF.3.2,Fraction de TVA,
@@ -81,7 +77,6 @@ RF.3.4.1,Taxe d'aménagement,"La taxe d'aménagement est applicable à toutes le
  Le taux de la part départementale est unique et ne peut pas dépasser 2,5 % . 
  La taxe d’aménagement se substitue à la taxe locale d’équipement (TLE), à la taxe départementale des espaces naturels et sensibles (TDENS), à la taxe départementale destinée au financement des conseils d’architecture, d’urbanisme et de l’environnement(TDCAUE)"
 RF.3.5,Autres fiscalités,"Il s'agit de différentes taxes ou impôts que perçoit le Département : 
- * taxe d'aménagement, 
  * taxe sur l'électricité, 
  * redevance des mines."
 RF.3.5.1,Taxe sur l'électricité,"La taxe départementale sur la consommation finale d'électricité (TDCFE) est due par les abonnés aux communes et départements en **proportion des kWh consommés**. Son montant dépend d’un coefficient multiplicateur fixé et voté par les Conseils municipaux et départementaux.
@@ -103,7 +98,7 @@ RF.5,Recettes sociales,"On compte plusieurs types de recettes sociales:
 RF.5.1,Dispositif de compensation AIS,Il s'agit d'un ensemble de ressources visant à compenser les charges liées à l'aide sociale et notamment aux allocations individuelles de solidarité (AIS).
 RF.5.1.1,Dotation de compensation peréquée (DCP),Cette dotation assure aux Départements une nouvelle ressource pour financer les **allocations individuelles de solidarité (AIS)**. Le DCP consiste à affecter aux Départements les produits nets des frais de gestion de la taxe foncière sur les propriétés bâties jusque-là perçus par l’Etat.[en savoir plus](http://www.lagazettedescommunes.com/220517/le-dispositif-de-compensation-perequee-une-nouvelle-ressource-departementale-pour-aider-au-financement-des-allocations-de-solidarite/)
 RF.5.1.2,Fonds de Mobilisation Départementale pour l'Insertion (FMDI),Ce fonds vise à soutenir les Départements qui se sont investis pour accompagner les bénéficiaires du RSA à **reprendre une activité**.
-RF.5.1.3,Fonds de stabilisation,
+RF.5.1.3,Fonds de stabilisation,"La Loi de Finances pour 2019 a créé, pour la durée des contrats des pactes financiers conclus entre les départements et l’Etat, soit 3 ans, un fonds de stabilisation en vue d’accompagner ceux qui connaissent des difficultés en raison de la dynamique de leurs dépenses en matière d’AIS."
 RF.5.2,Autres recettes sociales,
 RF.5.2.1,Indus RSA,Il s'agit des **remboursements des sommes versées** aux allocataires du RSA ayant exercé une activité salariée temporaire.
 RF.5.2.2,Dotation APA,
@@ -124,8 +119,8 @@ RF.5.2.9,Financement protection Enfance,
 RF.6,Recettes diverses,Il s'agit d'un ensemble de recettes allant des loyers perçus à des participations de l'Europe en passant par les encaissements au titre de la restauration des collègiens ou des recouvrements exceptionnels
 RF.6.1,Autres dotations et participations,
 RF.6.1.1,FSE,
-RF.6.1.1.2,Restauration collèges,Participation des familles au titre de la restauration scolaire des collègiens.
-RF.6.1.1.3,"Autres dotations et participations (transport étudiants handicapés, logements...)",
+RF.6.1.2,Restauration collèges,Participation des familles au titre de la restauration scolaire des collègiens.
+RF.6.1.3,"Autres dotations et participations (transport étudiants handicapés, logements...)",
 RF.6.2,Autres recettes,
 RF.6.2.1,Produits de gestion courante,Il s'agit de recouvrements au titre d'indus ou de régies.
 RF.6.2.2,Produits des services,"Il s'agit des revenus issus des services publics locaux, de redevances d'occupation du domaine public départemental ou de recouvrement suite à la mise à disposition de personnel (Maison Départementale des Personnes Handicapées ou autres organismes)."
@@ -187,7 +182,7 @@ DF.2.5,Autres,"Le Département favorise le parcours de santé à des âges clés
  [en savoir plus](https://www.gironde.fr/enfance-et-famille)
  Le centre de lutte anti-tuberculose, le centre de vaccinations et l’accompagnement santé des adultes en précarité complètent cette offre.
  [en savoir plus](https://www.gironde.fr/sante-sexualite)"
-DF.3,Actions d’intervention,Ce chapitre regroupe les dépenses liées à l'intervention du Département sur le territoire avec notamment la contribution financière au fonctionnement du **service d'incendie et de secours** (SDIS) gérant les sapeurs-pompiers. La baisse en 2018 marque le transfert de la compétence transports à la Région
+DF.3,Dépenses d’intervention,Ce chapitre regroupe les dépenses liées à l'intervention du Département sur le territoire avec notamment la contribution financière au fonctionnement du **service d'incendie et de secours** (SDIS) gérant les sapeurs-pompiers. La baisse en 2018 marque le transfert de la compétence transports à la Région
 DF.3.1,Service Départemental d'Incendie et de Secours (SDIS),"Le SDIS est l'établissement public à caractère administratif gérant les **sapeurs-pompiers** au niveau d'un département. Doté d'une assemblée délibérante, le SDIS est soumis à une double autorité : opérationnelle (gérée par le préfet et le maire en collaboration dans leur pouvoir de police respectif) et administrative (gérée par un conseil d'administration présidé par le Président du Conseil départemental)."
 DF.3.2,Transports,"Jusqu'à la loi NOTRe (art. L.3111-1 code des transports), relevaient de la compétence des Départements :
  * les **transports routiers non urbains** des personnes, 
@@ -255,7 +250,7 @@ RI.8,Avance remboursable DMTO,
 RI.EM,Emprunt contracté,"Les emprunts contractés par le Département sont exclusivement destinés à financer des investissements, qu'il s'agisse d'un équipement spécifique, d'un ensemble de travaux relatifs à cet équipement ou encore d'acquisitions ou d'études. Les emprunts peuvent être parfois affectés explicitement à une ou plusieurs opérations d'investissement précisément désignées au contrat (par exemple pour le plan collèges ou la réhabilitation thermique de batiments administratifs), mais ils sont dans la majeure partie globalisés et correspondent à l'ensemble du besoin de financement de la section d'investissement."
 RI.EM.1,Emprunt nouveau,"Il s'agit de l'emprunt réalisé dans l'année mais dont le contrat a pu être signé antérieurement. Préalablement à la signature d'un contrat de prêt, le Département organise une ou deux consultations sur la base d'un cahier des charges définissant les caractéristiques des emprunts recherchés et le volume. La décision finale est prise par le Président du Conseil Départemental. Les empunts sont en général à taux fixe ou variable d'une durée de 15 à 25 ans. Ces dernières années, le Département a réalisé des émissions obligataires qui lui ont permis d'obtenir des conditions de taux plus compétitives sur des durées plus courtes ou plus longues."
 RI.EM.2,OCLT,Ces emprunts baptisés Ouverture de Crédits Long Terme (OCLT) ou Crédits Long Terme Renouvelable (CLTR) sont des crédits long terme classique avec une possibilité d'utilisation en ligne de trésorerie. Ces droits consistent à pouvoir tirer des fonds jusqu'à un plafond fixé et pendant une période donnée afin de faire face à un besoin de trésorerie c'est à dire pour payer le décaissement des dépenses réalisées.
-RI.EM.3,Emprunt refinancés,
+RI.EM.3,Emprunt refinancé,
 ,,
 DI,Dépenses d’investissement (y compris le remboursement en capital des emprunts),"Les dépenses d’investissement sont destinées à : 
  * maintenir, améliorer et développer le patrimoine dont dispose le Département [travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, etc.
