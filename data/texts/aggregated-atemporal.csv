@@ -149,12 +149,19 @@ DF.1,Actions sociales par prestations,"L’action sociale du Département, dont 
  * des aides diverses."
 DF.1.1,Frais d’hébergement,"Le Département intervient pour faciliter l'hébergement des enfants, des personnes âgées et des personnes handicapées et ce par plusieurs dispositifs comme le Centre départemental de l'enfance et de la famille (CDEF), les Maisons d'Enfants à Caractère Social (MECS), les accueils familiaux, la création et le financement de places dans des établissements (EHPAD) ou dans des Foyers d'Accueil Médicalisés (FAM)."
 DF.1.1.1,Hébergement Personnes âgées,L'objectif du Département est de permettre aux personnes âgées de garder leur autonomie le plus longtemps possible.
-DF.1.1.2,Hébergement Personnes handicapées,Les principales actions mises en oeuvre en faveur du maintien à domicile sont:
+DF.1.1.2,Hébergement Personnes handicapées,"Les principales actions mises en oeuvre en faveur du maintien à domicile sont:  la Prestation de Compensation du Handicap (PCH), l’Allocation 
+Adulte Handicapé (AAH) et l’Allocation d’Education de l’Enfant Handicapé
+ (AEEH), le Département facilite la vie à domicile, l’accessibilité au 
+logement, à l’emploi, à la scolarisation et à la vie sociale
+(Carte Mobilité Inclusion). Au travers de ces aides, le Département 
+accompagne l’accueil en établissement et soutient les associations du 
+domaine du handicap.
+[en savoir plus(]https://www.gironde.fr/handicap-grand-age"
 DF.1.1.3,Hébergement Enfants,"Le Département assure le financement de places d'accueil en **établissement** (Maison d'Enfance à Caractère Social, par exemple) d'enfants en situation de précarité mais aussi à travers l'accueil au sein du Centre Départemental de l'Enfance et de la Famille (CDEF) et l'accueil par des **assistants familiaux ou maternels** à leur domicile.
  [en savoir plus](https://www.gironde.fr/enfance-et-famille/protection-de-lenfance)"
 DF.1.2,APA,"Elle est destinée aux **personnes âgées de plus de 60 ans** présentant une **dépendance lourde ou moyenne**. Accordée à domicile (mais aussi en établissement), l'APA permet de contribuer au financement des aides nécessaires à la prise en charge de la perte d'autonomie de la personne âgée."
 DF.1.3,Autonomie,
-DF.1.4,Divers social,"Il s'agit d'aides individuelles ou collectives liées à l'insertion( contrat d'accompagnement dans l'emploi en faveur des personnes en insertion,contrats aidés, contrats de prestations de services pour des prestataires dans le champ du social), des secours d'urgence (CAPED), de l'accueil familial pour les personnes handicapées ou des comités locaux d'informations et de coordinnations (CLIC)."
+DF.1.4,Divers social,
 DF.1.5,Préventions enfants,"La prévention permet de maintenir autant que possible les enfants dans leur milieu familial. le Département soutient la fonction parentale par des aides appropriées : 
  * aides financières et psychologiques, aides éducatives à domicile (comme l'Aide éducative en Milieu Ouvert ou AEMO), 
  * des interventions sociales au sein des familles. 
@@ -193,13 +200,13 @@ DF.3.2,Transports,"Jusqu'à la loi NOTRe (art. L.3111-1 code des transports), re
  Depuis le 1er septembre 2017, les lignes régulières de TransGironde et le transport scolaire ont été transférés à la Région Nouvelle-Aquitaine (loi Nouvelle organisation territoriale de la République). Seul le transport des élèves et étudiants en situation de handicap reste assuré par le Département.
  [en savoir plus sur le site Gironde.fr](https://www.gironde.fr/deplacements)
  [en savoir plus](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)"
-DF.3.3,Transports des étudiants et des élèves handicapés,Le Département prend en charge le transport spécial des élèves handicapés vers leurs établissements scolaires.
-DF.3.4,Prévention spécialisée,"Dans le cadre des politiques que ceux-ci développent pour venir en aide à l'enfance, les Départements ont autorité sur l'**action d'éducation spécialisée** visant à permettre à des jeunes en voie de marginalisation de **rompre avec l’isolement** et de **restaurer le lien social**."
-DF.3.5,Dotation de fonctionnement des collèges,"Le Département **construit, entretient et rénove l’ensemble du parc de 105 collèges publics** dans le respect des normes environnementales.
+DF.3.3,Prévention spécialisée,"Dans le cadre des politiques que ceux-ci développent pour venir en aide à l'enfance, les Départements ont autorité sur l'**action d'éducation spécialisée** visant à permettre à des jeunes en voie de marginalisation de **rompre avec l’isolement** et de **restaurer le lien social**."
+DF.3.4,Dotation de fonctionnement des collèges,"Le Département **construit, entretient et rénove l’ensemble du parc de 105 collèges publics** dans le respect des normes environnementales.
  Il assure aussi la restauration scolaire, l’environnement numérique des établissements, et accompagne le développement de projets culturels, citoyens et environnementaux.
  
  [en savoir plus](https://www.gironde.fr/jeunesse/vie-au-college)"
-DF.3.6,Subventions de fonctionnement,"Ces aides financières sont versées à des organismes extérieurs conformément aux règlements d'intervention adoptés par les élus. Il peut s'agir d'associations, de personnes physiques, d'organismes divers."
+DF.3.5,Subventions de fonctionnement,"Ces aides financières sont versées à des organismes extérieurs conformément aux règlements d'intervention adoptés par les élus. Il peut s'agir d'associations, de personnes physiques, d'organismes divers."
+DF.3.6,Transports des étudiants et des élèves handicapés,
 DF.3.7,Diverses participations,"Il s'agit principalement de Participations aux familles par le biais d'octroi de bourses d'études pour les collégiens, du fonds de solidarité pour le logement des plus démunis et autres participations financières."
 DF.3.7.1,Fond social logement,"Le Fonds de Solidarité Logement de la Gironde a pour but d’aider les **familles ou les personnes les plus démunies** rencontrant des difficultés pour accéder à un logement décent et indépendant, ou à s’y maintenir en disposant de la fourniture d’eau, d’énergie et de service téléphonique et/ou internet. [source](http://www.fsl33.org/)"
 DF.3.7.2,Bourses départementales,"Cette aide directe destinée à **couvrir les frais de scolarité** est accordée aux **familles les plus modestes**, domiciliées en Gironde, boursières de l’Education Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public ou un collège privé sous contrat. Selon les revenus de la famille, en 2015-2016, le montant de cette aide départementale était de :
@@ -259,7 +266,7 @@ DI,Dépenses d’investissement (y compris le remboursement en capital des empru
  Elles comprennent aussi le remboursement en capital des emprunts."
 ,,
 DI.1,Equipements Propres,"Les dépenses d'investissement en équipements propres sont considérées comme des immobilisations par nature, dans la mesure où elles remplissent des conditions de durabilité et de consistance."
-DI.1.1,Collèges,"En fonction de l'évolution de la démographie, le Département entreprend la construction de nouveaux collèges sur le département pour garantir des conditions d'accueil permettant le déroulement de la scolarité des élèves dans des locaux appropriés. D'ici à 2024, 12 nouveaux collèges doivent être construits pour répondre à ce besoin.
+DI.1.1,Collèges,"En fonction de l'évolution de la démographie, le Département entreprend la construction de nouveaux collèges sur le département pour garantir des conditions d'accueil permettant le déroulement de la scolarité des élèves dans des locaux appropriés. D'ici à 2026, 14 nouveaux collèges doivent être construits pour répondre à ce besoin.
  [en savoir plus](https://www.gironde.fr/actualites/plan-colleges-2024)"
 DI.1.2,Routes,"Ces dépenses correspondent à la construction de nouvelles routes, de nouveaux tronçons, ou d'aménagement de circulation sur le réseau départemental qui compte actuellement 6 400 km.
  [en savoir plus](https://www.gironde.fr/deplacements/les-routes-et-ponts)"

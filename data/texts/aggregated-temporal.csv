@@ -4,14 +4,26 @@ R,L'éxecution de l'exercice 2021 a mis en évidence des recettes de fonctionnem
 RF,"Les recettes de fonctionnement (hors cessions), dont le montant constaté en 2021 est de 1 821,5 M€, sont en hausse de 9%, soit 156 M€ supplémentaires par rapport à l’exercice 2020, augmentation tirée par le niveau record des Droits de Mutation à Titre Onéreux (DMTO) qui ont atteint 554 M€ soit + 137 M€."
 RF.1,"Malgré une légère augmentation de la Dotation Globale de Fonctionnement (part dotation forfaitaire) de 0,6%, les dotations de l’Etat sont globalement en repli (-0.6%), notamment par l’effet technique de la suppression des compensations fiscales au titre de la Taxe d’Habitation (-13%) suite à son transfert au bloc communal. La Dotation Globale de Décentralisation progresse de 1.1%."
 RF.1.1,
+RF.1.1.1,
+RF.1.1.2,
+RF.1.1.3,
+RF.1.1.4,
+RF.1.1.5,
+RF.1.1.6,
 RF.1.2,
 RF.1.3,
 RF.1.4,
-RF.2,"Le produit de la taxe foncière sur les propriétés bâties transféré aux communes est remplacé à partir de 2021 par une fraction du produit net de la TVA nationale considérée comme un impôt indirect.La fiscalité directe ne s’élève plus qu’à 150 M€ et concerne uniquement une fiscalité sans pouvoir de taux représentée par la cotisation sur la valeur ajoutée des entreprises (CVAE) et l’impôt forfaitaire sur les entreprises de réseau (IFER). A ceci on rajoute l’attribution de compensation de la Région au titre des transports qui correspond à un excédent de CVAE transféré au regard de la dépense, qui devient en réalité une quasi dotation figée à 31.1 M€ par an."
-RF.2.1,"La CVAE, imposition économique, n’a pas subi en 2021 la baisse de l’activité de l’année 2020 qui se traduira plutôt dans les encaissements 2022. Elle augmente de 2% pour s’établir à 107.2 M€ (+1.8 M€)"
-RF.2.2,"L'évolution des recettes issues des IFER constatée en 2021 de 4% (+0,41 M€), en légère hausse par rapport à 2020, est toujours portée par les recettes des centrales photovoltaïques."
-RF.3,La fiscalité indirecte atteint 1 244 M€ en 2021 soit une augmentation de 70% par rapport à 2020.
-RF.3.1,"Les droits de mutation sont en baisse de 3,19% (417,14 M€), mais une baisse à relativiser malgré tout au vu du contexte de la crise sanitaire (transactions immobilières totalement à l'arrêt durant plusieurs mois suite au 1er confinement, puis une reprise soutenue surtout après l'été 2020). Si la crise sanitaire a vu le nombre de ventes s'infléchir de 8,7% par rapport à 2019, les prix de vente restent sur une dynamique à la hausse (+ 4,5% pour les appartements neufs et + 8,8% pour les maisons anciennes)."
+RF.2,
+RF.2.1,
+RF.2.1.1,"Le produit de la taxe foncière sur les propriétés bâties transféré aux communes est remplacé à partir de 2021 par une fraction du produit net de la TVA nationale considérée comme un impôt indirect.La fiscalité directe ne s’élève plus qu’à 150.5 M€ et concerne uniquement une fiscalité sans pouvoir de taux représentée par la cotisation sur la valeur ajoutée des entreprises (CVAE) et l’impôt forfaitaire sur les entreprises de réseau (IFER). A ceci on rajoute l’attribution de compensation de la Région au titre des transports qui correspond à un excédent de CVAE transféré au regard de la dépense, qui devient en réalité une quasi dotation figée à 31.1 M€ par an."
+RF.2.2,
+RF.2.2.1,"La CVAE, imposition économique, n’a pas subi en 2021 la baisse de l’activité de l’année 2020 qui se traduira plutôt dans les encaissements 2022. Elle augmente de 2% pour s’établir à 107.2 M€ (+1.8 M€)"
+RF.2.2.2,"L'évolution des recettes issues des IFER constatée en 2021 de 4% (+0,41 M€), en légère hausse par rapport à 2020, est toujours portée par les recettes des centrales photovoltaïques."
+RF.2.2.3,
+RF.3,La fiscalité indirecte atteint 1 244.9 M€ en 2021 soit une augmentation de 70% par rapport à 2020.
+RF.3.1,"En 2021, c’est l’important rebond des DMTO avec une progression de 30% entre 2020 (année impactée par le confinement) et 2021 (554 M€) qui représente la quasi intégralité de l’augmentation des recettes de fonctionnement. 
+Après un infléchissement de 3% en 2020 suite à huit semaines de confinement, les recettes de DMTO retrouvent des volumes historiques portés par un nombre de transactions jamais atteint au niveau national (1.2 M et +17.5%) et des prix à
+la hausse (+7.4%). "
 RF.3.2,"Avec le transfert en 2020 de la taxe foncière aux communes et l’attribution aux départements de la TVA, la réforme de la fiscalité locale a largement porté atteinte à l’autonomie financière du département. Elle a introduit un risque dans le budget départemental puisque la taxe sur le foncier bâti voyait son rendement maintenu en dépit des aléas économiques tandis que la TVA est sujette aux aléas de la consommation nationale. En 2021, elle s’élève à 364 M€."
 RF.3.3,"Constituées des recettes destinées à compenser les transferts de compétences (personnels sociaux, personnels TOS ou DDE…), les recettes de fiscalité transférée représentent un montant de 290 M€ en 2021 soit une hausse de 8.6 M€ (+ 3.1%)."
 RF.3.3.1,"La taxe intérieure de consommation sur les produits énergétiques (TICPE) présente en 2021 une hausse de 1% après une baisse en 2020, imputable à la crise sanitaire, la faisant revenir à son niveau de 2019 de 129.3 M€."
@@ -28,7 +40,8 @@ RF.3.5,"Elles se composent de la taxe sur l’électricité, de la taxe de séjo
 RF.3.5.1,"La taxe sur l’électricité, pour 18.7 M€, en hausse de 6%, retrouve son niveau de 2019."
 RF.3.5.2,"La redevance des mines est en légère baisse à 1.827 M€, tandis que la Taxe additionnelle à la taxe de séjour avec 0.99 M€ subie une baisse de 18.5 %, conséquence de la crise COVID (décalage d’un an dans la perception de cette taxe)."
 RF.4,
-RF.4.1,"En 2021, le Département a reçu 20.45 M€ au titre de cette péréquation :    · 7.16 M€ au titre de l’enveloppe FPDMTO, · 13.29 M€ au titre de l’enveloppe Fonds de Solidarité destiné à réduire la charge des Allocations de Solidarité (AIS)"
+RF.4.1,"En 2021, le Département a reçu 20.5 M€ au titre de cette péréquation :    7.16 M€ au titre de l’enveloppe FPDMTO, 13.29 M€ au titre de l’enveloppe Fonds de Solidarité destiné à réduire la charge des Allocations de Solidarité (AIS)"
+RF.4.2,
 RF.5,
 RF.5.1,"Cette compensation a été instaurée dans le but de compenser les allocations individuelles de solidarité (AIS) versées de manière individuelle ou globale. Elle représente en 2021 un total de 37 M€, en baisse de 5.7%."
 RF.5.1.1,"Il est constitué des frais de gestion pour la Taxe Foncière sur les Propriétés Bâties, transféré par l’Etat en 2014, est destiné à compenser (partiellement) les allocations individuelles de solidarité de manière globale. Son montant s’est élevé à 20,71 M€ en 2021 soit une légère augmentation de 1%. Ce versement est réalisé de manière péréquée entre les départements en fonction du revenu par habitant et du reste à charge sur les trois allocations de solidarité."
@@ -38,17 +51,17 @@ RF.5.2,Elles représentent un total de 144 M€ et évoluent de 3.7% par rapport
 RF.5.2.1,"La récupération des indus RSA continue de croître pour atteindre 3,6 M€, soit + 0,5 M€ par rapport à 2020"
 RF.5.2.2,"Les recettes de la CNSA (Caisse Nationale de Solidarité pour l’Autonomie) relatives à la première et seconde part de l’APA (Aide Personnalisée d’Autonomie), d’un total de 60 M€, qui sont en hausse de 8% soit +4,25 M€. Pour ce qui est de la PCH (Prestation de Compensation du Handicap), autre composante de la CNSA, elle est en hausse de 4% et s’élève à 17,80 M€."
 RF.5.2.3,"Pour ce qui est de la PCH (Prestation de Compensation du Handicap), autre composante de la CNSA, elle est en hausse de 4% et s’élève à 17,80 M€."
-RF.5.2.4,"Le forfait autonomie et les actions de prévention issues de la conférence des financeurs, d’un total de 4,75M€, sont en baisse de 2%."
+RF.5.2.4,"Le forfait autonomie et les actions de prévention issues de la conférence des financeurs, d’un total de 4,8M€, sont en baisse de 2%."
 RF.5.2.5,"Le Fonds Stratégique Pauvreté, destiné à lutter contre la pauvreté et favoriser l’accès à l’emploi, s’élève à 2.9 M€ contre 3 M€ en 2020."
 RF.5.2.6,"Les recettes concernant les services d’aide à domicile s’élèvent à 2,5 M€, en baisse de 3%."
 RF.5.2.7,Les recettes issues des recouvrements sur bénéficiaires (récupérations sur les actifs successoraux et sur les obligés alimentaires - personnes âgées et personnes handicapées) sont globalement en repli de 1% suite au commencement du changement de méthode comptable à l’image de ce qui a été pratiqué pour l’hébergement des personnes âgées.
 RF.5.2.8,
 RF.5.2.9,
-RF.6,"D’un montant de 39.85 M€, elles sont en forte progression par rapport à 2020 (+27.7M€)"
+RF.6,"D’un montant de 39.2 M€, elles sont en forte progression par rapport à 2020 (+25.6%)"
 RF.6.1,
-RF.6.1.1,"Les recettes provenant du FSE (Fonds Social Européen) progressent de 14%, passant de 3.7 M€ à 4.3 M€,"
-RF.6.1.2,Ce sont les recettes liées à la restauration qui connaissent la plus forte progression à +58% pour atteindre 4.96 M€
-RF.6.1.3,"Les autres dotations s’élèvent à 4.8 M€, en hausse de 1 M€."
+RF.6.1.1,"Les recettes provenant du FSE (Fonds Social Européen) progressent de 14%, passant de 3.8 M€ à 5 M€,"
+RF.6.1.2,Ce sont les recettes liées à la restauration qui connaissent la plus forte progression à +58% pour atteindre 5 M€
+RF.6.1.3,"Les autres dotations s’élèvent à 4.2 M€, en hausse de 0.2 M€."
 RF.6.2,La progression la plus marquante concerne les produits exceptionnels et les produits de gestion courante avec respectivement +4 M€ et +1 M€.
 RF.6.2.1,
 RF.6.2.2,
@@ -57,19 +70,19 @@ RF.6.2.4,
 RF.6.2.5,
 RF.6.2.6,
 RF.6.2.7,
-RF.6.6,
 DF,"Les dépenses de fonctionnement (y compris les frais financiers) ont atteint 1 576 M€ évoluant en 2021 de 0.93%. Hors frais financiers et corrigées de la reprise financière de 19.87M€ en 2020, les dépenses de fonctionnement évoluent de 2.2 % pour s’établir à 1 562 M€, soit 34M€ de dépenses supplémentaires. A périmètre constant, c’est-à-dire en enlevant les dépenses COVID réalisées en 2020, l’augmentation aurait été de 4.4%."
-DF.1,"En 2021, les dépenses de solidarité franchissent le milliard d’euros en passant de 993 M€ en 2020 à 1 018 M€2soit +2.2% et +25 M€ de progression. Cette progression est la plus faible constatée depuis 2015."
-DF.1.1,"Les dépenses d’hébergement qui représentent le 2ème poste des dépenses de solidarité, avec 426 M€ et 42% des dépenses totales de solidarité, ont la progression la plus importante avec +2.8% soit 11.57 M€ supplémentaires, avec des dépenses liées à l’hébergement des enfants qui représentent la plus grande part de cette dynamique."
+DF.1,"En 2021, les dépenses de solidarité franchissent le milliard d’euros en passant de 993 M€ en 2020 à 1 018 M€ soit +2.2% et +25 M€ de progression. Cette progression est la plus faible constatée depuis 2015."
+DF.1.1,"Les dépenses d’hébergement qui représentent le 2ème poste des dépenses de solidarité après les Allocations Individuelles de Solidarité (AIS) , avec 426 M€ et 42% des dépenses totales de solidarité, ont la progression la plus importante avec +2.8% soit 11.57 M€ supplémentaires, avec des dépenses liées à l’hébergement des enfants qui représentent la plus grande part de cette dynamique."
 DF.1.1.1,"les dépenses liées à ce secteur de l’aide sociale s’élèvent à 42.4 M€, en baisse de 6%. Le facteur principal de la baisse est lié à l’expérimentation du paiement net aux organismes (contraction des dépenses et recettes) qui s’est traduit également par une baisse des recettes de recouvrement."
 DF.1.1.2,"L’hébergement pour les personnes handicapées, qui concerne l’accueil permanent et temporaire de personnes en situation de handicap dans des établissements représente une dépense de 139.9 M€, soit une baisse de 0.9% par rapport à 2020"
 DF.1.1.3,Ce sont en effet 15.6 M€ supplémentaires qui ont été consacrés en 2021 aux frais d’hébergement liés à la seule protection de l’enfance  pour un volume de dépenses qui atteint 244 M€ soit +7% par rapport à 2020. 
 DF.1.2,Les dépenses liées à l’Allocation Personnalisée d’Autonomie (APA) (allocation hors frais induits) s’élèvent à 150.6 M€ en 2021 soit une augmentation de +2.4% plus forte que celle constatée en 2020
 DF.1.3,"Les dépenses liées à l’autonomie comprennent les prestations pour personnes âgées issues de la conférence des financeurs créées par la loi Adaptation de la Société au Vieillissement (ASV) qui s’établissent à 5.16 M€, en progression de 12.7%, en lien avec un nouveau mode d’intervention créé en 2021 relatif au dispositif de l’aide à la vie partagée. Elles englobent également les dépenses pour les services d’aide à domicile avec une revalorisation des rémunérations des salariés relevant de la convention collective (avenants 43 et 44) pour un total dépensé de 4.9 M€."
 DF.1.4,"Ces dépenses concernent principalement la Protection Maternelle et Infantile (PMI), les actions de santé préventives particulièrement impactées par la crise sanitaire (consultations et animations en baisse), et la subvention à la Maison Départementale pour les Personnes Handicapées (MDPH) qui augmente de 12%, passant de 2.8 M€ à 3.1 M€."
-DF.1.5,"Elles s’élèvent à 29.9 M€ dont la progression de 7% traduit une volonté de faire de la prévention un levier et d’infléchir l’accroissement du besoin en terme de protection. Cette évolution s’explique également par de nouveaux engagements de justice, en hausse sur l’Action Educative en Milieu Ouvert (AEMO) et l’Aide Educative à Domicile (AED) avec respectivement 5 362 et 1 610 enfants concernés en 2021. Ces mesures sont particulièrement sollicitées pour soutenir la parentalité."
+DF.1.5,"Elles s’élèvent à 30 M€ dont la progression de 7% traduit une volonté de faire de la prévention un levier et d’infléchir l’accroissement du besoin en terme de protection. Cette évolution s’explique également par de nouveaux engagements de justice, en hausse sur l’Action Educative en Milieu Ouvert (AEMO) et l’Aide Educative à Domicile (AED) avec respectivement 5 362 et 1 610 enfants concernés en 2021. Ces mesures sont particulièrement sollicitées pour soutenir la parentalité."
 DF.1.6,Ce sont 255.8 M€ qui ont été versés au titre de l’Allocation RSA (hors régularisations de l’année) soit une très faible progression de 0.4% contre 4.9% en 2020 avec une moyenne mensuelle de versement revenant au niveau d’avant crise sanitaire.
-DF.1.7,"Les dépenses relatives à l’insertion et au développement social comprennent notamment la lutte contre la précarité (CAPED et aide alimentaire), la politique de développement social, les contrats aidés et les mesures liées à l’insertion qui progressent de 3% pour un total de 18.6 M€."
+DF.1.7,"Les dépenses relatives à l’insertion et au développement social comprennent notamment la lutte contre la précarité (CAPED et aide alimentaire), la politique de développement social, les contrats aidés et les mesures liées à l’insertion qui progressent de 3% pour un total de 18.7 M€."
+DF.1.8,"Les dépenses liées à la Prestation de Compensation du Handicap (PCH) s’élèvent à 107.7 M€, soit +6.98% contre +7.6% en 2020, marquant pour la 2ème année consécutive un ralentissement."
 DF.2,
 DF.2.1,
 DF.2.2,
@@ -79,17 +92,17 @@ DF.2.5,
 DF.3,"Les dépenses d’intervention hors champ social s’élèvent à 176 M€, en progression de 1.2%."
 DF.3.1,"La participation au Service Départemental d’Incendie et de Secours (SDIS), de 93.5 M€, enregistre une évolution de 1% par rapport à la participation de 2020 (hors prime de feu et dépenses exceptionnelles)."
 DF.3.2,
-DF.3.3,"Le transport des élèves et étudiants à mobilité réduite, pour un montant de 8,05 M€ est en hausse de 3%. Cette hausse traduit une augmentation du nombre d’élèves transportés. Pour l’année scolaire 2020/2021, plus de 1 300 élèves et étudiants ont fait une demande de prise en charge contre un plus de 1 000 en 2020"
-DF.3.4,"Les dépenses au titre des opérations de prévention spécialisée déployées sur les territoires, validées dans le cadre du schéma départemental, augmentent de 3% pour s’établir à 8 M€. Cette progression est la résultante de l’organisation d’actions collectives."
-DF.3.5,"Les dotations destinées aux collèges prenant en compte la restauration, le forfait externat ou les contrats aidés connaissent une hausse de 2.7% pour atteindre 26.3 M€, conséquence de l’augmentation du nombre d’élèves scolarisés (plus de 1 100 nouveaux élèves), l’implantation de près de 4 000m² de modulaires supplémentaires, et la livraison du collège de Marsas à la rentrée 2021"
-DF.3.6,"Les subventions aux tiers sont en baisse de 4% passant de 28.8 M€ à 27.6 M€ en lien avec la crise sanitaire (actions de promotions touristiques, la politique foncière agricole). Notre collectivité poursuit son soutien au tissu associatif culturel et sportif avec un subventionnement à hauteur de 5.3 M€ et l’accompagnement à l’insertion dans le cadre de la nouvelle programmation du Fonds Social Européen (FSE)."
+DF.3.3,"Les dépenses au titre des opérations de prévention spécialisée déployées sur les territoires, validées dans le cadre du schéma départemental, augmentent de 3% pour s’établir à 8 M€. Cette progression est la résultante de l’organisation d’actions collectives."
+DF.3.4,"Les dotations destinées aux collèges prenant en compte la restauration, le forfait externat ou les contrats aidés connaissent une hausse de 2.7% pour atteindre 26.3 M€, conséquence de l’augmentation du nombre d’élèves scolarisés (plus de 1 100 nouveaux élèves), l’implantation de près de 4 000m² de modulaires supplémentaires, et la livraison du collège de Marsas à la rentrée 2021"
+DF.3.5,"Les subventions aux tiers sont en baisse de 4% passant de 28.8 M€ à 27.6 M€ en lien avec la crise sanitaire (actions de promotions touristiques, la politique foncière agricole). Notre collectivité poursuit son soutien au tissu associatif culturel et sportif avec un subventionnement à hauteur de 5.3 M€ et l’accompagnement à l’insertion dans le cadre de la nouvelle programmation du Fonds Social Européen (FSE)."
+DF.3.6,"Le transport des élèves et étudiants à mobilité réduite, pour un montant de 8,05 M€ est en hausse de 3%. Cette hausse traduit une augmentation du nombre d’élèves transportés. Pour l’année scolaire 2020/2021, plus de 1 300 élèves et étudiants ont fait une demande de prise en charge contre un plus de 1 000 en 2020"
 DF.3.7,"Les participations au fonctionnement d’organismes extérieurs sont stables à 12 M€. Elles comprennent la participation au Fonds de solidarité pour le logement (FSL) pour 3.5 M€, la participation au Conseil d’Architecture, d’Urbanisme et de l’Environnement de la Gironde (CAUE) pour 1.9 M€ et celle versée à Gironde Ressources (0.97 M€)"
 DF.3.7.1,
 DF.3.7.2,
 DF.3.7.3,
 DF.4," Les dépenses de personnel (hors assistants familiaux dont la masse salariale est intégrée dans les dépenses de solidarités) représentent 234.2 M€, un niveau inférieur au niveau voté lors du budget car un certain nombre de créations de postes budgétés n’ont pas pu être pourvus sur 2021 et le seront sur 2022."
 DF.5,"Le bilan 2021 des dispositifs de péréquation dépendant en partie des recettes recouvrées au titre des DMTO en 2020, l’impact de la baisse de cette recette s’est traduit par une augmentation modérée de 1 M€ de notre contribution (les autres départements ayant connu en moyenne une baisse moins forte)."
-DF.6,"Les charges courantes et participations annexes correspondent aux frais généraux de fonctionnement de la structure départementale, aux dépenses liées à l’entretien de la voirie et à diverses charges et participations annexes (hors contribution aux fonds de péréquation, hors dotations aux collèges, FSL et prévention spécialisée évoqués par ailleurs). Elles s’établissent à 64.6 M€, soit une baisse de 0.16%, comparées aux 65 M€ dépensés en 2020 hors reprise financière constatée en 2020 de 19.8 M€."
+DF.6,"Les charges courantes et participations annexes correspondent aux frais généraux de fonctionnement de la structure départementale, aux dépenses liées à l’entretien de la voirie et à diverses charges et participations annexes (hors contribution aux fonds de péréquation, hors dotations aux collèges, FSL et prévention spécialisée évoqués par ailleurs). Elles s’établissent à 65.7 M€, soit une baisse de 23.6%, comparées aux 84.6 M€ dépensés en 2020 (hors reprise financière constatée en 2020 de 19.8 M€, les charges courantes progressent de 1.48%"
 DF.6.1,
 DF.6.1.1,
 DF.6.1.2,
@@ -106,7 +119,7 @@ DF.7,"Malgré l’augmentation de l’encours de 16.42%, le Département a su ti
 Les choix de gestion réalisés depuis 2015 ont permis une baisse de 23% des intérêts payés.
 "
 RI,"Les recettes d’investissement réalisées en 2021, hors cessions, progressent de 1 M€ par rapport à 2020 et s’établissent à 45.7 M€. En ajoutant les cessions d’immobilisation, les recettes totales restent stables à 47.7 M€."
-RI.1," Le Fonds de Compensation à la TVA (FCTVA), qui les compose à plus de 50% est en progression de 5.3 M€, conséquence d’un niveau de dépenses d’investissement important en 2020."
+RI.1," Le Fonds de Compensation à la TVA (FCTVA), qui représente plus de 50% est en progression de 8.3 M€, conséquence d’un niveau de dépenses d’investissement important en 2020."
 RI.2,
 RI.3,"La Dotation de Solidarité InterDépartementale (DSID), ex Dotation Globale d’Equipement (DGE), s’élève à 4 M€ en 2021 contre 0.7 M€ en 2020. Elle comprend les recettes du plan de relance versées au Département"
 RI.4,
@@ -115,23 +128,23 @@ RI.6,
 RI.7,
 RI.8,
 RI.EM,
-RI.EM.1,
-RI.EM.2,"En 2021, ce sont 120 M€ d'empruntx nouveaux qui ont été mobilisés à un taux moyen de , ce qui est particulièrement compétitif. L’encours de dette atteint 787M€ au 31 décembre 2021 et reste toutefois limité à 43% des recettes de fonctionnement en dessous de la moyenne des départements."
+RI.EM.1,"En 2021, ce sont 120 M€ d'empruntx nouveaux qui ont été mobilisés à un taux moyen de , ce qui est particulièrement compétitif. L’encours de dette atteint 787M€ au 31 décembre 2021 et reste toutefois limité à 43% des recettes de fonctionnement en dessous de la moyenne des départements."
+RI.EM.2,
 RI.EM.3,
 ,
-DI,"la Gironde s’est inscrite depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement d’un territoire dynamique qui accueille près de 20 000 girondins supplémentaires chaque année : ce sont près de 310 M€ qui s’ajoutent en 2021, soit 38% de plus que 2020 (+86 M€)."
+DI,"La Gironde s’est inscrite depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement d’un territoire dynamique qui accueille près de 20 000 girondins supplémentaires chaque année : ce sont près de 310 M€ qui s’ajoutent en 2021, soit 38% de plus que 2020 (+86 M€) hors remboursement de l'avance DMTO (28.4M€"
 DI.1,"Les dépenses d’acquisition ou de rénovation du patrimoine sont passées de 169.8 M€ à 246.4 M€ en 2021, soit 76.5M€ de plus qu’en 2020. Elles représentent 80% des dépenses d’investissement totales. Depuis 2015, ce sont 1 044 M€ qui ont été investis dans le patrimoine départemental et qui ont soutenu l’économie girondine."
 DI.1.1,"Avec une progression de +65 M€, les dépenses liées aux collèges ont atteint près de 170 M€ consommant 93% des crédits votés à cet effet. Sur ce montant, 146.6 M€ ont été consacrés à des travaux dont 140.6 M€ sur le plan Collèges avec 88.3 M€ sur les constructions neuves et 52.3 M€ pour les réhabilitations. Le reste des dépenses étant relatif aux acquisitions foncières et aux études.12 opérations ont été menées en 2021 malgré la crise sanitaire."
-DI.1.2,"Les enjeux concernant le réseau routier départemental, composé de 6 360 km de routes départementales, et avec 800.000 usagers quotidiens, restent toujours une préoccupation majeure comme en témoignent les 42.8 M€ investis en 2021, soit une augmentation de 11% par rapport à 2020."
+DI.1.2,"Les enjeux concernant le réseau routier départemental, composé de 6 400 km de routes départementales, et avec 800.000 usagers quotidiens, restent toujours une préoccupation majeure comme en témoignent les 42.8 M€ investis en 2021, soit une augmentation de 11% par rapport à 2020."
 DI.1.3,"Les travaux de maintenance et de rénovation du patrimoine bâti (19.8 M€) ont essentiellement porté sur le relogement du pôle de maintenance de proximité à hauteur de 5,3 M€, la fin des travaux des centres d’exploitation à hauteur de 6.4 M€, dont celui de St Martin Lacaussade pour 1.9 M€, Cestas pour 2.3M€ et St Avit St Nazaire pour 1.5 M€. On peut également signaler le début des travaux pour les opérations Biblio Gironde pour 0.8 M€ et la réalisation de 21M€ relatifs au relogement de l’IDDAC. Les dépenses relatives au patrimoine divers hors acquisitions s’élèvent à 10.16 M€ en progression de 15%."
 DI.1.4,"Les dépenses liées aux travaux sur le patrimoine naturel, financés principalement par la taxe d’aménagement se sont élevées à 2.5 M€ en 2021. Elles ont été principalement consacrées à l’acquisition d’espaces naturels sensibles et à leur gestion pour 1.2 M€, et aux déplacements doux pour 1.3 M€."
 DI.1.5,Les opérations du programme Immobilier Social s’élèvent à 1.3 M€ et concernent pour l’essentiel les travaux sur les Maisons départementales des Solidarités et de l‘insertion (MDSI) dont 0.76 M€ pour le pôle social de Langon.
 ,
 DI.2,"Avec 63.5 M€ versés, le Département a accentué son soutien aux territoires en les accompagnant en vue de favoriser la solidarité territoriale, avec des opérations d’équipement portées par des structures publiques et privées."
-DI.2.1,le bloc communal formé des communes et EPCI a reçu 32.6 M€ d’aides en 2021 en hausse de 17%. 626 dossiers ont été soutenus pour un montant de 18.1 M€.
+DI.2.1,Le bloc communal formé des communes et EPCI a reçu 32.7 M€ d’aides en 2021 en hausse de 10%. 626 dossiers ont été soutenus pour un montant de 18.1 M€.
 DI.2.2,"Le département a injecté près de 9 M€ dans l’aide au logement en 2021, soit une hausse de 25% par rapport à 2020. Les crédits au titre de la convention générale de délégation des aides à la pierre de l’Etat ont été réalisés à hauteur de 2.8 M€ contre 0.8 M€ en 2020, les chantiers ayant été décalés à cause de la COVID. Pour les mêmes raisons, la partie Départementale est passée de 2.4 M€ à 4.3 M€."
 DI.2.3,
-DI.2.4,"Les aides aux autres partenaires publics ou privés sont en forte progression à +36% et atteignent 17.2 M€. Parmi ces aides, 3 M€ ont été versés pour les investissements en direction des personnes âgées (dont 2.2 M€ pour l’EPHAD de la Tour du pin)"
+DI.2.4,"Les aides aux autres partenaires publics ou privés sont en forte progression à +36% et atteignent 17.3 M€. Parmi ces aides, 3 M€ ont été versés pour les investissements en direction des personnes âgées (dont 2.2 M€ pour l’EPHAD de la Tour du pin)"
 DI.2.5,
 DI.2.6,Gironde Numérique a reçu 4.7 M€ pour le développement du Plan très haut débit.
 DI.3,
