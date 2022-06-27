@@ -292,7 +292,7 @@ export default connect(
             yearDIDetails,
             yearInvestments: investmentsByYear.get(currentYear),
             partitionByYear,
-            population: 1505517, // source : https://www.gironde.fr/le-departement
+            population: 1626287, // source : https://www.gironde.fr/le-departement
             screenWidth,
             urls
         };
