@@ -77,15 +77,11 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `Ce compte administratif 2021 retrace l’exécution d’un budget qui a pour particularité d’assurer la transition entre deux mandatures dans un contexte incertain dominé par  :
-
-· Les suites de la crise sanitaire et économique qui a freinée l’économie française jusqu’au printemps provocant une baisse de son PIB de 8% avant un redressement de 6,3% ; 
-
-· Un taux de chômage en forte baisse revenant à son niveau d’avant crise mais avec pour corollaire une accélération de l’inflation et des contraintes d’offres sur de nombreux secteurs ;
-
-· Un taux de chômage en forte baisse revenant à son niveau d’avant crise mais avec pour corollaire une accélération de l’inflation et des contraintes d’offres sur de nombreux secteurs ;
-
-· Une gestion aux contraintes accentuées avec des recettes de fonctionnement de plus en plus soumises à la conjoncture et des dépenses de fonctionnement dont l’aspect structurel est de plus en plus marqué.
+                `L’année 2020 a été une année particulière à plusieurs égards :
+· Elle restera marquée par une crise sanitaire et économique qui certes a affecté le budget du Département mais conforte l’utilité de ses politiques publiques à l’égard des plus vulnérables et en faveur de l’équilibre des territoires Cette crise a placé une nouvelle fois les départements au cœur de l’action du fait de leurs compétences en matière sociales mais aussi leur rôle d’acteurs des solidarités humaines et territoriales
+· Elle est la dernière année de perception de la taxe sur le foncier des propriétés bâties (TFPB), dernier levier fiscal que conservaient les départements
+· Elle aura vu la suspension du Pacte de Cahors pour 2020 au vu des dépenses exceptionnelles considérables engagées par les départements pour combattre la crise sanitaire puis sociale. Le Département de la Gironde aura quant à lui obtenu gain de cause grâce au jugement rendu en toute fin d’année par le tribunal administratif confirmant qu’il était éligible à un taux prenant en compte sa dynamique démographique.
+· La crise sanitaire aura clairement démontré et mis en exergue les effets préoccupants de la dé-corrélation entre la structure des dépenses et des recettes départementales qui, en temps de crise, aggravent l’effet de ciseau et menacent la stabilité du soutien aux territoires et aux plus fragiles. · Elle porte le dernier budget voté et exécuté de la mandature `
             )
         ),
 
