@@ -139,7 +139,7 @@
                   "id": "DF.3.2",
                   "name": "Transports",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C6245+C6513)∩F52+C6245∩F568∩(Ann2016+Ann2017)+C6568∩F821∩(Ann2016+Ann2017)+C6568∩F81∩(Ann2016+Ann2017)+DF∩(C6542∩F52)+(C673+C611)∩F821+(C611+C673+C6245+C6513+C6156+C60632+C6718+C673+C62878+C627+C6541+C6542)∩F81+(C615231+C65888+C6281+C6236+C6156+C615232)∩F821+C6718∩F52"
+                  "formula": "DF∩(C673+C611)∩F821+(C611+C673+C6245+C6513+C6156+C60632+C6718+C673+C62878+C627+C6541+C6542)∩F81+C6245∩F568∩(Ann2016+Ann2017)+C6568∩F821∩(Ann2016+Ann2017)+C6568∩F81∩(Ann2016+Ann2017)+(C6156+C6236+C6281+C65888+C615231+C615232)∩F821"
                 },
                 {
                   "id": "DF.3.3",
@@ -160,29 +160,35 @@
                   "formula": "DF∩(C65731+C65732+C65733+C65734+C65735+C65736+C65737+C65738+C6574)-(C657∩F4+C657∩F5+C657∩F8)+C65734∩F51"
                 },
                 {
-                  "id": "DF.3.6",
+                  "id": "DF.3.7",
                   "name": "Diverses participations",
                   "useInAnalysis": true,
                   "children": [
                     {
-                      "id": "DF.3.6.1",
+                      "id": "DF.3.7.1",
                       "name": "Fond social logement FSL",
                       "useInAnalysis": true,
                       "formula": "DF∩(C6556+C65561)∩F72"
                     },
                     {
-                      "id": "DF.3.6.2",
-                      "name": "Bourses départementales",
-                      "useInAnalysis": true,
-                      "formula": "DF∩ C6513-(F52+F81)"
-                    },
-                    {
-                      "id": "DF.3.6.3",
+                      "id": "DF.3.7.3",
                       "name": "Participation diverses",
                       "useInAnalysis": true,
                       "formula": "DF∩ ((C6512+C65568)-F5-F4-F8)+ ((C6561+C6568)-(F5+F4+F8+F91))+(C6556+C6568)∩F58+C6556∩(F52+F041)+C6556∩F0202+C65661∩(F221+F0202)"
+                    },
+                    {
+                      "id": "DF.3.7.2",
+                      "name": "Bourses départementales",
+                      "useInAnalysis": true,
+                      "formula": "DF∩ C6513-(F52+F81)"
                     }
                   ]
+                },
+                {
+                  "id": "DF.3.6",
+                  "name": "Transports des élèves et étudiants handicapés",
+                  "useInAnalysis": true,
+                  "formula": "DF∩(C6245+C6513+C6542+C6718)∩F52"
                 }
               ]
             },
