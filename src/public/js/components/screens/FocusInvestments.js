@@ -103,7 +103,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. A la rentrée scolaire 2019-2020, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. En 2019, le plan Ambition 2024 a été lancé avec le démarrage de plusieurs opérations majeures de ce plan qui au total compte 13 nouveaux collèges et 10 réhabilitations l’objectif étant de pouvoir accueillir 70000 collégiens d’ici 2024. Les opérations de construction prévues se sont donc accélérées avec 67.1M€ de dépensés en 2020.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. En 2021, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. Pour répondre à cette croissance de la population collégienne en Gironde, le Département s'est engagé dans un Plan collèges qui prévoit, d’ici 2024, la création de 14 nouveaux collèges et la réhabilitation de 10 collèges existants représentant 670 millions d’euros d’investissement.  Les opérations de construction prévues se sont donc accélérées avec 140.6M€ de dépensés en 2021. A la rentrée 2021 les élèves de 5 collèges girondins ont pu découvrir leurs bâtiments flambant neufs : collèges de Marsas, Jean Jaurès de Cenon, Édouard Vaillant de Bordeaux, Jacques Ellul transféré à Mayaudon et Jules Ferry/Gisèle Halimi à Mérignac.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -122,7 +122,7 @@ export function FocusSol({
                 illustrationUrl: urls[ROUTES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.2'] / focusDetailsDenominator : 1,
-                text: `Les enjeux concernant le réseau routier départemental composé de 6 400 km de routes départementales, 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) et avec 800.000 usagers quotidiens restent toujours une préoccupation majeure comme en témoignent les 38.6 M€ investis en 2020, soit une moyenne de 41M€ par an depuis 2015. En 2020, les réalisations ont été importantes et ce malgré une interruption liée au confinement en mars /avril qui a été rattrapée durant l’été et l’automne notamment sur le chantier du Taillan et de Fargues St-Hilaire. Ce sont 5.8M€ et 9.3M€ qui ont été investis respectivement pour ces deux opérations.`,
+                text: `Les enjeux concernant le réseau routier départemental composé de 6 400 km de routes départementales, 350 kilomètres de pistes cyclables et 1 900 ouvrages d’art (ponts et murs de soutènement) et avec 800.000 usagers quotidiens restent toujours une préoccupation majeure comme en témoignent les 42.8 M€ investis en 2021, soit une moyenne de 41M€ par an depuis 2015. En 2021 ces dépenses ont concerné la préservation du patrimoine départemental pour 16 M€ dont 2.6 M€ au titre du renouvellement des véhicules et gros engins du parc routier, 10.2 M€ pour les renforcements programmés, et 2.4 M€ pour l’entretien des chaussées , le développement du réseau départemental avec 18.2 M€ réalisés dont 15.2 M€ au titre de la déviation du Taillan et 2.95 M€ au titre de celle de Fargues St Hilaire.`,
                 highlights: [
                     /*{
                     strong: "",
@@ -160,7 +160,7 @@ export function FocusSol({
                 illustrationUrl: urls[ENVIRONNEMENT_AMENAGEMENT_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.4'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.4'] / focusDetailsDenominator : 1,
-                text: `Le Département agit pour la protection et la valorisation des espaces naturels sensibles. Il assure leur gestion, organise des actions de sensibilisation à l'environnement, et permet au public de visiter ces sites préservés en visites libres, ou guidées par des guides naturalistes. Ces dépenses ont été principalement consacrées aux déplacements doux aux acquisitions destinées à la création ou extension de ZPENS (Vallée de la LEYRE, Ciron Bernos Beaulac.) et à leur gestion (gestion du projet Maharans à Captieux). Des travaux hydrauliques ou d’exploitation forestière ont été réalisés en particulier au domaine de Certes ou l’île nouvelle ainsi que sur les domaines départementaux de loisirs `,
+                text: `Le Département agit pour la protection et la valorisation des espaces naturels sensibles. Il assure leur gestion, organise des actions de sensibilisation à l'environnement, et permet au public de visiter ces sites préservés en visites libres, ou guidées par des guides naturalistes. Ces dépenses ont été principalement consacrées à l’acquisition d’espaces naturels sensibles et à leur gestion pour 1.2 M€, et aux déplacements doux pour 1.3 M€. `,
                 highlights: [
                     /*{
                       strong: "",
@@ -180,7 +180,7 @@ export function FocusSol({
                 amount: yearDIDetails ? yearDIDetails['DI.1.5'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.5'] / focusDetailsDenominator : 1,
                 text: `Il s’agit des travaux de construction ou de rénovation des bâtiments sociaux faisant suite au programme Solidarité 2013.
-                En 2020, Les opérations du programme Immobilier Social ont concerné pour 0.8M€ les travaux sur les Maisons du Département des Solidarités (notamment les Pôles territoriaux de solidarité de Bordeaux au Grand Parc et du Sud-Gironde à Langon).`,
+                En 2021, Les opérations du programme Immobilier Social ont concerné pour l’essentiel les travaux sur les Maisons départementales des Solidarités et de l‘insertion (MDSI) dont 0.76 M€ pour le Pôle social de Langon.`,
                 highlights: [
                     /*{
                       strong: "",
@@ -199,19 +199,23 @@ export function FocusSol({
                 illustrationUrl: urls[SOUTIEN_COMMUNES_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.2'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.2'] / focusDetailsDenominator : 1,
-                text: `Le Département est le chef de file des solidarités humaines et territoriales.  Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale (offre d’ingénierie avec Gironde Ressources et subventions). Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. En outre, la réduction des marges de manœuvre financières dues à la crise sanitaire combinée au décalage du calendrier électoral municipal a eu un impact sur le niveau d’investissement porté par les communes en 2020.`,
+                text: `Le Département est le chef de file des solidarités humaines et territoriales.  Il est l’interlocuteur privilégié des collectivités dans le domaine de l’ingénierie territoriale (offre d’ingénierie avec Gironde Ressources et subventions). Dans un contexte économique de plus en plus tendu et face à une pression démographique forte, les communes connaissent des situations économiques très contrastées qui rendent difficile la réalisation de projets pourtant nécessaires. Avec 63.5 M€ versés, le Département a accentué son soutien aux territoires en les accompagnant en vue de favoriser la solidarité territoriale, avec des opérations d’équipement portées par des structures publiques et privées. A l’image de l’enveloppe « coup de pouce », qui a permis de financer 10 projets en 2021, l’effet de levier du Département est significatif en investissement sur des projets portés par de petites communes en accompagnement de projets associatifs.`,
                 highlights: [
                     {
-                        strong: "29,7 M€",
+                        strong: "32,6 M€",
                         span: "de subventions aux communes"
                     },
                     {
-                        strong: "7 M€",
+                        strong: "9 M€",
                         span: "de subventions au logement social"
                     },
                     {
                         strong: "4,7 M€",
                         span: "de subventions pour l'accès au très haut débit"
+                    },
+					{
+                        strong: "17,2 M€",
+                        span: "de subventions aux partenaires publics et privés"
                     }
                 ],
                 moreUrl: '#!/finance-details/DI.2'
