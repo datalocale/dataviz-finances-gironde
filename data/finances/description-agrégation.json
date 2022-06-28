@@ -139,7 +139,7 @@
                   "id": "DF.3.2",
                   "name": "Transports",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C673+C611)∩F821+(C611+C673+C6245+C6513+C6156+C60632+C6718+C673+C62878+C627+C6541+C6542)∩F81+C6245∩F568∩(Ann2016+Ann2017)+C6568∩F821∩(Ann2016+Ann2017)+C6568∩F81∩(Ann2016+Ann2017)+(C6156+C6236+C6281+C65888+C615231+C615232)∩F821"
+                  "formula": "DF∩(C611)∩F821+(C611+C673+C6245+C6513+C6156+C60632+C6718+C673+C62878+C627+C6541+C6542)∩F81+C6245∩F568∩(Ann2016+Ann2017)+C6568∩F821∩(Ann2016+Ann2017)+C6568∩F81∩(Ann2016+Ann2017)+(C6156+C6236+C6281+C65888+C615231+C615232)∩F821"
                 },
                 {
                   "id": "DF.3.3",
@@ -188,7 +188,7 @@
                   "id": "DF.3.6",
                   "name": "Transports des élèves et étudiants handicapés",
                   "useInAnalysis": true,
-                  "formula": "DF∩(C6245+C6513+C6542+C6718)∩F52"
+                  "formula": "DF∩(C6245+C6513+C6542+C6718)∩F52+C673∩F821"
                 }
               ]
             },
