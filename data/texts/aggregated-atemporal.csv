@@ -71,17 +71,17 @@ RF.3.3,Fiscalité transférée,"Les **transferts de compétences** de l'Etat aux
 RF.3.3.1,TICPE,"Cette taxe concerne certains produits énergétiques, notamment ceux **d'origine pétrolière**. Elle s'intitulait anciennement « taxe intérieure de consommation sur les produits pétroliers » ou **TIPP**. 
  [en savoir plus](https://fr.wikipedia.org/wiki/Taxe_int%C3%A9rieure_de_consommation_sur_les_produits_%C3%A9nerg%C3%A9tiques)"
 RF.3.3.2,TSCA,"Cet **impôt proportionnel** créé en 1944, acquitté sur certaines conventions d'assurance par l'assureur, le courtier ou l'assuré lui-même, est affecté pour partie aux Départements, à la Caisse nationale des allocations familiales et à la Caisse nationale de l’assurance maladie des travailleurs salariés (CNAM). Pour les départements, le reversement de cette taxe vient en compensation de certaines charges ou compétences transférées par l'Etat (Service Départemental d'Incendie et de Secours, Revenu de solidarité active, etc.)."
-RF.3.4,Fiscalité affectée,
+RF.3.4,Fiscalité affectée,Il s'agit principalement de la Taxe d'Aménagement                                                                                                                                                                                                                                                                                                                                                                    
 RF.3.4.1,Taxe d'aménagement,"La taxe d'aménagement est applicable à toutes les opérations d'aménagement, de construction, de reconstruction et d'agrandissement de bâtiments ou d'installations, nécessitant une autorisation d'urbanisme (permis de construire ou d'aménager, déclaration préalable), et aux opérations qui changent la destination des locaux dans le cas des exploitations agricoles. La taxe est composée de 3 parts (communale, départementale et régionale. Chaque part étant instaurée par délibération de l'autorité locale : Conseil municipal, Conseil départemental et Conseil régional (uniquement en Île-de-France).
  
  Le taux de la part départementale est unique et ne peut pas dépasser 2,5 % . 
  La taxe d’aménagement se substitue à la taxe locale d’équipement (TLE), à la taxe départementale des espaces naturels et sensibles (TDENS), à la taxe départementale destinée au financement des conseils d’architecture, d’urbanisme et de l’environnement(TDCAUE)"
 RF.3.5,Autres fiscalités,"Il s'agit de différentes taxes ou impôts que perçoit le Département : 
- * taxe sur l'électricité, 
- * redevance des mines."
+ * Taxe sur l'électricité, 
+ * Redevance des mines,                                                                                                                                                                                                                                                                                                                                                                                       *  Taxe de séjour"
 RF.3.5.1,Taxe sur l'électricité,"La taxe départementale sur la consommation finale d'électricité (TDCFE) est due par les abonnés aux communes et départements en **proportion des kWh consommés**. Son montant dépend d’un coefficient multiplicateur fixé et voté par les Conseils municipaux et départementaux.
  [en savoir plus](http://www.energie-info.fr/Fiches-pratiques/Ma-facture-mon-compteur/CSPE-TICGN-CTA-TVA-Toutes-les-taxes-sur-ma-facture)"
-RF.3.5.2,"Autres recettes fiscales (redevance des mines, radars...)",Il s'agit principalement de la taxe additionnelle à la taxe de séjour. Le Département peut en effet instituer une taxe additionnelle de 10 % à la taxe de séjour ou à la taxe de séjour forfaitaire perçue dans le Département par les Communes ou les Etablissements publics de coopération intercommunale (EPCI).
+RF.3.5.2,"Autres recettes fiscales (Taxe de séjour, redevance des mines)",Il s'agit de la redevance des mines et de la taxe additionnelle à la taxe de séjour. Le Département peut en effet instituer une taxe additionnelle de 10 % à la taxe de séjour ou à la taxe de séjour forfaitaire perçue dans le Département par les Communes ou les Etablissements publics de coopération intercommunale (EPCI).
 RF.4,Péréquation horizontale,La finalité de la péréquation est d'atténuer les disparités entre les collectivités par une redistribution des ressources en fonction d'indicateurs physiques et financiers. Le mécanisme de péréquation horizontale consiste à prélever une fraction de ressources fiscales de certains départements pour la reverser à d'autres moins favorisés.
 RF.4.1,Fonds de Péréquation DMTO,"Le fonds national de péréquation des droits de mutation à titre onéreux (DMTO) perçus par les Départements a été mis en place en 2011. Ce fonds est alimenté par 2 prélèvements :
  * un premier prélèvement sur «stock» lié au niveau des DMTO du Département relativement à la moyenne de l’ensemble des départements ;
@@ -125,7 +125,7 @@ RF.6.2,Autres recettes,
 RF.6.2.1,Produits de gestion courante,Il s'agit de recouvrements au titre d'indus ou de régies.
 RF.6.2.2,Produits des services,"Il s'agit des revenus issus des services publics locaux, de redevances d'occupation du domaine public départemental ou de recouvrement suite à la mise à disposition de personnel (Maison Départementale des Personnes Handicapées ou autres organismes)."
 RF.6.2.3,Produits exceptionnels hors cessions,"Il s'agit de recettes qui ont des origines diverses et qui n'ont pas vocation à se reproduire (ex : annulation mandat, etc.)"
-RF.6.2.4,Produits financiers,Il s'agit de recettes issues de participations financières (intérêts sur parts sociales)
+RF.6.2.4,Produits financiers,Il s'agit de recettes issues des émissions de trésorerie à court terme (NEU CP) et de  participations financières 
 RF.6.2.5,Remboursement charges de personnels,Il s'agit de remboursement au titre des rémunérations ou des charges sécurité sociale ou prévoyance.
 RF.6.2.6,Reprise sur provisions,
 RF.6.2.7,Revenu des immeubles,Il s'agit des loyers perçus sur des biens appartenant au Département ou des rémunérations liées à une convention d’occupation du domaine public départemental.
@@ -196,54 +196,59 @@ DF.3.2,Transports,"Jusqu'à la loi NOTRe (art. L.3111-1 code des transports), re
  * les **transports scolaires**
  * la **desserte des îles**
  * la construction, l’aménagement et l’exploitation de **gares publiques routières de voyageurs** 
- * les **lignes ferroviaires d’intérêt local**
+ * les **lignes ferroviaires d’intérêt local**    
  Depuis le 1er septembre 2017, les lignes régulières de TransGironde et le transport scolaire ont été transférés à la Région Nouvelle-Aquitaine (loi Nouvelle organisation territoriale de la République). Seul le transport des élèves et étudiants en situation de handicap reste assuré par le Département.
- [en savoir plus sur le site Gironde.fr](https://www.gironde.fr/deplacements)
  [en savoir plus](http://www.vie-publique.fr/decouverte-institutions/institutions/collectivites-territoriales/competences-collectivites-territoriales/quelles-sont-competences-exercees-par-departements.html)"
 DF.3.3,Prévention spécialisée,"Dans le cadre des politiques que ceux-ci développent pour venir en aide à l'enfance, les Départements ont autorité sur l'**action d'éducation spécialisée** visant à permettre à des jeunes en voie de marginalisation de **rompre avec l’isolement** et de **restaurer le lien social**."
-DF.3.4,Dotation de fonctionnement des collèges,"Le Département **construit, entretient et rénove l’ensemble du parc de 105 collèges publics** dans le respect des normes environnementales.
+DF.3.4,Dotation de fonctionnement des collèges,"Le Département **construit, entretient et rénove l’ensemble du parc de 111 collèges publics** dans le respect des normes environnementales.
  Il assure aussi la restauration scolaire, l’environnement numérique des établissements, et accompagne le développement de projets culturels, citoyens et environnementaux.
  
  [en savoir plus](https://www.gironde.fr/jeunesse/vie-au-college)"
 DF.3.5,Subventions de fonctionnement,"Ces aides financières sont versées à des organismes extérieurs conformément aux règlements d'intervention adoptés par les élus. Il peut s'agir d'associations, de personnes physiques, d'organismes divers."
-DF.3.6,Transports des étudiants et des élèves handicapés,
+DF.3.6,Transports des étudiants et des élèves handicapés,"Avec la loi NOTRe, cette compétence est désormais attribuée à la Région Nouvelle Aquitaine à l'exception des services de transport adapté des élèves handicapés vers les établissements scolaires. Le transport adapté des élèves en situation de handicap reste donc à la charge des Départements.
+
+Les élèves et étudiants présentant un handicap peuvent bénéficier d'un transport adapté depuis leur domicile jusqu’à l'établissement d'enseignement fréquenté.
+
+EN SAVOIR PLUS"
 DF.3.7,Diverses participations,"Il s'agit principalement de Participations aux familles par le biais d'octroi de bourses d'études pour les collégiens, du fonds de solidarité pour le logement des plus démunis et autres participations financières."
 DF.3.7.1,Fond social logement,"Le Fonds de Solidarité Logement de la Gironde a pour but d’aider les **familles ou les personnes les plus démunies** rencontrant des difficultés pour accéder à un logement décent et indépendant, ou à s’y maintenir en disposant de la fourniture d’eau, d’énergie et de service téléphonique et/ou internet. [source](http://www.fsl33.org/)"
-DF.3.7.2,Bourses départementales,"Cette aide directe destinée à **couvrir les frais de scolarité** est accordée aux **familles les plus modestes**, domiciliées en Gironde, boursières de l’Education Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public ou un collège privé sous contrat. Selon les revenus de la famille, en 2015-2016, le montant de cette aide départementale était de :
- 
- * 70 € pour les familles bénéficiant du taux 1
- * 80 € pour les familles bénéficiant du taux 2
- * 100 € pour les familles bénéficiant du taux 3
+DF.3.7.2,Bourses départementales,"La bourse départementale concerne les familles domiciliées en Gironde, boursières de l’Éducation Nationale, qui ont un ou plusieurs enfants scolarisés dans un collège public, ou un collège privé sous contrat. Cette aide forfaitaire directe, destinée à couvrir les frais de scolarité, varie selon le taux de la bourse nationale qui tient compte des revenus de la famille.
+
+Pour l’année 2021-2022, le montant de cette aide départementale est de :
+
+70 € pour les familles bénéficiant du taux 1
+80 € pour les familles bénéficiant du taux 2
+100 € pour les familles bénéficiant du taux 3
  
  [en savoir plus](https://www.gironde.fr/jeunesse/vie-au-college#progress-3)"
-DF.3.7.3,Participation diverses,"Participations financières à des organismes de regroupement (syndicats mixtes et ententes) dans les domaines de l'aménagement, de l'assainissement, du développement touristique, du logement ou du milieu naturel."
+DF.3.7.3,Participation diverses,"Il s'agit de participations financières à des organismes de regroupement (syndicats mixtes et ententes) dans les domaines de l'aménagement, de l'assainissement, du développement touristique, du logement ou du milieu naturel."
 DF.4,Frais de personnel,"L'administration départementale dispose de **ressources humaines** pour lui permettre de mettre en oeuvre ses missions de service public. Ces agents territoriaux ( fonctionnaires ou contractuels) sont rémunérés par la collectivité en fonction des règles définies par le code général des collectivités territoriales.
  Les agents sont répartis sur le territoire dans les 425 sites d'accueil du public et dans le quartier de Mériadeck à Bordeaux. Ils assurent les missions de service public dévolues au Département avec le souci de l'équité territoriale."
 DF.5,Péréquation horizontale,"La péréquation est un mécanisme de redistribution qui **vise à réduire les écarts de richesse**, et donc les inégalités, entre les différentes collectivités territoriales. 
- L’article 113 de la loi de finances initiales pour 2013 prévoit la création d’un mécanisme de péréquation horizontale pour les départements, c'est-à-dire redistribuant une fraction des ressources fiscales entre ces collectivités. Cette péréquation s’est renforcée en 2019 : composée jusque-là des contributions au fonds de péréquation de la contribution sur la valeur ajoutée (FPCVAE) et au titre des deux fonds adossés au droits de mutation : le fonds de péréquation des DMTO (FPDMTO) et le fonds de solidarité entre les Départements (FSD), l’article 261 de la loi de finances pour 2019 a créé le Fonds de Soutien interdépartemental (FSID) destiné à répondre aux difficultés de financement des AIS des départements confrontés à des difficultés sociodémographiques mais pour lequel la Gironde n’a que la qualité de contributeur.L’année 2020 a vu la restructuration des dispositifs de péréquation horizontale, la loi de finances 2020 
- prévoyant la fusion des trois fonds assis sur les DMTO en un nouveau fonds unique afin de simplifier et renforcer les mécanismes de solidarité en faveur des départements les moins dotés."
-DF.6,Charges courantes,"Ces charges comprennent notamment les **dépenses d'achats de fourniture, les dépenses liées aux consommations d'énergie et de communication, l'ensemble des prestations de services** auxquelles font appel la collectivité ainsi que les dépenses liées à l'**entretien de la voirie** et les **indémnités des élus** (questure). En 2019, s'est rajoutée la dépense liée à la reprise financière, les dépenses de fonctionnement ayant évolué plus que les 1.2% demandés par l'Etat"
+ L’article 113 de la loi de finances initiales pour 2013 prévoit la création d’un mécanisme de péréquation horizontale pour les départements, c'est-à-dire redistribuant une fraction des ressources fiscales entre ces collectivités. Cette péréquation s’est renforcée en 2019 : composée jusque-là des contributions au fonds de péréquation de la contribution sur la valeur ajoutée (FPCVAE) et au titre des deux fonds adossés au droits de mutation : le fonds de péréquation des DMTO (FPDMTO) et le fonds de solidarité entre les Départements (FSD), l’article 261 de la loi de finances pour 2019 a créé le Fonds de Soutien interdépartemental (FSID) destiné à répondre aux difficultés de financement des AIS des départements confrontés à des difficultés sociodémographiques mais pour lequel la Gironde n’a que la qualité de contributeur.                                                                                                                                  
+ L’année 2020 a vu la restructuration des dispositifs de péréquation horizontale, la loi de finances pour 2020 prévoyant la fusion des trois fonds assis sur les DMTO en un nouveau fonds unique afin de simplifier et renforcer les mécanismes de solidarité en faveur des départements les moins dotés."
+DF.6,Charges courantes,"Ces charges comprennent notamment les **dépenses d'achats de fourniture, les dépenses liées aux consommations d'énergie et de communication, l'ensemble des prestations de services** auxquelles fait appel la collectivité ainsi que les dépenses liées à l'**entretien de la voirie** et les **indémnités des élus** (questure). En 2019, s'est rajoutée la dépense liée à la reprise financière, les dépenses de fonctionnement ayant évolué plus que les 1.2% demandés par l'Etat"
 DF.6.1,Frais généraux,"Ces frais correspondent aux dépenses liées au fonctionnement courant de la collectivité comme par exemple les **dépenses d’entretien des bâtiments, les assurances, les frais affranchissement ou de télécommunication, les achats d'électricité et de fournitures diverses, les prestations de formation** de la collectivité"
 DF.6.1.1,Achats et fournitures,"Il s'agit des dépenses liées aux achats d'électricité, carburant, chauffage, habillement, fournitures administratives et de petits équipements"
 DF.6.1.2,Prestations de services,"Ces frais comprennent notamment les dépenses réalisées par la collectivité pour l'entretien et les réparations de bâtiments, les assurances, les locations immobilières, la formation, études et charges diverses…"
 DF.6.1.3,Frais divers,"Cette rubrique regroupe un ensemble de dépenses effectuées par la collectivité en termes d'affranchissement, de souscription à une offre de service de télécommunication, de services bancaires, d'organisation de réception ou de déplacements"
 DF.6.1.4,Autres impôts et taxes,Ce sont des taxes foncières principalement
 DF.6.2,Dépenses de voirie,Ces dépenses concernent l'entretien du **réseau routier** départemental constitué de **6 400 kilomètres de routes dont 390 kilomètres de pistes cyclables.** [en savoir plus](https://www.gironde.fr/deplacements/les-routes-et-ponts)
-DF.6.3,Autres charges,"Ces charges diverses et souvent exceptionnelles, concernent notamment des subventions d'équilibre aux budgets annexes , ou des régularisations, annulations et provisions"
+DF.6.3,Autres charges,"Ces charges diverses et souvent exceptionnelles, concernent notamment les dépenses de la questure, des subventions d'équilibre aux budgets annexes , ou des régularisations, annulations et provisions"
 DF.6.3.1,Questure/indemnités des élus,Ces dépenses concernent les **frais de fonctionnement des groupes d’élus** et le paiement des indemnités aux élus.
 DF.6.3.2,Charges exceptionnelles et provisions,"Ces charges concernent les **intérêts moratoires, amendes fiscales, subventions aux SPIC** (service public industriel et commercial)."
 DF.6.3.3,"Autres (dont budgets annexes hostens, LABO)","Contributions aux budgets annexes des structures administratives rattachées au Département comme le domaine d'Hostens, ou le Laboratoire départemental."
-DF.6.4,Dotation transferts,Ces dépenses sont liées à l'application de la loi MAPTAM et aux transferts de certaines dépenses à Bordeaux Métropole
-DF.6.5,Reprise financière,"L'Etat a décidé en 2018 de mettre sous surveillance les dépenses de fonctionnement des collectivités, celles ci ne devant pas évoluer ( dans la majorité des cas) de plus de 1.2%. Dans le cas contraire, une reprise financière du montant du dépassement serait appliquée à 100%, ou à 75% de ce montant si la collectivité avait contractualisé avec l'Etat. N’étant pas d’accord avec le taux d'encadrement notifié par le Préfet, le Département de la Gironde a intenté un recours devant le Tribunal administratif à l’instar d’autres départements (Finistère, Seine-Saint-Denis)"
+DF.6.4,Dotation transferts,Ces dépenses sont liées à l'application de la loi MAPTAM et aux transferts de certaines dépenses à Bordeaux Métropole et au Syndicat mixte des ports du Bassin d'Arcachon
+DF.6.5,Reprise financière,"L'Etat a décidé en 2018 de mettre sous surveillance les dépenses de fonctionnement des collectivités, celles ci ne devant pas évoluer ( dans la majorité des cas) de plus de 1.2%. Dans le cas contraire, une reprise financière du montant du dépassement serait appliquée à 100%, ou à 75% de ce montant si la collectivité avait contractualisé avec l'Etat. N’étant pas d’accord avec le taux d'encadrement notifié par le Préfet, le Département de la Gironde a intenté un recours devant le Tribunal administratif à l’instar d’autres départements (Finistère, Seine-Saint-Denis). Il a obtenu gain de cause le 11 décembre 2020, l’Etat se voyant obligé d’appliquer un taux de 1.35% au lieu des 1.2% appliqué. Cela s’est ainsi traduit par baisse  de 6.1M€ des reprises financières précedemment appliquées."
 DF.7,Intérêts des emprunts,Il s'agit des intérêts des emprunts long terme contractés par le Département pour financer ses investissements. Avec l'amortissement du capital comptabilisé en investissement ils composent l'annuité de la dette
 RI,Recettes d’investissement,"Les recettes d'investissement sont constituées :
- * de dotations de l’Etat [par exemple, le Fonds de Compensation de la TVA (FCTVA), la Dotation Globale d'Équipement (DGE), etc.]
+ * de dotations de l’Etat [par exemple, le Fonds de Compensation de la TVA (FCTVA), la Dotation Globale d'Équipement (DGE) devenue la Dotation de Soutien à l'Investissement des Départements (DSID), etc.]
  * de subventions (versées en contrepartie de dépenses réalisées par les communes, la Région, l’État,ou l’Europe…)
  * des ventes de biens départementaux (cession d’immobilisation…)
  * des emprunts contractés pour financer les investissements de la collectivité"
 RI.1,Fonds de Compensation de la Taxe sur la Valeur Ajoutée (FCTVA),Ce fonds est une dotation de l'Etat destinée à assurer une compensation de la charge de TVA que les collectivités et leur groupement supportent sur leurs **dépenses réelles d’investissement**.
 RI.2,Dotation Décentralisée pour l’Equipement des collèges (DDEC),Cette dotation est attribuée aux départements pour **compenser les dépenses d’investissement et d’équipement** des collèges transférés aux départements par l'Etat en 1986.
-RI.3,Dotation Globale d’Equipement (DGE)/DSID,"Cette dotation est destinée à soutenir l’effort d'investissement des Départements en matière d’**équipement rural** (infrastructures publiques en milieu rural, tourisme vert ou encore habitat rural).Elle est remplacée àpartir de 2018 par la Dotation de soutien àl’investissement des départements (DSID) qui se décompose en deux parts :une part dite « projets » dédiée au financement de projets portés par
+RI.3,Dotation Globale d’Equipement (DGE)/DSID,"Cette dotation est destinée à soutenir l’effort d'investissement des Départements en matière d’**équipement rural** (infrastructures publiques en milieu rural, tourisme vert ou encore habitat rural).Elle est remplacée àpartir de 2018 par la Dotation de soutien à l’investissement des départements (DSID) qui se décompose en deux parts :une part dite « projets » dédiée au financement de projets portés par
  le Département et une part dite« péréquation » répartie en fonction de critères de péréquation"
 RI.4,Subventions,"Il s'agit de subventions versées par l’Europe (FEDER, FEOGA), l’Etat, la Région, les communes, l’ADEME, l’Agence de l’eau, la CAF afin de financer des équipements réalisés par le Département."
 RI.5,Divers,Il s'agit essentiellement de recettes liées à des régularisations d'avances pour des travaux ou aménagement dans les collèges ou la voirie
@@ -253,14 +258,14 @@ RI.6,Cessions,"Il s’agit des ventes de biens meubles ou immeubles comme :
  * les **terrains** (lotissement, parcelle zone d’activités, délaissés de voirie..........),
  * le **matériel** si le montant est supérieur à 500 € (véhicule, mobilier.....),"
 RI.7,Amendes radars automatiques,"Produits des amendes de radars automatiques sur les routes du réseau départemental,"
-RI.8,Avance remboursable DMTO,
-RI.EM,Emprunt contracté,"Les emprunts contractés par le Département sont exclusivement destinés à financer des investissements, qu'il s'agisse d'un équipement spécifique, d'un ensemble de travaux relatifs à cet équipement ou encore d'acquisitions ou d'études. Les emprunts peuvent être parfois affectés explicitement à une ou plusieurs opérations d'investissement précisément désignées au contrat (par exemple pour le plan collèges ou la réhabilitation thermique de batiments administratifs), mais ils sont dans la majeure partie globalisés et correspondent à l'ensemble du besoin de financement de la section d'investissement."
+RI.8,Avance remboursable DMTO,"En 2020, pour compenser la perte de recettes provenant des DMTO, l’Etat a accordé aux départements qui le souhaitaient et selon certains critères une avance remboursable considérée comme une dette et de ce fait inscrite en investissement. "
+RI.EM,Emprunt contracté,"Il s'agit des emprunts contractés ou refinancés par le Département qui sont exclusivement destinés à financer des investissements, qu'il s'agisse d'un équipement spécifique, d'un ensemble de travaux relatifs à cet équipement ou encore d'acquisitions ou d'études. Ces emprunts peuvent être parfois affectés explicitement à une ou plusieurs opérations d'investissement précisément désignées au contrat (par exemple pour le plan collèges avec les emprunts contractés auprès de la BEI ou de la CEB pour de la réhabilitation thermique de batiments administratifs), mais ils sont dans la majeure partie globalisés et correspondent à l'ensemble du besoin de financement de la section d'investissement."
 RI.EM.1,Emprunt nouveau,"Il s'agit de l'emprunt réalisé dans l'année mais dont le contrat a pu être signé antérieurement. Préalablement à la signature d'un contrat de prêt, le Département organise une ou deux consultations sur la base d'un cahier des charges définissant les caractéristiques des emprunts recherchés et le volume. La décision finale est prise par le Président du Conseil Départemental. Les empunts sont en général à taux fixe ou variable d'une durée de 15 à 25 ans. Ces dernières années, le Département a réalisé des émissions obligataires qui lui ont permis d'obtenir des conditions de taux plus compétitives sur des durées plus courtes ou plus longues."
 RI.EM.2,OCLT,Ces emprunts baptisés Ouverture de Crédits Long Terme (OCLT) ou Crédits Long Terme Renouvelable (CLTR) sont des crédits long terme classique avec une possibilité d'utilisation en ligne de trésorerie. Ces droits consistent à pouvoir tirer des fonds jusqu'à un plafond fixé et pendant une période donnée afin de faire face à un besoin de trésorerie c'est à dire pour payer le décaissement des dépenses réalisées.
-RI.EM.3,Emprunt refinancé,
+RI.EM.3,Emprunt refinancé,Il s'agit d'emprunt qui a été refinancé à des conditions plus avantageuses soit auprès de la Banque détenant le contrat ou d'une autre avec ou sans indemnité. Le même montant se retrouve en dépense.
 ,,
 DI,Dépenses d’investissement (y compris le remboursement en capital des emprunts),"Les dépenses d’investissement sont destinées à : 
- * maintenir, améliorer et développer le patrimoine dont dispose le Département [travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, etc.
+ * maintenir, améliorer et développer le patrimoine dont dispose le Département : travaux sur les routes départementales, construction ou aménagement des bâtiments de la collectivité (collèges, Maisons Départementales de la Santé et de l’Insertion…), acquisition diverses, études etc.
  * soutenir l’investissement de nos partenaires sur les territoires 
  
  Elles comprennent aussi le remboursement en capital des emprunts."
@@ -285,12 +290,12 @@ DI.2.2,Logement,Le département participe avec ses partenaires institutionnels e
 DI.2.3,SDIS,Subvention versée au SDIS (Etablissement Public Départemental) pour l'aider à financer ses équipements
 DI.2.4,subventions tiers (hors sdis),Subventions versées à d'autres établissements publics ou associations.
 DI.2.5,LGV,"Subvention versée au projet de ligne à grande vitesse financée par l'Etat et le Conseil régional.
- [en savoir plus](https://www.gironde.fr/espace-presse/28022017-inauguration-de-la-ligne-grande-vitesse-tours-bordeaux-avec-138-millions"
+"
 DI.2.6,Gironde Numérique,"Subvention versée au syndicat mixte chargé de développer le réseau de fibre optique du territoire.
  [en savoir plus](https://www.gironde.fr/grands-projets/le-haut-debit)"
 DI.3,Remboursement avance DMTO,Remboursement de l'avance de 28.4 M€ acceptée par le Département en septembre 2020 au regard à ce moment-là d’une forte baisse constatée des DMTO (- 32M€ par rapport à septembre 2019).
 ,,
-DI.EM,Emprunt remboursé,Chaque année la collectivité consacre une partie de ses revenus au remboursement des emprunts qu'il a contracté pour financer ses projets d'investissement.
+DI.EM,Emprunt remboursé,Chaque année la collectivité consacre une partie de ses ressources au remboursement des emprunts qu'il a contracté pour financer ses projets d'investissement.
 DI.EM.1,Amortissement emprunt,Remboursement du capital des emprunts contractés
 DI.EM.2,Amortissement OCLT,Remboursement des facilités de crédit
 DI.EM.3,Divers Emprunts,Emprunts sur comptes spéciaux du Trésor
