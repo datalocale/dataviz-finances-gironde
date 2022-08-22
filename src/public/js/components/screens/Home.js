@@ -38,16 +38,16 @@ export function Home({
                 }),
                 React.createElement(Appetizer, {
                     h1: "Solidarités",
-                    numberMain: "125 000",
+                    numberMain: "143 000",
                     numberSecundary: "prestations allouées",
-                    description: `Le Département affirme sa vocation sociale et déploie près d'1 milliard d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
+                    description: `Le Département affirme sa vocation sociale et déploie plus d'1 milliard d’euros pour aider et accompagner les personnes fragilisées. Il emploie 1 751 agents au service de l’action sociale soit près de 75 millions par an en frais de personnel pour assurer l’efficience et la proximité du service rendu aux publics les plus fragiles.`,
                     moreUrl: solidarity
                 }),
                 React.createElement(Appetizer, {
                     h1: "Investissements",
-                    numberMain: "1 milliard",
-                    numberSecundary: "à l’horizon 2020",
-                    description: `Comme en témoignent les 1 164 M€ déjà investis par le Département depuis 2015, la Gironde s’est inscrite depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement d’un territoire dynamique qui accueille près de 20 000 girondins supplémentaires chaque année : ce sont près de 310 M€ qui s’ajoutent en 2021`,
+                    numberMain: "L’ambition d’investissement du département réaffirmée",
+                    numberSecundary: "",
+                    description: `Comme en témoignent les 1 164 M€ déjà investis par le Département depuis 2015, la Gironde s’est inscrite depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement d’un territoirequi accueille près de 20 000 girondins supplémentaires chaque année : ce sont près de 310 M€ qui s’ajoutent en 2021`,
                     moreUrl: invest
                 }),
                 React.createElement(Appetizer, {
