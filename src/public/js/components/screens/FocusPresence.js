@@ -83,7 +83,7 @@ export function FocusSol({
         ),
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: `Détails des frais liés à la présence du Département sur le territoire`}),
-            React.createElement(Markdown, {}, `Avec la crise sanitaire, une extrême attention aux dépenses a été demandée aux services, et un important travail de régulation a été mené en 2020 afin de limiter les dépenses non essentielles`),
+            React.createElement(Markdown, {}, `Avec la crise sanitaire, une extrême attention aux dépenses a été demandée aux services, afin de limiter les dépenses non essentielles. Ces dépenses ont diminuées de 12 % par raaport à 2020.`),
             React.createElement(FocusDetail, {
 
                 className: 'buildings',
@@ -92,7 +92,7 @@ export function FocusSol({
                 illustrationUrl: urls[ELECTRICITE_PICTO],
                 amount: yearDetails ? yearDetails['DF.6.1.2'] : undefined,
                 proportion: yearDetails ? yearDetails['DF.6.1.2']/focusDetailsDenominator : 1,
-                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques. Ce poste est en baisse de 16% en 2020`,
+                text: `Le Département assure l’entretien et la réparation des bâtiments qu’il occupe ou utilise en qualité de locataire : il les équipe, les relie à internet à haut débit et les assure contre les risques.`,
                 highlights: [
                     {
                         strong: '1,56 M€',
