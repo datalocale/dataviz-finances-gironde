@@ -77,11 +77,9 @@ export function TotalBudget({
             React.createElement(
                 Markdown,
                 {},
-                `Ce compte administratif 2021 retrace l’exécution d’un budget qui a pour particularité d’assurer la transition entre deux mandatures dans un contexte incertain dominé par  :
+                `Ce compte administratif 2021 retrace l’exécution d’un budget qui a eu pour particularité d’assurer la transition entre deux mandatures dans un contexte incertain dominé par  :
 
 · Les suites de la crise sanitaire et économique qui a freinée l’économie française jusqu’au printemps provocant une baisse de son PIB de 8% avant un redressement de 6,3% ; 
-
-· Un taux de chômage en forte baisse revenant à son niveau d’avant crise mais avec pour corollaire une accélération de l’inflation et des contraintes d’offres sur de nombreux secteurs ;
 
 · Un taux de chômage en forte baisse revenant à son niveau d’avant crise mais avec pour corollaire une accélération de l’inflation et des contraintes d’offres sur de nombreux secteurs ;
 
