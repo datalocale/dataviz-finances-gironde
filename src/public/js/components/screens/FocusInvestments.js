@@ -57,7 +57,7 @@ export function FocusSol({
                 ]
             }),
             React.createElement('div', {},
-                React.createElement(Markdown, {}, `**En ${year}, le Département de la Gironde a investi ${yearInvestments && makeAmountString(yearInvestments.investments)} soit ${(investmentProportion * 100).toFixed(1)}% de la totalité des dépenses. Ce sont les 1,6 millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
+                React.createElement(Markdown, {}, `**En ${year}, le Département de la Gironde a investi (hors dette) ${yearInvestments && makeAmountString(yearInvestments.investments)} soit ${(investmentProportion * 100).toFixed(1)}% de la totalité des dépenses. Ce sont les 1,6 millions d’habitants en Gironde qui bénéficient directement de ces investissements avec par exemple le réaménagement des routes, la construction de collèges ou encore à l’entretien d’espaces naturels.**`),
                 React.createElement(PrimaryCallToAction, { href: '#!/finance-details/DI', text: `en savoir plus` })
             ),
             React.createElement('div', { className: 'people-fraction' },
@@ -69,7 +69,7 @@ export function FocusSol({
             )
         ),
         React.createElement('section', {},
-            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2015 à 2020' }),
+            React.createElement(SecundaryTitle, { text: 'Évolution des dépenses d’investissements de 2016 à 2020' }),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
@@ -103,7 +103,7 @@ export function FocusSol({
                 illustrationUrl: urls[COLLEGE_PICTO],
                 amount: yearDIDetails ? yearDIDetails['DI.1.1'] : undefined,
                 proportion: yearDIDetails ? yearDIDetails['DI.1.1'] / focusDetailsDenominator : 1,
-                text: `Le Département construit, entretient, rénove l’ensemble du parc des 105 collèges publics. En 2021, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. Pour répondre à cette croissance de la population collégienne en Gironde, le Département s'est engagé dans un Plan collèges qui prévoit, d’ici 2024, la création de 14 nouveaux collèges et la réhabilitation de 10 collèges existants représentant 670 millions d’euros d’investissement.  Les opérations de construction prévues se sont donc accélérées avec 140.6M€ de dépensés en 2021. A la rentrée 2021 les élèves de 5 collèges girondins ont pu découvrir leurs bâtiments flambant neufs : collèges de Marsas, Jean Jaurès de Cenon, Édouard Vaillant de Bordeaux, Jacques Ellul transféré à Mayaudon et Jules Ferry/Gisèle Halimi à Mérignac.`,
+                text: `Le Département construit, entretient, rénove l’ensemble du parc des 111 collèges publics. En 2021, on comptait 65 840 collégiens dans les collèges publics girondins et 13 110 collégiens dans les collèges privés. Pour répondre à cette croissance de la population collégienne en Gironde, le Département s'est engagé dans un Plan collèges qui prévoit, d’ici 2024, la création de 14 nouveaux collèges et la réhabilitation de 10 collèges existants représentant 670 millions d’euros d’investissement.  Les opérations de construction prévues se sont donc accélérées avec 140.6M€ de dépensés en 2021. A la rentrée 2021 les élèves de 5 collèges girondins ont pu découvrir leurs bâtiments flambant neufs : collèges de Marsas, Jean Jaurès de Cenon, Édouard Vaillant de Bordeaux, Jacques Ellul transféré à Mayaudon et Jules Ferry/Gisèle Halimi à Mérignac.`,
                 highlights: [
                     /*{
                     strong: "",
