@@ -26,14 +26,8 @@ jobs:
         - provider: script
           skip_cleanup: true
           script: bash ./tools/deploy.sh
-          
-    - stage: deploy
-      script: npm run build-preprod
-      env: DEPLOY_TARGET_BRANCH=preprod-gironde.fr
-      deploy:
-        - provider: script
-          skip_cleanup: true
-          script: bash ./tools/deploy.sh
+
+
     - stage: deploy
       script: npm run build-production
       env: DEPLOY_TARGET_BRANCH=gironde.fr
