@@ -42,5 +42,5 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEPLOY_TARGET_BRANCH: gh-pages
+          BRANCH: gh-pages
           force: true
