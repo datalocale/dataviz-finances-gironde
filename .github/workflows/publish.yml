@@ -12,7 +12,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Test
-        run: npm test
+        run: | 
+          npm install
+          npm test
 
   build-deploy-demo:
     needs: test
