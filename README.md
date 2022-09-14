@@ -1,4 +1,4 @@
-# Dataviz finances Gironde [![Build Status](https://travis-ci.org/datalocale/dataviz-finances-gironde.svg?branch=master)](https://travis-ci.org/datalocale/dataviz-finances-gironde)
+# Dataviz finances Gironde
 
 ## Contribuer
 
@@ -48,36 +48,8 @@ L'intégration continue est automatise les éléments suivants :
 * exécution des tests sur _chaque branche_ ;
 * déploiement de la [démo][] depuis _master_ ;
 
-Le suivi des _builds_ est assuré par [Travis CI][].
+Le suivi des _builds_ est assuré par une github action
 
-### Installation
-
-En se rendant sur [Travis CI][] :
-
-1. se connecter avec son compte GitHub (_Sign in with Github_) ;
-2. se rendre sur son [profil Travis CI][] ;
-3. cocher la case du projet `datalocale/dataviz-finances-gironde`.
-
-Reste ensuite à [configurer l'outil](#configurer-travis-ci).
-
-### Configurer Travis CI
-
-Deux variables d'environnement doivent être configurées dans l'[onglet Settings][ci-settings] :
-
-| Name | Value | Display value in build logs |
-| ---- | ----- | --------------------------- | |
-| `GH_TOKEN` | _voir [Générer un token](#générer-un-token)_ | **Off** |
-| `DEPLOY_TARGET_BRANCH` | gh-pages | _On_ |
-
-![](docs/ci-settings.png)
-
-### Générer un token
-
-Un _Personal access token_ est nécessaire pour que l'automate d'intégration continue puisse publier la [démo][].
-
-🔓 [Générer un nouveau _token_](https://github.com/settings/tokens/new?description=datalocale.github.io/dataviz-finances-gironde&scopes=public_repo)
-
-Le token créé est à renseigner dans la [configuration Travis CI](#configurer-travis-ci).
 
 ## Déploiement
 
@@ -87,12 +59,12 @@ Il existe 3 environnements :
 
 * gironde.fr où il faut créer manuellement dans le CMS un "media dataviz" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
     * `npm run build-production` pour gironde.fr, la production (media id `2459`)
-* démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
+* démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par github actions)
 * dévelopement (`npm run watch`)
 
 Les artéfacts de build sont rendus créés dans le dossier `./build`.
 
-[Travis CI](https://travis-ci.org/datalocale/dataviz-finances-gironde) est [configuré](https://github.com/datalocale/dataviz-finances-gironde/blob/master/.travis.yml) pour builder automatiquement les artefacts des 3 environnements et les pousser sur les branches : 
+Github actions est [configuré](https://github.com/datalocale/dataviz-finances-gironde/blob/master/.github/workflows/publish.yml) pour builder automatiquement les artefacts des 2 environnements et les pousser sur les branches : 
 - [`gh-pages`](https://github.com/datalocale/dataviz-finances-gironde/tree/gh-pages) pour l'environnement de [démo](https://datalocale.github.io/dataviz-finances-gironde/public/)
 - [`gironde.fr`](https://github.com/datalocale/dataviz-finances-gironde/tree/gironde.fr) pour le déploiement en production sur [gironde.fr](https://www.gironde.fr/un-budget-au-service-des-solidarites-humaine-et-territoriale)
 
@@ -183,7 +155,4 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 
 [nodejs]: https://nodejs.org/
 [ImageMagick]: https://www.imagemagick.org/script/download.php
-[Travis CI]: https://travis-ci.org/datalocale/dataviz-finances-gironde
-[profil Travis CI]: https://travis-ci.org/profile
 [démo]: https://datalocale.github.io/dataviz-finances-gironde/public/
-[ci-settings]: https://travis-ci.org/datalocale/dataviz-finances-gironde/settings
