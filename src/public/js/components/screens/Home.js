@@ -45,7 +45,7 @@ export function Home({
                 }),
                 React.createElement(Appetizer, {
                     h1: "Investissements",
-                    numberMain: "L’ambition d’investissement du département réaffirmée",
+                    numberMain: "L’ambition",
                     numberSecundary: "",
                     description: `Comme en témoignent les 1 164 M€ déjà investis par le Département depuis 2015, la Gironde s’est inscrite depuis plusieurs exercices dans une dynamique de soutien à l’économie locale et au développement d’un territoirequi accueille près de 20 000 girondins supplémentaires chaque année : ce sont près de 310 M€ qui s’ajoutent en 2021`,
                     moreUrl: invest
