@@ -11,7 +11,7 @@ Le code et les commentaires sont à écrire **en anglais**.
 Minima:
 
 * IE11
-* Edge
+* Microsoft Edge
 * Firefox
 * Chrome
 * navigateurs mobiles
