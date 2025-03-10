@@ -114,7 +114,7 @@
     "plans-de-compte": "git://github.com/dtc-innovation/plans-de-compte.git",
     "react-test-renderer": "^15.6.2",
     "sass": "^1.54.9",
-    "serve": "^14.0.1",
+    "serve": "^14.1.1",
     "watchify": "^3.11.1"
   }
 }
